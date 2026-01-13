@@ -11,10 +11,10 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 ENVIRONMENT = os.environ.get("ENVIRONMENT", "dev")
 DEBUG = ENVIRONMENT in ["dev", "test"]
 
-ALLOWED_HOSTS: list[str] = ["localhost"] + os.environ.get("ALLOWED_HOSTS", "").split(
-    ","
-)
-CSRF_TRUSTED_ORIGINS: list[str] = ["http://localhost:8000"] + [
+ALLOWED_HOSTS: list[str] = ["localhost", "127.0.0.1"] + os.environ.get(
+    "ALLOWED_HOSTS", ""
+).split(",")
+CSRF_TRUSTED_ORIGINS: list[str] = ["http://localhost:8000", "http://127.0.0.1:8000"] + [
     o for o in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",") if bool(o)
 ]
 
