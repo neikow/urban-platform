@@ -14,7 +14,9 @@ DEBUG = ENVIRONMENT in ["dev", "test"]
 ALLOWED_HOSTS: list[str] = ["localhost"] + os.environ.get("ALLOWED_HOSTS", "").split(
     ","
 )
-CSRF_TRUSTED_ORIGINS: list[str] = os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
+CSRF_TRUSTED_ORIGINS: list[str] = ["http://localhost:8000"] + [
+    o for o in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",") if bool(o)
+]
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
