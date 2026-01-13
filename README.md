@@ -1,11 +1,21 @@
 # Urban Platform
 
 ## Installation
-
+### Development Environment Setup
 We use [uv](https://docs.astral.sh/uv/) to manage our development 
 $environment. To set up the project, follow these steps:
 ```bash
 git clone git@github.com:neikow/urban-platform.git
 cd urban-platform
 uv sync
+```
+
+This will install all necessary dependencies and set up the development
+environment.
+
+### Running the Application
+To run the application in development mode, use the following command:
+```bash
+python manage.py migrate
+python manage.py runserver
 ```
