@@ -1,5 +1,7 @@
 .idea
 mediafiles
+staticfiles
 node_modules
 .venv
+.env
 db.sqlite3
