@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
+    "wagtail.locales",
     "wagtail",
     "modelcluster",
     "taggit",
@@ -103,11 +104,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = "fr-fr"
+LANGUAGE_CODE = "fr"
 
 TIME_ZONE = "Europe/Paris"
 
 USE_I18N = True
+WAGTAIL_I18N_ENABLED = True
 
 USE_TZ = True
 

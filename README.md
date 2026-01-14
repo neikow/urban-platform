@@ -22,3 +22,13 @@ To run the application in development mode, use the following command:
 python manage.py migrate
 python manage.py runserver
 ```
+
+### Internationalization
+To collect translation messages, run:
+```bash
+python manage.py makemessages -a
+```
+To compile translation messages, run:
+```bash
+python manage.py compilemessages
+```
