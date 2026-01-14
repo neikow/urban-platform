@@ -26,12 +26,13 @@ repos:
     rev: 1.8.3
     hooks:
       - id: bandit
+        args: ["-c", "pyproject.toml"]
         additional_dependencies: ["bandit[toml]"]
-#  - repo: local
-#    hooks:
-#      - id: tests
-#        name: Run Tests
-#        entry: uv run pytest
-#        language: system
-#        pass_filenames: false
-#        stages: [pre-push]
+  - repo: local
+    hooks:
+      - id: tests
+        name: Run Tests
+        entry: uv run pytest
+        language: system
+        pass_filenames: false
+        stages: [pre-push]

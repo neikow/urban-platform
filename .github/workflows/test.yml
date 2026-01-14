@@ -1,0 +1,42 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_call:
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    env:
+      DJANGO_SETTINGS_MODULE: urban_platform.settings
+      SECRET_KEY: "test-key"
+      ENVIRONMENT: "test"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+            enable-cache: true
+            cache-dependency-glob: "uv.lock"
+
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
+
+      - name: Install Playwright browsers
+        run: |
+          uv run playwright install --with-deps chromium
+
+      - name: Run Tests
+        run: uv run pytest
