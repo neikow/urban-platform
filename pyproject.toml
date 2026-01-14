@@ -4,11 +4,12 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.13"
 dependencies = [
-    "django>=6.0.1",
+    "django>=5.2,<5.3",
     "gunicorn>=23.0.0",
     "pre-commit>=4.5.1",
     "python-dotenv>=1.2.1",
     "tqdm>=4.67.1",
+    "wagtail>=7.2,<7.3",
 ]
 
 [tool.mypy]
@@ -32,3 +33,10 @@ dev = [
     "pytest-env>=1.2.0",
     "pytest-playwright>=0.7.2",
 ]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "urban_platform.settings.dev"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+
+[tool.ruff.lint.per-file-ignores]
+"urban_platform/settings/*" = ["F403", "F405"]
