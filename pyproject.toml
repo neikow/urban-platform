@@ -22,7 +22,7 @@ disable_error_code = [
 ]
 
 [tool.django-stubs]
-django_settings_module = "urban_platform.settings"
+django_settings_module = "urban_platform.settings.dev"
 
 [dependency-groups]
 dev = [
