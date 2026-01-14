@@ -1,4 +1,3 @@
-from django.db import models
 from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page
 from wagtail.fields import RichTextField
@@ -6,17 +5,22 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.search import index
 
 
-class PedagogyEntry(Page):
-    """
-    A Page model representing a pedagogy entry.
-    """
+class PedagogyCardPage(Page):
+    parent_page_types = ["pedagogy.PedagogyIndexPage"]
+    child_page_types = []
 
-    body = RichTextField()
-    date_published = models.DateField(_("Date Published"))
+    @classmethod
+    def get_verbose_name(cls):
+        return _("Pedagogy Card")
+
+    body = RichTextField(
+        blank=True,
+        verbose_name=_("Card body content"),
+        help_text=_("The main content of the pedagogy card."),
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField("body"),
-        index.FilterField("date_published"),
     ]
 
     content_panels = Page.content_panels + [

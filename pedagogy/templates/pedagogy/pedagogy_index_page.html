@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+    <article class="pedagogy-entry">
+        <header>
+            <h1>{{ page.title }}</h1>
+        </header>
+        <main class="entry-body">
+            <div>{{ page.page_description }}</div>
+            {% for pedagogy_entry in pedagogy_entries %}
+                <section class="pedagogy-summary">
+                    <h2>
+                        <a href="{{ pedagogy_entry.url }}">{{ pedagogy_entry.title }}</a>
+                    </h2>
+                    <p class="entry-meta">Published on {{ pedagogy_entry.first_published_at|date:"F j, Y" }}</p>
+                    <p>{{ pedagogy_entry.summary }}</p>
+                </section>
+            {% empty %}
+                <p>No pedagogy entries found.</p>
+            {% endfor %}
+            <nav class="pagination">
+                <span class="step-links">
+                    {% if pedagogy_entries.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ pedagogy_entries.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="current">Page {{ pedagogy_entries.number }} of {{ pedagogy_entries.paginator.num_pages }}.</span>
+                    {% if pedagogy_entries.has_next %}
+                        <a href="?page={{ pedagogy_entries.next_page_number }}">next</a>
+                        <a href="?page={{ pedagogy_entries.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </nav>
+        </main>
+    </article>
+{% endblock content %}
