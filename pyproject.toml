@@ -32,3 +32,11 @@ dev = [
     "pytest-env>=1.2.0",
     "pytest-playwright>=0.7.2",
 ]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "urban_platform.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B101"]
