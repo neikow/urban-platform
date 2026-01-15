@@ -12,6 +12,11 @@ class Command(BaseCommand):
         parser.add_argument(
             "--count", type=int, default=10, help="Number of cards to create"
         )
+        parser.add_argument(
+            "--delete",
+            action="store_true",
+            help="Delete all existing pedagogy cards before creating new ones",
+        )
 
     def handle(self, *args, **options):
         if not settings.DEBUG:
@@ -19,6 +24,23 @@ class Command(BaseCommand):
                 self.style.ERROR("This command can only be run when DEBUG=True")
             )
             return
+
+        if options["delete"]:
+            index_page = PedagogyIndexPage.objects.first()
+            if index_page:
+                children = index_page.get_children().specific()
+                for child in children:
+                    child.delete()
+                self.stdout.write(
+                    self.style.SUCCESS("Deleted all existing pedagogy cards.")
+                )
+            else:
+                self.stderr.write(
+                    self.style.ERROR(
+                        "No PedagogyIndexPage found. Please run the migration to create it first."
+                    )
+                )
+                return
 
         count = options["count"]
 
