@@ -25,6 +25,7 @@ class PedagogyIndexPage(Page):
     )
 
     search_fields = Page.search_fields + [
+        index.SearchField("page_introduction"),
         index.SearchField("body"),
     ]
 
