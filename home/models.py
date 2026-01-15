@@ -3,8 +3,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class HomePage(Page):
-    max_count = 1  # Limit to a single instance
-    parent_page_types = []  # Prevent creation under any other page
+    max_count = 1
+    parent_page_types = []
 
     @classmethod
     def can_create_at(cls, parent):
