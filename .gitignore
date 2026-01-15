@@ -7,3 +7,4 @@ node_modules
 db.sqlite3
 __pycache__/
 *.mo
+urban_platform/static/css/styles.css

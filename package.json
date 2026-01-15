@@ -1,0 +1,12 @@
+{
+  "name": "urban_platform",
+  "scripts": {
+    "styles:build": "tailwindcss -i ./urban_platform/styles/tailwind.css -o ./urban_platform/static/css/styles.css --minify",
+    "styles:watch": "tailwindcss -i ./urban_platform/styles/tailwind.css -o ./urban_platform/static/css/styles.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "daisyui": "^5.5.14",
+    "tailwindcss": "^4.1.18"
+  }
+}
