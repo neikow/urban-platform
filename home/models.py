@@ -1,5 +1,15 @@
 from wagtail.models import Page
+from django.utils.translation import gettext_lazy as _
 
 
 class HomePage(Page):
-    pass
+    max_count = 1
+    parent_page_types = []
+
+    @classmethod
+    def can_create_at(cls, parent):
+        return False
+
+    class Meta:
+        verbose_name = _("Page d'accueil")
+        verbose_name_plural = _("Pages d'accueil")

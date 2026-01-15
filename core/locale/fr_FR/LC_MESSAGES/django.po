@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-14 13:37+0100\n"
+"POT-Creation-Date: 2026-01-14 16:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,12 +25,12 @@ msgstr "Arrondissement"
 msgid "City Districts"
 msgstr "Arrondissements"
 
-#: core/models/city_neighborhood.py:12
+#: core/models/city_neighborhood.py:13
 #: core/models/neighborhood_association.py:8
 msgid "City Neighborhood"
 msgstr "Quartier"
 
-#: core/models/city_neighborhood.py:13
+#: core/models/city_neighborhood.py:14
 msgid "City Neighborhoods"
 msgstr "Quartiers"
 
@@ -47,10 +47,10 @@ msgid "Website"
 msgstr "Site web"
 
 #: core/models/neighborhood_association.py:17
-#: core/models/neighborhood_association.py:22
+#: core/models/neighborhood_association.py:26
 msgid "Neighborhood Association"
 msgstr "Comité d'intérêt de quartier"
 
-#: core/models/neighborhood_association.py:18 core/wagtail_hooks.py:9
+#: core/models/neighborhood_association.py:18
 msgid "Neighborhood Associations"
 msgstr "Comités d'intérêt de quartier"
