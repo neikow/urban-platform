@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-14 20:36+0100\n"
+"POT-Creation-Date: 2026-01-15 11:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: pedagogy/models/pedagogy_card.py:14
-#, fuzzy
 msgid "Pedagogy Card"
 msgstr "Fiche Pédagogique"
 
@@ -30,34 +29,22 @@ msgstr "Contenu de la fiche pédagogique"
 msgid "The main content of the pedagogy card."
 msgstr "Le contenu principal de la fiche pédagogique."
 
-#: pedagogy/models/pedagogy_index.py:16
+#: pedagogy/models/pedagogy_index.py:17
 msgid "Page introduction"
 msgstr "Introduction de la page"
 
-#: pedagogy/models/pedagogy_index.py:17
-msgid ""
-"A brief description of the pedagogy entries index page shown above entries."
-msgstr "Une brève description de la page d'index des fiches pédagogiques affichée au-dessus des fiches."
+#: pedagogy/models/pedagogy_index.py:19
+msgid "Small introduction shown above the pedagogy card list."
+msgstr "Le contenu principal de la fiche pédagogique."
 
-#: pedagogy/models/pedagogy_index.py:22
+#: pedagogy/models/pedagogy_index.py:25
 msgid "Page body content"
 msgstr "Contenu de la page"
 
-#: pedagogy/models/pedagogy_index.py:23
-msgid "Additional content for the pedagogy entries page."
+#: pedagogy/models/pedagogy_index.py:26
+msgid "Content for the pedagogy entries page."
 msgstr "Contenu supplémentaire pour la page des fiches pédagogiques."
 
-#: pedagogy/models/pedagogy_index.py:37 pedagogy/models/pedagogy_index.py:57
-#, fuzzy
-#| msgid "Pedagogy Entry"
+#: pedagogy/models/pedagogy_index.py:40 pedagogy/models/pedagogy_index.py:60
 msgid "Pedagogy Entries Index"
-msgstr "Fiche Pédagogiques"
-
-#: pedagogy/models/pedagogy_index.py:58
-#, fuzzy
-#| msgid "Pedagogy Entry"
-msgid "Pedagogy Entries Indices"
 msgstr "Fiche Pédagogique"
-
-#~ msgid "Date Published"
-#~ msgstr "Date de Publication"

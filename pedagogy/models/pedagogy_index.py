@@ -9,21 +9,19 @@ from pedagogy.models.pedagogy_card import PedagogyCardPage
 
 
 class PedagogyIndexPage(Page):
-    max_count = 1  # Limit to a single instance
+    max_count = 1
     parent_page_types = ["home.HomePage"]
 
     page_introduction = models.TextField(
         blank=True,
         verbose_name=_("Page introduction"),
-        help_text=_(
-            "A brief description of the pedagogy entries index page shown above entries."
-        ),
+        help_text=_("Small introduction shown above the pedagogy card list."),
         default="Voici un ensemble d'outils et de ressources pédagogiques pour vous aider à vous investir dans la vie de votre quartier.",
     )
     body = RichTextField(
         blank=True,
         verbose_name=_("Page body content"),
-        help_text=_("Additional content for the pedagogy entries page."),
+        help_text=_("Content for the pedagogy entries page."),
     )
 
     search_fields = Page.search_fields + [

@@ -22,38 +22,15 @@ class Command(BaseCommand):
 
         count = options["count"]
 
-        # Find or create Pedagogy Index Page
         index_page = PedagogyIndexPage.objects.first()
+
         if not index_page:
-            self.stdout.write(
-                "PedagogyIndexPage not found. Attempting to create one..."
-            )
-            # We assume a HomePage exists as the parent
-            home = HomePage.objects.first()
-            if not home:
-                self.stderr.write(
-                    self.style.ERROR(
-                        "No HomePage found. Cannot create PedagogyIndexPage."
-                    )
+            self.stderr.write(
+                self.style.ERROR(
+                    "No PedagogyIndexPage found. Please run the migration to create it first."
                 )
-                return
-
-            index_page = PedagogyIndexPage(
-                title="Fiches pédagogiques", slug="fiches-pedagogiques"
             )
-            # add_child saves the instance
-            home.add_child(instance=index_page)
-            # Publish the index page too
-            index_page.save_revision().publish()
-            self.stdout.write(
-                self.style.SUCCESS(f"Created PedagogyIndexPage: {index_page.title}")
-            )
-        else:
-            self.stdout.write(f"Using existing PedagogyIndexPage: {index_page.title}")
-
-        self.stdout.write(
-            f"Creating {count} mock pedagogy entries under '{index_page.title}'..."
-        )
+            return
 
         for i in range(count):
             try:

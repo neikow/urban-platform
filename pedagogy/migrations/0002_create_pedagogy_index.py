@@ -1,5 +1,6 @@
 from django.db import migrations
 from django.utils.text import slugify
+from pedagogy.utils.pedagogy_index_page import create_pedagogy_index_page
 
 _PEDAGOGY_CARDS_SLUG = "fiches-pedagogiques"
 
@@ -10,7 +11,6 @@ def _create_pedagogy_index(apps, schema_editor):
     HomePage = apps.get_model("home", "HomePage")
     Page = apps.get_model("wagtailcore", "Page")
 
-    # 1. Check idempotency
     if PedagogyIndexPage.objects.filter(slug=_PEDAGOGY_CARDS_SLUG).exists():
         return
 
@@ -20,12 +20,9 @@ def _create_pedagogy_index(apps, schema_editor):
 
     home_page = HomePage.objects.first()
     if not home_page:
-        # If no home page, we can't attach it. In local dev, maybe okay, but dangerous.
-        return
+        raise ValueError("No HomePage found. Cannot create PedagogyIndexPage.")
 
-    # 2. Calculate new Path
     # Get the last child of the homepage to determine the next path
-    # Wagtail paths are alphanumeric strings usually growing in steps of 4 (0001, 00010001, etc.)
     children = Page.objects.filter(
         path__startswith=home_page.path, depth=home_page.depth + 1
     ).order_by("path")
@@ -33,17 +30,14 @@ def _create_pedagogy_index(apps, schema_editor):
 
     if last_child:
         # If children exist, increment the last child's path
-        # This is a simplified version of treebeard's increment logic
-        # '00010001' -> int -> +1 -> '00010002'
         path_len = len(last_child.path)
-        last_path_int = int(last_child.path[path_len - 4 :])  # Get last 4 chars
-        new_suffix = f"{last_path_int + 1:04d}"  # Increment and pad with zeros
+        last_path_int = int(last_child.path[path_len - 4 :])
+        new_suffix = f"{last_path_int + 1:04d}"
         new_path = last_child.path[:-4] + new_suffix
     else:
         # If no children, append '0001' to parent path
         new_path = home_page.path + "0001"
 
-    # 3. Create the page
     PedagogyIndexPage.objects.create(
         title="Fiches pédagogiques",
         draft_title="Fiches pédagogiques",
@@ -58,7 +52,6 @@ def _create_pedagogy_index(apps, schema_editor):
         show_in_menus=True,
     )
 
-    # 4. Update parent numchild
     home_page.numchild += 1
     home_page.save(update_fields=["numchild"])
 
@@ -69,7 +62,6 @@ def _remove_pedagogy_index(apps, schema_editor):
 
     page = PedagogyIndexPage.objects.filter(slug=_PEDAGOGY_CARDS_SLUG).first()
     if page:
-        # Decrement parent numchild
         # Note: Finding parent via path prefix is safer in migrations
         parent_path = page.path[:-4]
         parent = HomePage.objects.filter(path=parent_path).first()
