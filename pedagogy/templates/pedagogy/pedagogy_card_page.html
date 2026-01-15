@@ -8,7 +8,7 @@
             <div class='flex flex-col-reverse md:flex-row pt-2 md:pt-4 lg:pt-8 gap-4 md:gap-8 lg:gap-16'>
                 <div class='w-full flex flex-col justify-center items-center gap-4'>
                     <p class='text-center'>{{ page.description }}</p>
-                    <button class='btn btn-primary w-min text-nowrap'>Accèder à la ressource</button>
+                    {% include "pedagogy/components/pedagogy_card_page_resource.html" with page=page %}
                 </div>
                 <figure class='w-full'>
                     {% image page.hero_image fill-600x400 alt=page.title class="w-full h-56 lg:h-72 object-cover rounded-lg" %}
@@ -20,9 +20,11 @@
                 {% include_block page.content %}
             </main>
             <aside class='w-full md:w-xs md:card md:bg-base-100 md:p-4 h-min md:shadow-sm md:sticky md:top-8 self-start items-center'>
-                <h2 class='text-lg font-bold mb-2 text-center hidden md:block'>Accès rapide</h2>
-                <button class='btn btn-primary w-min text-nowrap hidden md:block'>Accèder à la ressource</button>
-                <div class="divider hidden md:flex"></div>
+                {% if page.has_resource %}
+                    <h2 class='text-lg font-bold mb-2 text-center hidden md:block'>Accès rapide</h2>
+                    {% include "pedagogy/components/pedagogy_card_page_resource.html" with page=page %}
+                    <div class="divider hidden md:flex"></div>
+                {% endif %}
                 <div class='relative -mt-2'>
                     <div class="hidden md:block absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-base-100 to-transparent z-10 pointer-events-none">
                     </div>

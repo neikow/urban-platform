@@ -8,7 +8,7 @@ def test_table_of_contents_generation():
     page = PedagogyCardPageFactory.build(
         content=[
             (
-                "paragraph",
+                "text",
                 """
       <h2>a</h2>
       <p>b</p>

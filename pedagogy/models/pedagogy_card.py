@@ -1,9 +1,8 @@
 from dataclasses import dataclass
-from typing import override, reveal_type
+from typing import override
 
 from slugify import slugify
-from wagtail import blocks
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.blocks import StreamValue
 from wagtail.models import Page
 from wagtail.fields import StreamField
@@ -35,6 +34,8 @@ def _generate_paragraph_header_ids(block: StreamValue.StreamChild) -> None:
 class PedagogyCardPage(Page):
     parent_page_types = ["pedagogy.PedagogyIndexPage"]
     child_page_types = []
+
+    resources: models.Manager  # related manager
 
     @classmethod
     def get_verbose_name(cls):
@@ -70,8 +71,12 @@ class PedagogyCardPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel("description"),
         FieldPanel("hero_image"),
+        InlinePanel("resources", label=_("Resource"), max_num=1),
         FieldPanel("content"),
     ]
+
+    def has_resource(self) -> bool:
+        return self.resources.exists()
 
     @override
     def clean(self) -> None:
