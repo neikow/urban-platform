@@ -29,7 +29,7 @@ class PedagogyCardPage(Page):
         verbose_name=_("Card image"),
     )
 
-    description = RichTextField(
+    description = models.TextField(
         blank=True,
         verbose_name=_("Card description"),
         help_text=_("A brief description of the pedagogy card."),
