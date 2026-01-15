@@ -1,6 +1,4 @@
 from django.db import migrations
-from django.utils.text import slugify
-from pedagogy.utils.pedagogy_index_page import create_pedagogy_index_page
 
 _PEDAGOGY_CARDS_SLUG = "fiches-pedagogiques"
 
