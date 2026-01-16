@@ -18,6 +18,20 @@
 }
 
 @layer utilities {
+  .link-external {
+    &:not([href^="/"]):not([href^="#"])::after {
+      content: "↗";
+      @apply inline-block ml-0.5 text-[1em] align-super;
+    }
+  }
+
+  .link-document {
+    &[href^="/documents"]::before {
+      content: "📄";
+      @apply inline-block mr-0.5 text-[0.8em];
+    }
+  }
+
   .toc-container {
       counter-reset: toc-h2;
   }
@@ -65,6 +79,49 @@
 
     p {
       @apply mb-4 leading-7 text-justify;
+    }
+
+    ul {
+      @apply mb-4 pl-6 list-disc;
+    }
+
+    ol {
+      @apply mb-4 pl-6 list-decimal;
+    }
+
+    ol ol {
+      @apply list-[lower-alpha];
+    }
+
+    ol ol ol {
+      @apply list-[lower-roman];
+    }
+
+    ol ol ol ol {
+      @apply list-decimal;
+    }
+
+    ol ol ol ol ol {
+      @apply list-[lower-alpha];
+    }
+
+    li {
+      @apply mb-2;
+
+    }
+
+    a {
+      @apply link text-primary hover:text-secondary transition-colors duration-200;
+
+      &:not([href^="/"]):not([href^="#"])::after {
+        content: "↗";
+        @apply inline-block ml-0.5 text-[1em] opacity-70 align-super;
+      }
+
+      &[href^="/documents"]::before {
+        content: "📄";
+        @apply inline-block mr-0.5 text-[0.8em] opacity-100;
+      }
     }
   }
 }
