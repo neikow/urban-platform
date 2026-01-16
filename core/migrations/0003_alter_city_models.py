@@ -6,7 +6,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("core", "0002_create_marseille_city"),
+        ("core", "0002_populate_marseille_data"),
     ]
 
     operations = [
