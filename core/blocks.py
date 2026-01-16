@@ -35,7 +35,22 @@ BlockTypes: list[tuple[str, blocks.Block]] = [
     (
         "text",
         blocks.RichTextBlock(
-            label=_("Text"), template="core/blocks/rich_text_block.html"
+            features=[
+                "h2",
+                "h3",
+                "h4",
+                "bold",
+                "italic",
+                "link",
+                "document-link",
+                "ul",
+                "ol",
+                "blockquote",
+                "superscript",
+                "subscript",
+            ],
+            label=_("Text"),
+            template="core/blocks/rich_text_block.html",
         ),
     ),
     ("image", ImageBlock(label=_("Image"), template="core/blocks/image_block.html")),

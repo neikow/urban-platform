@@ -42,3 +42,11 @@ class PedagogyCardPageFactory(factory.django.DjangoModelFactory):
         raise ValueError(
             "Headless page creation not supported by this factory. Please provide a 'parent' argument."
         )
+
+
+class DocumentFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = "wagtaildocs.Document"
+
+    title = factory.Faker("sentence", nb_words=3)
+    file = factory.django.FileField()
