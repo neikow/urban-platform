@@ -26,6 +26,7 @@
         {% wagtailuserbar %}
         {% include "core/components/website_header.html" %}
         {% block content %}{% endblock %}
+        {% include "core/components/website_footer.html" %}
         <script type="text/javascript" src="{% static 'js/urban_platform.js' %}"></script>
         {% block extra_js %}{% endblock %}
     </body>
