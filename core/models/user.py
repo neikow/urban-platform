@@ -35,10 +35,10 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(_("email address"), unique=True)
+    email = models.EmailField(_("Email Address"), unique=True)
 
-    first_name = models.CharField(_("first name"), max_length=150)
-    last_name = models.CharField(_("last name"), max_length=150)
+    first_name = models.CharField(_("First Name"), max_length=150)
+    last_name = models.CharField(_("Last Name"), max_length=150)
 
     neighborhood = models.ForeignKey(
         "CityNeighborhood",
@@ -46,40 +46,40 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=True,
         blank=True,
         related_name="users",
-        verbose_name=_("neighborhood"),
+        verbose_name=_("Neighborhood"),
     )
-    postal_code = models.CharField(_("postal code"), max_length=10, blank=True)
+    postal_code = models.CharField(_("Postal Code"), max_length=10, blank=True)
 
     is_verified = models.BooleanField(
-        _("email verified"),
+        _("Email Verified"),
         default=False,
         help_text=_("Is the user's email address verified?"),
     )
     role = models.CharField(
-        _("role"),
+        _("Role"),
         max_length=20,
         choices=UserRole.choices,  # type: ignore[arg-type] # choices expects str, not TextChoices
         default=UserRole.CITIZEN,
     )
 
-    phone_number = models.CharField(_("phone number"), max_length=20, blank=True)
+    phone_number = models.CharField(_("Phone Number"), max_length=20, blank=True)
     newsletter_subscription = models.BooleanField(
-        _("newsletter subscription"),
+        _("Newsletter Subscription"),
         default=False,
         help_text=_("Does the user want to receive the newsletter?"),
     )
 
-    created_at = models.DateTimeField(_("date joined"), auto_now_add=True)
-    updated_at = models.DateTimeField(_("last updated"), auto_now=True)
+    created_at = models.DateTimeField(_("Date Joined"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("Last Updated"), auto_now=True)
 
     # Django permissions
     is_active = models.BooleanField(
-        _("active"),
+        _("Active"),
         default=True,
         help_text=_("Designates whether this user should be treated as active."),
     )
     is_staff = models.BooleanField(
-        _("staff status"),
+        _("Staff Status"),
         default=False,
         help_text=_("Designates whether the user can log into the admin site."),
     )
@@ -90,8 +90,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     class Meta:
-        verbose_name = _("user")
-        verbose_name_plural = _("users")
+        verbose_name = _("User")
+        verbose_name_plural = _("Users")
         ordering = ["-created_at"]
 
     def __str__(self):
@@ -103,4 +103,3 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.first_name or self.email.split("@")[0]
-
