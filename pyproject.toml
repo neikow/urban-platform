@@ -16,10 +16,15 @@ dependencies = [
 plugins = [
     "mypy_django_plugin.main"
 ]
-strict_optional = "True"
+strict_optional = true
+disallow_untyped_defs = true
 disable_error_code = [
     "import-untyped"
 ]
+
+[[tool.mypy.overrides]]
+module = "*.migrations.*"
+disallow_untyped_defs = false
 
 [tool.django-stubs]
 django_settings_module = "urban_platform.settings.dev"
@@ -27,12 +32,15 @@ django_settings_module = "urban_platform.settings.dev"
 [dependency-groups]
 dev = [
     "django-browser-reload>=1.21.0",
+    "django-stubs[compatible-mypy]>=5.2.8",
     "factory-boy>=3.3.3",
+    "mypy>=1.19.1",
     "playwright>=1.57.0",
     "pytest-django>=4.11.1",
     "pytest-env>=1.2.0",
     "pytest-playwright>=0.7.2",
 ]
+
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "urban_platform.settings.dev"
