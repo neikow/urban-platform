@@ -1,36 +1,69 @@
 {% load wagtailcore_tags navigation_tags %}
 {% get_site_root as site_root %}
 <header class="navbar bg-base-100 shadow-sm sticky top-0 z-50 rounded-b-lg container mx-auto mb-4">
-    <div class="flex-1 px-4">
-        <a href="{% pageurl site_root %}"
-           class="text-xl font-bold text-primary hover:text-base-content transition-colors duration-200">Urbix</a>
-    </div>
-    <div class="flex-none">
-        <nav class='flex flex-row items-center mr-4'>
-            <ul class="menu menu-horizontal px-1 gap-1">
+    <div class="navbar-start">
+        <nav class="dropdown lg:hidden">
+            <div tabindex="0"
+                 role="button"
+                 class="btn btn-ghost"
+                 aria-label="Navigation Menu">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-5 w-5"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                </svg>
+            </div>
+            <ul tabindex="0"
+                class="menu menu-lg dropdown-content mt-5 z-[1] p-2 shadow bg-base-100 rounded-box w-72">
+                <li>
+                    <a href="{% pageurl site_root %}" class="font-medium">Accueil</a>
+                </li>
                 {% for menuitem in site_root.get_children.live.in_menu %}
                     <li>
-                        <a href="{% pageurl menuitem %}"
-                           class="font-medium hover:text-primary transition-colors">{{ menuitem.title }}</a>
+                        <a href="{% pageurl menuitem %}" class="font-medium">{{ menuitem.title }}</a>
                     </li>
                 {% endfor %}
             </ul>
-            <a href='/todo' class='ml-2 hover:text-primary active:text-primary'>
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     width="24"
-                     height="24"
-                     viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="2"
-                     stroke-linecap="round"
-                     stroke-linejoin="round"
-                     class="lucide lucide-user-icon lucide-user">
-                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                </svg>
-                <span class='sr-only'>User Account</span>
-            </a>
         </nav>
+        <a href="{% pageurl site_root %}"
+           class="btn btn-ghost text-xl font-bold text-primary hover:text-base-content transition-colors duration-200">
+            Urbix
+        </a>
+    </div>
+    <nav class="navbar-center hidden lg:flex" aria-label='Header Navigation'>
+        <ul class="menu menu-horizontal px-1 gap-1">
+            <li>
+                <a href="{% pageurl site_root %}" class="font-medium">Accueil</a>
+            </li>
+            {% for menuitem in site_root.get_children.live.in_menu %}
+                <li>
+                    <a href="{% pageurl menuitem %}"
+                       class="font-medium hover:text-primary transition-colors">{{ menuitem.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+    <div class="navbar-end">
+        <a aria-label='User Account'
+           href='/todo'
+           class='btn btn-ghost hover:text-primary active:text-primary'>
+            <svg aria-hidden='true'
+                 xmlns="http://www.w3.org/2000/svg"
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 class="lucide lucide-user-icon lucide-user">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span class='sr-only'>User Account</span>
+        </a>
     </div>
 </header>
