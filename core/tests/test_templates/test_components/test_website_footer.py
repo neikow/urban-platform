@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from django.test import TestCase, RequestFactory
 from django.template.loader import render_to_string
 from wagtail.models import Site, Page
@@ -41,7 +42,9 @@ class FooterComponentTest(TestCase):
         rendered = render_to_string("core/components/website_footer.html", context)
 
         self.assertIn("Page 1", rendered)
+        self.assertIn('href="/page-1/"', rendered)
         self.assertIn("Page 2", rendered)
+        self.assertIn('href="/page-2/"', rendered)
 
         self.assertIn("Urbix", rendered)
         self.assertIn("Outils", rendered)

@@ -17,7 +17,7 @@ class HeaderComponentTest(TestCase):
 
         site = Site.objects.filter(is_default_site=True).first()
         if not site:
-            site = Site.objects.create(
+            Site.objects.create(
                 hostname="localhost",
                 root_page=cls.home,
                 is_default_site=True,
