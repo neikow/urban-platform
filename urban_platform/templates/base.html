@@ -1,6 +1,6 @@
 {% load static wagtailcore_tags wagtailuserbar %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -24,6 +24,7 @@
     </head>
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
+        {% include "core/components/website_header.html" %}
         {% block content %}{% endblock %}
         <script type="text/javascript" src="{% static 'js/urban_platform.js' %}"></script>
         {% block extra_js %}{% endblock %}
