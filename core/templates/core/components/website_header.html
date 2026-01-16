@@ -1,0 +1,36 @@
+{% load wagtailcore_tags navigation_tags %}
+{% get_site_root as site_root %}
+<header class="navbar bg-base-100 shadow-sm sticky top-0 z-50 rounded-b-lg container mx-auto mb-4">
+    <div class="flex-1 px-4">
+        <a href="{% pageurl site_root %}"
+           class="text-xl font-bold text-primary hover:text-base-content transition-colors duration-200">Urbix</a>
+    </div>
+    <div class="flex-none">
+        <nav class='flex flex-row items-center mr-4'>
+            <ul class="menu menu-horizontal px-1 gap-1">
+                {% for menuitem in site_root.get_children.live.in_menu %}
+                    <li>
+                        <a href="{% pageurl menuitem %}"
+                           class="font-medium hover:text-primary transition-colors">{{ menuitem.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <a href='/todo' class='ml-2 hover:text-primary active:text-primary'>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     class="lucide lucide-user-icon lucide-user">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span class='sr-only'>User Account</span>
+            </a>
+        </nav>
+    </div>
+</header>
