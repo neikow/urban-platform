@@ -1,11 +1,11 @@
-from django.test import TestCase, RequestFactory, override_settings
+from bs4 import BeautifulSoup
+from django.test import TestCase, RequestFactory
 from django.template.loader import render_to_string
 from wagtail.models import Site, Page
 from home.models import HomePage
-from pedagogy.models import PedagogyIndexPage
 
 
-class HeaderComponentTest(TestCase):
+class FooterComponentTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         root = Page.get_first_root_node()
@@ -17,7 +17,7 @@ class HeaderComponentTest(TestCase):
 
         site = Site.objects.filter(is_default_site=True).first()
         if not site:
-            Site.objects.create(
+            site = Site.objects.create(
                 hostname="localhost",
                 root_page=cls.home,
                 is_default_site=True,
@@ -33,16 +33,23 @@ class HeaderComponentTest(TestCase):
         cls.page2 = Page(title="Page 2", slug="page-2", show_in_menus=True)
         cls.home.add_child(instance=cls.page2)
 
-    def test_header_render(self):
+    def test_footer_render(self):
         factory = RequestFactory()
         request = factory.get("/")
 
         context = {"request": request}
 
-        rendered = render_to_string("core/components/website_header.html", context)
+        rendered = render_to_string("core/components/website_footer.html", context)
 
         self.assertIn("Page 1", rendered)
+        self.assertIn('href="/page-1/"', rendered)
         self.assertIn("Page 2", rendered)
-        self.assertIn("navbar-start", rendered)
-        self.assertIn("navbar-center", rendered)
-        self.assertIn("dropdown", rendered)
+        self.assertIn('href="/page-2/"', rendered)
+
+        self.assertIn("Urbix", rendered)
+        self.assertIn("Outils", rendered)
+        self.assertIn("Légal", rendered)
+        self.assertIn("Charte de bonne conduite", rendered)
+
+        self.assertIn("footer", rendered)
+        self.assertIn("bg-base-200", rendered)
