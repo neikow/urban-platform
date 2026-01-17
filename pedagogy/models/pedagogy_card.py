@@ -1,6 +1,6 @@
 from django_stubs_ext import StrOrPromise
 from wagtail.admin.panels import FieldPanel
-from wagtail.models import Page, PanelPlaceholder
+from wagtail.models import Page
 from wagtail.fields import RichTextField
 from django.utils.translation import gettext_lazy as _
 from wagtail.search import index
@@ -9,20 +9,6 @@ from wagtail.search import index
 class PedagogyCardPage(Page):
     parent_page_types: list[str] = ["pedagogy.PedagogyIndexPage"]
     child_page_types: list[str] = []
-
-    promote_panels = [
-        PanelPlaceholder(
-            "wagtail.admin.panels.MultiFieldPanel",
-            [
-                [
-                    "seo_title",
-                    "search_description",
-                ],
-                _("For search engines"),
-            ],
-            {},
-        ),
-    ]
 
     @classmethod
     def get_verbose_name(cls) -> StrOrPromise:
