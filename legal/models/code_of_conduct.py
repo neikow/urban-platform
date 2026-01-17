@@ -1,9 +1,7 @@
 from wagtail.admin.panels import FieldPanel
-from wagtail.fields import StreamField
+from wagtail.fields import RichTextField
 from wagtail.models import Page, PanelPlaceholder
 from django.utils.translation import gettext_lazy as _
-
-from core.blocks import BlockTypes
 
 
 class CodeOfConductPage(Page):
@@ -30,8 +28,8 @@ class CodeOfConductPage(Page):
         ),
     ]
 
-    content = StreamField(
-        BlockTypes,
+    content = RichTextField(
+        features=["h2", "h3", "bold", "italic", "link", "ol", "ul", "document-link"],
         blank=True,
         verbose_name=_("Code of conduct body content"),
         help_text=_(

@@ -86,16 +86,10 @@ class Command(BaseCommand):
             old_file_path = file_path + ".old"
             current_html = ""
             if page.content:
-                for block in page.content:
-                    if block.block_type == "text":
-                        # Assuming RichTextBlock value has a source property or is acceptable as string
-                        # In Wagtail, RichText objects render to string, but might wrap.
-                        if hasattr(block.value, "source"):
-                            current_html += block.value.source
-                        else:
-                            current_html += str(block.value)
-                    # Add newlines between blocks if multiple
-                    current_html += "\n"
+                # With RichTextField, content is stored as HTML string
+                # RichText object wraps it but often behaves like string or has .source depending on context
+                # Wagtail's RichTextField in model instance returns raw HTML string usually
+                current_html = str(page.content)
 
             try:
                 with open(old_file_path, "w", encoding="utf-8") as f:
@@ -118,7 +112,7 @@ class Command(BaseCommand):
                 )
                 continue
 
-            page.content = [("text", RichText(new_html))]
+            page.content = new_html
 
             page.save_revision().publish()
             self.stdout.write(self.style.SUCCESS(f"  Updated content for {page_key}"))
