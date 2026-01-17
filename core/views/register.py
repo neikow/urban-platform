@@ -58,7 +58,7 @@ class UserRegistrationForm(forms.Form):
 
 
 class RegisterFormView(FormView):
-    template_name = "registration/register.html"
+    template_name = "auth/register.html"
     form_class = UserRegistrationForm
     success_url = "/auth/me/"
 
@@ -73,7 +73,6 @@ class RegisterFormView(FormView):
             password=password,
             first_name=first_name,
             last_name=last_name,
-            username=email,
         )
 
         login(self.request, user)
