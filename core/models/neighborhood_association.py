@@ -22,5 +22,5 @@ class NeighborhoodAssociation(models.Model):
             "neighborhood__name",
         ]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{_('Neighborhood Association')} ({self.neighborhood.full_name})"

@@ -5,88 +5,120 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('core', '0003_alter_city_models'),
+        ("core", "0003_alter_city_models"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='user',
-            options={'ordering': ['-created_at'], 'verbose_name': 'User', 'verbose_name_plural': 'Users'},
+            name="user",
+            options={
+                "ordering": ["-created_at"],
+                "verbose_name": "User",
+                "verbose_name_plural": "Users",
+            },
         ),
         migrations.AlterField(
-            model_name='user',
-            name='created_at',
-            field=models.DateTimeField(auto_now_add=True, verbose_name='Date Joined'),
+            model_name="user",
+            name="created_at",
+            field=models.DateTimeField(auto_now_add=True, verbose_name="Date Joined"),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='email',
-            field=models.EmailField(max_length=254, unique=True, verbose_name='Email Address'),
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='first_name',
-            field=models.CharField(max_length=150, verbose_name='First Name'),
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='is_active',
-            field=models.BooleanField(default=True, help_text='Designates whether this user should be treated as active.', verbose_name='Active'),
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='is_staff',
-            field=models.BooleanField(default=False, help_text='Designates whether the user can log into the admin site.', verbose_name='Staff Status'),
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='is_verified',
-            field=models.BooleanField(default=False, help_text="Is the user's email address verified?", verbose_name='Email Verified'),
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='last_name',
-            field=models.CharField(max_length=150, verbose_name='Last Name'),
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='neighborhood',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='users', to='core.cityneighborhood', verbose_name='Neighborhood'),
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='newsletter_subscription',
-            field=models.BooleanField(default=False, help_text='Does the user want to receive the newsletter?', verbose_name='Newsletter Subscription'),
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='phone_number',
-            field=models.CharField(blank=True, max_length=20, verbose_name='Phone Number'),
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='postal_code',
-            field=models.CharField(blank=True, max_length=10, verbose_name='Postal Code'),
-        ),
-        migrations.AlterField(
-            model_name='user',
-            name='role',
-            field=models.CharField(
-                choices=[
-                    ('CITIZEN', 'Citizen'),
-                    ('ASSOCIATION_MEMBER', 'Association Member'),
-                    ('ADMIN', 'Admin'),
-                ],
-                default='CITIZEN',
-                max_length=20,
-                verbose_name='Role',
+            model_name="user",
+            name="email",
+            field=models.EmailField(
+                max_length=254, unique=True, verbose_name="Email Address"
             ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='updated_at',
-            field=models.DateTimeField(auto_now=True, verbose_name='Last Updated'),
+            model_name="user",
+            name="first_name",
+            field=models.CharField(max_length=150, verbose_name="First Name"),
+        ),
+        migrations.AlterField(
+            model_name="user",
+            name="is_active",
+            field=models.BooleanField(
+                default=True,
+                help_text="Designates whether this user should be treated as active.",
+                verbose_name="Active",
+            ),
+        ),
+        migrations.AlterField(
+            model_name="user",
+            name="is_staff",
+            field=models.BooleanField(
+                default=False,
+                help_text="Designates whether the user can log into the admin site.",
+                verbose_name="Staff Status",
+            ),
+        ),
+        migrations.AlterField(
+            model_name="user",
+            name="is_verified",
+            field=models.BooleanField(
+                default=False,
+                help_text="Is the user's email address verified?",
+                verbose_name="Email Verified",
+            ),
+        ),
+        migrations.AlterField(
+            model_name="user",
+            name="last_name",
+            field=models.CharField(max_length=150, verbose_name="Last Name"),
+        ),
+        migrations.AlterField(
+            model_name="user",
+            name="neighborhood",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="users",
+                to="core.cityneighborhood",
+                verbose_name="Neighborhood",
+            ),
+        ),
+        migrations.AlterField(
+            model_name="user",
+            name="newsletter_subscription",
+            field=models.BooleanField(
+                default=False,
+                help_text="Does the user want to receive the newsletter?",
+                verbose_name="Newsletter Subscription",
+            ),
+        ),
+        migrations.AlterField(
+            model_name="user",
+            name="phone_number",
+            field=models.CharField(
+                blank=True, max_length=20, verbose_name="Phone Number"
+            ),
+        ),
+        migrations.AlterField(
+            model_name="user",
+            name="postal_code",
+            field=models.CharField(
+                blank=True, max_length=10, verbose_name="Postal Code"
+            ),
+        ),
+        migrations.AlterField(
+            model_name="user",
+            name="role",
+            field=models.CharField(
+                choices=[
+                    ("CITIZEN", "Citizen"),
+                    ("ASSOCIATION_MEMBER", "Association Member"),
+                    ("ADMIN", "Admin"),
+                ],
+                default="CITIZEN",
+                max_length=20,
+                verbose_name="Role",
+            ),
+        ),
+        migrations.AlterField(
+            model_name="user",
+            name="updated_at",
+            field=models.DateTimeField(auto_now=True, verbose_name="Last Updated"),
         ),
     ]

@@ -1,11 +1,12 @@
 from django import template
+from django.template.context import BaseContext
 from wagtail.models import Site
 
 register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def get_site_root(context):
+def get_site_root(context: BaseContext) -> Site | None:
     request = context.get("request")
 
     if request is not None:

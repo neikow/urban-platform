@@ -1,5 +1,6 @@
 .idea
 mediafiles
+media
 staticfiles
 node_modules
 .venv

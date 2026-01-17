@@ -14,9 +14,9 @@ class CityNeighborhood(models.Model):
         verbose_name_plural = _("City Neighborhoods")
         ordering = ["district__city__name", "district__name", "name"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name} ({self.district.name})"
 
     @property
-    def full_name(self):
+    def full_name(self) -> str:
         return f"{self.name}, {self.district.name}"

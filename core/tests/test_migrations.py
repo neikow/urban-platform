@@ -4,7 +4,7 @@ from io import StringIO
 
 
 class MigrationTest(TestCase):
-    def test_no_pending_migrations(self):
+    def test_no_pending_migrations(self) -> None:
         out = StringIO()
         try:
             call_command("makemigrations", "--check", "--dry-run", stdout=out)

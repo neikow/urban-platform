@@ -5,91 +5,275 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='City',
+            name="City",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='CityDistrict',
+            name="CityDistrict",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('name_short', models.CharField(blank=True, max_length=50)),
-                ('city', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='districts', to='core.city')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("name_short", models.CharField(blank=True, max_length=50)),
+                (
+                    "city",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="districts",
+                        to="core.city",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'City District',
-                'verbose_name_plural': 'City Districts',
-                'ordering': ['city__name', 'name'],
+                "verbose_name": "City District",
+                "verbose_name_plural": "City Districts",
+                "ordering": ["city__name", "name"],
             },
         ),
         migrations.CreateModel(
-            name='CityNeighborhood',
+            name="CityNeighborhood",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('postal_code', models.CharField(blank=True, max_length=20, null=True)),
-                ('district', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='neighborhoods', to='core.citydistrict')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("postal_code", models.CharField(blank=True, max_length=20, null=True)),
+                (
+                    "district",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="neighborhoods",
+                        to="core.citydistrict",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'City Neighborhood',
-                'verbose_name_plural': 'City Neighborhoods',
-                'ordering': ['district__city__name', 'district__name', 'name'],
+                "verbose_name": "City Neighborhood",
+                "verbose_name_plural": "City Neighborhoods",
+                "ordering": ["district__city__name", "district__name", "name"],
             },
         ),
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
-                ('email', models.EmailField(max_length=254, unique=True, verbose_name='email address')),
-                ('first_name', models.CharField(max_length=150, verbose_name='first name')),
-                ('last_name', models.CharField(max_length=150, verbose_name='last name')),
-                ('postal_code', models.CharField(blank=True, max_length=10, verbose_name='postal code')),
-                ('is_verified', models.BooleanField(default=False, help_text="Is the user's email address verified?", verbose_name='email verified')),
-                ('role', models.CharField(choices=[('CITIZEN', 'Citizen'), ('ASSOCIATION_MEMBER', 'Association Member'), ('ADMIN', 'Admin')], default='CITIZEN', max_length=20, verbose_name='role')),
-                ('phone_number', models.CharField(blank=True, max_length=20, verbose_name='phone number')),
-                ('newsletter_subscription', models.BooleanField(default=False, help_text='Does the user want to receive the newsletter?', verbose_name='newsletter subscription')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='date joined')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='last updated')),
-                ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active.', verbose_name='active')),
-                ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into the admin site.', verbose_name='staff status')),
-                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')),
-                ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.permission', verbose_name='user permissions')),
-                ('neighborhood', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='users', to='core.cityneighborhood', verbose_name='neighborhood')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "is_superuser",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates that this user has all permissions without explicitly assigning them.",
+                        verbose_name="superuser status",
+                    ),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        max_length=254, unique=True, verbose_name="email address"
+                    ),
+                ),
+                (
+                    "first_name",
+                    models.CharField(max_length=150, verbose_name="first name"),
+                ),
+                (
+                    "last_name",
+                    models.CharField(max_length=150, verbose_name="last name"),
+                ),
+                (
+                    "postal_code",
+                    models.CharField(
+                        blank=True, max_length=10, verbose_name="postal code"
+                    ),
+                ),
+                (
+                    "is_verified",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Is the user's email address verified?",
+                        verbose_name="email verified",
+                    ),
+                ),
+                (
+                    "role",
+                    models.CharField(
+                        choices=[
+                            ("CITIZEN", "Citizen"),
+                            ("ASSOCIATION_MEMBER", "Association Member"),
+                            ("ADMIN", "Admin"),
+                        ],
+                        default="CITIZEN",
+                        max_length=20,
+                        verbose_name="role",
+                    ),
+                ),
+                (
+                    "phone_number",
+                    models.CharField(
+                        blank=True, max_length=20, verbose_name="phone number"
+                    ),
+                ),
+                (
+                    "newsletter_subscription",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Does the user want to receive the newsletter?",
+                        verbose_name="newsletter subscription",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="date joined"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="last updated"),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(
+                        default=True,
+                        help_text="Designates whether this user should be treated as active.",
+                        verbose_name="active",
+                    ),
+                ),
+                (
+                    "is_staff",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates whether the user can log into the admin site.",
+                        verbose_name="staff status",
+                    ),
+                ),
+                (
+                    "groups",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+                        related_name="user_set",
+                        related_query_name="user",
+                        to="auth.group",
+                        verbose_name="groups",
+                    ),
+                ),
+                (
+                    "user_permissions",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="Specific permissions for this user.",
+                        related_name="user_set",
+                        related_query_name="user",
+                        to="auth.permission",
+                        verbose_name="user permissions",
+                    ),
+                ),
+                (
+                    "neighborhood",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="users",
+                        to="core.cityneighborhood",
+                        verbose_name="neighborhood",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'user',
-                'verbose_name_plural': 'users',
-                'ordering': ['-created_at'],
+                "verbose_name": "user",
+                "verbose_name_plural": "users",
+                "ordering": ["-created_at"],
             },
         ),
         migrations.CreateModel(
-            name='NeighborhoodAssociation',
+            name="NeighborhoodAssociation",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('contact_email', models.EmailField(blank=True, max_length=254, verbose_name='Contact Email')),
-                ('contact_phone', models.CharField(blank=True, max_length=20, verbose_name='Contact Phone')),
-                ('website', models.URLField(blank=True, verbose_name='Website')),
-                ('neighborhood', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='associations', to='core.cityneighborhood', verbose_name='City Neighborhood')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "contact_email",
+                    models.EmailField(
+                        blank=True, max_length=254, verbose_name="Contact Email"
+                    ),
+                ),
+                (
+                    "contact_phone",
+                    models.CharField(
+                        blank=True, max_length=20, verbose_name="Contact Phone"
+                    ),
+                ),
+                ("website", models.URLField(blank=True, verbose_name="Website")),
+                (
+                    "neighborhood",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="associations",
+                        to="core.cityneighborhood",
+                        verbose_name="City Neighborhood",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Neighborhood Association',
-                'verbose_name_plural': 'Neighborhood Associations',
-                'ordering': ['neighborhood__district__city__name', 'neighborhood__district__name', 'neighborhood__name'],
+                "verbose_name": "Neighborhood Association",
+                "verbose_name_plural": "Neighborhood Associations",
+                "ordering": [
+                    "neighborhood__district__city__name",
+                    "neighborhood__district__name",
+                    "neighborhood__name",
+                ],
             },
         ),
     ]

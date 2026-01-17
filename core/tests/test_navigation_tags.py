@@ -1,3 +1,4 @@
+from django.template.context import BaseContext
 from django.test import TestCase, RequestFactory
 from django.template import Context, Template
 from wagtail.models import Site, Page
@@ -5,20 +6,20 @@ from core.templatetags.navigation_tags import get_site_root
 
 
 class NavigationTagsTest(TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.factory = RequestFactory()
 
-    def test_get_site_root_returns_root_page(self):
+    def test_get_site_root_returns_root_page(self) -> None:
         site = Site.objects.get(is_default_site=True)
         request = self.factory.get("/")
-        context = {"request": request}
+        context = BaseContext({"request": request})
 
         root_page = get_site_root(context)
 
         self.assertIsInstance(root_page, Page)
         self.assertEqual(root_page, site.root_page)
 
-    def test_get_site_root_in_template(self):
+    def test_get_site_root_in_template(self) -> None:
         site = Site.objects.get(is_default_site=True)
         request = self.factory.get("/")
 
@@ -33,7 +34,7 @@ class NavigationTagsTest(TestCase):
 
         self.assertEqual(rendered.strip(), str(site.root_page.id))
 
-    def test_get_site_root_with_custom_site(self):
+    def test_get_site_root_with_custom_site(self) -> None:
         default_site = Site.objects.get(is_default_site=True)
         root_page = default_site.root_page
 
@@ -49,34 +50,37 @@ class NavigationTagsTest(TestCase):
         )
 
         request = self.factory.get("/", HTTP_HOST="custom.example.com")
-        context = {"request": request}
+        context = BaseContext({"request": request})
 
         root_page_result = get_site_root(context)
 
         self.assertIsInstance(root_page_result, Page)
         self.assertEqual(root_page_result, custom_site.root_page)
-        self.assertEqual(root_page_result.title, "Custom Root")
+        self.assertEqual(
+            root_page_result.title,  # type: ignore[union-attr]
+            "Custom Root",
+        )
 
-    def test_get_site_root_no_request_in_context(self):
+    def test_get_site_root_no_request_in_context(self) -> None:
         site = Site.objects.get(is_default_site=True)
-        context = {}
+        context = BaseContext()
 
         root_page = get_site_root(context)
 
         self.assertEqual(root_page, site.root_page)
 
-    def test_get_site_root_unknown_host_fallback(self):
+    def test_get_site_root_unknown_host_fallback(self) -> None:
         request = self.factory.get("/", HTTP_HOST="unknown.server.com")
-        context = {"request": request}
+        context = BaseContext({"request": request})
         site = Site.objects.get(is_default_site=True)
 
         root_page = get_site_root(context)
 
         self.assertEqual(root_page, site.root_page)
 
-    def test_get_site_root_no_sites_exist(self):
+    def test_get_site_root_no_sites_exist(self) -> None:
         Site.objects.all().delete()
-        context = {}
+        context = BaseContext()
 
         root_page = get_site_root(context)
 
