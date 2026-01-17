@@ -24,9 +24,7 @@ class SiteRootTagTests(TestCase):
         request = self.factory.get("/")
 
         template = Template(
-            "{% load navigation_tags %}"
-            "{% get_site_root as site_root %}"
-            "{{ site_root.id }}"
+            "{% load navigation_tags %}{% get_site_root as site_root %}{{ site_root.id }}"
         )
 
         context = Context({"request": request})

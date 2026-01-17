@@ -76,9 +76,7 @@ class Command(BaseCommand):
             file_path = os.path.join(base_dir, filename)
 
             if not os.path.exists(file_path):
-                self.stdout.write(
-                    self.style.ERROR(f"Placeholder file not found: {file_path}")
-                )
+                self.stdout.write(self.style.ERROR(f"Placeholder file not found: {file_path}"))
                 continue
 
             page = model_class.objects.first()
@@ -103,9 +101,7 @@ class Command(BaseCommand):
                     f.write(current_html.strip())
                 self.stdout.write(f"  Backed up current content to {old_file_path}")
             except IOError as e:
-                self.stdout.write(
-                    self.style.ERROR(f"  Failed to write backup file: {e}")
-                )
+                self.stdout.write(self.style.ERROR(f"  Failed to write backup file: {e}"))
                 continue
 
             try:
@@ -113,9 +109,7 @@ class Command(BaseCommand):
                     new_html = f.read()
             except IOError as e:
                 self.stdout.write(
-                    self.style.ERROR(
-                        f"  Failed to read placeholder file {file_path}: {e}"
-                    )
+                    self.style.ERROR(f"  Failed to read placeholder file {file_path}: {e}")
                 )
                 continue
 

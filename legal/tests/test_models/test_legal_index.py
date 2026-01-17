@@ -19,17 +19,13 @@ class LegalIndexPageTests(WagtailPageTestCase):
         legal_index_page = LegalIndexPage.objects.filter(
             path__startswith=self.home_page.path
         ).first()
-        self.assertIsNotNone(
-            legal_index_page, "LegalIndexPage does not exist under HomePage."
-        )
+        self.assertIsNotNone(legal_index_page, "LegalIndexPage does not exist under HomePage.")
 
     def test_legal_index_page_is_subpage_of_home_page(self) -> None:
         legal_index_page = LegalIndexPage.objects.filter(
             path__startswith=self.home_page.path
         ).first()
-        self.assertIsNotNone(
-            legal_index_page, "LegalIndexPage does not exist under HomePage."
-        )
+        self.assertIsNotNone(legal_index_page, "LegalIndexPage does not exist under HomePage.")
         self.assertEqual(
             legal_index_page.get_parent().id,
             self.home_page.id,
@@ -40,9 +36,5 @@ class LegalIndexPageTests(WagtailPageTestCase):
         legal_index_page = LegalIndexPage.objects.filter(
             path__startswith=self.home_page.path
         ).first()
-        self.assertIsNotNone(
-            legal_index_page, "LegalIndexPage does not exist under HomePage."
-        )
-        self.assertEqual(
-            legal_index_page.slug, "legal", "LegalIndexPage slug is not 'legal'."
-        )
+        self.assertIsNotNone(legal_index_page, "LegalIndexPage does not exist under HomePage.")
+        self.assertEqual(legal_index_page.slug, "legal", "LegalIndexPage slug is not 'legal'.")

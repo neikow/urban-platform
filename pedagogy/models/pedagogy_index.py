@@ -57,13 +57,9 @@ class PedagogyIndexPage(Page):
     def get_verbose_name(cls) -> StrOrPromise:
         return _("Pedagogy Entries Index")
 
-    def _populate_pedagogy_entries(
-        self, context: Context, request: HttpRequest
-    ) -> None:
+    def _populate_pedagogy_entries(self, context: Context, request: HttpRequest) -> None:
         pedagogy_entries = (
-            PedagogyCardPage.objects.live()
-            .descendant_of(self)
-            .order_by("-first_published_at")
+            PedagogyCardPage.objects.live().descendant_of(self).order_by("-first_published_at")
         )
         search_query = request.GET.get("search", "")
         if search_query:

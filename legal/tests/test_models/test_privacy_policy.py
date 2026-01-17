@@ -20,9 +20,5 @@ class PrivacyPolicyPageTests(WagtailPageTestCase):
         self.assertCanNotCreateAt(HomePage, PrivacyPolicyPage)
 
     def test_privacy_policy_page_should_exist(self) -> None:
-        page = PrivacyPolicyPage.objects.filter(
-            path__startswith=self.legal_index_page.path
-        ).first()
-        self.assertIsNotNone(
-            page, "PrivacyPolicyPage does not exist under LegalIndexPage."
-        )
+        page = PrivacyPolicyPage.objects.filter(path__startswith=self.legal_index_page.path).first()
+        self.assertIsNotNone(page, "PrivacyPolicyPage does not exist under LegalIndexPage.")

@@ -12,9 +12,7 @@ class Command(BaseCommand):
     help = "Create mock pedagogy cards. Only works in DEBUG mode."
 
     def add_arguments(self, parser: CommandParser) -> None:
-        parser.add_argument(
-            "--count", type=int, default=10, help="Number of cards to create"
-        )
+        parser.add_argument("--count", type=int, default=10, help="Number of cards to create")
         parser.add_argument(
             "--delete",
             action="store_true",
@@ -23,9 +21,7 @@ class Command(BaseCommand):
 
     def handle(self, *args: Any, **options: Any) -> None:
         if not settings.DEBUG:
-            self.stderr.write(
-                self.style.ERROR("This command can only be run when DEBUG=True")
-            )
+            self.stderr.write(self.style.ERROR("This command can only be run when DEBUG=True"))
             return
 
         if options["delete"]:
@@ -34,9 +30,7 @@ class Command(BaseCommand):
                 children = index_page.get_children().specific()
                 for child in children:
                     child.delete()
-                self.stdout.write(
-                    self.style.SUCCESS("Deleted all existing pedagogy cards.")
-                )
+                self.stdout.write(self.style.SUCCESS("Deleted all existing pedagogy cards."))
             else:
                 self.stderr.write(
                     self.style.ERROR(
@@ -63,10 +57,6 @@ class Command(BaseCommand):
                 page.save_revision().publish()
                 self.stdout.write(f"Created: {page.title}")
             except Exception as e:
-                self.stderr.write(
-                    self.style.ERROR(f"Failed to create entry {i + 1}: {e}")
-                )
+                self.stderr.write(self.style.ERROR(f"Failed to create entry {i + 1}: {e}"))
 
-        self.stdout.write(
-            self.style.SUCCESS(f"Successfully created {count} pedagogy entries.")
-        )
+        self.stdout.write(self.style.SUCCESS(f"Successfully created {count} pedagogy entries."))
