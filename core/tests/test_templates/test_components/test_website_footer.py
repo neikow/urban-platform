@@ -6,8 +6,12 @@ from home.models import HomePage
 
 
 class FooterComponentTest(TestCase):
+    home: HomePage
+    page1: Page
+    page2: Page
+
     @classmethod
-    def setUpTestData(cls):
+    def setUpTestData(cls) -> None:
         root = Page.get_first_root_node()
 
         cls.home = HomePage.objects.child_of(root).first()
@@ -33,7 +37,7 @@ class FooterComponentTest(TestCase):
         cls.page2 = Page(title="Page 2", slug="page-2", show_in_menus=True)
         cls.home.add_child(instance=cls.page2)
 
-    def test_footer_render(self):
+    def test_footer_render(self) -> None:
         factory = RequestFactory()
         request = factory.get("/")
 

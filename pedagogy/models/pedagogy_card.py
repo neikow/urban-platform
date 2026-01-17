@@ -1,3 +1,4 @@
+from django_stubs_ext import StrOrPromise
 from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page
 from wagtail.fields import RichTextField
@@ -6,11 +7,11 @@ from wagtail.search import index
 
 
 class PedagogyCardPage(Page):
-    parent_page_types = ["pedagogy.PedagogyIndexPage"]
-    child_page_types = []
+    parent_page_types: list[str] = ["pedagogy.PedagogyIndexPage"]
+    child_page_types: list[str] = []
 
     @classmethod
-    def get_verbose_name(cls):
+    def get_verbose_name(cls) -> StrOrPromise:
         return _("Pedagogy Card")
 
     body = RichTextField(

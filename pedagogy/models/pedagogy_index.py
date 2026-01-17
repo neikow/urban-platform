@@ -1,5 +1,10 @@
+from typing import Any
+from django_stubs_ext import StrOrPromise
+
 from django.core.paginator import Paginator
 from django.db import models
+from django.http import HttpRequest
+from django.template import Context
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 from django.utils.translation import gettext_lazy as _
@@ -12,7 +17,7 @@ class PedagogyIndexPage(Page):
     max_count = 1
     parent_page_types = ["home.HomePage"]
 
-    page_introduction = models.TextField(
+    page_introduction: models.TextField = models.TextField(
         blank=True,
         verbose_name=_("Page introduction"),
         help_text=_("Small introduction shown above the pedagogy card list."),
@@ -34,10 +39,12 @@ class PedagogyIndexPage(Page):
     ]
 
     @classmethod
-    def get_verbose_name(cls):
+    def get_verbose_name(cls) -> StrOrPromise:
         return _("Pedagogy Entries Index")
 
-    def _populate_pedagogy_entries(self, context, request):
+    def _populate_pedagogy_entries(
+        self, context: Context, request: HttpRequest
+    ) -> None:
         pedagogy_entries = (
             PedagogyCardPage.objects.live()
             .descendant_of(self)
@@ -49,7 +56,7 @@ class PedagogyIndexPage(Page):
 
         context.update({"pedagogy_entries": pedagogy_entries})
 
-    def get_context(self, request, *args, **kwargs):
+    def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Context:
         context = super().get_context(request, *args, **kwargs)
         self._populate_pedagogy_entries(context, request)
         return context

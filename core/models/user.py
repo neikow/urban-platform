@@ -1,4 +1,10 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from typing import Any
+
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -9,9 +15,10 @@ class UserRole(models.TextChoices):
     ADMIN = "ADMIN", _("Admin")
 
 
-class UserManager(BaseUserManager):
-
-    def create_user(self, email, password=None, **extra_fields):
+class UserManager(BaseUserManager["User"]):
+    def create_user(
+        self, email: str, password: str | None = None, **extra_fields: Any
+    ) -> "User":
         if not email:
             raise ValueError(_("The Email field must be set"))
         email = self.normalize_email(email)
@@ -20,7 +27,9 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password=None, **extra_fields):
+    def create_superuser(
+        self, email: str, password: str | None = None, **extra_fields: Any
+    ) -> "User":
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("role", UserRole.ADMIN)
@@ -94,12 +103,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _("Users")
         ordering = ["-created_at"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.email
 
-    def get_full_name(self):
+    def get_full_name(self) -> str:
         full_name = f"{self.first_name} {self.last_name}".strip()
         return full_name or self.email
 
-    def get_short_name(self):
+    def get_short_name(self) -> str:
         return self.first_name or self.email.split("@")[0]
