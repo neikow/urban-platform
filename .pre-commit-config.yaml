@@ -28,6 +28,19 @@ repos:
       - id: bandit
         args: ["-c", "pyproject.toml"]
         additional_dependencies: ["bandit[toml]"]
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.19.1  # Match your pyproject.toml version
+    hooks:
+      - id: mypy
+        stages: [ pre-push ]
+        pass_filenames: false
+        always_run: true
+        args: ["."]
+        additional_dependencies:
+            - python-dotenv>=1.2.1
+            - django-stubs[compatible-mypy]>=5.2.8
+            - wagtail>=7.2
+            - factory-boy>=3.3.3
   - repo: local
     hooks:
       - id: tests

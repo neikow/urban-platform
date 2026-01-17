@@ -1,3 +1,6 @@
+from typing import Any
+
+from django.core.management import CommandParser
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from pedagogy.models import PedagogyIndexPage
@@ -8,12 +11,12 @@ from home.models import HomePage
 class Command(BaseCommand):
     help = "Create mock pedagogy cards. Only works in DEBUG mode."
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument(
             "--count", type=int, default=10, help="Number of cards to create"
         )
 
-    def handle(self, *args, **options):
+    def handle(self, *args: Any, **options: Any) -> None:
         if not settings.DEBUG:
             self.stderr.write(
                 self.style.ERROR("This command can only be run when DEBUG=True")

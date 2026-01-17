@@ -9,11 +9,11 @@ class HomeSetUpTests(WagtailPageTestCase):
     Tests for basic page structure setup and HomePage creation.
     """
 
-    def test_root_create(self):
+    def test_root_create(self) -> None:
         root_page = Page.objects.get(pk=1)
         self.assertIsNotNone(root_page)
 
-    def test_homepage_create(self):
+    def test_homepage_create(self) -> None:
         root_page = Page.objects.get(pk=1)
         homepage = HomePage(title="Home")
         root_page.add_child(instance=homepage)
@@ -25,7 +25,7 @@ class HomeTests(WagtailPageTestCase):
     Tests for homepage functionality and rendering.
     """
 
-    def setUp(self):
+    def setUp(self) -> None:
         """
         Create a homepage instance for testing.
         """
@@ -36,9 +36,9 @@ class HomeTests(WagtailPageTestCase):
         self.homepage = HomePage(title="Home")
         root_page.add_child(instance=self.homepage)
 
-    def test_homepage_is_renderable(self):
+    def test_homepage_is_renderable(self) -> None:
         self.assertPageIsRenderable(self.homepage)
 
-    def test_homepage_template_used(self):
+    def test_homepage_template_used(self) -> None:
         response = self.client.get(self.homepage.url)
         self.assertTemplateUsed(response, "home/home_page.html")

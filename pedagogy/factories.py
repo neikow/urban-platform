@@ -1,3 +1,5 @@
+from typing import Any
+
 import factory
 from wagtail.models import Page
 
@@ -12,7 +14,9 @@ class PedagogyCardPageFactory(factory.django.DjangoModelFactory):
     body = factory.Faker("paragraph", nb_sentences=10)
 
     @classmethod
-    def _create(cls, model_class, *args, **kwargs):
+    def _create(
+        cls, model_class: type[PedagogyCardPage], *args: Any, **kwargs: Any
+    ) -> PedagogyCardPage:
         parent: Page = kwargs.pop("parent", None)  # type: ignore
         instance = model_class(**kwargs)
 
