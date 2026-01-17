@@ -1,7 +1,9 @@
-from typing import Any
+from typing import Any, TypedDict
 import os
+
+from django.core.management import CommandParser
 from django.core.management.base import BaseCommand
-from wagtail.rich_text import RichText
+from wagtail.models import Page
 
 from legal.models import (
     TermsOfServicePage,
@@ -11,10 +13,15 @@ from legal.models import (
 )
 
 
+class PageMappingEntry(TypedDict):
+    model: type[Page]
+    filename: str
+
+
 class Command(BaseCommand):
     help = "Populates legal pages content from placeholder HTML files."
 
-    PAGE_MAPPING = {
+    PAGE_MAPPING: dict[str, PageMappingEntry] = {
         "terms_of_service": {
             "model": TermsOfServicePage,
             "filename": "terms_of_service.html",
@@ -33,7 +40,7 @@ class Command(BaseCommand):
         },
     }
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument(
             "--include",
             nargs="+",
@@ -49,7 +56,7 @@ class Command(BaseCommand):
         include_list = options["include"]
         exclude_list = options["exclude"] or []
 
-        pages_to_process = self.PAGE_MAPPING.keys()
+        pages_to_process = list(self.PAGE_MAPPING.keys())
 
         if include_list:
             pages_to_process = [p for p in pages_to_process if p in include_list]

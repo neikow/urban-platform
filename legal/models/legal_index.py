@@ -4,11 +4,11 @@ from django.utils.translation import gettext_lazy as _
 
 class LegalIndexPage(Page):
     max_count_per_parent = 1
-    parent_page_types = ["home.HomePage"]
-    child_page_types = []
+    parent_page_types: list[str] = ["home.HomePage"]
+    child_page_types: list[str] = []
     show_in_menus_default = False
     is_creatable = False
-    content_panels = []
+    content_panels: list = []
     promote_panels = [
         PanelPlaceholder(
             "wagtail.admin.panels.MultiFieldPanel",

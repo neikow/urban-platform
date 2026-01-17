@@ -4,7 +4,7 @@ from pedagogy.factories import PedagogyCardPageFactory, ImageFactory
 
 
 @pytest.mark.django_db
-def test_table_of_contents_generation():
+def test_table_of_contents_generation() -> None:
     page = PedagogyCardPageFactory.build(
         content=[
             (
