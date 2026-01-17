@@ -10,8 +10,10 @@ BASE_DIR = PROJECT_DIR.parent
 # Application definition
 
 INSTALLED_APPS = [
+    "core",
     "home",
     "search",
+    "pedagogy",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -33,8 +35,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "core",
-    "pedagogy",
 ]
 
 MIDDLEWARE = [
@@ -69,6 +69,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "urban_platform.wsgi.application"
+
+# Authentication
+AUTH_USER_MODEL = "core.User"
 
 
 # Database
