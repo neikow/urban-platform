@@ -2,13 +2,11 @@ from dataclasses import dataclass
 
 from django.db import migrations
 
-
 @dataclass
 class _DistrictDefinition:
     name: str
     name_short: str
     neighborhoods: list[str]
-
 
 def _populate_marseille_data(apps, schema_editor):
     City = apps.get_model("core", "City")
@@ -17,8 +15,7 @@ def _populate_marseille_data(apps, schema_editor):
 
     marseille, _ = City.objects.get_or_create(name="Marseille")
 
-    data = [
-        _DistrictDefinition(
+    data = [_DistrictDefinition(
             name="1er Arrondissement",
             name_short="1er",
             neighborhoods=[
@@ -217,10 +214,10 @@ def _populate_marseille_data(apps, schema_editor):
                 "L'Estaque",
                 "Les Riaux",
                 "Saint-André",
-                "Saint-Henri",
-            ],
+                "Saint-Henri"],
         ),
     ]
+
 
     for district_index, definition in enumerate(data):
         district, _ = CityDistrict.objects.get_or_create(
@@ -233,11 +230,9 @@ def _populate_marseille_data(apps, schema_editor):
                 postal_code="1300{}".format(str(district_index + 1).zfill(2)),
             )
 
-
 def _rollback_marseille_data(apps, schema_editor):
     City = apps.get_model("core", "City")
     City.objects.filter(name="Marseille").delete()
-
 
 class Migration(migrations.Migration):
     dependencies = [
