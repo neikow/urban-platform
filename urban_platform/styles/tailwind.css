@@ -18,6 +18,28 @@
 }
 
 @layer utilities {
+    .last-breadcrumb {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .last-breadcrumb:before {
+        content: "";
+        margin-right: calc(0.25rem * 3);
+        margin-left: calc(0.25rem * 2);
+        display: block;
+        height: calc(0.25rem * 1.5);
+        width: calc(0.25rem * 1.5);
+        opacity: 40%;
+        rotate: 45deg;
+        border-top: 1px solid;
+        border-right: 1px solid;
+        background-color: #0000;
+    }
+    [dir="rtl"] & + *:before {
+        rotate: -135deg;
+    }
+
   .link-external {
     &:not([href^="/"]):not([href^="#"])::after {
       content: "↗";
