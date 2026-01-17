@@ -10,6 +10,12 @@ jobs:
   quality:
     name: Quality (${{ matrix.check }})
     runs-on: ubuntu-latest
+
+    env:
+      DJANGO_SETTINGS_MODULE: urban_platform.settings.dev
+      SECRET_KEY: "test-key"
+      ENVIRONMENT: "test"
+
     strategy:
       fail-fast: false
       matrix:
@@ -32,6 +38,9 @@ jobs:
 
       - name: Install dependencies
         run: uv sync --all-extras --dev
+
+      - name: Install Ruff
+        run: uv tool install ruff
 
       - name: Run Ruff Linter
         if: matrix.check == 'lint'
