@@ -1,5 +1,10 @@
 {% load wagtailimages_tags %}
+
 <div class="flex flex-col {% if value.position == 'left' %} md:flex-row {% else %} md:flex-row-reverse {% endif %} gap-4 md:gap-8 lg:gap-16 my-2 md:my-4 lg:my-8">
-    <div class="w-full">{% image value.image width-400 alt=value.alt_text class="w-full h-72 rounded-lg" %}</div>
-    <div class="w-full text-justify my-2 md:my-4 lg:my-8">{{ value.paragraph|safe }}</div>
+    <div class="w-full">
+        {% image value.image width-400 alt=value.alt_text class="w-full h-72 rounded-lg" %}
+    </div>
+    <div class="w-full text-justify my-2 md:my-4 lg:my-8">
+        {{ value.paragraph|safe }}
+    </div>
 </div>

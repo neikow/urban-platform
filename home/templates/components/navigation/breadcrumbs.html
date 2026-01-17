@@ -3,9 +3,13 @@
         {% if ancestors|length >= 3 %}
             <ul class="text-sm flex items-center md:hidden">
                 <li class="dropdown">
-                    <div tabindex="0" role="button" class="btn btn-ghost btn-xs px-1">...</div>
-                    <ul tabindex="0"
-                        class="dropdown-content menu menu-lg w-sm z-[1] p-2 shadow bg-base-100 rounded-box">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-xs px-1">
+                        ...
+                    </div>
+                    <ul
+                        tabindex="0"
+                        class="dropdown-content menu menu-lg w-sm z-[1] p-2 shadow bg-base-100 rounded-box"
+                    >
                         {% for p in ancestors %}
                             {% if not p.is_root %}
                                 <li>
@@ -15,7 +19,9 @@
                         {% endfor %}
                     </ul>
                 </li>
-                <li class="last-breadcrumb font-bold">{{ page.title }}</li>
+                <li class="last-breadcrumb font-bold">
+                    {{ page.title }}
+                </li>
             </ul>
         {% endif %}
         <div class="breadcrumbs text-sm max-w-xs sm:max-w-none {% if ancestors|length >= 3 %}hidden md:block{% endif %}">
@@ -27,7 +33,9 @@
                         </li>
                     {% endif %}
                 {% endfor %}
-                <li class="font-bold">{{ page.title }}</li>
+                <li class="font-bold">
+                    {{ page.title }}
+                </li>
             </ul>
         </div>
     {% endif %}
