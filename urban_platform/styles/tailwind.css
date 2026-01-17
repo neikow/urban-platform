@@ -88,15 +88,15 @@
 @layer components {
   .page-content {
     h2 {
-      @apply mt-8 mb-4 text-2xl font-bold scroll-mt-8;
+      @apply mt-8 mb-4 text-2xl font-bold scroll-mt-20;
     }
 
     h3 {
-      @apply mt-6 mb-3 text-xl font-semibold scroll-mt-8;
+      @apply mt-6 mb-3 text-xl font-semibold scroll-mt-20;
     }
 
     h4 {
-      @apply mt-4 mb-2 text-lg font-semibold scroll-mt-8;
+      @apply mt-4 mb-2 text-lg font-semibold scroll-mt-20;
     }
 
     p {
