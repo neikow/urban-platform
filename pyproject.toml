@@ -47,7 +47,7 @@ dev = [
 DJANGO_SETTINGS_MODULE = "urban_platform.settings.dev"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
 
-[tool.ruff]
+[tool.ruff.lint]
 ignore = [
     "F401" # use explicit re-export
 ]

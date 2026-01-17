@@ -9,3 +9,6 @@ insert_final_newline = true
 
 [.pre-commit-config.yaml]
 indent_size = 2
+
+[.github/workflows/*.yml]
+indent_size = 2
