@@ -49,7 +49,7 @@ def _create_legal_index(apps, schema_editor):
         url_path=home_page.url_path + _LEGAL_INDEX_SLUG + "/",
         locale_id=home_page.locale_id,
         live=True,
-        show_in_menus=True,
+        show_in_menus=False,
     )
 
     home_page.numchild += 1
