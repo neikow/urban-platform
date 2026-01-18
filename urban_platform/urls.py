@@ -17,7 +17,6 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path("auth/register/", RegisterFormView.as_view(), name="register"),
     path("auth/me/", MeView.as_view(), name="me"),
-    path("__reload__/", include("django_browser_reload.urls")),
 ]
 
 
@@ -28,6 +27,10 @@ if settings.DEBUG:
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+    # Enable django-browser-reload
+    urlpatterns += [path("__reload__/", include("django_browser_reload.urls"))]
+
 
 urlpatterns = urlpatterns + [
     # For anything not caught by a more specific rule above, hand over to
