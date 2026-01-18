@@ -818,12 +818,12 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "django", specifier = "==5.2.10" },
-    { name = "gunicorn", specifier = "==23.0.0" },
-    { name = "pre-commit", specifier = "==4.5.1" },
-    { name = "python-dotenv", specifier = "==1.2.1" },
-    { name = "tqdm", specifier = "==4.67.1" },
-    { name = "wagtail", specifier = "==7.2.1" },
+    { name = "django", specifier = ">=5.2,<5.3" },
+    { name = "gunicorn", specifier = ">=23.0.0" },
+    { name = "pre-commit", specifier = ">=4.5.1" },
+    { name = "python-dotenv", specifier = ">=1.2.1" },
+    { name = "tqdm", specifier = ">=4.67.1" },
+    { name = "wagtail", specifier = ">=7.2.1" },
 ]
 
 [package.metadata.requires-dev]
