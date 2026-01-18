@@ -1,9 +1,14 @@
 from .base import *
 import os
+from .base import INSTALLED_APPS as INSTALLED_APPS_BASE
 
 DEBUG = False
 
 SECRET_KEY = os.environ["SECRET_KEY"]
+
+INSTALLED_APPS = INSTALLED_APPS_BASE + [
+    "django.contrib.postgres",
+]
 
 DATABASES["default"] = {
     "ENGINE": "django.db.backends.postgresql",
