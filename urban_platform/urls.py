@@ -17,6 +17,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path("auth/register/", RegisterFormView.as_view(), name="register"),
     path("auth/me/", MeView.as_view(), name="me"),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
 
 
