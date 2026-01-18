@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 2
 requires-python = ">=3.13"
 
 [[package]]
@@ -567,6 +567,18 @@ wheels = [
 ]
 
 [[package]]
+name = "psycopg"
+version = "3.3.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "tzdata", marker = "sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e0/1a/7d9ef4fdc13ef7f15b934c393edc97a35c281bb7d3c3329fbfcbe915a7c2/psycopg-3.3.2.tar.gz", hash = "sha256:707a67975ee214d200511177a6a80e56e654754c9afca06a7194ea6bbfde9ca7", size = 165630, upload-time = "2025-12-06T17:34:53.899Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8c/51/2779ccdf9305981a06b21a6b27e8547c948d85c41c76ff434192784a4c93/psycopg-3.3.2-py3-none-any.whl", hash = "sha256:3e94bc5f4690247d734599af56e51bae8e0db8e4311ea413f801fef82b14a99b", size = 212774, upload-time = "2025-12-06T17:31:41.414Z" },
+]
+
+[[package]]
 name = "pyee"
 version = "13.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -801,6 +813,7 @@ dependencies = [
     { name = "django" },
     { name = "gunicorn" },
     { name = "pre-commit" },
+    { name = "psycopg" },
     { name = "python-dotenv" },
     { name = "tqdm" },
     { name = "wagtail" },
@@ -821,6 +834,7 @@ requires-dist = [
     { name = "django", specifier = ">=5.2,<6.1" },
     { name = "gunicorn", specifier = ">=23.0.0" },
     { name = "pre-commit", specifier = ">=4.5.1" },
+    { name = "psycopg", specifier = ">=3.3.2" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "tqdm", specifier = ">=4.67.1" },
     { name = "wagtail", specifier = ">=7.2.1" },
