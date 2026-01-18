@@ -9,8 +9,6 @@ class MigrationTest(TestCase):
         try:
             call_command("makemigrations", "--check", "--dry-run", stdout=out)
         except SystemExit:
-            self.fail(
-                "Pending migrations detected. Run 'python manage.py makemigrations'."
-            )
+            self.fail("Pending migrations detected. Run 'python manage.py makemigrations'.")
         except Exception as e:
             self.fail(f"makemigrations check failed with error: {e}")

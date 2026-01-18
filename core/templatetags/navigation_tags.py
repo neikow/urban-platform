@@ -14,9 +14,7 @@ def get_site_root(context: BaseContext) -> Site | None:
         if site is not None:
             return site.root_page
 
-    default_site = (
-        Site.objects.filter(is_default_site=True).first() or Site.objects.first()
-    )
+    default_site = Site.objects.filter(is_default_site=True).first() or Site.objects.first()
     if default_site is not None:
         return default_site.root_page
 

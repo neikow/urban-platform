@@ -30,8 +30,6 @@ class PedagogyResource(Orderable):
     def clean(self) -> None:
         super().clean()
         if self.url and self.document:
-            raise ValidationError(
-                _("Please provide either a URL or a Document, but not both.")
-            )
+            raise ValidationError(_("Please provide either a URL or a Document, but not both."))
         if not self.url and not self.document:
             raise ValidationError(_("Please provide either a URL or a Document."))

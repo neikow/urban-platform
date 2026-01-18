@@ -14,14 +14,10 @@ repos:
       - id: ruff
         args: [ --fix ]
       - id: ruff-format
-  - repo: https://github.com/djlint/djLint
-    rev: v1.36.4
+  - repo: https://github.com/UnknownPlatypus/djangofmt-pre-commit
+    rev: v0.2.5
     hooks:
-      - id: djlint-reformat-django
-      - id: djlint-django
-        args:
-          - --ignore=T003,H006,H030
-          - --reformat
+      - id: djangofmt
   - repo: https://github.com/PyCQA/bandit
     rev: 1.8.3
     hooks:

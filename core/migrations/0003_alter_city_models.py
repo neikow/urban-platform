@@ -41,16 +41,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="neighborhoodassociation",
             name="contact_email",
-            field=models.EmailField(
-                blank=True, max_length=254, verbose_name="Contact Email"
-            ),
+            field=models.EmailField(blank=True, max_length=254, verbose_name="Contact Email"),
         ),
         migrations.AlterField(
             model_name="neighborhoodassociation",
             name="contact_phone",
-            field=models.CharField(
-                blank=True, max_length=20, verbose_name="Contact Phone"
-            ),
+            field=models.CharField(blank=True, max_length=20, verbose_name="Contact Phone"),
         ),
         migrations.AlterField(
             model_name="neighborhoodassociation",

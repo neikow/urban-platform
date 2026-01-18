@@ -56,8 +56,6 @@ BlockTypes: list[tuple[str, blocks.Block]] = [
     ("image", ImageBlock(label=_("Image"), template="core/blocks/image_block.html")),
     (
         "image_text",
-        ImageTextBlock(
-            label=_("Image & Text Row"), template="core/blocks/image_text_block.html"
-        ),
+        ImageTextBlock(label=_("Image & Text Row"), template="core/blocks/image_text_block.html"),
     ),
 ]

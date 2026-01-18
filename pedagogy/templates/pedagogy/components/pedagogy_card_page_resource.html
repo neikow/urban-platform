@@ -1,16 +1,20 @@
 {% if page.has_resource %}
-    <div class='flex flex-col items-center gap-4 {{ class|default:"" }}'>
+    <div class="flex flex-col items-center gap-4 {{ class|default:"" }}">
         {% for resource in page.resources.all %}
             {% if resource.url %}
-                <a href="{{ resource.url }}"
-                   class='btn btn-secondary w-min text-nowrap link-external'
-                   target="_blank"
-                   rel="noopener noreferrer">Accèder à la ressource</a>
+                <a
+                    href="{{ resource.url }}"
+                    class="btn btn-secondary w-min text-nowrap link-external"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >Accèder à la ressource</a>
             {% elif resource.document %}
-                <a href="{{ resource.document.url }}"
-                   class='btn btn-secondary w-min text-nowrap link-document'
-                   target="_blank"
-                   rel="noopener noreferrer">Télécharger la ressource</a>
+                <a
+                    href="{{ resource.document.url }}"
+                    class="btn btn-secondary w-min text-nowrap link-document"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >Télécharger la ressource</a>
             {% else %}
                 Type de ressource inconnu.
             {% endif %}

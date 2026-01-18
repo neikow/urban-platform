@@ -100,9 +100,7 @@ class Migration(migrations.Migration):
                 ("password", models.CharField(max_length=128, verbose_name="password")),
                 (
                     "last_login",
-                    models.DateTimeField(
-                        blank=True, null=True, verbose_name="last login"
-                    ),
+                    models.DateTimeField(blank=True, null=True, verbose_name="last login"),
                 ),
                 (
                     "is_superuser",
@@ -114,9 +112,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "email",
-                    models.EmailField(
-                        max_length=254, unique=True, verbose_name="email address"
-                    ),
+                    models.EmailField(max_length=254, unique=True, verbose_name="email address"),
                 ),
                 (
                     "first_name",
@@ -128,9 +124,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "postal_code",
-                    models.CharField(
-                        blank=True, max_length=10, verbose_name="postal code"
-                    ),
+                    models.CharField(blank=True, max_length=10, verbose_name="postal code"),
                 ),
                 (
                     "is_verified",
@@ -155,9 +149,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "phone_number",
-                    models.CharField(
-                        blank=True, max_length=20, verbose_name="phone number"
-                    ),
+                    models.CharField(blank=True, max_length=20, verbose_name="phone number"),
                 ),
                 (
                     "newsletter_subscription",
@@ -245,15 +237,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "contact_email",
-                    models.EmailField(
-                        blank=True, max_length=254, verbose_name="Contact Email"
-                    ),
+                    models.EmailField(blank=True, max_length=254, verbose_name="Contact Email"),
                 ),
                 (
                     "contact_phone",
-                    models.CharField(
-                        blank=True, max_length=20, verbose_name="Contact Phone"
-                    ),
+                    models.CharField(blank=True, max_length=20, verbose_name="Contact Phone"),
                 ),
                 ("website", models.URLField(blank=True, verbose_name="Website")),
                 (

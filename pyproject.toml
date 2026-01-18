@@ -4,12 +4,12 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.13"
 dependencies = [
-    "django>=5.2,<5.3",
+    "django>=5.2,<6.1",
     "gunicorn>=23.0.0",
     "pre-commit>=4.5.1",
     "python-dotenv>=1.2.1",
     "tqdm>=4.67.1",
-    "wagtail>=7.2,<7.3",
+    "wagtail>=7.2.1",
 ]
 
 [tool.mypy]
@@ -46,6 +46,20 @@ dev = [
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "urban_platform.settings.dev"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
+
+[tool.djlint]
+profile = "django"
+blank_line_after_tag = "load,extends"
+close_void_tags = true
+line_break_after_multiline_tag = true
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
 
 [tool.ruff.lint]
 ignore = [

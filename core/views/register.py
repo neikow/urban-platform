@@ -10,9 +10,7 @@ User = get_user_model()
 
 class UserRegistrationForm(forms.Form):
     email = forms.EmailField(required=True, label="Email")
-    password = forms.CharField(
-        widget=forms.PasswordInput, required=True, label="Mot de passe"
-    )
+    password = forms.CharField(widget=forms.PasswordInput, required=True, label="Mot de passe")
     confirm_password = forms.CharField(
         widget=forms.PasswordInput, required=True, label="Confirmer le mot de passe"
     )

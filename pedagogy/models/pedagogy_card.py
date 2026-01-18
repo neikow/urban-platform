@@ -105,8 +105,6 @@ class PedagogyCardPage(Page):
                     if not id_attr or not isinstance(id_attr, str):
                         continue
 
-                    toc.append(
-                        TableOfContentsItem(title=title, id=id_attr, level=level)
-                    )
+                    toc.append(TableOfContentsItem(title=title, id=id_attr, level=level))
 
         return toc
