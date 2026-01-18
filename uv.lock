@@ -818,22 +818,22 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "django", specifier = ">=5.2,<5.3" },
-    { name = "gunicorn", specifier = ">=23.0.0" },
-    { name = "pre-commit", specifier = ">=4.5.1" },
-    { name = "python-dotenv", specifier = ">=1.2.1" },
-    { name = "tqdm", specifier = ">=4.67.1" },
-    { name = "wagtail", specifier = ">=7.2,<7.3" },
+    { name = "django", specifier = "==5.2.10" },
+    { name = "gunicorn", specifier = "==23.0.0" },
+    { name = "pre-commit", specifier = "==4.5.1" },
+    { name = "python-dotenv", specifier = "==1.2.1" },
+    { name = "tqdm", specifier = "==4.67.1" },
+    { name = "wagtail", specifier = "==7.2.1" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "django-browser-reload", specifier = ">=1.21.0" },
-    { name = "factory-boy", specifier = ">=3.3.3" },
-    { name = "playwright", specifier = ">=1.57.0" },
-    { name = "pytest-django", specifier = ">=4.11.1" },
-    { name = "pytest-env", specifier = ">=1.2.0" },
-    { name = "pytest-playwright", specifier = ">=0.7.2" },
+    { name = "django-browser-reload", specifier = "==1.21.0" },
+    { name = "factory-boy", specifier = "==3.3.3" },
+    { name = "playwright", specifier = "==1.57.0" },
+    { name = "pytest-django", specifier = "==4.11.1" },
+    { name = "pytest-env", specifier = "==1.2.0" },
+    { name = "pytest-playwright", specifier = "==0.7.2" },
 ]
 
 [[package]]
