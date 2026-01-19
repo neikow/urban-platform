@@ -8,29 +8,28 @@ from pedagogy.factories.pedagogy_card_factory import PedagogyCardPageFactory
 
 
 class PedagogyResourceTest(TestCase):
+    page: Page
+    doc: Document
+
     @classmethod
-    def setUpTestData(cls):
-        # We need a parent page to attach resources to
+    def setUpTestData(cls) -> None:
         root = Page.get_first_root_node()
-        cls.page = PedagogyCardPageFactory(parent=root)
+        cls.page = PedagogyCardPageFactory.create(parent=root)
         cls.doc = Document.objects.create(title="Test Doc", file="test.pdf")
 
-    def test_resource_with_url_valid(self):
-        """Test resource is valid with only URL."""
+    def test_resource_with_url_valid(self) -> None:
         resource = PedagogyResource(page=self.page, url="https://example.com")
         # Should not raise
         resource.clean()
         resource.save()
 
-    def test_resource_with_document_valid(self):
-        """Test resource is valid with only Document."""
+    def test_resource_with_document_valid(self) -> None:
         resource = PedagogyResource(page=self.page, document=self.doc)
         # Should not raise
         resource.clean()
         resource.save()
 
-    def test_resource_mutual_exclusivity(self):
-        """Test that having both URL and Document raises ValidationError."""
+    def test_resource_mutual_exclusivity(self) -> None:
         resource = PedagogyResource(
             page=self.page,
             url="https://example.com",
@@ -44,8 +43,7 @@ class PedagogyResourceTest(TestCase):
             str(cm.exception),
         )
 
-    def test_resource_required_fields(self):
-        """Test that having neither URL nor Document raises ValidationError."""
+    def test_resource_required_fields(self) -> None:
         resource = PedagogyResource(page=self.page)
         with self.assertRaises(ValidationError) as cm:
             resource.clean()

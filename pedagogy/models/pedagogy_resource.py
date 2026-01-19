@@ -12,8 +12,8 @@ class PedagogyResource(Orderable):
         on_delete=models.CASCADE,
         related_name="resources",
     )
-    url = models.URLField(blank=True, verbose_name=_("External URL"))
-    document = models.ForeignKey(
+    url: models.URLField = models.URLField(blank=True, verbose_name=_("External URL"))
+    document: models.ForeignKey = models.ForeignKey(
         "wagtaildocs.Document",
         null=True,
         blank=True,
@@ -27,7 +27,7 @@ class PedagogyResource(Orderable):
         FieldPanel("document"),
     ]
 
-    def clean(self):
+    def clean(self) -> None:
         super().clean()
         if self.url and self.document:
             raise ValidationError(
