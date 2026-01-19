@@ -1,10 +1,11 @@
+from django_stubs_ext import StrOrPromise
+from wagtail.admin.panels import FieldPanel
 from dataclasses import dataclass
 from typing import override
 
 from slugify import slugify
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import InlinePanel
 from wagtail.blocks import StreamValue
-from django_stubs_ext import StrOrPromise
 from wagtail.models import Page
 from wagtail.fields import StreamField
 from django.db import models
