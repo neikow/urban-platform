@@ -1,60 +1,52 @@
 # Use an official Python runtime based on Debian 12 "bookworm" as a parent image.
-FROM python:3.12-slim-bookworm
+FROM python:3.13-slim-bookworm
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
-# Add user that will be used in the container.
-RUN useradd wagtail
-
-# Port used by this container to serve HTTP.
-EXPOSE 8000
-
-# Set environment variables.
-# 1. Force Python stdout and stderr streams to be unbuffered.
-# 2. Set PORT variable that is used by Gunicorn. This should match "EXPOSE"
-#    command.
-ENV PYTHONUNBUFFERED=1 \
-    PORT=8000
-
-# Install system packages required by Wagtail and Django.
-RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
-    build-essential \
+# Install system packages
+RUN apt-get update && apt-get install -y \
     libpq-dev \
-    libmariadb-dev \
-    libjpeg62-turbo-dev \
-    zlib1g-dev \
-    libwebp-dev \
- && rm -rf /var/lib/apt/lists/*
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install the application server.
-RUN pip install "gunicorn==20.0.4"
+# Install Node.js for Tailwind
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install the project requirements.
-COPY requirements.txt /
-RUN pip install -r /requirements.txt
-
-# Use /app folder as a directory where the source code is stored.
 WORKDIR /app
 
-# Set this directory to be owned by the "wagtail" user. This Wagtail project
-# uses SQLite, the folder needs to be owned by the user that
-# will be writing to the database file.
-RUN chown wagtail:wagtail /app
+# Install Python dependencies
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
 
-# Copy the source code of the project into the container.
-COPY --chown=wagtail:wagtail . .
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-install-project --no-dev
 
-# Use user "wagtail" to run the build commands below and the server itself.
-USER wagtail
+# Install Node dependencies
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Collect static files.
-RUN python manage.py collectstatic --noinput --clear
+# Copy the rest of the application
+COPY . .
 
-# Runtime command that executes when "docker run" is called, it does the
-# following:
-#   1. Migrate the database.
-#   2. Start the application server.
-# WARNING:
-#   Migrating database at the same time as starting the server IS NOT THE BEST
-#   PRACTICE. The database should be migrated manually or using the release
-#   phase facilities of your hosting platform. This is used only so the
-#   Wagtail instance can be started with a simple "docker run" command.
-CMD set -xe; python manage.py migrate --noinput; gunicorn urban_platform.wsgi:application
+# Build styles
+RUN npm run styles:build
+
+# Install the project itself
+RUN uv sync --frozen --no-dev
+
+# Collect static files
+# We need to set dummy env vars for collectstatic to work without a real DB or secrets
+RUN SECRET_KEY=dummy \
+    DB_NAME=dummy \
+    DB_USER=dummy \
+    DB_PASSWORD=dummy \
+    DB_HOST=dummy \
+    DB_PORT=5432 \
+    uv run python manage.py collectstatic --noinput
+
+# Expose port
+EXPOSE 8000
+
+# Run with gunicorn
+CMD ["uv", "run", "gunicorn", "urban_platform.wsgi:application", "--bind", "0.0.0.0:8000"]
