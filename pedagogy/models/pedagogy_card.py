@@ -11,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.search import index
 
 from core.blocks import BlockTypes
+from bs4 import BeautifulSoup
 
 
 @dataclass
@@ -22,7 +23,6 @@ class TableOfContentsItem:
 
 def _generate_paragraph_header_ids(block: StreamValue.StreamChild) -> None:
     html = block.value.source
-    from bs4 import BeautifulSoup
 
     soup = BeautifulSoup(html, "html.parser")
     for header in soup.find_all(["h2", "h3", "h4"]):
@@ -93,7 +93,6 @@ class PedagogyCardPage(Page):
         for block in self.content:
             if block.block_type == "text":
                 html = block.value.source
-                from bs4 import BeautifulSoup
 
                 soup = BeautifulSoup(html, "html.parser")
                 for header in soup.find_all(["h2", "h3", "h4"]):
