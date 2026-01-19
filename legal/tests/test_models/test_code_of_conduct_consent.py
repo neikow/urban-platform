@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.db import IntegrityError
 from django.test import TestCase
-from wagtail.models import Page, Revision
+from wagtail.models import Page
 
 from home.models import HomePage
 from legal.models import CodeOfConductPage, CodeOfConductConsent, LegalIndexPage
@@ -63,7 +64,7 @@ class CodeOfConductConsentTests(TestCase):
             policy_revision=self.initial_revision,
         )
 
-        with self.assertRaises(Exception):
+        with self.assertRaises(IntegrityError):
             CodeOfConductConsent.objects.create(
                 user=self.user,
                 policy_revision=self.initial_revision,

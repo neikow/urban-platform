@@ -1,5 +1,6 @@
 {% load wagtailcore_tags navigation_tags i18n %}
 {% get_site_root as site_root %}
+{% get_legal_pages as legal_pages %}
 <footer class="bg-base-200 text-base-content p-8 mt-8 md:mt-16 rounded-t-lg">
     <div class='footer sm:footer-horizontal'>
         <aside class="grid-flow-col items-center">
@@ -35,10 +36,9 @@
         </nav>
         <nav>
             <h3 class="footer-title">Légal</h3>
-            <a href="#" class="link link-hover">Charte de bonne conduite</a>
-            <a href="#" class="link link-hover">Termes d'utilisation</a>
-            <a href="#" class="link link-hover">Politique de confidentialité</a>
-            <a href="#" class="link link-hover">Politique de cookies</a>
+            {% for legal_page in legal_pages %}
+                <a href="{% pageurl legal_page %}" class="link link-hover">{{ legal_page.title }}</a>
+            {% endfor %}
         </nav>
     </div>
     <div>
