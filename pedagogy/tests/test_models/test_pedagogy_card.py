@@ -1,6 +1,6 @@
 import pytest
 
-from pedagogy.factories import PedagogyCardPageFactory, ImageFactory
+from pedagogy.factories.pedagogy_card_factory import PedagogyCardPageFactory
 
 
 @pytest.mark.django_db
