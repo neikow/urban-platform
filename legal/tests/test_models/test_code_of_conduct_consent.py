@@ -93,7 +93,9 @@ class CodeOfConductConsentTests(TestCase):
             user=self.user,
             policy_revision=self.initial_revision,
         )
-        expected_str = f"{self.user} consent to Code Of Conduct ({self.initial_revision.created_at})"
+        expected_str = (
+            f"{self.user} consent to Code Of Conduct ({self.initial_revision.created_at})"
+        )
         self.assertEqual(str(consent), expected_str)
 
     def test_user_can_consent_to_multiple_revisions(self) -> None:
