@@ -13,8 +13,8 @@ env:
 
 jobs:
   tests:
-    name: Run Tests
-    uses: ./.github/workflows/test.yml
+    name: Run CI Checks
+    uses: ./.github/workflows/ci.yml
 
   build-and-push:
     name: Build and Push Docker Image
