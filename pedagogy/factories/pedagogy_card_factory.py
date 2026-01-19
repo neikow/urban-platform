@@ -26,7 +26,9 @@ class PedagogyCardPageFactory(factory.django.DjangoModelFactory):
     hero_image = factory.SubFactory(ImageFactory)
 
     @classmethod
-    def _create(cls, model_class: type[Page], *args: Any, **kwargs: Any) -> Page:
+    def _create(
+        cls, model_class: type[PedagogyCardPage], *args: Any, **kwargs: Any
+    ) -> PedagogyCardPage:
         parent: Page = kwargs.pop("parent", None)  # type: ignore
         instance = model_class(**kwargs)
 

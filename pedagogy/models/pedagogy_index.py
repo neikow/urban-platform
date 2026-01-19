@@ -6,7 +6,7 @@ from django.db import models
 from django.http import HttpRequest
 from django.template import Context
 from wagtail.fields import RichTextField
-from wagtail.models import Page
+from wagtail.models import Page, PanelPlaceholder
 from django.utils.translation import gettext_lazy as _
 from wagtail.search import index
 from wagtail.admin.panels import FieldPanel
@@ -16,6 +16,20 @@ from pedagogy.models.pedagogy_card import PedagogyCardPage
 class PedagogyIndexPage(Page):
     max_count = 1
     parent_page_types = ["home.HomePage"]
+
+    promote_panels = [
+        PanelPlaceholder(
+            "wagtail.admin.panels.MultiFieldPanel",
+            [
+                [
+                    "seo_title",
+                    "search_description",
+                ],
+                _("For search engines"),
+            ],
+            {},
+        ),
+    ]
 
     page_introduction: models.TextField = models.TextField(
         blank=True,

@@ -1,14 +1,34 @@
-<div class="breadcrumbs text-sm max-w-xs sm:max-w-none">
-    {% if page.get_ancestors|length > 1 %}
-        <ul>
-            {% for p in page.get_ancestors %}
-                {% if p.is_root == False %}
-                    <li>
-                        <a href="{{ p.url }}">{{ p.title }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-            <li class="font-bold">{{ page.title }}</li>
-        </ul>
+{% with ancestors=page.get_ancestors %}
+    {% if ancestors|length > 1 %}
+        {% if ancestors|length >= 3 %}
+            <ul class="text-sm flex items-center md:hidden">
+                <li class="dropdown">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-xs px-1">...</div>
+                    <ul tabindex="0"
+                        class="dropdown-content menu menu-lg w-sm z-[1] p-2 shadow bg-base-100 rounded-box">
+                        {% for p in ancestors %}
+                            {% if not p.is_root %}
+                                <li>
+                                    <a href="{{ p.url }}">{{ p.title }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="last-breadcrumb font-bold">{{ page.title }}</li>
+            </ul>
+        {% endif %}
+        <div class="breadcrumbs text-sm max-w-xs sm:max-w-none {% if ancestors|length >= 3 %}hidden md:block{% endif %}">
+            <ul>
+                {% for p in ancestors %}
+                    {% if p.is_root == False %}
+                        <li>
+                            <a href="{{ p.url }}">{{ p.title }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <li class="font-bold">{{ page.title }}</li>
+            </ul>
+        </div>
     {% endif %}
-</div>
+{% endwith %}
