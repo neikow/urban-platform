@@ -3,6 +3,7 @@ from django.test import TestCase, RequestFactory
 from django.template import Context, Template
 from wagtail.models import Site, Page
 from core.templatetags.navigation_tags import get_site_root, get_legal_pages
+from legal.models import LegalIndexPage, TermsOfServicePage
 
 
 class SiteRootTagTests(TestCase):
@@ -92,8 +93,6 @@ class LegalPagesTagTests(TestCase):
         self.factory = RequestFactory()
 
     def test_get_legal_pages(self) -> None:
-        from legal.models import LegalIndexPage, TermsOfServicePage
-
         LegalIndexPage.objects.all().delete()
 
         site = Site.objects.get(is_default_site=True)
@@ -117,8 +116,6 @@ class LegalPagesTagTests(TestCase):
         self.assertEqual(pages[0].title, "Terms")
 
     def test_get_legal_pages_no_index(self) -> None:
-        from legal.models import LegalIndexPage
-
         LegalIndexPage.objects.all().delete()
 
         request = self.factory.get("/")
