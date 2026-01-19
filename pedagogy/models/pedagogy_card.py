@@ -1,8 +1,10 @@
+from django_stubs_ext import StrOrPromise
+from wagtail.admin.panels import FieldPanel
 from dataclasses import dataclass
 from typing import override
 
 from slugify import slugify
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import InlinePanel
 from wagtail.blocks import StreamValue
 from wagtail.models import Page
 from wagtail.fields import StreamField
@@ -32,13 +34,13 @@ def _generate_paragraph_header_ids(block: StreamValue.StreamChild) -> None:
 
 
 class PedagogyCardPage(Page):
-    parent_page_types = ["pedagogy.PedagogyIndexPage"]
-    child_page_types = []
+    parent_page_types: list[str] = ["pedagogy.PedagogyIndexPage"]
+    child_page_types: list[str] = []
 
     resources: models.Manager  # related manager
 
     @classmethod
-    def get_verbose_name(cls):
+    def get_verbose_name(cls) -> StrOrPromise:
         return _("Pedagogy Card")
 
     content = StreamField(
@@ -48,7 +50,7 @@ class PedagogyCardPage(Page):
         help_text=_("The main content of the pedagogy card."),
     )
 
-    hero_image = models.ForeignKey(
+    hero_image: models.ForeignKey = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
         blank=True,
@@ -57,7 +59,7 @@ class PedagogyCardPage(Page):
         verbose_name=_("Card image"),
     )
 
-    description = models.TextField(
+    description: models.TextField = models.TextField(
         blank=True,
         verbose_name=_("Card description"),
         help_text=_("A brief description of the pedagogy card."),
@@ -100,7 +102,7 @@ class PedagogyCardPage(Page):
                     title = header.get_text()
                     id_attr = header.get("id", "")
 
-                    if not id_attr:
+                    if not id_attr or not isinstance(id_attr, str):
                         continue
 
                     toc.append(

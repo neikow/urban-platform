@@ -1,4 +1,5 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import HttpResponse, HttpRequest
 from django.template.response import TemplateResponse
 
 from wagtail.models import Page
@@ -11,7 +12,7 @@ from wagtail.models import Page
 # from wagtail.contrib.search_promotions.models import Query
 
 
-def search(request):
+def search(request: HttpRequest) -> HttpResponse:
     search_query = request.GET.get("query", None)
     page = request.GET.get("page", 1)
 

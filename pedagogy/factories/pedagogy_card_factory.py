@@ -1,3 +1,5 @@
+from typing import Any
+
 import factory
 
 from wagtail.models import Page
@@ -24,7 +26,7 @@ class PedagogyCardPageFactory(factory.django.DjangoModelFactory):
     hero_image = factory.SubFactory(ImageFactory)
 
     @classmethod
-    def _create(cls, model_class, *args, **kwargs):
+    def _create(cls, model_class: type[Page], *args: Any, **kwargs: Any) -> Page:
         parent: Page = kwargs.pop("parent", None)  # type: ignore
         instance = model_class(**kwargs)
 

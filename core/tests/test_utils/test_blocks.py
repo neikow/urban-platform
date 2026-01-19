@@ -2,7 +2,7 @@ import pytest
 
 
 @pytest.mark.django_db
-def test_mock_block_value_handles_all_block_types():
+def test_mock_block_value_handles_all_block_types() -> None:
     from core.blocks import BlockTypes
     from core.tests.utils.blocks import mock_block_value
 

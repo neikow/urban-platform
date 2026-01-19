@@ -14,5 +14,5 @@ class NeighborhoodAssociationViewSet(ModelViewSet):
 
 
 @hooks.register("register_admin_viewset")
-def register_neighborhood_association_viewset():
+def register_neighborhood_association_viewset() -> NeighborhoodAssociationViewSet:
     return NeighborhoodAssociationViewSet("neighborhood_association")
