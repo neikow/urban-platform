@@ -1,19 +1,19 @@
 <nav class="flex justify-center my-8">
     <div class="join">
         {% if page_data.has_previous %}
-            <a href="?page={{ page_data.previous_page_number }}"
-               class="join-item btn btn-md">&lt;</a>
+            <a href="?page={{ page_data.previous_page_number }}" class="join-item btn btn-md">&lt;</a>
         {% endif %}
         {% for num in page_data.paginator.page_range %}
             {% if page_data.number == num %}
-                <button class="join-item btn btn-md btn-active">{{ num }}</button>
+                <button class="join-item btn btn-md btn-active">
+                    {{ num }}
+                </button>
             {% elif num > page_data.number|add:'-3' and num < page_data.number|add:'3' %}
                 <a href="?page={{ num }}" class="join-item btn btn-md">{{ num }}</a>
             {% endif %}
         {% endfor %}
         {% if page_data.has_next %}
-            <a href="?page={{ page_data.next_page_number }}"
-               class="join-item btn btn-md">&gt;</a>
+            <a href="?page={{ page_data.next_page_number }}" class="join-item btn btn-md">&gt;</a>
         {% endif %}
     </div>
 </nav>

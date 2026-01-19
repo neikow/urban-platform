@@ -27,9 +27,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "consented_at",
-                    models.DateTimeField(
-                        auto_now_add=True, verbose_name="Consented at"
-                    ),
+                    models.DateTimeField(auto_now_add=True, verbose_name="Consented at"),
                 ),
                 (
                     "consent_ip",

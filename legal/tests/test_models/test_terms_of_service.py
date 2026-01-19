@@ -23,6 +23,4 @@ class TermsOfServicePageTests(WagtailPageTestCase):
         page = TermsOfServicePage.objects.filter(
             path__startswith=self.legal_index_page.path
         ).first()
-        self.assertIsNotNone(
-            page, "TermsOfServicePage does not exist under LegalIndexPage."
-        )
+        self.assertIsNotNone(page, "TermsOfServicePage does not exist under LegalIndexPage.")

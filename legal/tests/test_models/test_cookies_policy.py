@@ -20,9 +20,5 @@ class CookiesPolicyPageTests(WagtailPageTestCase):
         self.assertCanNotCreateAt(HomePage, CookiesPolicyPage)
 
     def test_cookies_policy_page_should_exist(self) -> None:
-        page = CookiesPolicyPage.objects.filter(
-            path__startswith=self.legal_index_page.path
-        ).first()
-        self.assertIsNotNone(
-            page, "CookiesPolicyPage does not exist under LegalIndexPage."
-        )
+        page = CookiesPolicyPage.objects.filter(path__startswith=self.legal_index_page.path).first()
+        self.assertIsNotNone(page, "CookiesPolicyPage does not exist under LegalIndexPage.")

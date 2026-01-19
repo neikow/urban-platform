@@ -1,35 +1,45 @@
 {% extends "base.html" %}
+
 {% load wagtailcore_tags wagtailimages_tags %}
+
 {% block content %}
     <article class="mx-4">
-        <header class='my-6 md:my-12 lg:my-24 container mx-auto'>
+        <header class="my-6 md:my-12 lg:my-24 container mx-auto">
             {% include "components/navigation/breadcrumbs.html" with page=page %}
-            <h1 class='text-3xl sm:text-4xl lg:text-6xl mb-4 font-extrabold'>{{ page.title }}</h1>
-            <div class='flex flex-col-reverse md:flex-row pt-2 md:pt-4 lg:pt-8 gap-4 md:gap-8 lg:gap-16'>
-                <div class='w-full flex flex-col justify-center items-center gap-4'>
-                    <p class='text-center'>{{ page.description }}</p>
+            <h1 class="text-3xl sm:text-4xl lg:text-6xl mb-4 font-extrabold">
+                {{ page.title }}
+            </h1>
+            <div class="flex flex-col-reverse md:flex-row pt-2 md:pt-4 lg:pt-8 gap-4 md:gap-8 lg:gap-16">
+                <div class="w-full flex flex-col justify-center items-center gap-4">
+                    <p class="text-center">
+                        {{ page.description }}
+                    </p>
                     {% include "pedagogy/components/pedagogy_card_page_resource.html" with page=page %}
                 </div>
-                <figure class='w-full'>
+                <figure class="w-full">
                     {% image page.hero_image fill-600x400 alt=page.title class="w-full h-56 lg:h-72 object-cover rounded-lg" %}
                 </figure>
             </div>
         </header>
-        <div class='container mx-auto flex flex-col-reverse lg:flex-row gap-4 lg:gap-16 mb-12 lg:mb-24 mt-16 lg:mt-0'>
+        <div class="container mx-auto flex flex-col-reverse lg:flex-row gap-4 lg:gap-16 mb-12 lg:mb-24 mt-16 lg:mt-0">
             <main class="flex-1 page-content">
                 {% include_block page.content %}
             </main>
-            <aside class='w-full lg:w-xs lg:card lg:bg-base-100 lg:p-4 h-min lg:shadow-sm lg:sticky lg:top-20 self-start items-center'>
+            <aside class="w-full lg:w-xs lg:card lg:bg-base-100 lg:p-4 h-min lg:shadow-sm lg:sticky lg:top-20 self-start items-center">
                 {% if page.has_resource %}
-                    <h2 class='text-lg font-bold mb-2 text-center hidden lg:block'>Accès rapide</h2>
+                    <h2 class="text-lg font-bold mb-2 text-center hidden lg:block">
+                        Accès rapide
+                    </h2>
                     {% include "pedagogy/components/pedagogy_card_page_resource.html" with page=page class="hidden lg:flex" %}
                     <div class="divider hidden lg:flex"></div>
                 {% endif %}
-                <div class='relative -mt-2'>
+                <div class="relative -mt-2">
                     <div class="hidden lg:block absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-base-100 to-transparent z-10 pointer-events-none">
                     </div>
-                    <div class='lg:max-h-[450px] lg:overflow-y-auto lg:pb-2'>
-                        <h2 class='text-2xl text-start lg:text-lg font-bold mb-4 mt-2 md:text-center'>Table des matières</h2>
+                    <div class="lg:max-h-[450px] lg:overflow-y-auto lg:pb-2">
+                        <h2 class="text-2xl text-start lg:text-lg font-bold mb-4 mt-2 md:text-center">
+                            Table des matières
+                        </h2>
                         {% include "pedagogy/components/pedagogy_card_page_toc.html" with page=page %}
                     </div>
                     <div class="hidden lg:block absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-base-100 to-transparent z-10 pointer-events-none">
