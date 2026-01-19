@@ -4,8 +4,7 @@ from django.core.management import CommandParser
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from pedagogy.models import PedagogyIndexPage
-from pedagogy.factories import PedagogyCardPageFactory
-from home.models import HomePage
+from pedagogy.factories.pedagogy_card_factory import PedagogyCardPageFactory
 
 
 class Command(BaseCommand):

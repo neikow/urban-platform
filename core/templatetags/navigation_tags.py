@@ -1,6 +1,7 @@
 from django import template
 from django.template.context import BaseContext
 from wagtail.models import Site, Page
+from legal.models import LegalIndexPage
 
 register = template.Library()
 
@@ -26,8 +27,6 @@ def get_legal_pages(context: BaseContext) -> list[Page]:
     root = get_site_root(context)
     if not root:
         return []
-
-    from legal.models import LegalIndexPage
 
     legal_index = LegalIndexPage.objects.live().descendant_of(root).first()
     if legal_index:
