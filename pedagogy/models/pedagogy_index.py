@@ -25,6 +25,7 @@ class PedagogyIndexPage(Page):
     )
 
     search_fields = Page.search_fields + [
+        index.SearchField("page_introduction"),
         index.SearchField("body"),
     ]
 
@@ -43,7 +44,15 @@ class PedagogyIndexPage(Page):
             .descendant_of(self)
             .order_by("-first_published_at")
         )
-        paginator = Paginator(pedagogy_entries, 10)
+        search_query = request.GET.get("search", "")
+        if search_query:
+            pedagogy_entries = pedagogy_entries.filter(
+                models.Q(title__icontains=search_query)
+                | models.Q(description__icontains=search_query)
+                | models.Q(body__icontains=search_query)
+            )
+
+        paginator = Paginator(pedagogy_entries, 9)
         page_number = request.GET.get("page")
         pedagogy_entries = paginator.get_page(page_number)
 
