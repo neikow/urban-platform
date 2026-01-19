@@ -1,0 +1,14 @@
+<div class="breadcrumbs text-sm max-w-xs sm:max-w-none">
+    {% if page.get_ancestors|length > 1 %}
+        <ul>
+            {% for p in page.get_ancestors %}
+                {% if p.is_root == False %}
+                    <li>
+                        <a href="{{ p.url }}">{{ p.title }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            <li class="font-bold">{{ page.title }}</li>
+        </ul>
+    {% endif %}
+</div>
