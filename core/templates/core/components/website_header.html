@@ -63,7 +63,11 @@
     </nav>
     <div class="navbar-end">
         {% if user.is_authenticated %}
-            <a aria-label="User Account" href="/auth/me/" class="btn btn-ghost hover:text-primary active:text-primary">
+            <a
+                aria-label="User Account"
+                href="{% url 'me' %}"
+                class="btn btn-ghost hover:text-primary active:text-primary"
+            >
                 <svg
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
