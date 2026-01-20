@@ -150,4 +150,17 @@
       @apply border-l-4 border-primary pl-4 italic my-8;
     }
   }
+
+  form a::after {
+    content: none !important;
+  }
+
+  /* Force wrapping in forms texts */
+  form .label-text-alt,
+  form label {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
 }

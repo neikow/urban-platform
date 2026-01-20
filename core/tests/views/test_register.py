@@ -8,6 +8,8 @@ VALID_REQUEST = {
     "confirm_password": "Password123",
     "first_name": "Test",
     "last_name": "User",
+    "postal_code": "13001",
+    "accept_terms": True,
 }
 
 User = get_user_model()
@@ -42,6 +44,8 @@ class RegisterViewTests(TestCase):
                 "confirm_password": "Password321",
                 "first_name": "Test",
                 "last_name": "User",
+                "postal_code": "13001",
+                "accept_terms": True,
             },
         )
         self.assertEqual(response.status_code, 200)
@@ -56,10 +60,30 @@ class RegisterViewTests(TestCase):
                 "confirm_password": "weak",
                 "first_name": "Test",
                 "last_name": "User",
+                "postal_code": "13001",
+                "accept_terms": True,
             },
         )
         self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
             "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule et un chiffre.",
+        )
+
+    def test_register_accept_terms_required(self) -> None:
+        response = self.client.post(
+            self.register_url,
+            {
+                "email": "testuser@example.com",
+                "password": "Password123",
+                "confirm_password": "Password123",
+                "first_name": "Test",
+                "last_name": "User",
+                "postal_code": "13001",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            "Vous devez accepter la charte de bonne conduite et les conditions d&#x27;utilisation pour vous inscrire.",
         )
