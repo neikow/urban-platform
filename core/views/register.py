@@ -5,10 +5,12 @@ from django.http import HttpResponse
 from django.views.generic.edit import FormView
 from django import forms
 
+from .auth_mixins import PasswordValidationMixin, EmailValidationMixin
+
 User = get_user_model()
 
 
-class UserRegistrationForm(forms.Form):
+class UserRegistrationForm(PasswordValidationMixin, EmailValidationMixin, forms.Form):
     email = forms.EmailField(required=True, label="Email")
     password = forms.CharField(widget=forms.PasswordInput, required=True, label="Mot de passe")
     confirm_password = forms.CharField(
@@ -16,6 +18,19 @@ class UserRegistrationForm(forms.Form):
     )
     first_name = forms.CharField(required=True, label="Prénom")
     last_name = forms.CharField(required=True, label="Nom")
+    postal_code = forms.CharField(
+        required=True,
+        label="Code postal",
+        max_length=10,
+        widget=forms.TextInput(attrs={"placeholder": "13001"}),
+    )
+    accept_terms = forms.BooleanField(
+        required=True,
+        label="J'accepte la charte de bonne conduite et les conditions d'utilisation",
+        error_messages={
+            "required": "Vous devez accepter la charte de bonne conduite et les conditions d'utilisation pour vous inscrire."
+        },
+    )
 
     def clean(self) -> dict[str, Any] | None:
         cleaned_data = super().clean()
@@ -32,26 +47,15 @@ class UserRegistrationForm(forms.Form):
 
     def clean_email(self) -> str:
         email = self.cleaned_data.get("email")
-        if not email or not isinstance(email, str):
+        if not email:
             raise forms.ValidationError("Email invalide.")
-        if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("Email déjà utilisé.")
-        return email
+        return self.validate_email_unique(email)
 
     def clean_password(self) -> str:
         password = self.cleaned_data.get("password")
         if not password:
             raise forms.ValidationError("Le mot de passe est requis.")
-
-        if (
-            len(password) < 8
-            or not any(char.isdigit() for char in password)
-            or not any(char.isupper() for char in password)
-        ):
-            raise forms.ValidationError(
-                "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule et un chiffre."
-            )
-
+        self.validate_password_strength(password)
         return password
 
 
@@ -65,12 +69,14 @@ class RegisterFormView(FormView):
         password = form.cleaned_data["password"]
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
+        postal_code = form.cleaned_data["postal_code"]
 
         user = User.objects.create_user(
             email=email,
             password=password,
             first_name=first_name,
             last_name=last_name,
+            postal_code=postal_code,
         )
 
         login(self.request, user)

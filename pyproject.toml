@@ -28,6 +28,10 @@ ignore_missing_imports = true
 module = "*.migrations.*"
 disallow_untyped_defs = false
 
+[[tool.mypy.overrides]]
+module = ["*.tests.*"]
+disallow_untyped_defs = false
+
 [tool.django-stubs]
 django_settings_module = "urban_platform.settings.dev"
 
