@@ -1,7 +1,7 @@
 from typing import Any
 
 from django.contrib.auth import authenticate, login as auth_login
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.views import View
 from django import forms
 
@@ -30,7 +30,7 @@ class LoginForm(forms.Form):
 
 
 class LoginView(JsonResponseMixin, View):
-    def post(self, request) -> HttpResponse:
+    def post(self, request: HttpRequest) -> HttpResponse:
         form = LoginForm(request.POST)
 
         if form.is_valid():

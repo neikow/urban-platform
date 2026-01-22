@@ -53,6 +53,8 @@ class UserRegistrationForm(PasswordValidationMixin, EmailValidationMixin, forms.
 
     def clean_password(self) -> str:
         password = self.cleaned_data.get("password")
+        if not password:
+            raise forms.ValidationError("Le mot de passe est requis.")
         self.validate_password_strength(password)
         return password
 
