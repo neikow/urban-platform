@@ -27,7 +27,7 @@ def mock_block_value(block_type: str) -> Any:
                   <ul>
                     <li>{sentence(3)}</li>
                     <li>{sentence(9)}</li>
-                  </ul
+                  </ul>
                 </li>
               </ul>
             </li>
