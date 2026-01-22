@@ -74,11 +74,20 @@ class PublicationIndexPage(Page):
             )
 
         search_query = request.GET.get("search", "")
-        if search_query and publication_type != "all":
-            publications = publications.filter(
-                models.Q(title__icontains=search_query)
-                | models.Q(description__icontains=search_query)
-            )
+        if search_query:
+            if publication_type == "all":
+                search_lower = search_query.lower()
+                publications = [
+                    p
+                    for p in publications
+                    if search_lower in p.title.lower()
+                    or search_lower in (p.description or "").lower()
+                ]
+            else:
+                publications = publications.filter(
+                    models.Q(title__icontains=search_query)
+                    | models.Q(description__icontains=search_query)
+                )
 
         paginator = Paginator(publications, 12)
         page_number = request.GET.get("page")
