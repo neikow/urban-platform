@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     "legal",
     "search",
     "pedagogy",
+    "publications",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
