@@ -1,0 +1,80 @@
+{% load static %}
+
+<dialog id="login_modal" class="modal">
+    <div class="modal-box w-full max-w-sm">
+        <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <h3 class="font-bold text-lg mb-4">Se connecter</h3>
+
+        <form id="login-form" method="post" action="{% url 'login' %}" class="space-y-4">
+            {% csrf_token %}
+
+            <div id="login-error" class="alert alert-error hidden" role="alert">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="stroke-current shrink-0 h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                </svg>
+                <span id="login-error-text"></span>
+            </div>
+
+            <div class="form-control w-full">
+                <label class="label" for="id_email">
+                    <span class="label-text">Email</span>
+                </label>
+                <input
+                    type="email"
+                    name="email"
+                    id="id_email"
+                    class="input input-bordered w-full"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-control w-full">
+                <label class="label" for="id_password">
+                    <span class="label-text">Mot de passe</span>
+                </label>
+                <input
+                    type="password"
+                    name="password"
+                    id="id_password"
+                    class="input input-bordered w-full"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <div class="modal-action">
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+                <button type="button" onclick="login_modal.close()" class="btn">Annuler</button>
+            </div>
+        </form>
+
+        <div class="divider">OU</div>
+
+        <div class="text-center">
+            <p class="text-sm">
+                Vous n'avez pas de compte ?
+                <a href="{% url 'register' %}" class="link link-primary" onclick="login_modal.close()">
+                    S'inscrire
+                </a>
+            </p>
+        </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+<script src="{% static 'js/login_modal.js' %}"></script>
