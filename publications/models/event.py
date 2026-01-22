@@ -53,11 +53,13 @@ class EventPage(PublicationPage):
         help_text=_("Lien vers l'événement en ligne (si applicable)"),
     )
 
-    max_participants: models.PositiveIntegerField[int | None, int | None] = models.PositiveIntegerField(
-        _("Maximum Participants"),
-        null=True,
-        blank=True,
-        help_text=_("Nombre maximum de participants (laisser vide si illimité)"),
+    max_participants: models.PositiveIntegerField[int | None, int | None] = (
+        models.PositiveIntegerField(
+            _("Maximum Participants"),
+            null=True,
+            blank=True,
+            help_text=_("Nombre maximum de participants (laisser vide si illimité)"),
+        )
     )
 
     content_panels = PublicationPage.content_panels + [
