@@ -1,0 +1,258 @@
+# French translations for publications app.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-22 10:00+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: publications/models/publication.py
+msgid "Description"
+msgstr "Description"
+
+#: publications/models/publication.py
+msgid "A brief description shown in lists."
+msgstr "Une brève description affichée dans les listes."
+
+#: publications/models/publication.py
+msgid "Hero Image"
+msgstr "Image principale"
+
+#: publications/models/publication.py
+msgid "Main image for this publication"
+msgstr "Image principale pour cette publication"
+
+#: publications/models/publication.py
+msgid "Content"
+msgstr "Contenu"
+
+#: publications/models/publication.py
+msgid "The main content of the page."
+msgstr "Le contenu principal de la page."
+
+#: publications/models/publication_index.py
+msgid "Publications Index"
+msgstr "Index des publications"
+
+#: publications/models/publication_index.py
+msgid "Page introduction"
+msgstr "Introduction de la page"
+
+#: publications/models/publication_index.py
+msgid "Small introduction shown above the publications list."
+msgstr "Petite introduction affichée au-dessus de la liste des publications."
+
+#: publications/models/publication_index.py
+msgid "Page body content"
+msgstr "Contenu de la page"
+
+#: publications/models/publication_index.py
+msgid "Additional content for the publications page."
+msgstr "Contenu supplémentaire pour la page des publications."
+
+#: publications/models/project.py
+msgid "Project"
+msgstr "Projet"
+
+#: publications/models/project.py
+msgid "Category"
+msgstr "Catégorie"
+
+#: publications/models/project.py
+msgid "Urban Planning"
+msgstr "Urbanisme"
+
+#: publications/models/project.py
+msgid "Environment"
+msgstr "Environnement"
+
+#: publications/models/project.py
+msgid "Mobility"
+msgstr "Mobilité"
+
+#: publications/models/project.py
+msgid "Housing"
+msgstr "Logement"
+
+#: publications/models/project.py
+msgid "Culture"
+msgstr "Culture"
+
+#: publications/models/project.py
+msgid "Sport"
+msgstr "Sport"
+
+#: publications/models/project.py
+msgid "Education"
+msgstr "Éducation"
+
+#: publications/models/project.py
+msgid "Health"
+msgstr "Santé"
+
+#: publications/models/project.py
+msgid "Social"
+msgstr "Social"
+
+#: publications/models/project.py
+msgid "Economy"
+msgstr "Économie"
+
+#: publications/models/project.py
+msgid "Other"
+msgstr "Autre"
+
+#: publications/models/project.py
+msgid "Projects"
+msgstr "Projets"
+
+#: publications/models/event.py
+msgid "Event"
+msgstr "Événement"
+
+#: publications/models/event.py
+msgid "Events"
+msgstr "Événements"
+
+#: publications/models/event.py
+msgid "Event Date"
+msgstr "Date de l'événement"
+
+#: publications/models/event.py
+msgid "Date and time of the event"
+msgstr "Date et heure de l'événement"
+
+#: publications/models/event.py
+msgid "End Date"
+msgstr "Date de fin"
+
+#: publications/models/event.py
+msgid "End date and time (optional, for multi-day events)"
+msgstr "Date et heure de fin (optionnel, pour les événements sur plusieurs jours)"
+
+#: publications/models/event.py
+msgid "Location"
+msgstr "Lieu"
+
+#: publications/models/event.py
+msgid "Where the event takes place"
+msgstr "Où se déroule l'événement"
+
+#: publications/models/event.py
+msgid "Address"
+msgstr "Adresse"
+
+#: publications/models/event.py
+msgid "Full address of the event location"
+msgstr "Adresse complète du lieu de l'événement"
+
+#: publications/models/event.py
+msgid "Online Event"
+msgstr "Événement en ligne"
+
+#: publications/models/event.py
+msgid "Check if this is an online event"
+msgstr "Cochez si c'est un événement en ligne"
+
+#: publications/models/event.py
+msgid "Online Link"
+msgstr "Lien en ligne"
+
+#: publications/models/event.py
+msgid "Link to join the online event (Zoom, Teams, etc.)"
+msgstr "Lien pour rejoindre l'événement en ligne (Zoom, Teams, etc.)"
+
+#: publications/models/event.py
+msgid "Maximum Participants"
+msgstr "Nombre maximum de participants"
+
+#: publications/models/event.py
+msgid "Maximum number of participants (leave empty for unlimited)"
+msgstr "Nombre maximum de participants (laisser vide pour illimité)"
+
+#: publications/models/vote.py
+msgid "Vote"
+msgstr "Vote"
+
+#: publications/models/vote.py
+msgid "Votes"
+msgstr "Votes"
+
+#: publications/models/vote.py
+msgid "Deleted"
+msgstr "Supprimé"
+
+#: publications/models/vote.py
+msgid "Deleted at"
+msgstr "Supprimé le"
+
+#: publications/models/vote.py
+msgid "Created at"
+msgstr "Créé le"
+
+#: publications/templates/publications/publication_index_page.html
+msgid "Latest Publications"
+msgstr "Dernières publications"
+
+#: publications/templates/publications/publication_index_page.html
+msgid "Search..."
+msgstr "Rechercher..."
+
+#: publications/templates/publications/publication_index_page.html
+msgid "All"
+msgstr "Tout"
+
+#: publications/templates/publications/publication_index_page.html
+msgid "All categories"
+msgstr "Toutes les catégories"
+
+#: publications/templates/publications/publication_index_page.html
+msgid "No publications found"
+msgstr "Aucune publication trouvée"
+
+#: publications/templates/publications/publication_index_page.html
+msgid "View"
+msgstr "Voir"
+
+#: publications/templates/publications/publication_index_page.html
+msgid "votes"
+msgstr "votes"
+
+#: publications/templates/publications/publication_index_page.html
+msgid "Upcoming"
+msgstr "À venir"
+
+#: publications/templates/publications/event_page.html
+msgid "Past"
+msgstr "Passé"
+
+#: publications/templates/publications/event_page.html
+msgid "Date"
+msgstr "Date"
+
+#: publications/templates/publications/event_page.html
+msgid "Online"
+msgstr "En ligne"
+
+#: publications/templates/publications/event_page.html
+msgid "Yes"
+msgstr "Oui"
+
+#: publications/templates/publications/event_page.html
+msgid "Join"
+msgstr "Rejoindre"
+
+#: publications/templates/publications/event_page.html
+msgid "Max Participants"
+msgstr "Participants max"
