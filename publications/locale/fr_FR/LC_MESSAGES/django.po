@@ -1,21 +1,20 @@
 # French translations for publications app.
-# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+# Copyright (C) 2026 Urban Platform
+# This file is distributed under the same license as the urban-platform package.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-22 10:00+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2026-01-22 10:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: publications/models/publication.py
 msgid "Description"
@@ -181,25 +180,6 @@ msgstr "Nombre maximum de participants"
 msgid "Maximum number of participants (leave empty for unlimited)"
 msgstr "Nombre maximum de participants (laisser vide pour illimité)"
 
-#: publications/models/vote.py
-msgid "Vote"
-msgstr "Vote"
-
-#: publications/models/vote.py
-msgid "Votes"
-msgstr "Votes"
-
-#: publications/models/vote.py
-msgid "Deleted"
-msgstr "Supprimé"
-
-#: publications/models/vote.py
-msgid "Deleted at"
-msgstr "Supprimé le"
-
-#: publications/models/vote.py
-msgid "Created at"
-msgstr "Créé le"
 
 #: publications/templates/publications/publication_index_page.html
 msgid "Latest Publications"
@@ -225,9 +205,6 @@ msgstr "Aucune publication trouvée"
 msgid "View"
 msgstr "Voir"
 
-#: publications/templates/publications/publication_index_page.html
-msgid "votes"
-msgstr "votes"
 
 #: publications/templates/publications/publication_index_page.html
 msgid "Upcoming"

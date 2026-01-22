@@ -45,16 +45,22 @@
             <!-- Type filter -->
             <div class="mb-6">
                 <div class="flex flex-wrap gap-2">
-                    <a href="{{ page.url }}"
-                       class="btn btn-sm {% if selected_type == 'all' %}btn-primary{% else %}btn-outline{% endif %}">
+                    <a
+                        href="{{ page.url }}{% if request.GET.search %}?search={{ request.GET.search }}{% endif %}"
+                        class="btn btn-sm {% if selected_type == 'all' %}btn-primary{% else %}btn-outline{% endif %}"
+                    >
                         {% trans "All" %}
                     </a>
-                    <a href="?type=projects"
-                       class="btn btn-sm {% if selected_type == 'projects' %}btn-primary{% else %}btn-outline{% endif %}">
+                    <a
+                        href="?type=projects{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                        class="btn btn-sm {% if selected_type == 'projects' %}btn-primary{% else %}btn-outline{% endif %}"
+                    >
                         {% trans "Projects" %}
                     </a>
-                    <a href="?type=events"
-                       class="btn btn-sm {% if selected_type == 'events' %}btn-primary{% else %}btn-outline{% endif %}">
+                    <a
+                        href="?type=events{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                        class="btn btn-sm {% if selected_type == 'events' %}btn-primary{% else %}btn-outline{% endif %}"
+                    >
                         {% trans "Events" %}
                     </a>
                 </div>
@@ -62,20 +68,24 @@
 
             <!-- Category filter (only for projects) -->
             {% if selected_type == 'projects' %}
-            <div class="mb-6">
-                <div class="flex flex-wrap gap-2">
-                    <a href="?type=projects"
-                       class="btn btn-sm btn-xs {% if not selected_category %}btn-secondary{% else %}btn-ghost{% endif %}">
-                        {% trans "All categories" %}
-                    </a>
-                    {% for category_value, category_label in categories %}
-                    <a href="?type=projects&category={{ category_value }}"
-                       class="btn btn-sm btn-xs {% if selected_category == category_value %}btn-secondary{% else %}btn-ghost{% endif %}">
-                        {{ category_label }}
-                    </a>
-                    {% endfor %}
+                <div class="mb-6">
+                    <div class="flex flex-wrap gap-2">
+                        <a
+                            href="?type=projects{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                            class="btn btn-sm btn-xs {% if not selected_category %}btn-secondary{% else %}btn-ghost{% endif %}"
+                        >
+                            {% trans "All categories" %}
+                        </a>
+                        {% for category_value, category_label in categories %}
+                            <a
+                                href="?type=projects&category={{ category_value }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                                class="btn btn-sm btn-xs {% if selected_category == category_value %}btn-secondary{% else %}btn-ghost{% endif %}"
+                            >
+                                {{ category_label }}
+                            </a>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
             {% endif %}
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -89,14 +99,36 @@
                                 {% image publication.hero_image fill-400x250 alt=publication.title class="w-full h-48 object-cover" %}
                             {% else %}
                                 <div class="w-full h-48 bg-base-200 flex items-center justify-center">
-                                    {% if publication.get_verbose_name == "Événement" %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-base-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
+                                    {% if publication.is_event %}
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-16 w-16 text-base-300"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                            />
+                                        </svg>
                                     {% else %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-base-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                                    </svg>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-16 w-16 text-base-300"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                                            />
+                                        </svg>
                                     {% endif %}
                                 </div>
                             {% endif %}
@@ -106,7 +138,7 @@
                                 {{ publication.title }}
                             </h3>
                             <div class="flex gap-2">
-                                {% if publication.get_verbose_name == "Événement" %}
+                                {% if publication.is_event %}
                                     <span class="badge badge-secondary">{% trans "Event" %}</span>
                                     {% if publication.is_upcoming %}
                                         <span class="badge badge-success">{% trans "Upcoming" %}</span>
@@ -122,10 +154,8 @@
                                 {{ publication.description|truncatewords:20 }}
                             </p>
                             <div class="flex items-center justify-between mt-2 text-sm text-base-content/60">
-                                {% if publication.get_verbose_name == "Événement" %}
+                                {% if publication.is_event %}
                                     <span>{{ publication.event_date|date:"d/m/Y H:i" }}</span>
-                                {% else %}
-                                    <span>{{ publication.vote_count }} {% trans "votes" %}</span>
                                 {% endif %}
                                 <span>{{ publication.first_published_at|date:"d/m/Y" }}</span>
                             </div>
@@ -136,7 +166,7 @@
                             </div>
                         </div>
                     </a>
-                {% empty %}
+                    {% empty %}
                     <div class="min-h-64 flex items-center justify-center col-span-1 md:col-span-2 lg:col-span-3">
                         <p>
                             {% trans "No publications found" %}

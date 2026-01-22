@@ -16,6 +16,10 @@ class EventPage(PublicationPage):
     def get_verbose_name(cls) -> StrOrPromise:
         return _("Event")
 
+    @property
+    def is_event(self) -> bool:
+        return True
+
     event_date: models.DateTimeField[Any, Any] = models.DateTimeField(
         verbose_name=_("Event Date"),
         help_text=_("Date et heure de début de l'événement"),
@@ -25,7 +29,7 @@ class EventPage(PublicationPage):
         verbose_name=_("End Date"),
         null=True,
         blank=True,
-        help_text=_("Date et heure de fin de l'événement(optionnel)"),
+        help_text=_("Date et heure de fin de l'événement (optionnel)"),
     )
 
     location: models.CharField[str, str] = models.CharField(

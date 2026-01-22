@@ -14,6 +14,16 @@ class PublicationPage(Page):
     class Meta:
         abstract = True
 
+    @property
+    def is_event(self) -> bool:
+        """Returns True if this publication is an event."""
+        return False
+
+    @property
+    def is_project(self) -> bool:
+        """Returns True if this publication is a project."""
+        return False
+
     description: models.TextField[str, str] = models.TextField(
         blank=True,
         verbose_name=_("Description"),
