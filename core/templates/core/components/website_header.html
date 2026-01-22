@@ -15,7 +15,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
                 </svg>
             </div>
-            <ul tabindex="0" class="menu menu-lg dropdown-content mt-5 z-[1] p-2 shadow bg-base-100 rounded-box w-sm">
+            <ul tabindex="0" class="menu menu-lg dropdown-content mt-5 z-1 p-2 shadow bg-base-100 rounded-box w-sm">
                 <li>
                     <a href="{% pageurl site_root %}" class="font-medium">Accueil</a>
                 </li>
@@ -62,24 +62,40 @@
         </ul>
     </nav>
     <div class="navbar-end">
-        <a aria-label="User Account" href="/todo" class="btn btn-ghost hover:text-primary active:text-primary">
-            <svg
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-user-icon lucide-user"
+        {% if user.is_authenticated %}
+            <a
+                aria-label="User Account"
+                href="{% url 'me' %}"
+                class="btn btn-ghost hover:text-primary active:text-primary"
             >
-                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-            </svg>
-            <span class="sr-only">User Account</span>
-        </a>
+                <svg
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-user-icon lucide-user"
+                >
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span class="sr-only">User Account</span>
+            </a>
+        {% else %}
+            <div class="flex gap-2">
+                <a href="/auth/login/" class="btn btn-ghost hover:text-primary transition-colors font-medium">
+                    Se connecter
+                </a>
+                <span class="self-center text-base-content/50">/</span>
+                <a href="/auth/register/" class="btn btn-ghost hover:text-primary transition-colors font-medium">
+                    S'inscrire
+                </a>
+            </div>
+        {% endif %}
     </div>
 </header>

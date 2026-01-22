@@ -16,6 +16,19 @@ class UserRegistrationForm(forms.Form):
     )
     first_name = forms.CharField(required=True, label="Prénom")
     last_name = forms.CharField(required=True, label="Nom")
+    postal_code = forms.CharField(
+        required=True,
+        label="Code postal",
+        max_length=10,
+        widget=forms.TextInput(attrs={"placeholder": "13001"}),
+    )
+    accept_terms = forms.BooleanField(
+        required=True,
+        label="J'accepte la charte de bonne conduite et les conditions d'utilisation",
+        error_messages={
+            "required": "Vous devez accepter la charte de bonne conduite et les conditions d'utilisation pour vous inscrire."
+        },
+    )
 
     def clean(self) -> dict[str, Any] | None:
         cleaned_data = super().clean()
@@ -65,12 +78,14 @@ class RegisterFormView(FormView):
         password = form.cleaned_data["password"]
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
+        postal_code = form.cleaned_data["postal_code"]
 
         user = User.objects.create_user(
             email=email,
             password=password,
             first_name=first_name,
             last_name=last_name,
+            postal_code=postal_code,
         )
 
         login(self.request, user)
