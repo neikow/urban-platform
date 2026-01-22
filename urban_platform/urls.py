@@ -9,12 +9,14 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 from core.views.register import RegisterFormView
 from core.views.me import MeView
+from core.views.login import LoginView
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
+    path("auth/login/", LoginView.as_view(), name="login"),
     path("auth/register/", RegisterFormView.as_view(), name="register"),
     path("auth/me/", MeView.as_view(), name="me"),
 ]

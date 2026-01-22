@@ -88,14 +88,19 @@
             </a>
         {% else %}
             <div class="flex gap-2">
-                <a href="/auth/login/" class="btn btn-ghost hover:text-primary transition-colors font-medium">
+                <button
+                    onclick="login_modal.showModal()"
+                    class="btn btn-ghost hover:text-primary transition-colors font-medium"
+                >
                     Se connecter
-                </a>
+                </button>
                 <span class="self-center text-base-content/50">/</span>
-                <a href="/auth/register/" class="btn btn-ghost hover:text-primary transition-colors font-medium">
+                <a href="{% url 'register' %}" class="btn btn-ghost hover:text-primary transition-colors font-medium">
                     S'inscrire
                 </a>
             </div>
         {% endif %}
     </div>
 </header>
+
+{% include "auth/login_modal.html" %}
