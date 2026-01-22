@@ -10,6 +10,7 @@ from search import views as search_views
 from core.views.register import RegisterFormView
 from core.views.me import MeView
 from core.views.login import LoginView
+from core.views.logout import LogoutView
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -17,6 +18,7 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("auth/login/", LoginView.as_view(), name="login"),
+    path("auth/logout/", LogoutView.as_view(), name="logout"),
     path("auth/register/", RegisterFormView.as_view(), name="register"),
     path("auth/me/", MeView.as_view(), name="me"),
 ]
