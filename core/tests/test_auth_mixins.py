@@ -2,6 +2,7 @@ import pytest
 from django import forms
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
+import json
 
 from core.views.auth_mixins import (
     PasswordValidationMixin,
@@ -94,8 +95,6 @@ class TestJsonResponseMixin:
         assert isinstance(response, JsonResponse)
         assert response.status_code == 400
 
-        import json
-
         content = json.loads(response.content)
         assert content["success"] is False
         assert "errors" in content
@@ -113,8 +112,6 @@ class TestJsonResponseMixin:
 
         assert isinstance(response, JsonResponse)
         assert response.status_code == 400
-
-        import json
 
         content = json.loads(response.content)
         assert content["success"] is False
@@ -136,8 +133,6 @@ class TestJsonResponseMixin:
 
         assert isinstance(response, JsonResponse)
         assert response.status_code == 200
-
-        import json
 
         content = json.loads(response.content)
         assert content["success"] is True
