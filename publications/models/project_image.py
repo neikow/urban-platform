@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class ProjectImage(models.Model):
-
     project = models.ForeignKey(
         "projects.Project",
         on_delete=models.CASCADE,

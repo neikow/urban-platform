@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
@@ -14,44 +16,44 @@ class EventPage(PublicationPage):
     def get_verbose_name(cls) -> StrOrPromise:
         return _("Event")
 
-    event_date = models.DateTimeField(
+    event_date: models.DateTimeField[Any, Any] = models.DateTimeField(
         verbose_name=_("Event Date"),
         help_text=_("Date et heure de début de l'événement"),
     )
 
-    end_date = models.DateTimeField(
+    end_date: models.DateTimeField[Any, Any] = models.DateTimeField(
         verbose_name=_("End Date"),
         null=True,
         blank=True,
         help_text=_("Date et heure de fin de l'événement(optionnel)"),
     )
 
-    location = models.CharField(
+    location: models.CharField[str, str] = models.CharField(
         _("Location"),
         max_length=255,
         blank=True,
         help_text=_("Lieu de l'événement"),
     )
 
-    address = models.TextField(
+    address: models.TextField[str, str] = models.TextField(
         _("Address"),
         blank=True,
         help_text=_("Adresse complète de l'événement"),
     )
 
-    is_online = models.BooleanField(
+    is_online: models.BooleanField[bool, bool] = models.BooleanField(
         _("Online Event"),
         default=False,
         help_text=_("Cochez si l'événement est en ligne"),
     )
 
-    online_link = models.URLField(
+    online_link: models.URLField[str, str] = models.URLField(
         _("Online Link"),
         blank=True,
         help_text=_("Lien vers l'événement en ligne (si applicable)"),
     )
 
-    max_participants = models.PositiveIntegerField(
+    max_participants: models.PositiveIntegerField[int | None, int | None] = models.PositiveIntegerField(
         _("Maximum Participants"),
         null=True,
         blank=True,
@@ -71,6 +73,7 @@ class EventPage(PublicationPage):
     @property
     def is_past(self) -> bool:
         from django.utils import timezone
+
         return self.event_date < timezone.now()
 
     @property

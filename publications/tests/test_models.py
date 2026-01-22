@@ -48,11 +48,14 @@ class ProjectPageModelTest(TestCase):
             title="Project with TOC",
             category=ProjectCategory.URBAN_PLANNING,
             content=[
-                ("text", RichText(
-                    "<h2 id='intro'>Introduction</h2><p>Text</p>"
-                    "<h3 id='context'>Context</h3><p>More</p>"
-                    "<h2 id='conclusion'>Conclusion</h2>"
-                ))
+                (
+                    "text",
+                    RichText(
+                        "<h2 id='intro'>Introduction</h2><p>Text</p>"
+                        "<h3 id='context'>Context</h3><p>More</p>"
+                        "<h2 id='conclusion'>Conclusion</h2>"
+                    ),
+                )
             ],
         )
         self.project_index.add_child(instance=project)

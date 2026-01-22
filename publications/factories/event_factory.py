@@ -26,10 +26,12 @@ class EventPageFactory(factory.django.DjangoModelFactory):
     hero_image = factory.SubFactory(ImageFactory)
 
     event_date = factory.LazyFunction(
-        lambda: timezone.now() + timedelta(days=factory.Faker._get_faker().random_int(min=1, max=60))
+        lambda: timezone.now()
+        + timedelta(days=factory.Faker._get_faker().random_int(min=1, max=60))
     )
     end_date = factory.LazyAttribute(
-        lambda obj: obj.event_date + timedelta(hours=factory.Faker._get_faker().random_int(min=1, max=4))
+        lambda obj: obj.event_date
+        + timedelta(hours=factory.Faker._get_faker().random_int(min=1, max=4))
     )
     location = factory.Faker("company", locale="fr_FR")
     address = factory.Faker("address", locale="fr_FR")
@@ -42,9 +44,7 @@ class EventPageFactory(factory.django.DjangoModelFactory):
     )
 
     @classmethod
-    def _create(
-        cls, model_class: type[EventPage], *args: Any, **kwargs: Any
-    ) -> EventPage:
+    def _create(cls, model_class: type[EventPage], *args: Any, **kwargs: Any) -> EventPage:
         parent: Page = kwargs.pop("parent", None)
         instance = model_class(**kwargs)
 

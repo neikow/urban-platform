@@ -33,14 +33,11 @@ class ProjectPageFactory(factory.django.DjangoModelFactory):
     )
     hero_image = factory.SubFactory(ImageFactory)
     category = factory.Faker(
-        "random_element",
-        elements=[choice[0] for choice in ProjectCategory.choices]
+        "random_element", elements=[choice[0] for choice in ProjectCategory.choices]
     )
 
     @classmethod
-    def _create(
-        cls, model_class: type[ProjectPage], *args: Any, **kwargs: Any
-    ) -> ProjectPage:
+    def _create(cls, model_class: type[ProjectPage], *args: Any, **kwargs: Any) -> ProjectPage:
         parent: Page = kwargs.pop("parent", None)
         instance = model_class(**kwargs)
 
@@ -51,4 +48,3 @@ class ProjectPageFactory(factory.django.DjangoModelFactory):
         raise ValueError(
             "Headless page creation not supported by this factory. Please provide a 'parent' argument."
         )
-

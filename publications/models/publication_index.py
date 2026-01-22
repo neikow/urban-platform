@@ -22,7 +22,7 @@ class PublicationIndexPage(Page):
     def get_verbose_name(cls) -> StrOrPromise:
         return _("Publications Index")
 
-    page_introduction = models.TextField(
+    page_introduction: models.TextField[str, str] = models.TextField(
         blank=True,
         verbose_name=_("Page introduction"),
         help_text=_("Small introduction shown above the publications list."),
@@ -53,29 +53,19 @@ class PublicationIndexPage(Page):
 
         if publication_type == "projects":
             publications = (
-                ProjectPage.objects.live()
-                .descendant_of(self)
-                .order_by("-first_published_at")
+                ProjectPage.objects.live().descendant_of(self).order_by("-first_published_at")
             )
             category = request.GET.get("category")
             if category and category in [c.value for c in ProjectCategory]:
                 publications = publications.filter(category=category)
         elif publication_type == "events":
-            publications = (
-                EventPage.objects.live()
-                .descendant_of(self)
-                .order_by("-event_date")
-            )
+            publications = EventPage.objects.live().descendant_of(self).order_by("-event_date")
         else:
             projects = list(
-                ProjectPage.objects.live()
-                .descendant_of(self)
-                .order_by("-first_published_at")
+                ProjectPage.objects.live().descendant_of(self).order_by("-first_published_at")
             )
             events = list(
-                EventPage.objects.live()
-                .descendant_of(self)
-                .order_by("-first_published_at")
+                EventPage.objects.live().descendant_of(self).order_by("-first_published_at")
             )
             publications = sorted(
                 projects + events,

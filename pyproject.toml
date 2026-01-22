@@ -45,6 +45,7 @@ dev = [
     "pytest-django>=4.11.1",
     "pytest-env>=1.2.0",
     "pytest-playwright>=0.7.2",
+    "ruff>=0.9.4",
 ]
 
 [tool.pytest.ini_options]

@@ -44,7 +44,6 @@ class ProjectCategory(models.TextChoices):
 
 
 class ProjectPage(PublicationPage):
-
     parent_page_types: list[str] = ["publications.PublicationIndexPage"]
     child_page_types: list[str] = []
 
@@ -52,7 +51,7 @@ class ProjectPage(PublicationPage):
     def get_verbose_name(cls) -> StrOrPromise:
         return _("Project")
 
-    category = models.CharField(
+    category: models.CharField[str, str] = models.CharField(
         _("Category"),
         max_length=30,
         choices=ProjectCategory.choices,

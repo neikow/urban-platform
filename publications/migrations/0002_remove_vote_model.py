@@ -4,17 +4,16 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('publications', '0001_initial'),
+        ("publications", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveConstraint(
-            model_name='vote',
-            name='unique_active_vote_per_user_project',
+            model_name="vote",
+            name="unique_active_vote_per_user_project",
         ),
         migrations.DeleteModel(
-            name='Vote',
+            name="Vote",
         ),
     ]

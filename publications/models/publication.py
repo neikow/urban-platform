@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.panels import FieldPanel
@@ -9,17 +11,16 @@ from core.blocks import BlockTypes
 
 
 class PublicationPage(Page):
-
     class Meta:
         abstract = True
 
-    description = models.TextField(
+    description: models.TextField[str, str] = models.TextField(
         blank=True,
         verbose_name=_("Description"),
         help_text=_("A brief description shown in lists."),
     )
 
-    hero_image = models.ForeignKey(
+    hero_image: models.ForeignKey[Any, Any] = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
         blank=True,
