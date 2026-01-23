@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DJANGO_SETTINGS_MODULE: urban_platform.settings.dev
+      DJANGO_SETTINGS_MODULE: urban_platform.settings.test
       SECRET_KEY: "test-key"
       ENVIRONMENT: "test"
 
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DJANGO_SETTINGS_MODULE: urban_platform.settings.dev
+      DJANGO_SETTINGS_MODULE: urban_platform.settings.test
       SECRET_KEY: "test-key"
       ENVIRONMENT: "test"
 
