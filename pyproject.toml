@@ -49,7 +49,7 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "urban_platform.settings.dev"
+DJANGO_SETTINGS_MODULE = "urban_platform.settings.test"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
 
 [tool.djlint]
