@@ -49,9 +49,45 @@ services:
     ports:
       - "6379"
     volumes:
-      - 'redis_data:/bitnami/redis/data'
+      - 'redis_data:/data'
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - internal
+
+  worker:
+    container_name: urban-platform-staging-worker
+    image: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
+    command: uv run celery -A urban_platform worker --loglevel=info
+    volumes:
+      - media_volume:/app/mediafiles
+      - uv_cache:/app/.cache/uv
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - cache
+    restart: always
+    networks:
+      - internal
+
+#  celery_beat:
+#    container_name: urban-platform-staging-celery-beat
+#    image: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
+#    command: uv run celery -A urban_platform beat --loglevel=info
+#    volumes:
+#      - uv_cache:/app/.cache/uv
+#    env_file:
+#      - .env
+#    depends_on:
+#      - db
+#      - cache
+#    restart: always
+#    networks:
+#      - internal
 
   db:
     image: postgres:17
