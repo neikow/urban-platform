@@ -7,6 +7,7 @@ import sys
 import time
 from dataclasses import dataclass
 from pathlib import Path
+from types import FrameType
 from typing import Callable
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -119,7 +120,7 @@ class DevServer:
         signal.signal(signal.SIGTERM, self._handle_shutdown)
         atexit.register(self.cleanup)
 
-    def _handle_shutdown(self, signum: int, frame) -> None:
+    def _handle_shutdown(self, signum: int, frame: FrameType | None) -> None:
         print("\n\n🛑 Shutting down services...")
         self.cleanup()
         sys.exit(0)
