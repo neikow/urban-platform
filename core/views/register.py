@@ -9,7 +9,7 @@ from django import forms
 
 from legal.utils import has_valid_code_of_conduct_consent
 from .auth_mixins import PasswordValidationMixin, EmailValidationMixin
-from ..widgets import DaisyTextInput, DaisyPasswordInput
+from ..widgets import DaisyTextInput, DaisyPasswordInput, DaisyEmailInput
 
 if typing.TYPE_CHECKING:
     from core.models import User
@@ -19,7 +19,7 @@ else:
 
 class UserRegistrationForm(PasswordValidationMixin, EmailValidationMixin, forms.Form):
     email = forms.EmailField(
-        required=True, label="Email", widget=DaisyTextInput(placeholder="jean.dupont@email.fr")
+        required=True, label="Email", widget=DaisyEmailInput(placeholder="jean.dupont@email.fr")
     )
     password = forms.CharField(
         required=True,
