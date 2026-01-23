@@ -39,6 +39,7 @@ django_settings_module = "urban_platform.settings.dev"
 
 [dependency-groups]
 dev = [
+    "celery-stubs>=0.1.3",
     "django-browser-reload>=1.21.0",
     "django-stubs[compatible-mypy]>=5.2.8",
     "factory-boy>=3.3.3",
