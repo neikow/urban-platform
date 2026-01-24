@@ -1,5 +1,6 @@
 import pytest
 from django.contrib.auth import get_user_model
+from django.http import HttpResponseRedirect
 from django.test import Client
 from django.urls import reverse
 
@@ -17,7 +18,7 @@ class TestLogoutView:
         response = client.post(reverse("logout"))
 
         assert response.status_code == 302
-        assert response.url == "/"
+        assert response.url == "/"  # type: ignore[attr-defined]
 
     def test_user_logged_out_after_logout(self, client: Client, test_user):
         # Log in
@@ -43,7 +44,7 @@ class TestLogoutView:
 
         # Should still redirect without error
         assert response.status_code == 302
-        assert response.url == "/"
+        assert response.url == "/"  # type: ignore[attr-defined]
 
     def test_logout_clears_session(self, client: Client, test_user):
         # Log in and add some session data
