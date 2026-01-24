@@ -3,7 +3,7 @@
 {% block title %}S'inscrire{% endblock %}
 
 {% block content %}
-    <div class="min-h-screen flex items-center justify-center bg-base-200 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full">
             <div class="card bg-base-100 shadow-xl">
                 <div class="card-body">
@@ -35,142 +35,22 @@
                     <form method="post" class="space-y-4">
                         {% csrf_token %}
 
-                        <div class="form-control">
-                            <label class="label" for="{{ form.email.id_for_label }}">
-                                <span class="label-text font-semibold">{{ form.email.label }}</span>
-                            </label>
-                            <input
-                                type="email"
-                                autocomplete="email"
-                                name="{{ form.email.html_name }}"
-                                id="{{ form.email.id_for_label }}"
-                                class="input input-bordered w-full {% if form.email.errors %}input-error{% endif %}"
-                                placeholder="exemple@email.com"
-                                value="{{ form.email.value|default:'' }}"
-                                required
-                            >
-                            {% if form.email.errors %}
-                                <div class="mt-1">
-                                    <span class="label-text-alt text-error block">{{ form.email.errors.0 }}</span>
-                                </div>
-                            {% endif %}
-                        </div>
+                        {% include "components/forms/form_field.html" with field=form.email %}
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="form-control">
-                                <label class="label" for="{{ form.first_name.id_for_label }}">
-                                    <span class="label-text font-semibold">{{ form.first_name.label }}</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="{{ form.first_name.html_name }}"
-                                    id="{{ form.first_name.id_for_label }}"
-                                    class="input input-bordered w-full {% if form.first_name.errors %}input-error{% endif %}"
-                                    placeholder="Jean"
-                                    value="{{ form.first_name.value|default:'' }}"
-                                    required
-                                >
-                                {% if form.first_name.errors %}
-                                    <div class="mt-1">
-                                        <span
-                                            class="label-text-alt text-error block"
-                                        >{{ form.first_name.errors.0 }}</span>
-                                    </div>
-                                {% endif %}
-                            </div>
+                            {% include "components/forms/form_field.html" with field=form.first_name %}
 
-                            <div class="form-control">
-                                <label class="label" for="{{ form.last_name.id_for_label }}">
-                                    <span class="label-text font-semibold">{{ form.last_name.label }}</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="{{ form.last_name.html_name }}"
-                                    id="{{ form.last_name.id_for_label }}"
-                                    class="input input-bordered w-full {% if form.last_name.errors %}input-error{% endif %}"
-                                    placeholder="Dupont"
-                                    value="{{ form.last_name.value|default:'' }}"
-                                    required
-                                >
-                                {% if form.last_name.errors %}
-                                    <div class="mt-1">
-                                        <span
-                                            class="label-text-alt text-error block"
-                                        >{{ form.last_name.errors.0 }}</span>
-                                    </div>
-                                {% endif %}
-                            </div>
+                            {% include "components/forms/form_field.html" with field=form.last_name %}
                         </div>
 
-                        <div class="form-control">
-                            <label class="label" for="{{ form.postal_code.id_for_label }}">
-                                <span class="label-text font-semibold">{{ form.postal_code.label }}</span>
-                            </label>
-                            <input
-                                type="text"
-                                autocomplete="postal-code"
-                                name="{{ form.postal_code.html_name }}"
-                                id="{{ form.postal_code.id_for_label }}"
-                                class="input input-bordered w-full {% if form.postal_code.errors %}input-error{% endif %}"
-                                placeholder="13001"
-                                value="{{ form.postal_code.value|default:'' }}"
-                                maxlength="10"
-                                required
-                            >
-                            {% if form.postal_code.errors %}
-                                <div class="mt-1">
-                                    <span class="label-text-alt text-error block">{{ form.postal_code.errors.0 }}</span>
-                                </div>
-                            {% endif %}
-                        </div>
+                        {% include "components/forms/form_field.html" with field=form.postal_code %}
+
+                        {% include "components/forms/form_field.html" with field=form.password %}
+
+                        {% include "components/forms/form_field.html" with field=form.confirm_password %}
 
                         <div class="form-control">
-                            <label class="label" for="{{ form.password.id_for_label }}">
-                                <span class="label-text font-semibold">{{ form.password.label }}</span>
-                            </label>
-                            <input
-                                type="password"
-                                name="{{ form.password.html_name }}"
-                                id="{{ form.password.id_for_label }}"
-                                class="input input-bordered w-full {% if form.password.errors %}input-error{% endif %}"
-                                placeholder="••••••••"
-                                aria-describedby="password-requirements"
-                                required
-                            >
-                            <label class="label">
-                                <span class="label-text-alt" id="password-requirements"
-                                >Minimum 8 caractères, 1 majuscule et 1 chiffre</span>
-                            </label>
-                            {% if form.password.errors %}
-                                <div class="mt-1">
-                                    <span class="label-text-alt text-error block">{{ form.password.errors.0 }}</span>
-                                </div>
-                            {% endif %}
-                        </div>
-
-                        <div class="form-control">
-                            <label class="label" for="{{ form.confirm_password.id_for_label }}">
-                                <span class="label-text font-semibold">{{ form.confirm_password.label }}</span>
-                            </label>
-                            <input
-                                type="password"
-                                name="{{ form.confirm_password.html_name }}"
-                                id="{{ form.confirm_password.id_for_label }}"
-                                class="input input-bordered w-full {% if form.confirm_password.errors %}input-error{% endif %}"
-                                placeholder="••••••••"
-                                required
-                            >
-                            {% if form.confirm_password.errors %}
-                                <div class="mt-1">
-                                    <span
-                                        class="label-text-alt text-error block"
-                                    >{{ form.confirm_password.errors.0 }}</span>
-                                </div>
-                            {% endif %}
-                        </div>
-
-                        <div class="form-control">
-                            <div class="flex items-start gap-3">
+                            <div class="flex justify-start items-center gap-3">
                                 <input
                                     type="checkbox"
                                     name="{{ form.accept_terms.html_name }}"
@@ -182,17 +62,7 @@
                                     for="{{ form.accept_terms.id_for_label }}"
                                     class="text-sm cursor-pointer flex-1 min-w-0"
                                 >
-                                    J'accepte la
-                                    <a
-                                        href="/legal/charte-de-conduite/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="link link-primary font-semibold hover:underline"
-                                    >
-                                        charte de bonne conduite<span class="sr-only">
-                                            (ouvre dans un nouvel onglet)</span>
-                                    </a>
-                                    et les
+                                    J'accepte les
                                     <a
                                         href="/legal/termes/"
                                         target="_blank"
