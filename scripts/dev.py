@@ -99,13 +99,12 @@ class DevServer:
             )
         )
 
-        # Future: Add Celery worker here
-        # self.services.append(
-        #     Service(
-        #         name="Celery Worker",
-        #         start=self._start_celery_worker,
-        #     )
-        # )
+        self.services.append(
+            Service(
+                name="Celery Worker",
+                start=self._start_celery_worker,
+            )
+        )
 
         # Future: Add Celery beat here
         # self.services.append(
