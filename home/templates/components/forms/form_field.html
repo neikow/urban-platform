@@ -1,0 +1,16 @@
+<div class="form-control w-full">
+    <label class="label font-medium" for="{{ field.id_for_label }}">
+        <span class="label-text inline">
+            {{ field.label }}<span class="text-primary">{% if field.field.required %}*{% endif %}</span>
+        </span>
+    </label>
+    <div class="w-full">
+        {{ field }}
+    </div>
+    {% if field.errors %}
+        <span class="label-text-alt text-error">{{ field.errors.0 }}</span>
+    {% endif %}
+    {% if field.help_text %}
+        <span class="w-full text-xs text-neutral-500">{{ field.help_text }}</span>
+    {% endif %}
+</div>

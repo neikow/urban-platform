@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Charte de bonne conduite{% endblock %}
+
+{% block content %}
+    <article class="container mx-auto my-6 md:my-12 lg:my-24 px-4 min-h-screen">
+        <header>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl mb-4 font-extrabold">
+                Signature de la charte de bonne conduite
+            </h1>
+        </header>
+        <main class="page-content">
+            {{ content|safe }}
+
+            <span id="page-content-end"></span>
+        </main>
+    </article>
+    <div id="consent-banner" class="fixed bottom-0 left-0 w-full bg-base-300 p-6 z-50">
+        <form method="post" id="consent-form" class="container mx-auto flex items-center justify-between gap-4">
+            {% csrf_token %}
+            <label class="flex items-center gap-3 cursor-pointer">
+                <input
+                    type="checkbox"
+                    name="consent"
+                    id="consent-checkbox"
+                    class="checkbox checkbox-primary"
+                    disabled
+                >
+                <span id="consent-label-read" style="display: none">
+                    J'ai lu et j'accepte la charte de bonne conduite
+                </span>
+                <span id="consent-label-unread" class="opacity-70">
+                    Veuillez lire la charte en entier avant de pouvoir accepter
+                </span>
+            </label>
+            <button
+                type="submit"
+                id="submit-btn"
+                class="btn btn-primary"
+                disabled
+            >
+                Accepter et continuer
+            </button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/code_of_conduct_page.js' %}"></script>
+{% endblock %}
