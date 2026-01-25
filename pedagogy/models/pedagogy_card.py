@@ -1,11 +1,8 @@
 from django_stubs_ext import StrOrPromise
 from wagtail.admin.panels import FieldPanel
-from dataclasses import dataclass
 from typing import override
 
-from slugify import slugify
 from wagtail.admin.panels import InlinePanel
-from wagtail.blocks import StreamValue
 from wagtail.models import Page
 from wagtail.fields import StreamField
 from django.db import models
@@ -13,24 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.search import index
 
 from core.blocks import BlockTypes
-from bs4 import BeautifulSoup
-
-
-@dataclass
-class TableOfContentsItem:
-    title: str
-    id: str
-    level: int
-
-
-def _generate_paragraph_header_ids(block: StreamValue.StreamChild) -> None:
-    html = block.value.source
-
-    soup = BeautifulSoup(html, "html.parser")
-    for header in soup.find_all(["h2", "h3", "h4"]):
-        header_id = slugify(header.get_text())
-        header["id"] = header_id
-    block.value.source = str(soup)
+from core.toc import TableOfContentsItem, generate_header_ids, get_table_of_contents
 
 
 class PedagogyCardPage(Page):
@@ -86,25 +66,8 @@ class PedagogyCardPage(Page):
 
         for block in self.content:
             if block.block_type == "text":
-                _generate_paragraph_header_ids(block)
+                generate_header_ids(block)
 
     @property
     def table_of_contents(self) -> list[TableOfContentsItem]:
-        toc: list[TableOfContentsItem] = []
-
-        for block in self.content:
-            if block.block_type == "text":
-                html = block.value.source
-
-                soup = BeautifulSoup(html, "html.parser")
-                for header in soup.find_all(["h2", "h3", "h4"]):
-                    level = int(header.name[1])
-                    title = header.get_text()
-                    id_attr = header.get("id", "")
-
-                    if not id_attr or not isinstance(id_attr, str):
-                        continue
-
-                    toc.append(TableOfContentsItem(title=title, id=id_attr, level=level))
-
-        return toc
+        return get_table_of_contents(self.content)
