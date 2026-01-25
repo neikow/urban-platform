@@ -4,6 +4,7 @@ from typing import Optional, Sequence, Union
 from django.core.paginator import Page as PaginatorPage
 from django.core.paginator import Paginator
 from django.db.models import Q, QuerySet
+from django.http import HttpRequest
 
 from publications.models.project import ProjectCategory
 
@@ -16,7 +17,7 @@ class PublicationFilters:
     page_number: Optional[int] = None
 
     @classmethod
-    def from_request(cls, request) -> "PublicationFilters":
+    def from_request(cls, request: HttpRequest) -> "PublicationFilters":
         return cls(
             publication_type=request.GET.get("type", "all"),
             category=request.GET.get("category"),
