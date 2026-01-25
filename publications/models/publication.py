@@ -16,7 +16,7 @@ class PublicationPage(Page):
         verbose_name = _("Publication")
         verbose_name_plural = _("Publications")
 
-    real_type: models.ForeignKey[ContentType | None] = models.ForeignKey(
+    real_type = models.ForeignKey(  # type: ignore[var-annotated]
         ContentType,
         on_delete=models.SET_NULL,
         editable=False,

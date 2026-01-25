@@ -18,11 +18,13 @@ class PublicationFilters:
 
     @classmethod
     def from_request(cls, request: HttpRequest) -> "PublicationFilters":
+        page_str = request.GET.get("page")
+        page_number = int(page_str) if page_str is not None else None
         return cls(
             publication_type=request.GET.get("type", "all"),
             category=request.GET.get("category"),
             search_query=request.GET.get("search", ""),
-            page_number=request.GET.get("page"),
+            page_number=page_number,
         )
 
 
