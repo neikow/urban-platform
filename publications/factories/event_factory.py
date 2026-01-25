@@ -5,11 +5,11 @@ import factory.fuzzy
 from django.utils import timezone
 
 from core.tests.utils.blocks import mock_block_value
-from core.tests.utils.factories import ImageFactory, WagtailPageFactory
+from core.tests.utils.factories import ImageFactory, BaseWagtailPageFactory
 from publications.models import EventPage
 
 
-class EventPageFactory(WagtailPageFactory):
+class EventPageFactory(BaseWagtailPageFactory):
     class Meta:
         model = EventPage
 

@@ -1,11 +1,11 @@
 import factory
 
 from core.tests.utils.blocks import mock_block_value
-from core.tests.utils.factories import ImageFactory, WagtailPageFactory
+from core.tests.utils.factories import ImageFactory, BaseWagtailPageFactory
 from pedagogy.models import PedagogyCardPage
 
 
-class PedagogyCardPageFactory(WagtailPageFactory):
+class PedagogyCardPageFactory(BaseWagtailPageFactory):
     class Meta:
         model = PedagogyCardPage
 

@@ -21,7 +21,7 @@ class DocumentFactory(factory.django.DjangoModelFactory):
     file = factory.django.FileField()
 
 
-class WagtailPageFactory(factory.django.DjangoModelFactory):
+class BaseWagtailPageFactory(factory.django.DjangoModelFactory):
     class Meta:
         abstract = True
 

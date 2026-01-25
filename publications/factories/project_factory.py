@@ -2,11 +2,11 @@ import factory
 import factory.fuzzy
 
 from core.tests.utils.blocks import mock_block_value
-from core.tests.utils.factories import ImageFactory, WagtailPageFactory
+from core.tests.utils.factories import ImageFactory, BaseWagtailPageFactory
 from publications.models import ProjectPage, ProjectCategory
 
 
-class ProjectPageFactory(WagtailPageFactory):
+class ProjectPageFactory(BaseWagtailPageFactory):
     class Meta:
         model = ProjectPage
 
