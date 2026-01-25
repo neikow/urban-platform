@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DJANGO_SETTINGS_MODULE: urban_platform.settings.dev
+      DJANGO_SETTINGS_MODULE: urban_platform.settings.test
       SECRET_KEY: "test-key"
       ENVIRONMENT: "test"
 
@@ -24,16 +24,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7
         with:
             enable-cache: true
             cache-dependency-glob: "uv.lock"
 
       - name: "Set up Python"
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version-file: ".python-version"
 
@@ -60,38 +60,38 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DJANGO_SETTINGS_MODULE: urban_platform.settings.dev
+      DJANGO_SETTINGS_MODULE: urban_platform.settings.test
       SECRET_KEY: "test-key"
       ENVIRONMENT: "test"
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7
         with:
             enable-cache: true
             cache-dependency-glob: "uv.lock"
 
       - name: "Set up Python"
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version-file: ".python-version"
 
       - name: Install dependencies
         run: uv sync --all-extras --dev
 
-      - name: Install Playwright browsers
-        run: |
-          uv run playwright install --with-deps chromium
+#      - name: Install Playwright browsers
+#        run: |
+#          uv run playwright install --with-deps chromium
 
       - name: Run Tests
         run: uv run pytest --junitxml=test-results.xml
 
       - name: Upload Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: test-results
           path: test-results.xml
