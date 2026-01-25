@@ -13,6 +13,8 @@ from wagtail.search import index
 
 
 class PublicationIndexPage(Page):
+    PUBLICATIONS_PER_PAGE = 12
+
     max_count = 1
     parent_page_types = ["home.HomePage"]
     subpage_types = ["publications.ProjectPage", "publications.EventPage"]
@@ -81,7 +83,7 @@ class PublicationIndexPage(Page):
                 | models.Q(description__icontains=search_query)
             )
 
-        paginator = Paginator(publications, 12)
+        paginator = Paginator(publications, self.PUBLICATIONS_PER_PAGE)
         page_number = request.GET.get("page")
         return paginator.get_page(page_number)
 
