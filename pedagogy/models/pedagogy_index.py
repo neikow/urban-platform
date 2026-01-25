@@ -14,6 +14,8 @@ from pedagogy.models.pedagogy_card import PedagogyCardPage
 
 
 class PedagogyIndexPage(Page):
+    PEDAGOGY_ENTRIES_PER_PAGE = 9
+
     max_count = 1
     parent_page_types = ["home.HomePage"]
 
@@ -69,7 +71,7 @@ class PedagogyIndexPage(Page):
                 | models.Q(content__icontains=search_query)
             )
 
-        paginator = Paginator(pedagogy_entries, 9)
+        paginator = Paginator(pedagogy_entries, self.PEDAGOGY_ENTRIES_PER_PAGE)
         page_number = request.GET.get("page")
         pedagogy_entries = paginator.get_page(page_number)
 
