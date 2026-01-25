@@ -2,7 +2,6 @@ from datetime import timedelta
 
 from django.test import TestCase, RequestFactory
 from django.utils import timezone
-from wagtail.models import Page
 from wagtail.rich_text import RichText
 
 from home.models import HomePage
@@ -14,13 +13,7 @@ class ProjectPageModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls) -> None:
-        root_page = Page.objects.get(depth=1)
-        try:
-            home_page = Page.objects.get(slug="home")
-        except Page.DoesNotExist:
-            home_page = HomePage(title="Home", slug="home")
-            root_page.add_child(instance=home_page)
-
+        home_page = HomePage.objects.get(slug="home")
         cls.project_index = PublicationIndexPage(title="Projects", slug="projects")
         home_page.add_child(instance=cls.project_index)
 
@@ -58,7 +51,6 @@ class ProjectPageModelTest(TestCase):
                 )
             ],
         )
-        self.project_index.add_child(instance=project)
 
         toc = project.table_of_contents
         self.assertEqual(len(toc), 3)
@@ -73,13 +65,7 @@ class EventPageModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls) -> None:
-        root_page = Page.objects.get(depth=1)
-        try:
-            home_page = Page.objects.get(slug="home")
-        except Page.DoesNotExist:
-            home_page = HomePage(title="Home", slug="home")
-            root_page.add_child(instance=home_page)
-
+        home_page = HomePage.objects.get(slug="home")
         cls.publication_index = PublicationIndexPage(title="Publications", slug="publications")
         home_page.add_child(instance=cls.publication_index)
 
@@ -128,13 +114,7 @@ class PublicationIndexPageModelTest(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         cls.factory = RequestFactory()
-        root_page = Page.objects.get(depth=1)
-
-        try:
-            home_page = Page.objects.get(slug="home")
-        except Page.DoesNotExist:
-            home_page = HomePage(title="Home", slug="home")
-            root_page.add_child(instance=home_page)
+        home_page = HomePage.objects.get(slug="home")
 
         cls.publication_index = PublicationIndexPage(
             title="Publications",

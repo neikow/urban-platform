@@ -1,6 +1,5 @@
 from typing import Any
 
-from django.core.paginator import Paginator
 from django.db import models
 from django.http import HttpRequest
 from django.template import Context
@@ -10,6 +9,8 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 from wagtail.search import index
+
+from publications.services import PublicationFilters, get_filtered_publications
 
 
 class PublicationIndexPage(Page):
@@ -48,44 +49,14 @@ class PublicationIndexPage(Page):
     ]
 
     def get_publications(self, request: HttpRequest) -> Any:
-        from django.contrib.contenttypes.models import ContentType
-
-        from publications.models.event import EventPage
-        from publications.models.project import ProjectCategory, ProjectPage
         from publications.models.publication import PublicationPage
 
-        publication_type = request.GET.get("type", "all")
+        base_queryset = PublicationPage.objects.live().descendant_of(self)
+        filters = PublicationFilters.from_request(request)
 
-        publications = PublicationPage.objects.live().descendant_of(self)
-
-        if publication_type == "projects":
-            project_ct = ContentType.objects.get_for_model(ProjectPage)
-            publications = publications.filter(real_type=project_ct)
-
-            category = request.GET.get("category")
-            if category and category in [c.value for c in ProjectCategory]:
-                publications = publications.filter(projectpage__category=category)
-
-            publications = publications.order_by("-first_published_at")
-
-        elif publication_type == "events":
-            event_ct = ContentType.objects.get_for_model(EventPage)
-            publications = publications.filter(real_type=event_ct).order_by(
-                "-eventpage__event_date"
-            )
-        else:
-            publications = publications.order_by("-first_published_at")
-
-        search_query = request.GET.get("search", "")
-        if search_query:
-            publications = publications.filter(
-                models.Q(title__icontains=search_query)
-                | models.Q(description__icontains=search_query)
-            )
-
-        paginator = Paginator(publications, self.PUBLICATIONS_PER_PAGE)
-        page_number = request.GET.get("page")
-        return paginator.get_page(page_number)
+        return get_filtered_publications(
+            base_queryset, filters, per_page=self.PUBLICATIONS_PER_PAGE
+        )
 
     def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Context:
         from publications.models.project import ProjectCategory
