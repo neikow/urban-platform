@@ -106,6 +106,28 @@ class EventPageModelTest(TestCase):
         self.assertTrue(past_event.is_past)
         self.assertFalse(past_event.is_upcoming)
 
+    def test_is_past_uses_end_date_when_available(self) -> None:
+        ongoing_event = EventPage(
+            title="Ongoing Seminar",
+            event_date=timezone.now() - timedelta(days=1),  # commencé hier
+            end_date=timezone.now() + timedelta(days=2),  # finit dans 2 jours
+        )
+        self.publication_index.add_child(instance=ongoing_event)
+
+        self.assertFalse(ongoing_event.is_past)
+        self.assertTrue(ongoing_event.is_upcoming)
+
+    def test_is_past_with_end_date_in_past(self) -> None:
+        finished_event = EventPage(
+            title="Finished Seminar",
+            event_date=timezone.now() - timedelta(days=5),
+            end_date=timezone.now() - timedelta(days=2),
+        )
+        self.publication_index.add_child(instance=finished_event)
+
+        self.assertTrue(finished_event.is_past)
+        self.assertFalse(finished_event.is_upcoming)
+
 
 class PublicationIndexPageModelTest(TestCase):
     publication_index: PublicationIndexPage

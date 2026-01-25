@@ -80,7 +80,8 @@ class EventPage(PublicationPage):
     def is_past(self) -> bool:
         from django.utils import timezone
 
-        return self.event_date < timezone.now()
+        reference_date = self.end_date if self.end_date else self.event_date
+        return reference_date < timezone.now()
 
     @property
     def is_upcoming(self) -> bool:

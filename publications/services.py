@@ -30,6 +30,8 @@ class PublicationFilters:
 
 def filter_publications_by_type(publications: QuerySet, publication_type: str) -> QuerySet:
     from django.contrib.contenttypes.models import ContentType
+    from django.db.models.functions import Coalesce
+    from django.utils import timezone
 
     from publications.models.event import EventPage
     from publications.models.project import ProjectPage
@@ -40,7 +42,13 @@ def filter_publications_by_type(publications: QuerySet, publication_type: str) -
 
     elif publication_type == "events":
         event_ct = ContentType.objects.get_for_model(EventPage)
-        return publications.filter(real_type=event_ct).order_by("-eventpage__event_date")
+        now = timezone.now()
+        return (
+            publications.filter(real_type=event_ct)
+            .annotate(effective_end_date=Coalesce("eventpage__end_date", "eventpage__event_date"))
+            .filter(effective_end_date__gte=now)
+            .order_by("eventpage__event_date")
+        )
 
     return publications.order_by("-first_published_at")
 

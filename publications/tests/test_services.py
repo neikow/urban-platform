@@ -69,21 +69,32 @@ class FilterPublicationsByTypeTest(TestCase):
         self.assertEqual(result, mock_ordered)
 
     @patch("django.contrib.contenttypes.models.ContentType.objects.get_for_model")
-    def test_filter_by_events(self, mock_get_for_model: MagicMock) -> None:
+    @patch("publications.services.timezone")
+    def test_filter_by_events(
+        self, mock_timezone: MagicMock, mock_get_for_model: MagicMock
+    ) -> None:
         mock_queryset = MagicMock()
         mock_filtered = MagicMock()
+        mock_annotated = MagicMock()
+        mock_filtered_upcoming = MagicMock()
         mock_ordered = MagicMock()
 
         mock_queryset.filter.return_value = mock_filtered
-        mock_filtered.order_by.return_value = mock_ordered
+        mock_filtered.annotate.return_value = mock_annotated
+        mock_annotated.filter.return_value = mock_filtered_upcoming
+        mock_filtered_upcoming.order_by.return_value = mock_ordered
 
         mock_ct = MagicMock()
         mock_get_for_model.return_value = mock_ct
+        mock_now = MagicMock()
+        mock_timezone.now.return_value = mock_now
 
         result = filter_publications_by_type(mock_queryset, "events")
 
         mock_queryset.filter.assert_called_once_with(real_type=mock_ct)
-        mock_filtered.order_by.assert_called_once_with("-eventpage__event_date")
+        mock_filtered.annotate.assert_called_once()
+        mock_annotated.filter.assert_called_once()
+        mock_filtered_upcoming.order_by.assert_called_once_with("eventpage__event_date")
         self.assertEqual(result, mock_ordered)
 
     def test_filter_by_all_returns_ordered(self) -> None:
