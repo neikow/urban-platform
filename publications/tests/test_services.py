@@ -35,7 +35,7 @@ class PublicationFiltersTest(TestCase):
         self.assertEqual(filters.publication_type, "projects")
         self.assertEqual(filters.category, "URBAN_PLANNING")
         self.assertEqual(filters.search_query, "test query")
-        self.assertEqual(filters.page_number, "2")
+        self.assertEqual(filters.page_number, 2)
 
     def test_from_request_with_missing_params_uses_defaults(self) -> None:
         request = MagicMock()
