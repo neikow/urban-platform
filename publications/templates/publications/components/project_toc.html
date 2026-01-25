@@ -1,12 +1,1 @@
-{% load i18n %}
-
-<div class="flex flex-col toc-container gap-2 lg:gap-1">
-    {% for item in page.table_of_contents %}
-        <a
-            href="#{{ item.id }}"
-            class="link link-hover toc-item-{{ item.level }} {% if item.level == 4 %} ml-8 {% elif item.level == 3 %} ml-4 {% else %} ml-0 font-bold {% endif %}"
-        >{{ item.title }}</a>
-    {% empty %}
-        <p class="text-sm text-base-content/60">{% trans "No table of contents available" %}</p>
-    {% endfor %}
-</div>
+{% include "components/toc.html" %}
