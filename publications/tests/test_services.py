@@ -69,10 +69,8 @@ class FilterPublicationsByTypeTest(TestCase):
         self.assertEqual(result, mock_ordered)
 
     @patch("django.contrib.contenttypes.models.ContentType.objects.get_for_model")
-    @patch("publications.services.timezone")
-    def test_filter_by_events(
-        self, mock_timezone: MagicMock, mock_get_for_model: MagicMock
-    ) -> None:
+    @patch("django.utils.timezone.now")
+    def test_filter_by_events(self, mock_now: MagicMock, mock_get_for_model: MagicMock) -> None:
         mock_queryset = MagicMock()
         mock_filtered = MagicMock()
         mock_annotated = MagicMock()
@@ -86,8 +84,6 @@ class FilterPublicationsByTypeTest(TestCase):
 
         mock_ct = MagicMock()
         mock_get_for_model.return_value = mock_ct
-        mock_now = MagicMock()
-        mock_timezone.now.return_value = mock_now
 
         result = filter_publications_by_type(mock_queryset, "events")
 
