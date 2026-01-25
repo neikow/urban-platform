@@ -2,8 +2,7 @@ import random
 from typing import Any
 
 from core.tests.utils.faker_shortcuts import title, paragraph, sentence
-from pedagogy.factories.image_factory import ImageFactory
-from pedagogy.factories.document_factory import DocumentFactory
+from core.tests.utils.factories import ImageFactory, DocumentFactory
 from core.blocks import ImagePosition
 
 

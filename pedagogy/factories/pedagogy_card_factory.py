@@ -1,14 +1,11 @@
-from typing import Any
-
 import factory
 
-from wagtail.models import Page
 from core.tests.utils.blocks import mock_block_value
-from pedagogy.factories.image_factory import ImageFactory
+from core.tests.utils.factories import ImageFactory, WagtailPageFactory
 from pedagogy.models import PedagogyCardPage
 
 
-class PedagogyCardPageFactory(factory.django.DjangoModelFactory):
+class PedagogyCardPageFactory(WagtailPageFactory):
     class Meta:
         model = PedagogyCardPage
 
@@ -24,18 +21,3 @@ class PedagogyCardPageFactory(factory.django.DjangoModelFactory):
         ]
     )
     hero_image = factory.SubFactory(ImageFactory)
-
-    @classmethod
-    def _create(
-        cls, model_class: type[PedagogyCardPage], *args: Any, **kwargs: Any
-    ) -> PedagogyCardPage:
-        parent: Page = kwargs.pop("parent", None)  # type: ignore
-        instance = model_class(**kwargs)
-
-        if parent:
-            parent.add_child(instance=instance)
-            return instance
-
-        raise ValueError(
-            "Headless page creation not supported by this factory. Please provide a 'parent' argument."
-        )
