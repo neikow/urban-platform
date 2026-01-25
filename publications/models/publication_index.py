@@ -46,48 +46,40 @@ class PublicationIndexPage(Page):
     ]
 
     def get_publications(self, request: HttpRequest) -> Any:
-        from publications.models.project import ProjectPage, ProjectCategory
+        from django.contrib.contenttypes.models import ContentType
+
         from publications.models.event import EventPage
+        from publications.models.project import ProjectCategory, ProjectPage
+        from publications.models.publication import PublicationPage
 
         publication_type = request.GET.get("type", "all")
 
+        publications = PublicationPage.objects.live().descendant_of(self)
+
         if publication_type == "projects":
-            publications = (
-                ProjectPage.objects.live().descendant_of(self).order_by("-first_published_at")
-            )
+            project_ct = ContentType.objects.get_for_model(ProjectPage)
+            publications = publications.filter(real_type=project_ct)
+
             category = request.GET.get("category")
             if category and category in [c.value for c in ProjectCategory]:
-                publications = publications.filter(category=category)
+                publications = publications.filter(projectpage__category=category)
+
+            publications = publications.order_by("-first_published_at")
+
         elif publication_type == "events":
-            publications = EventPage.objects.live().descendant_of(self).order_by("-event_date")
+            event_ct = ContentType.objects.get_for_model(EventPage)
+            publications = publications.filter(real_type=event_ct).order_by(
+                "-eventpage__event_date"
+            )
         else:
-            projects = list(
-                ProjectPage.objects.live().descendant_of(self).order_by("-first_published_at")
-            )
-            events = list(
-                EventPage.objects.live().descendant_of(self).order_by("-first_published_at")
-            )
-            publications = sorted(
-                projects + events,
-                key=lambda x: x.first_published_at or x.last_published_at,
-                reverse=True,
-            )
+            publications = publications.order_by("-first_published_at")
 
         search_query = request.GET.get("search", "")
         if search_query:
-            if publication_type == "all":
-                search_lower = search_query.lower()
-                publications = [
-                    p
-                    for p in publications
-                    if search_lower in p.title.lower()
-                    or search_lower in (p.description or "").lower()
-                ]
-            else:
-                publications = publications.filter(
-                    models.Q(title__icontains=search_query)
-                    | models.Q(description__icontains=search_query)
-                )
+            publications = publications.filter(
+                models.Q(title__icontains=search_query)
+                | models.Q(description__icontains=search_query)
+            )
 
         paginator = Paginator(publications, 12)
         page_number = request.GET.get("page")

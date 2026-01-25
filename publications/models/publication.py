@@ -1,5 +1,6 @@
-from typing import Any
+from typing import Any, Self, override
 
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.panels import FieldPanel
@@ -12,16 +13,36 @@ from core.blocks import BlockTypes
 
 class PublicationPage(Page):
     class Meta:
-        abstract = True
+        verbose_name = _("Publication")
+        verbose_name_plural = _("Publications")
+
+    real_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.SET_NULL,
+        editable=False,
+        null=True,
+        related_name="+",
+    )
+
+    @override
+    def save(self, *args: Any, **kwargs: Any) -> None:
+        if not self.real_type_id:
+            self.real_type = ContentType.objects.get_for_model(type(self))
+        super().save(*args, **kwargs)
+
+    def get_real_instance(self) -> Self:
+        if self.real_type:
+            model_name = self.real_type.model
+            if hasattr(self, model_name):
+                return getattr(self, model_name)
+        return self
 
     @property
     def is_event(self) -> bool:
-        """Returns True if this publication is an event."""
         return False
 
     @property
     def is_project(self) -> bool:
-        """Returns True if this publication is a project."""
         return False
 
     description: models.TextField[str, str] = models.TextField(
