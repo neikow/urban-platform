@@ -45,8 +45,5 @@ RUN SECRET_KEY=dummy \
     DB_PORT=5432 \
     uv run python manage.py collectstatic --noinput
 
-# Expose port
-EXPOSE 8000
-
 # Run with gunicorn
 CMD ["uv", "run", "gunicorn", "urban_platform.wsgi:application", "--bind", "0.0.0.0:8000"]
