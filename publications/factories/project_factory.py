@@ -1,16 +1,17 @@
 import factory
+import factory.fuzzy
 
 from core.tests.utils.blocks import mock_block_value
 from core.tests.utils.factories import ImageFactory, BaseWagtailPageFactory
-from pedagogy.models import PedagogyCardPage
+from publications.models import ProjectPage, ProjectCategory
 
 
-class PedagogyCardPageFactory(BaseWagtailPageFactory):
+class ProjectPageFactory(BaseWagtailPageFactory):
     class Meta:
-        model = PedagogyCardPage
+        model = ProjectPage
 
-    title = factory.Faker("sentence", nb_words=4)
-    description = factory.Faker("paragraph", nb_sentences=3)
+    title = factory.Faker("sentence", nb_words=4, locale="fr_FR")
+    description = factory.Faker("paragraph", nb_sentences=3, locale="fr_FR")
     content = factory.LazyFunction(
         lambda: [
             ("text", mock_block_value("text")),
@@ -21,3 +22,4 @@ class PedagogyCardPageFactory(BaseWagtailPageFactory):
         ]
     )
     hero_image = factory.SubFactory(ImageFactory)
+    category = factory.fuzzy.FuzzyChoice([c[0] for c in ProjectCategory.choices])
