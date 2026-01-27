@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block content %}
+    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h1 class="card-title text-3xl font-bold mb-6">
+                        Mon profil
+                    </h1>
+
+                    <div class="space-y-6">
+                        <div class="border-b border-base-300 pb-6">
+                            <h2 class="text-xl font-semibold mb-4 text-primary">
+                                Informations personnelles
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Prénom</span>
+                                    </label>
+                                    <p class="text-base-content">{{ user.first_name }}</p>
+                                </div>
+                                <div>
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Nom</span>
+                                    </label>
+                                    <p class="text-base-content">{{ user.last_name }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-b border-base-300 pb-6">
+                            <h2 class="text-xl font-semibold mb-4 text-primary">
+                                Contact
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Email</span>
+                                    </label>
+                                    <p class="text-base-content flex items-center gap-2">
+                                        {{ user.email }}
+                                        {% if user.is_verified %}
+                                            <span class="badge badge-success badge-sm">
+                                                Vérifié
+                                            </span>
+                                        {% else %}
+                                            <span class="badge badge-warning badge-sm">
+                                                Non vérifié
+                                            </span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                {% if user.phone_number %}
+                                    <div>
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Téléphone</span>
+                                        </label>
+                                        <p class="text-base-content">{{ user.phone_number }}</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="border-b border-base-300 pb-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {% if user.neighborhood %}
+                                    <div>
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Quartier</span>
+                                        </label>
+                                        <p class="text-base-content">{{ user.neighborhood.full_name }}</p>
+                                    </div>
+                                {% endif %}
+                                {% if user.postal_code %}
+                                    <div>
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Code postal</span>
+                                        </label>
+                                        <p class="text-base-content">{{ user.postal_code }}</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="border-b border-base-300 pb-6">
+                            <h2 class="text-xl font-semibold mb-4 text-primary">
+                                Compte
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Rôle</span>
+                                    </label>
+                                    <p class="text-base-content">
+                                        {% if user.role == 'CITIZEN' %}
+                                            <span class="badge badge-primary">Citoyen</span>
+                                        {% elif user.role == 'ASSOCIATION_MEMBER' %}
+                                            <span class="badge badge-secondary">Membre d'association</span>
+                                        {% elif user.role == 'ADMIN' %}
+                                            <span class="badge badge-accent">Administrateur</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <div>
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Newsletter</span>
+                                    </label>
+                                    <p class="text-base-content">
+                                        {% if user.newsletter_subscription %}
+                                            <span class="badge badge-success">Abonné</span>
+                                        {% else %}
+                                            <span class="badge badge-ghost">Non abonné</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="text-xl font-semibold mb-4 text-primary">
+                                Informations du compte
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Membre depuis</span>
+                                    </label>
+                                    <p class="text-base-content">{{ user.created_at|date:"d/m/Y à H:i" }}</p>
+                                </div>
+                                <div>
+                                    <label class="label">
+                                        <span class="label-text font-semibold">Dernière mise à jour</span>
+                                    </label>
+                                    <p class="text-base-content">{{ user.updated_at|date:"d/m/Y à H:i" }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end pt-4">
+                            <button class="btn btn-primary">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                    <path d="m15 5 4 4" />
+                                </svg>
+                                Modifier mon profil
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

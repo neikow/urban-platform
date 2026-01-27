@@ -1,16 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views import View
-from django.http import JsonResponse, HttpResponse, HttpRequest
+from django.views.generic import TemplateView
 
 
-class MeView(LoginRequiredMixin, View):
-    def get(self, request: HttpRequest) -> HttpResponse:
-        if not request.user.is_authenticated:
-            return JsonResponse({"error": "Unauthorized"}, status=401)
-        return JsonResponse(
-            {
-                "first_name": request.user.first_name,
-                "last_name": request.user.last_name,
-                "email": request.user.email,
-            }
-        )
+class MeView(LoginRequiredMixin, TemplateView):
+    template_name = "core/profile.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user"] = self.request.user
+        return context
