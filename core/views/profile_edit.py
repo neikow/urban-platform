@@ -1,7 +1,5 @@
-import typing
-from typing import Any
+from typing import Any, cast
 
-from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse
@@ -11,8 +9,7 @@ from django.contrib import messages
 
 from .auth_mixins import PasswordValidationMixin
 from ..widgets import DaisyTextInput, DaisyPasswordInput, DaisyEmailInput
-
-User = get_user_model()
+from core.models import User
 
 
 class ProfileUpdateForm(forms.Form):
@@ -42,11 +39,10 @@ class ProfileUpdateForm(forms.Form):
         label="Je souhaite être informé(e) des actualités et des événements par email",
     )
 
-    def __init__(self, user: "User", *args: Any, **kwargs: Any) -> None:
+    def __init__(self, user: User, *args: Any, **kwargs: Any) -> None:
         self.user = user
         super().__init__(*args, **kwargs)
 
-        # Pré-remplir le formulaire avec les données actuelles
         if not kwargs.get("data"):
             self.initial = {
                 "email": user.email,
@@ -62,7 +58,6 @@ class ProfileUpdateForm(forms.Form):
         if not email:
             raise forms.ValidationError("Email invalide.")
 
-        # Vérifier que l'email n'est pas déjà utilisé par un autre utilisateur
         if email != self.user.email and User.objects.filter(email=email).exists():
             raise forms.ValidationError("Cet email est déjà utilisé.")
 
@@ -97,7 +92,7 @@ class PasswordChangeForm(PasswordValidationMixin, forms.Form):
         help_text="Minimum 8 caractères, 1 majuscule et 1 chiffre",
     )
 
-    def __init__(self, user: "User", *args: Any, **kwargs: Any) -> None:
+    def __init__(self, user: User, *args: Any, **kwargs: Any) -> None:
         self.user = user
         super().__init__(*args, **kwargs)
 
@@ -138,16 +133,16 @@ class ProfileEditView(LoginRequiredMixin, FormView):
 
     def get_form_kwargs(self) -> dict[str, Any]:
         kwargs = super().get_form_kwargs()
-        kwargs["user"] = self.request.user
+        kwargs["user"] = cast(User, self.request.user)
         return kwargs
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["password_form"] = PasswordChangeForm(user=self.request.user)
+        context["password_form"] = PasswordChangeForm(user=cast(User, self.request.user))
         return context
 
     def form_valid(self, form: ProfileUpdateForm) -> HttpResponse:
-        user: User = self.request.user
+        user = cast(User, self.request.user)
 
         email_changed = form.cleaned_data["email"] != user.email
 
@@ -180,17 +175,17 @@ class PasswordChangeView(LoginRequiredMixin, FormView):
 
     def get_form_kwargs(self) -> dict[str, Any]:
         kwargs = super().get_form_kwargs()
-        kwargs["user"] = self.request.user
+        kwargs["user"] = cast(User, self.request.user)
         return kwargs
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["form"] = ProfileUpdateForm(user=self.request.user)
+        context["form"] = ProfileUpdateForm(user=cast(User, self.request.user))
         context["password_form"] = self.get_form()
         return context
 
     def form_valid(self, form: PasswordChangeForm) -> HttpResponse:
-        user: User = self.request.user
+        user = cast(User, self.request.user)
         user.set_password(form.cleaned_data["new_password"])
         user.save()
 
