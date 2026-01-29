@@ -42,7 +42,7 @@ class FooterComponentTest(TestCase):
         factory = RequestFactory()
         request = factory.get("/")
 
-        context = {"request": request}
+        context = {"request": request, "website_name": settings.WEBSITE_NAME}
 
         rendered = render_to_string("core/components/website_footer.html", context)
 
