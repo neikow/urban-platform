@@ -113,17 +113,16 @@
 
                                 <div class="form-control">
                                     <label class="label cursor-pointer justify-start gap-3">
-                                        <input
-                                            type="checkbox"
-                                            name="{{ form.newsletter_subscription.html_name }}"
-                                            id="{{ form.newsletter_subscription.id_for_label }}"
-                                            class="checkbox checkbox-primary"
-                                            {% if form.newsletter_subscription.value %}
-                                                checked
-                                            {% endif %}
-                                        >
+                                        {{ form.newsletter_subscription }}
                                         <span class="label-text">{{ form.newsletter_subscription.label }}</span>
                                     </label>
+                                    {% if form.newsletter_subscription.errors %}
+                                        <div class="label">
+                                            <span class="label-text-alt text-error">
+                                                {{ form.newsletter_subscription.errors.0 }}
+                                            </span>
+                                        </div>
+                                    {% endif %}
                                 </div>
 
                                 <div class="flex justify-end pt-4">
