@@ -8,14 +8,11 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from search import views as search_views
 from legal import views as legal_views
-from core.views import (
-    RegisterFormView,
-    MeView,
-    LoginView,
-    LogoutView,
-    ProfileEditView,
-    PasswordChangeView,
-)
+from core.views.register import RegisterFormView
+from core.views.login import LoginView
+from core.views.logout import LogoutView
+from core.views.me import MeView
+from core.views.profile_edit import ProfileEditView, PasswordChangeView
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),

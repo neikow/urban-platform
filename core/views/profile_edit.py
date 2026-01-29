@@ -8,7 +8,7 @@ from django import forms
 from django.contrib import messages
 
 from .auth_mixins import PasswordValidationMixin
-from ..widgets import DaisyTextInput, DaisyPasswordInput, DaisyEmailInput
+from ..widgets import DaisyTextInput, DaisyPasswordInput, DaisyEmailInput, DaisyCheckboxInput
 from core.models import User
 
 
@@ -37,6 +37,7 @@ class ProfileUpdateForm(forms.Form):
     newsletter_subscription = forms.BooleanField(
         required=False,
         label="Je souhaite être informé(e) des actualités et des événements par email",
+        widget=DaisyCheckboxInput(),
     )
 
     def __init__(self, user: User, *args: Any, **kwargs: Any) -> None:
