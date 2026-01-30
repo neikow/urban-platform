@@ -1,0 +1,24 @@
+{% extends "wagtailadmin/base.html" %}
+{% load static %}
+
+{% block branding_logo %}
+    <div class="flex flex-col items-center gap-2">
+        <img src="{% static 'images/favicon.svg' %}" alt="{{ website_name }}" width="80">
+        <span class="font-bold text-primary text-lg">{{ website_name }}</span>
+    </div>
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        document.documentElement.setAttribute("data-theme", "light");
+    </script>
+{% endblock %}
+
+{% block branding_favicon %}
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+{% endblock %}
