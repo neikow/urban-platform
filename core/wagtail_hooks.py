@@ -1,4 +1,4 @@
-from django.conf import settings
+from django.http import HttpRequest
 from django.urls import reverse
 from wagtail.admin.menu import MenuItem, Menu, SubmenuMenuItem
 from wagtail.admin.viewsets.model import ModelViewSet
@@ -28,12 +28,14 @@ def register_neighborhood_association_viewset() -> NeighborhoodAssociationViewSe
 
 
 @hooks.register("register_icons")
-def register_icons(icons):
+def register_icons(icons: list[str]) -> list[str]:
     return icons + ["core/icons/graduation-cap.svg", "core/icons/gavel.svg"]
 
 
 @hooks.register("construct_main_menu")
-def hide_images_menu_item(request, menu_items):
+def hide_images_menu_item(
+    request: HttpRequest, menu_items: list[MenuItem | SubmenuMenuItem]
+) -> None:
     hidden_names = ["explorer", "reports", "help"]
 
     admin_settings = [item for item in menu_items if item.name == "settings"][0]
@@ -54,7 +56,7 @@ def hide_images_menu_item(request, menu_items):
 
 
 @hooks.register("register_admin_menu_item")
-def register_home_page_edition_menu():
+def register_home_page_edition_menu() -> MenuItem:
     home_page = HomePage.objects.first()
 
     return MenuItem(
@@ -66,7 +68,7 @@ def register_home_page_edition_menu():
 
 
 @hooks.register("register_admin_menu_item")
-def register_publications_menu():
+def register_publications_menu() -> MenuItem:
     index_page = PublicationIndexPage.objects.first()
 
     submenu = Menu(
@@ -95,7 +97,7 @@ def register_publications_menu():
 
 
 @hooks.register("register_admin_menu_item")
-def register_pedagogic_entries_menu():
+def register_pedagogic_entries_menu() -> MenuItem:
     index_page = PedagogyIndexPage.objects.first()
 
     submenu = Menu(
@@ -124,7 +126,7 @@ def register_pedagogic_entries_menu():
 
 
 @hooks.register("register_admin_menu_item")
-def register_legal_menu():
+def register_legal_menu() -> MenuItem:
     code_of_conduct = CodeOfConductPage.objects.first()
     cookies_policy = CookiesPolicyPage.objects.first()
     privacy_policy = PrivacyPolicyPage.objects.first()
