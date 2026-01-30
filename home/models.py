@@ -22,7 +22,7 @@ class HomePage(Page):
         FieldPanel("content"),
     ]
 
-    search_fields = []
+    search_fields: list = []
 
     @classmethod
     def can_create_at(cls, parent: Page) -> bool:

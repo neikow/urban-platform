@@ -87,7 +87,7 @@ class RecentPublicationsBlock(blocks.StructBlock):
         required=True,
     )
 
-    def get_context(self, value: dict, parent_context: dict | None = None):
+    def get_context(self, value: dict, parent_context: dict | None = None) -> dict:
         context = super().get_context(value, parent_context=parent_context)
 
         from publications.models import PublicationPage
