@@ -1,12 +1,14 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags %}
 
 {% load static %}
 
+{% block header %}
+    {% include "core/components/website_header.html" %}
+{% endblock header %}
+
 {% block content %}
-    <h1>
-        Hello World
-    </h1>
-    <p>
-        {% lorem 50 %}
-    </p>
+    {% for block in page.content %}
+        {% include_block block with index=forloop.counter container=True %}
+    {% endfor %}
 {% endblock content %}
