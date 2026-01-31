@@ -19,6 +19,8 @@
                 {% endif %}
             {% endblock %}
         </title>
+        <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+        <link rel="alternate icon" href="{% static 'favicon.ico' %}">
         {% if page.search_description %}
             <meta name="description" content="{{ page.search_description }}">
         {% endif %}

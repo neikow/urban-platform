@@ -1,0 +1,45 @@
+{% load wagtailcore_tags i18n l10n %}
+
+<section class="{% if container %}container mx-auto{% endif %} px-4 py-12">
+    <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-bold">
+            {% translate 'Recent Publications' %}
+        </h2>
+        <a href="/publications/" class="link link-hover text-sm opacity-70">
+            {% translate 'View All' %}
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {% for pub in publications %}
+            <a href="{% pageurl pub %}" class="group block h-full">
+                <div class="card h-full bg-base-100 shadow-sm border border-base-200 group-hover:shadow-md group-hover:border-base-300 transition-all duration-200">
+                    <div class="card-body p-6">
+                        <h3 class="card-title group-hover:text-primary transition-colors text-lg mb-2">
+                            <span class="flex items-center gap-2">
+                                {{ pub.title }}
+                                <span class="inline-block badge badge-outline badge-sm opacity-70">
+                                    {{ pub.content_type.name|title }}
+                                </span>
+                            </span>
+                        </h3>
+
+                        <p class="text-sm opacity-70">
+                            {{ pub.description }}
+                        </p>
+
+                        <div class="card-actions items-center justify-between mt-4">
+                            <time class="text-xs opacity-50">
+                                {{ pub.first_published_at|date:"DATE_FORMAT" }}
+                            </time>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <p class="col-span-full text-center opacity-50 py-10">
+                {% translate "No recent publications found." %}
+            </p>
+        {% endfor %}
+    </div>
+</section>

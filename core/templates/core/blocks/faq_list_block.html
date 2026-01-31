@@ -1,0 +1,16 @@
+<div class="{% if container %} container mx-auto {% endif %} px-4 py-12 max-w-3xl">
+    <h2 class="text-3xl font-bold text-center mb-8">FAQ</h2>
+    <div class="join join-vertical w-full">
+        {% for item in self %}
+            <div class="collapse collapse-arrow join-item border border-base-300">
+                <input type="radio" name="faq-accordion" {% if forloop.first %}checked="checked"{% endif %}>
+                <div class="collapse-title text-xl font-medium">
+                    {{ item.question }}
+                </div>
+                <div class="collapse-content">
+                    <p class="py-2 opacity-80">{{ item.answer|linebreaks }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

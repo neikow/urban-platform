@@ -12,6 +12,8 @@ from core.blocks import BlockTypes
 
 
 class PublicationPage(Page):
+    parent_page_types: list[str] = ["publications.PublicationIndexPage"]
+
     class Meta:
         verbose_name = _("Publication")
         verbose_name_plural = _("Publications")

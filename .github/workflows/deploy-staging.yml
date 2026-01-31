@@ -96,6 +96,8 @@ jobs:
             echo "DB_HOST=db" >> .env
             echo "DB_PORT=5432" >> .env
 
+            echo "WEBSITE_NAME=${{ vars.WEBSITE_NAME }}" >> .env
+
             echo "DOCKER_REGISTRY=${{ env.DOCKER_REGISTRY }}" >> .env
             echo "DOCKER_IMAGE=${{ env.DOCKER_IMAGE }}" >> .env
 
@@ -113,6 +115,7 @@ jobs:
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
             docker compose pull
+            docker compose down
             docker compose up -d --remove-orphans --build
             docker system prune -f
 

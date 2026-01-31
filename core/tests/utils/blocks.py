@@ -3,11 +3,22 @@ from typing import Any
 
 from core.tests.utils.faker_shortcuts import title, paragraph, sentence
 from core.tests.utils.factories import ImageFactory, DocumentFactory
-from core.blocks import ImagePosition
+from core.blocks import (
+    ImagePosition,
+    BLOCK_TYPE_TEXT,
+    BLOCK_TYPE_IMAGE,
+    BLOCK_TYPE_IMAGE_TEXT,
+    BLOCK_TYPE_HERO,
+    BLOCK_TYPE_CARDS,
+    BLOCK_TYPE_TESTIMONIAL,
+    BLOCK_TYPE_RECENT_PUBLICATIONS,
+    BLOCK_TYPE_FAQ,
+    BLOCK_TYPE_TEXT_CENTERED,
+)
 
 
 def mock_block_value(block_type: str) -> Any:
-    if block_type == "text":
+    if block_type == BLOCK_TYPE_TEXT:
         document = DocumentFactory.create()
 
         return f"""
@@ -88,7 +99,18 @@ def mock_block_value(block_type: str) -> Any:
 
        """
 
-    elif block_type == "image":
+    elif block_type == BLOCK_TYPE_TEXT_CENTERED:
+        return f"""
+            <p>
+                {paragraph(2)}
+                <b>{paragraph(1)}</b>
+                {paragraph(1)}
+                <i>{paragraph(1)}</i>
+                {paragraph(1)}
+            </p>
+        """
+
+    elif block_type == BLOCK_TYPE_IMAGE:
         image = ImageFactory.create()
 
         return {
@@ -96,7 +118,7 @@ def mock_block_value(block_type: str) -> Any:
             "alt_text": image.title,
         }
 
-    elif block_type == "image_text":
+    elif block_type == BLOCK_TYPE_IMAGE_TEXT:
         image = ImageFactory.create()
         position = random.choice(ImagePosition.values)
 
@@ -106,6 +128,68 @@ def mock_block_value(block_type: str) -> Any:
             "alt_text": image.title,
             "position": position,
         }
+
+    elif block_type == BLOCK_TYPE_HERO:
+        image = ImageFactory.create()
+
+        return {
+            "title": title(6),
+            "subtitle": paragraph(4),
+            "image": image,
+            "alt_text": image.title,
+            "cta_link": "https://example.com",
+            "cta_text": "Click Here",
+        }
+
+    elif block_type == BLOCK_TYPE_CARDS:
+        return [
+            {
+                "title": title(5),
+                "description": paragraph(6),
+                "image": ImageFactory.create(),
+                "alt_text": title(3),
+                "link": "https://example.com",
+            },
+            {
+                "title": title(5),
+                "description": paragraph(6),
+                "image": ImageFactory.create(),
+                "alt_text": title(3),
+                "link": "https://example.com",
+            },
+            {
+                "title": title(5),
+                "description": paragraph(6),
+                "image": ImageFactory.create(),
+                "alt_text": title(3),
+                "link": "https://example.com",
+            },
+        ]
+
+    elif block_type == BLOCK_TYPE_TESTIMONIAL:
+        return {
+            "quote": paragraph(8),
+            "author_name": title(2),
+            "author_title": title(3),
+            "author_image": ImageFactory.create(),
+        }
+
+    elif block_type == BLOCK_TYPE_RECENT_PUBLICATIONS:
+        return {
+            "number_of_publications": 5,
+        }
+
+    elif block_type == BLOCK_TYPE_FAQ:
+        return [
+            {
+                "question": title(6),
+                "answer": paragraph(10),
+            },
+            {
+                "question": title(6),
+                "answer": paragraph(10),
+            },
+        ]
 
     else:
         raise ValueError(f"Unsupported block type: {block_type}")

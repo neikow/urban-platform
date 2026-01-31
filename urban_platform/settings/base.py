@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -6,6 +7,8 @@ load_dotenv()
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = PROJECT_DIR.parent
+
+WEBSITE_NAME = os.environ.get("WEBSITE_NAME", "Urbix")
 
 # Application definition
 
@@ -65,6 +68,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.project_settings",
             ],
         },
     },
@@ -114,7 +118,7 @@ LANGUAGE_CODE = "fr"
 TIME_ZONE = "Europe/Paris"
 
 USE_I18N = True
-WAGTAIL_I18N_ENABLED = True
+WAGTAIL_I18N_ENABLED = False
 
 USE_TZ = True
 
@@ -167,7 +171,7 @@ WAGTAILSEARCH_BACKENDS = {
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-WAGTAILADMIN_BASE_URL = "http://localhost:8000"
+WAGTAILADMIN_BASE_URL = os.environ.get("BASE_URL", "http://localhost:8000")
 
 # Allowed file extensions for documents in the document library.
 # This can be omitted to allow all files, but note that this may present a security risk

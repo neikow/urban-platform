@@ -1,0 +1,26 @@
+{% load i18n wagtailimages_tags %}
+
+<div class="{% if container %} container mx-auto {% endif %} px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for card in self %}
+            <div class="card bg-base-100 shadow-sm border border-base-200">
+                {% if card.image %}
+                    <figure>
+                        {% image card.image fill-600x400 alt=card.alt_text %}
+                    </figure>
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="card-title">{{ card.title }}</h2>
+                    <p>{{ card.description }}</p>
+                    {% if card.link %}
+                        <div class="card-actions justify-end">
+                            <a href="{{ card.link }}" class="btn btn-ghost btn-sm text-primary">
+                                {% translate "Learn More" %}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
