@@ -1,8 +1,7 @@
 import json
 from typing import Any
 
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse, HttpResponseBase, JsonResponse
+from django.http import HttpRequest, HttpResponseBase, JsonResponse
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 
@@ -12,7 +11,7 @@ from publications.models.project import ProjectPage
 from publications.services import get_vote_results
 
 
-class VoteView(LoginRequiredMixin, View):
+class VoteView(View):
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponseBase:
         if not request.user.is_authenticated:
             return JsonResponse(
