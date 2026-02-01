@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmRemove: voteComponent.dataset.msgConfirmRemove || 'Are you sure you want to remove your vote?',
     };
 
-    const voteCard = document.getElementById('vote-card');
     const voteForm = document.getElementById('vote-form');
     const voteFormContainer = document.getElementById('vote-form-container');
     const voteResultsContainer = document.getElementById('vote-results-container');
