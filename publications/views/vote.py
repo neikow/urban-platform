@@ -53,8 +53,7 @@ class VoteView(View):
         comment = data.get("comment", "")
         anonymize = bool(data.get("anonymize", False))
 
-        valid_choices = [c[0] for c in VoteChoice.choices]
-        if choice not in valid_choices:
+        if choice not in VoteChoice.values:
             return JsonResponse(
                 {"success": False, "error": _("Invalid vote choice")},
                 status=400,
