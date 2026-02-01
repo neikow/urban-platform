@@ -18,33 +18,42 @@ class VoteStatsView(WagtailAdminTemplateMixin, TemplateView):
         context = super().get_context_data(**kwargs)
 
         projects = (
-            ProjectPage.objects.live().filter(enable_voting=True).order_by("-first_published_at")
+            ProjectPage.objects.live()
+            .filter(enable_voting=True)
+            .annotate(
+                total_votes=Count("vote_responses"),
+                with_comments=Count(
+                    "vote_responses",
+                    filter=Q(vote_responses__comment__isnull=False)
+                    & ~Q(vote_responses__comment=""),
+                ),
+                favorable_count=Count(
+                    "vote_responses",
+                    filter=Q(
+                        vote_responses__choice__in=[
+                            VoteChoice.FAVORABLE.value,
+                            VoteChoice.RATHER_FAVORABLE.value,
+                        ]
+                    ),
+                ),
+            )
+            .order_by("-first_published_at")
         )
 
-        projects_stats = []
-        for project in projects:
-            stats = FormResponse.objects.filter(project=project).aggregate(
-                total=Count("id"),
-                with_comments=Count("id", filter=Q(comment__isnull=False) & ~Q(comment="")),
-            )
-
-            favorable = FormResponse.objects.filter(
-                project=project,
-                choice__in=[VoteChoice.FAVORABLE.value, VoteChoice.RATHER_FAVORABLE.value],
-            ).count()
-
-            total = stats["total"] or 0
-            favorable_percent = round((favorable / total) * 100, 1) if total > 0 else 0
-
-            projects_stats.append(
-                {
-                    "project": project,
-                    "total_votes": total,
-                    "with_comments": stats["with_comments"] or 0,
-                    "favorable_percent": favorable_percent,
-                    "is_voting_open": project.is_voting_open,
-                }
-            )
+        projects_stats = [
+            {
+                "project": project,
+                "total_votes": project.total_votes,
+                "with_comments": project.with_comments,
+                "favorable_percent": (
+                    round((project.favorable_count / project.total_votes) * 100, 1)
+                    if project.total_votes > 0
+                    else 0
+                ),
+                "is_voting_open": project.is_voting_open,
+            }
+            for project in projects
+        ]
 
         context.update(
             {
