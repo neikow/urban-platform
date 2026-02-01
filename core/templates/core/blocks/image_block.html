@@ -1,5 +1,5 @@
 {% load wagtailimages_tags %}
 
-<div class="flex justify-center my-2 md:my-4 lg:my-8">
+<div class="{% if container %} container mx-auto {% endif %} flex justify-center my-2 md:my-4 lg:my-8">
     {% image value max-800x600 alt=value.alt_text class="rounded-lg object-cover w-auto h-96" %}
 </div>

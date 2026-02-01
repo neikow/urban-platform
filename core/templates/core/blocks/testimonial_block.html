@@ -1,0 +1,20 @@
+{% load wagtailimages_tags %}
+
+<div class="{% if container %}container mx-auto{% endif %} px-4 py-16 max-w-2xl">
+    <div class="chat chat-start">
+        {% if self.author_image %}
+            <div class="chat-image avatar">
+                <div class="w-10 md:w-12 lg:w-16 rounded-full ring-2 ring-primary ring-offset-2">
+                    {% image self.author_image fill-100x100 %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="chat-header opacity-50 mb-1">
+            {{ self.author_name }}
+            {% if self.author_title %}<span class="text-xs">{{ self.author_title }}</span>{% endif %}
+        </div>
+        <div class="chat-bubble bg-base-200 text-base-content text-md lg:text-lg italic">
+            "{{ self.quote }}"
+        </div>
+    </div>
+</div>

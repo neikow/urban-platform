@@ -1,0 +1,21 @@
+{% load wagtailimages_tags %}
+
+<div
+    class="hero {% if index == 1 %} min-h-[100vh] {% else %} min-h-[50vh] {% endif %}"
+    style="{% if self.image %}{% image self.image fill-1920x1080 as bg_img %}background-image: url({{ bg_img.url }});{% endif %}"
+>
+    <div class="hero-overlay bg-opacity-60 bg-neutral"></div>
+    <div class="hero-content text-center text-neutral-content">
+        <div class="max-w-md">
+            <h1 class="mb-5 text-5xl font-bold">{{ self.title }}</h1>
+            {% if self.subtitle %}
+                <p class="mb-5">{{ self.subtitle }}</p>
+            {% endif %}
+            {% if self.cta_link and self.cta_text %}
+                <a href="{{ self.cta_link }}" class="btn btn-primary border-none">
+                    {{ self.cta_text }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -40,7 +40,7 @@
             <h3 class="footer-title">
                 Outils
             </h3>
-            <ul>
+            <ul class="space-y-2">
                 {% for menuitem in site_root.get_children.live.in_menu %}
                     <li>
                         <a href="{% pageurl menuitem %}" class="link link-hover">{{ menuitem.title }}</a>
@@ -52,9 +52,13 @@
             <h3 class="footer-title">
                 Légal
             </h3>
-            {% for legal_page in legal_pages %}
-                <a href="{% pageurl legal_page %}" class="link link-hover">{{ legal_page.title }}</a>
-            {% endfor %}
+            <ul class="space-y-2">
+                {% for legal_page in legal_pages %}
+                    <li>
+                        <a href="{% pageurl legal_page %}" class="link link-hover">{{ legal_page.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
         </nav>
     </div>
     <div>
