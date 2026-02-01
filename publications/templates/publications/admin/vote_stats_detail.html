@@ -5,7 +5,12 @@
 
 {% block extra_js %}
     {{ block.super }}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+        integrity="sha384-fMnLz2LLe1lxVaFNsq6e6wYB4aoOX0z+maXDBH7Cxug7LRBJqgOWuV9NYnqX/Xlc"
+        crossorigin="anonymous"
+    >
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -13,9 +18,22 @@
 
     <div class="w-nice-padding w-px-6">
         <!-- Back link -->
-        <a href="{% url 'vote_statistics' %}" class="w-flex w-items-center w-gap-1 w-text-text-meta hover:w-text-primary w-mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
+        <a
+            href="{% url 'vote_statistics' %}"
+            class="w-flex w-items-center w-gap-1 w-text-text-meta hover:w-text-primary w-mb-4"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
             {% trans "Back to list" %}
         </a>
@@ -23,19 +41,40 @@
         <!-- Project info -->
         <div class="w-flex w-items-center w-gap-4 w-mb-6">
             <h2 class="w-text-xl w-font-bold">{{ project.title }}</h2>
-            <a href="{{ project.url }}" target="_blank" class="w-text-text-meta hover:w-text-primary" title="{% trans 'View project' %}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                    <polyline points="15 3 21 3 21 9"/>
-                    <line x1="10" y1="14" x2="21" y2="3"/>
+            <a
+                href="{{ project.url }}"
+                target="_blank"
+                class="w-text-text-meta hover:w-text-primary"
+                title="{% trans 'View project' %}"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
                 </svg>
             </a>
             {% if is_voting_open %}
-                <span class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium" style="background-color: #dcfce7; color: #166534;">
+                <span
+                    class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium"
+                    style="background-color: #dcfce7; color: #166534"
+                >
                     {% trans "Voting open" %}
                 </span>
             {% else %}
-                <span class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium" style="background-color: #fef2f2; color: #991b1b;">
+                <span
+                    class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium"
+                    style="background-color: #fef2f2; color: #991b1b"
+                >
                     {% trans "Voting closed" %}
                 </span>
             {% endif %}
@@ -45,107 +84,173 @@
         {% if total_votes > 0 %}
             <div class="w-bg-surface-page w-p-6 w-rounded-lg">
                 <div class="w-flex w-justify-center w-mt-4 w-mb-8">
-                    <div style="width: 250px; height: 250px;">
+                    <div style="width: 250px; height: 250px">
                         <canvas id="pieChart"></canvas>
                     </div>
                 </div>
 
-                <table class="w-w-full w-text-sm" style="border: 1px solid var(--w-color-border-furniture); border-collapse: collapse; border-radius: 8px;">
+                <table
+                    class="w-w-full w-text-sm"
+                    style="border: 1px solid var(--w-color-border-furniture); border-collapse: collapse; border-radius: 8px"
+                >
                     <thead>
-                        <tr style="border-bottom: 1px solid var(--w-color-border-furniture);">
-                            <th class="w-text-left w-py-3 w-px-4 w-font-semibold" style="width: 40%; text-align: left;">{% trans "Type" %}</th>
-                            <th class="w-py-3 w-px-4 w-font-semibold" style="width: 20%; text-align: center;">{% trans "Count" %}</th>
-                            <th class="w-py-3 w-px-4 w-font-semibold" style="width: 20%; text-align: center;">%</th>
-                            <th class="w-py-3 w-px-4 w-font-semibold" style="width: 20%; text-align: center;">{% trans "With comment" %}</th>
+                        <tr style="border-bottom: 1px solid var(--w-color-border-furniture)">
+                            <th class="w-text-left w-py-3 w-px-4 w-font-semibold" style="width: 40%; text-align: left">
+                                {% trans "Type" %}
+                            </th>
+                            <th class="w-py-3 w-px-4 w-font-semibold" style="width: 20%; text-align: center">
+                                {% trans "Count" %}
+                            </th>
+                            <th class="w-py-3 w-px-4 w-font-semibold" style="width: 20%; text-align: center">%</th>
+                            <th class="w-py-3 w-px-4 w-font-semibold" style="width: 20%; text-align: center">
+                                {% trans "With comment" %}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid var(--w-color-border-furniture);">
+                        <tr style="border-bottom: 1px solid var(--w-color-border-furniture)">
                             <td class="w-py-3 w-px-4">
                                 <span class="w-flex w-items-center w-gap-2">
-                                    <span class="w-inline-block w-w-3 w-h-3 w-rounded" style="background-color: #22c55e;"></span>
+                                    <span
+                                        class="w-inline-block w-w-3 w-h-3 w-rounded"
+                                        style="background-color: #22c55e"
+                                    ></span>
                                     {% trans "Favorable" %}
                                 </span>
                             </td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ counts.FAVORABLE }}</div></td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ percentages.FAVORABLE }}%</div></td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ counts_with_comment.FAVORABLE }}</div></td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ counts.FAVORABLE }}</div>
+                            </td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ percentages.FAVORABLE }}%</div>
+                            </td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ counts_with_comment.FAVORABLE }}</div>
+                            </td>
                         </tr>
-                        <tr style="border-bottom: 1px solid var(--w-color-border-furniture);">
+                        <tr style="border-bottom: 1px solid var(--w-color-border-furniture)">
                             <td class="w-py-3 w-px-4">
                                 <span class="w-flex w-items-center w-gap-2">
-                                    <span class="w-inline-block w-w-3 w-h-3 w-rounded" style="background-color: #3b82f6;"></span>
+                                    <span
+                                        class="w-inline-block w-w-3 w-h-3 w-rounded"
+                                        style="background-color: #3b82f6"
+                                    ></span>
                                     {% trans "Rather Favorable" %}
                                 </span>
                             </td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ counts.RATHER_FAVORABLE }}</div></td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ percentages.RATHER_FAVORABLE }}%</div></td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ counts_with_comment.RATHER_FAVORABLE }}</div></td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ counts.RATHER_FAVORABLE }}</div>
+                            </td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ percentages.RATHER_FAVORABLE }}%</div>
+                            </td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ counts_with_comment.RATHER_FAVORABLE }}</div>
+                            </td>
                         </tr>
-                        <tr style="border-bottom: 1px solid var(--w-color-border-furniture);">
+                        <tr style="border-bottom: 1px solid var(--w-color-border-furniture)">
                             <td class="w-py-3 w-px-4">
                                 <span class="w-flex w-items-center w-gap-2">
-                                    <span class="w-inline-block w-w-3 w-h-3 w-rounded" style="background-color: #eab308;"></span>
+                                    <span
+                                        class="w-inline-block w-w-3 w-h-3 w-rounded"
+                                        style="background-color: #eab308"
+                                    ></span>
                                     {% trans "Rather Unfavorable" %}
                                 </span>
                             </td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ counts.RATHER_UNFAVORABLE }}</div></td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ percentages.RATHER_UNFAVORABLE }}%</div></td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ counts_with_comment.RATHER_UNFAVORABLE }}</div></td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ counts.RATHER_UNFAVORABLE }}</div>
+                            </td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ percentages.RATHER_UNFAVORABLE }}%</div>
+                            </td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ counts_with_comment.RATHER_UNFAVORABLE }}</div>
+                            </td>
                         </tr>
                         <tr>
                             <td class="w-py-3 w-px-4">
                                 <span class="w-flex w-items-center w-gap-2">
-                                    <span class="w-inline-block w-w-3 w-h-3 w-rounded" style="background-color: #ef4444;"></span>
+                                    <span
+                                        class="w-inline-block w-w-3 w-h-3 w-rounded"
+                                        style="background-color: #ef4444"
+                                    ></span>
                                     {% trans "Unfavorable" %}
                                 </span>
                             </td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ counts.UNFAVORABLE }}</div></td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ percentages.UNFAVORABLE }}%</div></td>
-                            <td class="w-py-3 w-px-4"><div class="w-flex w-justify-center">{{ counts_with_comment.UNFAVORABLE }}</div></td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ counts.UNFAVORABLE }}</div>
+                            </td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ percentages.UNFAVORABLE }}%</div>
+                            </td>
+                            <td class="w-py-3 w-px-4">
+                                <div class="w-flex w-justify-center">{{ counts_with_comment.UNFAVORABLE }}</div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             {% if votes_with_comments %}
-            <div class="w-mt-6">
-                <h3 class="w-text-lg w-font-semibold w-mb-4">{% trans "Comments" %} ({{ votes_with_comments|length }})</h3>
-                <div class="w-flex w-flex-col w-gap-4">
-                    {% for vote in votes_with_comments %}
-                        <div class="w-bg-surface-page w-p-4 w-border w-border-border-furniture" style="border-radius: 12px;">
-                            <div class="w-flex w-justify-between w-items-start w-mb-2">
-                                <div class="w-flex w-items-center w-gap-2">
-                                    {% if vote.choice == "FAVORABLE" %}
-                                        <span class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium" style="background-color: #dcfce7; color: #166534;">
-                                            {% trans "Favorable" %}
-                                        </span>
-                                    {% elif vote.choice == "RATHER_FAVORABLE" %}
-                                        <span class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium" style="background-color: #dbeafe; color: #1e40af;">
-                                            {% trans "Rather Favorable" %}
-                                        </span>
-                                    {% elif vote.choice == "RATHER_UNFAVORABLE" %}
-                                        <span class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium" style="background-color: #fef9c3; color: #854d0e;">
-                                            {% trans "Rather Unfavorable" %}
-                                        </span>
-                                    {% else %}
-                                        <span class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium" style="background-color: #fef2f2; color: #991b1b;">
-                                            {% trans "Unfavorable" %}
-                                        </span>
-                                    {% endif %}
-                                    {% if not vote.anonymize %}
-                                        <span class="w-text-text-meta w-text-sm">{{ vote.user.email }}</span>
-                                    {% else %}
-                                        <span class="w-text-text-meta w-text-sm w-italic">{% trans "Anonymous" %}</span>
-                                    {% endif %}
+                <div class="w-mt-6">
+                    <h3 class="w-text-lg w-font-semibold w-mb-4">
+                        {% trans "Comments" %} ({{ votes_with_comments|length }})
+                    </h3>
+                    <div class="w-flex w-flex-col w-gap-4">
+                        {% for vote in votes_with_comments %}
+                            <div
+                                class="w-bg-surface-page w-p-4 w-border w-border-border-furniture"
+                                style="border-radius: 12px"
+                            >
+                                <div class="w-flex w-justify-between w-items-start w-mb-2">
+                                    <div class="w-flex w-items-center w-gap-2">
+                                        {% if vote.choice == "FAVORABLE" %}
+                                            <span
+                                                class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium"
+                                                style="background-color: #dcfce7; color: #166534"
+                                            >
+                                                {% trans "Favorable" %}
+                                            </span>
+                                        {% elif vote.choice == "RATHER_FAVORABLE" %}
+                                            <span
+                                                class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium"
+                                                style="background-color: #dbeafe; color: #1e40af"
+                                            >
+                                                {% trans "Rather Favorable" %}
+                                            </span>
+                                        {% elif vote.choice == "RATHER_UNFAVORABLE" %}
+                                            <span
+                                                class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium"
+                                                style="background-color: #fef9c3; color: #854d0e"
+                                            >
+                                                {% trans "Rather Unfavorable" %}
+                                            </span>
+                                        {% else %}
+                                            <span
+                                                class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium"
+                                                style="background-color: #fef2f2; color: #991b1b"
+                                            >
+                                                {% trans "Unfavorable" %}
+                                            </span>
+                                        {% endif %}
+                                        {% if not vote.anonymize %}
+                                            <span class="w-text-text-meta w-text-sm">{{ vote.user.email }}</span>
+                                        {% else %}
+                                            <span
+                                                class="w-text-text-meta w-text-sm w-italic"
+                                            >{% trans "Anonymous" %}</span>
+                                        {% endif %}
+                                    </div>
+                                    <span
+                                        class="w-text-text-meta w-text-xs"
+                                    >{{ vote.created_at|date:"d/m/Y H:i" }}</span>
                                 </div>
-                                <span class="w-text-text-meta w-text-xs">{{ vote.created_at|date:"d/m/Y H:i" }}</span>
+                                <p class="w-text-sm">{{ vote.comment }}</p>
                             </div>
-                            <p class="w-text-sm">{{ vote.comment }}</p>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
             {% endif %}
         {% else %}
             <p class="w-text-text-meta w-text-sm w-italic">{% trans "No votes yet" %}</p>
@@ -153,42 +258,42 @@
     </div>
 
     {% if total_votes > 0 %}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('pieChart');
-            if (ctx) {
-                new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['{% trans "Favorable" %}', '{% trans "Rather Favorable" %}', '{% trans "Rather Unfavorable" %}', '{% trans "Unfavorable" %}'],
-                        datasets: [{
-                            data: [{{ counts.FAVORABLE }}, {{ counts.RATHER_FAVORABLE }}, {{ counts.RATHER_UNFAVORABLE }}, {{ counts.UNFAVORABLE }}],
-                            backgroundColor: ['#22c55e', '#3b82f6', '#eab308', '#ef4444'],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                        const value = context.raw;
-                                        const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
-                                        return `${context.label}: ${value} (${percentage}%)`;
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const ctx = document.getElementById('pieChart');
+                if (ctx) {
+                    new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['{% trans "Favorable" %}', '{% trans "Rather Favorable" %}', '{% trans "Rather Unfavorable" %}', '{% trans "Unfavorable" %}'],
+                            datasets: [{
+                                data: [{{ counts.FAVORABLE }}, {{ counts.RATHER_FAVORABLE }}, {{ counts.RATHER_UNFAVORABLE }}, {{ counts.UNFAVORABLE }}],
+                                backgroundColor: ['#22c55e', '#3b82f6', '#eab308', '#ef4444'],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                            const value = context.raw;
+                                            const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                                            return `${context.label}: ${value} (${percentage}%)`;
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                });
-            }
-        });
-    </script>
+                    });
+                }
+            });
+        </script>
     {% endif %}
 {% endblock %}
