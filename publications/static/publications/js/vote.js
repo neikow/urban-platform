@@ -6,6 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const isAuthenticated = voteComponent.dataset.isAuthenticated === 'true';
     const csrfToken = voteComponent.dataset.csrfToken;
 
+    const messages = {
+        selectOption: voteComponent.dataset.msgSelectOption || 'Please select an option',
+        genericError: voteComponent.dataset.msgGenericError || 'An error occurred',
+        loadError: voteComponent.dataset.msgLoadError || 'An error occurred while loading',
+        submitError: voteComponent.dataset.msgSubmitError || 'An error occurred while submitting the vote',
+        removeError: voteComponent.dataset.msgRemoveError || 'An error occurred while removing the vote',
+        confirmRemove: voteComponent.dataset.msgConfirmRemove || 'Are you sure you want to remove your vote?',
+    };
+
     const voteCard = document.getElementById('vote-card');
     const voteForm = document.getElementById('vote-form');
     const voteFormContainer = document.getElementById('vote-form-container');
@@ -49,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const selectedChoice = document.querySelector('input[name="vote_choice"]:checked');
             if (!selectedChoice) {
-                showError('Veuillez sélectionner une option');
+                showError(messages.selectOption);
                 return;
             }
 
@@ -68,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (removeVoteBtn) {
         removeVoteBtn.addEventListener('click', async function() {
-            if (confirm('Êtes-vous sûr de vouloir retirer votre vote ?')) {
+            if (confirm(messages.confirmRemove)) {
                 await removeVote();
             }
         });
@@ -104,11 +113,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     showVoteForm();
                 }
             } else {
-                showError(data.error || 'Une erreur est survenue');
+                showError(data.error || messages.genericError);
             }
         } catch (error) {
             console.error('Error loading vote state:', error);
-            showError('Une erreur est survenue lors du chargement');
+            showError(messages.loadError);
         } finally {
             showLoading(false);
         }
@@ -145,12 +154,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 displayResults(data.results, data.vote);
             } else {
-                showError(data.error || 'Une erreur est survenue');
+                showError(data.error || messages.genericError);
                 showVoteForm();
             }
         } catch (error) {
             console.error('Error submitting vote:', error);
-            showError('Une erreur est survenue lors de l\'envoi du vote');
+            showError(messages.submitError);
             showVoteForm();
         } finally {
             showLoading(false);
@@ -179,11 +188,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 voteSubmitBtn.disabled = true;
                 showVoteForm();
             } else {
-                showError(data.error || 'Une erreur est survenue');
+                showError(data.error || messages.genericError);
             }
         } catch (error) {
             console.error('Error removing vote:', error);
-            showError('Une erreur est survenue lors de la suppression du vote');
+            showError(messages.removeError);
         } finally {
             showLoading(false);
         }
@@ -215,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span>${choiceData.percentage}%</span>
                         </div>
                         <div class="w-full bg-base-300 rounded-full h-3">
-                            <div class="${choiceColors[choiceKey]} h-3 rounded-full transition-all duration-500" 
+                            <div class="${choiceColors[choiceKey]} h-3 rounded-full transition-all duration-500"
                                  style="width: ${choiceData.percentage}%"></div>
                         </div>
                     </div>
