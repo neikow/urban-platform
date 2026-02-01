@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: Push Code To Remote
-        uses: appleboy/ssh-action@v1.2.4
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
@@ -102,7 +102,7 @@ jobs:
             echo "DOCKER_IMAGE=${{ env.DOCKER_IMAGE }}" >> .env
 
       - name: Deploy Docker Containers
-        uses: appleboy/ssh-action@v1.2.4
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
@@ -126,7 +126,7 @@ jobs:
     needs: deploy
     steps:
       - name: Run Migrations
-        uses: appleboy/ssh-action@v1.2.4
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
