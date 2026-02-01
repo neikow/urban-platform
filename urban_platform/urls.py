@@ -31,9 +31,9 @@ urlpatterns = [
     path("auth/me/", MeView.as_view(), name="me"),
     path("auth/me/edit/", ProfileEditView.as_view(), name="profile_edit"),
     path("auth/me/password/", PasswordChangeView.as_view(), name="password_change"),
-    path("api/projects/<int:project_id>/vote", VoteView.as_view(), name="project_vote"),
+    path("api/projects/<int:project_id>/vote/", VoteView.as_view(), name="project_vote"),
     path(
-        "api/projects/<int:project_id>/vote/results",
+        "api/projects/<int:project_id>/vote/results/",
         VoteResultsView.as_view(),
         name="project_vote_results",
     ),
