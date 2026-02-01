@@ -56,7 +56,7 @@ class MeViewTests(TestCase):
         response = self.client.get(self.me_url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Citoyen")  # Default role is CITIZEN
+        self.assertContains(response, "Membre")  # Default role is CITIZEN
 
     def test_me_displays_verified_status(self) -> None:
         """Test that email verification status is displayed."""
