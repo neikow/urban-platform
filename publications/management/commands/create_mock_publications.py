@@ -33,15 +33,9 @@ class Command(BaseCommand):
             help="Delete all existing publications before creating new ones",
         )
         parser.add_argument(
-            "--with-voting",
-            action="store_true",
-            default=True,
-            help="Enable voting on projects (default: True)",
-        )
-        parser.add_argument(
             "--no-voting",
             action="store_true",
-            help="Disable voting on projects",
+            help="Disable voting on projects (voting is enabled by default)",
         )
 
     def handle(self, *args: Any, **options: Any) -> None:
@@ -69,7 +63,7 @@ class Command(BaseCommand):
 
         projects_count = options["projects"]
         events_count = options["events"]
-        enable_voting = options["with_voting"] and not options["no_voting"]
+        enable_voting = not options["no_voting"]
 
         # Create projects
         self.stdout.write(f"Creating {projects_count} projects...")
