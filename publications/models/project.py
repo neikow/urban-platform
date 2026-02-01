@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import forms
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -45,13 +47,13 @@ class ProjectPage(PublicationPage):
         default=ProjectCategory.OTHER,
     )
 
-    enable_voting = models.BooleanField(
+    enable_voting: models.BooleanField[bool, bool] = models.BooleanField(
         _("Enable Voting"),
         default=True,
         help_text=_("Allow users to vote on this project"),
     )
 
-    voting_end_date = models.DateTimeField(
+    voting_end_date: models.DateTimeField[datetime | None, datetime | None] = models.DateTimeField(
         _("Voting End Date"),
         null=True,
         blank=True,

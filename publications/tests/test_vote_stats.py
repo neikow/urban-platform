@@ -174,7 +174,9 @@ class TestVoteStatsDetailView:
         response = client.get("/admin/vote-statistics/99999/")
         assert response.status_code == 404
 
-    def test_project_without_votes_shows_empty_state(self, client, admin_user, project_without_votes):
+    def test_project_without_votes_shows_empty_state(
+        self, client, admin_user, project_without_votes
+    ):
         """Test that empty state is shown when project has no votes."""
         client.force_login(admin_user)
         response = client.get(f"/admin/vote-statistics/{project_without_votes.pk}/")
@@ -215,7 +217,9 @@ class TestVoteStatsDetailView:
         # "Anonymous" or "Anonyme" should be displayed instead
         assert "Anonymous" in content or "Anonyme" in content
 
-    def test_non_anonymous_vote_shows_email_in_admin(self, client, admin_user, project_without_votes):
+    def test_non_anonymous_vote_shows_email_in_admin(
+        self, client, admin_user, project_without_votes
+    ):
         """Test that non-anonymous votes show user email in admin view."""
         # Create a user who votes publicly
         public_voter = User.objects.create_user(
@@ -244,4 +248,3 @@ class TestVoteStatsDetailView:
         # Both the comment and email should be visible
         assert "This is a public comment" in content
         assert "public_voter@example.com" in content
-

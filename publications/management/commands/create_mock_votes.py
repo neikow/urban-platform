@@ -13,27 +13,102 @@ User = get_user_model()
 
 # Prénoms français courants
 FIRST_NAMES = [
-    "Marie", "Jean", "Pierre", "Françoise", "Michel", "Monique", "André",
-    "Catherine", "Philippe", "Isabelle", "Nicolas", "Sophie", "Laurent",
-    "Nathalie", "Christophe", "Sandrine", "Julien", "Céline", "Thomas",
-    "Aurélie", "Alexandre", "Émilie", "Mathieu", "Marine", "Sébastien",
-    "Charlotte", "Antoine", "Camille", "Romain", "Julie", "Maxime",
-    "Léa", "Guillaume", "Manon", "Florian", "Pauline", "Kevin", "Clara",
+    "Marie",
+    "Jean",
+    "Pierre",
+    "Françoise",
+    "Michel",
+    "Monique",
+    "André",
+    "Catherine",
+    "Philippe",
+    "Isabelle",
+    "Nicolas",
+    "Sophie",
+    "Laurent",
+    "Nathalie",
+    "Christophe",
+    "Sandrine",
+    "Julien",
+    "Céline",
+    "Thomas",
+    "Aurélie",
+    "Alexandre",
+    "Émilie",
+    "Mathieu",
+    "Marine",
+    "Sébastien",
+    "Charlotte",
+    "Antoine",
+    "Camille",
+    "Romain",
+    "Julie",
+    "Maxime",
+    "Léa",
+    "Guillaume",
+    "Manon",
+    "Florian",
+    "Pauline",
+    "Kevin",
+    "Clara",
 ]
 
 # Noms de famille français courants
 LAST_NAMES = [
-    "Martin", "Bernard", "Dubois", "Thomas", "Robert", "Richard", "Petit",
-    "Durand", "Leroy", "Moreau", "Simon", "Laurent", "Lefebvre", "Michel",
-    "Garcia", "David", "Bertrand", "Roux", "Vincent", "Fournier", "Morel",
-    "Girard", "André", "Lefèvre", "Mercier", "Dupont", "Lambert", "Bonnet",
-    "François", "Martinez", "Legrand", "Garnier", "Faure", "Rousseau",
+    "Martin",
+    "Bernard",
+    "Dubois",
+    "Thomas",
+    "Robert",
+    "Richard",
+    "Petit",
+    "Durand",
+    "Leroy",
+    "Moreau",
+    "Simon",
+    "Laurent",
+    "Lefebvre",
+    "Michel",
+    "Garcia",
+    "David",
+    "Bertrand",
+    "Roux",
+    "Vincent",
+    "Fournier",
+    "Morel",
+    "Girard",
+    "André",
+    "Lefèvre",
+    "Mercier",
+    "Dupont",
+    "Lambert",
+    "Bonnet",
+    "François",
+    "Martinez",
+    "Legrand",
+    "Garnier",
+    "Faure",
+    "Rousseau",
 ]
 
 # Codes postaux de Marseille
 POSTAL_CODES = [
-    "13001", "13002", "13003", "13004", "13005", "13006", "13007", "13008",
-    "13009", "13010", "13011", "13012", "13013", "13014", "13015", "13016",
+    "13001",
+    "13002",
+    "13003",
+    "13004",
+    "13005",
+    "13006",
+    "13007",
+    "13008",
+    "13009",
+    "13010",
+    "13011",
+    "13012",
+    "13013",
+    "13014",
+    "13015",
+    "13016",
 ]
 
 # Commentaires positifs
@@ -118,7 +193,9 @@ class Command(BaseCommand):
         # Delete existing data if requested
         if options["delete_votes"]:
             deleted_count = FormResponse.objects.all().delete()[0]
-            self.stdout.write(self.style.SUCCESS(f"Deleted {deleted_count} existing vote responses."))
+            self.stdout.write(
+                self.style.SUCCESS(f"Deleted {deleted_count} existing vote responses.")
+            )
 
         if options["delete_users"]:
             deleted_count = User.objects.filter(is_staff=False, is_superuser=False).delete()[0]
@@ -133,8 +210,8 @@ class Command(BaseCommand):
         created_users = []
         for i in range(users_count):
             try:
-                first_name = random.choice(FIRST_NAMES)
-                last_name = random.choice(LAST_NAMES)
+                first_name = random.choice(FIRST_NAMES)  # nosec B311
+                last_name = random.choice(LAST_NAMES)  # nosec B311
                 email = f"{first_name.lower()}.{last_name.lower()}{i}@example.com"
 
                 # Check if user already exists
@@ -145,10 +222,10 @@ class Command(BaseCommand):
 
                 user = User.objects.create_user(
                     email=email,
-                    password="testpassword123",
+                    password="testpassword123",  # nosec B106
                     first_name=first_name,
                     last_name=last_name,
-                    postal_code=random.choice(POSTAL_CODES),
+                    postal_code=random.choice(POSTAL_CODES),  # nosec B311
                     is_verified=True,
                 )
                 created_users.append(user)
@@ -183,10 +260,10 @@ class Command(BaseCommand):
         for project in projects_with_voting:
             # Randomly select users to vote on this project
             num_voters = min(
-                random.randint(max(1, votes_per_project - 5), votes_per_project + 5),
-                len(created_users)
+                random.randint(max(1, votes_per_project - 5), votes_per_project + 5),  # nosec B311
+                len(created_users),
             )
-            voters = random.sample(created_users, num_voters)
+            voters = random.sample(created_users, num_voters)  # nosec B311
 
             project_votes = 0
             for user in voters:
@@ -198,28 +275,26 @@ class Command(BaseCommand):
                     # Choose a vote based on weighted probability
                     # Slightly favor positive votes for realism
                     vote_weights = [0.15, 0.20, 0.30, 0.35]  # UNFAV, RATHER_UNFAV, RATHER_FAV, FAV
-                    choice = random.choices(
-                        list(VoteChoice.choices),
-                        weights=vote_weights,
-                        k=1
+                    choice = random.choices(  # nosec B311
+                        list(VoteChoice.choices), weights=vote_weights, k=1
                     )[0][0]
 
                     # Decide if adding a comment
                     comment = ""
-                    if random.random() < comment_probability:
+                    if random.random() < comment_probability:  # nosec B311
                         if choice in [VoteChoice.FAVORABLE, VoteChoice.RATHER_FAVORABLE]:
-                            comment = random.choice(POSITIVE_COMMENTS)
+                            comment = random.choice(POSITIVE_COMMENTS)  # nosec B311
                         elif choice in [VoteChoice.UNFAVORABLE, VoteChoice.RATHER_UNFAVORABLE]:
-                            comment = random.choice(NEGATIVE_COMMENTS)
+                            comment = random.choice(NEGATIVE_COMMENTS)  # nosec B311
                         else:
-                            comment = random.choice(NEUTRAL_COMMENTS)
+                            comment = random.choice(NEUTRAL_COMMENTS)  # nosec B311
 
                     FormResponse.objects.create(
                         user=user,
                         project=project,
                         choice=choice,
                         comment=comment,
-                        anonymize=random.random() < 0.3,  # 30% choose to be anonymous
+                        anonymize=random.random() < 0.3,  # nosec B311 - 30% choose anonymous
                     )
                     project_votes += 1
                     total_votes_created += 1
@@ -228,7 +303,9 @@ class Command(BaseCommand):
 
                 except Exception as e:
                     self.stderr.write(
-                        self.style.ERROR(f"  Failed to create vote for {user.email} on {project.title}: {e}")
+                        self.style.ERROR(
+                            f"  Failed to create vote for {user.email} on {project.title}: {e}"
+                        )
                     )
 
             self.stdout.write(f"  Created {project_votes} votes for: {project.title}")

@@ -173,10 +173,12 @@ class TestVoteAPI:
 
         response = client.post(
             f"/api/projects/{project_with_voting.pk}/vote",
-            data=json.dumps({
-                "choice": "FAVORABLE",
-                "comment": "I support this project!",
-            }),
+            data=json.dumps(
+                {
+                    "choice": "FAVORABLE",
+                    "comment": "I support this project!",
+                }
+            ),
             content_type="application/json",
         )
 
@@ -318,11 +320,13 @@ class TestVoteAnonymization:
 
         response = client.post(
             f"/api/projects/{project_with_voting.pk}/vote",
-            data=json.dumps({
-                "choice": "FAVORABLE",
-                "comment": "Anonymous comment",
-                "anonymize": True,
-            }),
+            data=json.dumps(
+                {
+                    "choice": "FAVORABLE",
+                    "comment": "Anonymous comment",
+                    "anonymize": True,
+                }
+            ),
             content_type="application/json",
         )
 
@@ -341,11 +345,13 @@ class TestVoteAnonymization:
 
         response = client.post(
             f"/api/projects/{project_with_voting.pk}/vote",
-            data=json.dumps({
-                "choice": "FAVORABLE",
-                "comment": "Public comment",
-                "anonymize": False,
-            }),
+            data=json.dumps(
+                {
+                    "choice": "FAVORABLE",
+                    "comment": "Public comment",
+                    "anonymize": False,
+                }
+            ),
             content_type="application/json",
         )
 
@@ -363,9 +369,11 @@ class TestVoteAnonymization:
 
         response = client.post(
             f"/api/projects/{project_with_voting.pk}/vote",
-            data=json.dumps({
-                "choice": "FAVORABLE",
-            }),
+            data=json.dumps(
+                {
+                    "choice": "FAVORABLE",
+                }
+            ),
             content_type="application/json",
         )
 
@@ -382,20 +390,24 @@ class TestVoteAnonymization:
         # First vote (non-anonymous)
         client.post(
             f"/api/projects/{project_with_voting.pk}/vote",
-            data=json.dumps({
-                "choice": "FAVORABLE",
-                "anonymize": False,
-            }),
+            data=json.dumps(
+                {
+                    "choice": "FAVORABLE",
+                    "anonymize": False,
+                }
+            ),
             content_type="application/json",
         )
 
         # Update to anonymous
         response = client.post(
             f"/api/projects/{project_with_voting.pk}/vote",
-            data=json.dumps({
-                "choice": "FAVORABLE",
-                "anonymize": True,
-            }),
+            data=json.dumps(
+                {
+                    "choice": "FAVORABLE",
+                    "anonymize": True,
+                }
+            ),
             content_type="application/json",
         )
 
@@ -414,10 +426,12 @@ class TestVoteAnonymization:
         # Submit anonymous vote
         client.post(
             f"/api/projects/{project_with_voting.pk}/vote",
-            data=json.dumps({
-                "choice": "FAVORABLE",
-                "anonymize": True,
-            }),
+            data=json.dumps(
+                {
+                    "choice": "FAVORABLE",
+                    "anonymize": True,
+                }
+            ),
             content_type="application/json",
         )
 
@@ -427,4 +441,3 @@ class TestVoteAnonymization:
         assert response.status_code == 200
         data = response.json()
         assert data["user_vote"]["anonymize"] is True
-

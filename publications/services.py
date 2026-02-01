@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Any, Optional, Sequence, Union
+from typing import TYPE_CHECKING, Any, Optional, Sequence, Union
 
 from django.db.models import Count, Q, QuerySet
 from django.core.paginator import Page as PaginatorPage
@@ -7,6 +9,9 @@ from django.core.paginator import Paginator
 from django.http import HttpRequest
 
 from publications.models.project import ProjectCategory
+
+if TYPE_CHECKING:
+    from publications.models.project import ProjectPage
 
 
 @dataclass

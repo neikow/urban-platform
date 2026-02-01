@@ -76,8 +76,8 @@ class Command(BaseCommand):
         for i in range(projects_count):
             try:
                 voting_end_date = None
-                if enable_voting and random.random() > 0.3:
-                    voting_end_date = timezone.now() + timedelta(days=random.randint(30, 180))
+                if enable_voting and random.random() > 0.3:  # nosec B311
+                    voting_end_date = timezone.now() + timedelta(days=random.randint(30, 180))  # nosec B311
 
                 page = ProjectPageFactory.create(
                     parent=index_page,
@@ -89,7 +89,9 @@ class Command(BaseCommand):
                 voting_info = ""
                 if enable_voting:
                     if voting_end_date:
-                        voting_info = f" (voting enabled until {voting_end_date.strftime('%Y-%m-%d')})"
+                        voting_info = (
+                            f" (voting enabled until {voting_end_date.strftime('%Y-%m-%d')})"
+                        )
                     else:
                         voting_info = " (voting enabled, no end date)"
                 else:

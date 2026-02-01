@@ -2,18 +2,18 @@ import json
 from typing import Any
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseBase, JsonResponse
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 
+from core.models import User
 from publications.models.form import FormResponse, VoteChoice
 from publications.models.project import ProjectPage
 from publications.services import get_vote_results
 
 
 class VoteView(LoginRequiredMixin, View):
-
-    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponseBase:
         if not request.user.is_authenticated:
             return JsonResponse(
                 {"success": False, "error": _("Authentication required")},
@@ -76,7 +76,9 @@ class VoteView(LoginRequiredMixin, View):
         return JsonResponse(
             {
                 "success": True,
-                "message": _("Vote submitted successfully") if created else _("Vote updated successfully"),
+                "message": _("Vote submitted successfully")
+                if created
+                else _("Vote updated successfully"),
                 "vote": {
                     "choice": response.choice,
                     "comment": response.comment,
@@ -107,8 +109,9 @@ class VoteView(LoginRequiredMixin, View):
                 status=400,
             )
 
+        user: User = request.user  # type: ignore[assignment]
         deleted_count, _deleted_types = FormResponse.objects.filter(
-            user=request.user,
+            user=user,
             project=project,
         ).delete()
 
@@ -126,9 +129,7 @@ class VoteView(LoginRequiredMixin, View):
         )
 
 
-
 class VoteResultsView(View):
-
     def get(self, request: HttpRequest, project_id: int) -> JsonResponse:
         try:
             project = ProjectPage.objects.get(pk=project_id)
@@ -177,4 +178,3 @@ class VoteResultsView(View):
                 "results": results,
             }
         )
-

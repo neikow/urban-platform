@@ -6,43 +6,100 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('publications', '0002_alter_publicationpage_content'),
+        ("publications", "0002_alter_publicationpage_content"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         # Add new vote fields
         migrations.AddField(
-            model_name='projectpage',
-            name='enable_voting',
-            field=models.BooleanField(default=True, help_text='Allow users to vote on this project', verbose_name='Enable Voting'),
+            model_name="projectpage",
+            name="enable_voting",
+            field=models.BooleanField(
+                default=True,
+                help_text="Allow users to vote on this project",
+                verbose_name="Enable Voting",
+            ),
         ),
         migrations.AddField(
-            model_name='projectpage',
-            name='voting_end_date',
-            field=models.DateTimeField(blank=True, help_text='Leave empty for no end date', null=True, verbose_name='Voting End Date'),
+            model_name="projectpage",
+            name="voting_end_date",
+            field=models.DateTimeField(
+                blank=True,
+                help_text="Leave empty for no end date",
+                null=True,
+                verbose_name="Voting End Date",
+            ),
         ),
         migrations.CreateModel(
-            name='FormResponse',
+            name="FormResponse",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated At')),
-                ('choice', models.CharField(choices=[('UNFAVORABLE', 'Unfavorable'), ('RATHER_UNFAVORABLE', 'Rather Unfavorable'), ('RATHER_FAVORABLE', 'Rather Favorable'), ('FAVORABLE', 'Favorable')], max_length=30, verbose_name='Choice')),
-                ('comment', models.TextField(blank=True, help_text='Optional comment to explain your vote', verbose_name='Comment')),
-                ('anonymize', models.BooleanField(default=False, help_text='Hide your identity in public displays', verbose_name='Anonymize')),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='vote_responses', to='publications.projectpage', verbose_name='Project')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='form_responses', to=settings.AUTH_USER_MODEL, verbose_name='User')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True, verbose_name="Created At")),
+                ("updated_at", models.DateTimeField(auto_now=True, verbose_name="Updated At")),
+                (
+                    "choice",
+                    models.CharField(
+                        choices=[
+                            ("UNFAVORABLE", "Unfavorable"),
+                            ("RATHER_UNFAVORABLE", "Rather Unfavorable"),
+                            ("RATHER_FAVORABLE", "Rather Favorable"),
+                            ("FAVORABLE", "Favorable"),
+                        ],
+                        max_length=30,
+                        verbose_name="Choice",
+                    ),
+                ),
+                (
+                    "comment",
+                    models.TextField(
+                        blank=True,
+                        help_text="Optional comment to explain your vote",
+                        verbose_name="Comment",
+                    ),
+                ),
+                (
+                    "anonymize",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Hide your identity in public displays",
+                        verbose_name="Anonymize",
+                    ),
+                ),
+                (
+                    "project",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="vote_responses",
+                        to="publications.projectpage",
+                        verbose_name="Project",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="form_responses",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="User",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Vote Response',
-                'verbose_name_plural': 'Vote Responses',
+                "verbose_name": "Vote Response",
+                "verbose_name_plural": "Vote Responses",
             },
         ),
         migrations.AddConstraint(
-            model_name='formresponse',
-            constraint=models.UniqueConstraint(fields=('user', 'project'), name='unique_user_project_vote'),
+            model_name="formresponse",
+            constraint=models.UniqueConstraint(
+                fields=("user", "project"), name="unique_user_project_vote"
+            ),
         ),
     ]
