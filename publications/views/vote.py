@@ -52,7 +52,7 @@ class VoteView(LoginRequiredMixin, View):
 
         choice = data.get("choice")
         comment = data.get("comment", "")
-        anonymize = data.get("anonymize", False)
+        anonymize = bool(data.get("anonymize", False))
 
         valid_choices = [c[0] for c in VoteChoice.choices]
         if choice not in valid_choices:
