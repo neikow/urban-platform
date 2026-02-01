@@ -1,8 +1,6 @@
 import json
 
 import pytest
-from django.test import Client
-from django.urls import reverse
 
 from core.models import User
 from publications.models import FormResponse, ProjectPage, VoteChoice
