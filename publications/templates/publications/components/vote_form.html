@@ -1,0 +1,148 @@
+{% load static i18n %}
+
+{% if page.enable_voting %}
+<div id="vote-component"
+     data-project-id="{{ page.id }}"
+     data-is-authenticated="{{ user.is_authenticated|yesno:'true,false' }}"
+     data-csrf-token="{{ csrf_token }}">
+
+    <div id="vote-card" class="card bg-base-200 shadow-md px-4 pt-4 pb-6 sm:px-6 sm:pt-5 sm:pb-6 scroll-mt-24">
+        <div class="flex items-center gap-2 mb-3">
+            <h3 class="text-lg font-bold mt-0 mb-0 leading-tight">{{ page.vote_question }}</h3>
+            <div class="tooltip tooltip-top" data-tip="{% trans 'Your opinion matters! Votes help decision-makers understand residents priorities. All votes are analyzed and taken into account in the final project decisions.' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info text-base-content/50 cursor-help">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4"/>
+                    <path d="M12 8h.01"/>
+                </svg>
+            </div>
+        </div>
+
+        {% if not user.is_authenticated %}
+            <div id="vote-login-prompt" class="text-center py-2">
+                <p class="text-base-content/70 mb-4">{% trans "Log in to vote on this project" %}</p>
+                <button type="button"
+                        onclick="document.getElementById('login_modal').showModal()"
+                        class="btn btn-primary">
+                    {% trans "Log in to vote" %}
+                </button>
+            </div>
+        {% else %}
+            <div id="vote-form-container">
+                <form id="vote-form" class="space-y-5">
+                    <div id="vote-choices" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+                        <label class="vote-choice-btn cursor-pointer order-4 sm:order-3 xl:order-1">
+                            <input type="radio" name="vote_choice" value="UNFAVORABLE" class="hidden peer" />
+                            <div class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-base-300 bg-base-100 hover:border-error hover:bg-error/10 peer-checked:border-error peer-checked:bg-error/20 transition-all h-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-thumbs-down mb-1 text-error">
+                                    <path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/>
+                                </svg>
+                                <span class="text-sm font-medium text-center">{% trans "Unfavorable" %}</span>
+                            </div>
+                        </label>
+                        <label class="vote-choice-btn cursor-pointer order-3 sm:order-4 xl:order-2">
+                            <input type="radio" name="vote_choice" value="RATHER_UNFAVORABLE" class="hidden peer" />
+                            <div class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-base-300 bg-base-100 hover:border-warning hover:bg-warning/10 peer-checked:border-warning peer-checked:bg-warning/20 transition-all h-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-circle mb-1 text-warning">
+                                    <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/>
+                                </svg>
+                                <span class="text-sm font-medium text-center">{% trans "Rather Unfavorable" %}</span>
+                            </div>
+                        </label>
+                        <label class="vote-choice-btn cursor-pointer order-2 sm:order-2 xl:order-3">
+                            <input type="radio" name="vote_choice" value="RATHER_FAVORABLE" class="hidden peer" />
+                            <div class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-base-300 bg-base-100 hover:border-info hover:bg-info/10 peer-checked:border-info peer-checked:bg-info/20 transition-all h-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-circle mb-1 text-info">
+                                    <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
+                                </svg>
+                                <span class="text-sm font-medium text-center">{% trans "Rather Favorable" %}</span>
+                            </div>
+                        </label>
+                        <label class="vote-choice-btn cursor-pointer order-1 sm:order-1 xl:order-4">
+                            <input type="radio" name="vote_choice" value="FAVORABLE" class="hidden peer" />
+                            <div class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-base-300 bg-base-100 hover:border-success hover:bg-success/10 peer-checked:border-success peer-checked:bg-success/20 transition-all h-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-thumbs-up mb-1 text-success">
+                                    <path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/>
+                                </svg>
+                                <span class="text-sm font-medium text-center">{% trans "Favorable" %}</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="form-control w-full">
+                        <label class="label pb-1" for="vote-comment">
+                            <span class="label-text">{% trans "Comment (optional)" %}</span>
+                        </label>
+                        <textarea
+                            id="vote-comment"
+                            name="comment"
+                            class="textarea textarea-bordered h-24 w-full"
+                            placeholder="{% trans 'Explain your vote...' %}"
+                        ></textarea>
+                        <p class="text-xs text-base-content/60 mt-1">{% trans "Only you and administrators can see your comment" %}</p>
+                    </div>
+
+                    <div id="vote-error" class="alert alert-error hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span id="vote-error-text"></span>
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label cursor-pointer justify-start gap-3">
+                            <input type="checkbox" id="vote-anonymous" name="is_anonymous" class="checkbox checkbox-sm" />
+                            <span class="label-text">{% trans "Submit my vote anonymously (my name will not be linked to this vote)" %}</span>
+                        </label>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button type="submit" id="vote-submit-btn" class="btn btn-primary flex-1" disabled>
+                            {% trans "Submit my vote" %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="vote-results-container" class="hidden">
+                <div id="vote-results" class="space-y-3">
+                </div>
+
+                <div id="user-vote-info" class="mt-4 p-3 bg-base-300 rounded-lg">
+                    <p class="text-sm font-medium">{% trans "Your vote:" %} <span id="user-vote-choice" class="font-bold"></span></p>
+                    <div id="user-vote-comment-container" class="hidden mt-2">
+                        <p class="text-sm text-base-content/70">{% trans "Your comment:" %}</p>
+                        <p id="user-vote-comment" class="text-sm italic"></p>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mt-4">
+                    <button type="button" id="change-vote-btn" class="btn btn-outline btn-sm flex-1">
+                        {% trans "Change my vote" %}
+                    </button>
+                    <button type="button" id="remove-vote-btn" class="btn btn-ghost btn-sm text-error">
+                        {% trans "Remove my vote" %}
+                    </button>
+                </div>
+            </div>
+
+            <div id="vote-loading" class="hidden flex justify-center py-4">
+                <span class="loading loading-spinner loading-md"></span>
+            </div>
+        {% endif %}
+
+        {% if not page.is_voting_open %}
+            <div class="alert alert-warning mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <span>{% trans "Voting is closed for this project" %}</span>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% include "auth/login_modal.html" %}
+
+<script src="{% static 'publications/js/vote.js' %}"></script>
+{% endif %}

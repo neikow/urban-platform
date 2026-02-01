@@ -1,3 +1,4 @@
+from django import forms
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
@@ -6,6 +7,9 @@ from wagtail.search import index
 
 from core.toc import TableOfContentsItem, generate_header_ids, get_table_of_contents
 from publications.models.publication import PublicationPage
+
+
+DEFAULT_VOTE_QUESTION = _("What is your opinion on this project?")
 
 
 class ProjectCategory(models.TextChoices):
@@ -41,12 +45,27 @@ class ProjectPage(PublicationPage):
         default=ProjectCategory.OTHER,
     )
 
+    enable_voting = models.BooleanField(
+        _("Enable Voting"),
+        default=True,
+        help_text=_("Allow users to vote on this project"),
+    )
+
+    voting_end_date = models.DateTimeField(
+        _("Voting End Date"),
+        null=True,
+        blank=True,
+        help_text=_("Leave empty for no end date"),
+    )
+
     search_fields = PublicationPage.search_fields + [
         index.SearchField("category"),
     ]
 
     content_panels = PublicationPage.content_panels + [
         FieldPanel("category"),
+        FieldPanel("enable_voting"),
+        FieldPanel("voting_end_date"),
     ]
 
     def clean(self) -> None:
@@ -55,6 +74,22 @@ class ProjectPage(PublicationPage):
         for block in self.content:
             if block.block_type == "text":
                 generate_header_ids(block)
+
+    @property
+    def vote_question(self) -> str:
+        """Return the standard vote question for all projects."""
+        return str(DEFAULT_VOTE_QUESTION)
+
+    @property
+    def is_voting_open(self) -> bool:
+        """Check if voting is still open for this project."""
+        if not self.enable_voting:
+            return False
+        if self.voting_end_date is None:
+            return True
+        from django.utils import timezone
+
+        return timezone.now() <= self.voting_end_date
 
     @property
     def table_of_contents(self) -> list[TableOfContentsItem]:
