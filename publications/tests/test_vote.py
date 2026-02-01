@@ -31,15 +31,13 @@ def admin_user(db):
 
 
 @pytest.fixture
-def project_with_voting(db):
-    """Create a project page with voting enabled."""
+def publication_index(db):
+    """Create a publication index page."""
     from wagtail.models import Page
 
-    # Get the root page
-    root_page = Page.objects.get(depth=1)
-
-    # Create a publication index page if needed
     from publications.models import PublicationIndexPage
+
+    root_page = Page.objects.get(depth=1)
 
     try:
         index_page = PublicationIndexPage.objects.first()
@@ -56,13 +54,36 @@ def project_with_voting(db):
         )
         root_page.add_child(instance=index_page)
 
-    # Create the project page with voting enabled
+    return index_page
+
+
+@pytest.fixture
+def project_with_voting(publication_index):
+    """Create a project page with voting enabled."""
     project = ProjectPage(
         title="Test Project",
         slug="test-project",
         enable_voting=True,
     )
-    index_page.add_child(instance=project)
+    publication_index.add_child(instance=project)
+
+    return project
+
+
+@pytest.fixture
+def closed_project(publication_index):
+    """Create a project page with voting closed (past end date)."""
+    from datetime import timedelta
+
+    from django.utils import timezone
+
+    project = ProjectPage(
+        title="Closed Voting Project",
+        slug="closed-voting-project",
+        enable_voting=True,
+        voting_end_date=timezone.now() - timedelta(days=1),
+    )
+    publication_index.add_child(instance=project)
 
     return project
 
@@ -271,34 +292,14 @@ class TestVoteAPI:
 
         assert response.status_code == 400
 
-    def test_vote_on_project_without_voting(self, client, user, db):
+    def test_vote_on_project_without_voting(self, client, user, publication_index):
         """Test voting on a project without voting enabled."""
-        from wagtail.models import Page
-        from publications.models import PublicationIndexPage
-
-        root_page = Page.objects.get(depth=1)
-
-        try:
-            index_page = PublicationIndexPage.objects.first()
-            if not index_page:
-                index_page = PublicationIndexPage(
-                    title="Publications",
-                    slug="publications-no-voting",
-                )
-                root_page.add_child(instance=index_page)
-        except Exception:
-            index_page = PublicationIndexPage(
-                title="Publications",
-                slug="publications-no-voting",
-            )
-            root_page.add_child(instance=index_page)
-
         project = ProjectPage(
             title="Project Without Voting",
             slug="project-without-voting",
             enable_voting=False,
         )
-        index_page.add_child(instance=project)
+        publication_index.add_child(instance=project)
 
         client.force_login(user)
 
@@ -309,6 +310,23 @@ class TestVoteAPI:
         )
 
         assert response.status_code == 400
+
+    def test_vote_on_closed_project(self, client, user, closed_project):
+        """Test voting on a project with voting closed (past end date)."""
+        # Verify voting is closed
+        assert closed_project.is_voting_open is False
+
+        client.force_login(user)
+
+        response = client.post(
+            f"/api/projects/{closed_project.pk}/vote",
+            data=json.dumps({"choice": "FAVORABLE"}),
+            content_type="application/json",
+        )
+
+        assert response.status_code == 400
+        data = response.json()
+        assert "error" in data or "message" in data
 
 
 class TestVoteAnonymization:
