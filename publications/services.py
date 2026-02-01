@@ -109,7 +109,7 @@ def get_vote_results(project: "ProjectPage") -> dict[str, Any]:
         }
 
     # Count votes per choice
-    vote_counts = responses.values("choice").annotate(count=Count("choice"))
+    vote_counts = responses.values("choice").annotate(count=Count("id"))
     counts_dict = {item["choice"]: item["count"] for item in vote_counts}
 
     choices_results = {}
