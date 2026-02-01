@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hideError();
 
         try {
-            const response = await fetch(`/api/projects/${projectId}/vote/results`, {
+            const response = await fetch(`/api/projects/${projectId}/vote/results/`, {
                 method: 'GET',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hideError();
 
         try {
-            const response = await fetch(`/api/projects/${projectId}/vote`, {
+            const response = await fetch(`/api/projects/${projectId}/vote/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hideError();
 
         try {
-            const response = await fetch(`/api/projects/${projectId}/vote`, {
+            const response = await fetch(`/api/projects/${projectId}/vote/`, {
                 method: 'DELETE',
                 headers: {
                     'X-CSRFToken': csrfToken,

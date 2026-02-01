@@ -180,7 +180,7 @@ class TestVoteAPI:
     def test_vote_requires_authentication(self, client, project_with_voting):
         """Test that voting requires authentication."""
         response = client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps({"choice": "FAVORABLE"}),
             content_type="application/json",
         )
@@ -191,7 +191,7 @@ class TestVoteAPI:
         client.force_login(user)
 
         response = client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps(
                 {
                     "choice": "FAVORABLE",
@@ -213,14 +213,14 @@ class TestVoteAPI:
 
         # First vote
         client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps({"choice": "FAVORABLE"}),
             content_type="application/json",
         )
 
         # Update vote
         response = client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps({"choice": "UNFAVORABLE"}),
             content_type="application/json",
         )
@@ -235,13 +235,13 @@ class TestVoteAPI:
 
         # First, submit a vote
         client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps({"choice": "FAVORABLE"}),
             content_type="application/json",
         )
 
         # Delete the vote
-        response = client.delete(f"/api/projects/{project_with_voting.pk}/vote")
+        response = client.delete(f"/api/projects/{project_with_voting.pk}/vote/")
 
         assert response.status_code == 200
         data = response.json()
@@ -251,7 +251,7 @@ class TestVoteAPI:
         """Test getting results when user hasn't voted."""
         client.force_login(user)
 
-        response = client.get(f"/api/projects/{project_with_voting.pk}/vote/results")
+        response = client.get(f"/api/projects/{project_with_voting.pk}/vote/results/")
 
         assert response.status_code == 200
         data = response.json()
@@ -264,13 +264,13 @@ class TestVoteAPI:
 
         # Submit a vote
         client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps({"choice": "FAVORABLE"}),
             content_type="application/json",
         )
 
         # Get results
-        response = client.get(f"/api/projects/{project_with_voting.pk}/vote/results")
+        response = client.get(f"/api/projects/{project_with_voting.pk}/vote/results/")
 
         assert response.status_code == 200
         data = response.json()
@@ -283,7 +283,7 @@ class TestVoteAPI:
         client.force_login(user)
 
         response = client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps({"choice": "INVALID_CHOICE"}),
             content_type="application/json",
         )
@@ -302,7 +302,7 @@ class TestVoteAPI:
         client.force_login(user)
 
         response = client.post(
-            f"/api/projects/{project.pk}/vote",
+            f"/api/projects/{project.pk}/vote/",
             data=json.dumps({"choice": "FAVORABLE"}),
             content_type="application/json",
         )
@@ -317,7 +317,7 @@ class TestVoteAPI:
         client.force_login(user)
 
         response = client.post(
-            f"/api/projects/{closed_project.pk}/vote",
+            f"/api/projects/{closed_project.pk}/vote/",
             data=json.dumps({"choice": "FAVORABLE"}),
             content_type="application/json",
         )
@@ -335,7 +335,7 @@ class TestVoteAnonymization:
         client.force_login(user)
 
         response = client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps(
                 {
                     "choice": "FAVORABLE",
@@ -360,7 +360,7 @@ class TestVoteAnonymization:
         client.force_login(user)
 
         response = client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps(
                 {
                     "choice": "FAVORABLE",
@@ -384,7 +384,7 @@ class TestVoteAnonymization:
         client.force_login(user)
 
         response = client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps(
                 {
                     "choice": "FAVORABLE",
@@ -405,7 +405,7 @@ class TestVoteAnonymization:
 
         # First vote (non-anonymous)
         client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps(
                 {
                     "choice": "FAVORABLE",
@@ -417,7 +417,7 @@ class TestVoteAnonymization:
 
         # Update to anonymous
         response = client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps(
                 {
                     "choice": "FAVORABLE",
@@ -441,7 +441,7 @@ class TestVoteAnonymization:
 
         # Submit anonymous vote
         client.post(
-            f"/api/projects/{project_with_voting.pk}/vote",
+            f"/api/projects/{project_with_voting.pk}/vote/",
             data=json.dumps(
                 {
                     "choice": "FAVORABLE",
@@ -452,7 +452,7 @@ class TestVoteAnonymization:
         )
 
         # Get results
-        response = client.get(f"/api/projects/{project_with_voting.pk}/vote/results")
+        response = client.get(f"/api/projects/{project_with_voting.pk}/vote/results/")
 
         assert response.status_code == 200
         data = response.json()
