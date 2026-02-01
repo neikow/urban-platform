@@ -3,102 +3,133 @@
 {% block title %}S'inscrire{% endblock %}
 
 {% block content %}
-    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full">
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h1 class="card-title text-3xl font-bold text-center justify-center mb-6">
-                        S'inscrire
-                    </h1>
+    <div class="min-h-screen flex items-center justify-center px-8 lg:px-16 py-12">
+        <div class="w-full max-w-7xl rounded-2xl overflow-hidden lg:shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+                <div class="relative hidden lg:flex items-center justify-center py-8">
+                    {% load static %}
+                    <img
+                        src="{% static 'images/endoume-marseille.jpg' %}"
+                        alt=""
+                        class="absolute inset-0 w-full h-full object-cover"
+                    >
+                    <div class="relative z-10 bg-white rounded-2xl p-8 max-w-md w-full">
+                        <h2 class="text-2xl font-bold mb-4 text-gray-800">
+                            Devenez membre {{ website_name|default:"Urba7" }}
+                        </h2>
+                        <ul class="list-disc list-inside space-y-3 text-base text-gray-700">
+                            <li>Accédez aux fiches pédagogiques</li>
+                            <li>Suivez les actualités de votre quartier</li>
+                            <li>Votez sur les initiatives</li>
+                        </ul>
+                    </div>
+                </div>
 
-                    {% if form.non_field_errors %}
-                        <div class="alert alert-error mb-4">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="stroke-current shrink-0 h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                            </svg>
-                            <div>
-                                {{ form.non_field_errors }}
-                            </div>
-                        </div>
-                    {% endif %}
+                <div class="flex items-center justify-center py-8 bg-base-100">
+                    <div class="w-full max-w-md">
+                        <h1 class="text-3xl font-bold text-center mb-6">
+                            S'inscrire
+                        </h1>
 
-                    <form method="post" class="space-y-4">
-                        {% csrf_token %}
-
-                        {% include "components/forms/form_field.html" with field=form.email %}
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {% include "components/forms/form_field.html" with field=form.first_name %}
-
-                            {% include "components/forms/form_field.html" with field=form.last_name %}
-                        </div>
-
-                        {% include "components/forms/form_field.html" with field=form.postal_code %}
-
-                        {% include "components/forms/form_field.html" with field=form.password %}
-
-                        {% include "components/forms/form_field.html" with field=form.confirm_password %}
-
-                        <div class="form-control">
-                            <div class="flex justify-start items-center gap-3">
-                                <input
-                                    type="checkbox"
-                                    name="{{ form.accept_terms.html_name }}"
-                                    id="{{ form.accept_terms.id_for_label }}"
-                                    class="checkbox checkbox-primary shrink-0 mt-0.5 {% if form.accept_terms.errors %}checkbox-error{% endif %}"
-                                    required
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-error mb-4">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="stroke-current shrink-0 h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
                                 >
-                                <label
-                                    for="{{ form.accept_terms.id_for_label }}"
-                                    class="text-sm cursor-pointer flex-1 min-w-0"
-                                >
-                                    J'accepte les
-                                    <a
-                                        href="/legal/termes/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="link link-primary font-semibold hover:underline"
-                                    >
-                                        conditions d'utilisation<span class="sr-only">
-                                            (ouvre dans un nouvel onglet)</span>
-                                    </a>
-                                </label>
-                            </div>
-                            {% if form.accept_terms.errors %}
-                                <div class="mt-1">
-                                    <span class="label-text-alt text-error block">
-                                        {{ form.accept_terms.errors.0 }}
-                                    </span>
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
+                                <div>
+                                    {{ form.non_field_errors }}
                                 </div>
-                            {% endif %}
+                            </div>
+                        {% endif %}
+
+                        <form method="post" class="space-y-4">
+                            {% csrf_token %}
+
+                            {% include "components/forms/form_field.html" with field=form.email %}
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {% include "components/forms/form_field.html" with field=form.first_name %}
+
+                                {% include "components/forms/form_field.html" with field=form.last_name %}
+                            </div>
+
+                            {% include "components/forms/form_field.html" with field=form.postal_code %}
+
+                            {% include "components/forms/form_field.html" with field=form.password %}
+
+                            {% include "components/forms/form_field.html" with field=form.confirm_password %}
+
+                            <div class="form-control">
+                                <div class="flex justify-start items-center gap-3">
+                                    <input
+                                        type="checkbox"
+                                        name="{{ form.accept_terms.html_name }}"
+                                        id="{{ form.accept_terms.id_for_label }}"
+                                        class="checkbox checkbox-primary shrink-0 mt-0.5 {% if form.accept_terms.errors %}checkbox-error{% endif %}"
+                                        required
+                                    >
+                                    <label
+                                        for="{{ form.accept_terms.id_for_label }}"
+                                        class="text-sm cursor-pointer flex-1 min-w-0"
+                                    >
+                                        J'accepte les
+                                        <a
+                                            href="/legal/termes/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="link link-primary font-semibold hover:underline"
+                                        >
+                                            conditions d'utilisation<span class="sr-only">
+                                                (ouvre dans un nouvel onglet)</span>
+                                        </a>
+                                    </label>
+                                </div>
+                                {% if form.accept_terms.errors %}
+                                    <div class="mt-1">
+                                        <span class="label-text-alt text-error block">
+                                            {{ form.accept_terms.errors.0 }}
+                                        </span>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="form-control mt-6">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    S'inscrire
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="divider">OU</div>
+
+                        <div class="text-center">
+                            <p class="text-sm">
+                                Vous avez déjà un compte ?
+                                <a href="/auth/login/" class="link link-primary font-semibold">
+                                    Se connecter
+                                </a>
+                            </p>
                         </div>
-
-                        <div class="form-control mt-6">
-                            <button type="submit" class="btn btn-primary btn-block">
-                                S'inscrire
-                            </button>
+                        <div class="lg:hidden mt-8 bg-base-200 p-6 rounded-lg">
+                            <h2 class="text-2xl font-bold mb-4 text-gray-800">
+                                Devenez membre {{ website_name|default:"Urba7" }}
+                            </h2>
+                            <ul class="list-disc list-inside space-y-3 text-base text-gray-700">
+                                <li>Accédez aux fiches pédagogiques</li>
+                                <li>Suivez les actualités de votre quartier</li>
+                                <li>Votez sur les initiatives</li>
+                            </ul>
                         </div>
-                    </form>
-
-                    <div class="divider">OU</div>
-
-                    <div class="text-center">
-                        <p class="text-sm">
-                            Vous avez déjà un compte ?
-                            <a href="/auth/login/" class="link link-primary font-semibold">
-                                Se connecter
-                            </a>
-                        </p>
                     </div>
                 </div>
             </div>
