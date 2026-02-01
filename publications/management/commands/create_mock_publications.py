@@ -1,14 +1,14 @@
-from typing import Any
-from datetime import timedelta
 import random
+from datetime import timedelta
+from typing import Any
 
+from django.conf import settings
 from django.core.management import CommandParser
 from django.core.management.base import BaseCommand
-from django.conf import settings
 from django.utils import timezone
 
+from publications.factories import EventPageFactory, ProjectPageFactory
 from publications.models import PublicationIndexPage
-from publications.factories import ProjectPageFactory, EventPageFactory
 
 
 class Command(BaseCommand):
