@@ -1,0 +1,8 @@
+:root {
+    --w-color-primary: oklch(0.637 0.194 31.558);
+    --w-color-primary-200: oklch(0.588 0.183 31.537);
+    --w-color-secondary: oklch(0.614 0.07 163.866);
+    --w-color-surface-button-hover: oklch(0.532 0.062 164.602);
+    --w-color-text-button-outline-default: var(--w-color-primary);
+    --w-color-black-35: transparent;
+}
