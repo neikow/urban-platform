@@ -1,11 +1,14 @@
+import random
+from datetime import timedelta
 from typing import Any
 
+from django.conf import settings
 from django.core.management import CommandParser
 from django.core.management.base import BaseCommand
-from django.conf import settings
+from django.utils import timezone
 
+from publications.factories import EventPageFactory, ProjectPageFactory
 from publications.models import PublicationIndexPage
-from publications.factories import ProjectPageFactory, EventPageFactory
 
 
 class Command(BaseCommand):
@@ -28,6 +31,11 @@ class Command(BaseCommand):
             "--delete",
             action="store_true",
             help="Delete all existing publications before creating new ones",
+        )
+        parser.add_argument(
+            "--no-voting",
+            action="store_true",
+            help="Disable voting on projects (voting is enabled by default)",
         )
 
     def handle(self, *args: Any, **options: Any) -> None:
@@ -55,14 +63,35 @@ class Command(BaseCommand):
 
         projects_count = options["projects"]
         events_count = options["events"]
+        enable_voting = not options["no_voting"]
 
         # Create projects
         self.stdout.write(f"Creating {projects_count} projects...")
         for i in range(projects_count):
             try:
-                page = ProjectPageFactory.create(parent=index_page)
+                voting_end_date = None
+                if enable_voting and random.random() > 0.3:  # nosec B311
+                    voting_end_date = timezone.now() + timedelta(days=random.randint(30, 180))  # nosec B311
+
+                page = ProjectPageFactory.create(
+                    parent=index_page,
+                    enable_voting=enable_voting,
+                    voting_end_date=voting_end_date,
+                )
                 page.save_revision().publish()
-                self.stdout.write(f"  Created project: {page.title}")
+
+                voting_info = ""
+                if enable_voting:
+                    if voting_end_date:
+                        voting_info = (
+                            f" (voting enabled until {voting_end_date.strftime('%Y-%m-%d')})"
+                        )
+                    else:
+                        voting_info = " (voting enabled, no end date)"
+                else:
+                    voting_info = " (voting disabled)"
+
+                self.stdout.write(f"  Created project: {page.title}{voting_info}")
             except Exception as e:
                 self.stderr.write(self.style.ERROR(f"  Failed to create project {i + 1}: {e}"))
 

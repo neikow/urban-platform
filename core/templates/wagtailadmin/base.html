@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {# Do not load styles.css here as it interferes with Wagtail admin styles #}
 {% endblock %}
 
 {% block extra_js %}
