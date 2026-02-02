@@ -13,7 +13,7 @@ from core.views.login import LoginView
 from core.views.logout import LogoutView
 from core.views.me import MeView
 from core.views.profile_edit import ProfileEditView, PasswordChangeView
-from publications.views import VoteView, VoteResultsView
+from publications.views.vote import VoteView, VoteResultsView
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
