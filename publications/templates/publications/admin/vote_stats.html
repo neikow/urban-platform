@@ -1,0 +1,63 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n wagtailadmin_tags %}
+
+{% block titletag %}{% trans "Vote Statistics" %}{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title=_("Vote Statistics") icon="doc-full" %}
+
+    <div class="w-nice-padding w-px-6">
+        {% if projects_stats %}
+            <table class="listing">
+                <thead>
+                    <tr>
+                        <th>{% trans "Project" %}</th>
+                        <th class="w-text-center">{% trans "Status" %}</th>
+                        <th class="w-text-center">{% trans "Total votes" %}</th>
+                        <th class="w-text-center">{% trans "With comment" %}</th>
+                        <th class="w-text-center">{% trans "Favorable" %}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in projects_stats %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'wagtailadmin_pages:edit' stat.project.id %}" class="w-text-primary hover:w-underline w-font-medium">
+                                    {{ stat.project.title }}
+                                </a>
+                            </td>
+                            <td class="w-text-center">
+                                {% if stat.is_voting_open %}
+                                    <span class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium" style="background-color: #dcfce7; color: #166534;">
+                                        {% trans "Open" %}
+                                    </span>
+                                {% else %}
+                                    <span class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium" style="background-color: #fef2f2; color: #991b1b;">
+                                        {% trans "Closed" %}
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td class="w-text-center">{{ stat.total_votes }}</td>
+                            <td class="w-text-center">{{ stat.with_comments }}</td>
+                            <td class="w-text-center">
+                                {% if stat.total_votes > 0 %}
+                                    <span class="w-font-medium" style="color: #166534;">{{ stat.favorable_percent }}%</span>
+                                {% else %}
+                                    <span class="w-text-text-meta">-</span>
+                                {% endif %}
+                            </td>
+                            <td class="w-text-right">
+                                <a href="{% url 'vote_statistics_detail' stat.project.id %}" class="button button-small button-secondary">
+                                    {% trans "View details" %}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="w-text-text-meta">{% trans "No projects with voting enabled." %}</p>
+        {% endif %}
+    </div>
+{% endblock %}

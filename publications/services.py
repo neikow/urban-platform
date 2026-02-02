@@ -1,12 +1,17 @@
-from dataclasses import dataclass
-from typing import Optional, Sequence, Union
+from __future__ import annotations
 
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Any, Optional, Sequence, Union
+
+from django.db.models import Count, Q, QuerySet
 from django.core.paginator import Page as PaginatorPage
 from django.core.paginator import Paginator
-from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 
 from publications.models.project import ProjectCategory
+
+if TYPE_CHECKING:
+    from publications.models.project import ProjectPage
 
 
 @dataclass
@@ -89,3 +94,35 @@ def get_filtered_publications(
     publications = search_publications(publications, filters.search_query)
 
     return paginate_publications(publications, filters.page_number, per_page)
+
+
+def get_vote_results(project: "ProjectPage") -> dict[str, Any]:
+    from publications.models.form import FormResponse, VoteChoice
+
+    responses = FormResponse.objects.filter(project=project)
+    total_votes = responses.count()
+
+    if total_votes == 0:
+        return {
+            "total_votes": 0,
+            "choices": {choice[0]: {"count": 0, "percentage": 0} for choice in VoteChoice.choices},
+        }
+
+    # Count votes per choice
+    vote_counts = responses.values("choice").annotate(count=Count("id"))
+    counts_dict = {item["choice"]: item["count"] for item in vote_counts}
+
+    choices_results = {}
+    for choice_value, choice_label in VoteChoice.choices:
+        count = counts_dict.get(choice_value, 0)
+        percentage = round((count / total_votes) * 100, 1) if total_votes > 0 else 0
+        choices_results[choice_value] = {
+            "count": count,
+            "percentage": percentage,
+            "label": str(choice_label),
+        }
+
+    return {
+        "total_votes": total_votes,
+        "choices": choices_results,
+    }
