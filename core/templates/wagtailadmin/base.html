@@ -2,14 +2,13 @@
 {% load static %}
 
 {% block branding_logo %}
-    <div class="flex flex-col items-center gap-2">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 0.5rem; border-radius: 0.5rem">
         <img src="{% static 'images/favicon.svg' %}" alt="{{ website_name }}" width="80">
-        <span class="font-bold text-primary text-lg">{{ website_name }}</span>
     </div>
 {% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/wagtail_overrides.css' %}">
 {% endblock %}
 
 {% block extra_js %}
