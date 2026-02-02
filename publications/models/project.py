@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
 from wagtail.admin.panels import FieldPanel
@@ -88,7 +89,6 @@ class ProjectPage(PublicationPage):
             return False
         if self.voting_end_date is None:
             return True
-        from django.utils import timezone
 
         return timezone.now() <= self.voting_end_date
 
