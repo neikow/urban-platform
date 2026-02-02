@@ -10,6 +10,7 @@ dependencies = [
     "pre-commit>=4.5.1",
     "psycopg>=3.3.2",
     "python-dotenv>=1.2.1",
+    "python-slugify>=8.0.4",
     "redis>=5.0.3,<6.5",
     "tqdm>=4.67.1",
     "wagtail>=7.2.1",

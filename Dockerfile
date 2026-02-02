@@ -1,49 +1,41 @@
-# Use an official Python runtime based on Debian 12 "bookworm" as a parent image.
-FROM python:3.13-slim-bookworm
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
-
-# Install system packages
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Node.js for Tailwind
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && rm -rf /var/lib/apt/lists/*
-
+FROM node:20-bookworm-slim AS assets
 WORKDIR /app
-
-# Install Python dependencies
-ENV UV_COMPILE_BYTECODE=1
-ENV UV_LINK_MODE=copy
-
-COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-install-project --no-dev
-
-# Install Node dependencies
 COPY package.json package-lock.json ./
 RUN npm ci
-
-# Copy the rest of the application
 COPY . .
-
-# Build styles
 RUN npm run styles:build
 
-# Install the project itself
-RUN uv sync --frozen --no-dev
+FROM python:3.13-slim-bookworm AS builder
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+WORKDIR /app
+ENV UV_COMPILE_BYTECODE=1 UV_NO_DEV=1
 
-# Collect static files
-# We need to set dummy env vars for collectstatic to work without a real DB or secrets
+RUN apt-get update && apt-get install -y \
+    libpq5 \
+    gettext \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m appuser && chown appuser /app -R
+USER appuser
+
+ENV PATH="/app/.venv/bin:$PATH"
+
+COPY --chown=appuser:appuser . .
+
+COPY --from=assets --chown=appuser:appuser /app/urban_platform/static/css/styles.css /app/urban_platform/static/css/styles.css
+
+RUN uv sync --locked
+
+ENV DJANGO_SETTINGS_MODULE="urban_platform.settings.production"
+
 RUN SECRET_KEY=dummy \
     DB_NAME=dummy \
     DB_USER=dummy \
     DB_PASSWORD=dummy \
     DB_HOST=dummy \
     DB_PORT=5432 \
-    uv run python manage.py collectstatic --noinput
+    uv run manage.py collectstatic --noinput && \
+    uv run manage.py compilemessages
 
-# Run with gunicorn
-CMD ["uv", "run", "gunicorn", "urban_platform.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Run application
+CMD ["/app/.venv/bin/gunicorn", "urban_platform.wsgi:application", "--bind", "0.0.0.0:8000"]
