@@ -15,14 +15,11 @@ RUN apt-get update && apt-get install -y \
     gettext \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m appuser && chown appuser /app -R
-USER appuser
-
 ENV PATH="/app/.venv/bin:$PATH"
 
-COPY --chown=appuser:appuser . .
+COPY . .
 
-COPY --from=assets --chown=appuser:appuser /app/urban_platform/static/css/styles.css /app/urban_platform/static/css/styles.css
+COPY --from=assets /app/urban_platform/static/css/styles.css /app/urban_platform/static/css/styles.css
 
 RUN uv sync --locked
 
