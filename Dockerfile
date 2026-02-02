@@ -34,7 +34,14 @@ RUN SECRET_KEY=dummy \
     DB_PASSWORD=dummy \
     DB_HOST=dummy \
     DB_PORT=5432 \
-    uv run manage.py collectstatic --noinput && \
+    uv run manage.py collectstatic --noinput \
+
+RUN SECRET_KEY=dummy \
+    DB_NAME=dummy \
+    DB_USER=dummy \
+    DB_PASSWORD=dummy \
+    DB_HOST=dummy \
+    DB_PORT=5432 \
     uv run manage.py compilemessages
 
 # Run application
