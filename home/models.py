@@ -29,5 +29,5 @@ class HomePage(Page):
         return False
 
     class Meta:
-        verbose_name = _("Page d'accueil")
-        verbose_name_plural = _("Pages d'accueil")
+        verbose_name = _("Home Page")
+        verbose_name_plural = _("Home Pages")

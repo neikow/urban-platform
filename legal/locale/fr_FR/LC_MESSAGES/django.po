@@ -1,0 +1,115 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-03 15:44+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: legal/forms.py:6
+msgid "I agree to abide by the Code of Conduct"
+msgstr "J'accepte de respecter la charte de conduite"
+
+#: legal/models/code_of_conduct.py:25 legal/models/cookies_policy.py:25
+#: legal/models/legal_index.py:20 legal/models/privacy_policy.py:25
+#: legal/models/terms_of_service.py:25
+msgid "For search engines"
+msgstr "Pour les moteurs de recherche"
+
+#: legal/models/code_of_conduct.py:34
+msgid "Code of conduct body content"
+msgstr "Contenu de la charte de conduite"
+
+#: legal/models/code_of_conduct.py:36
+msgid ""
+"This content should not change often as the user is prompted to accept it "
+"whenever it changes."
+msgstr "Ce contenu ne devrait pas changer fréquemment, car l'utilisateur est invité à l'accepter à chaque modification."
+
+#: legal/models/code_of_conduct.py:41
+msgid "Code of Conduct Page"
+msgstr "Page de la Charte de conduite"
+
+#: legal/models/code_of_conduct.py:42
+msgid "Code of Conduct Pages"
+msgstr "Pages de la Charte de conduite"
+
+#: legal/models/code_of_conduct_consent.py:11
+msgid "User"
+msgstr "Utilisateur"
+
+#: legal/models/code_of_conduct_consent.py:17
+msgid "Policy Version"
+msgstr "Version de la politique"
+
+#: legal/models/code_of_conduct_consent.py:21
+msgid "Consented at"
+msgstr "Accepté le"
+
+#: legal/models/code_of_conduct_consent.py:26
+msgid "Consent IP Address"
+msgstr "Adresse IP lors du consentement"
+
+#: legal/models/code_of_conduct_consent.py:30
+msgid "Code of Conduct Consent"
+msgstr "Consentement à la Charte de conduite"
+
+#: legal/models/code_of_conduct_consent.py:31
+msgid "Code of Conduct Consents"
+msgstr "Consentements à la Charte de conduite"
+
+#: legal/models/cookies_policy.py:34
+msgid "Cookies policy body content"
+msgstr "Contenu de la politique de cookies"
+
+#: legal/models/cookies_policy.py:38
+msgid "Cookies Policy Page"
+msgstr "Page de la politique de cookies"
+
+#: legal/models/cookies_policy.py:39
+msgid "Cookies Policy Pages"
+msgstr "Pages de la politique de cookies"
+
+#: legal/models/legal_index.py:27
+msgid "Legal Index Page"
+msgstr "Page d'index juridique"
+
+#: legal/models/legal_index.py:28
+msgid "Legal Index Pages"
+msgstr "Pages d'index juridiques"
+
+#: legal/models/privacy_policy.py:34
+msgid "Privacy policy body content"
+msgstr "Contenu de la politique de confidentialité"
+
+#: legal/models/privacy_policy.py:38
+msgid "Privacy Policy Page"
+msgstr "Page de la politique de confidentialité"
+
+#: legal/models/privacy_policy.py:39
+msgid "Privacy Policy Pages"
+msgstr "Pages de la politique de confidentialité"
+
+#: legal/models/terms_of_service.py:34
+msgid "Terms of service body content"
+msgstr "Contenu des conditions d'utilisation"
+
+#: legal/models/terms_of_service.py:38
+msgid "Terms of Service Page"
+msgstr "Page des conditions d'utilisation"
+
+#: legal/models/terms_of_service.py:39
+msgid "Terms of Service Pages"
+msgstr "Pages des conditions d'utilisation"

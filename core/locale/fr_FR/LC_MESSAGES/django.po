@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-14 16:29+0100\n"
+"POT-Creation-Date: 2026-02-03 15:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,62 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: core/blocks.py:10
+msgid "Left"
+msgstr "Gauche"
+
+#: core/blocks.py:11
+msgid "Right"
+msgstr "Droite"
+
+#: core/blocks.py:18
+msgid "Image Position"
+msgstr "Position de l'image"
+
+#: core/blocks.py:22 core/blocks.py:153
+msgid "Text"
+msgstr "Texte"
+
+#: core/blocks.py:26 core/blocks.py:168
+msgid "Image"
+msgstr "Image"
+
+#: core/blocks.py:32
+msgid "Alt Text"
+msgstr "Titre de l'image (pour Google)"
+
+#: core/blocks.py:86
+msgid "Number of Publications"
+msgstr "Nombre de publications"
+
+#: core/blocks.py:164
+msgid "Centered Text"
+msgstr "Texte centré"
+
+#: core/blocks.py:171
+msgid "Image & Text Row"
+msgstr "Image et Texte sur une ligne"
+
+#: core/blocks.py:173
+msgid "Hero Block"
+msgstr "Bloc \"Hero\""
+
+#: core/blocks.py:174
+msgid "Card List Block"
+msgstr "Bloc Liste de cartes"
+
+#: core/blocks.py:175
+msgid "Testimonial Block"
+msgstr "Bloc de témoignages"
+
+#: core/blocks.py:176
+msgid "Recent Publications Block"
+msgstr "Bloc des publications récentes"
+
+#: core/blocks.py:177
+msgid "FAQ Block"
+msgstr "Bloc FAQ"
 
 #: core/models/city_district.py:11
 msgid "City District"
@@ -54,3 +110,161 @@ msgstr "Comité d'intérêt de quartier"
 #: core/models/neighborhood_association.py:18
 msgid "Neighborhood Associations"
 msgstr "Comités d'intérêt de quartier"
+
+#: core/models/user.py:13
+msgid "Citizen"
+msgstr "Citoyen"
+
+#: core/models/user.py:14
+msgid "Association Member"
+msgstr "Membre d'association"
+
+#: core/models/user.py:15
+msgid "Admin"
+msgstr "Administrateur"
+
+#: core/models/user.py:21
+msgid "The Email field must be set"
+msgstr "Le champ email doit être renseigné"
+
+#: core/models/user.py:37
+msgid "Superuser must have is_staff=True."
+msgstr "Le superutilisateur doit avoir is_staff=True."
+
+#: core/models/user.py:39
+msgid "Superuser must have is_superuser=True."
+msgstr "Le superutilisateur doit avoir is_superuser=True."
+
+#: core/models/user.py:45
+msgid "Email Address"
+msgstr "Adresse e-mail"
+
+#: core/models/user.py:47
+msgid "First Name"
+msgstr "Prénom"
+
+#: core/models/user.py:48
+msgid "Last Name"
+msgstr "Nom de famille"
+
+#: core/models/user.py:56
+#, fuzzy
+#| msgid "City Neighborhood"
+msgid "Neighborhood"
+msgstr "Quartier"
+
+#: core/models/user.py:58
+msgid "Postal Code"
+msgstr "Code postal"
+
+#: core/models/user.py:61
+msgid "Email Verified"
+msgstr "Email vérifié"
+
+#: core/models/user.py:63
+msgid "Is the user's email address verified?"
+msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
+
+#: core/models/user.py:66
+msgid "Role"
+msgstr "Rôle"
+
+#: core/models/user.py:72
+msgid "Phone Number"
+msgstr "Numéro de téléphone"
+
+#: core/models/user.py:74
+msgid "Newsletter Subscription"
+msgstr "Inscription à la newsletter"
+
+#: core/models/user.py:76
+msgid "Does the user want to receive the newsletter?"
+msgstr "L'utilisateur souhaite-t-il recevoir la newsletter ?"
+
+#: core/models/user.py:79
+msgid "Date Joined"
+msgstr "Date d'inscription"
+
+#: core/models/user.py:80
+msgid "Last Updated"
+msgstr "Dernière mise à jour"
+
+#: core/models/user.py:84
+msgid "Active"
+msgstr "Actif"
+
+#: core/models/user.py:86
+msgid "Designates whether this user should be treated as active."
+msgstr "Indique si cet utilisateur doit être considéré comme actif."
+
+#: core/models/user.py:89
+msgid "Staff Status"
+msgstr "Statut du personnel"
+
+#: core/models/user.py:91
+msgid "Designates whether the user can log into the admin site."
+msgstr "Indique si l'utilisateur peut se connecter à l'interface d'administration."
+
+#: core/models/user.py:100
+msgid "User"
+msgstr "Utilisateur"
+
+#: core/models/user.py:101
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: core/templates/core/blocks/card_list_block.html:18
+msgid "Learn More"
+msgstr "En savoir plus"
+
+#: core/templates/core/blocks/recent_publications_block.html:6
+msgid "Recent Publications"
+msgstr "Publications récentes"
+
+#: core/templates/core/blocks/recent_publications_block.html:9
+msgid "View All"
+msgstr "Voir tout"
+
+#: core/templates/core/blocks/recent_publications_block.html:41
+msgid "No recent publications found."
+msgstr "Aucune publication récente trouvée."
+
+#: core/wagtail_hooks.py:63 core/wagtail_hooks.py:77 core/wagtail_hooks.py:106
+msgid "Page d'accueil"
+msgstr "Page d'accueil"
+
+#: core/wagtail_hooks.py:83 core/wagtail_hooks.py:112
+msgid "Liste"
+msgstr "Liste"
+
+#: core/wagtail_hooks.py:89 core/wagtail_hooks.py:118
+msgid "Ajouter"
+msgstr "Ajouter"
+
+#: core/wagtail_hooks.py:96
+msgid "Publications"
+msgstr "Publications"
+
+#: core/wagtail_hooks.py:125
+msgid "Fiches Pédagogiques"
+msgstr "Fiches Pédagogiques"
+
+#: core/wagtail_hooks.py:138
+msgid "Charte de conduite"
+msgstr "Charte de conduite"
+
+#: core/wagtail_hooks.py:144
+msgid "Conditions d'utilisation"
+msgstr "Conditions d'utilisation"
+
+#: core/wagtail_hooks.py:150
+msgid "Politique de cookies"
+msgstr "Politique de cookies"
+
+#: core/wagtail_hooks.py:156
+msgid "Politique de confidentialité"
+msgstr "Politique de confidentialité"
+
+#: core/wagtail_hooks.py:163
+msgid "Légal"
+msgstr "Légal"
