@@ -5,7 +5,6 @@ import sentry_sdk
 
 def setup_sentry(dsn: str, environment: str) -> None:
     if environment not in ["production", "staging"]:
-        print(f"⚠️ Warning: Sentry is not configured for environment '{environment}'")
         return
 
     sentry_sdk.init(
