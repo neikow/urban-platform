@@ -33,24 +33,25 @@ def register_icons(icons: list[str]) -> list[str]:
 
 
 @hooks.register("construct_main_menu")
-def hide_images_menu_item(
-    request: HttpRequest, menu_items: list[MenuItem | SubmenuMenuItem]
-) -> None:
+def hide_menu_items(request: HttpRequest, menu_items: list[MenuItem | SubmenuMenuItem]) -> None:
     hidden_names = ["explorer", "reports", "help"]
 
-    admin_settings = [item for item in menu_items if item.name == "settings"][0]
+    admin_settings = [item for item in menu_items if item.name == "settings"]
 
-    settings_hidden_names = [
-        "sites",
-        "redirects",
-        "collections",
-    ]
+    if admin_settings:
+        admin_setting = admin_settings[0]
 
-    admin_settings.menu.registered_menu_items[:] = [
-        item
-        for item in admin_settings.menu.registered_menu_items
-        if item.name not in settings_hidden_names
-    ]
+        settings_hidden_names = [
+            "sites",
+            "redirects",
+            "collections",
+        ]
+
+        admin_setting.menu.registered_menu_items[:] = [
+            item
+            for item in admin_setting.menu.registered_menu_items
+            if item.name not in settings_hidden_names
+        ]
 
     menu_items[:] = [item for item in menu_items if item.name not in hidden_names]
 
