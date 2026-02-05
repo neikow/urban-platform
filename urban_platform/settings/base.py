@@ -194,6 +194,6 @@ WAGTAILDOCS_EXTENSIONS = [
 
 # Sentry Setup
 setup_sentry(
-    dsn=os.environ.get("SENTRY_DSN"),
+    dsn=os.environ.get("SENTRY_DSN", ""),
     environment=os.environ.get("ENVIRONMENT", "dev"),
 )
