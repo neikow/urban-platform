@@ -3,6 +3,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from urban_platform.tools.setup_sentry import setup_sentry
+
 load_dotenv()
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
@@ -189,3 +191,9 @@ WAGTAILDOCS_EXTENSIONS = [
     "xlsx",
     "zip",
 ]
+
+# Sentry Setup
+setup_sentry(
+    dsn=os.environ.get("SENTRY_DSN"),
+    environment=os.environ.get("ENVIRONMENT", "dev"),
+)

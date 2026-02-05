@@ -10,16 +10,39 @@ env:
   DOCKER_CONTAINER_NAME: urban-platform-staging
   DOCKER_IMAGE: neikow/urban-platform-staging
   DOCKER_REGISTRY: ghcr.io
+  SENTRY_ORG: ${{ vars.SENTRY_ORG }}
+  SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
 
 jobs:
   tests:
     name: Run CI Checks
     uses: ./.github/workflows/ci.yml
 
+  sentry-release:
+    name: Create Sentry Release
+    runs-on: ubuntu-latest
+    needs: tests
+    environment: staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Create Sentry release
+        uses: getsentry/action-release@v3
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ env.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ env.SENTRY_PROJECT }}
+        with:
+          environment: staging
+          version: ${{ github.sha }}
+
   build-and-push:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
-    needs: tests
+    needs: sentry-release
     environment: staging
     permissions:
       contents: read
@@ -38,12 +61,12 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
-        env:
-          DJANGO_SETTINGS_MODULE: urban_platform.settings.production
         with:
           context: .
           push: true
           tags: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}:latest
+          build-args: |
+            SENTRY_RELEASE=${{ github.sha }}
 
   deploy:
     name: Deploy Staging Server
@@ -101,6 +124,9 @@ jobs:
             echo "DOCKER_REGISTRY=${{ env.DOCKER_REGISTRY }}" >> .env
             echo "DOCKER_IMAGE=${{ env.DOCKER_IMAGE }}" >> .env
 
+            echo "SENTRY_DSN=${{ secrets.SENTRY_DSN }}" >> .env
+            echo "SENTRY_RELEASE=${{ github.sha }}" >> .env
+
       - name: Deploy Docker Containers
         uses: appleboy/ssh-action@v1.2.5
         with:
@@ -135,6 +161,4 @@ jobs:
           script: |
             cd ~/deployments/${{ env.DOCKER_CONTAINER_NAME }}
             echo "Running migrations"
-            docker compose exec web uv run python manage.py migrate
-            echo "Collecting static files"
-            docker compose exec web uv run python manage.py collectstatic --noinput --clear
+            docker compose exec web python manage.py migrate
