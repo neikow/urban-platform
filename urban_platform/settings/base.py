@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "django_filters",
+    "django_celery_beat",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -197,3 +198,20 @@ setup_sentry(
     dsn=os.environ.get("SENTRY_DSN", ""),
     environment=os.environ.get("ENVIRONMENT", "dev"),
 )
+
+# Email Configuration
+EMAIL_VERIFICATION_TOKEN_EXPIRY = 86400  # 24 hours in seconds
+PASSWORD_RESET_TOKEN_EXPIRY = 3600  # 1 hour in seconds
+EMAIL_EVENT_ANONYMIZE_DAYS = 30
+
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@example.com")
+DEFAULT_FROM_NAME = os.environ.get("DEFAULT_FROM_NAME", WEBSITE_NAME)
+
+# Celery Beat Schedule
+CELERY_BEAT_SCHEDULE = {
+    "anonymize-old-email-events": {
+        "task": "core.emails.tasks.anonymize_old_email_events",
+        "schedule": 86400,  # Run daily (24 hours in seconds)
+    },
+}
