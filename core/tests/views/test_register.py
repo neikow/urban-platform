@@ -1,7 +1,10 @@
+from unittest.mock import patch, MagicMock
+
 from django.contrib.auth import get_user_model
 import pytest
 
 from core.views.register import UserRegistrationForm
+from core.views.register import RegisterFormView
 
 VALID_REQUEST = {
     "email": "testuser@example.com",
@@ -145,3 +148,24 @@ class TestUserRegistrationForm:
 
         assert isinstance(form.fields["password"].widget, PasswordInput)
         assert isinstance(form.fields["confirm_password"].widget, PasswordInput)
+
+
+class TestUserRegistrationView:
+    @pytest.mark.django_db
+    @patch("core.views.register.UserRegistrationForm")
+    def test_registration_view_creates_user_and_sends_verification_email(self, mock_form_class):
+        mock_form = MagicMock()
+        mock_form.is_valid.return_value = True
+        mock_form.cleaned_data = VALID_REQUEST
+        mock_form_class.return_value = mock_form
+
+        with patch("core.emails.tasks.send_verification_email.delay") as mock_send_email:
+            view = RegisterFormView()
+            request = MagicMock()
+            view.request = request
+            response = view.form_valid(mock_form)
+
+            assert response.status_code == 302  # Redirect after successful registration
+            assert User.objects.filter(email=VALID_REQUEST["email"]).exists()
+            user = User.objects.get(email=VALID_REQUEST["email"])
+            mock_send_email.assert_called_once_with(user.pk)

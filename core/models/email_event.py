@@ -66,8 +66,3 @@ class EmailEvent(models.Model):
 
     def __str__(self) -> str:
         return f"{self.event_type} - {self.status} ({self.created_at})"
-
-    def anonymize(self) -> None:
-        self.user = None
-        self.recipient_email = ""
-        self.save(update_fields=["user", "recipient_email"])

@@ -3,10 +3,12 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 from django.test import override_settings
+from django.conf import settings
 
 from core.emails.services import (
     ConsoleEmailService,
     get_email_service,
+    FailedToSendEmail,
 )
 
 
@@ -125,7 +127,7 @@ class TestBrevoEmailService:
             mock_api.send_transac_email.assert_called_once()
 
     @override_settings(BREVO_API_KEY="test-api-key")
-    def test_send_email_failure_returns_false(self):
+    def test_send_email_failure_returns_raises_a(self):
         mock_sdk = MagicMock()
         mock_api = MagicMock()
         mock_sdk.Configuration.return_value = MagicMock()
@@ -142,14 +144,15 @@ class TestBrevoEmailService:
 
             service = BrevoEmailService()
 
-            result = service.send_email(
-                to_email="test@example.com",
-                to_name="Test User",
-                subject="Test Subject",
-                html_content="<p>Test content</p>",
-            )
+            with pytest.raises(FailedToSendEmail) as exc_info:
+                service.send_email(
+                    to_email="test@example.com",
+                    to_name="Test User",
+                    subject="Test Subject",
+                    html_content="<p>Test content</p>",
+                )
 
-            assert result is False
+            assert "Failed to send email via Brevo: API Error" in str(exc_info.value)
 
 
 class TestGetEmailService:
@@ -171,15 +174,7 @@ class TestGetEmailService:
                 service = get_email_service()
                 assert isinstance(service, BrevoEmailService)
 
+    @override_settings(EMAIL_SERVICE_BACKEND=None)
     def test_get_email_service_default_is_console(self):
-        from django.conf import settings
-
-        original = getattr(settings, "EMAIL_SERVICE_BACKEND", None)
-        try:
-            if hasattr(settings, "EMAIL_SERVICE_BACKEND"):
-                delattr(settings, "EMAIL_SERVICE_BACKEND")
-            service = get_email_service()
-            assert isinstance(service, ConsoleEmailService)
-        finally:
-            if original is not None:
-                settings.EMAIL_SERVICE_BACKEND = original
+        service = get_email_service()
+        assert isinstance(service, ConsoleEmailService)

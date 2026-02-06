@@ -1,7 +1,4 @@
 import time
-from unittest.mock import patch
-
-import pytest
 from django.test import override_settings
 
 from core.emails.tokens import (

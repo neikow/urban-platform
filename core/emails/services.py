@@ -4,8 +4,14 @@ from typing import TYPE_CHECKING
 from django.conf import settings
 from django.template.loader import render_to_string
 
+from sib_api_v3_sdk.rest import ApiException
+
 if TYPE_CHECKING:
     from core.models import User
+
+
+class FailedToSendEmail(Exception):
+    pass
 
 
 class EmailService(ABC):
@@ -102,8 +108,8 @@ class BrevoEmailService(EmailService):
         try:
             self.api_instance.send_transac_email(send_smtp_email)
             return True
-        except sib_api_v3_sdk.ApiException:
-            return False
+        except ApiException as e:
+            raise FailedToSendEmail(f"Failed to send email via Brevo: {e}")
 
 
 def get_email_service() -> EmailService:

@@ -45,20 +45,6 @@ class TestEmailEvent:
         assert EmailEventType.VERIFICATION in str_repr
         assert EmailEventStatus.SENT in str_repr
 
-    def test_anonymize_clears_user_and_email(self, user):
-        event = EmailEvent.objects.create(
-            user=user,
-            event_type=EmailEventType.PASSWORD_RESET,
-            status=EmailEventStatus.SENT,
-            recipient_email=user.email,
-        )
-
-        event.anonymize()
-
-        event.refresh_from_db()
-        assert event.user is None
-        assert event.recipient_email == ""
-
     def test_user_deletion_sets_null(self, user):
         event = EmailEvent.objects.create(
             user=user,

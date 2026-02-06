@@ -266,7 +266,7 @@ wheels = [
 [[package]]
 name = "django-celery-beat"
 version = "2.8.1"
-source = { git = "https://github.com/celery/django-celery-beat#5ca807e9fe446961073ee5d594fea0124ba0e6c0" }
+source = { git = "https://github.com/celery/django-celery-beat?rev=5ca807e9fe446961073ee5d594fea0124ba0e6c0#5ca807e9fe446961073ee5d594fea0124ba0e6c0" }
 dependencies = [
     { name = "celery" },
     { name = "cron-descriptor" },
@@ -1234,7 +1234,7 @@ dev = [
 requires-dist = [
     { name = "celery", extras = ["redis"], specifier = ">=5.5.0" },
     { name = "django", specifier = ">=6.0,<6.1" },
-    { name = "django-celery-beat", git = "https://github.com/celery/django-celery-beat" },
+    { name = "django-celery-beat", git = "https://github.com/celery/django-celery-beat?rev=5ca807e9fe446961073ee5d594fea0124ba0e6c0" },
     { name = "gunicorn", specifier = ">=23.0.0" },
     { name = "pre-commit", specifier = ">=4.5.1" },
     { name = "psycopg", specifier = ">=3.3.2" },

@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 from core.models import EmailEvent, EmailEventStatus, EmailEventType
-from .services import get_email_service
+from .services import get_email_service, FailedToSendEmail
 from .tokens import generate_verification_token, generate_password_reset_token
 
 User = get_user_model()
@@ -31,7 +31,6 @@ def send_verification_email(self: Task, user_id: int) -> bool:
     verification_url = f"{base_url}/auth/verify-email/{token}/"
 
     email_service = get_email_service()
-
     try:
         success = email_service.send_verification_email(user, verification_url)
         if success:
@@ -42,7 +41,7 @@ def send_verification_email(self: Task, user_id: int) -> bool:
             event.error_message = "Email service returned failure"
         event.save()
         return success
-    except Exception as e:
+    except FailedToSendEmail as e:
         event.status = EmailEventStatus.FAILED
         event.error_message = str(e)
         event.save()
@@ -79,7 +78,7 @@ def send_password_reset_email(self: Task, user_id: int) -> bool:
             event.error_message = "Email service returned failure"
         event.save()
         return success
-    except Exception as e:
+    except FailedToSendEmail as e:
         event.status = EmailEventStatus.FAILED
         event.error_message = str(e)
         event.save()
@@ -96,9 +95,9 @@ def anonymize_old_email_events() -> int:
         user__isnull=False,
     )
 
-    count = old_events.count()
-
-    for event in old_events:
-        event.anonymize()
+    count = old_events.update(
+        user=None,
+        recipient_email="",
+    )
 
     return count

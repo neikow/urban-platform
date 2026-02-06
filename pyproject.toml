@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-django-celery-beat = { git = "https://github.com/celery/django-celery-beat" }
+django-celery-beat = { git = "https://github.com/celery/django-celery-beat", rev = "5ca807e9fe446961073ee5d594fea0124ba0e6c0" }
 
 [tool.mypy]
 plugins = [

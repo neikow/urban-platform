@@ -1,11 +1,10 @@
 import typing
-from typing import Any
 
 from django import forms
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse, HttpResponseBase
 from django.shortcuts import redirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 
 from core.emails.tasks import send_password_reset_email
@@ -39,6 +38,7 @@ class PasswordResetRequestView(FormView):
             user = User.objects.get(email=email)
             send_password_reset_email.delay(user.pk)  # type: ignore[attr-defined]
         except User.DoesNotExist:
+            # Prevent user enumeration
             pass
 
         return super().form_valid(form)
@@ -61,7 +61,7 @@ class PasswordResetConfirmForm(PasswordValidationMixin, forms.Form):
         help_text="Minimum 8 caractères, 1 majuscule et 1 chiffre",
     )
 
-    def clean(self) -> dict[str, Any] | None:
+    def clean(self) -> dict[str, typing.Any] | None:
         cleaned_data = super().clean()
         if not cleaned_data:
             return None
@@ -89,7 +89,9 @@ class PasswordResetConfirmView(FormView):
     token: str
     reset_user: "User | None" = None
 
-    def dispatch(self, request: Any, *args: Any, **kwargs: Any) -> HttpResponseBase:
+    def dispatch(
+        self, request: typing.Any, *args: typing.Any, **kwargs: typing.Any
+    ) -> HttpResponseBase:
         self.token = kwargs.get("token", "")
         user_id = verify_password_reset_token(self.token)
 
