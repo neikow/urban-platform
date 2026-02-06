@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.signing import TimestampSigner, BadSignature, SignatureExpired
 
 VERIFICATION_SALT = "email-verification"
-PASSWORD_RESET_SALT = "password-reset"  # nosec - This salt is not used for security purposes, just to namespace the tokens.
+PASSWORD_RESET_SALT = "password-reset"  # nosec B105
 
 
 def generate_verification_token(user_id: int) -> str:
