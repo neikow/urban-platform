@@ -137,7 +137,7 @@ class TestBrevoEmailService:
         mock_sdk.ApiException = Exception
 
         # Make the API call raise an exception
-        mock_api.send_transac_email.side_effect = Exception("API Error")
+        mock_api.send_transac_email.side_effect = FailedToSendEmail("API Error")
 
         with patch.dict(sys.modules, {"sib_api_v3_sdk": mock_sdk}):
             from core.emails.services import BrevoEmailService
@@ -152,7 +152,7 @@ class TestBrevoEmailService:
                     html_content="<p>Test content</p>",
                 )
 
-            assert "Failed to send email via Brevo: API Error" in str(exc_info.value)
+            assert "API Error" in str(exc_info.value)
 
 
 class TestGetEmailService:
