@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from django.conf import settings
 from django.template.loader import render_to_string
 
-from sib_api_v3_sdk.rest import ApiException
+from sib_api_v3_sdk.rest import ApiException  # type: ignore[import-untyped]
 
 if TYPE_CHECKING:
     from core.models import User
