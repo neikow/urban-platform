@@ -1,4 +1,6 @@
-{% load static %}
+{% load static forms %}
+
+{% login_form as form %}
 
 <dialog id="login_modal" class="modal">
     <div class="modal-box w-full max-w-sm">
@@ -27,33 +29,9 @@
                 <span id="login-error-text"></span>
             </div>
 
-            <div class="form-control w-full">
-                <label class="label" for="id_email">
-                    <span class="label-text">Email</span>
-                </label>
-                <input
-                    type="email"
-                    name="email"
-                    id="id_email"
-                    class="input input-bordered w-full"
-                    required
-                    autocomplete="email"
-                >
-            </div>
+            {% include "components/forms/form_field.html" with field=form.email %}
 
-            <div class="form-control w-full">
-                <label class="label" for="id_password">
-                    <span class="label-text">Mot de passe</span>
-                </label>
-                <input
-                    type="password"
-                    name="password"
-                    id="id_password"
-                    class="input input-bordered w-full"
-                    required
-                    autocomplete="current-password"
-                >
-            </div>
+            {% include "components/forms/form_field.html" with field=form.password %}
 
             <div class="modal-action">
                 <button type="submit" class="btn btn-primary">Se connecter</button>
