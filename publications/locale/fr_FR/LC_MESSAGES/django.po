@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 15:46+0100\n"
+"POT-Creation-Date: 2026-02-07 19:20+0100\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: publications/models/event.py:17 publications/models/event.py:91
 #: publications/templates/publications/event_page.html:15
-#: publications/templates/publications/publication_index_page.html:142
+#: publications/templates/publications/publication_index_page.html:122
 msgid "Event"
 msgstr "Événement"
 
@@ -83,7 +83,7 @@ msgid "Nombre maximum de participants (laisser vide si illimité)"
 msgstr "Nombre maximum de participants (laisser vide pour illimité)"
 
 #: publications/models/event.py:92
-#: publications/templates/publications/publication_index_page.html:65
+#: publications/templates/publications/publication_index_page.html:45
 msgid "Events"
 msgstr "Événements"
 
@@ -135,7 +135,7 @@ msgstr "Utilisateur"
 #: publications/models/form.py:32 publications/models/project.py:37
 #: publications/models/project.py:100
 #: publications/templates/publications/admin/vote_stats.html:14
-#: publications/templates/publications/publication_index_page.html:147
+#: publications/templates/publications/publication_index_page.html:127
 msgid "Project"
 msgstr "Projet"
 
@@ -244,7 +244,7 @@ msgid "Leave empty for no end date"
 msgstr "Laisser vide pour pas de date de fin"
 
 #: publications/models/project.py:101
-#: publications/templates/publications/publication_index_page.html:59
+#: publications/templates/publications/publication_index_page.html:39
 msgid "Projects"
 msgstr "Projets"
 
@@ -467,7 +467,7 @@ msgid "Voting is closed for this project"
 msgstr "Le vote est fermé pour ce projet"
 
 #: publications/templates/publications/event_page.html:17
-#: publications/templates/publications/publication_index_page.html:144
+#: publications/templates/publications/publication_index_page.html:124
 msgid "Upcoming"
 msgstr "À venir"
 
@@ -509,29 +509,31 @@ msgstr "Contenu de la page"
 msgid "Latest Publications"
 msgstr "Dernières publications"
 
-#: publications/templates/publications/publication_index_page.html:38
+#: publications/templates/publications/publication_index_page.html:21
 #, fuzzy
 #| msgid "Latest Publications"
 msgid "Search publications"
 msgstr "Dernières publications"
 
-#: publications/templates/publications/publication_index_page.html:39
-msgid "Search..."
-msgstr "Rechercher..."
+#: publications/templates/publications/publication_index_page.html:22
+#, fuzzy
+#| msgid "Latest Publications"
+msgid "Search for a publication..."
+msgstr "Chercher une publication..."
 
-#: publications/templates/publications/publication_index_page.html:53
+#: publications/templates/publications/publication_index_page.html:33
 msgid "All"
 msgstr "Tout"
 
-#: publications/templates/publications/publication_index_page.html:77
+#: publications/templates/publications/publication_index_page.html:57
 msgid "All categories"
 msgstr "Toutes les catégories"
 
-#: publications/templates/publications/publication_index_page.html:164
+#: publications/templates/publications/publication_index_page.html:144
 msgid "View"
 msgstr "Voir"
 
-#: publications/templates/publications/publication_index_page.html:172
+#: publications/templates/publications/publication_index_page.html:152
 msgid "No publications found"
 msgstr "Aucune publication trouvée"
 
@@ -572,3 +574,6 @@ msgstr "Aucun vote à supprimer"
 #: publications/views/vote.py:125
 msgid "Vote removed successfully"
 msgstr "Vote supprimé avec succès"
+
+#~ msgid "Search..."
+#~ msgstr "Rechercher..."
