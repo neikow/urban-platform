@@ -1,9 +1,9 @@
 {% load wagtailimages_tags %}
 
-<div class="{% if container %}container mx-auto{% endif %} flex flex-col {% if value.position == 'left' %} md:flex-row {% else %} md:flex-row-reverse {% endif %} gap-4 md:gap-8 lg:gap-16 my-2 md:my-4 lg:my-8">
-    <div class="w-full px-4">
-        {% image value.image width-400 alt=value.alt_text class="w-full h-72 rounded-lg" %}
-    </div>
+<div class="{% if container %}container mx-auto{% endif %} flex flex-col {% if value.position == 'left' %} lg:flex-row {% else %} lg:flex-row-reverse {% endif %} gap-4 md:gap-8 lg:gap-16 my-2 md:my-4 lg:my-8">
+    <figure class="w-full px-4">
+        {% image value.image width-400 alt=value.alt_text class="w-full h-auto min-h-16 rounded-lg" %}
+    </figure>
     <div class="w-full text-justify my-2 md:my-4 lg:my-8 px-4">
         {{ value.paragraph|safe }}
     </div>
