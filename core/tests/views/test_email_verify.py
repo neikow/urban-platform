@@ -1,11 +1,13 @@
 import pytest
+import uuid
 from django.contrib.auth import get_user_model
 from django.test import Client
 from django.urls import reverse
 
+import core.models
 from core.emails.tokens import generate_verification_token
 
-User = get_user_model()
+User: type[core.models.User] = get_user_model()
 
 
 @pytest.fixture
@@ -27,7 +29,7 @@ def client():
 @pytest.mark.django_db
 class TestEmailVerifyView:
     def test_valid_token_verifies_user(self, client, user):
-        token = generate_verification_token(user.pk)
+        token = generate_verification_token(user.uuid)
 
         response = client.get(reverse("email_verify", kwargs={"token": token}))
 
@@ -50,14 +52,14 @@ class TestEmailVerifyView:
         user.is_verified = True
         user.save()
 
-        token = generate_verification_token(user.pk)
+        token = generate_verification_token(user.uuid)
         response = client.get(reverse("email_verify", kwargs={"token": token}))
 
         assert response.status_code == 302
         assert response.url == reverse("email_verify_success")
 
     def test_nonexistent_user_redirects_to_error(self, client, db):
-        token = generate_verification_token(99999)
+        token = generate_verification_token(uuid.uuid4())
         response = client.get(reverse("email_verify", kwargs={"token": token}))
 
         assert response.status_code == 302

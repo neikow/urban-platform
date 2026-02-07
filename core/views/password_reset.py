@@ -93,13 +93,13 @@ class PasswordResetConfirmView(FormView):
         self, request: typing.Any, *args: typing.Any, **kwargs: typing.Any
     ) -> HttpResponseBase:
         self.token = kwargs.get("token", "")
-        user_id = verify_password_reset_token(self.token)
+        user_uuid = verify_password_reset_token(self.token)
 
-        if user_id is None:
+        if user_uuid is None:
             return redirect("password_reset_error")
 
         try:
-            self.reset_user = User.objects.get(pk=user_id)
+            self.reset_user = User.objects.get(uuid=user_uuid)
         except User.DoesNotExist:
             return redirect("password_reset_error")
 

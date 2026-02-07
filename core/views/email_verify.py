@@ -11,13 +11,13 @@ User = get_user_model()
 
 class EmailVerifyView(View):
     def get(self, request: HttpRequest, token: str) -> HttpResponse:
-        user_id = verify_verification_token(token)
+        user_uuid = verify_verification_token(token)
 
-        if user_id is None:
+        if user_uuid is None:
             return redirect("email_verify_error")
 
         try:
-            user = User.objects.get(pk=user_id)
+            user = User.objects.get(uuid=user_uuid)
         except User.DoesNotExist:
             return redirect("email_verify_error")
 
