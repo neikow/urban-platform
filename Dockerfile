@@ -10,6 +10,9 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 WORKDIR /app
 ENV UV_COMPILE_BYTECODE=1 UV_NO_DEV=1
 
+ARG SENTRY_RELEASE
+ENV SENTRY_RELEASE=${SENTRY_RELEASE}
+
 RUN apt-get update && apt-get install -y \
     libpq5 \
     gettext \
@@ -25,21 +28,14 @@ RUN uv sync --locked
 
 ENV DJANGO_SETTINGS_MODULE="urban_platform.settings.production"
 
-RUN SECRET_KEY=dummy \
-    DB_NAME=dummy \
-    DB_USER=dummy \
-    DB_PASSWORD=dummy \
-    DB_HOST=dummy \
-    DB_PORT=5432 \
-    uv run manage.py collectstatic --noinput
+ARG SECRET_KEY=build-only-secret-key
+ARG DB_NAME=build
+ARG DB_USER=build
+ARG DB_PASSWORD=build
+ARG DB_HOST=localhost
+ARG DB_PORT=5432
 
-RUN SECRET_KEY=dummy \
-    DB_NAME=dummy \
-    DB_USER=dummy \
-    DB_PASSWORD=dummy \
-    DB_HOST=dummy \
-    DB_PORT=5432 \
-    uv run manage.py compilemessages
+RUN python manage.py collectstatic --noinput
+RUN python manage.py compilemessages
 
-# Run application
-CMD ["/app/.venv/bin/gunicorn", "urban_platform.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "urban_platform.wsgi:application", "--bind", "0.0.0.0:8000"]
