@@ -17,6 +17,10 @@
   --color-base-content: oklch(0.182 0.031 261.099);
 }
 
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
 @layer utilities {
     .last-breadcrumb {
         position: relative;

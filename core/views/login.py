@@ -6,11 +6,16 @@ from django.views import View
 from django import forms
 
 from .auth_mixins import JsonResponseMixin
+from ..widgets import DaisyEmailInput, DaisyPasswordInput
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(required=True, label="Email")
-    password = forms.CharField(widget=forms.PasswordInput, required=True, label="Mot de passe")
+    email = forms.EmailField(
+        required=True, label="Email", widget=DaisyEmailInput("jean.dupont@email.fr")
+    )
+    password = forms.CharField(
+        widget=DaisyPasswordInput(placeholder="••••••••"), required=True, label="Mot de passe"
+    )
 
     def clean(self) -> dict[str, Any] | None:
         cleaned_data = super().clean()
