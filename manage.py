@@ -3,12 +3,14 @@
 
 import os
 import sys
+from dotenv import load_dotenv
 
 
 def main() -> None:
+    load_dotenv()
     """Run administrative tasks."""
     if not os.environ.get("DJANGO_SETTINGS_MODULE"):
-        raise Exception("DJANGO_SETTINGS_MODULE not set.")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "urban_platform.settings.dev")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
