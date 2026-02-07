@@ -161,7 +161,10 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "Urban"
+WAGTAIL_SITE_NAME = WEBSITE_NAME
+LOCALE_PATHS = [
+    PROJECT_DIR / "locale",
+]
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html

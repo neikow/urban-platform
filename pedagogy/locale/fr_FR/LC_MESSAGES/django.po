@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-15 11:28+0100\n"
+"POT-Creation-Date: 2026-02-03 15:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,72 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: pedagogy/models/pedagogy_card.py:14
+#: pedagogy/models/pedagogy_card.py:24
 msgid "Pedagogy Card"
-msgstr "Fiche Pédagogique"
+msgstr "Fiche pédagogique"
 
-#: pedagogy/models/pedagogy_card.py:18
+#: pedagogy/models/pedagogy_card.py:29
 msgid "Card body content"
 msgstr "Contenu de la fiche pédagogique"
 
-#: pedagogy/models/pedagogy_card.py:19
+#: pedagogy/models/pedagogy_card.py:30
 msgid "The main content of the pedagogy card."
 msgstr "Le contenu principal de la fiche pédagogique."
 
-#: pedagogy/models/pedagogy_index.py:17
+#: pedagogy/models/pedagogy_card.py:39
+msgid "Card image"
+msgstr "Image de la fiche pédagogique"
+
+#: pedagogy/models/pedagogy_card.py:44
+msgid "Card description"
+msgstr "Description de la fiche pédagogique"
+
+#: pedagogy/models/pedagogy_card.py:45
+#, fuzzy
+#| msgid "The main content of the pedagogy card."
+msgid "A brief description of the pedagogy card."
+msgstr "Brève description de la fiche pédagogique."
+
+#: pedagogy/models/pedagogy_card.py:56
+msgid "Resource"
+msgstr "Ressource"
+
+#: pedagogy/models/pedagogy_index.py:30
+msgid "For search engines"
+msgstr "Pour les moteurs de recherche"
+
+#: pedagogy/models/pedagogy_index.py:38
 msgid "Page introduction"
 msgstr "Introduction de la page"
 
-#: pedagogy/models/pedagogy_index.py:19
+#: pedagogy/models/pedagogy_index.py:39
 msgid "Small introduction shown above the pedagogy card list."
-msgstr "Le contenu principal de la fiche pédagogique."
+msgstr "Petite introduction affichée au-dessus de la liste des fiches pédagogiques."
 
-#: pedagogy/models/pedagogy_index.py:25
+#: pedagogy/models/pedagogy_index.py:44
 msgid "Page body content"
 msgstr "Contenu de la page"
 
-#: pedagogy/models/pedagogy_index.py:26
+#: pedagogy/models/pedagogy_index.py:45
 msgid "Content for the pedagogy entries page."
 msgstr "Contenu supplémentaire pour la page des fiches pédagogiques."
 
-#: pedagogy/models/pedagogy_index.py:40 pedagogy/models/pedagogy_index.py:60
+#: pedagogy/models/pedagogy_index.py:60 pedagogy/models/pedagogy_index.py:86
 msgid "Pedagogy Entries Index"
-msgstr "Fiche Pédagogique"
+msgstr "Index des fiches pédagogiques"
+
+#: pedagogy/models/pedagogy_resource.py:15
+msgid "External URL"
+msgstr "URL externe"
+
+#: pedagogy/models/pedagogy_resource.py:22
+msgid "File Document"
+msgstr "Document"
+
+#: pedagogy/models/pedagogy_resource.py:33
+msgid "Please provide either a URL or a Document, but not both."
+msgstr "Veuillez fournir soit une URL, soit un document, mais pas les deux."
+
+#: pedagogy/models/pedagogy_resource.py:35
+msgid "Please provide either a URL or a Document."
+msgstr "Veuillez fournir soit une URL, soit un document."
