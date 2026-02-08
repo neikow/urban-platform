@@ -82,12 +82,12 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras --dev
 
-#      - name: Install Playwright browsers
-#        run: |
-#          uv run playwright install --with-deps chromium
+      - name: Install Playwright browsers
+        run: |
+          uv run playwright install --with-deps chromium
 
       - name: Run Tests
-        run: uv run pytest --junitxml=test-results.xml
+        run: uv run pytest -n auto --junitxml=test-results.xml
 
       - name: Upload Test Results
         if: always()
