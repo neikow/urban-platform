@@ -87,7 +87,7 @@ jobs:
           uv run playwright install --with-deps chromium
 
       - name: Run Tests
-        run: uv run pytest -n --junitxml=test-results.xml
+        run: uv run pytest -n auto --junitxml=test-results.xml
 
       - name: Upload Test Results
         if: always()
