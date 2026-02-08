@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -144,6 +146,28 @@ class ProfileEditViewTests(TestCase):
             "postal_code",
             "Le code postal doit contenir uniquement des chiffres.",
         )
+
+    @patch("core.views.profile_edit.send_verification_email.delay")
+    def test_email_change_sends_email(self, mock_send_verification_email) -> None:
+        self.user.is_verified = True
+        self.user.save()
+
+        self.client.force_login(self.user)
+
+        data = {
+            "email": "mynewemail@example.com",
+            "first_name": self.user.first_name,
+            "last_name": self.user.last_name,
+            "postal_code": self.user.postal_code,
+        }
+
+        response = self.client.post(self.profile_edit_url, data)
+
+        self.assertEqual(response.status_code, 302)
+        self.user.refresh_from_db()
+        self.assertFalse(self.user.is_verified)
+
+        mock_send_verification_email.assert_called_once_with(self.user.pk)  # type: ignore[attr-defined]
 
 
 class PasswordChangeViewTests(TestCase):

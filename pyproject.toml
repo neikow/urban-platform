@@ -5,7 +5,8 @@ description = "Add your description here"
 requires-python = ">=3.13"
 dependencies = [
     "celery[redis]>=5.5.0",
-    "django>=5.2,<6.1",
+    "django>=6.0,<6.1",
+    "django-celery-beat", # we temporarily install this from git because Django 6.0 support is not yet released
     "gunicorn>=23.0.0",
     "pre-commit>=4.5.1",
     "psycopg>=3.3.2",
@@ -13,9 +14,13 @@ dependencies = [
     "python-slugify>=8.0.4",
     "redis>=5.0.3,<6.5",
     "sentry-sdk>=2.52.0",
+    "sib-api-v3-sdk>=7.6.0",
     "tqdm>=4.67.1",
     "wagtail>=7.2.1",
 ]
+
+[tool.uv.sources]
+django-celery-beat = { git = "https://github.com/celery/django-celery-beat", rev = "5ca807e9fe446961073ee5d594fea0124ba0e6c0" }
 
 [tool.mypy]
 plugins = [

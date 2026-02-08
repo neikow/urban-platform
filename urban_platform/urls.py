@@ -13,6 +13,14 @@ from core.views.login import LoginView
 from core.views.logout import LogoutView
 from core.views.me import MeView
 from core.views.profile_edit import ProfileEditView, PasswordChangeView
+from core.views.email_verify import EmailVerifyView, EmailVerifySuccessView, EmailVerifyErrorView
+from core.views.password_reset import (
+    PasswordResetRequestView,
+    PasswordResetSentView,
+    PasswordResetConfirmView,
+    PasswordResetErrorView,
+    PasswordResetCompleteView,
+)
 from publications.views.vote import VoteView, VoteResultsView
 
 urlpatterns = [
@@ -23,6 +31,26 @@ urlpatterns = [
     path("auth/login/", LoginView.as_view(), name="login"),
     path("auth/logout/", LogoutView.as_view(), name="logout"),
     path("auth/register/", RegisterFormView.as_view(), name="register"),
+    path(
+        "auth/verify-email/success/", EmailVerifySuccessView.as_view(), name="email_verify_success"
+    ),
+    path("auth/verify-email/error/", EmailVerifyErrorView.as_view(), name="email_verify_error"),
+    path("auth/verify-email/<str:token>/", EmailVerifyView.as_view(), name="email_verify"),
+    path("auth/password-reset/", PasswordResetRequestView.as_view(), name="password_reset_request"),
+    path("auth/password-reset/sent/", PasswordResetSentView.as_view(), name="password_reset_sent"),
+    path(
+        "auth/password-reset/error/", PasswordResetErrorView.as_view(), name="password_reset_error"
+    ),
+    path(
+        "auth/password-reset/complete/",
+        PasswordResetCompleteView.as_view(),
+        name="password_reset_complete",
+    ),
+    path(
+        "auth/password-reset/<str:token>/",
+        PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
     path(
         "user/code-of-conduct-consent/",
         legal_views.CodeOfConductConsentView.as_view(),

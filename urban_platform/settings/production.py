@@ -50,3 +50,6 @@ SESSION_CACHE_ALIAS = "default"
 # Celery settings
 CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", REDIS_URL)
 CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", REDIS_URL)
+
+# Use Brevo email service in production
+EMAIL_SERVICE_BACKEND = "brevo"

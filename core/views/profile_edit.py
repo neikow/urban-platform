@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.views.generic.edit import FormView
 from django import forms
 from django.contrib import messages
+from core.emails.tasks import send_verification_email
 
 from .auth_mixins import PasswordValidationMixin
 from ..widgets import DaisyTextInput, DaisyPasswordInput, DaisyEmailInput, DaisyCheckboxInput
@@ -156,6 +157,7 @@ class ProfileEditView(LoginRequiredMixin, FormView):
 
         if email_changed:
             user.is_verified = False
+            send_verification_email.delay(user.pk)  # type: ignore[attr-defined]
             messages.warning(
                 self.request,
                 "Votre email a été modifié. Vous devrez le vérifier à nouveau.",

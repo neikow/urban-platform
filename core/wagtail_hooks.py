@@ -8,7 +8,7 @@ from home.models import HomePage
 from legal.models import CodeOfConductPage, CookiesPolicyPage, PrivacyPolicyPage, TermsOfServicePage
 from pedagogy.models import PedagogyIndexPage
 from publications.models import PublicationIndexPage
-from .models import NeighborhoodAssociation
+from .models import NeighborhoodAssociation, EmailEvent
 from django.utils.translation import gettext_lazy as _
 
 
@@ -25,6 +25,21 @@ class NeighborhoodAssociationViewSet(ModelViewSet):
 @hooks.register("register_admin_viewset")
 def register_neighborhood_association_viewset() -> NeighborhoodAssociationViewSet:
     return NeighborhoodAssociationViewSet("neighborhood_association")
+
+
+class EmailEventViewSet(ModelViewSet):
+    model = EmailEvent
+    menu_icon = "mail"
+    add_to_settings_menu = True
+    exclude_from_explorer = False
+    list_display = ["user", "event_type", "status", "recipient_email", "sent_at"]
+    search_fields = ["user__email", "recipient_email", "event_type", "status"]
+    form_fields = ["user", "event_type", "status", "recipient_email", "sent_at"]
+
+
+@hooks.register("register_admin_viewset")
+def register_email_event_viewset() -> EmailEventViewSet:
+    return EmailEventViewSet("register_email_event_viewset")
 
 
 @hooks.register("register_icons")
