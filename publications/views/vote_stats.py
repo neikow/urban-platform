@@ -98,6 +98,15 @@ class VoteStatsDetailView(WagtailAdminTemplateMixin, TemplateView):
             else:
                 percentages[choice.value] = 0
 
+        favorable_total = (
+            counts[VoteChoice.FAVORABLE.value] + counts[VoteChoice.RATHER_FAVORABLE.value]
+        )
+        unfavorable_total = (
+            counts[VoteChoice.UNFAVORABLE.value] + counts[VoteChoice.RATHER_UNFAVORABLE.value]
+        )
+        favorable_percentage = round((favorable_total / total) * 100, 1) if total > 0 else 0
+        unfavorable_percentage = round((unfavorable_total / total) * 100, 1) if total > 0 else 0
+
         votes_with_comments = (
             FormResponse.objects.filter(project=project)
             .exclude(comment="")
@@ -113,6 +122,10 @@ class VoteStatsDetailView(WagtailAdminTemplateMixin, TemplateView):
                 "counts": counts,
                 "counts_with_comment": counts_with_comment,
                 "percentages": percentages,
+                "favorable_total": favorable_total,
+                "favorable_percentage": favorable_percentage,
+                "unfavorable_total": unfavorable_total,
+                "unfavorable_percentage": unfavorable_percentage,
                 "is_voting_open": project.is_voting_open,
                 "votes_with_comments": votes_with_comments,
                 "vote_choices": VoteChoice,
