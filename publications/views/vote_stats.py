@@ -7,7 +7,12 @@ from django.views.generic import TemplateView
 from wagtail.admin.views.generic.base import WagtailAdminTemplateMixin
 
 from publications.models import ProjectPage
-from publications.models.form import FormResponse, VoteChoice
+from publications.models.form import (
+    FAVORABLE_VALUES,
+    FormResponse,
+    UNFAVORABLE_VALUES,
+    VoteChoice,
+)
 
 
 class VoteStatsView(WagtailAdminTemplateMixin, TemplateView):
@@ -29,12 +34,7 @@ class VoteStatsView(WagtailAdminTemplateMixin, TemplateView):
                 ),
                 favorable_count=Count(
                     "vote_responses",
-                    filter=Q(
-                        vote_responses__choice__in=[
-                            VoteChoice.FAVORABLE.value,
-                            VoteChoice.RATHER_FAVORABLE.value,
-                        ]
-                    ),
+                    filter=Q(vote_responses__choice__in=FAVORABLE_VALUES),
                 ),
             )
             .order_by("-first_published_at")
@@ -98,12 +98,8 @@ class VoteStatsDetailView(WagtailAdminTemplateMixin, TemplateView):
             else:
                 percentages[choice.value] = 0
 
-        favorable_total = (
-            counts[VoteChoice.FAVORABLE.value] + counts[VoteChoice.RATHER_FAVORABLE.value]
-        )
-        unfavorable_total = (
-            counts[VoteChoice.UNFAVORABLE.value] + counts[VoteChoice.RATHER_UNFAVORABLE.value]
-        )
+        favorable_total = sum(counts[choice] for choice in FAVORABLE_VALUES)
+        unfavorable_total = sum(counts[choice] for choice in UNFAVORABLE_VALUES)
         favorable_percentage = round((favorable_total / total) * 100, 1) if total > 0 else 0
         unfavorable_percentage = round((unfavorable_total / total) * 100, 1) if total > 0 else 0
 
