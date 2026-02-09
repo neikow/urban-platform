@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "django_filters",
+    "django_celery_beat",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -195,8 +196,22 @@ WAGTAILDOCS_EXTENSIONS = [
     "zip",
 ]
 
-# Sentry Setup
 setup_sentry(
     dsn=os.environ.get("SENTRY_DSN", ""),
     environment=os.environ.get("ENVIRONMENT", "dev"),
 )
+
+EMAIL_VERIFICATION_TOKEN_EXPIRY = 86400
+PASSWORD_RESET_TOKEN_EXPIRY = 3600
+EMAIL_EVENT_ANONYMIZE_DAYS = 30
+
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@example.com")
+DEFAULT_FROM_NAME = os.environ.get("DEFAULT_FROM_NAME", WEBSITE_NAME)
+
+CELERY_BEAT_SCHEDULE = {
+    "anonymize-old-email-events": {
+        "task": "core.emails.tasks.anonymize_old_email_events",
+        "schedule": 86400,
+    },
+}

@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.views.generic.edit import FormView
 from django import forms
 
+from core.emails.tasks import send_verification_email
 from legal.utils import has_valid_code_of_conduct_consent
 from .auth_mixins import PasswordValidationMixin, EmailValidationMixin
 from ..widgets import DaisyTextInput, DaisyPasswordInput, DaisyEmailInput
@@ -109,6 +110,8 @@ class RegisterFormView(FormView):
             last_name=last_name,
             postal_code=postal_code,
         )
+
+        send_verification_email.delay(self.user.pk)  # type: ignore[attr-defined]
 
         login(self.request, self.user)
 
