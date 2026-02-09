@@ -52,7 +52,7 @@
                             </div>
                         {% endif %}
 
-                        <form method="post" class="space-y-4">
+                        <form id="registration-form" method="post" class="space-y-4">
                             {% csrf_token %}
 
                             {% include "components/forms/form_field.html" with field=form.email %}

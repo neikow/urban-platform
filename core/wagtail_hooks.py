@@ -128,10 +128,10 @@ def register_pedagogic_entries_menu() -> MenuItem:
 
 @hooks.register("register_admin_menu_item")
 def register_legal_menu() -> MenuItem:
-    code_of_conduct = CodeOfConductPage.objects.first()
-    cookies_policy = CookiesPolicyPage.objects.first()
-    privacy_policy = PrivacyPolicyPage.objects.first()
-    terms_of_service = TermsOfServicePage.objects.first()
+    code_of_conduct = CodeOfConductPage.objects.live().first()
+    cookies_policy = CookiesPolicyPage.objects.live().first()
+    privacy_policy = PrivacyPolicyPage.objects.live().first()
+    terms_of_service = TermsOfServicePage.objects.live().first()
 
     submenu = Menu(
         items=[
