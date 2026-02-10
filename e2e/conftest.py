@@ -1,7 +1,11 @@
 import os
 from dataclasses import dataclass
+from typing import Any, Generator
 
 import pytest
+from django.conf import LazySettings
+from pytest_django.live_server_helper import LiveServer
+
 from core.models import User
 
 from wagtail.models import Site, Page, Locale
@@ -22,13 +26,13 @@ def pytest_configure(config: pytest.Config) -> None:
 
 
 @pytest.fixture(scope="function")
-def wagtail_locale():
+def wagtail_locale() -> Generator[Locale, Any, None]:
     locale, _ = Locale.objects.get_or_create(language_code="fr", defaults={"language_code": "fr"})
     yield locale
 
 
 @pytest.fixture(scope="function")
-def setup_wagtail_pages(wagtail_locale):
+def setup_wagtail_pages(wagtail_locale: Locale) -> None:
     root = Page.get_first_root_node()
     if not root:
         root = Page.add_root(title="Root", locale=wagtail_locale)
@@ -72,7 +76,7 @@ def create_legal_page(
     slug: str,
     filename: str,
     locale: Locale,
-):
+) -> None:
     base_dir = os.path.join("legal", "templates", "legal", "placeholders")
     file_path = os.path.join(base_dir, filename)
 
@@ -115,7 +119,7 @@ class LegalPageDefinition:
 
 
 @pytest.fixture(scope="function")
-def setup_legal_pages(wagtail_locale, setup_wagtail_pages):
+def setup_legal_pages(wagtail_locale: Locale, setup_wagtail_pages: None) -> None:
     legal_index = LegalIndexPage.objects.live().first()
     if not legal_index:
         home = HomePage.objects.first()
@@ -172,23 +176,23 @@ def setup_legal_pages(wagtail_locale, setup_wagtail_pages):
 
 
 @pytest.fixture(autouse=True)
-def enable_db_access_for_all_tests(db):
+def enable_db_access_for_all_tests(db: Any) -> None:
     """Automatically enable database access for all tests."""
     pass
 
 
 @pytest.fixture
-def email():
+def email() -> Generator[str, None, None]:
     yield "e2e.user@email.com"
 
 
 @pytest.fixture
-def password():
+def password() -> Generator[str, None, None]:
     yield "password123"
 
 
 @pytest.fixture
-def e2e_default_user(db, email, password):
+def e2e_default_user(db: Any, email: str, password: str) -> Generator[User, None, None]:
     user = User.objects.create_user(
         email=email,
         password=password,
@@ -200,7 +204,7 @@ def e2e_default_user(db, email, password):
 
 
 @pytest.fixture
-def e2e_wagtail_admin_user(db, email, password):
+def e2e_wagtail_admin_user(db: Any, email: str, password: str) -> Generator[User, None, None]:
     from django.contrib.auth.models import Group, Permission
     from wagtail.models import Page
 
@@ -231,7 +235,7 @@ def e2e_wagtail_admin_user(db, email, password):
 
 
 @pytest.fixture
-def e2e_superadmin_user(db, email, password):
+def e2e_superadmin_user(db: Any, email: str, password: str) -> Generator[User, None, None]:
     user = User.objects.create_superuser(
         email=email,
         password=password,
@@ -243,7 +247,9 @@ def e2e_superadmin_user(db, email, password):
 
 
 @pytest.fixture
-def live_server(live_server, settings):
+def live_server(
+    live_server: LiveServer, settings: LazySettings
+) -> Generator[LiveServer, None, None]:
     settings.STATIC_URL = live_server.url + "/static/"
     settings.DEBUG = True
 
