@@ -519,7 +519,7 @@ msgstr "Dernières publications"
 #, fuzzy
 #| msgid "Latest Publications"
 msgid "Search for a publication..."
-msgstr "Chercher une publication..."
+msgstr "Rechercher une publication..."
 
 #: publications/templates/publications/publication_index_page.html:33
 msgid "All"

@@ -232,7 +232,7 @@ msgstr "Aucune publication récente trouvée."
 
 #: core/templates/core/components/search/text_search_form.html:38
 msgid "Search"
-msgstr "Chercher"
+msgstr "Rechercher"
 
 #: core/wagtail_hooks.py:64 core/wagtail_hooks.py:78 core/wagtail_hooks.py:107
 msgid "Page d'accueil"

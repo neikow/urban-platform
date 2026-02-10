@@ -90,8 +90,8 @@ msgstr "Veuillez fournir soit une URL, soit un document."
 
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:22
 msgid "Search resources"
-msgstr "Chercher des ressources"
+msgstr "Rechercher des ressources"
 
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:23
 msgid "Search for a resource..."
-msgstr "Chercher une ressource..."
+msgstr "Rechercher une ressource..."
