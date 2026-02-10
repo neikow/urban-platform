@@ -1,4 +1,5 @@
 from typing import Any
+import uuid
 
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -43,6 +44,7 @@ class UserManager(BaseUserManager["User"]):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("Email Address"), unique=True)
+    uuid = models.UUIDField(_("UUID"), unique=True, default=uuid.uuid4, editable=False)
 
     first_name = models.CharField(_("First Name"), max_length=150)
     last_name = models.CharField(_("Last Name"), max_length=150)

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "django_filters",
+    "django_celery_beat",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -178,6 +179,8 @@ WAGTAILSEARCH_BACKENDS = {
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = os.environ.get("BASE_URL", "http://localhost:8000")
 
+# Disable Wagtail's default password reset functionality
+WAGTAIL_PASSWORD_RESET_ENABLED = False
 # Allowed file extensions for documents in the document library.
 # This can be omitted to allow all files, but note that this may present a security risk
 # if untrusted users are allowed to upload files -
@@ -195,8 +198,22 @@ WAGTAILDOCS_EXTENSIONS = [
     "zip",
 ]
 
-# Sentry Setup
 setup_sentry(
     dsn=os.environ.get("SENTRY_DSN", ""),
     environment=os.environ.get("ENVIRONMENT", "dev"),
 )
+
+EMAIL_VERIFICATION_TOKEN_EXPIRY = 86400
+PASSWORD_RESET_TOKEN_EXPIRY = 3600
+EMAIL_EVENT_ANONYMIZE_DAYS = 30
+
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@example.com")
+DEFAULT_FROM_NAME = os.environ.get("DEFAULT_FROM_NAME", WEBSITE_NAME)
+
+CELERY_BEAT_SCHEDULE = {
+    "anonymize-old-email-events": {
+        "task": "core.emails.tasks.anonymize_old_email_events",
+        "schedule": 86400,
+    },
+}
