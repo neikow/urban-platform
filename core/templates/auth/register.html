@@ -71,16 +71,10 @@
 
                             <div class="form-control">
                                 <div class="flex justify-start items-center gap-3">
-                                    <input
-                                        type="checkbox"
-                                        name="{{ form.accept_terms.html_name }}"
-                                        id="{{ form.accept_terms.id_for_label }}"
-                                        class="checkbox checkbox-primary shrink-0 mt-0.5 {% if form.accept_terms.errors %}checkbox-error{% endif %}"
-                                        required
-                                    >
+                                    {{ form.accept_terms }}
                                     <label
                                         for="{{ form.accept_terms.id_for_label }}"
-                                        class="text-sm cursor-pointer flex-1 min-w-0"
+                                        class="text-sm cursor-pointer flex-1 min-w-0 break-words"
                                     >
                                         J'accepte les
                                         <a
@@ -96,11 +90,23 @@
                                 </div>
                                 {% if form.accept_terms.errors %}
                                     <div class="mt-1">
-                                        <span class="label-text-alt text-error block">
+                                        <span class="label-text-alt text-error block break-words">
                                             {{ form.accept_terms.errors.0 }}
                                         </span>
                                     </div>
                                 {% endif %}
+                            </div>
+
+                            <div class="form-control">
+                                <div class="flex justify-start items-center gap-3">
+                                    {{ form.newsletter_subscription }}
+                                    <label
+                                        for="{{ form.newsletter_subscription.id_for_label }}"
+                                        class="text-sm cursor-pointer flex-1 min-w-0 break-words"
+                                    >
+                                        {{ form.newsletter_subscription.label }}
+                                    </label>
+                                </div>
                             </div>
 
                             <div class="form-control mt-6">
