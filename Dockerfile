@@ -16,6 +16,7 @@ ENV SENTRY_RELEASE=${SENTRY_RELEASE}
 RUN apt-get update && apt-get install -y \
     libpq5 \
     gettext \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/app/.venv/bin:$PATH"
