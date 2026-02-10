@@ -26,63 +26,120 @@
                     <div class="stats stats-vertical lg:stats-horizontal shadow">
                         <div class="stat">
                             <div class="stat-figure text-secondary">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-8 w-8"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                    />
                                 </svg>
                             </div>
                             <div class="stat-title">{% trans "Date" %}</div>
                             <div class="stat-value text-lg">{{ page.event_date|date:"d/m/Y" }}</div>
-                            <div class="stat-desc">{{ page.event_date|date:"H:i" }}{% if page.end_date %} - {{ page.end_date|date:"H:i" }}{% endif %}</div>
+                            <div class="stat-desc">
+                                {{ page.event_date|date:"H:i" }}{% if page.end_date %}
+                                    - {{ page.end_date|date:"H:i" }}{% endif %}
+                            </div>
                         </div>
 
                         {% if page.location %}
-                        <div class="stat">
-                            <div class="stat-figure text-secondary">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
+                            <div class="stat">
+                                <div class="stat-figure text-secondary">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-8 w-8"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                        />
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="stat-title">{% trans "Location" %}</div>
+                                <div class="stat-value text-lg">{{ page.location }}</div>
+                                {% if page.address %}
+                                    <div class="stat-desc">{{ page.address|truncatewords:5 }}</div>
+                                {% endif %}
                             </div>
-                            <div class="stat-title">{% trans "Location" %}</div>
-                            <div class="stat-value text-lg">{{ page.location }}</div>
-                            {% if page.address %}
-                            <div class="stat-desc">{{ page.address|truncatewords:5 }}</div>
-                            {% endif %}
-                        </div>
                         {% endif %}
 
                         {% if page.is_online %}
-                        <div class="stat">
-                            <div class="stat-figure text-secondary">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                </svg>
+                            <div class="stat">
+                                <div class="stat-figure text-secondary">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-8 w-8"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="stat-title">{% trans "Online" %}</div>
+                                <div class="stat-value text-lg">{% trans "Yes" %}</div>
+                                {% if page.online_link and page.is_upcoming %}
+                                    <div class="stat-desc">
+                                        <a
+                                            href="{{ page.online_link }}"
+                                            class="link link-primary"
+                                        >{% trans "Join" %}</a>
+                                    </div>
+                                {% endif %}
                             </div>
-                            <div class="stat-title">{% trans "Online" %}</div>
-                            <div class="stat-value text-lg">{% trans "Yes" %}</div>
-                            {% if page.online_link and page.is_upcoming %}
-                            <div class="stat-desc"><a href="{{ page.online_link }}" class="link link-primary">{% trans "Join" %}</a></div>
-                            {% endif %}
-                        </div>
                         {% endif %}
 
                         {% if page.max_participants %}
-                        <div class="stat">
-                            <div class="stat-figure text-secondary">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
+                            <div class="stat">
+                                <div class="stat-figure text-secondary">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-8 w-8"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="stat-title">{% trans "Max Participants" %}</div>
+                                <div class="stat-value text-lg">{{ page.max_participants }}</div>
                             </div>
-                            <div class="stat-title">{% trans "Max Participants" %}</div>
-                            <div class="stat-value text-lg">{{ page.max_participants }}</div>
-                        </div>
                         {% endif %}
                     </div>
                 </div>
                 {% if page.hero_image %}
-                <figure class="w-full">
-                    {% image page.hero_image fill-600x400 alt=page.title class="w-full h-56 lg:h-72 object-cover rounded-lg" %}
-                </figure>
+                    <figure class="w-full">
+                        {% image page.hero_image fill-600x400 alt=page.title class="w-full h-56 lg:h-72 object-cover rounded-lg" %}
+                    </figure>
                 {% endif %}
             </div>
         </header>
@@ -92,10 +149,10 @@
             </main>
 
             {% if page.address %}
-            <aside class="mt-8">
-                <h2 class="text-2xl font-bold mb-4">{% trans "Address" %}</h2>
-                <p class="text-base-content/70">{{ page.address }}</p>
-            </aside>
+                <aside class="mt-8">
+                    <h2 class="text-2xl font-bold mb-4">{% trans "Address" %}</h2>
+                    <p class="text-base-content/70">{{ page.address }}</p>
+                </aside>
             {% endif %}
         </div>
     </article>
