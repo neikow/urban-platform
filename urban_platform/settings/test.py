@@ -18,3 +18,12 @@ CACHES = {
         "LOCATION": "",
     }
 }
+
+# Celery settings for testing
+CELERY_TASK_ALWAYS_EAGER = True
+CELERY_TASK_EAGER_PROPAGATES = True
+CELERY_BROKER_URL = "memory://"
+CELERY_RESULT_BACKEND = "cache+memory://"
+
+# Use console email service in tests
+EMAIL_SERVICE_BACKEND = "console"

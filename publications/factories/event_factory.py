@@ -34,8 +34,10 @@ class EventPageFactory(BaseWagtailPageFactory):
     address = factory.Faker("address", locale="fr_FR")
     is_online = factory.Faker("boolean", chance_of_getting_true=20)
     online_link = factory.LazyAttribute(
-        lambda obj: f"https://example.com/event/{factory.fuzzy.FuzzyInteger(1000, 9999).fuzz()}"
-        if obj.is_online
-        else ""
+        lambda obj: (
+            f"https://example.com/event/{factory.fuzzy.FuzzyInteger(1000, 9999).fuzz()}"
+            if obj.is_online
+            else ""
+        )
     )
     max_participants = factory.fuzzy.FuzzyChoice([None, 20, 50, 100, 200])

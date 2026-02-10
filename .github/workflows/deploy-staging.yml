@@ -127,6 +127,10 @@ jobs:
             echo "SENTRY_DSN=${{ secrets.SENTRY_DSN }}" >> .env
             echo "SENTRY_RELEASE=${{ github.sha }}" >> .env
 
+            echo "BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}" >> .env
+            echo "DEFAULT_FROM_EMAIL=${{ vars.DEFAULT_FROM_EMAIL }}" >> .env
+            echo "DEFAULT_FROM_NAME=${{ vars.DEFAULT_FROM_NAME }}" >> .env
+
       - name: Deploy Docker Containers
         uses: appleboy/ssh-action@v1.2.5
         with:
