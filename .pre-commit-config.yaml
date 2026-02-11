@@ -1,3 +1,4 @@
+default_install_hook_types: [pre-commit, post-checkout, pre-push]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
@@ -39,7 +40,7 @@ repos:
         language: system
         always_run: true
         pass_filenames: false
-        stages: [pre-push]
+        stages: [ pre-push ]
       - id: mypy
         name: Run MyPy
         entry: uv run mypy .
