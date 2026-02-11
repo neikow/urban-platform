@@ -104,11 +104,11 @@ jobs:
 
       - name: Run End-to-End Tests
         if: matrix.tests == 'e2e'
-        run: uv run pytest e2e -n auto --junitxml=test-results-e2e.xml
+        run: uv run scripts/e2e.py ci
 
-      - name: Upload E2E Test Results
-        if: matrix.tests == 'e2e' && always()
+      - name: Upload Playwright Artifacts
+        if: matrix.tests == 'e2e' && failure()
         uses: actions/upload-artifact@v6
         with:
-          name: test-results-e2e
-          path: test-results-e2e.xml
+          name: playwright-artifacts
+          path: test-results/

@@ -1,5 +1,3 @@
-from django.urls import reverse
-from pytest_django.live_server_helper import LiveServer
 from playwright.sync_api import Page, expect
 
 from e2e.utils import login_user
@@ -7,23 +5,18 @@ from e2e.utils import login_user
 
 def test_wagtail_admin_access(
     page: Page,
-    e2e_wagtail_admin_user,
-    email: str,
-    password: str,
-    settings,
-    live_server: LiveServer,
-    setup_wagtail_pages,
-    setup_legal_pages,
+    base_url: str,
+    admin_email: str,
+    admin_password: str,
 ):
+    """Test that an admin user can access the Wagtail admin panel."""
     login_user(
         page=page,
-        live_server=live_server,
-        email=email,
-        password=password,
+        base_url=base_url,
+        email=admin_email,
+        password=admin_password,
     )
-    page.goto(live_server.url + "/admin/")
+    page.goto(base_url + "/admin/")
 
-    expect(page).to_have_url(
-        live_server.url + "/admin/",
-    )
-    expect(page.locator("header h1", has_text=settings.WEBSITE_NAME)).to_be_visible()
+    expect(page).to_have_url(base_url + "/admin/")
+    expect(page.locator("header h1")).to_be_visible()
