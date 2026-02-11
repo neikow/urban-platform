@@ -14,6 +14,7 @@ VALID_REQUEST = {
     "last_name": "User",
     "postal_code": "13001",
     "accept_terms": True,
+    "newsletter_subscription": True,
 }
 
 User = get_user_model()
@@ -140,6 +141,7 @@ class TestUserRegistrationForm:
         assert form.fields["last_name"].required is True
         assert form.fields["postal_code"].required is True
         assert form.fields["accept_terms"].required is True
+        assert form.fields["newsletter_subscription"].required is False
 
     def test_form_password_widgets_are_password_input(self):
         from django.forms.widgets import PasswordInput
@@ -148,6 +150,24 @@ class TestUserRegistrationForm:
 
         assert isinstance(form.fields["password"].widget, PasswordInput)
         assert isinstance(form.fields["confirm_password"].widget, PasswordInput)
+
+    def test_form_valid_with_newsletter_subscription(self):
+        data = VALID_REQUEST.copy()
+        data["newsletter_subscription"] = True
+
+        form = UserRegistrationForm(data=data)
+
+        assert form.is_valid()
+        assert form.cleaned_data["newsletter_subscription"] is True
+
+    def test_form_valid_without_newsletter_subscription(self):
+        data = VALID_REQUEST.copy()
+        data["newsletter_subscription"] = False
+
+        form = UserRegistrationForm(data=data)
+
+        assert form.is_valid()
+        assert form.cleaned_data.get("newsletter_subscription", False) is False
 
 
 class TestUserRegistrationView:

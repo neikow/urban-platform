@@ -10,7 +10,7 @@ from django import forms
 from core.emails.tasks import send_verification_email
 from legal.utils import has_valid_code_of_conduct_consent
 from .auth_mixins import PasswordValidationMixin, EmailValidationMixin
-from ..widgets import DaisyTextInput, DaisyPasswordInput, DaisyEmailInput
+from ..widgets import DaisyTextInput, DaisyPasswordInput, DaisyEmailInput, DaisyCheckboxInput
 
 if typing.TYPE_CHECKING:
     from core.models import User
@@ -48,9 +48,15 @@ class UserRegistrationForm(PasswordValidationMixin, EmailValidationMixin, forms.
     accept_terms = forms.BooleanField(
         required=True,
         label="J'accepte la charte de bonne conduite et les conditions d'utilisation",
+        widget=DaisyCheckboxInput(),
         error_messages={
             "required": "Vous devez accepter la charte de bonne conduite et les conditions d'utilisation pour vous inscrire."
         },
+    )
+    newsletter_subscription = forms.BooleanField(
+        required=False,
+        label="Je souhaite être informé(e) des actualités et des événements par email",
+        widget=DaisyCheckboxInput(),
     )
 
     def clean(self) -> dict[str, Any] | None:
@@ -102,6 +108,7 @@ class RegisterFormView(FormView):
         first_name = form.cleaned_data["first_name"]
         last_name = form.cleaned_data["last_name"]
         postal_code = form.cleaned_data["postal_code"]
+        newsletter_subscription = form.cleaned_data.get("newsletter_subscription", False)
 
         self.user = User.objects.create_user(
             email=email,
@@ -109,6 +116,7 @@ class RegisterFormView(FormView):
             first_name=first_name,
             last_name=last_name,
             postal_code=postal_code,
+            newsletter_subscription=newsletter_subscription,
         )
 
         send_verification_email.delay(self.user.pk)  # type: ignore[attr-defined]
