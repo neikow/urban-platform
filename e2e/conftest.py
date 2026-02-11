@@ -1,3 +1,4 @@
+import logging
 import os
 from dataclasses import dataclass
 from typing import Any, Generator
@@ -5,10 +6,13 @@ from typing import Any, Generator
 import pytest
 from django.conf import LazySettings
 from pytest_django.live_server_helper import LiveServer
+from wagtail.images.models import Image
 
 from core.models import User
 
-from wagtail.models import Site, Page, Locale
+from wagtail.models import Site, Page, Locale, Collection
+
+from core.tests.utils.factories import ImageFactory
 from home.models import HomePage
 from legal.models import (
     CodeOfConductPage,
@@ -19,6 +23,8 @@ from legal.models import (
 )
 from pedagogy.models import PedagogyIndexPage
 from publications.models import PublicationIndexPage
+
+logger = logging.getLogger(__name__)
 
 
 def pytest_configure(config: pytest.Config) -> None:
@@ -32,41 +38,59 @@ def wagtail_locale() -> Generator[Locale, Any, None]:
 
 
 @pytest.fixture(scope="function")
-def setup_wagtail_pages(wagtail_locale: Locale) -> None:
-    root = Page.get_first_root_node()
-    if not root:
-        root = Page.add_root(title="Root", locale=wagtail_locale)
+def wagtail_root(wagtail_locale: Locale) -> Generator[Page, Any, None]:
+    root = Page.add_root(title="Root", locale=wagtail_locale)
 
+    yield root
+
+    root.delete()
+
+
+@pytest.fixture(scope="function")
+def home_page(wagtail_locale: Locale, wagtail_root: Page) -> Generator[HomePage, Any, None]:
     home = HomePage.objects.first()
     if not home:
         home = HomePage(title="Home", slug="home")
-        root.add_child(instance=home)
+        wagtail_root.add_child(instance=home)
 
     home.save_revision().publish()
 
-    Site.objects.get_or_create(
+    site, _ = Site.objects.get_or_create(
         hostname="localhost", defaults={"root_page": home, "is_default_site": True}
     )
 
-    if not PublicationIndexPage.objects.live().exists():
+    yield home
+
+    site.delete()
+    home.delete()
+
+
+@pytest.fixture(scope="function")
+def setup_wagtail_pages(wagtail_locale: Locale, home_page: HomePage) -> Generator[None, None, None]:
+    if not (publication_index := PublicationIndexPage.objects.first()):
         publication_index = PublicationIndexPage(
             title="Publications",
             slug="publications",
             show_in_menus=True,
             page_introduction="Découvrez les projets et événements en cours et à venir dans votre quartier.",
         )
-        home.add_child(instance=publication_index)
-        publication_index.save_revision().publish()
+        home_page.add_child(instance=publication_index)
+    publication_index.save_revision().publish()
 
-    if not PedagogyIndexPage.objects.live().exists():
+    if not (pedagogy_index := PedagogyIndexPage.objects.first()):
         pedagogy_index = PedagogyIndexPage(
             title="Fiches pédagogiques",
             slug="fiches-pedagogiques",
             show_in_menus=True,
             page_introduction="Découvrez les fiches pédagogiques",
         )
-        home.add_child(instance=pedagogy_index)
-        pedagogy_index.save_revision().publish()
+        home_page.add_child(instance=pedagogy_index)
+    pedagogy_index.save_revision().publish()
+
+    yield None
+
+    pedagogy_index.delete()
+    publication_index.delete()
 
 
 def create_legal_page(
@@ -119,19 +143,17 @@ class LegalPageDefinition:
 
 
 @pytest.fixture(scope="function")
-def setup_legal_pages(wagtail_locale: Locale, setup_wagtail_pages: None) -> None:
+def setup_legal_pages(
+    wagtail_locale: Locale, home_page: HomePage, setup_wagtail_pages: None
+) -> Generator[None, None, None]:
     legal_index = LegalIndexPage.objects.live().first()
     if not legal_index:
-        home = HomePage.objects.first()
-        if not home:
-            raise RuntimeError("HomePage not found. Ensure it exists before running tests.")
-
         legal_index = LegalIndexPage(
             title="Legal",
             slug="legal",
             locale=wagtail_locale,
         )
-        home.add_child(instance=legal_index)
+        home_page.add_child(instance=legal_index)
         legal_index.save_revision().publish()
 
     if not legal_index.live:
@@ -174,6 +196,15 @@ def setup_legal_pages(wagtail_locale: Locale, setup_wagtail_pages: None) -> None
             locale=wagtail_locale,
         )
 
+    yield None
+
+    for definition in legal_definitions:
+        page = definition.page_class.objects.live().first()
+        if page:
+            page.delete()
+
+    legal_index.delete()
+
 
 @pytest.fixture(autouse=True)
 def enable_db_access_for_all_tests(db: Any) -> None:
@@ -202,13 +233,16 @@ def e2e_default_user(db: Any, email: str, password: str) -> Generator[User, None
     )
     yield user
 
+    user.delete()
+
 
 @pytest.fixture
-def e2e_wagtail_admin_user(db: Any, email: str, password: str) -> Generator[User, None, None]:
+def e2e_wagtail_admin_user(
+    db: Any, home_page: HomePage, email: str, password: str
+) -> Generator[User, None, None]:
     from django.contrib.auth.models import Group, Permission
-    from wagtail.models import Page
 
-    user = User.objects.create_user(
+    user = User.objects.create_superuser(
         email=email,
         password=password,
         first_name="E2E",
@@ -217,25 +251,29 @@ def e2e_wagtail_admin_user(db: Any, email: str, password: str) -> Generator[User
         is_staff=True,
     )
 
-    # Get or create the Editors group
-    editors_group, _ = Group.objects.get_or_create(name="Editors")
+    editors_group, _ = Group.objects.get_or_create(name="Moderator")
 
-    # Add Wagtail admin access permission
     wagtail_admin_permission = Permission.objects.get(codename="access_admin")
     editors_group.permissions.add(wagtail_admin_permission)
 
-    # Grant page permissions to the group on the root page
-    Page.get_first_root_node()
-    # Add user to the Editors group
+    editors_group.permissions.add(Permission.objects.get(codename="add_page"))
+    editors_group.permissions.add(Permission.objects.get(codename="change_page"))
+    editors_group.permissions.add(Permission.objects.get(codename="delete_page"))
+    editors_group.permissions.add(Permission.objects.get(codename="publish_page"))
+    editors_group.permissions.add(Permission.objects.get(codename="unlock_page"))
+    editors_group.permissions.add(Permission.objects.get(codename="add_revision"))
+
     user.groups.add(editors_group)
 
     user.save()
 
     yield user
 
+    user.delete()
+
 
 @pytest.fixture
-def e2e_superadmin_user(db: Any, email: str, password: str) -> Generator[User, None, None]:
+def e2e_superadmin_user(email: str, password: str) -> Generator[User, None, None]:
     user = User.objects.create_superuser(
         email=email,
         password=password,
@@ -243,7 +281,22 @@ def e2e_superadmin_user(db: Any, email: str, password: str) -> Generator[User, N
         last_name="Admin",
         postal_code="13007",
     )
+
     yield user
+
+    user.delete()
+
+
+@pytest.fixture
+def mock_image() -> Generator[Image, None, None]:
+    if collection := Collection.get_first_root_node() is None:
+        collection = Collection.add_root(
+            name="Root Collection",
+        )
+
+    yield ImageFactory.create(
+        collection=collection,
+    )
 
 
 @pytest.fixture

@@ -63,6 +63,9 @@ dev = [
 DJANGO_SETTINGS_MODULE = "urban_platform.settings.test"
 addopts = "--strict-markers --tb=short"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
+markers = [
+    "e2e: marks tests as end-to-end tests (deselect with '-m \"not e2e\"')",
+]
 
 [tool.djlint]
 profile = "django"
