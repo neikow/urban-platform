@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DEBUG = False
+DEBUG = True
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "e2e-test-secret-key-not-for-production")
 
@@ -42,5 +42,3 @@ CELERY_RESULT_BACKEND = "cache+memory://"
 
 # Use console email service in e2e tests
 EMAIL_SERVICE_BACKEND = "console"
-
-STORAGES["staticfiles"]["BACKEND"] = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
