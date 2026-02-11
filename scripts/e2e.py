@@ -357,10 +357,7 @@ def run_tests(
     if generate_artifacts:
         cmd.extend(
             [
-                "--screenshot=only-on-failure",
-                "--video=retain-on-failure",
-                "--trace=retain-on-failure",
-                "--output=test-results",
+                "--tracing=retain-on-failure",
             ]
         )
 
@@ -443,7 +440,7 @@ def main() -> None:
     elif args.command == "migrate":
         run_migrations()
     elif args.command == "ci":
-        reset_database()
+        setup()
         start_server(foreground=False)
         sys.exit(
             run_tests(
