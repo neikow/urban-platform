@@ -11,6 +11,8 @@ cd urban-platform
 uv sync
 
 cp .env.example .env
+
+pre-commit install --hook-type pre-commit --hook-type pre-push --hook-type post-checkout
 ```
 
 This will install all necessary dependencies and set up the development
