@@ -19,7 +19,7 @@ def setup_django() -> None:
     # Add project root to path so Django can find the settings module
     if str(PROJECT_ROOT) not in sys.path:
         sys.path.insert(0, str(PROJECT_ROOT))
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", E2E_SETTINGS_MODULE)
+    os.environ["DJANGO_SETTINGS_MODULE"] = E2E_SETTINGS_MODULE
     import django
 
     django.setup()
@@ -443,7 +443,7 @@ def main() -> None:
     elif args.command == "migrate":
         run_migrations()
     elif args.command == "ci":
-        setup()
+        reset_database()
         start_server(foreground=False)
         sys.exit(
             run_tests(
