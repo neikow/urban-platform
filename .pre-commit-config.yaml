@@ -1,3 +1,4 @@
+default_install_hook_types: [pre-commit, post-checkout, pre-push]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
@@ -31,22 +32,26 @@ repos:
         entry: uv sync
         language: system
         pass_filenames: false
+        always_run: true
         stages: [ post-checkout ]
       - id: tests
         name: Run Tests
         entry: uv run pytest
         language: system
+        always_run: true
         pass_filenames: false
-        stages: [pre-push]
+        stages: [ pre-push ]
       - id: mypy
         name: Run MyPy
         entry: uv run mypy .
         language: system
+        always_run: true
         pass_filenames: false
         stages: [ pre-push ]
       - id: run-tailwindcss-build
         name: Run TailwindCSS Build
         entry: npm run styles:build
         pass_filenames: false
+        always_run: true
         language: system
         stages: [post-checkout]
