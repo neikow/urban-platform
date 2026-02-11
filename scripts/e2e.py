@@ -5,6 +5,7 @@ import os
 import subprocess  # nosec
 import sys
 from pathlib import Path
+from typing import TypedDict
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 E2E_DB_PATH = PROJECT_ROOT / "db.e2e.sqlite3"
@@ -83,11 +84,9 @@ def populate_database() -> None:
 
     print("🌱 Populating E2E database...")
 
-    # Create or get locale
     locale, _ = Locale.objects.get_or_create(language_code="fr", defaults={"language_code": "fr"})
     print(f"  ✓ Locale: {locale.language_code}")
 
-    # Create root page if needed
     root = Page.objects.filter(depth=1).first()
     if not root:
         root = Page.add_root(title="Root", locale=locale)
@@ -95,7 +94,6 @@ def populate_database() -> None:
     else:
         print("  ✓ Root page exists")
 
-    # Create or get home page
     home = HomePage.objects.first()
     if not home:
         home = HomePage(title="Accueil", slug="home", locale=locale)
@@ -107,7 +105,6 @@ def populate_database() -> None:
             home.save_revision().publish()
         print("  ✓ Home page exists")
 
-    # Set up default site
     site, created = Site.objects.get_or_create(
         hostname="localhost",
         defaults={"root_page": home, "is_default_site": True, "port": E2E_SERVER_PORT},
@@ -119,7 +116,6 @@ def populate_database() -> None:
         site.save()
     print(f"  ✓ Site configured for localhost:{E2E_SERVER_PORT}")
 
-    # Create publication index
     if not PublicationIndexPage.objects.exists():
         publication_index = PublicationIndexPage(
             title="Publications",
@@ -134,7 +130,6 @@ def populate_database() -> None:
     else:
         print("  ✓ Publication index exists")
 
-    # Create pedagogy index
     if not PedagogyIndexPage.objects.exists():
         pedagogy_index = PedagogyIndexPage(
             title="Fiches pédagogiques",
@@ -149,7 +144,6 @@ def populate_database() -> None:
     else:
         print("  ✓ Pedagogy index exists")
 
-    # Create legal pages
     legal_index = LegalIndexPage.objects.first()
     if not legal_index:
         legal_index = LegalIndexPage(
@@ -165,8 +159,13 @@ def populate_database() -> None:
             legal_index.save_revision().publish()
         print("  ✓ Legal index exists")
 
-    # Legal page definitions
-    legal_pages = [
+    class LegalPageDefinition(TypedDict):
+        model: type[Page]
+        title: str
+        slug: str
+        filename: str
+
+    legal_pages: list[LegalPageDefinition] = [
         {
             "model": CodeOfConductPage,
             "title": "Charte de conduite",

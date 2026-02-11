@@ -18,12 +18,10 @@ E2E_BASE_URL = f"http://{E2E_SERVER_HOST}:{E2E_SERVER_PORT}"
 
 
 def pytest_configure(config: pytest.Config) -> None:
-    """Configure pytest for E2E tests."""
     os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "urban_platform.settings.e2e")
 
-    # Initialize Django so we can use Django utilities like reverse()
-    if not django.apps.apps.ready:
+    if not django.apps.apps.ready:  # type: ignore[attr-defined]
         django.setup()
 
 
