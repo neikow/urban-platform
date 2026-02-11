@@ -87,16 +87,6 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras --dev
 
-      - name: Install system dependencies
-        if: matrix.tests == 'e2e'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gettext
-
-      - name: Install Playwright browsers
-        run: |
-          uv run playwright install --with-deps chromium
-
       - name: Run Unit Tests
         if: matrix.tests == 'unit'
         run: uv run pytest --ignore e2e -n auto --junitxml=test-results-unit.xml
@@ -107,6 +97,17 @@ jobs:
         with:
           name: test-results-unit
           path: test-results-unit.xml
+
+      - name: Install system dependencies
+        if: matrix.tests == 'e2e'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gettext
+
+      - name: Install Playwright browsers
+        if: matrix.tests == 'e2e'
+        run: |
+          uv run playwright install --with-deps chromium
 
       - name: Run End-to-End Tests
         if: matrix.tests == 'e2e'
