@@ -64,6 +64,25 @@ def collect_static() -> None:
     print("✅ Static files collected")
 
 
+def compile_messages() -> None:
+    """Compile translation messages."""
+    print("🌐 Compiling translation messages...")
+    result = subprocess.run(  # nosec
+        [
+            sys.executable,
+            "manage.py",
+            "compilemessages",
+            "--settings",
+            E2E_SETTINGS_MODULE,
+        ],
+        cwd=PROJECT_ROOT,
+    )
+    if result.returncode != 0:
+        print("❌ Message compilation failed")
+        sys.exit(1)
+    print("✅ Messages compiled")
+
+
 def populate_database() -> None:
     """Populate the E2E database with required test data."""
     setup_django()
@@ -379,6 +398,7 @@ def setup(skip_static: bool = False) -> None:
         run_migrations()
 
     if not skip_static:
+        compile_messages()
         collect_static()
 
     populate_database()
