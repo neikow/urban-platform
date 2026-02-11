@@ -7,17 +7,19 @@
     </div>
 {% endblock %}
 
+{% block branding_favicon %}
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+{% endblock %}
+
 {% block extra_css %}
+    {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static 'css/wagtail_overrides.css' %}">
 {% endblock %}
 
 {% block extra_js %}
+    {{ block.super }}
     <script>
         document.documentElement.setAttribute("data-theme", "light");
     </script>
-{% endblock %}
-
-{% block branding_favicon %}
-    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 {% endblock %}

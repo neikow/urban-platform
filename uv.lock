@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 2
 requires-python = ">=3.13"
 
 [[package]]
@@ -1231,19 +1231,19 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "celery", extras = ["redis"], specifier = ">=5.5.0" },
-    { name = "django", specifier = ">=6.0,<6.1" },
+    { name = "celery", extras = ["redis"], specifier = "==5.6.2" },
+    { name = "django", specifier = "==6.0.2" },
     { name = "django-celery-beat", git = "https://github.com/celery/django-celery-beat?rev=5ca807e9fe446961073ee5d594fea0124ba0e6c0" },
-    { name = "gunicorn", specifier = ">=23.0.0" },
-    { name = "pre-commit", specifier = ">=4.5.1" },
-    { name = "psycopg", specifier = ">=3.3.2" },
-    { name = "python-dotenv", specifier = ">=1.2.1" },
-    { name = "python-slugify", specifier = ">=8.0.4" },
-    { name = "redis", specifier = ">=5.0.3,<6.5" },
-    { name = "sentry-sdk", specifier = ">=2.52.0" },
-    { name = "sib-api-v3-sdk", specifier = ">=7.6.0" },
-    { name = "tqdm", specifier = ">=4.67.1" },
-    { name = "wagtail", specifier = ">=7.2.1" },
+    { name = "gunicorn", specifier = "==25.0.3" },
+    { name = "pre-commit", specifier = "==4.5.1" },
+    { name = "psycopg", specifier = "==3.3.2" },
+    { name = "python-dotenv", specifier = "==1.2.1" },
+    { name = "python-slugify", specifier = "==8.0.4" },
+    { name = "redis", specifier = "==6.4.0" },
+    { name = "sentry-sdk", specifier = "==2.52.0" },
+    { name = "sib-api-v3-sdk", specifier = "==7.6.0" },
+    { name = "tqdm", specifier = "==4.67.3" },
+    { name = "wagtail", specifier = "==7.3" },
 ]
 
 [package.metadata.requires-dev]
