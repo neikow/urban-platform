@@ -85,6 +85,12 @@ python scripts/e2e.py setup
   python scripts/e2e.py migrate
   ```
 
+- **Run CI**:
+  This prepares and runs the full E2E suite in headless mode, suitable for CI environments:
+  ```bash
+  python scripts/e2e.py ci
+  ```
+
 ### Test Users
 
 The following test users are created by the setup script:
