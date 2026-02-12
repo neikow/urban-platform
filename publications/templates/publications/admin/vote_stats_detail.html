@@ -83,6 +83,41 @@
 
         {% if total_votes > 0 %}
             <div class="w-bg-surface-page w-p-6 w-rounded-lg">
+                <!-- Summary Box: Favorable vs Unfavorable -->
+                <div class="w-flex w-flex-wrap w-justify-center w-gap-4 w-mb-6">
+                    <div
+                        class="w-bg-surface-page w-p-4 w-border w-border-border-furniture w-flex-1"
+                        style="border-radius: 12px; min-width: 150px; max-width: 200px"
+                    >
+                        <span
+                            class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium w-mb-2"
+                            style="background-color: #dcfce7; color: #166534"
+                        >
+                            {% trans "Favorable" %}
+                        </span>
+                        <div class="w-text-2xl w-font-bold">
+                            {{ favorable_total }} <span class="w-text-sm w-font-normal w-text-text-meta"
+                            >({{ favorable_percentage }}%)</span>
+                        </div>
+                    </div>
+                    <div
+                        class="w-bg-surface-page w-p-4 w-border w-border-border-furniture w-flex-1"
+                        style="border-radius: 12px; min-width: 150px; max-width: 200px"
+                    >
+                        <span
+                            class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium w-mb-2"
+                            style="background-color: #fef2f2; color: #991b1b"
+                        >
+                            {% trans "Unfavorable" %}
+                        </span>
+                        <div class="w-text-2xl w-font-bold">
+                            {{ unfavorable_total }} <span class="w-text-sm w-font-normal w-text-text-meta"
+                            >({{ unfavorable_percentage }}%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pie Chart -->
                 <div class="w-flex w-justify-center w-mt-4 w-mb-8">
                     <div style="width: 250px; height: 250px">
                         <canvas id="pieChart"></canvas>
@@ -203,8 +238,8 @@
                                 class="w-bg-surface-page w-p-4 w-border w-border-border-furniture"
                                 style="border-radius: 12px"
                             >
-                                <div class="w-flex w-justify-between w-items-start w-mb-2">
-                                    <div class="w-flex w-items-center w-gap-2">
+                                <div class="w-flex w-flex-wrap w-justify-between w-items-start w-gap-2 w-mb-2">
+                                    <div class="w-flex w-flex-wrap w-items-center w-gap-2">
                                         {% if vote.choice == "FAVORABLE" %}
                                             <span
                                                 class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium"

@@ -10,6 +10,15 @@ class VoteChoice(models.TextChoices):
     FAVORABLE = "FAVORABLE", _("Favorable")
 
 
+# Shared constants for grouping vote choices
+FAVORABLE_CHOICES = (VoteChoice.FAVORABLE, VoteChoice.RATHER_FAVORABLE)
+UNFAVORABLE_CHOICES = (VoteChoice.UNFAVORABLE, VoteChoice.RATHER_UNFAVORABLE)
+
+# Value-based versions for use in queryset filters
+FAVORABLE_VALUES = tuple(choice.value for choice in FAVORABLE_CHOICES)
+UNFAVORABLE_VALUES = tuple(choice.value for choice in UNFAVORABLE_CHOICES)
+
+
 class FormResponse(models.Model):
     """
     Represents a user's vote response on a project.
