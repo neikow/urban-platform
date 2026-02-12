@@ -47,7 +47,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     voteChoices.forEach(choice => {
         choice.addEventListener('change', function() {
-            if (voteSubmitBtn) voteSubmitBtn.disabled = false;
+            if (this.checked) {
+                voteChoices.forEach(other => {
+                    if (other !== this) {
+                        other.checked = false;
+                    }
+                });
+                if (voteSubmitBtn) voteSubmitBtn.disabled = false;
+            } else {
+                const anyChecked = Array.from(voteChoices).some(c => c.checked);
+                if (voteSubmitBtn) voteSubmitBtn.disabled = !anyChecked;
+            }
         });
     });
 
