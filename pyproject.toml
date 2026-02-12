@@ -55,12 +55,17 @@ dev = [
     "pytest-django>=4.11.1",
     "pytest-env>=1.2.0",
     "pytest-playwright>=0.7.2",
+    "pytest-xdist>=3.8.0",
     "ruff>=0.9.4",
 ]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "urban_platform.settings.test"
+addopts = "--strict-markers --tb=short"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
+markers = [
+    "e2e: marks tests as end-to-end tests (deselect with '-m \"not e2e\"')",
+]
 
 [tool.djlint]
 profile = "django"

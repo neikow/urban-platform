@@ -1,8 +1,11 @@
+import logging
+
 from django.http import HttpRequest
 from django.urls import reverse
 from wagtail.admin.menu import MenuItem, Menu, SubmenuMenuItem
 from wagtail.admin.viewsets.model import ModelViewSet
 from wagtail import hooks
+from wagtail.models import Page
 
 from home.models import HomePage
 from legal.models import CodeOfConductPage, CookiesPolicyPage, PrivacyPolicyPage, TermsOfServicePage
@@ -114,7 +117,7 @@ def register_publications_menu() -> MenuItem:
 
 @hooks.register("register_admin_menu_item")
 def register_pedagogic_entries_menu() -> MenuItem:
-    index_page = PedagogyIndexPage.objects.first()
+    index_page = PedagogyIndexPage.objects.live().first()
 
     submenu = Menu(
         items=[
@@ -143,10 +146,10 @@ def register_pedagogic_entries_menu() -> MenuItem:
 
 @hooks.register("register_admin_menu_item")
 def register_legal_menu() -> MenuItem:
-    code_of_conduct = CodeOfConductPage.objects.first()
-    cookies_policy = CookiesPolicyPage.objects.first()
-    privacy_policy = PrivacyPolicyPage.objects.first()
-    terms_of_service = TermsOfServicePage.objects.first()
+    code_of_conduct = CodeOfConductPage.objects.live().first()
+    cookies_policy = CookiesPolicyPage.objects.live().first()
+    privacy_policy = PrivacyPolicyPage.objects.live().first()
+    terms_of_service = TermsOfServicePage.objects.live().first()
 
     submenu = Menu(
         items=[

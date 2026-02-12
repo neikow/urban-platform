@@ -35,8 +35,8 @@ repos:
         always_run: true
         stages: [ post-checkout ]
       - id: tests
-        name: Run Tests
-        entry: uv run pytest
+        name: Run Unit Tests
+        entry: uv run pytest --ignore=e2e -n auto
         language: system
         always_run: true
         pass_filenames: false

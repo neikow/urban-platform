@@ -59,6 +59,11 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        tests: [ unit, e2e ]
+
     env:
       DJANGO_SETTINGS_MODULE: urban_platform.settings.test
       SECRET_KEY: "test-key"
@@ -82,16 +87,35 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras --dev
 
-#      - name: Install Playwright browsers
-#        run: |
-#          uv run playwright install --with-deps chromium
+      - name: Run Unit Tests
+        if: matrix.tests == 'unit'
+        run: uv run pytest --ignore e2e -n auto --junitxml=test-results-unit.xml
 
-      - name: Run Tests
-        run: uv run pytest --junitxml=test-results.xml
-
-      - name: Upload Test Results
-        if: always()
+      - name: Upload Unit Test Results
+        if: matrix.tests == 'unit' && always()
         uses: actions/upload-artifact@v6
         with:
-          name: test-results
-          path: test-results.xml
+          name: test-results-unit
+          path: test-results-unit.xml
+
+      - name: Install system dependencies
+        if: matrix.tests == 'e2e'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gettext
+
+      - name: Install Playwright browsers
+        if: matrix.tests == 'e2e'
+        run: |
+          uv run playwright install --with-deps chromium
+
+      - name: Run End-to-End Tests
+        if: matrix.tests == 'e2e'
+        run: uv run scripts/e2e.py ci
+
+      - name: Upload Playwright Artifacts
+        if: matrix.tests == 'e2e' && failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: playwright-artifacts
+          path: test-results/

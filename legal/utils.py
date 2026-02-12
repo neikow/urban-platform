@@ -21,7 +21,7 @@ def has_valid_code_of_conduct_consent(user: User) -> bool:
 
 
 def get_latest_code_of_conduct_revision() -> Revision:
-    code_of_conduct_page: CodeOfConductPage = CodeOfConductPage.objects.first()
+    code_of_conduct_page: CodeOfConductPage = CodeOfConductPage.objects.live().first()
     latest_revision = code_of_conduct_page.revisions.order_by("-created_at").first()
     return latest_revision
 
