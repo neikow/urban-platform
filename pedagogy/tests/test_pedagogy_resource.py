@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 from wagtail.documents.models import Document
 from wagtail.models import Page
+from django.utils.translation import gettext_lazy as _
 
 from pedagogy.models import PedagogyCardPage
 from pedagogy.models.pedagogy_resource import PedagogyResource
@@ -40,7 +41,7 @@ class PedagogyResourceTest(TestCase):
             resource.clean()
 
         self.assertIn(
-            "Please provide either a URL or a Document, but not both.",
+            str(_("Please provide either a URL or a Document, but not both.")),
             str(cm.exception),
         )
 
@@ -50,6 +51,6 @@ class PedagogyResourceTest(TestCase):
             resource.clean()
 
         self.assertIn(
-            "Please provide either a URL or a Document.",
+            str(_("Please provide either a URL or a Document.")),
             str(cm.exception),
         )

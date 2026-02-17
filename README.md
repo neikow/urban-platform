@@ -9,6 +9,7 @@ git clone git@github.com:neikow/urban-platform.git
 cd urban-platform
 
 uv sync
+pre-commit install
 
 cp .env.example .env
 ```
