@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 15:46+0100\n"
+"POT-Creation-Date: 2026-02-07 19:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -203,7 +203,8 @@ msgstr "Statut du personnel"
 
 #: core/models/user.py:91
 msgid "Designates whether the user can log into the admin site."
-msgstr "Indique si l'utilisateur peut se connecter à l'interface d'administration."
+msgstr ""
+"Indique si l'utilisateur peut se connecter à l'interface d'administration."
 
 #: core/models/user.py:100
 msgid "User"
@@ -229,42 +230,46 @@ msgstr "Voir tout"
 msgid "No recent publications found."
 msgstr "Aucune publication récente trouvée."
 
-#: core/wagtail_hooks.py:63 core/wagtail_hooks.py:77 core/wagtail_hooks.py:106
+#: core/templates/core/components/search/text_search_form.html:38
+msgid "Search"
+msgstr "Rechercher"
+
+#: core/wagtail_hooks.py:64 core/wagtail_hooks.py:78 core/wagtail_hooks.py:107
 msgid "Page d'accueil"
 msgstr "Page d'accueil"
 
-#: core/wagtail_hooks.py:83 core/wagtail_hooks.py:112
+#: core/wagtail_hooks.py:84 core/wagtail_hooks.py:113
 msgid "Liste"
 msgstr "Liste"
 
-#: core/wagtail_hooks.py:89 core/wagtail_hooks.py:118
+#: core/wagtail_hooks.py:90 core/wagtail_hooks.py:119
 msgid "Ajouter"
 msgstr "Ajouter"
 
-#: core/wagtail_hooks.py:96
+#: core/wagtail_hooks.py:97
 msgid "Publications"
 msgstr "Publications"
 
-#: core/wagtail_hooks.py:125
+#: core/wagtail_hooks.py:126
 msgid "Fiches Pédagogiques"
 msgstr "Fiches Pédagogiques"
 
-#: core/wagtail_hooks.py:138
+#: core/wagtail_hooks.py:139
 msgid "Charte de conduite"
 msgstr "Charte de conduite"
 
-#: core/wagtail_hooks.py:144
+#: core/wagtail_hooks.py:145
 msgid "Conditions d'utilisation"
 msgstr "Conditions d'utilisation"
 
-#: core/wagtail_hooks.py:150
+#: core/wagtail_hooks.py:151
 msgid "Politique de cookies"
 msgstr "Politique de cookies"
 
-#: core/wagtail_hooks.py:156
+#: core/wagtail_hooks.py:157
 msgid "Politique de confidentialité"
 msgstr "Politique de confidentialité"
 
-#: core/wagtail_hooks.py:163
+#: core/wagtail_hooks.py:164
 msgid "Légal"
 msgstr "Légal"

@@ -18,29 +18,9 @@
                 <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold">
                     {% trans "Latest Publications" %}
                 </h2>
-                <form class="flex gap-2">
-                    <label class="input">
-                        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <g
-                                stroke-linejoin="round"
-                                stroke-linecap="round"
-                                stroke-width="2.5"
-                                fill="none"
-                                stroke="currentColor"
-                            >
-                                <circle cx="11" cy="11" r="8" />
-                                <path d="m21 21-4.3-4.3" />
-                            </g>
-                        </svg>
-                        <input
-                            type="search"
-                            name="search"
-                            aria-label="{% trans 'Search publications' %}"
-                            placeholder="{% trans 'Search...' %}"
-                            value="{{ request.GET.search|default:"" }}"
-                        >
-                    </label>
-                </form>
+                {% trans 'Search publications' as aria_label %}
+                {% trans "Search for a publication..." as placeholder %}
+                {% include "core/components/search/text_search_form.html" with aria_label=aria_label placeholder=placeholder %}
             </div>
 
             <!-- Type filter -->
