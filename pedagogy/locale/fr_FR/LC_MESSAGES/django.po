@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 15:46+0100\n"
+"POT-Creation-Date: 2026-02-26 18:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,8 @@ msgstr "Introduction de la page"
 
 #: pedagogy/models/pedagogy_index.py:39
 msgid "Small introduction shown above the pedagogy card list."
-msgstr "Petite introduction affichée au-dessus de la liste des fiches pédagogiques."
+msgstr ""
+"Petite introduction affichée au-dessus de la liste des fiches pédagogiques."
 
 #: pedagogy/models/pedagogy_index.py:44
 msgid "Page body content"
@@ -80,9 +81,11 @@ msgid "File Document"
 msgstr "Document"
 
 #: pedagogy/models/pedagogy_resource.py:33
+#: pedagogy/tests/test_pedagogy_resource.py:44
 msgid "Please provide either a URL or a Document, but not both."
 msgstr "Veuillez fournir soit une URL, soit un document, mais pas les deux."
 
 #: pedagogy/models/pedagogy_resource.py:35
+#: pedagogy/tests/test_pedagogy_resource.py:54
 msgid "Please provide either a URL or a Document."
 msgstr "Veuillez fournir soit une URL, soit un document."

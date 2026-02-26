@@ -7,13 +7,13 @@ from core.blocks import (
     ImagePosition,
     BLOCK_TYPE_TEXT,
     BLOCK_TYPE_IMAGE,
-    BLOCK_TYPE_IMAGE_TEXT,
+    DEPRECATED_BLOCK_TYPE_IMAGE_TEXT,
     BLOCK_TYPE_HERO,
     BLOCK_TYPE_CARDS,
     BLOCK_TYPE_TESTIMONIAL,
     BLOCK_TYPE_RECENT_PUBLICATIONS,
     BLOCK_TYPE_FAQ,
-    BLOCK_TYPE_TEXT_CENTERED,
+    DEPRECATED_BLOCK_TYPE_TEXT_CENTERED,
 )
 
 
@@ -99,7 +99,7 @@ def mock_block_value(block_type: str) -> Any:
 
        """
 
-    elif block_type == BLOCK_TYPE_TEXT_CENTERED:
+    elif block_type == DEPRECATED_BLOCK_TYPE_TEXT_CENTERED:
         return f"""
             <p>
                 {paragraph(2)}
@@ -118,7 +118,7 @@ def mock_block_value(block_type: str) -> Any:
             "alt_text": image.title,
         }
 
-    elif block_type == BLOCK_TYPE_IMAGE_TEXT:
+    elif block_type == DEPRECATED_BLOCK_TYPE_IMAGE_TEXT:
         image = ImageFactory.create()
         position = random.choice(ImagePosition.values)
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 15:46+0100\n"
+"POT-Creation-Date: 2026-02-26 18:49+0100\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -39,7 +39,7 @@ msgid "Date et heure de fin de l'événement (optionnel)"
 msgstr ""
 
 #: publications/models/event.py:36
-#: publications/templates/publications/event_page.html:46
+#: publications/templates/publications/event_page.html:76
 msgid "Location"
 msgstr "Lieu"
 
@@ -48,7 +48,7 @@ msgid "Lieu de l'événement"
 msgstr ""
 
 #: publications/models/event.py:43
-#: publications/templates/publications/event_page.html:96
+#: publications/templates/publications/event_page.html:153
 msgid "Address"
 msgstr "Adresse"
 
@@ -326,19 +326,19 @@ msgstr "Total des votes"
 msgid "With comment"
 msgstr "Avec commentaire"
 
-#: publications/templates/publications/admin/vote_stats.html:33
+#: publications/templates/publications/admin/vote_stats.html:39
 msgid "Open"
 msgstr "Ouvert"
 
-#: publications/templates/publications/admin/vote_stats.html:37
+#: publications/templates/publications/admin/vote_stats.html:46
 msgid "Closed"
 msgstr "Fermé"
 
-#: publications/templates/publications/admin/vote_stats.html:52
+#: publications/templates/publications/admin/vote_stats.html:67
 msgid "View details"
 msgstr "Voir les détails"
 
-#: publications/templates/publications/admin/vote_stats.html:60
+#: publications/templates/publications/admin/vote_stats.html:75
 msgid "No projects with voting enabled."
 msgstr "Aucun projet avec le vote activé."
 
@@ -475,23 +475,23 @@ msgstr "À venir"
 msgid "Past"
 msgstr "Passé"
 
-#: publications/templates/publications/event_page.html:33
+#: publications/templates/publications/event_page.html:44
 msgid "Date"
 msgstr "Date"
 
-#: publications/templates/publications/event_page.html:61
+#: publications/templates/publications/event_page.html:102
 msgid "Online"
 msgstr "En ligne"
 
-#: publications/templates/publications/event_page.html:62
+#: publications/templates/publications/event_page.html:103
 msgid "Yes"
 msgstr "Oui"
 
-#: publications/templates/publications/event_page.html:64
+#: publications/templates/publications/event_page.html:109
 msgid "Join"
 msgstr "Rejoindre"
 
-#: publications/templates/publications/event_page.html:76
+#: publications/templates/publications/event_page.html:133
 msgid "Max Participants"
 msgstr "Participants max"
 

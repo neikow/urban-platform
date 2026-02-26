@@ -13,9 +13,9 @@ class ImagePosition(models.TextChoices):
 
 class ImageTextBlock(blocks.StructBlock):
     position = blocks.ChoiceBlock(
+        label=_("Image Position"),
         choices=ImagePosition.choices,
         default=ImagePosition.LEFT,
-        label=_("Image Position"),
         required=True,
     )
     paragraph = blocks.TextBlock(
@@ -27,19 +27,29 @@ class ImageTextBlock(blocks.StructBlock):
         required=True,
     )
     alt_text = blocks.CharBlock(
+        label=_("Image Alt Text (For accessibility, SEO, and in case the image fails to load)"),
         required=True,
         max_length=255,
-        label=_("Alt Text"),
     )
 
 
 class HeroBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=True)
-    subtitle = blocks.TextBlock(required=False)
-    image = ImageChooserBlock()
-    alt_text = blocks.CharBlock(required=True, max_length=255)
-    cta_link = blocks.URLBlock(required=False)
-    cta_text = blocks.CharBlock(required=False)
+    title = blocks.CharBlock(label=_("Title"), required=True)
+    subtitle = blocks.TextBlock(label=_("Subtitle (Optional)"), required=False)
+    image = ImageChooserBlock(
+        label=_("Background Image"),
+    )
+    alt_text = blocks.CharBlock(
+        label=_("Image Alt Text (For accessibility, SEO, and in case the image fails to load)"),
+        required=True,
+        max_length=255,
+    )
+    cta_link = blocks.URLBlock(
+        label=_("Call-to-Action Link (Leave blank if no CTA button)"), required=False
+    )
+    cta_text = blocks.CharBlock(
+        label=_("Call-to-Action Text (Leave blank if no CTA button)"), required=False
+    )
 
     class Meta:
         template = "core/blocks/hero_block.html"
@@ -47,11 +57,27 @@ class HeroBlock(blocks.StructBlock):
 
 
 class CardBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=True)
-    description = blocks.TextBlock(required=True)
-    image = ImageChooserBlock(required=False)
-    alt_text = blocks.CharBlock(required=False, max_length=255)
-    link = blocks.URLBlock(required=False)
+    title = blocks.CharBlock(
+        label=_("Card Title"),
+        required=True,
+        max_length=255,
+    )
+    description = blocks.TextBlock(
+        label=_("Card Description"),
+        required=True,
+    )
+    image = ImageChooserBlock(label=_("Card Image (Optional)"), required=False)
+    alt_text = blocks.CharBlock(
+        label=_(
+            "Card Image Alt Text (For accessibility, SEO, and in case the image fails to load)"
+        ),
+        required=False,
+        max_length=255,
+    )
+    link = blocks.URLBlock(
+        required=False,
+        label=_("Card Link (Optional)"),
+    )
 
     class Meta:
         template = "core/blocks/card_block.html"
@@ -68,10 +94,10 @@ class CardListBlock(blocks.ListBlock):
 
 
 class TestimonialBlock(blocks.StructBlock):
-    quote = blocks.TextBlock(required=True)
-    author_name = blocks.CharBlock(required=True)
-    author_title = blocks.CharBlock(required=False)
-    author_image = ImageChooserBlock(required=False)
+    quote = blocks.TextBlock(label=_("Testimonial Quote"), required=True)
+    author_name = blocks.CharBlock(label=_("Author Name"), required=True)
+    author_title = blocks.CharBlock(label=_("Author Title (Optional)"), required=False)
+    author_image = ImageChooserBlock(label=_("Author Image (Optional)"), required=False)
 
     class Meta:
         template = "core/blocks/testimonial_block.html"
@@ -80,10 +106,10 @@ class TestimonialBlock(blocks.StructBlock):
 
 class RecentPublicationsBlock(blocks.StructBlock):
     number_of_publications = blocks.IntegerBlock(
+        label=_("Number of Publications"),
         default=5,
         min_value=1,
         max_value=20,
-        label=_("Number of Publications"),
         required=True,
     )
 
@@ -92,6 +118,7 @@ class RecentPublicationsBlock(blocks.StructBlock):
 
         from publications.models import PublicationPage
 
+        # TODO: URB-148 Add caching to this query to avoid hitting the database on every page load
         context["publications"] = (
             PublicationPage.objects.live()
             .public()
@@ -105,8 +132,8 @@ class RecentPublicationsBlock(blocks.StructBlock):
 
 
 class FAQQuestionBlock(blocks.StructBlock):
-    question = blocks.CharBlock(required=True)
-    answer = blocks.TextBlock(required=True)
+    question = blocks.CharBlock(label=_("Question"), required=True)
+    answer = blocks.TextBlock(label=_("Answer"), required=True)
 
     class Meta:
         template = "core/blocks/faq_block.html"
@@ -124,15 +151,15 @@ class FAQBlock(blocks.ListBlock):
 
 BLOCK_TYPE_TEXT = "text"
 BLOCK_TYPE_IMAGE = "image"
-BLOCK_TYPE_IMAGE_TEXT = "image_text"
-BLOCK_TYPE_TEXT_CENTERED = "text_centered"
+DEPRECATED_BLOCK_TYPE_IMAGE_TEXT = "image_text"
+DEPRECATED_BLOCK_TYPE_TEXT_CENTERED = "text_centered"
 BLOCK_TYPE_HERO = "hero"
 BLOCK_TYPE_CARDS = "cards"
 BLOCK_TYPE_TESTIMONIAL = "testimonial"
 BLOCK_TYPE_RECENT_PUBLICATIONS = "recent_publications"
 BLOCK_TYPE_FAQ = "faq"
 
-BlockTypes: list[tuple[str, blocks.Block]] = [
+COMMON_BLOCK_TYPES: list[tuple[str, blocks.Block]] = [
     (
         BLOCK_TYPE_TEXT,
         blocks.RichTextBlock(
@@ -155,24 +182,31 @@ BlockTypes: list[tuple[str, blocks.Block]] = [
         ),
     ),
     (
-        BLOCK_TYPE_TEXT_CENTERED,
+        DEPRECATED_BLOCK_TYPE_TEXT_CENTERED,
         blocks.RichTextBlock(
             features=[
                 "bold",
                 "italic",
             ],
-            label=_("Centered Text"),
+            label=_("DEPRECATED Centered Text"),
             template="core/blocks/centered_text_block.html",
         ),
     ),
     (BLOCK_TYPE_IMAGE, ImageBlock(label=_("Image"), template="core/blocks/image_block.html")),
     (
-        BLOCK_TYPE_IMAGE_TEXT,
-        ImageTextBlock(label=_("Image & Text Row"), template="core/blocks/image_text_block.html"),
+        DEPRECATED_BLOCK_TYPE_IMAGE_TEXT,
+        ImageTextBlock(
+            label=_("DEPRECATED Image & Text Row"), template="core/blocks/image_text_block.html"
+        ),
     ),
+    (BLOCK_TYPE_FAQ, FAQBlock(label=_("FAQ Block"))),
+]
+
+CONTENT_BLOCK_TYPES = COMMON_BLOCK_TYPES + []
+
+WEBSITE_BLOCK_TYPES = COMMON_BLOCK_TYPES + [
     (BLOCK_TYPE_HERO, HeroBlock(label=_("Hero Block"))),
-    (BLOCK_TYPE_CARDS, CardListBlock(label=_("Card List Block"))),
     (BLOCK_TYPE_TESTIMONIAL, TestimonialBlock(label=_("Testimonial Block"))),
     (BLOCK_TYPE_RECENT_PUBLICATIONS, RecentPublicationsBlock(label=_("Recent Publications Block"))),
-    (BLOCK_TYPE_FAQ, FAQBlock(label=_("FAQ Block"))),
+    (BLOCK_TYPE_CARDS, CardListBlock(label=_("Card List Block"))),
 ]
