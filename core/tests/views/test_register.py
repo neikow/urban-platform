@@ -2,6 +2,7 @@ from unittest.mock import patch, MagicMock
 
 from django.contrib.auth import get_user_model
 import pytest
+from django.urls import reverse
 
 from core.views.register import UserRegistrationForm
 from core.views.register import RegisterFormView
@@ -169,3 +170,23 @@ class TestUserRegistrationView:
             assert User.objects.filter(email=VALID_REQUEST["email"]).exists()
             user = User.objects.get(email=VALID_REQUEST["email"])
             mock_send_email.assert_called_once_with(user.pk)
+
+    @pytest.mark.django_db
+    @patch("core.views.register.UserRegistrationForm")
+    def test_registration_with_next_page_override_redirects_to_next_page(self, mock_form_class):
+        mock_form = MagicMock()
+        mock_form.is_valid.return_value = True
+        mock_form.cleaned_data = VALID_REQUEST
+        mock_form_class.return_value = mock_form
+
+        with patch("core.emails.tasks.send_verification_email.delay"):
+            view = RegisterFormView()
+            request = MagicMock()
+            request.POST.get.return_value = "/some-protected-page/"
+            view.request = request
+            response = view.form_valid(mock_form)
+
+            assert response.status_code == 302
+            assert response.url == reverse(
+                "code_of_conduct_consent", query={"next": "/some-protected-page/"}
+            )

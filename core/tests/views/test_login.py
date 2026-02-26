@@ -148,7 +148,7 @@ class TestLoginView:
         assert response.status_code == 200
         assert client.session["_auth_user_id"] == str(user.pk)
 
-    def test_login_redirects_to_me_page(self, client: Client):
+    def test_login_redirects_to_current_page(self, client: Client):
         User.objects.create_user(
             email="testuser@example.com",
             password="TestPass123",
@@ -159,10 +159,11 @@ class TestLoginView:
         response = client.post(
             reverse("login"),
             data={
+                "next": "/current-page/",
                 "email": "testuser@example.com",
                 "password": "TestPass123",
             },
         )
 
         data = json.loads(response.content)
-        assert data["redirect"] == "/auth/me/"
+        assert data["redirect"] == "/current-page/"

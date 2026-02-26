@@ -24,11 +24,20 @@ class TestCodeOfConductConsentViewGet:
         assert "/login" in response.url  # type: ignore[attr-defined]
 
     @patch("legal.views.has_valid_code_of_conduct_consent", return_value=True)
-    def test_with_valid_consent_redirects_to_me(self, mock_consent, authenticated_client):
+    def test_with_valid_consent_redirects_to_me_if_no_override(
+        self, mock_consent, authenticated_client
+    ):
         client, user = authenticated_client
         response = client.get("/user/code-of-conduct-consent/")
         assert response.status_code == 302
         assert response.url == "/auth/me/"
+
+    @patch("legal.views.has_valid_code_of_conduct_consent", return_value=True)
+    def test_with_valid_consent_redirects_to_next(self, mock_consent, authenticated_client):
+        client, user = authenticated_client
+        response = client.get("/user/code-of-conduct-consent/?next=/some-protected-page/")
+        assert response.status_code == 302
+        assert response.url == "/some-protected-page/"
 
     @patch("legal.views.has_valid_code_of_conduct_consent", return_value=False)
     def test_without_consent_shows_form(self, mock_consent, authenticated_client):
