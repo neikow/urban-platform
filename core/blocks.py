@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 BlockTypeList = list[tuple[str, blocks.Block]]
 
 
-class ImagePosition(models.TextChoices):
+class DeprecatedImagePosition(models.TextChoices):
     LEFT = "left", _("Left")
     RIGHT = "right", _("Right")
 
@@ -30,6 +30,30 @@ class TextJustification(models.TextChoices):
     CENTER = "center", _("Center")
     RIGHT = "right", _("Right")
     JUSTIFY = "justify", _("Justify")
+
+
+class ImageSize(models.TextChoices):
+    SMALL = "small", _("Small (1/3 Width)")
+    MEDIUM = "medium", _("Medium (1/2 Width)")
+    LARGE = "large", _("Large (2/3 Width)")
+    FULL = "full", _("Full Width")
+
+
+class CustomImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=True)
+    size = blocks.ChoiceBlock(
+        choices=ImageSize.choices,
+        default=ImageSize.FULL,
+        required=True,
+    )
+    alt_text = blocks.CharBlock(
+        required=False, help_text=_("Leave blank to use the image's default alt text")
+    )
+
+    class Meta:
+        label = _("Image")
+        template = "core/blocks/image_block.html"
+        icon = "image"
 
 
 class AugmentedRichTextBlock(blocks.StructBlock):
@@ -74,8 +98,8 @@ class AugmentedRichTextBlock(blocks.StructBlock):
 class DeprecatedImageTextBlock(blocks.StructBlock):
     position = blocks.ChoiceBlock(
         label=_("Image Position"),
-        choices=ImagePosition.choices,
-        default=ImagePosition.LEFT,
+        choices=DeprecatedImagePosition.choices,
+        default=DeprecatedImagePosition.LEFT,
         required=True,
     )
     paragraph = blocks.TextBlock(
@@ -365,7 +389,7 @@ COMMON_BLOCK_TYPES: BlockTypeList = [
             template="core/blocks/centered_text_block.html",
         ),
     ),
-    (BLOCK_TYPE_IMAGE, ImageBlock(label=_("Image"), template="core/blocks/image_block.html")),
+    (BLOCK_TYPE_IMAGE, CustomImageBlock()),
     (
         DEPRECATED_BLOCK_TYPE_IMAGE_TEXT,
         DeprecatedImageTextBlock(),

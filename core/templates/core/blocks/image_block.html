@@ -1,5 +1,9 @@
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags custom_blocks %}
 
-<div class="{% if container %} container mx-auto {% endif %} flex justify-center my-2 md:my-4 lg:my-8">
-    {% image value max-800x600 alt=value.alt_text class="rounded-lg w-full h-auto" %}
+{% get_image_config value.size as cfg %}
+
+<div class="flex justify-center my-4 lg:my-8">
+    <div class="{{ cfg.class }} w-full">
+        {% image value.image cfg.rendition alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+    </div>
 </div>
