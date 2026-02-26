@@ -56,7 +56,11 @@
         <div class="text-center">
             <p class="text-sm">
                 Vous n'avez pas de compte ?
-                <a href="{% url 'register' %}" class="link link-primary" onclick="login_modal.close()">
+                <a
+                    href="{% url 'register' %}?next={{ request.path|urlencode }}"
+                    class="link link-primary"
+                    onclick="login_modal.close()"
+                >
                     S'inscrire
                 </a>
             </p>
