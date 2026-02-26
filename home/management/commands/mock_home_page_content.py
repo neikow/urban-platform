@@ -5,7 +5,7 @@ from core.blocks import (
     BLOCK_TYPE_HERO,
     DEPRECATED_BLOCK_TYPE_IMAGE_TEXT,
     BLOCK_TYPE_CARDS,
-    BLOCK_TYPE_TESTIMONIAL,
+    DEPRECATED_BLOCK_TYPE_TESTIMONIAL,
     BLOCK_TYPE_RECENT_PUBLICATIONS,
     BLOCK_TYPE_FAQ,
     DEPRECATED_BLOCK_TYPE_TEXT_CENTERED,
@@ -40,8 +40,14 @@ class Command(BaseCommand):
                 DEPRECATED_BLOCK_TYPE_TEXT_CENTERED,
                 mock_block_value(DEPRECATED_BLOCK_TYPE_TEXT_CENTERED),
             ),
-            (BLOCK_TYPE_TESTIMONIAL, mock_block_value(BLOCK_TYPE_TESTIMONIAL)),
-            (BLOCK_TYPE_TESTIMONIAL, mock_block_value(BLOCK_TYPE_TESTIMONIAL)),
+            (
+                DEPRECATED_BLOCK_TYPE_TESTIMONIAL,
+                mock_block_value(DEPRECATED_BLOCK_TYPE_TESTIMONIAL),
+            ),
+            (
+                DEPRECATED_BLOCK_TYPE_TESTIMONIAL,
+                mock_block_value(DEPRECATED_BLOCK_TYPE_TESTIMONIAL),
+            ),
             (BLOCK_TYPE_RECENT_PUBLICATIONS, mock_block_value(BLOCK_TYPE_RECENT_PUBLICATIONS)),
             (
                 DEPRECATED_BLOCK_TYPE_TEXT_CENTERED,

@@ -5,12 +5,12 @@ from core.tests.utils.faker_shortcuts import title, paragraph, sentence
 from core.tests.utils.factories import ImageFactory, DocumentFactory
 from core.blocks import (
     ImagePosition,
-    BLOCK_TYPE_TEXT,
+    DEPRECATED_BLOCK_TYPE_TEXT,
     BLOCK_TYPE_IMAGE,
     DEPRECATED_BLOCK_TYPE_IMAGE_TEXT,
     BLOCK_TYPE_HERO,
     BLOCK_TYPE_CARDS,
-    BLOCK_TYPE_TESTIMONIAL,
+    DEPRECATED_BLOCK_TYPE_TESTIMONIAL,
     BLOCK_TYPE_RECENT_PUBLICATIONS,
     BLOCK_TYPE_FAQ,
     DEPRECATED_BLOCK_TYPE_TEXT_CENTERED,
@@ -18,7 +18,7 @@ from core.blocks import (
 
 
 def mock_block_value(block_type: str) -> Any:
-    if block_type == BLOCK_TYPE_TEXT:
+    if block_type == DEPRECATED_BLOCK_TYPE_TEXT:
         document = DocumentFactory.create()
 
         return f"""
@@ -166,7 +166,7 @@ def mock_block_value(block_type: str) -> Any:
             },
         ]
 
-    elif block_type == BLOCK_TYPE_TESTIMONIAL:
+    elif block_type == DEPRECATED_BLOCK_TYPE_TESTIMONIAL:
         return {
             "quote": paragraph(8),
             "author_name": title(2),
