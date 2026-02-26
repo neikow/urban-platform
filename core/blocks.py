@@ -1,6 +1,7 @@
 from typing import Any
 
 from wagtail import blocks
+from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageBlock, ImageChooserBlock
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -11,6 +12,17 @@ BlockTypeList = list[tuple[str, blocks.Block]]
 class ImagePosition(models.TextChoices):
     LEFT = "left", _("Left")
     RIGHT = "right", _("Right")
+
+
+class ButtonAlignment(models.TextChoices):
+    LEFT = "left", _("Left")
+    CENTER = "center", _("Center")
+    RIGHT = "right", _("Right")
+
+
+class ButtonStyle(models.TextChoices):
+    PRIMARY = "primary", _("Primary")
+    SECONDARY = "secondary", _("Secondary")
 
 
 class TextJustification(models.TextChoices):
@@ -44,6 +56,13 @@ class AugmentedRichTextBlock(blocks.StructBlock):
         ],
         label=_("Content"),
         template="core/blocks/rich_text_block.html",
+    )
+
+    max_width = blocks.IntegerBlock(
+        label=_("Max Width (in pixels, optional)"),
+        required=False,
+        min_value=0,
+        placeholder=_("Leave blank for full width"),
     )
 
     class Meta:
@@ -143,7 +162,7 @@ class CardBlock(blocks.StructBlock):
     )
     link = blocks.URLBlock(
         required=False,
-        label=_("Card Link (Optional)"),
+        label=_("Learn More Link (Optional)"),
     )
 
     class Meta:
@@ -231,6 +250,63 @@ class FAQBlock(blocks.ListBlock):
         icon = "help"
 
 
+class VerticalSpacerBlock(blocks.StructBlock):
+    height = blocks.IntegerBlock(
+        label=_("Height (in pixels)"),
+        default=20,
+        min_value=0,
+        required=True,
+    )
+
+    hide_on_mobile = blocks.BooleanBlock(
+        label=_("Hide on Mobile"),
+        default=False,
+        required=False,
+    )
+
+    class Meta:
+        label = _("Vertical Spacer")
+        template = "core/blocks/vertical_spacer_block.html"
+        icon = "arrow-down"
+
+
+class ButtonLinkBaseBlock(blocks.StructBlock):
+    text = blocks.CharBlock(label=_("Button Text"), required=True)
+    style = blocks.ChoiceBlock(
+        label=_("Button Type"),
+        choices=ButtonStyle.choices,
+        default=ButtonStyle.PRIMARY,
+        required=True,
+    )
+    alignment = blocks.ChoiceBlock(
+        label=_("Button Alignment"),
+        choices=ButtonAlignment.choices,
+        default=ButtonAlignment.CENTER,
+        required=True,
+    )
+
+    class Meta:
+        abstract = True
+
+
+class CTAButtonBlock(ButtonLinkBaseBlock):
+    url = blocks.URLBlock(label=_("Button Link"), required=True)
+
+    class Meta:
+        label = _("Call-to-Action Button")
+        template = "core/blocks/cta_button_block.html"
+        icon = "link"
+
+
+class DocumentBlock(ButtonLinkBaseBlock):
+    document = DocumentChooserBlock(label=_("Document"), required=True)
+
+    class Meta:
+        label = _("Document")
+        template = "core/blocks/document_block.html"
+        icon = "doc-full"
+
+
 BLOCK_TYPE_RICH_TEXT = "rich_text"
 BLOCK_TYPE_IMAGE = "image"
 BLOCK_TYPE_HERO = "hero"
@@ -239,6 +315,9 @@ BLOCK_TYPE_TESTIMONIAL_LIST = "testimonial_list"
 BLOCK_TYPE_RECENT_PUBLICATIONS = "recent_publications"
 BLOCK_TYPE_FAQ = "faq"
 BLOCK_TYPE_TWO_COLUMN = "two_column"
+BLOCK_TYPE_VERTICAL_SPACER = "vertical_spacer"
+BLOCK_TYPE_CALL_TO_ACTION_BUTTON = "call_to_action_button"
+BLOCK_TYPE_DOCUMENT = "document"
 
 DEPRECATED_BLOCK_TYPE_TESTIMONIAL = "testimonial"
 DEPRECATED_BLOCK_TYPE_TEXT_CENTERED = "text_centered"
@@ -291,7 +370,14 @@ COMMON_BLOCK_TYPES: BlockTypeList = [
         DEPRECATED_BLOCK_TYPE_IMAGE_TEXT,
         DeprecatedImageTextBlock(),
     ),
-    (BLOCK_TYPE_FAQ, FAQBlock()),
+    (
+        BLOCK_TYPE_VERTICAL_SPACER,
+        VerticalSpacerBlock(),
+    ),
+    (
+        BLOCK_TYPE_CALL_TO_ACTION_BUTTON,
+        CTAButtonBlock(),
+    ),
 ]
 
 BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS: BlockTypeList = [
@@ -306,10 +392,13 @@ COMMON_BLOCK_TYPES += [
         get_two_column_block(
             BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS, BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS
         )(),
-    )
+    ),
 ]
 
-CONTENT_BLOCK_TYPES: BlockTypeList = COMMON_BLOCK_TYPES + []
+CONTENT_BLOCK_TYPES: BlockTypeList = COMMON_BLOCK_TYPES + [
+    (BLOCK_TYPE_FAQ, FAQBlock()),
+    (BLOCK_TYPE_DOCUMENT, DocumentBlock()),
+]
 
 WEBSITE_BLOCK_TYPES: BlockTypeList = COMMON_BLOCK_TYPES + [
     (BLOCK_TYPE_HERO, HeroBlock()),
@@ -317,6 +406,7 @@ WEBSITE_BLOCK_TYPES: BlockTypeList = COMMON_BLOCK_TYPES + [
     (BLOCK_TYPE_TESTIMONIAL_LIST, TestimonialListBlock()),
     (BLOCK_TYPE_RECENT_PUBLICATIONS, RecentPublicationsBlock()),
     (BLOCK_TYPE_CARDS, CardListBlock()),
+    (BLOCK_TYPE_FAQ, FAQBlock()),
 ]
 
 ALL_BLOCK_TYPES = list(

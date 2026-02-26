@@ -2,7 +2,7 @@ import random
 from typing import Any
 
 from core.tests.utils.faker_shortcuts import title, paragraph
-from core.tests.utils.factories import ImageFactory
+from core.tests.utils.factories import ImageFactory, DocumentFactory
 from core.blocks import (
     DEPRECATED_BLOCK_TYPE_TEXT,
     BLOCK_TYPE_IMAGE,
@@ -18,6 +18,10 @@ from core.blocks import (
     BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS,
     BLOCK_TYPE_RICH_TEXT,
     TextJustification,
+    BLOCK_TYPE_VERTICAL_SPACER,
+    BLOCK_TYPE_CALL_TO_ACTION_BUTTON,
+    ButtonStyle,
+    BLOCK_TYPE_DOCUMENT,
 )
 
 
@@ -133,6 +137,26 @@ def mock_block_value(block_type: str) -> Any:
                 "answer": paragraph(10),
             },
         ]
+
+    elif block_type == BLOCK_TYPE_VERTICAL_SPACER:
+        return {
+            "height": random.randint(10, 100),
+        }
+
+    elif block_type == BLOCK_TYPE_CALL_TO_ACTION_BUTTON:
+        return {
+            "text": title(3),
+            "url": "https://example.com",
+            "style": random.choice(ButtonStyle.values),
+        }
+
+    elif block_type == BLOCK_TYPE_DOCUMENT:
+        document = DocumentFactory.create()
+
+        return {
+            "document": document,
+            "title": title(5),
+        }
 
     else:
         raise NotImplementedError(f"Unsupported block type: {block_type}")
