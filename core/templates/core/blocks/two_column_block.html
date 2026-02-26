@@ -1,6 +1,6 @@
 {% load wagtailcore_tags custom_blocks %}
 
-<div>
+<div class="{% if container %}container mx-auto{% endif %} px-4 py-2 md:py-4 lg:py-8">
     <div class="flex flex-col md:flex-row gap-4">
         <div class="w-full md:w-1/2">
             {% include_block value.left_column %}
