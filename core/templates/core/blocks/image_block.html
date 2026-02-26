@@ -4,6 +4,14 @@
 
 <div class="flex justify-center my-4 lg:my-8">
     <div class="{{ cfg.class }} w-full">
-        {% image value.image cfg.rendition alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+        {% if value.size == "small" %}
+            {% image value.image width-400 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+        {% elif value.size == "medium" %}
+            {% image value.image width-800 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+        {% elif value.size == "large" %}
+            {% image value.image width-1200 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+        {% else %}
+            {% image value.image original alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+        {% endif %}
     </div>
 </div>

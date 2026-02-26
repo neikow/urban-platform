@@ -1,4 +1,6 @@
 import json
+from typing import Any
+
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from wagtail.models import Page
@@ -12,12 +14,12 @@ from wagtail.models import Page
 class Command(BaseCommand):
     help = "Migrates deprecated blocks to AugmentedRichTextBlock across specific models."
 
-    def handle(self, *args, **options):
+    def handle(self, *args: Any, **options: Any) -> None:
         from publications.models import PublicationPage
         from home.models import HomePage
         from pedagogy.models import PedagogyCardPage
 
-        _models = [
+        _models: list[tuple[type[Page], str]] = [
             (PublicationPage, "content"),
             (HomePage, "content"),
             (PedagogyCardPage, "content"),
