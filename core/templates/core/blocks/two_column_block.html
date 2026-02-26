@@ -1,0 +1,12 @@
+{% load wagtailcore_tags custom_blocks %}
+
+<div>
+    <div class="flex flex-col md:flex-row gap-4">
+        <div class="w-full md:w-1/2">
+            {% include_block value.left_column %}
+        </div>
+        <div class="w-full md:w-1/2">
+            {% include_block value.right_column %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+
+<div>
+    {% for testimonial in value %}
+        {% include_block testimonial %}
+    {% endfor %}
+</div>

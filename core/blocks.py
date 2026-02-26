@@ -245,6 +245,13 @@ DEPRECATED_BLOCK_TYPE_TEXT_CENTERED = "text_centered"
 DEPRECATED_BLOCK_TYPE_IMAGE_TEXT = "image_text"
 DEPRECATED_BLOCK_TYPE_TEXT = "text"
 
+DEPRECATED_BLOCK_TYPES = [
+    DEPRECATED_BLOCK_TYPE_TESTIMONIAL,
+    DEPRECATED_BLOCK_TYPE_TEXT_CENTERED,
+    DEPRECATED_BLOCK_TYPE_IMAGE_TEXT,
+    DEPRECATED_BLOCK_TYPE_TEXT,
+]
+
 COMMON_BLOCK_TYPES: BlockTypeList = [
     (
         DEPRECATED_BLOCK_TYPE_TEXT,
@@ -264,7 +271,7 @@ COMMON_BLOCK_TYPES: BlockTypeList = [
                 "subscript",
             ],
             label=_("DEPRECATED Text"),
-            template="core/blocks/rich_text_block.html",
+            template="core/blocks/text_block.html",
         ),
     ),
     (BLOCK_TYPE_RICH_TEXT, AugmentedRichTextBlock()),
@@ -287,8 +294,19 @@ COMMON_BLOCK_TYPES: BlockTypeList = [
     (BLOCK_TYPE_FAQ, FAQBlock()),
 ]
 
+BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS: BlockTypeList = [
+    (block_type, definition)
+    for block_type, definition in COMMON_BLOCK_TYPES
+    if block_type not in DEPRECATED_BLOCK_TYPES
+]
+
 COMMON_BLOCK_TYPES += [
-    (BLOCK_TYPE_TWO_COLUMN, get_two_column_block(COMMON_BLOCK_TYPES, COMMON_BLOCK_TYPES)())
+    (
+        BLOCK_TYPE_TWO_COLUMN,
+        get_two_column_block(
+            BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS, BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS
+        )(),
+    )
 ]
 
 CONTENT_BLOCK_TYPES: BlockTypeList = COMMON_BLOCK_TYPES + []
@@ -300,3 +318,7 @@ WEBSITE_BLOCK_TYPES: BlockTypeList = COMMON_BLOCK_TYPES + [
     (BLOCK_TYPE_RECENT_PUBLICATIONS, RecentPublicationsBlock()),
     (BLOCK_TYPE_CARDS, CardListBlock()),
 ]
+
+ALL_BLOCK_TYPES = list(
+    set([block_type for [block_type, _] in (CONTENT_BLOCK_TYPES + WEBSITE_BLOCK_TYPES)])
+)

@@ -1,5 +1,5 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags custom_blocks %}
 
-<div class="{% if container %}container mx-auto{% endif %} my-2 md:my-4 lg:my-8">
-    {{ value|richtext }}
+<div class="{% if container %}container mx-auto{% endif %} my-2 md:my-4 lg:my-8 {% text_justification_class value.justification %}">
+    {{ value.text|richtext }}
 </div>
