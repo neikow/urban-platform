@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-26 18:49+0100\n"
+"POT-Creation-Date: 2026-02-26 21:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,138 +17,265 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: core/blocks.py:10
+#: core/blocks.py:13 core/blocks.py:18 core/blocks.py:29
 msgid "Left"
 msgstr "Gauche"
 
-#: core/blocks.py:11
+#: core/blocks.py:14 core/blocks.py:20 core/blocks.py:31
 msgid "Right"
 msgstr "Droite"
 
-#: core/blocks.py:16
-msgid "Image Position"
-msgstr "Position de l'image"
+#: core/blocks.py:19 core/blocks.py:30
+msgid "Center"
+msgstr "Centré"
 
-#: core/blocks.py:22 core/blocks.py:206
-msgid "Text"
-msgstr "Texte"
+#: core/blocks.py:24
+msgid "Primary"
+msgstr "Primaire"
 
-#: core/blocks.py:26 core/blocks.py:221
+#: core/blocks.py:25
+msgid "Secondary"
+msgstr "Secondaire"
+
+#: core/blocks.py:32
+msgid "Justify"
+msgstr "Justifié"
+
+#: core/blocks.py:36
+msgid "Small (1/3 Width)"
+msgstr "Petit (1/3 de la largeur)"
+
+#: core/blocks.py:37
+msgid "Medium (1/2 Width)"
+msgstr "Moyen (1/2 de la largeur)"
+
+#: core/blocks.py:38
+msgid "Large (2/3 Width)"
+msgstr "Large (2/3 de la largeur)"
+
+#: core/blocks.py:39
+msgid "Full Width"
+msgstr "Pleine largeur"
+
+#: core/blocks.py:50
+msgid "Leave blank to use the image's default alt text"
+msgstr "Laisser vide pour utiliser le texte alternatif par défaut de l'image"
+
+#: core/blocks.py:54 core/blocks.py:110
 msgid "Image"
 msgstr "Image"
 
-#: core/blocks.py:30 core/blocks.py:49
-msgid ""
-"Image Alt Text (For accessibility, SEO, and in case the image fails to load)"
-msgstr "Texte alternatif de l'image (pour l'accessibilité, le référencement et en cas de problème de chargement de l'image)"
-
-#: core/blocks.py:38
-msgid "Title"
-msgstr "Titre"
-
-#: core/blocks.py:42
-msgid "Subtitle (Optional)"
-msgstr "Sous-titre (optionnel)"
-
-#: core/blocks.py:46
-msgid "Background Image"
-msgstr "Image de fond"
-
-#: core/blocks.py:54
-msgid "Call-to-Action Link (Leave blank if no CTA button)"
-msgstr "Lien d'appel à l'action (laisser vide s'il n'y a pas de bouton CTA)"
-
-#: core/blocks.py:57
-msgid "Call-to-Action Text (Leave blank if no CTA button)"
-msgstr "Texte de l'appel à l'action (laisser vide s'il n'y a pas de bouton CTA)"
-
-#: core/blocks.py:68
-#, fuzzy
-#| msgid "Card List Block"
-msgid "Card Title"
-msgstr "Bloc Liste de cartes"
-
-#: core/blocks.py:73
-msgid "Card Description"
-msgstr "Description de la carte"
-
-#: core/blocks.py:77
-msgid "Card Image (Optional)"
-msgstr "Image de la carte (optionnelle)"
+#: core/blocks.py:61
+msgid "Text Justification"
+msgstr "Alignement du texte"
 
 #: core/blocks.py:81
+msgid "Content"
+msgstr "Contenu"
+
+#: core/blocks.py:86
+msgid "Max Width (in pixels, optional)"
+msgstr "Largeur maximale (en pixels, optionnelle)"
+
+#: core/blocks.py:89
+msgid "Leave blank for full width"
+msgstr "Laisser vide pour une largeur complète"
+
+#: core/blocks.py:93 core/blocks.py:106
+msgid "Text"
+msgstr "Texte"
+
+#: core/blocks.py:100
+msgid "Image Position"
+msgstr "Position de l'image"
+
+#: core/blocks.py:114 core/blocks.py:152
 msgid ""
-"Card Image Alt Text (For accessibility, SEO, and in case the image fails to "
-"load)"
-msgstr "Texte alternatif de l'image de la carte (pour l'accessibilité, le référencement et en cas de problème de chargement de l'image)"
+"Image Alt Text (For accessibility, SEO, and in case the image fails to load)"
+msgstr ""
+"Texte alternatif de l'image (pour l'accessibilité, le référencement et en "
+"cas de problème de chargement de l'image)"
 
-#: core/blocks.py:87
-msgid "Card Link (Optional)"
-msgstr "Lien de la carte (optionnel)"
-
-#: core/blocks.py:106
-#, fuzzy
-#| msgid "Testimonial Block"
-msgid "Testimonial Quote"
-msgstr "Bloc de témoignages"
-
-#: core/blocks.py:110
-#, fuzzy
-#| msgid "Last Name"
-msgid "Author Name"
-msgstr "Nom de famille"
-
-#: core/blocks.py:114
-msgid "Author Title (Optional)"
-msgstr "Titre de l'auteur (optionnel)"
-
-#: core/blocks.py:118
-msgid "Author Image (Optional)"
-msgstr "Image de l'auteur (optionnelle)"
-
-#: core/blocks.py:129
-msgid "Number of Publications"
-msgstr "Nombre de publications"
-
-#: core/blocks.py:156
-msgid "Question"
-msgstr "Question"
-
-#: core/blocks.py:160
-msgid "Answer"
-msgstr "Réponse"
-
-#: core/blocks.py:217
-#, fuzzy
-#| msgid "Centered Text"
-msgid "DEPRECATED Centered Text"
-msgstr "NE PLUS UTILISER Texte centré"
-
-#: core/blocks.py:224
+#: core/blocks.py:120
 #, fuzzy
 #| msgid "Image & Text Row"
 msgid "DEPRECATED Image & Text Row"
 msgstr "NE PLUS UTILISER Image et Texte sur une ligne"
 
-#: core/blocks.py:226
-msgid "FAQ Block"
-msgstr "Bloc FAQ"
+#: core/blocks.py:130
+msgid "Left Column Content"
+msgstr "Contenu de la colonne de gauche"
 
-#: core/blocks.py:234
+#: core/blocks.py:134
+msgid "Right Column Content"
+msgstr "Contenu de la colonne de droite"
+
+#: core/blocks.py:138
+msgid "Two Column Block"
+msgstr "Bloc à deux colonnes"
+
+#: core/blocks.py:146
+msgid "Title"
+msgstr "Titre"
+
+#: core/blocks.py:147
+msgid "Subtitle (Optional)"
+msgstr "Sous-titre (optionnel)"
+
+#: core/blocks.py:149
+msgid "Background Image"
+msgstr "Image de fond"
+
+#: core/blocks.py:157
+msgid "Call-to-Action Link (Leave blank if no CTA button)"
+msgstr "Lien d'appel à l'action (laisser vide s'il n'y a pas de bouton CTA)"
+
+#: core/blocks.py:160
+msgid "Call-to-Action Text (Leave blank if no CTA button)"
+msgstr ""
+"Texte de l'appel à l'action (laisser vide s'il n'y a pas de bouton CTA)"
+
+#: core/blocks.py:164
 msgid "Hero Block"
 msgstr "Bloc \"Hero\""
 
-#: core/blocks.py:235
-msgid "Testimonial Block"
+#: core/blocks.py:171
+#, fuzzy
+#| msgid "Card List Block"
+msgid "Card Title"
+msgstr "Bloc Liste de cartes"
+
+#: core/blocks.py:176
+msgid "Card Description"
+msgstr "Description de la carte"
+
+#: core/blocks.py:179
+msgid "Card Image (Optional)"
+msgstr "Image de la carte (optionnelle)"
+
+#: core/blocks.py:182
+msgid ""
+"Card Image Alt Text (For accessibility, SEO, and in case the image fails to "
+"load)"
+msgstr ""
+"Texte alternatif de l'image de la carte (pour l'accessibilité, le "
+"référencement et en cas de problème de chargement de l'image)"
+
+#: core/blocks.py:189
+#, fuzzy
+#| msgid "Card Link (Optional)"
+msgid "Learn More Link (Optional)"
+msgstr "Lien de la carte (optionnel)"
+
+#: core/blocks.py:193
+msgid "Card"
+msgstr "Carte"
+
+#: core/blocks.py:203
+msgid "Card List Block"
+msgstr "Bloc Liste de cartes"
+
+#: core/blocks.py:209
+#, fuzzy
+#| msgid "Testimonial Block"
+msgid "Testimonial Quote"
 msgstr "Bloc de témoignages"
 
-#: core/blocks.py:236
+#: core/blocks.py:210
+#, fuzzy
+#| msgid "Last Name"
+msgid "Author Name"
+msgstr "Nom de famille"
+
+#: core/blocks.py:211
+msgid "Author Title (Optional)"
+msgstr "Titre de l'auteur (optionnel)"
+
+#: core/blocks.py:212
+msgid "Author Image (Optional)"
+msgstr "Image de l'auteur (optionnelle)"
+
+#: core/blocks.py:215
+#, fuzzy
+#| msgid "Testimonial Block"
+msgid "Testimonial"
+msgstr "Bloc de témoignages"
+
+#: core/blocks.py:225
+#, fuzzy
+#| msgid "Testimonial Block"
+msgid "Testimonial List Block"
+msgstr "Bloc de témoignages"
+
+#: core/blocks.py:232
+msgid "Number of Publications"
+msgstr "Nombre de publications"
+
+#: core/blocks.py:254
 msgid "Recent Publications Block"
 msgstr "Bloc des publications récentes"
 
-#: core/blocks.py:237
-msgid "Card List Block"
-msgstr "Bloc Liste de cartes"
+#: core/blocks.py:259
+msgid "Question"
+msgstr "Question"
+
+#: core/blocks.py:260
+msgid "Answer"
+msgstr "Réponse"
+
+#: core/blocks.py:272
+msgid "FAQ Block"
+msgstr "Bloc FAQ"
+
+#: core/blocks.py:279
+msgid "Height (in pixels)"
+msgstr "Hauteur (en pixels)"
+
+#: core/blocks.py:286
+msgid "Hide on Mobile"
+msgstr "Masquer sur mobile"
+
+#: core/blocks.py:292
+msgid "Vertical Spacer"
+msgstr "Espace vertical"
+
+#: core/blocks.py:298
+#, fuzzy
+#| msgid "Alt Text"
+msgid "Button Text"
+msgstr "Titre de l'image (pour Google)"
+
+#: core/blocks.py:300
+msgid "Button Type"
+msgstr "Type de bouton"
+
+#: core/blocks.py:306
+msgid "Button Alignment"
+msgstr "Alignement du bouton"
+
+#: core/blocks.py:317
+msgid "Button Link"
+msgstr "Lien du bouton"
+
+#: core/blocks.py:320
+msgid "Call-to-Action Button"
+msgstr "CTA - Bouton d'appel à l'action"
+
+#: core/blocks.py:326 core/blocks.py:329
+msgid "Document"
+msgstr "Document"
+
+#: core/blocks.py:376
+#, fuzzy
+#| msgid "Centered Text"
+msgid "DEPRECATED Text"
+msgstr "NE PLUS UTILISER Texte centré"
+
+#: core/blocks.py:388
+#, fuzzy
+#| msgid "Centered Text"
+msgid "DEPRECATED Centered Text"
+msgstr "NE PLUS UTILISER Texte centré"
 
 #: core/models/city_district.py:11
 msgid "City District"
@@ -412,6 +539,3 @@ msgstr "Politique de confidentialité"
 #: core/wagtail_hooks.py:179
 msgid "Légal"
 msgstr "Légal"
-
-#~ msgid "Alt Text"
-#~ msgstr "Titre de l'image (pour Google)"
