@@ -11,7 +11,7 @@
         {% elif value.size == "large" %}
             {% image value.image width-1200 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
         {% else %}
-            {% image value.image original alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+            {% image value.image width-1920 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
         {% endif %}
     </div>
 </div>
