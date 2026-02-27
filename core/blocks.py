@@ -2,7 +2,7 @@ from typing import Any
 
 from wagtail import blocks
 from wagtail.documents.blocks import DocumentChooserBlock
-from wagtail.images.blocks import ImageBlock, ImageChooserBlock
+from wagtail.images.blocks import ImageChooserBlock
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
