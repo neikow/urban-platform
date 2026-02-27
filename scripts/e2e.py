@@ -359,6 +359,23 @@ def start_server(foreground: bool = True) -> subprocess.Popen | None:
         return process
 
 
+def wait_for_server(timeout: int = 30) -> bool:
+    """Poll the server URL until it responds or the timeout is reached."""
+    import time
+    import urllib.error
+    import urllib.request
+
+    url = f"http://{E2E_SERVER_HOST}:{E2E_SERVER_PORT}/"
+    start_time = time.time()
+    while time.time() - start_time < timeout:
+        try:
+            urllib.request.urlopen(url, timeout=1)  # nosec
+            return True
+        except (urllib.error.URLError, OSError):
+            time.sleep(0.5)
+    return False
+
+
 def run_tests(
     test_path: str | None = None, headed: bool = False, generate_artifacts: bool = False
 ) -> int:
@@ -461,13 +478,25 @@ def main() -> None:
         run_migrations()
     elif args.command == "ci":
         setup()
-        start_server(foreground=False)
-        sys.exit(
-            run_tests(
+        server_process = start_server(foreground=False)
+        if not wait_for_server():
+            print("❌ Server failed to start within timeout")
+            if server_process is not None:
+                server_process.terminate()
+            sys.exit(1)
+        exit_code = 1
+        try:
+            exit_code = run_tests(
                 headed=False,
                 generate_artifacts=True,
             )
-        )
+        finally:
+            if server_process is not None and hasattr(server_process, "terminate"):
+                try:
+                    server_process.terminate()
+                except Exception:
+                    pass
+        sys.exit(exit_code)
     else:
         parser.print_help()
 
