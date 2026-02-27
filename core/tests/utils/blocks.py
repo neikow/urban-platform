@@ -18,9 +18,11 @@ from core.blocks import (
     BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS,
     BLOCK_TYPE_RICH_TEXT,
     TextJustification,
+    ImageSize,
     BLOCK_TYPE_VERTICAL_SPACER,
     BLOCK_TYPE_CALL_TO_ACTION_BUTTON,
     ButtonStyle,
+    ButtonAlignment,
     BLOCK_TYPE_DOCUMENT,
 )
 
@@ -41,6 +43,7 @@ def mock_block_value(block_type: str) -> Any:
 
         return {
             "image": image,
+            "size": random.choice(ImageSize.values),
             "alt_text": image.title,
         }
 
@@ -53,7 +56,7 @@ def mock_block_value(block_type: str) -> Any:
         return {
             "title": title(6),
             "subtitle": paragraph(4),
-            "image": image.id,
+            "image": image,
             "alt_text": image.title,
             "cta_link": "https://example.com",
             "cta_text": "Click Here",
@@ -141,6 +144,7 @@ def mock_block_value(block_type: str) -> Any:
     elif block_type == BLOCK_TYPE_VERTICAL_SPACER:
         return {
             "height": random.randint(10, 100),
+            "hide_on_mobile": random.choice([True, False]),
         }
 
     elif block_type == BLOCK_TYPE_CALL_TO_ACTION_BUTTON:
@@ -148,6 +152,7 @@ def mock_block_value(block_type: str) -> Any:
             "text": title(3),
             "url": "https://example.com",
             "style": random.choice(ButtonStyle.values),
+            "alignment": random.choice(ButtonAlignment.values),
         }
 
     elif block_type == BLOCK_TYPE_DOCUMENT:
@@ -155,7 +160,9 @@ def mock_block_value(block_type: str) -> Any:
 
         return {
             "document": document,
-            "title": title(5),
+            "text": title(5),
+            "style": random.choice(ButtonStyle.values),
+            "alignment": random.choice(ButtonAlignment.values),
         }
 
     else:
