@@ -21,6 +21,6 @@ def test_mock_block_value_raises_for_deprecated_block_types() -> None:
 
     for block_type in DEPRECATED_BLOCK_TYPES:
         with pytest.raises(
-            RuntimeError, match=f"{block_type} is deprecated and should not be used."
+            RuntimeError, match=f"{block_type} is deprecated and should not be used in new tests\\."
         ):
             mock_block_value(block_type)

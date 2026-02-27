@@ -78,7 +78,7 @@ class Command(BaseCommand):
 
                         image_block_data = {
                             "type": "image",
-                            "value": {"image": image, "alt_text": alt_text},
+                            "value": {"image": image, "size": "full", "alt_text": alt_text},
                         }
                         text_block_data = {
                             "type": "rich_text",
@@ -105,17 +105,17 @@ class Command(BaseCommand):
                         changed = True
 
                     elif block_type == "testimonial":
-                        # Collect testimonials to convert into a single testimonial block later
+                        # Collect testimonials to convert into a single testimonial_list block
                         testimonials.append(value)
-                        testimonial_list_block_index = len(
-                            new_stream_data
-                        )  # Remember where to insert the testimonial block
-                        new_stream_data.append(
-                            {
-                                "type": "testimonial_list",
-                                "value": [],  # Placeholder, will be replaced later
-                            }
-                        )
+                        if testimonial_list_block_index is None:
+                            # Insert a placeholder only once for the first testimonial
+                            testimonial_list_block_index = len(new_stream_data)
+                            new_stream_data.append(
+                                {
+                                    "type": "testimonial_list",
+                                    "value": [],  # Placeholder, will be replaced later
+                                }
+                            )
 
                         changed = True
 
