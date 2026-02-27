@@ -5,11 +5,6 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 from wagtail.models import Page
 
-# Import your specific page models here
-# from publications.models import PublicationPage
-# from home.models import HomePage
-# from pedagogy.models import PedagogyCardPage
-
 
 class Command(BaseCommand):
     help = "Migrates deprecated blocks to AugmentedRichTextBlock across specific models."
