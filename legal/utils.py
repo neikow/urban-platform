@@ -21,8 +21,14 @@ def has_valid_code_of_conduct_consent(user: User) -> bool:
 
 
 def get_latest_code_of_conduct_revision() -> Revision:
-    code_of_conduct_page: CodeOfConductPage = CodeOfConductPage.objects.live().first()
+    code_of_conduct_page: CodeOfConductPage | None = CodeOfConductPage.objects.live().first()
+    if code_of_conduct_page is None:
+        raise CodeOfConductPage.DoesNotExist("No live CodeOfConductPage found.")
+
     latest_revision = code_of_conduct_page.revisions.order_by("-created_at").first()
+    if latest_revision is None:
+        raise Revision.DoesNotExist("No revisions found for the live CodeOfConductPage.")
+
     return latest_revision
 
 

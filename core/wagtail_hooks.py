@@ -118,6 +118,8 @@ def register_publications_menu() -> MenuItem:
 @hooks.register("register_admin_menu_item")
 def register_pedagogic_entries_menu() -> MenuItem:
     index_page = PedagogyIndexPage.objects.live().first()
+    if index_page is None:
+        raise PedagogyIndexPage.DoesNotExist("No live PedagogyIndexPage found.")
 
     submenu = Menu(
         items=[
@@ -150,6 +152,15 @@ def register_legal_menu() -> MenuItem:
     cookies_policy = CookiesPolicyPage.objects.live().first()
     privacy_policy = PrivacyPolicyPage.objects.live().first()
     terms_of_service = TermsOfServicePage.objects.live().first()
+
+    if code_of_conduct is None:
+        raise CodeOfConductPage.DoesNotExist("No live CodeOfConductPage found.")
+    if cookies_policy is None:
+        raise CookiesPolicyPage.DoesNotExist("No live CookiesPolicyPage found.")
+    if privacy_policy is None:
+        raise PrivacyPolicyPage.DoesNotExist("No live PrivacyPolicyPage found.")
+    if terms_of_service is None:
+        raise TermsOfServicePage.DoesNotExist("No live TermsOfServicePage found.")
 
     submenu = Menu(
         items=[

@@ -13,9 +13,9 @@ load_dotenv()
 
 DEBUG = True
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "e2e-test-secret-key-not-for-production")
+SECRET_KEY = os.environ.get("SECRET_KEY", "INSECURE-E2E-TEST-KEY-DO-NOT-USE-IN-PRODUCTION")
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "testserver"]
 
 # Use a dedicated SQLite database for e2e tests
 DATABASES = {
