@@ -84,7 +84,7 @@ class Command(BaseCommand):
                             "type": "rich_text",
                             "value": {
                                 "justification": "left",
-                                "text": f"<p>{text}</p>",
+                                "text": text,
                             },
                         }
 
