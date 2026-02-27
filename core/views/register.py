@@ -132,7 +132,10 @@ class RegisterFormView(FormView):
             require_https=self.request.is_secure(),
         )
 
-        redirection_url = redirect_to if url_is_safe else reverse("me")
+        if url_is_safe and redirect_to:
+            redirection_url = redirect_to
+        else:
+            redirection_url = reverse("me")
 
         if not has_valid_code_of_conduct_consent(self.user):
             return reverse("code_of_conduct_consent", query={"next": redirection_url})
