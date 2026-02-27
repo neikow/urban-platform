@@ -56,7 +56,7 @@ def mock_block_value(block_type: str) -> Any:
         return {
             "title": title(6),
             "subtitle": paragraph(4),
-            "image": image.id,
+            "image": image,
             "alt_text": image.title,
             "cta_link": "https://example.com",
             "cta_text": "Click Here",
