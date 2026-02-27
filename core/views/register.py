@@ -126,13 +126,13 @@ class RegisterFormView(FormView):
     def get_success_url(self) -> str:
         redirect_to = self.request.POST.get("next") or self.request.GET.get("next")
 
-        url_is_safe = url_has_allowed_host_and_scheme(
+        url_is_safe = bool(redirect_to) and url_has_allowed_host_and_scheme(
             url=redirect_to,
             allowed_hosts={self.request.get_host()},
             require_https=self.request.is_secure(),
         )
 
-        redirection_url = redirect_to if url_is_safe and redirect_to else reverse("me")
+        redirection_url = redirect_to if url_is_safe else reverse("me")
 
         if not has_valid_code_of_conduct_consent(self.user):
             return reverse("code_of_conduct_consent", query={"next": redirection_url})

@@ -62,6 +62,20 @@ class TestCodeOfConductConsentViewPost:
         mock_create.assert_called_once()
 
     @patch("legal.views.has_valid_code_of_conduct_consent", return_value=False)
+    @patch("legal.views.create_code_of_conduct_consent_record")
+    def test_valid_form_with_next_redirects_to_next(
+        self, mock_create, mock_consent, authenticated_client
+    ):
+        client, user = authenticated_client
+        response = client.post(
+            "/user/code-of-conduct-consent/", {"consent": True, "next": "/some-protected-page/"}
+        )
+
+        assert response.status_code == 302
+        assert response.url == "/some-protected-page/"
+        mock_create.assert_called_once()
+
+    @patch("legal.views.has_valid_code_of_conduct_consent", return_value=False)
     def test_invalid_form_shows_errors(self, mock_consent, authenticated_client):
         client, user = authenticated_client
         response = client.post("/user/code-of-conduct-consent/", {})

@@ -59,13 +59,11 @@ class CodeOfConductConsentView(FormView):
     def get_success_url(self) -> str:
         redirect_to = self.request.POST.get("next") or self.request.GET.get("next")
 
-        url_is_safe = url_has_allowed_host_and_scheme(
+        if redirect_to and url_has_allowed_host_and_scheme(
             url=redirect_to,
             allowed_hosts={self.request.get_host()},
             require_https=self.request.is_secure(),
-        )
-
-        if redirect_to and url_is_safe:
+        ):
             return redirect_to
 
         return reverse("me")
