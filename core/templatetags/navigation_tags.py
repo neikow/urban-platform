@@ -53,7 +53,7 @@ def get_navigation_menu_items(
 ) -> list[MenuItem]:
     root = get_site_root(context)
     request = context["request"]
-    if not request:
+    if not root or not request:
         return []
 
     home_url = pageurl(context, root) or "/"
