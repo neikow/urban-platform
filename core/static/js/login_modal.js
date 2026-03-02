@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('login-form');
     const errorDiv = document.getElementById('login-error');
     const errorText = document.getElementById('login-error-text');
 
-    loginForm.addEventListener('submit', async function(e) {
+    loginForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         errorDiv.classList.add('hidden');
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'X-Requested-With': 'XMLHttpRequest',
                 }
             });
 
@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.errors) {
                     if (data.errors.__all__) {
                         errorMessage = data.errors.__all__.join(' ');
-                    }
-                    else {
+                    } else {
                         const firstError = Object.values(data.errors)[0];
                         errorMessage = Array.isArray(firstError) ? firstError.join(' ') : String(firstError);
                     }
