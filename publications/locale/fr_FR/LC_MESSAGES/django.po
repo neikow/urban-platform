@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-26 18:49+0100\n"
+"POT-Creation-Date: 2026-03-02 11:27+0100\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -88,84 +88,86 @@ msgid "Events"
 msgstr "Événements"
 
 #: publications/models/form.py:7
-#: publications/templates/publications/admin/vote_stats_detail.html:178
-#: publications/templates/publications/admin/vote_stats_detail.html:234
-#: publications/templates/publications/admin/vote_stats_detail.html:268
+#: publications/templates/publications/admin/vote_stats_detail.html:110
+#: publications/templates/publications/admin/vote_stats_detail.html:211
+#: publications/templates/publications/admin/vote_stats_detail.html:267
+#: publications/templates/publications/admin/vote_stats_detail.html:301
 #: publications/templates/publications/components/vote_form.html:75
 msgid "Unfavorable"
 msgstr "Défavorable"
 
 #: publications/models/form.py:8
-#: publications/templates/publications/admin/vote_stats_detail.html:158
-#: publications/templates/publications/admin/vote_stats_detail.html:227
-#: publications/templates/publications/admin/vote_stats_detail.html:268
+#: publications/templates/publications/admin/vote_stats_detail.html:191
+#: publications/templates/publications/admin/vote_stats_detail.html:260
+#: publications/templates/publications/admin/vote_stats_detail.html:301
 #: publications/templates/publications/components/vote_form.html:98
 msgid "Rather Unfavorable"
 msgstr "Plutôt défavorable"
 
 #: publications/models/form.py:9
-#: publications/templates/publications/admin/vote_stats_detail.html:138
-#: publications/templates/publications/admin/vote_stats_detail.html:220
-#: publications/templates/publications/admin/vote_stats_detail.html:268
+#: publications/templates/publications/admin/vote_stats_detail.html:171
+#: publications/templates/publications/admin/vote_stats_detail.html:253
+#: publications/templates/publications/admin/vote_stats_detail.html:301
 #: publications/templates/publications/components/vote_form.html:120
 msgid "Rather Favorable"
 msgstr "Plutôt favorable"
 
 #: publications/models/form.py:10
 #: publications/templates/publications/admin/vote_stats.html:18
-#: publications/templates/publications/admin/vote_stats_detail.html:118
-#: publications/templates/publications/admin/vote_stats_detail.html:213
-#: publications/templates/publications/admin/vote_stats_detail.html:268
+#: publications/templates/publications/admin/vote_stats_detail.html:95
+#: publications/templates/publications/admin/vote_stats_detail.html:151
+#: publications/templates/publications/admin/vote_stats_detail.html:246
+#: publications/templates/publications/admin/vote_stats_detail.html:301
 #: publications/templates/publications/components/vote_form.html:141
 msgid "Favorable"
 msgstr "Favorable"
 
-#: publications/models/form.py:19
+#: publications/models/form.py:28
 msgid "Created At"
 msgstr "Créé le"
 
-#: publications/models/form.py:20
+#: publications/models/form.py:29
 msgid "Updated At"
 msgstr "Mis à jour le"
 
-#: publications/models/form.py:26
+#: publications/models/form.py:35
 msgid "User"
 msgstr "Utilisateur"
 
-#: publications/models/form.py:32 publications/models/project.py:37
+#: publications/models/form.py:41 publications/models/project.py:37
 #: publications/models/project.py:100
 #: publications/templates/publications/admin/vote_stats.html:14
 #: publications/templates/publications/publication_index_page.html:127
 msgid "Project"
 msgstr "Projet"
 
-#: publications/models/form.py:35
+#: publications/models/form.py:44
 msgid "Choice"
 msgstr "Choix"
 
-#: publications/models/form.py:40
+#: publications/models/form.py:49
 msgid "Comment"
 msgstr "Commentaire"
 
-#: publications/models/form.py:42
+#: publications/models/form.py:51
 msgid "Optional comment to explain your vote"
 msgstr "Commentaire optionnel pour expliquer votre vote"
 
-#: publications/models/form.py:45
+#: publications/models/form.py:54
 msgid "Anonymize"
 msgstr "Anonymiser"
 
-#: publications/models/form.py:47
+#: publications/models/form.py:56
 msgid "Hide your identity in public displays"
 msgstr "Masquer votre identité dans les affichages publics"
 
-#: publications/models/form.py:51
+#: publications/models/form.py:60
 #, fuzzy
 #| msgid "Form Response"
 msgid "Vote Response"
 msgstr "Réponse au formulaire"
 
-#: publications/models/form.py:52
+#: publications/models/form.py:61
 #, fuzzy
 #| msgid "Form Responses"
 msgid "Vote Responses"
@@ -308,7 +310,7 @@ msgstr "Contenu supplémentaire pour la page des publications."
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
-#: publications/views/vote_stats.py:15 publications/views/vote_stats.py:69
+#: publications/views/vote_stats.py:20 publications/views/vote_stats.py:69
 #: publications/wagtail_hooks.py:24
 msgid "Vote Statistics"
 msgstr "Statistiques des votes"
@@ -322,7 +324,7 @@ msgid "Total votes"
 msgstr "Total des votes"
 
 #: publications/templates/publications/admin/vote_stats.html:17
-#: publications/templates/publications/admin/vote_stats_detail.html:106
+#: publications/templates/publications/admin/vote_stats_detail.html:139
 msgid "With comment"
 msgstr "Avec commentaire"
 
@@ -362,23 +364,23 @@ msgstr "Vote fermé"
 msgid "votes"
 msgstr "votes"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:99
+#: publications/templates/publications/admin/vote_stats_detail.html:132
 msgid "Type"
 msgstr "Type"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:102
+#: publications/templates/publications/admin/vote_stats_detail.html:135
 msgid "Count"
 msgstr "Nombre"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:198
+#: publications/templates/publications/admin/vote_stats_detail.html:231
 msgid "Comments"
 msgstr "Commentaires"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:242
+#: publications/templates/publications/admin/vote_stats_detail.html:275
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:256
+#: publications/templates/publications/admin/vote_stats_detail.html:289
 msgid "No votes yet"
 msgstr "Aucun vote pour l'instant"
 
