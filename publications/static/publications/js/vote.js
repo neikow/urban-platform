@@ -45,9 +45,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadVoteState();
 
-    voteChoices.forEach(choice => {
-        choice.addEventListener('change', function() {
-            if (voteSubmitBtn) voteSubmitBtn.disabled = false;
+    const voteLabels = document.querySelectorAll('.vote-choice-btn');
+    voteLabels.forEach(label => {
+        const input = label.querySelector('input[name="vote_choice"]');
+        if (!input) return;
+
+        label.addEventListener('click', function(e) {
+            if (input.dataset.wasChecked === 'true') {
+                e.preventDefault();
+                input.checked = false;
+                if (voteSubmitBtn) voteSubmitBtn.disabled = true;
+            } else {
+                if (voteSubmitBtn) voteSubmitBtn.disabled = false;
+            }
+            delete input.dataset.wasChecked;
+        });
+
+        label.addEventListener('mousedown', function() {
+            if (input.checked) {
+                input.dataset.wasChecked = 'true';
+            }
         });
     });
 
