@@ -55,13 +55,12 @@ class TestGetLatestCodeOfConductRevision:
         mock_page = MagicMock()
         mock_revision = MagicMock()
         mock_page.revisions.order_by.return_value.first.return_value = mock_revision
-        mock_page_model.objects.first.return_value = mock_page
-
+        mock_page_model.objects.live.return_value.first.return_value = mock_page
         from legal.utils import get_latest_code_of_conduct_revision
 
         result = get_latest_code_of_conduct_revision()
 
-        assert result == mock_revision
+        assert result is mock_revision
         mock_page.revisions.order_by.assert_called_once_with("-created_at")
 
 

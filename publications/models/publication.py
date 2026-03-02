@@ -8,7 +8,7 @@ from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
 
-from core.blocks import BlockTypes
+from core.blocks import CONTENT_BLOCK_TYPES
 
 
 class PublicationPage(Page):
@@ -122,7 +122,7 @@ class PublicationPage(Page):
     )
 
     content = StreamField(
-        BlockTypes,
+        CONTENT_BLOCK_TYPES,
         blank=True,
         verbose_name=_("Content"),
         help_text=_("The main content of the page."),
