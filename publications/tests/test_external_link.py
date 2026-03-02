@@ -1,10 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
-from django.utils.translation import gettext_lazy as _
-from wagtail.models import Page
 
 from publications.factories.project_factory import ProjectPageFactory
-from publications.models import ProjectExternalLink, ProjectPage
+from publications.models import ProjectExternalLink, ProjectPage, PublicationIndexPage
 
 
 class ProjectExternalLinkTest(TestCase):
@@ -14,8 +12,8 @@ class ProjectExternalLinkTest(TestCase):
 
     @classmethod
     def setUpTestData(cls) -> None:
-        root = Page.get_first_root_node()
-        cls.project = ProjectPageFactory.create(parent=root)
+        publication_index = PublicationIndexPage.objects.first()
+        cls.project = ProjectPageFactory.create(parent=publication_index)
 
     def test_create_external_link(self) -> None:
         """Test creating an external link for a project."""
@@ -25,7 +23,6 @@ class ProjectExternalLinkTest(TestCase):
             url="https://example.com/docs",
             tooltip="Accéder à la documentation officielle",
         )
-        link.clean()
         link.save()
 
         self.assertEqual(link.title, "Voir le site officiel")
@@ -40,7 +37,6 @@ class ProjectExternalLinkTest(TestCase):
             title="Lien simple",
             url="https://example.com",
         )
-        link.clean()
         link.save()
 
         self.assertEqual(link.tooltip, "")
@@ -53,12 +49,9 @@ class ProjectExternalLinkTest(TestCase):
             url="",
         )
         with self.assertRaises(ValidationError) as cm:
-            link.clean()
+            link.full_clean()
 
-        self.assertIn(
-            str(_("URL is required for external links.")),
-            str(cm.exception),
-        )
+        self.assertIn("url", cm.exception.message_dict)
 
     def test_project_has_external_links_property(self) -> None:
         """Test the has_external_links property on ProjectPage."""
