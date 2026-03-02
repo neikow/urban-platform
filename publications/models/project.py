@@ -60,6 +60,12 @@ class ProjectPage(PublicationPage):
         help_text=_("Leave empty for no end date"),
     )
 
+    show_toc: models.BooleanField[bool, bool] = models.BooleanField(
+        _("Show table of contents"),
+        default=True,
+        help_text=_("Display the table of contents in the sidebar"),
+    )
+
     search_fields = PublicationPage.search_fields + [
         index.SearchField("category"),
     ]
@@ -68,13 +74,14 @@ class ProjectPage(PublicationPage):
         FieldPanel("category"),
         FieldPanel("enable_voting"),
         FieldPanel("voting_end_date"),
+        FieldPanel("show_toc"),
     ]
 
     def clean(self) -> None:
         super().clean()
 
         for block in self.content:
-            if block.block_type == "text":
+            if block.block_type in ("text", "rich_text"):
                 generate_header_ids(block)
 
     @property
