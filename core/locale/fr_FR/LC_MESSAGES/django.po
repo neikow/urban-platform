@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 15:46+0100\n"
+"POT-Creation-Date: 2026-02-26 21:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,61 +17,265 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: core/blocks.py:10
+#: core/blocks.py:13 core/blocks.py:18 core/blocks.py:29
 msgid "Left"
 msgstr "Gauche"
 
-#: core/blocks.py:11
+#: core/blocks.py:14 core/blocks.py:20 core/blocks.py:31
 msgid "Right"
 msgstr "Droite"
 
-#: core/blocks.py:18
-msgid "Image Position"
-msgstr "Position de l'image"
+#: core/blocks.py:19 core/blocks.py:30
+msgid "Center"
+msgstr "Centré"
 
-#: core/blocks.py:22 core/blocks.py:153
-msgid "Text"
-msgstr "Texte"
+#: core/blocks.py:24
+msgid "Primary"
+msgstr "Primaire"
 
-#: core/blocks.py:26 core/blocks.py:168
+#: core/blocks.py:25
+msgid "Secondary"
+msgstr "Secondaire"
+
+#: core/blocks.py:32
+msgid "Justify"
+msgstr "Justifié"
+
+#: core/blocks.py:36
+msgid "Small (1/3 Width)"
+msgstr "Petit (1/3 de la largeur)"
+
+#: core/blocks.py:37
+msgid "Medium (1/2 Width)"
+msgstr "Moyen (1/2 de la largeur)"
+
+#: core/blocks.py:38
+msgid "Large (2/3 Width)"
+msgstr "Large (2/3 de la largeur)"
+
+#: core/blocks.py:39
+msgid "Full Width"
+msgstr "Pleine largeur"
+
+#: core/blocks.py:50
+msgid "Leave blank to use the image's default alt text"
+msgstr "Laisser vide pour utiliser le texte alternatif par défaut de l'image"
+
+#: core/blocks.py:54 core/blocks.py:110
 msgid "Image"
 msgstr "Image"
 
-#: core/blocks.py:32
-msgid "Alt Text"
-msgstr "Titre de l'image (pour Google)"
+#: core/blocks.py:61
+msgid "Text Justification"
+msgstr "Alignement du texte"
+
+#: core/blocks.py:81
+msgid "Content"
+msgstr "Contenu"
 
 #: core/blocks.py:86
-msgid "Number of Publications"
-msgstr "Nombre de publications"
+msgid "Max Width (in pixels, optional)"
+msgstr "Largeur maximale (en pixels, optionnelle)"
+
+#: core/blocks.py:89
+msgid "Leave blank for full width"
+msgstr "Laisser vide pour une largeur complète"
+
+#: core/blocks.py:93 core/blocks.py:106
+msgid "Text"
+msgstr "Texte"
+
+#: core/blocks.py:100
+msgid "Image Position"
+msgstr "Position de l'image"
+
+#: core/blocks.py:114 core/blocks.py:152
+msgid ""
+"Image Alt Text (For accessibility, SEO, and in case the image fails to load)"
+msgstr ""
+"Texte alternatif de l'image (pour l'accessibilité, le référencement et en "
+"cas de problème de chargement de l'image)"
+
+#: core/blocks.py:120
+#, fuzzy
+#| msgid "Image & Text Row"
+msgid "DEPRECATED Image & Text Row"
+msgstr "NE PLUS UTILISER Image et Texte sur une ligne"
+
+#: core/blocks.py:130
+msgid "Left Column Content"
+msgstr "Contenu de la colonne de gauche"
+
+#: core/blocks.py:134
+msgid "Right Column Content"
+msgstr "Contenu de la colonne de droite"
+
+#: core/blocks.py:138
+msgid "Two Column Block"
+msgstr "Bloc à deux colonnes"
+
+#: core/blocks.py:146
+msgid "Title"
+msgstr "Titre"
+
+#: core/blocks.py:147
+msgid "Subtitle (Optional)"
+msgstr "Sous-titre (optionnel)"
+
+#: core/blocks.py:149
+msgid "Background Image"
+msgstr "Image de fond"
+
+#: core/blocks.py:157
+msgid "Call-to-Action Link (Leave blank if no CTA button)"
+msgstr "Lien d'appel à l'action (laisser vide s'il n'y a pas de bouton CTA)"
+
+#: core/blocks.py:160
+msgid "Call-to-Action Text (Leave blank if no CTA button)"
+msgstr ""
+"Texte de l'appel à l'action (laisser vide s'il n'y a pas de bouton CTA)"
 
 #: core/blocks.py:164
-msgid "Centered Text"
-msgstr "Texte centré"
-
-#: core/blocks.py:171
-msgid "Image & Text Row"
-msgstr "Image et Texte sur une ligne"
-
-#: core/blocks.py:173
 msgid "Hero Block"
 msgstr "Bloc \"Hero\""
 
-#: core/blocks.py:174
+#: core/blocks.py:171
+#, fuzzy
+#| msgid "Card List Block"
+msgid "Card Title"
+msgstr "Bloc Liste de cartes"
+
+#: core/blocks.py:176
+msgid "Card Description"
+msgstr "Description de la carte"
+
+#: core/blocks.py:179
+msgid "Card Image (Optional)"
+msgstr "Image de la carte (optionnelle)"
+
+#: core/blocks.py:182
+msgid ""
+"Card Image Alt Text (For accessibility, SEO, and in case the image fails to "
+"load)"
+msgstr ""
+"Texte alternatif de l'image de la carte (pour l'accessibilité, le "
+"référencement et en cas de problème de chargement de l'image)"
+
+#: core/blocks.py:189
+#, fuzzy
+#| msgid "Card Link (Optional)"
+msgid "Learn More Link (Optional)"
+msgstr "Lien de la carte (optionnel)"
+
+#: core/blocks.py:193
+msgid "Card"
+msgstr "Carte"
+
+#: core/blocks.py:203
 msgid "Card List Block"
 msgstr "Bloc Liste de cartes"
 
-#: core/blocks.py:175
-msgid "Testimonial Block"
+#: core/blocks.py:209
+#, fuzzy
+#| msgid "Testimonial Block"
+msgid "Testimonial Quote"
 msgstr "Bloc de témoignages"
 
-#: core/blocks.py:176
+#: core/blocks.py:210
+#, fuzzy
+#| msgid "Last Name"
+msgid "Author Name"
+msgstr "Nom de famille"
+
+#: core/blocks.py:211
+msgid "Author Title (Optional)"
+msgstr "Titre de l'auteur (optionnel)"
+
+#: core/blocks.py:212
+msgid "Author Image (Optional)"
+msgstr "Image de l'auteur (optionnelle)"
+
+#: core/blocks.py:215
+#, fuzzy
+#| msgid "Testimonial Block"
+msgid "Testimonial"
+msgstr "Bloc de témoignages"
+
+#: core/blocks.py:225
+#, fuzzy
+#| msgid "Testimonial Block"
+msgid "Testimonial List Block"
+msgstr "Bloc de témoignages"
+
+#: core/blocks.py:232
+msgid "Number of Publications"
+msgstr "Nombre de publications"
+
+#: core/blocks.py:254
 msgid "Recent Publications Block"
 msgstr "Bloc des publications récentes"
 
-#: core/blocks.py:177
+#: core/blocks.py:259
+msgid "Question"
+msgstr "Question"
+
+#: core/blocks.py:260
+msgid "Answer"
+msgstr "Réponse"
+
+#: core/blocks.py:272
 msgid "FAQ Block"
 msgstr "Bloc FAQ"
+
+#: core/blocks.py:279
+msgid "Height (in pixels)"
+msgstr "Hauteur (en pixels)"
+
+#: core/blocks.py:286
+msgid "Hide on Mobile"
+msgstr "Masquer sur mobile"
+
+#: core/blocks.py:292
+msgid "Vertical Spacer"
+msgstr "Espace vertical"
+
+#: core/blocks.py:298
+#, fuzzy
+#| msgid "Alt Text"
+msgid "Button Text"
+msgstr "Titre de l'image (pour Google)"
+
+#: core/blocks.py:300
+msgid "Button Type"
+msgstr "Type de bouton"
+
+#: core/blocks.py:306
+msgid "Button Alignment"
+msgstr "Alignement du bouton"
+
+#: core/blocks.py:317
+msgid "Button Link"
+msgstr "Lien du bouton"
+
+#: core/blocks.py:320
+msgid "Call-to-Action Button"
+msgstr "CTA - Bouton d'appel à l'action"
+
+#: core/blocks.py:326 core/blocks.py:329
+msgid "Document"
+msgstr "Document"
+
+#: core/blocks.py:376
+#, fuzzy
+#| msgid "Centered Text"
+msgid "DEPRECATED Text"
+msgstr "NE PLUS UTILISER Texte centré"
+
+#: core/blocks.py:388
+#, fuzzy
+#| msgid "Centered Text"
+msgid "DEPRECATED Centered Text"
+msgstr "NE PLUS UTILISER Texte centré"
 
 #: core/models/city_district.py:11
 msgid "City District"
@@ -89,6 +293,72 @@ msgstr "Quartier"
 #: core/models/city_neighborhood.py:14
 msgid "City Neighborhoods"
 msgstr "Quartiers"
+
+#: core/models/email_event.py:9
+#, fuzzy
+#| msgid "Email Verified"
+msgid "Email Verification"
+msgstr "Email vérifié"
+
+#: core/models/email_event.py:10
+msgid "Password Reset"
+msgstr "Réinitialisation du mot de passe"
+
+#: core/models/email_event.py:14
+msgid "Pending"
+msgstr "En attente"
+
+#: core/models/email_event.py:15
+msgid "Sent"
+msgstr "Envoyé"
+
+#: core/models/email_event.py:16
+msgid "Failed"
+msgstr "Échec"
+
+#: core/models/email_event.py:27 core/models/user.py:102
+msgid "User"
+msgstr "Utilisateur"
+
+#: core/models/email_event.py:30
+msgid "Event Type"
+msgstr "Type d'événement"
+
+#: core/models/email_event.py:35
+#, fuzzy
+#| msgid "Staff Status"
+msgid "Status"
+msgstr "Statut du personnel"
+
+#: core/models/email_event.py:41
+msgid "Recipient Email"
+msgstr "Email du destinataire"
+
+#: core/models/email_event.py:42
+msgid "Stored temporarily, cleared on anonymization"
+msgstr "Stocké temporairement, effacé lors de l'anonymisation"
+
+#: core/models/email_event.py:45
+msgid "Sent At"
+msgstr "Envoyé à"
+
+#: core/models/email_event.py:50
+msgid "Created At"
+msgstr "Créé à"
+
+#: core/models/email_event.py:54
+msgid "Error Message"
+msgstr "Message d'erreur"
+
+#: core/models/email_event.py:59
+msgid "Email Event"
+msgstr "Événement de courriel"
+
+#: core/models/email_event.py:60
+#, fuzzy
+#| msgid "Email Address"
+msgid "Email Events"
+msgstr "Adresse e-mail"
 
 #: core/models/neighborhood_association.py:12
 msgid "Contact Email"
@@ -111,105 +381,106 @@ msgstr "Comité d'intérêt de quartier"
 msgid "Neighborhood Associations"
 msgstr "Comités d'intérêt de quartier"
 
-#: core/models/user.py:13
+#: core/models/user.py:14
 msgid "Citizen"
 msgstr "Citoyen"
 
-#: core/models/user.py:14
+#: core/models/user.py:15
 msgid "Association Member"
 msgstr "Membre d'association"
 
-#: core/models/user.py:15
+#: core/models/user.py:16
 msgid "Admin"
 msgstr "Administrateur"
 
-#: core/models/user.py:21
+#: core/models/user.py:22
 msgid "The Email field must be set"
 msgstr "Le champ email doit être renseigné"
 
-#: core/models/user.py:37
+#: core/models/user.py:38
 msgid "Superuser must have is_staff=True."
 msgstr "Le superutilisateur doit avoir is_staff=True."
 
-#: core/models/user.py:39
+#: core/models/user.py:40
 msgid "Superuser must have is_superuser=True."
 msgstr "Le superutilisateur doit avoir is_superuser=True."
 
-#: core/models/user.py:45
+#: core/models/user.py:46
 msgid "Email Address"
 msgstr "Adresse e-mail"
 
 #: core/models/user.py:47
+msgid "UUID"
+msgstr "UUID"
+
+#: core/models/user.py:49
 msgid "First Name"
 msgstr "Prénom"
 
-#: core/models/user.py:48
+#: core/models/user.py:50
 msgid "Last Name"
 msgstr "Nom de famille"
 
-#: core/models/user.py:56
+#: core/models/user.py:58
 #, fuzzy
 #| msgid "City Neighborhood"
 msgid "Neighborhood"
 msgstr "Quartier"
 
-#: core/models/user.py:58
+#: core/models/user.py:60
 msgid "Postal Code"
 msgstr "Code postal"
 
-#: core/models/user.py:61
+#: core/models/user.py:63
 msgid "Email Verified"
 msgstr "Email vérifié"
 
-#: core/models/user.py:63
+#: core/models/user.py:65
 msgid "Is the user's email address verified?"
 msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:66
+#: core/models/user.py:68
 msgid "Role"
 msgstr "Rôle"
 
-#: core/models/user.py:72
+#: core/models/user.py:74
 msgid "Phone Number"
 msgstr "Numéro de téléphone"
 
-#: core/models/user.py:74
+#: core/models/user.py:76
 msgid "Newsletter Subscription"
 msgstr "Inscription à la newsletter"
 
-#: core/models/user.py:76
+#: core/models/user.py:78
 msgid "Does the user want to receive the newsletter?"
 msgstr "L'utilisateur souhaite-t-il recevoir la newsletter ?"
 
-#: core/models/user.py:79
+#: core/models/user.py:81
 msgid "Date Joined"
 msgstr "Date d'inscription"
 
-#: core/models/user.py:80
+#: core/models/user.py:82
 msgid "Last Updated"
 msgstr "Dernière mise à jour"
 
-#: core/models/user.py:84
+#: core/models/user.py:86
 msgid "Active"
 msgstr "Actif"
 
-#: core/models/user.py:86
+#: core/models/user.py:88
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:89
+#: core/models/user.py:91
 msgid "Staff Status"
 msgstr "Statut du personnel"
 
-#: core/models/user.py:91
+#: core/models/user.py:93
 msgid "Designates whether the user can log into the admin site."
-msgstr "Indique si l'utilisateur peut se connecter à l'interface d'administration."
+msgstr ""
+"Indique si l'utilisateur peut se connecter à l'interface d'administration."
 
-#: core/models/user.py:100
-msgid "User"
-msgstr "Utilisateur"
-
-#: core/models/user.py:101
+#: core/models/user.py:103
 msgid "Users"
 msgstr "Utilisateurs"
 
@@ -229,42 +500,47 @@ msgstr "Voir tout"
 msgid "No recent publications found."
 msgstr "Aucune publication récente trouvée."
 
-#: core/wagtail_hooks.py:63 core/wagtail_hooks.py:77 core/wagtail_hooks.py:106
+#: core/wagtail_hooks.py:79 core/wagtail_hooks.py:93 core/wagtail_hooks.py:122
+#: core/templates/core/components/search/text_search_form.html:38
+msgid "Search"
+msgstr "Rechercher"
+
+#: core/wagtail_hooks.py:64 core/wagtail_hooks.py:78 core/wagtail_hooks.py:107
 msgid "Page d'accueil"
 msgstr "Page d'accueil"
 
-#: core/wagtail_hooks.py:83 core/wagtail_hooks.py:112
+#: core/wagtail_hooks.py:99 core/wagtail_hooks.py:128
 msgid "Liste"
 msgstr "Liste"
 
-#: core/wagtail_hooks.py:89 core/wagtail_hooks.py:118
+#: core/wagtail_hooks.py:105 core/wagtail_hooks.py:134
 msgid "Ajouter"
 msgstr "Ajouter"
 
-#: core/wagtail_hooks.py:96
+#: core/wagtail_hooks.py:112
 msgid "Publications"
 msgstr "Publications"
 
-#: core/wagtail_hooks.py:125
+#: core/wagtail_hooks.py:141
 msgid "Fiches Pédagogiques"
 msgstr "Fiches Pédagogiques"
 
-#: core/wagtail_hooks.py:138
+#: core/wagtail_hooks.py:154
 msgid "Charte de conduite"
 msgstr "Charte de conduite"
 
-#: core/wagtail_hooks.py:144
+#: core/wagtail_hooks.py:160
 msgid "Conditions d'utilisation"
 msgstr "Conditions d'utilisation"
 
-#: core/wagtail_hooks.py:150
+#: core/wagtail_hooks.py:166
 msgid "Politique de cookies"
 msgstr "Politique de cookies"
 
-#: core/wagtail_hooks.py:156
+#: core/wagtail_hooks.py:172
 msgid "Politique de confidentialité"
 msgstr "Politique de confidentialité"
 
-#: core/wagtail_hooks.py:163
+#: core/wagtail_hooks.py:179
 msgid "Légal"
 msgstr "Légal"

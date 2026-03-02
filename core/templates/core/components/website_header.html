@@ -2,6 +2,8 @@
 {% load wagtailcore_tags navigation_tags %}
 
 {% get_site_root as site_root %}
+{% get_navigation_menu_items as menu %}
+
 <header class="navbar bg-base-100 shadow-sm fixed top-0 z-50 rounded-b-lg container mx-auto mb-4 left-1/2 -translate-x-1/2">
     <div class="navbar-start">
         <nav class="dropdown lg:hidden">
@@ -17,12 +19,12 @@
                 </svg>
             </div>
             <ul tabindex="0" class="menu menu-lg dropdown-content mt-5 z-1 p-2 shadow bg-base-100 rounded-box w-sm">
-                <li>
-                    <a href="{% pageurl site_root %}" class="font-medium">Accueil</a>
-                </li>
-                {% for menuitem in site_root.get_children.live.in_menu %}
+                {% for menuitem in menu %}
                     <li>
-                        <a href="{% pageurl menuitem %}" class="font-medium">{{ menuitem.title }}</a>
+                        <a
+                            href="{{ menuitem.url }}"
+                            class="font-medium {% if menuitem.is_active %} text-primary {% endif %}"
+                        >{{ menuitem.title }}</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -49,14 +51,11 @@
     </div>
     <nav class="navbar-center hidden lg:flex" aria-label="Header Navigation">
         <ul class="menu menu-horizontal px-1 gap-1">
-            <li>
-                <a href="{% pageurl site_root %}" class="font-medium hover:text-primary transition-colors">Accueil</a>
-            </li>
-            {% for menuitem in site_root.get_children.live.in_menu %}
+            {% for menuitem in menu %}
                 <li>
                     <a
-                        href="{% pageurl menuitem %}"
-                        class="font-medium hover:text-primary transition-colors"
+                        href="{{ menuitem.url }}"
+                        class="font-medium {% if menuitem.is_active %} text-primary {% endif %}"
                     >{{ menuitem.title }}</a>
                 </li>
             {% endfor %}
