@@ -40,7 +40,10 @@
     </head>
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
-        {% include "core/components/website_header.html" %}
+        {% block header %}
+            {% include "core/components/website_header.html" %}
+            <div class="pt-16"></div>
+        {% endblock header %}
         {% block content %}
         {% endblock %}
         {% include "core/components/website_footer.html" %}
