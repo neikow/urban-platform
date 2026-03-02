@@ -148,7 +148,27 @@ class TestLoginView:
         assert response.status_code == 200
         assert client.session["_auth_user_id"] == str(user.pk)
 
-    def test_login_redirects_to_me_page(self, client: Client):
+    def test_login_redirects_to_current_page(self, client: Client):
+        User.objects.create_user(
+            email="testuser@example.com",
+            password="TestPass123",
+            first_name="Test",
+            last_name="User",
+        )
+
+        response = client.post(
+            reverse("login"),
+            data={
+                "next": "/current-page/",
+                "email": "testuser@example.com",
+                "password": "TestPass123",
+            },
+        )
+
+        data = json.loads(response.content)
+        assert data["redirect"] == "/current-page/"
+
+    def test_login_without_next_redirects_to_root_for_regular_user(self, client: Client):
         User.objects.create_user(
             email="testuser@example.com",
             password="TestPass123",
@@ -165,4 +185,45 @@ class TestLoginView:
         )
 
         data = json.loads(response.content)
-        assert data["redirect"] == "/auth/me/"
+        assert data["redirect"] == "/"
+
+    def test_login_without_next_redirects_to_admin_for_staff_user(self, client: Client):
+        user = User.objects.create_user(
+            email="staffuser@example.com",
+            password="StaffPass123",
+            first_name="Staff",
+            last_name="User",
+        )
+        user.is_staff = True
+        user.save()
+
+        response = client.post(
+            reverse("login"),
+            data={
+                "email": "staffuser@example.com",
+                "password": "StaffPass123",
+            },
+        )
+
+        data = json.loads(response.content)
+        assert data["redirect"] == "/admin/"
+
+    def test_login_with_invalid_next_falls_back_to_default_redirect(self, client: Client):
+        User.objects.create_user(
+            email="testuser@example.com",
+            password="TestPass123",
+            first_name="Test",
+            last_name="User",
+        )
+
+        response = client.post(
+            reverse("login"),
+            data={
+                "next": "http://malicious.example.com/evil",
+                "email": "testuser@example.com",
+                "password": "TestPass123",
+            },
+        )
+
+        data = json.loads(response.content)
+        assert data["redirect"] == "/"

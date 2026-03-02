@@ -6,7 +6,13 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 from django.contrib.auth import get_user_model
 
-from publications.models import ProjectPage, FormResponse, VoteChoice
+from publications.models import ProjectPage
+from publications.models.form import (
+    FAVORABLE_CHOICES,
+    FormResponse,
+    UNFAVORABLE_CHOICES,
+    VoteChoice,
+)
 
 
 User = get_user_model()
@@ -282,9 +288,9 @@ class Command(BaseCommand):
                     # Decide if adding a comment
                     comment = ""
                     if random.random() < comment_probability:  # nosec B311
-                        if choice in [VoteChoice.FAVORABLE, VoteChoice.RATHER_FAVORABLE]:
+                        if choice in FAVORABLE_CHOICES:
                             comment = random.choice(POSITIVE_COMMENTS)  # nosec B311
-                        elif choice in [VoteChoice.UNFAVORABLE, VoteChoice.RATHER_UNFAVORABLE]:
+                        elif choice in UNFAVORABLE_CHOICES:
                             comment = random.choice(NEGATIVE_COMMENTS)  # nosec B311
                         else:
                             comment = random.choice(NEUTRAL_COMMENTS)  # nosec B311
