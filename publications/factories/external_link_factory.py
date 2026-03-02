@@ -9,4 +9,4 @@ class ProjectExternalLinkFactory(factory.django.DjangoModelFactory):
 
     title = factory.Faker("sentence", nb_words=3, locale="fr_FR")
     url = factory.Faker("url")
-    tooltip = factory.Faker("sentence", nb_sentences=1, locale="fr_FR")
+    tooltip = factory.Faker("sentence", nb_words=6, locale="fr_FR")

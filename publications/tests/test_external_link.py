@@ -74,20 +74,20 @@ class ProjectExternalLinkTest(TestCase):
 
     def test_project_external_links_relation(self) -> None:
         """Test the external_links relation on ProjectPage."""
-        link1 = ProjectExternalLink.objects.create(
+        ProjectExternalLink.objects.create(
             page=self.project,
             title="Link 1",
             url="https://example1.com",
             sort_order=1,
         )
-        link2 = ProjectExternalLink.objects.create(
+        ProjectExternalLink.objects.create(
             page=self.project,
             title="Link 2",
             url="https://example2.com",
             sort_order=0,
         )
 
-        links = [link1, link2]
+        links = list(self.project.external_links.all())
         # Should be ordered by sort_order
         self.assertEqual(links[0].title, "Link 2")
         self.assertEqual(links[1].title, "Link 1")

@@ -7,7 +7,7 @@ from django.core.management import CommandParser
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
-from publications.factories import EventPageFactory, ProjectPageFactory
+from publications.factories import EventPageFactory, ProjectPageFactory, ProjectExternalLinkFactory
 from publications.models import PublicationIndexPage
 
 
@@ -80,6 +80,13 @@ class Command(BaseCommand):
                 )
                 page.save_revision().publish()
 
+                external_links_info = ""
+                if random.random() > 0.5:  # nosec B311
+                    num_links = random.randint(1, 3)  # nosec B311
+                    for _ in range(num_links):
+                        ProjectExternalLinkFactory.create(page=page)
+                    external_links_info = f" [{num_links} external link(s)]"
+
                 voting_info = ""
                 if enable_voting:
                     if voting_end_date:
@@ -91,7 +98,9 @@ class Command(BaseCommand):
                 else:
                     voting_info = " (voting disabled)"
 
-                self.stdout.write(f"  Created project: {page.title}{voting_info}")
+                self.stdout.write(
+                    f"  Created project: {page.title}{voting_info}{external_links_info}"
+                )
             except Exception as e:
                 self.stderr.write(self.style.ERROR(f"  Failed to create project {i + 1}: {e}"))
 
