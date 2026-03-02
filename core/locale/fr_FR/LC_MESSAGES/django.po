@@ -828,10 +828,8 @@ msgid "Ajouter"
 msgstr "Ajouter"
 
 #: core/wagtail_hooks.py:115
-#, fuzzy
-#| msgid "Recent Publications"
 msgid "Publications"
-msgstr "Publications récentes"
+msgstr "Publications"
 
 #: core/wagtail_hooks.py:146
 msgid "Fiches Pédagogiques"

@@ -1,7 +1,8 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static wagtailcore_tags wagtailuserbar i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
-<html lang="en" data-theme="light" class="scroll-smooth">
+<html lang="{{ LANGUAGE_CODE }}" data-theme="light" class="scroll-smooth">
     <head>
         <meta charset="utf-8">
         <title>
