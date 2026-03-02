@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Modifier mon profil{% endblock %}
+{% block title %}{% trans "Edit my profile" %}{% endblock %}
 
 {% block content %}
     <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -48,7 +49,7 @@
                 <div class="card-body">
                     <div class="flex items-center justify-between mb-6">
                         <h1 class="card-title text-3xl font-bold">
-                            Modifier mon profil
+                            {% trans "Edit my profile" %}
                         </h1>
                         <a href="{% url 'me' %}" class="btn btn-ghost btn-sm">
                             <svg
@@ -65,14 +66,14 @@
                                 <path d="m12 19-7-7 7-7" />
                                 <path d="M19 12H5" />
                             </svg>
-                            Retour
+                            {% trans "Back" %}
                         </a>
                     </div>
 
                     <div class="space-y-6">
                         <div class="border-b border-base-300 pb-6">
                             <h2 class="text-xl font-semibold mb-4 text-primary">
-                                Informations personnelles
+                                {% trans "Personal information" %}
                             </h2>
 
                             {% if form.non_field_errors %}
@@ -142,7 +143,7 @@
                                             <polyline points="17 21 17 13 7 13 7 21" />
                                             <polyline points="7 3 7 8 15 8" />
                                         </svg>
-                                        Enregistrer les modifications
+                                        {% trans "Save changes" %}
                                     </button>
                                 </div>
                             </form>
@@ -150,7 +151,7 @@
 
                         <div>
                             <h2 class="text-xl font-semibold mb-4 text-primary">
-                                Changer le mot de passe
+                                {% trans "Change password" %}
                             </h2>
 
                             {% if password_form.non_field_errors %}
@@ -199,7 +200,7 @@
                                             <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
                                             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                                         </svg>
-                                        Changer le mot de passe
+                                        {% trans "Change password" %}
                                     </button>
                                 </div>
                             </form>

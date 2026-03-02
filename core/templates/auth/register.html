@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}S'inscrire{% endblock %}
+{% block title %}{% trans "Sign up" %}{% endblock %}
 
 {% block content %}
     <div class="min-h-screen flex items-center justify-center px-8 lg:px-16 py-12">
@@ -15,12 +15,12 @@
                     >
                     <div class="relative z-10 bg-white rounded-2xl p-8 max-w-md w-full">
                         <h2 class="text-2xl font-bold mb-4 text-gray-800">
-                            Devenez membre
+                            {% trans "Become a member" %}
                         </h2>
                         <ul class="list-disc list-inside space-y-3 text-base text-gray-700">
-                            <li>Accédez aux fiches pédagogiques</li>
-                            <li>Suivez les actualités de votre quartier</li>
-                            <li>Votez sur les initiatives</li>
+                            <li>{% trans "Access educational resources" %}</li>
+                            <li>{% trans "Follow your neighborhood's news" %}</li>
+                            <li>{% trans "Vote on initiatives" %}</li>
                         </ul>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="flex items-center justify-center py-8 bg-base-100">
                     <div class="w-full max-w-md">
                         <h1 class="text-3xl font-bold text-center mb-6">
-                            S'inscrire
+                            {% trans "Sign up" %}
                         </h1>
 
                         {% if form.non_field_errors %}
@@ -86,15 +86,15 @@
                                         for="{{ form.accept_terms.id_for_label }}"
                                         class="text-sm cursor-pointer flex-1 min-w-0"
                                     >
-                                        J'accepte les
+                                        {% trans "I accept the" %}
                                         <a
                                             href="/legal/termes/"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             class="link link-primary font-semibold hover:underline"
                                         >
-                                            conditions d'utilisation<span class="sr-only">
-                                                (ouvre dans un nouvel onglet)</span>
+                                            {% trans "terms of service" %}<span class="sr-only">
+                                                {% trans "(opens in a new tab)" %}</span>
                                         </a>
                                     </label>
                                 </div>
@@ -109,29 +109,29 @@
 
                             <div class="form-control mt-6">
                                 <button type="submit" class="btn btn-primary btn-block">
-                                    S'inscrire
+                                    {% trans "Sign up" %}
                                 </button>
                             </div>
                         </form>
 
-                        <div class="divider">OU</div>
+                        <div class="divider">{% trans "OR" %}</div>
 
                         <div class="text-center">
                             <p class="text-sm">
-                                Vous avez déjà un compte ?
+                                {% trans "Already have an account?" %}
                                 <a href="/auth/login/" class="link link-primary font-semibold">
-                                    Se connecter
+                                    {% trans "Log in" %}
                                 </a>
                             </p>
                         </div>
                         <div class="lg:hidden mt-8 bg-base-200 p-6 rounded-lg">
                             <h2 class="text-2xl font-bold mb-4 text-gray-800">
-                                Devenez membre {{ website_name|default:"Urba7" }}
+                                {% blocktrans %}Become a member of {{ website_name }}{% endblocktrans %}
                             </h2>
                             <ul class="list-disc list-inside space-y-3 text-base text-gray-700">
-                                <li>Accédez aux fiches pédagogiques</li>
-                                <li>Suivez les actualités de votre quartier</li>
-                                <li>Votez sur les initiatives</li>
+                                <li>{% trans "Access educational resources" %}</li>
+                                <li>{% trans "Follow your neighborhood's news" %}</li>
+                                <li>{% trans "Vote on initiatives" %}</li>
                             </ul>
                         </div>
                     </div>

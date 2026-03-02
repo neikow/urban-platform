@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 15:46+0100\n"
+"POT-Creation-Date: 2026-03-02 15:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,39 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: search/templates/search/search.html:9 search/templates/search/search.html:13
+#: search/templates/search/search.html:17
+msgid "Search"
+msgstr "Rechercher"
+
+#: search/templates/search/search.html:35
+msgid "Previous"
+msgstr "Précédent"
+
+#: search/templates/search/search.html:40
+msgid "Next"
+msgstr "Suivant"
+
+#: search/templates/search/search.html:43
+msgid "No results found"
+msgstr "Aucun résultat trouvé"
+
+#: urban_platform/templates/404.html:5 urban_platform/templates/404.html:12
+msgid "Page not found"
+msgstr "Page non trouvée"
+
+#: urban_platform/templates/404.html:15
+msgid "Sorry, this page could not be found."
+msgstr "Désolé, cette page n'a pas pu être trouvée."
+
+#: urban_platform/templates/500.html:7 urban_platform/templates/500.html:13
+msgid "Internal server error"
+msgstr "Erreur interne du serveur"
+
+#: urban_platform/templates/500.html:16
+msgid "Sorry, there seems to be an error. Please try again soon."
+msgstr "Désolé, il semble y avoir une erreur. Veuillez réessayer bientôt."
 
 #: urban_platform/templates/components/toc.html:10
 msgid "No table of contents available"

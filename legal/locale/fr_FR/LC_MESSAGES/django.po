@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-03 15:44+0000\n"
+"POT-Creation-Date: 2026-03-02 15:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,9 @@ msgstr "Contenu de la charte de conduite"
 msgid ""
 "This content should not change often as the user is prompted to accept it "
 "whenever it changes."
-msgstr "Ce contenu ne devrait pas changer fréquemment, car l'utilisateur est invité à l'accepter à chaque modification."
+msgstr ""
+"Ce contenu ne devrait pas changer fréquemment, car l'utilisateur est invité "
+"à l'accepter à chaque modification."
 
 #: legal/models/code_of_conduct.py:41
 msgid "Code of Conduct Page"
@@ -113,3 +115,27 @@ msgstr "Page des conditions d'utilisation"
 #: legal/models/terms_of_service.py:39
 msgid "Terms of Service Pages"
 msgstr "Pages des conditions d'utilisation"
+
+#: legal/templates/legal/code_of_conduct_consent.html:4
+msgid "Code of conduct"
+msgstr "Charte de bonne conduite"
+
+#: legal/templates/legal/code_of_conduct_consent.html:10
+msgid "Signing the code of conduct"
+msgstr "Signature de la charte de bonne conduite"
+
+#: legal/templates/legal/code_of_conduct_consent.html:31
+msgid "I have read and accept the code of conduct"
+msgstr "J'ai lu et j'accepte la charte de bonne conduite"
+
+#: legal/templates/legal/code_of_conduct_consent.html:34
+msgid "Please read the entire charter before accepting"
+msgstr "Veuillez lire la charte en entier avant de pouvoir accepter"
+
+#: legal/templates/legal/code_of_conduct_consent.html:43
+msgid "Accept and continue"
+msgstr "Accepter et continuer"
+
+#: legal/templates/legal/legal_index_page.html:22
+msgid "No content available at the moment."
+msgstr "Aucun contenu disponible pour le moment."

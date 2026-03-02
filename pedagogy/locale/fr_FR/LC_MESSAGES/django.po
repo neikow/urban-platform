@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-26 18:49+0100\n"
+"POT-Creation-Date: 2026-03-02 15:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,6 +90,30 @@ msgstr "Veuillez fournir soit une URL, soit un document, mais pas les deux."
 msgid "Please provide either a URL or a Document."
 msgstr "Veuillez fournir soit une URL, soit un document."
 
+#: pedagogy/templates/pedagogy/components/pedagogy_card_page_resource.html:12
+msgid "Access the resource"
+msgstr "Accéder à la ressource"
+
+#: pedagogy/templates/pedagogy/components/pedagogy_card_page_resource.html:19
+msgid "Download the resource"
+msgstr "Télécharger la ressource"
+
+#: pedagogy/templates/pedagogy/components/pedagogy_card_page_resource.html:21
+msgid "Unknown resource type."
+msgstr "Type de ressource inconnu."
+
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:31
+msgid "Quick access"
+msgstr "Accès rapide"
+
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:41
+msgid "Table of Contents"
+msgstr "Table des matières"
+
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:20
+msgid "Latest additions"
+msgstr "Derniers ajouts"
+
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:22
 msgid "Search resources"
 msgstr "Rechercher des ressources"
@@ -97,3 +121,11 @@ msgstr "Rechercher des ressources"
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:23
 msgid "Search for a resource..."
 msgstr "Rechercher une ressource..."
+
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:44
+msgid "View more"
+msgstr "Voir plus"
+
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:52
+msgid "No educational resources found"
+msgstr "Aucune ressource pédagogique trouvée"

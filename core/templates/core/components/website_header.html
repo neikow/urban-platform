@@ -107,7 +107,7 @@
                                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                                 <circle cx="12" cy="7" r="4" />
                             </svg>
-                            <span>Profil</span>
+                            <span>{% trans "Profile" %}</span>
                         </a>
                     </li>
                     <li>
@@ -129,7 +129,7 @@
                                     <polyline points="16 17 21 12 16 7" />
                                     <line x1="21" x2="9" y1="12" y2="12" />
                                 </svg>
-                                <span>Se déconnecter</span>
+                                <span>{% trans "Log out" %}</span>
                             </button>
                         </form>
                     </li>
@@ -141,7 +141,7 @@
                     onclick="login_modal.showModal()"
                     class="btn btn-ghost hover:text-primary transition-colors font-medium"
                 >
-                    Se connecter
+                    {% trans "Log in" %}
                 </button>
             </div>
         {% endif %}
