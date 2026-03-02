@@ -1,4 +1,5 @@
 from datetime import datetime
+from functools import cached_property
 
 from django.db import models
 from django.utils import timezone
@@ -93,7 +94,7 @@ class ProjectPage(PublicationPage):
 
         return timezone.now() <= self.voting_end_date
 
-    @property
+    @cached_property
     def has_external_links(self) -> bool:
         """Check if this project has any external links."""
         return self.external_links.exists()
