@@ -65,9 +65,7 @@ class EventPageModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls) -> None:
-        home_page = HomePage.objects.get(slug="home")
-        cls.publication_index = PublicationIndexPage(title="Publications", slug="publications")
-        home_page.add_child(instance=cls.publication_index)
+        cls.publication_index = PublicationIndexPage.objects.first()
 
     def test_event_creation_with_all_fields(self) -> None:
         event = EventPage(
@@ -136,14 +134,8 @@ class PublicationIndexPageModelTest(TestCase):
     @classmethod
     def setUpTestData(cls) -> None:
         cls.factory = RequestFactory()
-        home_page = HomePage.objects.get(slug="home")
 
-        cls.publication_index = PublicationIndexPage(
-            title="Publications",
-            slug="publications",
-            page_introduction="Test introduction",
-        )
-        home_page.add_child(instance=cls.publication_index)
+        cls.publication_index = PublicationIndexPage.objects.first()
 
         project1 = ProjectPage(title="Urban Project", category=ProjectCategory.URBAN_PLANNING)
         cls.publication_index.add_child(instance=project1)

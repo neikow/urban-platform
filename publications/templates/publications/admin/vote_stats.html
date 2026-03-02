@@ -23,17 +23,26 @@
                     {% for stat in projects_stats %}
                         <tr>
                             <td>
-                                <a href="{% url 'wagtailadmin_pages:edit' stat.project.id %}" class="w-text-primary hover:w-underline w-font-medium">
+                                <a
+                                    href="{% url 'wagtailadmin_pages:edit' stat.project.id %}"
+                                    class="w-text-primary hover:w-underline w-font-medium"
+                                >
                                     {{ stat.project.title }}
                                 </a>
                             </td>
                             <td class="w-text-center">
                                 {% if stat.is_voting_open %}
-                                    <span class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium" style="background-color: #dcfce7; color: #166534;">
+                                    <span
+                                        class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium"
+                                        style="background-color: #dcfce7; color: #166534"
+                                    >
                                         {% trans "Open" %}
                                     </span>
                                 {% else %}
-                                    <span class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium" style="background-color: #fef2f2; color: #991b1b;">
+                                    <span
+                                        class="w-inline-flex w-items-center w-px-2 w-py-1 w-rounded w-text-xs w-font-medium"
+                                        style="background-color: #fef2f2; color: #991b1b"
+                                    >
                                         {% trans "Closed" %}
                                     </span>
                                 {% endif %}
@@ -42,13 +51,19 @@
                             <td class="w-text-center">{{ stat.with_comments }}</td>
                             <td class="w-text-center">
                                 {% if stat.total_votes > 0 %}
-                                    <span class="w-font-medium" style="color: #166534;">{{ stat.favorable_percent }}%</span>
+                                    <span
+                                        class="w-font-medium"
+                                        style="color: #166534"
+                                    >{{ stat.favorable_percent }}%</span>
                                 {% else %}
                                     <span class="w-text-text-meta">-</span>
                                 {% endif %}
                             </td>
                             <td class="w-text-right">
-                                <a href="{% url 'vote_statistics_detail' stat.project.id %}" class="button button-small button-secondary">
+                                <a
+                                    href="{% url 'vote_statistics_detail' stat.project.id %}"
+                                    class="button button-small button-secondary"
+                                >
                                     {% trans "View details" %}
                                 </a>
                             </td>
