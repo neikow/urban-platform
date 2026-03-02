@@ -1,2 +1,3 @@
 from .project_factory import ProjectPageFactory
 from .event_factory import EventPageFactory
+from .external_link_factory import ProjectExternalLinkFactory
