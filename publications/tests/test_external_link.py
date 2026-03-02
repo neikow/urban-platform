@@ -4,11 +4,13 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.models import Page
 
 from publications.factories.project_factory import ProjectPageFactory
-from publications.models import ProjectExternalLink
+from publications.models import ProjectExternalLink, ProjectPage
 
 
 class ProjectExternalLinkTest(TestCase):
     """Test cases for ProjectExternalLink model."""
+
+    project: ProjectPage
 
     @classmethod
     def setUpTestData(cls) -> None:
