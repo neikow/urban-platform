@@ -321,9 +321,9 @@ class TestVoteStatsDetailViewAggregates:
         assert response.status_code == 200
         context = response.context
 
-        assert context["favorable_percentage"] == 3/5 * 100
+        assert context["favorable_percentage"] == 3 / 5 * 100
 
-        assert context["unfavorable_percentage"] == 2/5 * 100
+        assert context["unfavorable_percentage"] == 2 / 5 * 100
 
     def test_percentages_rounding(self, client, admin_user, db):
         """Test that percentages are correctly rounded to one decimal place."""
