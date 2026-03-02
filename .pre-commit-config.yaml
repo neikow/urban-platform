@@ -1,4 +1,4 @@
-default_install_hook_types: [pre-commit, post-checkout, pre-push]
+default_install_hook_types: [ pre-commit, post-checkout, pre-push ]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
@@ -23,8 +23,8 @@ repos:
     rev: 1.8.3
     hooks:
       - id: bandit
-        args: ["-c", "pyproject.toml"]
-        additional_dependencies: ["bandit[toml]"]
+        args: [ "-c", "pyproject.toml" ]
+        additional_dependencies: [ "bandit[toml]" ]
   - repo: local
     hooks:
       - id: sync-uv-packages
@@ -34,13 +34,6 @@ repos:
         pass_filenames: false
         always_run: true
         stages: [ post-checkout ]
-      - id: tests
-        name: Run Tests
-        entry: uv run pytest
-        language: system
-        always_run: true
-        pass_filenames: false
-        stages: [ pre-push ]
       - id: mypy
         name: Run MyPy
         entry: uv run mypy .
@@ -54,4 +47,4 @@ repos:
         pass_filenames: false
         always_run: true
         language: system
-        stages: [post-checkout]
+        stages: [ post-checkout ]

@@ -4,6 +4,7 @@ import factory
 import factory.fuzzy
 from django.utils import timezone
 
+from core.blocks import BLOCK_TYPE_RICH_TEXT, BLOCK_TYPE_IMAGE, BLOCK_TYPE_TWO_COLUMN
 from core.tests.utils.blocks import mock_block_value
 from core.tests.utils.factories import ImageFactory, BaseWagtailPageFactory
 from publications.models import EventPage
@@ -17,9 +18,11 @@ class EventPageFactory(BaseWagtailPageFactory):
     description = factory.Faker("paragraph", nb_sentences=3, locale="fr_FR")
     content = factory.LazyFunction(
         lambda: [
-            ("text", mock_block_value("text")),
-            ("image", mock_block_value("image")),
-            ("text", mock_block_value("text")),
+            (BLOCK_TYPE_RICH_TEXT, mock_block_value(BLOCK_TYPE_RICH_TEXT)),
+            (BLOCK_TYPE_IMAGE, mock_block_value(BLOCK_TYPE_IMAGE)),
+            (BLOCK_TYPE_RICH_TEXT, mock_block_value(BLOCK_TYPE_RICH_TEXT)),
+            (BLOCK_TYPE_TWO_COLUMN, mock_block_value(BLOCK_TYPE_TWO_COLUMN)),
+            (BLOCK_TYPE_RICH_TEXT, mock_block_value(BLOCK_TYPE_RICH_TEXT)),
         ]
     )
     hero_image = factory.SubFactory(ImageFactory)

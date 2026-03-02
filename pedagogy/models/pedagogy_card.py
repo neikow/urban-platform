@@ -9,7 +9,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from wagtail.search import index
 
-from core.blocks import BlockTypes
+from core.blocks import CONTENT_BLOCK_TYPES
 from core.toc import TableOfContentsItem, generate_header_ids, get_table_of_contents
 
 
@@ -24,7 +24,7 @@ class PedagogyCardPage(Page):
         return _("Pedagogy Card")
 
     content = StreamField(
-        BlockTypes,
+        CONTENT_BLOCK_TYPES,
         blank=True,
         verbose_name=_("Card body content"),
         help_text=_("The main content of the pedagogy card."),
