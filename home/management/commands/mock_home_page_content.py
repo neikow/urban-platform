@@ -3,12 +3,12 @@ from typing import Any
 from django.core.management import BaseCommand
 from core.blocks import (
     BLOCK_TYPE_HERO,
-    BLOCK_TYPE_IMAGE_TEXT,
     BLOCK_TYPE_CARDS,
-    BLOCK_TYPE_TESTIMONIAL,
     BLOCK_TYPE_RECENT_PUBLICATIONS,
     BLOCK_TYPE_FAQ,
-    BLOCK_TYPE_TEXT_CENTERED,
+    BLOCK_TYPE_RICH_TEXT,
+    BLOCK_TYPE_TESTIMONIAL_LIST,
+    BLOCK_TYPE_TWO_COLUMN,
 )
 from core.tests.utils.blocks import mock_block_value
 from home.models import HomePage
@@ -30,14 +30,25 @@ class Command(BaseCommand):
 
         home_page.content = [
             (BLOCK_TYPE_HERO, mock_block_value(BLOCK_TYPE_HERO)),
-            (BLOCK_TYPE_TEXT_CENTERED, mock_block_value(BLOCK_TYPE_TEXT_CENTERED)),
-            (BLOCK_TYPE_IMAGE_TEXT, mock_block_value(BLOCK_TYPE_IMAGE_TEXT)),
+            (
+                BLOCK_TYPE_RICH_TEXT,
+                mock_block_value(BLOCK_TYPE_RICH_TEXT),
+            ),
+            (BLOCK_TYPE_TWO_COLUMN, mock_block_value(BLOCK_TYPE_TWO_COLUMN)),
             (BLOCK_TYPE_CARDS, mock_block_value(BLOCK_TYPE_CARDS)),
-            (BLOCK_TYPE_TEXT_CENTERED, mock_block_value(BLOCK_TYPE_TEXT_CENTERED)),
-            (BLOCK_TYPE_TESTIMONIAL, mock_block_value(BLOCK_TYPE_TESTIMONIAL)),
-            (BLOCK_TYPE_TESTIMONIAL, mock_block_value(BLOCK_TYPE_TESTIMONIAL)),
+            (
+                BLOCK_TYPE_RICH_TEXT,
+                mock_block_value(BLOCK_TYPE_RICH_TEXT),
+            ),
+            (
+                BLOCK_TYPE_TESTIMONIAL_LIST,
+                mock_block_value(BLOCK_TYPE_TESTIMONIAL_LIST),
+            ),
             (BLOCK_TYPE_RECENT_PUBLICATIONS, mock_block_value(BLOCK_TYPE_RECENT_PUBLICATIONS)),
-            (BLOCK_TYPE_TEXT_CENTERED, mock_block_value(BLOCK_TYPE_TEXT_CENTERED)),
+            (
+                BLOCK_TYPE_RICH_TEXT,
+                mock_block_value(BLOCK_TYPE_RICH_TEXT),
+            ),
             (BLOCK_TYPE_FAQ, mock_block_value(BLOCK_TYPE_FAQ)),
         ]
 

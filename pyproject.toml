@@ -61,7 +61,7 @@ dev = [
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "urban_platform.settings.test"
-addopts = "--strict-markers --tb=short"
+addopts = "--strict-markers --tb=short -m 'not e2e'"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
 markers = [
     "e2e: marks tests as end-to-end tests (deselect with '-m \"not e2e\"')",

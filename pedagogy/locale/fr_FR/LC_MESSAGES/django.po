@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-07 19:23+0100\n"
+"POT-Creation-Date: 2026-02-26 18:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,10 +81,12 @@ msgid "File Document"
 msgstr "Document"
 
 #: pedagogy/models/pedagogy_resource.py:33
+#: pedagogy/tests/test_pedagogy_resource.py:44
 msgid "Please provide either a URL or a Document, but not both."
 msgstr "Veuillez fournir soit une URL, soit un document, mais pas les deux."
 
 #: pedagogy/models/pedagogy_resource.py:35
+#: pedagogy/tests/test_pedagogy_resource.py:54
 msgid "Please provide either a URL or a Document."
 msgstr "Veuillez fournir soit une URL, soit un document."
 

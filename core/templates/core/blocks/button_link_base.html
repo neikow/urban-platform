@@ -1,0 +1,8 @@
+<div class="flex {% if value.alignment == "center" %} justify-center {% elif value.alignment == "right" %} justify-end {% endif %}">
+    <a
+        href="{% spaceless %}{% block href %}{% endblock %}{% endspaceless %}"
+        class="btn {% if value.style == 'primary' %} btn-primary {% elif value.style == 'secondary' %} btn-secondary {% endif %}"
+    >
+        {{ value.text }}
+    </a>
+</div>

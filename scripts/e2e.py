@@ -495,7 +495,7 @@ def main() -> None:
                 try:
                     server_process.terminate()
                 except Exception:
-                    pass
+                    print("⚠️  Failed to terminate server process, it may still be running.")
         sys.exit(exit_code)
     else:
         parser.print_help()
