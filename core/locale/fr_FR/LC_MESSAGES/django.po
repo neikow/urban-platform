@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-26 21:41+0100\n"
+"POT-Creation-Date: 2026-03-02 11:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -500,47 +500,50 @@ msgstr "Voir tout"
 msgid "No recent publications found."
 msgstr "Aucune publication récente trouvée."
 
-#: core/wagtail_hooks.py:79 core/wagtail_hooks.py:93 core/wagtail_hooks.py:122
 #: core/templates/core/components/search/text_search_form.html:38
 msgid "Search"
 msgstr "Rechercher"
 
-#: core/wagtail_hooks.py:64 core/wagtail_hooks.py:78 core/wagtail_hooks.py:107
+#: core/templatetags/navigation_tags.py:63
+msgid "Home"
+msgstr ""
+
+#: core/wagtail_hooks.py:82 core/wagtail_hooks.py:96 core/wagtail_hooks.py:127
 msgid "Page d'accueil"
 msgstr "Page d'accueil"
 
-#: core/wagtail_hooks.py:99 core/wagtail_hooks.py:128
+#: core/wagtail_hooks.py:102 core/wagtail_hooks.py:133
 msgid "Liste"
 msgstr "Liste"
 
-#: core/wagtail_hooks.py:105 core/wagtail_hooks.py:134
+#: core/wagtail_hooks.py:108 core/wagtail_hooks.py:139
 msgid "Ajouter"
 msgstr "Ajouter"
 
-#: core/wagtail_hooks.py:112
+#: core/wagtail_hooks.py:115
 msgid "Publications"
 msgstr "Publications"
 
-#: core/wagtail_hooks.py:141
+#: core/wagtail_hooks.py:146
 msgid "Fiches Pédagogiques"
 msgstr "Fiches Pédagogiques"
 
-#: core/wagtail_hooks.py:154
+#: core/wagtail_hooks.py:168
 msgid "Charte de conduite"
 msgstr "Charte de conduite"
 
-#: core/wagtail_hooks.py:160
+#: core/wagtail_hooks.py:174
 msgid "Conditions d'utilisation"
 msgstr "Conditions d'utilisation"
 
-#: core/wagtail_hooks.py:166
+#: core/wagtail_hooks.py:180
 msgid "Politique de cookies"
 msgstr "Politique de cookies"
 
-#: core/wagtail_hooks.py:172
+#: core/wagtail_hooks.py:186
 msgid "Politique de confidentialité"
 msgstr "Politique de confidentialité"
 
-#: core/wagtail_hooks.py:179
+#: core/wagtail_hooks.py:193
 msgid "Légal"
 msgstr "Légal"
