@@ -95,7 +95,8 @@ python scripts/e2e.py setup
 
 The following test users are created by the setup script:
 
-| Email               | Password    | Role                    |
-|---------------------|-------------|-------------------------|
-| e2e.user@email.com  | password123 | Regular user            |
-| e2e.admin@email.com | password123 | Admin (Moderator group) |
+| Email                      | Password      | Role                    | Note                   |
+|----------------------------|---------------|-------------------------|------------------------|
+| e2e.user@email.com         | password123   | Regular user            |                        |
+| e2e.admin@email.com        | password123   | Admin (Moderator group) |                        |
+| e2e.delete.test@email.com  | DeleteTest123 | Regular user            | Used for deletion test |

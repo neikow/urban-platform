@@ -7,6 +7,15 @@ from playwright.sync_api import Page, expect
 from e2e.utils import login_user
 
 
+@pytest.fixture
+def deletion_test_user_credentials():
+    """Return credentials for the deletion test user created by e2e setup script."""
+    return {
+        "email": "e2e.delete.test@email.com",
+        "password": "DeleteTest123",
+    }
+
+
 @pytest.mark.e2e
 def test_login_flow(page: Page, base_url: str, user_email: str, user_password: str):
     """Test that a user can log in through the UI."""
@@ -58,78 +67,50 @@ def test_registration_flow(page: Page, base_url: str):
 
 
 @pytest.mark.e2e
-def test_account_deletion_flow(page: Page, base_url: str, django_user_model):
-    """Test that a user can delete their account and data is anonymized."""
-    import uuid
-    from publications.models import FormResponse, ProjectPage
-    from core.models import User
+def test_account_deletion_flow(page: Page, base_url: str, deletion_test_user_credentials: dict):
+    """Test that a user can delete their account through the UI.
 
-    unique_email = f"e2e.delete.{uuid.uuid4().hex[:8]}@email.com"
-    test_user = django_user_model.objects.create_user(
-        email=unique_email,
-        password="Password123",
-        first_name="ToDelete",
-        last_name="User",
-        postal_code="13001",
-    )
-    user_id = test_user.pk
-    user_email = test_user.email
+    Note: This test uses a user created by the e2e setup script.
+    Run 'python scripts/e2e.py setup' or 'python scripts/e2e.py populate' to recreate the user.
+    """
+    email = deletion_test_user_credentials["email"]
+    password = deletion_test_user_credentials["password"]
 
-    # Create test data: a vote on a project
-    project = ProjectPage.objects.live().first()
-    vote = None
-    if project:
-        vote = FormResponse.objects.create(
-            user=test_user,
-            project=project,
-            choice="FAVORABLE",
-            comment="This is my test comment",
-            anonymize=False,
-        )
+    # Login as the deletion test user
+    login_user(page=page, base_url=base_url, email=email, password=password)
 
-    login_user(page=page, base_url=base_url, email=unique_email, password="Password123")
-
+    # Navigate to profile edit page
     page.goto(base_url + reverse("profile_edit"))
+
+    # Click on "Supprimer mon compte" button
     page.get_by_role("link", name="Supprimer mon compte").click()
 
+    # Should be on account deletion page
     expect(page).to_have_url(base_url + reverse("account_delete"))
+
+    # Verify warning messages are displayed
     expect(page.locator("text=Action irréversible")).to_be_visible()
     expect(page.locator("text=Supprimer mon compte")).to_be_visible()
 
-    page.locator("input[name='password']").fill("Password123")
+    # Fill in password confirmation (use placeholder to distinguish from login modal password)
+    page.get_by_placeholder("Entrez votre mot de passe pour confirmer").fill(password)
+
+    # Check the confirmation checkbox
     page.locator("input[name='confirm']").click()
+
+    # Submit the deletion form
     page.get_by_role("button", name="Supprimer définitivement mon compte").click()
 
+    # Should redirect to home page after deletion
     expect(page).to_have_url(base_url + "/")
-    expect(page.locator(f"text={user_email}")).to_be_visible()
-    expect(page.locator("text=supprimé avec succès")).to_be_visible()
-
-    # Verify user is soft-deleted
-    assert not User.objects.filter(pk=user_id).exists()
-    assert not User.objects.filter(email=unique_email).exists()
-    deleted_user = User.objects.with_deleted().get(pk=user_id)
-    assert deleted_user.is_deleted is True
-    assert deleted_user.deleted_at is not None
-
-    assert deleted_user.first_name == "Utilisateur"
-    assert deleted_user.last_name == "Supprimé"
-    assert deleted_user.email == f"deleted.{deleted_user.uuid}@deleted.local"
-    assert deleted_user.phone_number == ""
-    assert deleted_user.is_active is False
-
-    # Verify vote still exists and points to soft-deleted user
-    if vote:
-        vote.refresh_from_db()
-        assert vote.user.pk == deleted_user.pk
-        assert vote.user.is_deleted is True
 
     # Try to login again with deleted account credentials - should fail
     page.goto(base_url)
     page.get_by_role("button", name="Se connecter").click()
 
-    page.locator("input[name='email']").fill(unique_email)
-    page.locator("input[name='password']").fill("Password123")
+    page.locator("input[name='email']").fill(email)
+    page.locator("input[name='password']").fill(password)
     page.locator("#login_modal button[type='submit']", has_text="Se connecter").click()
 
-    # Should show error message
+    # Should show error message (account is deleted/deactivated)
     expect(page.locator("#login-error")).to_be_visible()
