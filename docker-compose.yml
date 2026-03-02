@@ -19,6 +19,28 @@ services:
             cache:
                 condition: service_healthy
         restart: always
+        environment:
+            - ENVIRONMENT=${ENVIRONMENT}
+            # Database configuration
+            - DB_HOST=${DB_HOST}
+            - DB_PORT=${DB_PORT}
+            - DB_NAME=${DB_NAME}
+            - DB_USER=${DB_USER}
+            - DB_PASSWORD=${DB_PASSWORD}
+            # Django configuration
+            - WEBSITE_NAME=${WEBSITE_NAME}
+            - BASE_URL=${BASE_URL}
+            - SECRET_KEY=${SECRET_KEY}
+            - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
+            - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
+            - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+            # Brevo configuration
+            - BREVO_API_KEY=${BREVO_API_KEY}
+            - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
+            - DEFAULT_FROM_NAME=${DEFAULT_FROM_NAME}
+            # Sentry configuration
+            - SENTRY_DSN=${SENTRY_DSN}
+            - SENTRY_RELEASE=${SENTRY_RELEASE}
         networks:
             internal:
                 aliases:
@@ -67,6 +89,28 @@ services:
             - db
             - cache
         restart: always
+        environment:
+            - ENVIRONMENT=${ENVIRONMENT}
+            # Database configuration
+            - DB_HOST=${DB_HOST}
+            - DB_PORT=${DB_PORT}
+            - DB_NAME=${DB_NAME}
+            - DB_USER=${DB_USER}
+            - DB_PASSWORD=${DB_PASSWORD}
+            # Django configuration
+            - WEBSITE_NAME=${WEBSITE_NAME}
+            - BASE_URL=${BASE_URL}
+            - SECRET_KEY=${SECRET_KEY}
+            - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
+            - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
+            - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+            # Brevo configuration
+            - BREVO_API_KEY=${BREVO_API_KEY}
+            - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
+            - DEFAULT_FROM_NAME=${DEFAULT_FROM_NAME}
+            # Sentry configuration
+            - SENTRY_DSN=${SENTRY_DSN}
+            - SENTRY_RELEASE=${SENTRY_RELEASE}
         networks:
             - internal
         healthcheck:
@@ -116,6 +160,28 @@ services:
             db:
                 condition: service_healthy
         restart: "no"
+        environment:
+            - ENVIRONMENT=${ENVIRONMENT}
+            # Database configuration
+            - DB_HOST=${DB_HOST}
+            - DB_PORT=${DB_PORT}
+            - DB_NAME=${DB_NAME}
+            - DB_USER=${DB_USER}
+            - DB_PASSWORD=${DB_PASSWORD}
+            # Django configuration
+            - WEBSITE_NAME=${WEBSITE_NAME}
+            - BASE_URL=${BASE_URL}
+            - SECRET_KEY=${SECRET_KEY}
+            - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
+            - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
+            - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+            # Brevo configuration
+            - BREVO_API_KEY=${BREVO_API_KEY}
+            - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
+            - DEFAULT_FROM_NAME=${DEFAULT_FROM_NAME}
+            # Sentry configuration
+            - SENTRY_DSN=${SENTRY_DSN}
+            - SENTRY_RELEASE=${SENTRY_RELEASE}
         networks:
             - internal
 
