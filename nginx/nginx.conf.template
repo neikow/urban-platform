@@ -1,5 +1,5 @@
 upstream urban_platform_web {
-    server urban-platform-staging-web:8000;
+    server ${UPSTREAM_NAME}:8000;
 }
 
 server {
