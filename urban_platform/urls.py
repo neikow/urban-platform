@@ -13,6 +13,7 @@ from core.views.login import LoginView
 from core.views.logout import LogoutView
 from core.views.me import MeView
 from core.views.profile_edit import ProfileEditView, PasswordChangeView
+from core.views.account_delete import AccountDeleteView
 from core.views.email_verify import EmailVerifyView, EmailVerifySuccessView, EmailVerifyErrorView
 from core.views.password_reset import (
     PasswordResetRequestView,
@@ -59,6 +60,7 @@ urlpatterns = [
     path("auth/me/", MeView.as_view(), name="me"),
     path("auth/me/edit/", ProfileEditView.as_view(), name="profile_edit"),
     path("auth/me/password/", PasswordChangeView.as_view(), name="password_change"),
+    path("auth/me/delete/", AccountDeleteView.as_view(), name="account_delete"),
     path("api/projects/<int:project_id>/vote/", VoteView.as_view(), name="project_vote"),
     path(
         "api/projects/<int:project_id>/vote/results/",
