@@ -1,7 +1,36 @@
+x-django-common: &django-common
+    image: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
+    volumes:
+        - uv_cache:/app/.cache/uv
+    networks:
+        - internal
+    environment:
+        - ENVIRONMENT=${ENVIRONMENT}
+        # Database configuration
+        - DB_HOST=${DB_HOST}
+        - DB_PORT=${DB_PORT}
+        - DB_NAME=${DB_NAME}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
+        # Django configuration
+        - WEBSITE_NAME=${WEBSITE_NAME}
+        - BASE_URL=${BASE_URL}
+        - SECRET_KEY=${SECRET_KEY}
+        - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
+        - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
+        - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+        # Brevo configuration
+        - BREVO_API_KEY=${BREVO_API_KEY}
+        - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
+        - DEFAULT_FROM_NAME=${DEFAULT_FROM_NAME}
+        # Sentry configuration
+        - SENTRY_DSN=${SENTRY_DSN}
+        - SENTRY_RELEASE=${SENTRY_RELEASE}
+
 services:
     web:
+        <<: *django-common
         container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-web
-        image: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
         command: uv run gunicorn urban_platform.wsgi:application --bind 0.0.0.0:8000
         volumes:
             - static_volume:/app/staticfiles
@@ -19,28 +48,6 @@ services:
             cache:
                 condition: service_healthy
         restart: always
-        environment:
-            - ENVIRONMENT=${ENVIRONMENT}
-            # Database configuration
-            - DB_HOST=${DB_HOST}
-            - DB_PORT=${DB_PORT}
-            - DB_NAME=${DB_NAME}
-            - DB_USER=${DB_USER}
-            - DB_PASSWORD=${DB_PASSWORD}
-            # Django configuration
-            - WEBSITE_NAME=${WEBSITE_NAME}
-            - BASE_URL=${BASE_URL}
-            - SECRET_KEY=${SECRET_KEY}
-            - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
-            - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
-            - ALLOWED_HOSTS=${ALLOWED_HOSTS}
-            # Brevo configuration
-            - BREVO_API_KEY=${BREVO_API_KEY}
-            - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
-            - DEFAULT_FROM_NAME=${DEFAULT_FROM_NAME}
-            # Sentry configuration
-            - SENTRY_DSN=${SENTRY_DSN}
-            - SENTRY_RELEASE=${SENTRY_RELEASE}
         networks:
             internal:
                 aliases:
@@ -59,6 +66,7 @@ services:
             - UPSTREAM_NAME=${COMPOSE_PROJECT_NAME:-urban-platform}-web-backend
         depends_on:
             - web
+            - static_collector
         restart: always
         networks:
             - nginx
@@ -79,8 +87,8 @@ services:
             - internal
 
     worker:
+        <<: *django-common
         container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-worker
-        image: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
         command: uv run celery -A urban_platform worker --loglevel=info
         volumes:
             - media_volume:/app/mediafiles
@@ -89,30 +97,6 @@ services:
             - db
             - cache
         restart: always
-        environment:
-            - ENVIRONMENT=${ENVIRONMENT}
-            # Database configuration
-            - DB_HOST=${DB_HOST}
-            - DB_PORT=${DB_PORT}
-            - DB_NAME=${DB_NAME}
-            - DB_USER=${DB_USER}
-            - DB_PASSWORD=${DB_PASSWORD}
-            # Django configuration
-            - WEBSITE_NAME=${WEBSITE_NAME}
-            - BASE_URL=${BASE_URL}
-            - SECRET_KEY=${SECRET_KEY}
-            - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
-            - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
-            - ALLOWED_HOSTS=${ALLOWED_HOSTS}
-            # Brevo configuration
-            - BREVO_API_KEY=${BREVO_API_KEY}
-            - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
-            - DEFAULT_FROM_NAME=${DEFAULT_FROM_NAME}
-            # Sentry configuration
-            - SENTRY_DSN=${SENTRY_DSN}
-            - SENTRY_RELEASE=${SENTRY_RELEASE}
-        networks:
-            - internal
         healthcheck:
             test: [ "CMD-SHELL", "uv run celery -A urban_platform inspect ping" ]
             interval: 30s
@@ -150,40 +134,26 @@ services:
             timeout: 5s
             retries: 5
 
-    migrator:
-        container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-migrator
-        image: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
-        command: uv run python manage.py migrate --noinput
+    static_collector:
+        <<: *django-common
+        container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-static-collector
+        command: uv run python manage.py collectstatic --noinput --clear
         volumes:
+            - static_volume:/app/staticfiles
             - uv_cache:/app/.cache/uv
         depends_on:
             db:
                 condition: service_healthy
         restart: "no"
-        environment:
-            - ENVIRONMENT=${ENVIRONMENT}
-            # Database configuration
-            - DB_HOST=${DB_HOST}
-            - DB_PORT=${DB_PORT}
-            - DB_NAME=${DB_NAME}
-            - DB_USER=${DB_USER}
-            - DB_PASSWORD=${DB_PASSWORD}
-            # Django configuration
-            - WEBSITE_NAME=${WEBSITE_NAME}
-            - BASE_URL=${BASE_URL}
-            - SECRET_KEY=${SECRET_KEY}
-            - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
-            - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
-            - ALLOWED_HOSTS=${ALLOWED_HOSTS}
-            # Brevo configuration
-            - BREVO_API_KEY=${BREVO_API_KEY}
-            - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
-            - DEFAULT_FROM_NAME=${DEFAULT_FROM_NAME}
-            # Sentry configuration
-            - SENTRY_DSN=${SENTRY_DSN}
-            - SENTRY_RELEASE=${SENTRY_RELEASE}
-        networks:
-            - internal
+
+    migrator:
+        <<: *django-common
+        container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-migrator
+        command: uv run python manage.py migrate --noinput
+        depends_on:
+            db:
+                condition: service_healthy
+        restart: "no"
 
 volumes:
     postgres_data:
