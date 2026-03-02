@@ -512,16 +512,12 @@ msgid "Log in"
 msgstr "Se connecter"
 
 #: core/templates/auth/email_verify_success.html:4
-#, fuzzy
-#| msgid "Email Verified"
 msgid "Email confirmed"
-msgstr "Email vérifié"
+msgstr "Email confirmé"
 
 #: core/templates/auth/email_verify_success.html:27
-#, fuzzy
-#| msgid "Email Verified"
 msgid "Email confirmed!"
-msgstr "Email vérifié"
+msgstr "Email confirmé !"
 
 #: core/templates/auth/email_verify_success.html:29
 msgid "Your email address has been verified successfully."
