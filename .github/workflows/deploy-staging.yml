@@ -1,9 +1,9 @@
 name: Deploy Staging
 
 on:
-  push:
-    branches:
-      - main
+  #  push:
+  #    branches:
+  #      - main
   workflow_dispatch:
 
 env:
@@ -14,14 +14,14 @@ env:
   SENTRY_PROJECT: ${{ vars.SENTRY_PROJECT }}
 
 jobs:
-  tests:
+  ci:
     name: Run CI Checks
     uses: ./.github/workflows/ci.yml
 
   sentry-release:
     name: Create Sentry Release
     runs-on: ubuntu-latest
-    needs: tests
+    needs: ci
     environment: staging
     steps:
       - name: Checkout code
@@ -69,100 +69,13 @@ jobs:
             SENTRY_RELEASE=${{ github.sha }}
 
   deploy:
-    name: Deploy Staging Server
+    name: Trigger Portainer Deployment (staging)
     runs-on: ubuntu-latest
     needs: build-and-push
     environment: staging
 
     steps:
-      - name: Push Code To Remote
-        uses: appleboy/ssh-action@v1.2.5
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            echo "Creating project directory"
-            mkdir -p ~/deployments/${{ env.DOCKER_CONTAINER_NAME }}
-            cd ~/deployments/${{ env.DOCKER_CONTAINER_NAME }}
-
-            if [ ! -d ".git" ]; then
-                echo "Cloning repository..."
-                # Using HTTPS cloning with the actor and token usually works best in CI environment
-                # but here we are on the remote server.
-                # We assume the remote server has SSH access to GitHub or we need to use https with a PAT?
-                # The user's other script didn't show cloning.
-                # Let's assume SSH access is configured on the server for GitHub or fallback to user setup.
-                # But to be safe, we can try to initialize if empty.
-                git clone git@github.com:${{ github.repository }}.git . || echo "Clone failed, assuming manual setup or existing repo"
-            fi
-
-            echo "Pulling latest code"
-            git fetch origin
-            git reset --hard origin/main
-
-            echo "Creating .env file"
-            rm -f .env
-            touch .env
-            echo "ENVIRONMENT=staging" >> .env
-            echo "DJANGO_SETTINGS_MODULE=urban_platform.settings.production" >> .env
-
-            echo "SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
-            echo "BASE_URL=${{ vars.BASE_URL }}" >> .env
-            echo "ALLOWED_HOSTS=${{ vars.ALLOWED_HOSTS }}" >> .env
-            echo "CSRF_TRUSTED_ORIGINS=${{ vars.CSRF_TRUSTED_ORIGINS }}" >> .env
-
-            echo "DB_NAME=${{ vars.DB_NAME }}" >> .env
-            echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-            echo "DB_HOST=db" >> .env
-            echo "DB_PORT=5432" >> .env
-
-            echo "WEBSITE_NAME=${{ vars.WEBSITE_NAME }}" >> .env
-
-            echo "DOCKER_REGISTRY=${{ env.DOCKER_REGISTRY }}" >> .env
-            echo "DOCKER_IMAGE=${{ env.DOCKER_IMAGE }}" >> .env
-
-            echo "SENTRY_DSN=${{ secrets.SENTRY_DSN }}" >> .env
-            echo "SENTRY_RELEASE=${{ github.sha }}" >> .env
-
-            echo "BREVO_API_KEY=${{ secrets.BREVO_API_KEY }}" >> .env
-            echo "DEFAULT_FROM_EMAIL=${{ vars.DEFAULT_FROM_EMAIL }}" >> .env
-            echo "DEFAULT_FROM_NAME=${{ vars.DEFAULT_FROM_NAME }}" >> .env
-
-      - name: Deploy Docker Containers
-        uses: appleboy/ssh-action@v1.2.5
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd ~/deployments/${{ env.DOCKER_CONTAINER_NAME }}
-            echo "Restarting docker containers"
-
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-            docker compose pull
-            docker compose down
-            docker compose up -d --remove-orphans --build
-            docker system prune -f
-
-  run-migrations:
-    name: Run Migrations
-    runs-on: ubuntu-latest
-    environment: staging
-    needs: deploy
-    steps:
-      - name: Run Migrations
-        uses: appleboy/ssh-action@v1.2.5
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd ~/deployments/${{ env.DOCKER_CONTAINER_NAME }}
-            echo "Running migrations"
-            docker compose exec web python manage.py migrate
+      - name: Trigger Portainer webhook
+        run: |
+          curl --silent --show-error --fail \
+            -X POST "${{ secrets.DEPLOYMENT_WEBHOOK }}"

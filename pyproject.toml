@@ -4,19 +4,19 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.13"
 dependencies = [
-    "celery[redis]>=5.5.0",
-    "django>=6.0,<6.1",
+    "celery[redis]==5.6.2",
+    "django==6.0.2",
     "django-celery-beat", # we temporarily install this from git because Django 6.0 support is not yet released
-    "gunicorn>=23.0.0",
-    "pre-commit>=4.5.1",
-    "psycopg>=3.3.2",
-    "python-dotenv>=1.2.1",
-    "python-slugify>=8.0.4",
-    "redis>=5.0.3,<6.5",
-    "sentry-sdk>=2.52.0",
-    "sib-api-v3-sdk>=7.6.0",
-    "tqdm>=4.67.1",
-    "wagtail>=7.2.1",
+    "gunicorn==25.0.3",
+    "pre-commit==4.5.1",
+    "psycopg==3.3.2",
+    "python-dotenv==1.2.1",
+    "python-slugify==8.0.4",
+    "redis==6.4.0",
+    "sentry-sdk==2.52.0",
+    "sib-api-v3-sdk==7.6.0",
+    "tqdm==4.67.3",
+    "wagtail==7.2.2",
 ]
 
 [tool.uv.sources]
@@ -55,12 +55,17 @@ dev = [
     "pytest-django>=4.11.1",
     "pytest-env>=1.2.0",
     "pytest-playwright>=0.7.2",
+    "pytest-xdist>=3.8.0",
     "ruff>=0.9.4",
 ]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "urban_platform.settings.test"
+addopts = "--strict-markers --tb=short -m 'not e2e'"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
+markers = [
+    "e2e: marks tests as end-to-end tests (deselect with '-m \"not e2e\"')",
+]
 
 [tool.djlint]
 profile = "django"

@@ -33,6 +33,16 @@
 
             {% include "components/forms/form_field.html" with field=form.password %}
 
+            <div class="text-right mb-4">
+                <a
+                    href="{% url 'password_reset_request' %}"
+                    class="text-sm link link-primary"
+                    onclick="login_modal.close()"
+                >
+                    Mot de passe oublié ?
+                </a>
+            </div>
+
             <div class="modal-action">
                 <button type="submit" class="btn btn-primary">Se connecter</button>
                 <button type="button" onclick="login_modal.close()" class="btn">Annuler</button>

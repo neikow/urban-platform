@@ -1,5 +1,17 @@
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags custom_blocks %}
 
-<div class="{% if container %} container mx-auto {% endif %} flex justify-center my-2 md:my-4 lg:my-8">
-    {% image value max-800x600 alt=value.alt_text class="rounded-lg object-cover w-auto h-96" %}
+{% get_image_config value.size as cfg %}
+
+<div class="flex justify-center my-4 lg:my-8">
+    <div class="{{ cfg.class }} w-full">
+        {% if value.size == "small" %}
+            {% image value.image width-400 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+        {% elif value.size == "medium" %}
+            {% image value.image width-800 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+        {% elif value.size == "large" %}
+            {% image value.image width-1200 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+        {% else %}
+            {% image value.image width-1920 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+        {% endif %}
+    </div>
 </div>
