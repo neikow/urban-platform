@@ -423,10 +423,8 @@ msgid "Log in to vote"
 msgstr "Se connecter pour voter"
 
 #: publications/templates/publications/components/vote_form.html:60
-#, fuzzy
-#| msgid "Invalid vote choice"
 msgid "Vote choice"
-msgstr "Choix de vote invalide"
+msgstr "Choix de vote"
 
 #: publications/templates/publications/components/vote_form.html:158
 msgid "Comment (optional)"
@@ -504,8 +502,6 @@ msgid "Give your opinion"
 msgstr "Donner votre avis"
 
 #: publications/templates/publications/project_page.html:79
-#, fuzzy
-#| msgid "Page body content"
 msgid "Table of Contents"
 msgstr "Table des matières"
 

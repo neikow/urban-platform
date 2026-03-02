@@ -485,10 +485,8 @@ msgid "Users"
 msgstr "Utilisateurs"
 
 #: core/templates/auth/email_verify_error.html:4
-#, fuzzy
-#| msgid "Email Verified"
 msgid "Verification error"
-msgstr "Email vérifié"
+msgstr "Erreur de vérification"
 
 #: core/templates/auth/email_verify_error.html:27
 #: core/templates/auth/password_reset_error.html:27
@@ -819,15 +817,15 @@ msgstr "Accueil"
 
 #: core/wagtail_hooks.py:82 core/wagtail_hooks.py:96 core/wagtail_hooks.py:127
 msgid "Page d'accueil"
-msgstr ""
+msgstr "Page d'accueil"
 
 #: core/wagtail_hooks.py:102 core/wagtail_hooks.py:133
 msgid "Liste"
-msgstr ""
+msgstr "Liste"
 
 #: core/wagtail_hooks.py:108 core/wagtail_hooks.py:139
 msgid "Ajouter"
-msgstr ""
+msgstr "Ajouter"
 
 #: core/wagtail_hooks.py:115
 #, fuzzy
