@@ -89,3 +89,11 @@ msgstr "Veuillez fournir soit une URL, soit un document, mais pas les deux."
 #: pedagogy/tests/test_pedagogy_resource.py:54
 msgid "Please provide either a URL or a Document."
 msgstr "Veuillez fournir soit une URL, soit un document."
+
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:22
+msgid "Search resources"
+msgstr "Rechercher des ressources"
+
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:23
+msgid "Search for a resource..."
+msgstr "Rechercher une ressource..."
