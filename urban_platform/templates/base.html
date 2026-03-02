@@ -1,7 +1,7 @@
-{% load static wagtailcore_tags wagtailuserbar structured_data %}
+{% load i18n static wagtailcore_tags wagtailuserbar structured_data %}
 
 <!DOCTYPE html>
-<html lang="en" data-theme="light" class="scroll-smooth">
+<html lang="{{ request.LANGUAGE_CODE|default:'fr' }}" data-theme="light" class="scroll-smooth">
     <head>
         <meta charset="utf-8">
         <title>
