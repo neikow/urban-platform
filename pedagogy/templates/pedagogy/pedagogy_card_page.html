@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags i18n %}
 
 {% block content %}
     <article class="mx-4">
@@ -31,20 +31,24 @@
                         Accès rapide
                     </h2>
                     {% include "pedagogy/components/pedagogy_card_page_resource.html" with page=page class="hidden lg:flex" %}
-                    <div class="divider hidden lg:flex"></div>
+                    {% if page.show_toc and page.table_of_contents %}
+                        <div class="divider hidden lg:flex"></div>
+                    {% endif %}
                 {% endif %}
-                <div class="relative -mt-2">
-                    <div class="hidden lg:block absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-base-100 to-transparent z-10 pointer-events-none">
+                {% if page.show_toc and page.table_of_contents %}
+                    <div class="relative -mt-2">
+                        <div class="hidden lg:block absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-base-100 to-transparent z-10 pointer-events-none">
+                        </div>
+                        <div class="lg:max-h-[450px] lg:overflow-y-auto lg:pb-2">
+                            <h2 class="text-2xl text-start lg:text-lg font-bold mb-4 mt-2 md:text-center">
+                                {% trans "Table of Contents" %}
+                            </h2>
+                            {% include "pedagogy/components/pedagogy_card_page_toc.html" with page=page %}
+                        </div>
+                        <div class="hidden lg:block absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-base-100 to-transparent z-10 pointer-events-none">
+                        </div>
                     </div>
-                    <div class="lg:max-h-[450px] lg:overflow-y-auto lg:pb-2">
-                        <h2 class="text-2xl text-start lg:text-lg font-bold mb-4 mt-2 md:text-center">
-                            Table des matières
-                        </h2>
-                        {% include "pedagogy/components/pedagogy_card_page_toc.html" with page=page %}
-                    </div>
-                    <div class="hidden lg:block absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-base-100 to-transparent z-10 pointer-events-none">
-                    </div>
-                </div>
+                {% endif %}
             </aside>
         </div>
     </article>
