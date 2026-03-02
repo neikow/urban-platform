@@ -1,9 +1,11 @@
+import pytest
 from django.urls import reverse
 from playwright.sync_api import Page, expect
 
 from e2e.utils import login_user
 
 
+@pytest.mark.e2e
 def test_login_flow(page: Page, base_url: str, user_email: str, user_password: str):
     """Test that a user can log in through the UI."""
     login_user(
@@ -16,6 +18,7 @@ def test_login_flow(page: Page, base_url: str, user_email: str, user_password: s
     expect(page).to_have_url(base_url + reverse("me"))
 
 
+@pytest.mark.e2e
 def test_registration_flow(page: Page, base_url: str):
     """Test that a new user can register through the UI."""
     import uuid

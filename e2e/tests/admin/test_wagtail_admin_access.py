@@ -1,8 +1,10 @@
+import pytest
 from playwright.sync_api import Page, expect
 
 from e2e.utils import login_user
 
 
+@pytest.mark.e2e
 def test_wagtail_admin_access(
     page: Page,
     base_url: str,

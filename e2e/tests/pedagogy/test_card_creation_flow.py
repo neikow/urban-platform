@@ -1,10 +1,12 @@
 import uuid
 
+import pytest
 from playwright.sync_api import Page, expect
 
 from e2e.utils import login_user
 
 
+@pytest.mark.e2e
 def test_pedagogy_card_creation_flow(
     page: Page,
     base_url: str,
