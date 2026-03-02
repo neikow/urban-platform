@@ -4,7 +4,8 @@ from typing import Any
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest, HttpResponseBase, HttpResponse
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.generic import FormView
 
 from core.utils import get_client_ip
@@ -20,7 +21,6 @@ else:
 
 class CodeOfConductConsentView(FormView):
     template_name = "legal/code_of_conduct_consent.html"
-    success_url = reverse_lazy("me")
     form_class = CodeOfConductConsentForm
 
     user: User
@@ -47,9 +47,23 @@ class CodeOfConductConsentView(FormView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
 
+        context["next"] = self.request.POST.get("next") or self.request.GET.get("next")
+
         code_of_conduct_page: CodeOfConductPage = CodeOfConductPage.objects.live().first()
         page_content = code_of_conduct_page.content if code_of_conduct_page else ""
 
         context["content"] = page_content
 
         return context
+
+    def get_success_url(self) -> str:
+        redirect_to = self.request.POST.get("next") or self.request.GET.get("next")
+
+        if redirect_to and url_has_allowed_host_and_scheme(
+            url=redirect_to,
+            allowed_hosts={self.request.get_host()},
+            require_https=self.request.is_secure(),
+        ):
+            return redirect_to
+
+        return reverse("me")
