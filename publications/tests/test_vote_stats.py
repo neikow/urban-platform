@@ -272,9 +272,6 @@ def project_with_mixed_votes(db):
     )
     index_page.add_child(instance=project)
 
-    # Create users and votes with known distribution:
-    # 2 FAVORABLE, 1 RATHER_FAVORABLE, 1 RATHER_UNFAVORABLE, 1 UNFAVORABLE
-    # Total: 5 votes, 3 favorable (60%), 2 unfavorable (40%)
     users_votes = [
         ("user1@example.com", VoteChoice.FAVORABLE),
         ("user2@example.com", VoteChoice.FAVORABLE),
@@ -324,10 +321,9 @@ class TestVoteStatsDetailViewAggregates:
         assert response.status_code == 200
         context = response.context
 
-        # 3/5 = 60.0%
-        assert context["favorable_percentage"] == 60.0
-        # 2/5 = 40.0%
-        assert context["unfavorable_percentage"] == 40.0
+        assert context["favorable_percentage"] == 3/5 * 100
+
+        assert context["unfavorable_percentage"] == 2/5 * 100
 
     def test_percentages_rounding(self, client, admin_user, db):
         """Test that percentages are correctly rounded to one decimal place."""
@@ -350,9 +346,6 @@ class TestVoteStatsDetailViewAggregates:
         )
         index_page.add_child(instance=project)
 
-        # Create 3 votes: 1 favorable, 2 unfavorable
-        # favorable: 1/3 = 33.333...% -> should round to 33.3%
-        # unfavorable: 2/3 = 66.666...% -> should round to 66.7%
         users_votes = [
             ("rounding1@example.com", VoteChoice.FAVORABLE),
             ("rounding2@example.com", VoteChoice.UNFAVORABLE),
@@ -480,7 +473,6 @@ class TestVoteStatsDetailViewAggregates:
 
     def test_grouping_uses_correct_choices(self, client, admin_user, project_with_mixed_votes):
         """Test that grouping correctly classifies all VoteChoice values."""
-        # Verify that the constants are correctly defined
         assert VoteChoice.FAVORABLE.value in FAVORABLE_VALUES
         assert VoteChoice.RATHER_FAVORABLE.value in FAVORABLE_VALUES
         assert VoteChoice.UNFAVORABLE.value in UNFAVORABLE_VALUES
