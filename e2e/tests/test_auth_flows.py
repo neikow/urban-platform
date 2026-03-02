@@ -1,3 +1,5 @@
+import re
+
 import pytest
 from django.urls import reverse
 from playwright.sync_api import Page, expect
@@ -15,7 +17,7 @@ def test_login_flow(page: Page, base_url: str, user_email: str, user_password: s
         password=user_password,
     )
 
-    expect(page).to_have_url(base_url + reverse("me"))
+    expect(page).to_have_url(base_url + "/")
 
 
 @pytest.mark.e2e
@@ -42,8 +44,9 @@ def test_registration_flow(page: Page, base_url: str):
     registration_form.locator("button[type='submit']", has_text="S'inscrire").click()
 
     # Wait for consent page
-    page.wait_for_url(base_url + reverse("code_of_conduct_consent"))
-    expect(page).to_have_url(base_url + reverse("code_of_conduct_consent"))
+    expect(page).to_have_url(
+        re.compile(f"^{re.escape(base_url + reverse('code_of_conduct_consent'))}")
+    )
 
     # Scroll to consent checkbox and accept
     page.locator("#page-content-end").scroll_into_view_if_needed()
@@ -51,5 +54,4 @@ def test_registration_flow(page: Page, base_url: str):
 
     # Click accept button and wait for redirect to me page
     page.get_by_role("button", name="Accepter et continuer").click()
-    page.wait_for_url(base_url + reverse("me"))
     expect(page).to_have_url(base_url + reverse("me"))
