@@ -65,6 +65,9 @@ class ProjectExternalLinkTest(TestCase):
             url="https://example.com",
         )
 
+        # Clear cached_property and refresh instance
+        del self.project.has_external_links
+        self.project.refresh_from_db()
         self.assertTrue(self.project.has_external_links)
 
     def test_project_external_links_relation(self) -> None:
