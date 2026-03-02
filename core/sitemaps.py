@@ -49,7 +49,7 @@ class LegalPagesSitemap(WagtailPageSitemap):
     priority = 0.3
     changefreq = "monthly"
 
-    def items(self) -> Page:  # type: ignore[override]
+    def items(self) -> Iterable[Page]:  # type: ignore[override]
         page_types: list[type[Page]] = [
             LegalIndexPage,
             TermsOfServicePage,
@@ -67,7 +67,7 @@ class PedagogyIndexSitemap(WagtailPageSitemap):
     priority = 0.7
     changefreq = "weekly"
 
-    def items(self) -> PedagogyIndexPage:  # type: ignore[override]
+    def items(self) -> Iterable[PedagogyIndexPage]:  # type: ignore[override]
         return PedagogyIndexPage.objects.live().public()
 
 
