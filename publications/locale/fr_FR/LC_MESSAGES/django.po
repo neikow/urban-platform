@@ -77,10 +77,8 @@ msgid "Maximum Participants"
 msgstr "Nombre maximum de participants"
 
 #: publications/models/event.py:65
-#, fuzzy
-#| msgid "Maximum number of participants (leave empty for unlimited)"
 msgid "Nombre maximum de participants (laisser vide si illimité)"
-msgstr "Nombre maximum de participants (laisser vide pour illimité)"
+msgstr "Nombre maximum de participants (laisser vide si illimité)"
 
 #: publications/models/event.py:92
 #: publications/templates/publications/publication_index_page.html:45
@@ -162,16 +160,12 @@ msgid "Hide your identity in public displays"
 msgstr "Masquer votre identité dans les affichages publics"
 
 #: publications/models/form.py:60
-#, fuzzy
-#| msgid "Form Response"
 msgid "Vote Response"
-msgstr "Réponse au formulaire"
+msgstr "Réponse de vote"
 
 #: publications/models/form.py:61
-#, fuzzy
-#| msgid "Form Responses"
 msgid "Vote Responses"
-msgstr "Réponses aux formulaires"
+msgstr "Réponses de vote"
 
 #: publications/models/project.py:14
 msgid "What is your opinion on this project?"
@@ -247,16 +241,12 @@ msgid "Projects"
 msgstr "Projets"
 
 #: publications/models/publication.py:18
-#, fuzzy
-#| msgid "Publications Index"
 msgid "Publication"
-msgstr "Index des publications"
+msgstr "Publication"
 
 #: publications/models/publication.py:19
-#, fuzzy
-#| msgid "Publications Index"
 msgid "Publications"
-msgstr "Index des publications"
+msgstr "Publications"
 
 #: publications/models/publication.py:110
 msgid "Description"

@@ -97,10 +97,8 @@ msgstr ""
 "cas de problème de chargement de l'image)"
 
 #: core/blocks.py:120
-#, fuzzy
-#| msgid "Image & Text Row"
 msgid "DEPRECATED Image & Text Row"
-msgstr "NE PLUS UTILISER Image et Texte sur une ligne"
+msgstr "OBSOLÈTE Image et Texte sur une ligne"
 
 #: core/blocks.py:130
 msgid "Left Column Content"
@@ -140,10 +138,8 @@ msgid "Hero Block"
 msgstr "Bloc \"Hero\""
 
 #: core/blocks.py:171
-#, fuzzy
-#| msgid "Card List Block"
 msgid "Card Title"
-msgstr "Bloc Liste de cartes"
+msgstr "Titre de la carte"
 
 #: core/blocks.py:176
 msgid "Card Description"
@@ -162,10 +158,8 @@ msgstr ""
 "référencement et en cas de problème de chargement de l'image)"
 
 #: core/blocks.py:189
-#, fuzzy
-#| msgid "Card Link (Optional)"
 msgid "Learn More Link (Optional)"
-msgstr "Lien de la carte (optionnel)"
+msgstr "Lien \"En savoir plus\" (optionnel)"
 
 #: core/blocks.py:193
 msgid "Card"
@@ -176,16 +170,12 @@ msgid "Card List Block"
 msgstr "Bloc Liste de cartes"
 
 #: core/blocks.py:209
-#, fuzzy
-#| msgid "Testimonial Block"
 msgid "Testimonial Quote"
-msgstr "Bloc de témoignages"
+msgstr "Citation du témoignage"
 
 #: core/blocks.py:210
-#, fuzzy
-#| msgid "Last Name"
 msgid "Author Name"
-msgstr "Nom de famille"
+msgstr "Nom de l'auteur"
 
 #: core/blocks.py:211
 msgid "Author Title (Optional)"
@@ -196,16 +186,12 @@ msgid "Author Image (Optional)"
 msgstr "Image de l'auteur (optionnelle)"
 
 #: core/blocks.py:215
-#, fuzzy
-#| msgid "Testimonial Block"
 msgid "Testimonial"
-msgstr "Bloc de témoignages"
+msgstr "Témoignage"
 
 #: core/blocks.py:225
-#, fuzzy
-#| msgid "Testimonial Block"
 msgid "Testimonial List Block"
-msgstr "Bloc de témoignages"
+msgstr "Bloc Liste de témoignages"
 
 #: core/blocks.py:232
 msgid "Number of Publications"
@@ -240,10 +226,8 @@ msgid "Vertical Spacer"
 msgstr "Espace vertical"
 
 #: core/blocks.py:298
-#, fuzzy
-#| msgid "Alt Text"
 msgid "Button Text"
-msgstr "Titre de l'image (pour Google)"
+msgstr "Texte du bouton"
 
 #: core/blocks.py:300
 msgid "Button Type"
@@ -266,16 +250,12 @@ msgid "Document"
 msgstr "Document"
 
 #: core/blocks.py:376
-#, fuzzy
-#| msgid "Centered Text"
 msgid "DEPRECATED Text"
-msgstr "NE PLUS UTILISER Texte centré"
+msgstr "OBSOLÈTE Texte"
 
 #: core/blocks.py:388
-#, fuzzy
-#| msgid "Centered Text"
 msgid "DEPRECATED Centered Text"
-msgstr "NE PLUS UTILISER Texte centré"
+msgstr "OBSOLÈTE Texte centré"
 
 #: core/models/city_district.py:11
 msgid "City District"
@@ -295,10 +275,8 @@ msgid "City Neighborhoods"
 msgstr "Quartiers"
 
 #: core/models/email_event.py:9
-#, fuzzy
-#| msgid "Email Verified"
 msgid "Email Verification"
-msgstr "Email vérifié"
+msgstr "Vérification d'email"
 
 #: core/models/email_event.py:10
 msgid "Password Reset"
@@ -325,10 +303,8 @@ msgid "Event Type"
 msgstr "Type d'événement"
 
 #: core/models/email_event.py:35
-#, fuzzy
-#| msgid "Staff Status"
 msgid "Status"
-msgstr "Statut du personnel"
+msgstr "Statut"
 
 #: core/models/email_event.py:41
 msgid "Recipient Email"
@@ -355,10 +331,8 @@ msgid "Email Event"
 msgstr "Événement de courriel"
 
 #: core/models/email_event.py:60
-#, fuzzy
-#| msgid "Email Address"
 msgid "Email Events"
-msgstr "Adresse e-mail"
+msgstr "Événements d'email"
 
 #: core/models/neighborhood_association.py:12
 msgid "Contact Email"
@@ -422,8 +396,6 @@ msgid "Last Name"
 msgstr "Nom de famille"
 
 #: core/models/user.py:58 core/templates/core/profile.html:74
-#, fuzzy
-#| msgid "City Neighborhood"
 msgid "Neighborhood"
 msgstr "Quartier"
 
@@ -854,8 +826,3 @@ msgstr ""
 #: core/wagtail_hooks.py:193
 msgid "Légal"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Email Verified"
-#~ msgid "Email confirmé !"
-#~ msgstr "Email vérifié"

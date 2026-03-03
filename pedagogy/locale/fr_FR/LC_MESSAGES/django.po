@@ -38,8 +38,6 @@ msgid "Card description"
 msgstr "Description de la fiche pédagogique"
 
 #: pedagogy/models/pedagogy_card.py:45
-#, fuzzy
-#| msgid "The main content of the pedagogy card."
 msgid "A brief description of the pedagogy card."
 msgstr "Brève description de la fiche pédagogique."
 

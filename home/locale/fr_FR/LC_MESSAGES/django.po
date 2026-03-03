@@ -26,11 +26,9 @@ msgid "The main content of the home page."
 msgstr "Le contenu principal de la page d'accueil."
 
 #: home/models.py:32
-#, fuzzy
-#| msgid "Home page content"
 msgid "Home Page"
-msgstr "Contenu de la page d'accueil"
+msgstr "Page d'accueil"
 
 #: home/models.py:33
 msgid "Home Pages"
-msgstr "Contenu de la page d'accueil"
+msgstr "Pages d'accueil"
