@@ -1,16 +1,29 @@
 {% extends "base.html" %}
+{% load i18n navigation_tags wagtailcore_tags %}
 
-{% block title %}
-    Page not found
-{% endblock %}
-{% block body_class %}
-    template-404
-{% endblock %}
+{% block title %}{% trans "Page not found" %}{% endblock %}
+
+{% block body_class %}template-404{% endblock %}
+
 {% block content %}
-    <h1>
-        Page not found
-    </h1>
-    <h2>
-        Sorry, this page could not be found.
-    </h2>
+    <main class="mx-4">
+        <div class="container mx-auto min-h-[60vh] flex flex-col items-center justify-center text-center py-24 gap-6">
+            <p class="text-8xl font-black text-primary opacity-20 select-none" aria-hidden="true">404</p>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold -mt-8">
+                {% trans "Page not found" %}
+            </h1>
+            <p class="text-base-content/60 text-lg max-w-md">
+                {% trans "Sorry, the page you are looking for does not exist or has been moved." %}
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center mt-4">
+                {% get_site_root as site_root %}
+                <a href="{% pageurl site_root %}" class="btn btn-primary">
+                    {% trans "Back to home" %}
+                </a>
+                <a href="javascript:history.back()" class="btn btn-ghost">
+                    {% trans "Go back" %}
+                </a>
+            </div>
+        </div>
+    </main>
 {% endblock %}

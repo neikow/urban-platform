@@ -19,6 +19,7 @@ repos:
     rev: v0.2.5
     hooks:
       - id: djangofmt
+        exclude: robots\.txt$
   - repo: https://github.com/PyCQA/bandit
     rev: 1.8.3
     hooks:
