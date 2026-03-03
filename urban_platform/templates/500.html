@@ -1,7 +1,7 @@
 {% load static i18n %}
 
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" data-theme="light" class="scroll-smooth">
     <head>
         <meta charset="utf-8">
         <title>{% trans "Internal server error" %}</title>
@@ -9,11 +9,22 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     </head>
     <body>
-        <h1>
-            {% trans "Internal server error" %}
-        </h1>
-        <h2>
-            {% trans "Sorry, there seems to be an error. Please try again soon." %}
-        </h2>
+        <div class="mx-4 min-h-screen flex flex-col items-center justify-center text-center gap-6 py-24">
+            <p class="text-8xl font-black text-primary opacity-20 select-none" aria-hidden="true">500</p>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold -mt-8">
+                {% trans 'Internal server error' %}
+            </h1>
+            <p class="text-base-content/60 text-lg max-w-md">
+                {% trans "Sorry, something went wrong on our end. Please try again later." %}
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center mt-4">
+                <a href="/" class="btn btn-primary">
+                    {% trans "Back to home" %}
+                </a>
+                <a href="javascript:location.reload()" class="btn btn-ghost">
+                    {% trans "Reload the page" %}
+                </a>
+            </div>
+        </div>
     </body>
 </html>

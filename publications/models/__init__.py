@@ -10,3 +10,4 @@ from .form import (
     UNFAVORABLE_VALUES,
     VoteChoice,
 )
+from .external_link import ProjectExternalLink
