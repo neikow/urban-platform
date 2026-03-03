@@ -583,5 +583,40 @@ msgstr "Aucun vote à supprimer"
 msgid "Vote removed successfully"
 msgstr "Vote supprimé avec succès"
 
+#: publications/models/external_link.py:19
+msgid "Button Text"
+msgstr "Texte du bouton"
+
+#: publications/models/external_link.py:22
+msgid "Text displayed on the button"
+msgstr "Texte affiché sur le bouton"
+
+#: publications/models/external_link.py:24
+msgid "URL"
+msgstr "URL"
+
+#: publications/models/external_link.py:26
+msgid "External URL for this link"
+msgstr "URL externe pour ce lien"
+
+#: publications/models/external_link.py:28
+msgid "Tooltip"
+msgstr "Info-bulle"
+
+#: publications/models/external_link.py:31
+msgid "Text shown on hover (optional)"
+msgstr "Texte affiché au survol (optionnel)"
+
+#: publications/models/external_link.py:43
+msgid "External Link"
+msgstr "Lien externe"
+
+#: publications/models/external_link.py:44
+msgid "External Links"
+msgstr "Liens externes"
+
+#~ msgid "URL is required for external links."
+#~ msgstr "L'URL est obligatoire pour les liens externes."
+
 #~ msgid "Search..."
 #~ msgstr "Rechercher..."
