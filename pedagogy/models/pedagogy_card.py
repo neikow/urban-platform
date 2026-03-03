@@ -45,6 +45,12 @@ class PedagogyCardPage(Page):
         help_text=_("A brief description of the pedagogy card."),
     )
 
+    show_toc: models.BooleanField[bool, bool] = models.BooleanField(
+        _("Show table of contents"),
+        default=True,
+        help_text=_("Display the table of contents in the sidebar"),
+    )
+
     search_fields = Page.search_fields + [
         index.SearchField("description"),
         index.SearchField("content"),
@@ -55,6 +61,7 @@ class PedagogyCardPage(Page):
         FieldPanel("hero_image"),
         InlinePanel("resources", label=_("Resource"), max_num=1),
         FieldPanel("content"),
+        FieldPanel("show_toc"),
     ]
 
     def has_resource(self) -> bool:
@@ -65,7 +72,7 @@ class PedagogyCardPage(Page):
         super().clean()
 
         for block in self.content:
-            if block.block_type == "text":
+            if block.block_type in ("text", "rich_text"):
                 generate_header_ids(block)
 
     @property

@@ -36,7 +36,6 @@ ARG DB_PASSWORD=build
 ARG DB_HOST=localhost
 ARG DB_PORT=5432
 
-RUN python manage.py collectstatic --noinput
 RUN python manage.py compilemessages
 
 CMD ["gunicorn", "urban_platform.wsgi:application", "--bind", "0.0.0.0:8000"]

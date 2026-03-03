@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-02 11:27+0100\n"
+"POT-Creation-Date: 2026-03-02 17:50+0100\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -92,7 +92,7 @@ msgstr "Événements"
 #: publications/templates/publications/admin/vote_stats_detail.html:211
 #: publications/templates/publications/admin/vote_stats_detail.html:267
 #: publications/templates/publications/admin/vote_stats_detail.html:301
-#: publications/templates/publications/components/vote_form.html:75
+#: publications/templates/publications/components/vote_form.html:80
 msgid "Unfavorable"
 msgstr "Défavorable"
 
@@ -100,7 +100,7 @@ msgstr "Défavorable"
 #: publications/templates/publications/admin/vote_stats_detail.html:191
 #: publications/templates/publications/admin/vote_stats_detail.html:260
 #: publications/templates/publications/admin/vote_stats_detail.html:301
-#: publications/templates/publications/components/vote_form.html:98
+#: publications/templates/publications/components/vote_form.html:108
 msgid "Rather Unfavorable"
 msgstr "Plutôt défavorable"
 
@@ -108,7 +108,7 @@ msgstr "Plutôt défavorable"
 #: publications/templates/publications/admin/vote_stats_detail.html:171
 #: publications/templates/publications/admin/vote_stats_detail.html:253
 #: publications/templates/publications/admin/vote_stats_detail.html:301
-#: publications/templates/publications/components/vote_form.html:120
+#: publications/templates/publications/components/vote_form.html:130
 msgid "Rather Favorable"
 msgstr "Plutôt favorable"
 
@@ -118,7 +118,7 @@ msgstr "Plutôt favorable"
 #: publications/templates/publications/admin/vote_stats_detail.html:151
 #: publications/templates/publications/admin/vote_stats_detail.html:246
 #: publications/templates/publications/admin/vote_stats_detail.html:301
-#: publications/templates/publications/components/vote_form.html:141
+#: publications/templates/publications/components/vote_form.html:151
 msgid "Favorable"
 msgstr "Favorable"
 
@@ -426,44 +426,50 @@ msgstr "Connectez-vous pour voter sur ce projet"
 msgid "Log in to vote"
 msgstr "Se connecter pour voter"
 
-#: publications/templates/publications/components/vote_form.html:148
+#: publications/templates/publications/components/vote_form.html:60
+#, fuzzy
+#| msgid "Invalid vote choice"
+msgid "Vote choice"
+msgstr "Choix de vote invalide"
+
+#: publications/templates/publications/components/vote_form.html:158
 msgid "Comment (optional)"
 msgstr "Commentaire (optionnel)"
 
-#: publications/templates/publications/components/vote_form.html:155
+#: publications/templates/publications/components/vote_form.html:165
 msgid "Explain your vote..."
 msgstr "Expliquez votre vote..."
 
-#: publications/templates/publications/components/vote_form.html:158
+#: publications/templates/publications/components/vote_form.html:168
 msgid "Only you and administrators can see your comment"
 msgstr "Seuls vous et les administrateurs peuvent voir votre commentaire"
 
-#: publications/templates/publications/components/vote_form.html:189
+#: publications/templates/publications/components/vote_form.html:199
 msgid "Submit my vote anonymously (my name will not be linked to this vote)"
 msgstr ""
 "Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce vote)"
 
-#: publications/templates/publications/components/vote_form.html:195
+#: publications/templates/publications/components/vote_form.html:205
 msgid "Submit my vote"
 msgstr "Soumettre mon vote"
 
-#: publications/templates/publications/components/vote_form.html:206
+#: publications/templates/publications/components/vote_form.html:216
 msgid "Your vote:"
 msgstr "Votre vote :"
 
-#: publications/templates/publications/components/vote_form.html:209
+#: publications/templates/publications/components/vote_form.html:219
 msgid "Your comment:"
 msgstr "Votre commentaire :"
 
-#: publications/templates/publications/components/vote_form.html:216
+#: publications/templates/publications/components/vote_form.html:226
 msgid "Change my vote"
 msgstr "Modifier mon vote"
 
-#: publications/templates/publications/components/vote_form.html:219
+#: publications/templates/publications/components/vote_form.html:229
 msgid "Remove my vote"
 msgstr "Retirer mon vote"
 
-#: publications/templates/publications/components/vote_form.html:244
+#: publications/templates/publications/components/vote_form.html:254
 #: publications/views/vote.py:40 publications/views/vote.py:106
 msgid "Voting is closed for this project"
 msgstr "Le vote est fermé pour ce projet"
