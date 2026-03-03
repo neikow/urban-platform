@@ -1,7 +1,11 @@
 import pytest
-from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate, get_user_model
 from django.test import Client, TestCase
 from django.urls import reverse
+from wagtail.models import Page
+
+from core.views.account_delete import AccountDeleteForm
+from publications.models import FormResponse, ProjectPage, PublicationIndexPage
 
 User = get_user_model()
 
@@ -162,8 +166,6 @@ class TestAccountDeleteWithRelatedData:
 
     def test_account_delete_preserves_votes(self) -> None:
         """Test that soft deleting account preserves votes."""
-        from publications.models import FormResponse, ProjectPage, PublicationIndexPage
-        from wagtail.models import Page
 
         user = User.objects.create_user(
             email="voter@example.com",
@@ -216,10 +218,6 @@ class TestAccountDeleteWithRelatedData:
 
     def test_account_delete_via_view_soft_deletes(self) -> None:
         """Test that deleting account via the view performs soft delete."""
-        from django.test import Client
-        from django.urls import reverse
-        from publications.models import FormResponse, ProjectPage, PublicationIndexPage
-        from wagtail.models import Page
 
         client = Client()
         user = User.objects.create_user(
@@ -291,8 +289,6 @@ class TestAccountDeleteWithRelatedData:
 
     def test_multiple_users_soft_deletion(self) -> None:
         """Test that multiple users can be soft deleted without conflicts."""
-        from publications.models import FormResponse, ProjectPage, PublicationIndexPage
-        from wagtail.models import Page
 
         # Create a test project page
         home = Page.objects.get(slug="home")
@@ -365,7 +361,6 @@ class TestAccountDeleteWithRelatedData:
 
     def test_soft_deleted_user_cannot_login(self) -> None:
         """Test that a soft-deleted user cannot log in."""
-        from django.contrib.auth import authenticate
 
         user = User.objects.create_user(
             email="test@example.com",
@@ -394,7 +389,6 @@ class TestAccountDeleteWithRelatedData:
 class TestAccountDeleteForm:
     def test_form_valid_with_correct_password(self) -> None:
         """Test that form is valid with correct password and confirmation."""
-        from core.views.account_delete import AccountDeleteForm
 
         user = User.objects.create_user(
             email="test@example.com",
@@ -415,7 +409,6 @@ class TestAccountDeleteForm:
 
     def test_form_invalid_with_wrong_password(self) -> None:
         """Test that form is invalid with incorrect password."""
-        from core.views.account_delete import AccountDeleteForm
 
         user = User.objects.create_user(
             email="test@example.com",
@@ -437,7 +430,6 @@ class TestAccountDeleteForm:
 
     def test_form_invalid_without_confirmation(self) -> None:
         """Test that form is invalid without confirmation checkbox."""
-        from core.views.account_delete import AccountDeleteForm
 
         user = User.objects.create_user(
             email="test@example.com",
