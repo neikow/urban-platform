@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-02 15:10+0100\n"
+"POT-Creation-Date: 2026-03-03 16:39+0100\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -85,6 +85,38 @@ msgstr "Nombre maximum de participants (laisser vide si illimité)"
 msgid "Events"
 msgstr "Événements"
 
+#: publications/models/external_link.py:20
+msgid "Button Text"
+msgstr "Texte du bouton"
+
+#: publications/models/external_link.py:22
+msgid "Text displayed on the button"
+msgstr "Texte affiché sur le bouton"
+
+#: publications/models/external_link.py:25
+msgid "URL"
+msgstr "URL"
+
+#: publications/models/external_link.py:26
+msgid "External URL for this link"
+msgstr "URL externe pour ce lien"
+
+#: publications/models/external_link.py:29
+msgid "Tooltip"
+msgstr "Info-bulle"
+
+#: publications/models/external_link.py:32
+msgid "Text shown on hover (optional)"
+msgstr "Texte affiché au survol (optionnel)"
+
+#: publications/models/external_link.py:45
+msgid "External Link"
+msgstr "Lien externe"
+
+#: publications/models/external_link.py:46 publications/models/project.py:76
+msgid "External Links"
+msgstr "Liens externes"
+
 #: publications/models/form.py:7
 #: publications/templates/publications/admin/vote_stats_detail.html:110
 #: publications/templates/publications/admin/vote_stats_detail.html:211
@@ -132,8 +164,8 @@ msgstr "Mis à jour le"
 msgid "User"
 msgstr "Utilisateur"
 
-#: publications/models/form.py:41 publications/models/project.py:37
-#: publications/models/project.py:100
+#: publications/models/form.py:41 publications/models/project.py:38
+#: publications/models/project.py:114
 #: publications/templates/publications/admin/vote_stats.html:14
 #: publications/templates/publications/publication_index_page.html:127
 msgid "Project"
@@ -167,75 +199,85 @@ msgstr "Réponse de vote"
 msgid "Vote Responses"
 msgstr "Réponses de vote"
 
-#: publications/models/project.py:14
+#: publications/models/project.py:15
 msgid "What is your opinion on this project?"
 msgstr "Quel est votre avis sur ce projet ?"
 
-#: publications/models/project.py:18
+#: publications/models/project.py:19
 msgid "Urban Planning"
 msgstr "Urbanisme"
 
-#: publications/models/project.py:19
+#: publications/models/project.py:20
 msgid "Environment"
 msgstr "Environnement"
 
-#: publications/models/project.py:20
+#: publications/models/project.py:21
 msgid "Mobility"
 msgstr "Mobilité"
 
-#: publications/models/project.py:21
+#: publications/models/project.py:22
 msgid "Housing"
 msgstr "Logement"
 
-#: publications/models/project.py:22
+#: publications/models/project.py:23
 msgid "Culture"
 msgstr "Culture"
 
-#: publications/models/project.py:23
+#: publications/models/project.py:24
 msgid "Sport"
 msgstr "Sport"
 
-#: publications/models/project.py:24
+#: publications/models/project.py:25
 msgid "Education"
 msgstr "Éducation"
 
-#: publications/models/project.py:25
+#: publications/models/project.py:26
 msgid "Health"
 msgstr "Santé"
 
-#: publications/models/project.py:26
+#: publications/models/project.py:27
 msgid "Social"
 msgstr "Social"
 
-#: publications/models/project.py:27
+#: publications/models/project.py:28
 msgid "Economy"
 msgstr "Économie"
 
-#: publications/models/project.py:28
+#: publications/models/project.py:29
 msgid "Other"
 msgstr "Autre"
 
-#: publications/models/project.py:44
+#: publications/models/project.py:45
 msgid "Category"
 msgstr "Catégorie"
 
-#: publications/models/project.py:51
+#: publications/models/project.py:52
 msgid "Enable Voting"
 msgstr "Activer le vote"
 
-#: publications/models/project.py:53
+#: publications/models/project.py:54
 msgid "Allow users to vote on this project"
 msgstr "Permettre aux utilisateurs de voter sur ce projet"
 
-#: publications/models/project.py:57
+#: publications/models/project.py:58
 msgid "Voting End Date"
 msgstr "Date de fin du vote"
 
-#: publications/models/project.py:60
+#: publications/models/project.py:61
 msgid "Leave empty for no end date"
 msgstr "Laisser vide pour pas de date de fin"
 
-#: publications/models/project.py:101
+#: publications/models/project.py:65
+#, fuzzy
+#| msgid "Table of Contents"
+msgid "Show table of contents"
+msgstr "Table des matières"
+
+#: publications/models/project.py:67
+msgid "Display the table of contents in the sidebar"
+msgstr ""
+
+#: publications/models/project.py:115
 #: publications/templates/publications/publication_index_page.html:39
 msgid "Projects"
 msgstr "Projets"
@@ -487,11 +529,11 @@ msgstr "Rejoindre"
 msgid "Max Participants"
 msgstr "Participants max"
 
-#: publications/templates/publications/project_page.html:73
+#: publications/templates/publications/project_page.html:75
 msgid "Give your opinion"
 msgstr "Donner votre avis"
 
-#: publications/templates/publications/project_page.html:79
+#: publications/templates/publications/project_page.html:84
 msgid "Table of Contents"
 msgstr "Table des matières"
 
@@ -560,38 +602,6 @@ msgstr "Aucun vote à supprimer"
 #: publications/views/vote.py:125
 msgid "Vote removed successfully"
 msgstr "Vote supprimé avec succès"
-
-#: publications/models/external_link.py:19
-msgid "Button Text"
-msgstr "Texte du bouton"
-
-#: publications/models/external_link.py:22
-msgid "Text displayed on the button"
-msgstr "Texte affiché sur le bouton"
-
-#: publications/models/external_link.py:24
-msgid "URL"
-msgstr "URL"
-
-#: publications/models/external_link.py:26
-msgid "External URL for this link"
-msgstr "URL externe pour ce lien"
-
-#: publications/models/external_link.py:28
-msgid "Tooltip"
-msgstr "Info-bulle"
-
-#: publications/models/external_link.py:31
-msgid "Text shown on hover (optional)"
-msgstr "Texte affiché au survol (optionnel)"
-
-#: publications/models/external_link.py:43
-msgid "External Link"
-msgstr "Lien externe"
-
-#: publications/models/external_link.py:44
-msgid "External Links"
-msgstr "Liens externes"
 
 #~ msgid "URL is required for external links."
 #~ msgstr "L'URL est obligatoire pour les liens externes."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-02 15:14+0100\n"
+"POT-Creation-Date: 2026-03-03 16:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -476,8 +476,8 @@ msgstr "Les liens de vérification sont valables 24 heures."
 #: core/templates/auth/email_verify_error.html:36
 #: core/templates/auth/login_modal.html:10
 #: core/templates/auth/login_modal.html:49
-#: core/templates/auth/register.html:123
-#: core/templates/core/components/website_header.html:144
+#: core/templates/auth/register.html:129
+#: core/templates/core/components/website_header.html:169
 msgid "Log in"
 msgstr "Se connecter"
 
@@ -512,7 +512,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: core/templates/auth/login_modal.html:54
-#: core/templates/auth/register.html:117
+#: core/templates/auth/register.html:123
 msgid "OR"
 msgstr "OU"
 
@@ -521,7 +521,7 @@ msgid "Don't have an account?"
 msgstr "Vous n'avez pas de compte ?"
 
 #: core/templates/auth/login_modal.html:64 core/templates/auth/register.html:4
-#: core/templates/auth/register.html:31 core/templates/auth/register.html:112
+#: core/templates/auth/register.html:31 core/templates/auth/register.html:118
 msgid "Sign up"
 msgstr "S'inscrire"
 
@@ -616,35 +616,35 @@ msgstr "Le lien est valable pendant 1 heure."
 msgid "Become a member"
 msgstr "Devenez membre"
 
-#: core/templates/auth/register.html:21 core/templates/auth/register.html:132
+#: core/templates/auth/register.html:21 core/templates/auth/register.html:138
 msgid "Access educational resources"
 msgstr "Accédez aux fiches pédagogiques"
 
-#: core/templates/auth/register.html:22 core/templates/auth/register.html:133
+#: core/templates/auth/register.html:22 core/templates/auth/register.html:139
 msgid "Follow your neighborhood's news"
 msgstr "Suivez les actualités de votre quartier"
 
-#: core/templates/auth/register.html:23 core/templates/auth/register.html:134
+#: core/templates/auth/register.html:23 core/templates/auth/register.html:140
 msgid "Vote on initiatives"
 msgstr "Votez sur les initiatives"
 
-#: core/templates/auth/register.html:89
+#: core/templates/auth/register.html:83
 msgid "I accept the"
 msgstr "J'accepte les"
 
-#: core/templates/auth/register.html:96
+#: core/templates/auth/register.html:90
 msgid "terms of service"
 msgstr "conditions d'utilisation"
 
-#: core/templates/auth/register.html:97
+#: core/templates/auth/register.html:91
 msgid "(opens in a new tab)"
 msgstr "(ouvre dans un nouvel onglet)"
 
-#: core/templates/auth/register.html:121
+#: core/templates/auth/register.html:127
 msgid "Already have an account?"
 msgstr "Vous avez déjà un compte ?"
 
-#: core/templates/auth/register.html:129
+#: core/templates/auth/register.html:135
 #, python-format
 msgid "Become a member of %(website_name)s"
 msgstr "Devenez membre de %(website_name)s"
@@ -685,11 +685,11 @@ msgstr "Légal"
 msgid "All rights reserved."
 msgstr "Tous droits réservés."
 
-#: core/templates/core/components/website_header.html:110
+#: core/templates/core/components/website_header.html:103
 msgid "Profile"
 msgstr "Profil"
 
-#: core/templates/core/components/website_header.html:132
+#: core/templates/core/components/website_header.html:157
 msgid "Log out"
 msgstr "Se déconnecter"
 

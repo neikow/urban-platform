@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-02 15:10+0100\n"
+"POT-Creation-Date: 2026-03-03 16:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,17 @@ msgstr "Description de la fiche pédagogique"
 msgid "A brief description of the pedagogy card."
 msgstr "Brève description de la fiche pédagogique."
 
-#: pedagogy/models/pedagogy_card.py:56
+#: pedagogy/models/pedagogy_card.py:49
+#, fuzzy
+#| msgid "Table of Contents"
+msgid "Show table of contents"
+msgstr "Table des matières"
+
+#: pedagogy/models/pedagogy_card.py:51
+msgid "Display the table of contents in the sidebar"
+msgstr ""
+
+#: pedagogy/models/pedagogy_card.py:62
 msgid "Resource"
 msgstr "Ressource"
 
@@ -100,11 +110,7 @@ msgstr "Télécharger la ressource"
 msgid "Unknown resource type."
 msgstr "Type de ressource inconnu."
 
-#: pedagogy/templates/pedagogy/pedagogy_card_page.html:31
-msgid "Quick access"
-msgstr "Accès rapide"
-
-#: pedagogy/templates/pedagogy/pedagogy_card_page.html:41
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:46
 msgid "Table of Contents"
 msgstr "Table des matières"
 
@@ -127,3 +133,6 @@ msgstr "Voir plus"
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:52
 msgid "No educational resources found"
 msgstr "Aucune ressource pédagogique trouvée"
+
+#~ msgid "Quick access"
+#~ msgstr "Accès rapide"
