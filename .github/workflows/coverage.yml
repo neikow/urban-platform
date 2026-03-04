@@ -16,7 +16,22 @@ jobs:
       contents: write
       actions: read
     steps:
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          run_id: ${{ github.event.workflow_run.id }}
+          name: python-coverage-comment-action
+        continue-on-error: true
+
+      - name: Check if artifact exists
+        id: check_artifact
+        run: |
+          if [ ! -f python-coverage-comment-action.txt ]; then
+            echo "::set-output name=skip::true"
+          fi
+
       - name: Post comment
+        if: steps.check_artifact.outputs.skip != 'true'
         uses: py-cov-action/python-coverage-comment-action@v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
