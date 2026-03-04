@@ -1,11 +1,10 @@
-name: CI Pipeline
+name: CI
 
 on:
+  pull_request:
   push:
     branches:
-      - '**'
-      - '!main'
-  workflow_call:
+      - 'main'
 
 jobs:
   quality:
@@ -126,26 +125,3 @@ jobs:
         with:
           name: playwright-artifacts
           path: test-results/
-
-  coverage:
-    name: Coverage Report
-    runs-on: ubuntu-latest
-    needs: test
-    permissions:
-      pull-requests: write
-      contents: write
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Download Coverage Report
-        uses: actions/download-artifact@v6
-        with:
-          name: coverage-report
-
-      - name: Post Coverage Comment
-        uses: py-cov-action/python-coverage-comment-action@v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERAGE_DATA_BRANCH: coverage-data
