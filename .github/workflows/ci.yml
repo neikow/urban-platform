@@ -1,6 +1,7 @@
-name: CI Pipeline
+name: CI
 
 on:
+  pull_request:
   push:
     branches:
       - '**'
@@ -20,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        check: [lint, format, types]
+        check: [ lint, format, types ]
 
     steps:
       - name: Checkout code
@@ -29,8 +30,8 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
-            enable-cache: true
-            cache-dependency-glob: "uv.lock"
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
 
       - name: "Set up Python"
         uses: actions/setup-python@v6
@@ -76,8 +77,8 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
-            enable-cache: true
-            cache-dependency-glob: "uv.lock"
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
 
       - name: "Set up Python"
         uses: actions/setup-python@v6
@@ -89,7 +90,7 @@ jobs:
 
       - name: Run Unit Tests
         if: matrix.tests == 'unit'
-        run: uv run pytest --ignore e2e -n auto --junitxml=test-results-unit.xml
+        run: uv run pytest --ignore e2e -n auto --junitxml=test-results-unit.xml --cov --cov-report=xml:coverage.xml
 
       - name: Upload Unit Test Results
         if: matrix.tests == 'unit' && always()
@@ -97,6 +98,20 @@ jobs:
         with:
           name: test-results-unit
           path: test-results-unit.xml
+
+      - name: Coverage comment
+        if: matrix.tests == 'unit' && always()
+        id: coverage_comment
+        uses: py-cov-action/python-coverage-comment-action@v3
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Store Pull Request comment to be posted
+        if: matrix.tests == 'unit' && steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-coverage-comment-action
+          path: python-coverage-comment-action.txt
 
       - name: Install system dependencies
         if: matrix.tests == 'e2e'
