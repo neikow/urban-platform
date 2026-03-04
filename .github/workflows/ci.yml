@@ -99,12 +99,19 @@ jobs:
           name: test-results-unit
           path: test-results-unit.xml
 
-      - name: Upload Coverage Report
+      - name: Coverage comment
         if: matrix.tests == 'unit' && always()
-        uses: actions/upload-artifact@v6
+        id: coverage_comment
+        uses: py-cov-action/python-coverage-comment-action@v3
         with:
-          name: coverage-report
-          path: coverage.xml
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Store Pull Request comment to be posted
+        if: matrix.tests == 'unit' && steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-coverage-comment-action
+          path: python-coverage-comment-action.txt
 
       - name: Install system dependencies
         if: matrix.tests == 'e2e'
