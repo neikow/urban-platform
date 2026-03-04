@@ -9,3 +9,4 @@ node_modules
 __pycache__/
 *.mo
 urban_platform/static/css/styles.css
+.coverage
