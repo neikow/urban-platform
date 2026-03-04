@@ -356,7 +356,9 @@ COMMON_BLOCK_TYPES: BlockTypeList = [
     ),
 ]
 
-BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS = COMMON_BLOCK_TYPES
+BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS = [
+    *COMMON_BLOCK_TYPES
+]  # we copy the list to prevent circular reference and undefined behavior
 
 COMMON_BLOCK_TYPES += [
     (

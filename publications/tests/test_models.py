@@ -4,6 +4,7 @@ from django.test import TestCase, RequestFactory
 from django.utils import timezone
 from wagtail.rich_text import RichText
 
+from core.blocks import BLOCK_TYPE_RICH_TEXT, TextJustification
 from home.models import HomePage
 from publications.models import ProjectPage, PublicationIndexPage, ProjectCategory, EventPage
 
@@ -42,12 +43,15 @@ class ProjectPageModelTest(TestCase):
             category=ProjectCategory.URBAN_PLANNING,
             content=[
                 (
-                    "text",
-                    RichText(
-                        "<h2 id='intro'>Introduction</h2><p>Text</p>"
-                        "<h3 id='context'>Context</h3><p>More</p>"
-                        "<h2 id='conclusion'>Conclusion</h2>"
-                    ),
+                    BLOCK_TYPE_RICH_TEXT,
+                    {
+                        "text": RichText(
+                            "<h2 id='intro'>Introduction</h2><p>Text</p>"
+                            "<h3 id='context'>Context</h3><p>More</p>"
+                            "<h2 id='conclusion'>Conclusion</h2>"
+                        ),
+                        "justification": TextJustification.LEFT,
+                    },
                 )
             ],
         )

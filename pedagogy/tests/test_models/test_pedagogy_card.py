@@ -1,5 +1,7 @@
 import pytest
+from wagtail.rich_text import RichText
 
+from core.blocks import BLOCK_TYPE_RICH_TEXT, TextJustification
 from pedagogy.factories.pedagogy_card_factory import PedagogyCardPageFactory
 
 
@@ -8,17 +10,13 @@ def test_table_of_contents_generation() -> None:
     page = PedagogyCardPageFactory.build(
         content=[
             (
-                "text",
-                """
-      <h2>a</h2>
-      <p>b</p>
-      <h3>c</h3>
-      <h2>d</h2>
-      <p>e</p>
-      <h4>f</h4>
-      <h3>g</h3>
-      <p>h</p>
-      """,
+                BLOCK_TYPE_RICH_TEXT,
+                {
+                    "text": RichText(
+                        "<h2>a</h2><p>b</p><h3>c</h3><h2>d</h2><p>e</p><h4>f</h4><h3>g</h3><p>h</p>"
+                    ),
+                    "justification": TextJustification.LEFT,
+                },
             ),
         ],
     )
