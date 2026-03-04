@@ -343,57 +343,9 @@ BLOCK_TYPE_VERTICAL_SPACER = "vertical_spacer"
 BLOCK_TYPE_CALL_TO_ACTION_BUTTON = "call_to_action_button"
 BLOCK_TYPE_DOCUMENT = "document"
 
-DEPRECATED_BLOCK_TYPE_TESTIMONIAL = "testimonial"
-DEPRECATED_BLOCK_TYPE_TEXT_CENTERED = "text_centered"
-DEPRECATED_BLOCK_TYPE_IMAGE_TEXT = "image_text"
-DEPRECATED_BLOCK_TYPE_TEXT = "text"
-
-DEPRECATED_BLOCK_TYPES = [
-    DEPRECATED_BLOCK_TYPE_TESTIMONIAL,
-    DEPRECATED_BLOCK_TYPE_TEXT_CENTERED,
-    DEPRECATED_BLOCK_TYPE_IMAGE_TEXT,
-    DEPRECATED_BLOCK_TYPE_TEXT,
-]
-
 COMMON_BLOCK_TYPES: BlockTypeList = [
-    (
-        DEPRECATED_BLOCK_TYPE_TEXT,
-        blocks.RichTextBlock(
-            features=[
-                "h2",
-                "h3",
-                "h4",
-                "bold",
-                "italic",
-                "link",
-                "document-link",
-                "ul",
-                "ol",
-                "blockquote",
-                "superscript",
-                "subscript",
-            ],
-            label=_("DEPRECATED Text"),
-            template="core/blocks/text_block.html",
-        ),
-    ),
     (BLOCK_TYPE_RICH_TEXT, AugmentedRichTextBlock()),
-    (
-        DEPRECATED_BLOCK_TYPE_TEXT_CENTERED,
-        blocks.RichTextBlock(
-            features=[
-                "bold",
-                "italic",
-            ],
-            label=_("DEPRECATED Centered Text"),
-            template="core/blocks/centered_text_block.html",
-        ),
-    ),
     (BLOCK_TYPE_IMAGE, CustomImageBlock()),
-    (
-        DEPRECATED_BLOCK_TYPE_IMAGE_TEXT,
-        DeprecatedImageTextBlock(),
-    ),
     (
         BLOCK_TYPE_VERTICAL_SPACER,
         VerticalSpacerBlock(),
@@ -404,11 +356,7 @@ COMMON_BLOCK_TYPES: BlockTypeList = [
     ),
 ]
 
-BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS: BlockTypeList = [
-    (block_type, definition)
-    for block_type, definition in COMMON_BLOCK_TYPES
-    if block_type not in DEPRECATED_BLOCK_TYPES
-]
+BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS = COMMON_BLOCK_TYPES
 
 COMMON_BLOCK_TYPES += [
     (
@@ -426,13 +374,13 @@ CONTENT_BLOCK_TYPES: BlockTypeList = COMMON_BLOCK_TYPES + [
 
 WEBSITE_BLOCK_TYPES: BlockTypeList = COMMON_BLOCK_TYPES + [
     (BLOCK_TYPE_HERO, HeroBlock()),
-    (DEPRECATED_BLOCK_TYPE_TESTIMONIAL, TestimonialBlock()),
     (BLOCK_TYPE_TESTIMONIAL_LIST, TestimonialListBlock()),
     (BLOCK_TYPE_RECENT_PUBLICATIONS, RecentPublicationsBlock()),
     (BLOCK_TYPE_CARDS, CardListBlock()),
     (BLOCK_TYPE_FAQ, FAQBlock()),
 ]
 
-ALL_BLOCK_TYPES = list(
-    set([block_type for [block_type, _] in (CONTENT_BLOCK_TYPES + WEBSITE_BLOCK_TYPES)])
-)
+ALL_BLOCKS: dict[str, blocks.Block] = {
+    block_type: block_definition
+    for [block_type, block_definition] in (CONTENT_BLOCK_TYPES + WEBSITE_BLOCK_TYPES)
+}
