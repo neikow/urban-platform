@@ -65,9 +65,11 @@ def collect_static() -> None:
 
 
 def delete_compiled_messages() -> None:
-    """Delete compiled translation message files (.mo files)."""
+    """Delete compiled translation message files (.mo files), excluding .venv."""
     print("🗑️  Deleting compiled translation messages...")
-    mo_files = list(PROJECT_ROOT.rglob("*.mo"))
+
+    mo_files = [f for f in PROJECT_ROOT.rglob("*.mo") if ".venv" not in f.parts]
+
     if mo_files:
         for mo_file in mo_files:
             mo_file.unlink()
