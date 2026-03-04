@@ -15,6 +15,7 @@
                     <p class="text-center">
                         {{ page.description }}
                     </p>
+                    {% include "publications/components/project_external_links.html" with page=page %}
                 </div>
                 {% if page.hero_image %}
                     <figure class="w-full">
