@@ -1,6 +1,6 @@
 # Urban Platform
 
-[![Coverage](https://github.com/neikow/urban-platform/blob/python-coverage-comment-action-data/badge.svg)]
+![Coverage](https://github.com/neikow/urban-platform/blob/python-coverage-comment-action-data/badge.svg)
 
 ## Installation
 
