@@ -64,6 +64,19 @@ def collect_static() -> None:
     print("✅ Static files collected")
 
 
+def delete_compiled_messages() -> None:
+    """Delete compiled translation message files (.mo files)."""
+    print("🗑️  Deleting compiled translation messages...")
+    mo_files = list(PROJECT_ROOT.rglob("*.mo"))
+    if mo_files:
+        for mo_file in mo_files:
+            mo_file.unlink()
+            print(f"  ✓ Deleted {mo_file.relative_to(PROJECT_ROOT)}")
+    else:
+        print("  ✓ No compiled messages found")
+    print("✅ Compiled messages deleted")
+
+
 def compile_messages() -> None:
     """Compile translation messages."""
     print("🌐 Compiling translation messages...")
@@ -404,7 +417,7 @@ def run_tests(
     return result.returncode
 
 
-def setup(skip_static: bool = False) -> None:
+def setup(skip_static: bool = False, clean_messages: bool = False) -> None:
     """Full setup: migrations, static files, database population, and test users."""
     print("🔧 Setting up E2E environment...")
 
@@ -415,6 +428,8 @@ def setup(skip_static: bool = False) -> None:
         run_migrations()
 
     if not skip_static:
+        if clean_messages:
+            delete_compiled_messages()
         compile_messages()
         collect_static()
 
@@ -437,6 +452,11 @@ def main() -> None:
         "--skip-static",
         action="store_true",
         help="Skip collecting static files",
+    )
+    setup_parser.add_argument(
+        "--clean-messages",
+        action="store_true",
+        help="Delete compiled messages before compiling",
     )
 
     subparsers.add_parser("serve", help="Start the E2E test server")
@@ -464,7 +484,7 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.command == "setup":
-        setup(skip_static=args.skip_static)
+        setup(skip_static=args.skip_static, clean_messages=args.clean_messages)
     elif args.command == "serve":
         start_server()
     elif args.command == "populate":
@@ -477,7 +497,7 @@ def main() -> None:
     elif args.command == "migrate":
         run_migrations()
     elif args.command == "ci":
-        setup()
+        setup(clean_messages=True)
         server_process = start_server(foreground=False)
         if not wait_for_server():
             print("❌ Server failed to start within timeout")
