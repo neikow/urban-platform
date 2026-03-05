@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% if url %}
+    <a href="{{ url }}" class="btn btn-ghost btn-sm text-primary">
+        {% trans "Learn More" %}
+        {% include "icons/arrow_right.html" %}
+    </a>
+{% else %}
+    <span class="btn btn-ghost btn-sm text-primary">
+        {% trans "Learn More" %}
+        {% include "icons/arrow_right.html" %}
+    </span>
+{% endif %}

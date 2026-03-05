@@ -1,0 +1,86 @@
+{% load i18n wagtailimages_tags %}
+
+<a
+    href="{{ publication.url }}"
+    class="card bg-base-100 w-full shadow-sm focus:shadow-lg hover:shadow-md transition-shadow duration-100"
+>
+    <div class="relative">
+        <figure>
+            {% if publication.hero_image %}
+                {% image publication.hero_image fill-400x250 alt=publication.title class="w-full h-48 object-cover rounded-t-lg" %}
+            {% else %}
+                <div class="w-full h-48 bg-base-200 flex items-center justify-center">
+                    {% if publication.is_event %}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-16 w-16 text-base-300"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            />
+                        </svg>
+                    {% else %}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-16 w-16 text-base-300"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                            />
+                        </svg>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </figure>
+        <div class="flex gap-1 absolute top-2 left-2">
+            {% if publication.is_event %}
+                <span class="badge badge-outline bg-secondary">{% trans "Event" %}</span>
+                {% if publication.is_upcoming %}
+                    <span class="badge badge-outline bg-success">{% trans "Upcoming" %}</span>
+                {% endif %}
+            {% else %}
+                <span class="badge badge-outline bg-primary">{% trans "Project" %}</span>
+                {% if publication.category %}
+                    <span class="badge badge-outline bg-info">{{ publication.get_category_display }}</span>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-body">
+        <h3 class="card-title text-lg">
+            {{ publication.title }}
+        </h3>
+        <p class="text-sm text-base-content/70">
+            {{ publication.description|truncatewords:20 }}
+        </p>
+        <div class="flex items-center justify-between mt-2 text-xs text-base-content/50">
+            {% if publication.is_event %}
+                <span class="flex items-center">
+                    {% include "icons/calendar.html" %}
+                    <span>{{ publication.event_date|date:"d/m/Y H:i" }}</span>
+                </span>
+            {% else %}
+                <span></span>
+            {% endif %}
+            <span class="flex items-center">
+                {% include "icons/globe.html" %}
+                <span>{{ publication.first_published_at|date:"d/m/Y" }}</span>
+            </span>
+        </div>
+        <div class="card-actions justify-end mt-2">
+            {% include "core/components/io/learn_more_button.html" %}
+        </div>
+    </div>
+</a>
