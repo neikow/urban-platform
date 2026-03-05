@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-26 18:49+0100\n"
+"POT-Creation-Date: 2026-03-05 09:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,7 +43,17 @@ msgstr "Description de la fiche pédagogique"
 msgid "A brief description of the pedagogy card."
 msgstr "Brève description de la fiche pédagogique."
 
-#: pedagogy/models/pedagogy_card.py:56
+#: pedagogy/models/pedagogy_card.py:49
+#, fuzzy
+#| msgid "Page body content"
+msgid "Show table of contents"
+msgstr "Contenu de la page"
+
+#: pedagogy/models/pedagogy_card.py:51
+msgid "Display the table of contents in the sidebar"
+msgstr "Afficher la table des matières dans la barre latérale"
+
+#: pedagogy/models/pedagogy_card.py:62
 msgid "Resource"
 msgstr "Ressource"
 
@@ -89,6 +99,17 @@ msgstr "Veuillez fournir soit une URL, soit un document, mais pas les deux."
 #: pedagogy/tests/test_pedagogy_resource.py:54
 msgid "Please provide either a URL or a Document."
 msgstr "Veuillez fournir soit une URL, soit un document."
+
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:28
+#, python-format
+msgid "Preview image: %(title)s"
+msgstr "Aperçu de l'image: %(title)s"
+
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:62
+#, fuzzy
+#| msgid "Page body content"
+msgid "Table of Contents"
+msgstr "Contenu de la page"
 
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:22
 msgid "Search resources"

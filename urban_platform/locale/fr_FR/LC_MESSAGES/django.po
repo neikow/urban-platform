@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-02 17:50+0100\n"
+"POT-Creation-Date: 2026-03-05 09:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,12 +39,12 @@ msgstr "Erreur interne du serveur"
 
 #: urban_platform/templates/500.html:20
 msgid "Sorry, something went wrong on our end. Please try again later."
-msgstr "Désolé, une erreur est survenue de notre côté. Veuillez réessayer plus tard."
+msgstr ""
+"Désolé, une erreur est survenue de notre côté. Veuillez réessayer plus tard."
 
 #: urban_platform/templates/500.html:27
 msgid "Reload the page"
 msgstr "Recharger la page"
 
-#: urban_platform/templates/components/toc.html:10
-msgid "No table of contents available"
-msgstr "La table des matières est vide"
+#~ msgid "No table of contents available"
+#~ msgstr "La table des matières est vide"
