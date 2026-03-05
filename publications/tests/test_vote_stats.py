@@ -1,4 +1,5 @@
 import pytest
+from django.utils.translation import gettext_lazy as _
 
 from core.models import User
 from publications.models import FormResponse, ProjectPage, PublicationIndexPage, VoteChoice
@@ -286,8 +287,8 @@ class TestVoteStatsDetailView:
         # The original email should NOT be visible (it was anonymized)
         assert "deleted_voter@example.com" not in content
 
-        # "Utilisateur Supprimé" should be displayed
-        assert "Utilisateur Supprimé" in content
+        # "Utilisateur supprimé" should be displayed
+        assert "Utilisateur supprimé" in content
 
         # The user should be marked as deleted
         deleted_voter_from_db = User.objects.with_deleted().get(pk=deleted_voter.pk)
