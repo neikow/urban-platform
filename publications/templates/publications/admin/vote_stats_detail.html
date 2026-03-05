@@ -270,7 +270,7 @@
                                         {% if not vote.anonymize %}
                                             {% if vote.user.is_deleted %}
                                                 <span class="w-text-text-meta w-text-sm w-italic">
-                                                    {{ vote.user.get_full_name }}
+                                                    {% trans "Deleted User" %}
                                                 </span>
                                             {% else %}
                                                 <span class="w-text-text-meta w-text-sm">{{ vote.user.email }}</span>

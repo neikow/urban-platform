@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Supprimer mon compte{% endblock %}
+{% block title %}{% translate "Delete my account" %}{% endblock %}
 
 {% block content %}
     <div class="min-h-screen pt-24 pb-8 px-4 sm:px-6 lg:px-8">
@@ -9,7 +10,7 @@
                 <div class="card-body">
                     <div class="flex items-center justify-between mb-6">
                         <h1 class="card-title text-3xl font-bold text-error">
-                            Supprimer mon compte
+                            {% translate "Delete my account" %}
                         </h1>
                         <a href="{% url 'profile_edit' %}" class="btn btn-ghost btn-sm">
                             <svg
@@ -22,7 +23,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m12 19-7-7 7-7" />
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5" />
                             </svg>
-                            Retour
+                            {% translate "Back" %}
                         </a>
                     </div>
 
@@ -40,20 +41,22 @@
                             />
                         </svg>
                         <div>
-                            <h3 class="font-bold">Attention : Action irréversible</h3>
+                            <h3 class="font-bold">{% translate "Warning: Irreversible action" %}</h3>
                             <div class="text-sm">
-                                La suppression de votre compte entraînera la perte définitive de toutes vos données.
+                                {% translate "Deleting your account will result in the permanent loss of all your data." %}
                             </div>
                         </div>
                     </div>
 
                     <div class="prose mb-6">
-                        <h2 class="text-lg font-semibold">Que se passe-t-il lorsque vous supprimez votre compte ?</h2>
+                        <h2 class="text-lg font-semibold">
+                            {% translate "What happens when you delete your account?" %}
+                        </h2>
                         <ul class="list-disc list-inside space-y-2 text-sm">
-                            <li>Toutes vos informations personnelles seront définitivement supprimées</li>
-                            <li>Vos participations et votes seront anonymisés</li>
-                            <li>Vous ne pourrez plus accéder à votre compte</li>
-                            <li>Cette action est irréversible et ne peut pas être annulée</li>
+                            <li>{% translate "All your personal information will be permanently deleted" %}</li>
+                            <li>{% translate "Your participations and votes will be anonymized" %}</li>
+                            <li>{% translate "You will no longer be able to access your account" %}</li>
+                            <li>{% translate "This action is irreversible and cannot be undone" %}</li>
                         </ul>
                     </div>
 
@@ -83,13 +86,18 @@
                         {% include "components/forms/form_field.html" with field=form.password %}
 
                         <div class="form-control">
-                            <label class="label cursor-pointer justify-start gap-3">
+                            <div class="flex justify-start items-center gap-3">
                                 {{ form.confirm }}
-                                <span class="label-text font-semibold">{{ form.confirm.label }}</span>
-                            </label>
+                                <label
+                                    for="{{ form.confirm.id_for_label }}"
+                                    class="text-sm cursor-pointer flex-1 min-w-0 break-words"
+                                >
+                                    {{ form.confirm.label }}
+                                </label>
+                            </div>
                             {% if form.confirm.errors %}
-                                <div class="label">
-                                    <span class="label-text-alt text-error">
+                                <div class="mt-1">
+                                    <span class="label-text-alt text-error block break-words">
                                         {{ form.confirm.errors.0 }}
                                     </span>
                                 </div>
@@ -100,7 +108,7 @@
 
                         <div class="flex justify-end gap-3">
                             <a href="{% url 'profile_edit' %}" class="btn btn-ghost">
-                                Annuler
+                                {% translate "Cancel" %}
                             </a>
                             <button type="submit" class="btn btn-error">
                                 <svg
@@ -138,7 +146,7 @@
                                         y2="17"
                                     />
                                 </svg>
-                                Supprimer définitivement mon compte
+                                {% translate "Permanently delete my account" %}
                             </button>
                         </div>
                     </form>
