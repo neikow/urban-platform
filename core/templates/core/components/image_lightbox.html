@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<dialog id="lightbox-modal" class="modal" aria-label="{% trans 'Image preview' %}" aria-modal="true">
+    <div class="modal-box max-w-5xl w-full p-2 bg-base-100 flex items-center justify-center relative">
+        <form method="dialog">
+            <button
+                class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 z-10"
+                aria-label="{% trans 'Close preview' %}"
+            >
+                ✕
+            </button>
+        </form>
+        <img
+            id="lightbox-img"
+            src=""
+            alt=""
+            class="max-h-[85vh] w-auto max-w-full rounded-lg object-contain"
+        >
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button aria-label="{% trans 'Close preview' %}">{% trans 'Close' %}</button>
+    </form>
+</dialog>
