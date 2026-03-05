@@ -252,7 +252,7 @@ class TestVoteStatsDetailView:
     def test_soft_deleted_user_vote_shows_deleted_user_label(
         self, client, admin_user, project_without_votes
     ):
-        """Test that votes from soft-deleted users show 'Utilisateur Supprimé' in admin view."""
+        """Test that votes from soft-deleted users show 'Utilisateur supprimé' in admin view."""
         # Create a user who votes
         deleted_voter = User.objects.create_user(
             email="deleted_voter@example.com",
@@ -286,8 +286,8 @@ class TestVoteStatsDetailView:
         # The original email should NOT be visible (it was anonymized)
         assert "deleted_voter@example.com" not in content
 
-        # "Utilisateur Supprimé" should be displayed
-        assert "Utilisateur Supprimé" in content
+        # "Utilisateur supprimé" should be displayed
+        assert "Utilisateur supprimé" in content
 
         # The user should be marked as deleted
         deleted_voter_from_db = User.objects.with_deleted().get(pk=deleted_voter.pk)
