@@ -52,6 +52,7 @@ dev = [
     "factory-boy>=3.3.3",
     "mypy>=1.19.1",
     "playwright>=1.57.0",
+    "pytest-cov>=7.0.0",
     "pytest-django>=4.11.1",
     "pytest-env>=1.2.0",
     "pytest-playwright>=0.7.2",
@@ -66,6 +67,30 @@ python_files = ["tests.py", "test_*.py", "*_tests.py"]
 markers = [
     "e2e: marks tests as end-to-end tests (deselect with '-m \"not e2e\"')",
 ]
+
+[tool.coverage.run]
+relative_files = true
+branch = true
+source = [
+    "core",
+    "home",
+    "legal",
+    "pedagogy",
+    "publications",
+    "search",
+]
+omit = [
+    "*/migrations/*",
+    "*/tests/*",
+    "*/tests.py",
+    "*/factories/*",
+    "*/factories.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+precision = 2
 
 [tool.djlint]
 profile = "django"

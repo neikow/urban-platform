@@ -1,10 +1,11 @@
 from datetime import datetime
+from functools import cached_property
 
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.search import index
 
 from core.toc import TableOfContentsItem, generate_header_ids, get_table_of_contents
@@ -60,21 +61,29 @@ class ProjectPage(PublicationPage):
         help_text=_("Leave empty for no end date"),
     )
 
+    show_toc: models.BooleanField[bool, bool] = models.BooleanField(
+        _("Show table of contents"),
+        default=True,
+        help_text=_("Display the table of contents in the sidebar"),
+    )
+
     search_fields = PublicationPage.search_fields + [
         index.SearchField("category"),
     ]
 
     content_panels = PublicationPage.content_panels + [
         FieldPanel("category"),
+        InlinePanel("external_links", label=_("External Links")),
         FieldPanel("enable_voting"),
         FieldPanel("voting_end_date"),
+        FieldPanel("show_toc"),
     ]
 
     def clean(self) -> None:
         super().clean()
 
         for block in self.content:
-            if block.block_type == "text":
+            if block.block_type in ("text", "rich_text"):
                 generate_header_ids(block)
 
     @property
@@ -91,6 +100,11 @@ class ProjectPage(PublicationPage):
             return True
 
         return timezone.now() <= self.voting_end_date
+
+    @cached_property
+    def has_external_links(self) -> bool:
+        """Check if this project has any external links."""
+        return self.external_links.exists()
 
     @property
     def table_of_contents(self) -> list[TableOfContentsItem]:

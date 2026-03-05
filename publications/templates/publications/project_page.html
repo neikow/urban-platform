@@ -15,6 +15,7 @@
                     <p class="text-center">
                         {{ page.description }}
                     </p>
+                    {% include "publications/components/project_external_links.html" with page=page %}
                 </div>
                 {% if page.hero_image %}
                     <figure class="w-full">
@@ -53,41 +54,47 @@
                 {% endif %}
             </main>
             <aside class="w-full lg:w-xs lg:card lg:bg-base-100 lg:p-4 h-min lg:shadow-sm lg:sticky lg:top-20 self-start items-center">
-                {% if page.enable_voting %}
-                    <a href="#vote-card" class="btn btn-primary btn-block">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                            />
-                        </svg>
-                        {% trans "Give your opinion" %}
-                    </a>
-                    <div class="divider my-4"></div>
-                {% endif %}
-                <div>
-                    <h2 class="text-2xl text-start lg:text-lg font-bold mb-4 md:text-center">
-                        {% trans "Table of Contents" %}
-                    </h2>
-                    <div class="relative">
-                        <div class="hidden lg:block absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-base-100 to-transparent z-10 pointer-events-none">
+                {% with toc=page.table_of_contents %}
+                    {% if page.enable_voting %}
+                        <a href="#vote-card" class="btn btn-primary btn-block whitespace-nowrap">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 mr-2 shrink-0"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                                />
+                            </svg>
+                            <span class="whitespace-nowrap">{% trans "Give your opinion" %}</span>
+                        </a>
+                        {% if page.show_toc and toc %}
+                            <div class="divider my-4"></div>
+                        {% endif %}
+                    {% endif %}
+                    {% if page.show_toc and toc %}
+                        <div>
+                            <h2 class="text-2xl text-start lg:text-lg font-bold mb-4 md:text-center">
+                                {% trans "Table of Contents" %}
+                            </h2>
+                            <div class="relative">
+                                <div class="hidden lg:block absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-base-100 to-transparent z-10 pointer-events-none">
+                                </div>
+                                <div class="lg:max-h-[400px] lg:overflow-y-auto lg:pb-2 lg:pt-1">
+                                    {% include "publications/components/project_toc.html" with toc=toc %}
+                                </div>
+                                <div class="hidden lg:block absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-base-100 to-transparent z-10 pointer-events-none">
+                                </div>
+                            </div>
                         </div>
-                        <div class="lg:max-h-[400px] lg:overflow-y-auto lg:pb-2 lg:pt-1">
-                            {% include "publications/components/project_toc.html" with page=page %}
-                        </div>
-                        <div class="hidden lg:block absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-base-100 to-transparent z-10 pointer-events-none">
-                        </div>
-                    </div>
-                </div>
+                    {% endif %}
+                {% endwith %}
             </aside>
         </div>
     </article>

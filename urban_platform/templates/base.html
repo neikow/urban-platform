@@ -1,7 +1,7 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load i18n static wagtailcore_tags wagtailuserbar structured_data %}
 
 <!DOCTYPE html>
-<html lang="en" data-theme="light" class="scroll-smooth">
+<html lang="{{ request.LANGUAGE_CODE|default:'fr' }}" data-theme="light" class="scroll-smooth">
     <head>
         <meta charset="utf-8">
         <title>
@@ -37,10 +37,16 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
         {% block extra_css %}
         {% endblock %}
+        {% block extra_head %}
+            {% structured_data_script %}
+        {% endblock %}
     </head>
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
-        {% include "core/components/website_header.html" %}
+        {% block header %}
+            {% include "core/components/website_header.html" %}
+            <div class="pt-16"></div>
+        {% endblock header %}
         {% block content %}
         {% endblock %}
         {% include "core/components/website_footer.html" %}
