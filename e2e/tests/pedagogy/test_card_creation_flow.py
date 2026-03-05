@@ -37,13 +37,10 @@ def test_pedagogy_card_creation_flow(
     page.wait_for_timeout(500)
 
     # Try to find and click on any image in the chooser
-    images = page.locator("img[role='button']")
-    if images.count() > 0:
-        images.first.click()
-    else:
-        # If no images, close the modal
-        page.keyboard.press("Escape")
-        page.wait_for_timeout(300)
+    images = page.locator("#search-results a.image-choice")
+
+    assert images.count() > 0, "No images found in the chooser modal"
+    images.first.click()
 
     page.get_by_role("button", name="Ajouter un(e) Ressource").click()
     page.get_by_role("textbox", name="URL externe").fill(TEST_URL)
