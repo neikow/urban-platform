@@ -211,7 +211,7 @@ class TestAccountDeleteWithRelatedData:
         assert vote.user.pk == user_id
 
         # Verify the user is soft-deleted with anonymized data
-        deleted_user = User.objects.with_deleted().get(pk=user_id)
+        deleted_user = User.objects.with_deleted().get(pk=user.pk)
         assert deleted_user.is_deleted is True
         assert deleted_user.first_name == "Utilisateur"
         assert deleted_user.last_name == "Supprimé"
