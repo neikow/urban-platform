@@ -546,6 +546,11 @@ msgstr "Supprimer définitivement mon compte"
 msgid "Learn More"
 msgstr "En savoir plus"
 
+#: core/templates/core/blocks/image_block.html:15
+#, python-format
+msgid "Preview image: %(title)s"
+msgstr "Aperçu de l'image: %(title)s"
+
 #: core/templates/core/blocks/recent_publications_block.html:6
 msgid "Recent Publications"
 msgstr "Publications récentes"
@@ -558,13 +563,26 @@ msgstr "Voir tout"
 msgid "No recent publications found."
 msgstr "Aucune publication récente trouvée."
 
+#: core/templates/core/components/image_lightbox.html:3
+msgid "Image preview"
+msgstr "Aperçu de l'image"
+
+#: core/templates/core/components/image_lightbox.html:8
+#: core/templates/core/components/image_lightbox.html:20
+msgid "Close preview"
+msgstr "Fermer l'aperçu"
+
+#: core/templates/core/components/image_lightbox.html:20
+msgid "Close"
+msgstr "Fermer"
+
 #: core/templates/core/components/search/text_search_form.html:38
 msgid "Search"
 msgstr "Rechercher"
 
 #: core/templatetags/navigation_tags.py:63
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 #: core/wagtail_hooks.py:82 core/wagtail_hooks.py:96 core/wagtail_hooks.py:127
 msgid "Page d'accueil"

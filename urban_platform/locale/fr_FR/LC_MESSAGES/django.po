@@ -39,7 +39,8 @@ msgstr "Erreur interne du serveur"
 
 #: urban_platform/templates/500.html:20
 msgid "Sorry, something went wrong on our end. Please try again later."
-msgstr "Désolé, une erreur est survenue de notre côté. Veuillez réessayer plus tard."
+msgstr ""
+"Désolé, une erreur est survenue de notre côté. Veuillez réessayer plus tard."
 
 #: urban_platform/templates/500.html:27
 msgid "Reload the page"

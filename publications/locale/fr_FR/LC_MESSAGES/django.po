@@ -48,7 +48,7 @@ msgid "Lieu de l'événement"
 msgstr ""
 
 #: publications/models/event.py:43
-#: publications/templates/publications/event_page.html:153
+#: publications/templates/publications/event_page.html:163
 msgid "Address"
 msgstr "Adresse"
 
@@ -281,11 +281,11 @@ msgstr "Laisser vide pour pas de date de fin"
 #, fuzzy
 #| msgid "Page body content"
 msgid "Show table of contents"
-msgstr "Contenu de la page"
+msgstr "Afficher la table des matières"
 
 #: publications/models/project.py:67
 msgid "Display the table of contents in the sidebar"
-msgstr ""
+msgstr "Afficher la table des matières dans la barre latérale"
 
 #: publications/models/project.py:115
 #: publications/templates/publications/publication_index_page.html:39
@@ -549,11 +549,17 @@ msgstr "Rejoindre"
 msgid "Max Participants"
 msgstr "Participants max"
 
-#: publications/templates/publications/project_page.html:75
+#: publications/templates/publications/event_page.html:148
+#: publications/templates/publications/project_page.html:29
+#, python-format
+msgid "Preview image: %(title)s"
+msgstr "Image d'aperçu: %(title)s"
+
+#: publications/templates/publications/project_page.html:91
 msgid "Give your opinion"
 msgstr "Donner votre avis"
 
-#: publications/templates/publications/project_page.html:84
+#: publications/templates/publications/project_page.html:100
 #, fuzzy
 #| msgid "Page body content"
 msgid "Table of Contents"

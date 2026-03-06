@@ -51,7 +51,7 @@ msgstr "Contenu de la page"
 
 #: pedagogy/models/pedagogy_card.py:51
 msgid "Display the table of contents in the sidebar"
-msgstr ""
+msgstr "Afficher la table des matières dans la barre latérale"
 
 #: pedagogy/models/pedagogy_card.py:62
 msgid "Resource"
@@ -100,8 +100,12 @@ msgstr "Veuillez fournir soit une URL, soit un document, mais pas les deux."
 msgid "Please provide either a URL or a Document."
 msgstr "Veuillez fournir soit une URL, soit un document."
 
-#: pedagogy/templates/pedagogy/pedagogy_card_page.html:46
-#, fuzzy
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:28
+#, python-format
+msgid "Preview image: %(title)s"
+msgstr "Aperçu de l'image: %(title)s"
+
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:62
 #| msgid "Page body content"
 msgid "Table of Contents"
 msgstr "Contenu de la page"
