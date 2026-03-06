@@ -1,17 +1,28 @@
-{% load wagtailimages_tags custom_blocks %}
+{% load wagtailimages_tags custom_blocks i18n %}
 
 {% get_image_config value.size as cfg %}
 
+{% image value.image width-1920 as lightbox_img %}
+
 <div class="flex justify-center my-4 lg:my-8">
     <div class="{{ cfg.class }} w-full">
-        {% if value.size == "small" %}
-            {% image value.image width-400 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
-        {% elif value.size == "medium" %}
-            {% image value.image width-800 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
-        {% elif value.size == "large" %}
-            {% image value.image width-1200 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
-        {% else %}
-            {% image value.image width-1920 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
-        {% endif %}
+        <button
+            type="button"
+            class="cursor-zoom-in w-full block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            data-lightbox
+            data-lightbox-src="{{ lightbox_img.url }}"
+            data-lightbox-alt="{{ value.alt_text|default:value.image.title }}"
+            aria-label="{% blocktrans with title=value.alt_text|default:value.image.title %}Preview image: {{ title }}{% endblocktrans %}"
+        >
+            {% if value.size == "small" %}
+                {% image value.image width-400 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+            {% elif value.size == "medium" %}
+                {% image value.image width-800 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+            {% elif value.size == "large" %}
+                {% image value.image width-1200 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+            {% else %}
+                {% image value.image width-1920 alt=value.alt_text|default:value.image.title class="rounded-lg h-auto w-full" %}
+            {% endif %}
+        </button>
     </div>
 </div>

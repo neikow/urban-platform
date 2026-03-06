@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-05 10:18+0100\n"
+"POT-Creation-Date: 2026-03-05 10:59+0100\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -48,7 +48,7 @@ msgid "Lieu de l'événement"
 msgstr ""
 
 #: publications/models/event.py:43
-#: publications/templates/publications/event_page.html:153
+#: publications/templates/publications/event_page.html:163
 msgid "Address"
 msgstr "Adresse"
 
@@ -123,7 +123,7 @@ msgstr "Liens externes"
 #: publications/templates/publications/admin/vote_stats_detail.html:110
 #: publications/templates/publications/admin/vote_stats_detail.html:211
 #: publications/templates/publications/admin/vote_stats_detail.html:267
-#: publications/templates/publications/admin/vote_stats_detail.html:301
+#: publications/templates/publications/admin/vote_stats_detail.html:307
 #: publications/templates/publications/components/vote_form.html:80
 msgid "Unfavorable"
 msgstr "Défavorable"
@@ -131,7 +131,7 @@ msgstr "Défavorable"
 #: publications/models/form.py:8
 #: publications/templates/publications/admin/vote_stats_detail.html:191
 #: publications/templates/publications/admin/vote_stats_detail.html:260
-#: publications/templates/publications/admin/vote_stats_detail.html:301
+#: publications/templates/publications/admin/vote_stats_detail.html:307
 #: publications/templates/publications/components/vote_form.html:108
 msgid "Rather Unfavorable"
 msgstr "Plutôt défavorable"
@@ -139,7 +139,7 @@ msgstr "Plutôt défavorable"
 #: publications/models/form.py:9
 #: publications/templates/publications/admin/vote_stats_detail.html:171
 #: publications/templates/publications/admin/vote_stats_detail.html:253
-#: publications/templates/publications/admin/vote_stats_detail.html:301
+#: publications/templates/publications/admin/vote_stats_detail.html:307
 #: publications/templates/publications/components/vote_form.html:130
 msgid "Rather Favorable"
 msgstr "Plutôt favorable"
@@ -149,7 +149,7 @@ msgstr "Plutôt favorable"
 #: publications/templates/publications/admin/vote_stats_detail.html:95
 #: publications/templates/publications/admin/vote_stats_detail.html:151
 #: publications/templates/publications/admin/vote_stats_detail.html:246
-#: publications/templates/publications/admin/vote_stats_detail.html:301
+#: publications/templates/publications/admin/vote_stats_detail.html:307
 #: publications/templates/publications/components/vote_form.html:151
 msgid "Favorable"
 msgstr "Favorable"
@@ -281,11 +281,11 @@ msgstr "Laisser vide pour pas de date de fin"
 #, fuzzy
 #| msgid "Page body content"
 msgid "Show table of contents"
-msgstr "Contenu de la page"
+msgstr "Afficher la table des matières"
 
 #: publications/models/project.py:67
 msgid "Display the table of contents in the sidebar"
-msgstr ""
+msgstr "Afficher la table des matières dans la barre latérale"
 
 #: publications/models/project.py:115
 #: publications/templates/publications/publication_index_page.html:39
@@ -418,11 +418,15 @@ msgstr "Nombre"
 msgid "Comments"
 msgstr "Commentaires"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:275
+#: publications/templates/publications/admin/vote_stats_detail.html:273
+msgid "Deleted User"
+msgstr "Utilisateur supprimé"
+
+#: publications/templates/publications/admin/vote_stats_detail.html:281
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:289
+#: publications/templates/publications/admin/vote_stats_detail.html:295
 msgid "No votes yet"
 msgstr "Aucun vote pour l'instant"
 
@@ -551,11 +555,17 @@ msgstr "Rejoindre"
 msgid "Max Participants"
 msgstr "Participants max"
 
-#: publications/templates/publications/project_page.html:81
+#: publications/templates/publications/event_page.html:148
+#: publications/templates/publications/project_page.html:29
+#, python-format
+msgid "Preview image: %(title)s"
+msgstr "Image d'aperçu: %(title)s"
+
+#: publications/templates/publications/project_page.html:91
 msgid "Give your opinion"
 msgstr "Donner votre avis"
 
-#: publications/templates/publications/project_page.html:90
+#: publications/templates/publications/project_page.html:100
 #, fuzzy
 #| msgid "Page body content"
 msgid "Table of Contents"

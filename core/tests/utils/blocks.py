@@ -4,15 +4,11 @@ from typing import Any
 from core.tests.utils.faker_shortcuts import title, paragraph
 from core.tests.utils.factories import ImageFactory, DocumentFactory
 from core.blocks import (
-    DEPRECATED_BLOCK_TYPE_TEXT,
     BLOCK_TYPE_IMAGE,
-    DEPRECATED_BLOCK_TYPE_IMAGE_TEXT,
     BLOCK_TYPE_HERO,
     BLOCK_TYPE_CARDS,
-    DEPRECATED_BLOCK_TYPE_TESTIMONIAL,
     BLOCK_TYPE_RECENT_PUBLICATIONS,
     BLOCK_TYPE_FAQ,
-    DEPRECATED_BLOCK_TYPE_TEXT_CENTERED,
     BLOCK_TYPE_TESTIMONIAL_LIST,
     BLOCK_TYPE_TWO_COLUMN,
     BLOCK_TYPES_AVAILABLE_IN_TWO_COLUMNS,
@@ -27,18 +23,8 @@ from core.blocks import (
 )
 
 
-def deprecated_block_error(block_type: str) -> RuntimeError:
-    return RuntimeError(f"{block_type} is deprecated and should not be used in new tests.")
-
-
 def mock_block_value(block_type: str) -> Any:
-    if block_type == DEPRECATED_BLOCK_TYPE_TEXT:
-        raise deprecated_block_error(block_type)
-
-    elif block_type == DEPRECATED_BLOCK_TYPE_TEXT_CENTERED:
-        raise deprecated_block_error(block_type)
-
-    elif block_type == BLOCK_TYPE_IMAGE:
+    if block_type == BLOCK_TYPE_IMAGE:
         image = ImageFactory.create()
 
         return {
@@ -46,9 +32,6 @@ def mock_block_value(block_type: str) -> Any:
             "size": random.choice(ImageSize.values),
             "alt_text": image.title,
         }
-
-    elif block_type == DEPRECATED_BLOCK_TYPE_IMAGE_TEXT:
-        raise deprecated_block_error(block_type)
 
     elif block_type == BLOCK_TYPE_HERO:
         image = ImageFactory.create()
@@ -98,9 +81,6 @@ def mock_block_value(block_type: str) -> Any:
                 (right_content_type, mock_block_value(right_content_type)),
             ],
         }
-
-    elif block_type == DEPRECATED_BLOCK_TYPE_TESTIMONIAL:
-        raise deprecated_block_error(block_type)
 
     elif block_type == BLOCK_TYPE_TESTIMONIAL_LIST:
         return [

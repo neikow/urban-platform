@@ -1,4 +1,5 @@
 import pytest
+from django.utils.translation import gettext_lazy as _
 
 from core.models import User
 from publications.models import FormResponse, ProjectPage, PublicationIndexPage, VoteChoice
@@ -248,6 +249,52 @@ class TestVoteStatsDetailView:
         # Both the comment and email should be visible
         assert "This is a public comment" in content
         assert "public_voter@example.com" in content
+
+    def test_soft_deleted_user_vote_shows_deleted_user_label(
+        self, client, admin_user, project_without_votes
+    ):
+        """Test that votes from soft-deleted users show 'Utilisateur supprimé' in admin view."""
+        # Create a user who votes
+        deleted_voter = User.objects.create_user(
+            email="deleted_voter@example.com",
+            password="TestPass123",
+            first_name="ToBeDeleted",
+            last_name="User",
+        )
+
+        # Create non-anonymous vote with comment
+        FormResponse.objects.create(
+            user=deleted_voter,
+            project=project_without_votes,
+            choice=VoteChoice.FAVORABLE,
+            comment=str(_("This vote is from a user who will be deleted")),
+            anonymize=False,
+        )
+
+        # Soft delete the user
+        deleted_voter.soft_delete()
+
+        # Access admin stats detail page
+        client.force_login(admin_user)
+        response = client.get(f"/admin/vote-statistics/{project_without_votes.pk}/")
+
+        assert response.status_code == 200
+        content = response.content.decode()
+
+        # The comment should be visible
+        assert "This vote is from a user who will be deleted" in content
+
+        # The original email should NOT be visible (it was anonymized)
+        assert "deleted_voter@example.com" not in content
+
+        # "Utilisateur supprimé" should be displayed
+        assert str(_("Deleted User")) in content
+
+        # The user should be marked as deleted
+        deleted_voter_from_db = User.objects.with_deleted().get(pk=deleted_voter.pk)
+        assert deleted_voter_from_db.is_deleted is True
+        assert deleted_voter_from_db.first_name == "Utilisateur"
+        assert deleted_voter_from_db.last_name == "Supprimé"
 
 
 @pytest.fixture

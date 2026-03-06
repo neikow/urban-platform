@@ -18,8 +18,18 @@
                     {% include "publications/components/project_external_links.html" with page=page %}
                 </div>
                 {% if page.hero_image %}
+                    {% image page.hero_image width-1200 as hero_full %}
                     <figure class="w-full">
-                        {% image page.hero_image fill-600x400 alt=page.title class="w-full h-56 lg:h-72 object-cover rounded-lg" %}
+                        <button
+                            type="button"
+                            class="cursor-zoom-in w-full block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                            data-lightbox
+                            data-lightbox-src="{{ hero_full.url }}"
+                            data-lightbox-alt="{{ page.title }}"
+                            aria-label="{% blocktrans with title=page.title %}Preview image: {{ title }}{% endblocktrans %}"
+                        >
+                            {% image page.hero_image width-600 alt=page.title class="w-full h-auto object-cover rounded-lg" %}
+                        </button>
                     </figure>
                 {% endif %}
             </div>

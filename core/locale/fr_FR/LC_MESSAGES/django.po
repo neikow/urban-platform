@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-05 10:18+0100\n"
+"POT-Creation-Date: 2026-03-05 10:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -316,7 +316,7 @@ msgstr "Envoyé"
 msgid "Failed"
 msgstr "Échec"
 
-#: core/models/email_event.py:27 core/models/user.py:102
+#: core/models/email_event.py:27 core/models/user.py:120
 msgid "User"
 msgstr "Utilisateur"
 
@@ -393,100 +393,163 @@ msgstr "Membre d'association"
 msgid "Admin"
 msgstr "Administrateur"
 
-#: core/models/user.py:22
+#: core/models/user.py:34
 msgid "The Email field must be set"
 msgstr "Le champ email doit être renseigné"
 
-#: core/models/user.py:38
+#: core/models/user.py:50
 msgid "Superuser must have is_staff=True."
 msgstr "Le superutilisateur doit avoir is_staff=True."
 
-#: core/models/user.py:40
+#: core/models/user.py:52
 msgid "Superuser must have is_superuser=True."
 msgstr "Le superutilisateur doit avoir is_superuser=True."
 
-#: core/models/user.py:46
+#: core/models/user.py:58
 msgid "Email Address"
 msgstr "Adresse e-mail"
 
-#: core/models/user.py:47
+#: core/models/user.py:59
 msgid "UUID"
 msgstr "UUID"
 
-#: core/models/user.py:49
+#: core/models/user.py:61
 msgid "First Name"
 msgstr "Prénom"
 
-#: core/models/user.py:50
+#: core/models/user.py:62
 msgid "Last Name"
 msgstr "Nom de famille"
 
-#: core/models/user.py:58
+#: core/models/user.py:70
 #, fuzzy
 #| msgid "City Neighborhood"
 msgid "Neighborhood"
 msgstr "Quartier"
 
-#: core/models/user.py:60
+#: core/models/user.py:72
 msgid "Postal Code"
 msgstr "Code postal"
 
-#: core/models/user.py:63
+#: core/models/user.py:75
 msgid "Email Verified"
 msgstr "Email vérifié"
 
-#: core/models/user.py:65
+#: core/models/user.py:77
 msgid "Is the user's email address verified?"
 msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:68
+#: core/models/user.py:80
 msgid "Role"
 msgstr "Rôle"
 
-#: core/models/user.py:74
+#: core/models/user.py:86
 msgid "Phone Number"
 msgstr "Numéro de téléphone"
 
-#: core/models/user.py:76
+#: core/models/user.py:88
 msgid "Newsletter Subscription"
 msgstr "Inscription à la newsletter"
 
-#: core/models/user.py:78
+#: core/models/user.py:90
 msgid "Does the user want to receive the newsletter?"
 msgstr "L'utilisateur souhaite-t-il recevoir la newsletter ?"
 
-#: core/models/user.py:81
+#: core/models/user.py:93
 msgid "Date Joined"
 msgstr "Date d'inscription"
 
-#: core/models/user.py:82
+#: core/models/user.py:94
 msgid "Last Updated"
 msgstr "Dernière mise à jour"
 
-#: core/models/user.py:86
+#: core/models/user.py:96
+#, fuzzy
+#| msgid "Created At"
+msgid "Deleted At"
+msgstr "Créé à"
+
+#: core/models/user.py:99
+msgid "When the user account was soft-deleted. NULL if not deleted."
+msgstr ""
+
+#: core/models/user.py:104
 msgid "Active"
 msgstr "Actif"
 
-#: core/models/user.py:88
+#: core/models/user.py:106
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:91
+#: core/models/user.py:109
 msgid "Staff Status"
 msgstr "Statut du personnel"
 
-#: core/models/user.py:93
+#: core/models/user.py:111
 msgid "Designates whether the user can log into the admin site."
 msgstr ""
 "Indique si l'utilisateur peut se connecter à l'interface d'administration."
 
-#: core/models/user.py:103
+#: core/models/user.py:121
 msgid "Users"
 msgstr "Utilisateurs"
+
+#: core/templates/core/account_delete.html:4
+#: core/templates/core/account_delete.html:13
+msgid "Delete my account"
+msgstr "Supprimer mon compte"
+
+#: core/templates/core/account_delete.html:26
+msgid "Back"
+msgstr "Retour"
+
+#: core/templates/core/account_delete.html:44
+msgid "Warning: Irreversible action"
+msgstr "Attention : Action irréversible"
+
+#: core/templates/core/account_delete.html:46
+msgid ""
+"Deleting your account will result in the permanent loss of all your data."
+msgstr ""
+"La suppression de votre compte entraînera la perte définitive de toutes vos "
+"données."
+
+#: core/templates/core/account_delete.html:52
+msgid "What happens when you delete your account?"
+msgstr "Que se passe-t-il lorsque vous supprimez votre compte ?"
+
+#: core/templates/core/account_delete.html:54
+msgid "All your personal information will be permanently deleted"
+msgstr "Toutes vos informations personnelles seront définitivement supprimées"
+
+#: core/templates/core/account_delete.html:55
+msgid "Your participations and votes will be anonymized"
+msgstr "Vos participations et votes seront anonymisés"
+
+#: core/templates/core/account_delete.html:56
+msgid "You will no longer be able to access your account"
+msgstr "Vous ne pourrez plus accéder à votre compte"
+
+#: core/templates/core/account_delete.html:57
+msgid "This action is irreversible and cannot be undone"
+msgstr "Cette action est irréversible et ne peut pas être annulée"
+
+#: core/templates/core/account_delete.html:109
+msgid "Cancel"
+msgstr "Annuler"
+
+#: core/templates/core/account_delete.html:147
+msgid "Permanently delete my account"
+msgstr "Supprimer définitivement mon compte"
 
 #: core/templates/core/blocks/card_list_block.html:18
 msgid "Learn More"
 msgstr "En savoir plus"
+
+#: core/templates/core/blocks/image_block.html:15
+#, python-format
+msgid "Preview image: %(title)s"
+msgstr "Aperçu de l'image: %(title)s"
 
 #: core/templates/core/blocks/recent_publications_block.html:6
 msgid "Recent Publications"
@@ -500,13 +563,26 @@ msgstr "Voir tout"
 msgid "No recent publications found."
 msgstr "Aucune publication récente trouvée."
 
+#: core/templates/core/components/image_lightbox.html:3
+msgid "Image preview"
+msgstr "Aperçu de l'image"
+
+#: core/templates/core/components/image_lightbox.html:8
+#: core/templates/core/components/image_lightbox.html:20
+msgid "Close preview"
+msgstr "Fermer l'aperçu"
+
+#: core/templates/core/components/image_lightbox.html:20
+msgid "Close"
+msgstr "Fermer"
+
 #: core/templates/core/components/search/text_search_form.html:38
 msgid "Search"
 msgstr "Rechercher"
 
 #: core/templatetags/navigation_tags.py:63
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 #: core/wagtail_hooks.py:82 core/wagtail_hooks.py:96 core/wagtail_hooks.py:127
 msgid "Page d'accueil"
