@@ -559,7 +559,7 @@ msgstr "Publications récentes"
 msgid "View All"
 msgstr "Voir tout"
 
-#: core/templates/core/blocks/recent_publications_block.html:41
+#: core/templates/core/blocks/recent_publications_block.html:18
 msgid "No recent publications found."
 msgstr "Aucune publication récente trouvée."
 

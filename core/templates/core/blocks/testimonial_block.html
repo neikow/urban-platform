@@ -9,11 +9,11 @@
                 </div>
             </div>
         {% endif %}
-        <div class="chat-header opacity-50 mb-1">
+        <div class="chat-header text-sm opacity-50 mb-1 flex flex-col">
             {{ self.author_name }}
             {% if self.author_title %}<span class="text-xs">{{ self.author_title }}</span>{% endif %}
         </div>
-        <div class="chat-bubble bg-base-200 text-base-content text-md lg:text-lg italic">
+        <div class="chat-bubble bg-base-200 text-base-content text-sm sm:text-base lg:text-lg italic leading-relaxed">
             "{{ self.quote }}"
         </div>
     </div>

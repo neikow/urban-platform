@@ -17,8 +17,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: publications/models/event.py:17 publications/models/event.py:91
+#: publications/templates/publications/components/publication_card.html:52
 #: publications/templates/publications/event_page.html:15
-#: publications/templates/publications/publication_index_page.html:122
 msgid "Event"
 msgstr "Événement"
 
@@ -169,7 +169,7 @@ msgstr "Utilisateur"
 #: publications/models/form.py:41 publications/models/project.py:38
 #: publications/models/project.py:114
 #: publications/templates/publications/admin/vote_stats.html:14
-#: publications/templates/publications/publication_index_page.html:127
+#: publications/templates/publications/components/publication_card.html:57
 msgid "Project"
 msgstr "Projet"
 
@@ -430,6 +430,17 @@ msgstr "Anonyme"
 msgid "No votes yet"
 msgstr "Aucun vote pour l'instant"
 
+#: publications/templates/publications/components/publication_card.html:54
+#: publications/templates/publications/event_page.html:17
+msgid "Upcoming"
+msgstr "À venir"
+
+#: publications/templates/publications/components/publication_card.html:74
+#, fuzzy
+#| msgid "View project"
+msgid "View more"
+msgstr "Voir la suite"
+
 #: publications/templates/publications/components/vote_form.html:9
 msgid "Please select an option"
 msgstr "Veuillez sélectionner une option"
@@ -520,11 +531,6 @@ msgstr "Retirer mon vote"
 msgid "Voting is closed for this project"
 msgstr "Le vote est fermé pour ce projet"
 
-#: publications/templates/publications/event_page.html:17
-#: publications/templates/publications/publication_index_page.html:124
-msgid "Upcoming"
-msgstr "À venir"
-
 #: publications/templates/publications/event_page.html:19
 msgid "Past"
 msgstr "Passé"
@@ -589,11 +595,7 @@ msgstr "Tout"
 msgid "All categories"
 msgstr "Toutes les catégories"
 
-#: publications/templates/publications/publication_index_page.html:144
-msgid "View"
-msgstr "Voir"
-
-#: publications/templates/publications/publication_index_page.html:152
+#: publications/templates/publications/publication_index_page.html:80
 msgid "No publications found"
 msgstr "Aucune publication trouvée"
 
@@ -634,6 +636,9 @@ msgstr "Aucun vote à supprimer"
 #: publications/views/vote.py:125
 msgid "Vote removed successfully"
 msgstr "Vote supprimé avec succès"
+
+#~ msgid "View"
+#~ msgstr "Voir"
 
 #~ msgid "URL is required for external links."
 #~ msgstr "L'URL est obligatoire pour les liens externes."
