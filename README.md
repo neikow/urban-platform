@@ -19,7 +19,7 @@
 | core/models/city\_neighborhood.py                              |       15 |        2 |        0 |        0 |     86.67% |    18, 22 |
 | core/models/email\_event.py                                    |       27 |        0 |        0 |        0 |    100.00% |           |
 | core/models/neighborhood\_association.py                       |       13 |        1 |        0 |        0 |     92.31% |        26 |
-| core/models/user.py                                            |       57 |        4 |        6 |        3 |     88.89% |22, 38, 40, 114 |
+| core/models/user.py                                            |       79 |        4 |        6 |        3 |     91.76% |34, 50, 52, 132 |
 | core/sitemaps.py                                               |       62 |       16 |        4 |        0 |     69.70% |29-31, 34, 37, 45, 53-63, 71, 79, 87, 95, 103 |
 | core/templatetags/\_\_init\_\_.py                              |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/templatetags/custom\_blocks.py                            |       18 |       11 |        8 |        0 |     26.92% |10-19, 24-39 |
@@ -29,6 +29,7 @@
 | core/toc.py                                                    |       41 |        1 |       22 |        1 |     96.83% |        52 |
 | core/utils.py                                                  |        6 |        0 |        2 |        0 |    100.00% |           |
 | core/views/\_\_init\_\_.py                                     |        0 |        0 |        0 |        0 |    100.00% |           |
+| core/views/account\_delete.py                                  |       39 |        1 |        4 |        1 |     95.35% |        38 |
 | core/views/auth\_mixins.py                                     |       29 |        0 |       10 |        0 |    100.00% |           |
 | core/views/email\_verify.py                                    |       24 |        0 |        4 |        0 |    100.00% |           |
 | core/views/login.py                                            |       34 |        1 |       10 |        1 |     95.45% |        57 |
@@ -89,7 +90,7 @@
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **2271** |  **471** |  **394** |   **57** | **75.01%** |           |
+| **TOTAL**                                                      | **2332** |  **472** |  **398** |   **58** | **75.53%** |           |
 
 
 ## Setup coverage badge
