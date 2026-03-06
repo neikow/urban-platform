@@ -97,52 +97,51 @@
 
 @layer components {
     .page-content {
-        h2 {
+        h2:not(.no-page-style, .no-page-style *) {
             @apply mt-8 mb-4 text-2xl font-bold scroll-mt-20;
         }
 
-        h3 {
+        h3:not(.no-page-style, .no-page-style *) {
             @apply mt-6 mb-3 text-xl font-semibold scroll-mt-20;
         }
 
-        h4 {
+        h4:not(.no-page-style, .no-page-style *) {
             @apply mt-4 mb-2 text-lg font-semibold scroll-mt-20;
         }
 
-        p {
+        p:not(.no-page-style, .no-page-style *) {
             @apply mb-4 leading-7;
         }
 
-        ul {
+        ul:not(.no-page-style, .no-page-style *) {
             @apply mb-4 pl-6 list-disc;
         }
 
-        ol {
+        ol:not(.no-page-style, .no-page-style *) {
             @apply mb-4 pl-6 list-decimal;
         }
 
-        ol ol {
+        ol ol:not(.no-page-style, .no-page-style *) {
             @apply list-[lower-alpha];
         }
 
-        ol ol ol {
+        ol ol ol:not(.no-page-style, .no-page-style *) {
             @apply list-[lower-roman];
         }
 
-        ol ol ol ol {
+        ol ol ol ol:not(.no-page-style, .no-page-style *) {
             @apply list-decimal;
         }
 
-        ol ol ol ol ol {
+        ol ol ol ol ol:not(.no-page-style, .no-page-style *) {
             @apply list-[lower-alpha];
         }
 
-        li {
+        li:not(.no-page-style, .no-page-style *) {
             @apply mb-2;
-
         }
 
-        a {
+        a:not(.no-page-style, .no-page-style *) {
             @apply link text-primary hover:text-secondary transition-colors duration-200;
 
             &:not([href^="/"]):not([href^="#"])::after {
@@ -156,7 +155,7 @@
             }
         }
 
-        blockquote {
+        blockquote:not(.no-page-style, .no-page-style *) {
             @apply border-l-4 border-primary pl-4 italic my-8;
         }
     }
