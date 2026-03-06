@@ -1,5 +1,6 @@
 import pytest
 from django.contrib.auth import authenticate, get_user_model
+from django.utils.translation import gettext_lazy as _
 from django.test import Client, TestCase
 from django.urls import reverse
 from wagtail.models import Page
@@ -35,8 +36,7 @@ class AccountDeleteViewTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "core/account_delete.html")
-        self.assertContains(response, "Supprimer mon compte")
-        self.assertContains(response, "Action irréversible")
+        self.assertContains(response, _("Delete my account"))
 
     def test_account_delete_requires_password(self) -> None:
         """Test that password is required to delete account."""

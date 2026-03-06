@@ -267,7 +267,7 @@ class TestVoteStatsDetailView:
             user=deleted_voter,
             project=project_without_votes,
             choice=VoteChoice.FAVORABLE,
-            comment="This vote is from a user who will be deleted",
+            comment=str(_("This vote is from a user who will be deleted")),
             anonymize=False,
         )
 
@@ -288,7 +288,7 @@ class TestVoteStatsDetailView:
         assert "deleted_voter@example.com" not in content
 
         # "Utilisateur supprimé" should be displayed
-        assert "Utilisateur supprimé" in content
+        assert str(_("Deleted User")) in content
 
         # The user should be marked as deleted
         deleted_voter_from_db = User.objects.with_deleted().get(pk=deleted_voter.pk)
