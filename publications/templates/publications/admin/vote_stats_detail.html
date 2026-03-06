@@ -268,7 +268,13 @@
                                             </span>
                                         {% endif %}
                                         {% if not vote.anonymize %}
-                                            <span class="w-text-text-meta w-text-sm">{{ vote.user.email }}</span>
+                                            {% if vote.user.is_deleted %}
+                                                <span class="w-text-text-meta w-text-sm w-italic">
+                                                    {% trans "Deleted User" %}
+                                                </span>
+                                            {% else %}
+                                                <span class="w-text-text-meta w-text-sm">{{ vote.user.email }}</span>
+                                            {% endif %}
                                         {% else %}
                                             <span
                                                 class="w-text-text-meta w-text-sm w-italic"

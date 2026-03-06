@@ -17,6 +17,18 @@ class UserRole(models.TextChoices):
 
 
 class UserManager(BaseUserManager["User"]):
+    def get_queryset(self) -> models.QuerySet["User"]:
+        """Override to exclude soft-deleted users by default."""
+        return super().get_queryset().filter(deleted_at__isnull=True)
+
+    def with_deleted(self) -> models.QuerySet["User"]:
+        """Return all users including soft-deleted ones."""
+        return super().get_queryset()
+
+    def deleted_only(self) -> models.QuerySet["User"]:
+        """Return only soft-deleted users."""
+        return super().get_queryset().filter(deleted_at__isnull=False)
+
     def create_user(self, email: str, password: str | None = None, **extra_fields: Any) -> "User":
         if not email:
             raise ValueError(_("The Email field must be set"))
@@ -80,6 +92,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     created_at = models.DateTimeField(_("Date Joined"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Last Updated"), auto_now=True)
+    deleted_at = models.DateTimeField(
+        _("Deleted At"),
+        null=True,
+        blank=True,
+        help_text=_("When the user account was soft-deleted. NULL if not deleted."),
+    )
 
     # Django permissions
     is_active = models.BooleanField(
@@ -112,3 +130,24 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self) -> str:
         return self.first_name or self.email.split("@")[0]
+
+    @property
+    def is_deleted(self) -> bool:
+        return self.deleted_at is not None
+
+    def soft_delete(self) -> None:
+        from django.utils import timezone
+
+        self.deleted_at = timezone.now()
+        self.is_active = False
+        self.set_unusable_password()
+
+        # Anonymize personal data
+        self.first_name = "Utilisateur"
+        self.last_name = "Supprimé"
+        self.email = f"deleted.{self.uuid}@deleted.local"
+        self.phone_number = ""
+        self.newsletter_subscription = False
+        self.is_verified = False
+
+        self.save()
