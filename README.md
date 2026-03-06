@@ -82,7 +82,7 @@
 | publications/models/form.py                                    |       26 |        1 |        0 |        0 |     96.15% |        70 |
 | publications/models/project.py                                 |       62 |        3 |        8 |        1 |     94.29% |38, 42, 98 |
 | publications/models/publication.py                             |       88 |       51 |       36 |        0 |     31.45% |36-40, 44-49, 53-58, 62-67, 70-82, 86-91, 95-106 |
-| publications/models/publication\_index.py                      |       39 |        1 |        0 |        0 |     97.44% |        26 |
+| publications/models/publication\_index.py                      |       45 |        1 |        0 |        0 |     97.78% |        35 |
 | publications/services.py                                       |       64 |        1 |       14 |        1 |     97.44% |       106 |
 | publications/views/\_\_init\_\_.py                             |        0 |        0 |        0 |        0 |    100.00% |           |
 | publications/views/vote.py                                     |       70 |       12 |       20 |        5 |     81.11% |26-27, 46-47, 92-93, 99, 105, 117, 134-135, 141, 149->164 |
@@ -90,7 +90,7 @@
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **2327** |  **472** |  **398** |   **58** | **75.49%** |           |
+| **TOTAL**                                                      | **2333** |  **472** |  **398** |   **58** | **75.54%** |           |
 
 
 ## Setup coverage badge
