@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from typing import Any
 
 from django.db import models
@@ -11,6 +12,14 @@ from wagtail.models import Page
 from wagtail.search import index
 
 from publications.services import PublicationFilters, get_filtered_publications
+
+
+@dataclass
+class CategoryFilter:
+    label: StrOrPromise
+    value: str
+    is_selected: bool
+    url: str
 
 
 class PublicationIndexPage(Page):
@@ -63,7 +72,21 @@ class PublicationIndexPage(Page):
 
         context = super().get_context(request, *args, **kwargs)
         context["publications"] = self.get_publications(request)
-        context["categories"] = ProjectCategory.choices
+
+        searched_value = request.GET.get("search", "")
+        search = ("&search=" + searched_value) if searched_value else ""
+
+        categories = [
+            CategoryFilter(
+                label=label,
+                value=value,
+                is_selected=(value == request.GET.get("category", "")),
+                url=f"?type=projects&category={value}{search}",
+            )
+            for value, label in ProjectCategory.choices
+        ]
+
+        context["categories"] = categories
         context["selected_category"] = request.GET.get("category", "")
         context["selected_type"] = request.GET.get("type", "all")
         return context

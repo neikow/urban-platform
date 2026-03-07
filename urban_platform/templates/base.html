@@ -51,7 +51,8 @@
         {% block content %}
         {% endblock %}
         {% include "core/components/website_footer.html" %}
-        <script type="text/javascript" src="{% static 'js/urban_platform.js' %}"></script>
+        {% include "core/components/image_lightbox.html" %}
+        <script type="text/javascript" src="{% static 'js/lightbox.js' %}"></script>
         {% block extra_js %}
         {% endblock %}
     </body>

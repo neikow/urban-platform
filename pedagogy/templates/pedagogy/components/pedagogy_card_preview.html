@@ -1,0 +1,21 @@
+{% load wagtailimages_tags %}
+
+<a
+    href="{{ pedagogy_entry.url }}"
+    class="card bg-base-100 w-full shadow-sm focus:shadow-lg hover:shadow-md transition-shadow duration-100"
+>
+    <figure>
+        {% image pedagogy_entry.hero_image fill-400x250 alt=pedagogy_entry.title class="w-full h-48 object-cover" %}
+    </figure>
+    <div class="card-body">
+        <h3 class="card-title text-lg">
+            {{ pedagogy_entry.title }}
+        </h3>
+        <p class="text-sm leading-relaxed text-base-content/70">
+            {{ pedagogy_entry.description }}
+        </p>
+        <div class="card-actions justify-end mt-4">
+            {% include "core/components/io/learn_more_button.html" %}
+        </div>
+    </div>
+</a>

@@ -1,0 +1,9 @@
+<header class="my-6 md:my-8 lg:my-16 container mx-auto">
+    {% include "components/navigation/breadcrumbs.html" with page=page %}
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl mb-4 font-extrabold">
+        {{ page.title }}
+    </h1>
+    <p class="text-sm sm:text-base leading-relaxed text-base-content/80">
+        {{ page.page_introduction }}
+    </p>
+</header>

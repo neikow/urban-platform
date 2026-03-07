@@ -325,6 +325,19 @@ def create_test_users() -> None:
     else:
         print(f"  ✓ Admin user exists: {admin_email}")
 
+    # Account deletion test user
+    deletion_email = "e2e.delete.test@email.com"
+    # Always recreate this user fresh for deletion tests
+    User.objects.with_deleted().filter(email=deletion_email).delete()
+    User.objects.create_user(
+        email=deletion_email,
+        password="DeleteTest123",  # nosec
+        first_name="Delete",
+        last_name="Test",
+        postal_code="13001",
+    )
+    print(f"  ✓ Created deletion test user: {deletion_email}")
+
     print("✅ Test users ready!")
 
 

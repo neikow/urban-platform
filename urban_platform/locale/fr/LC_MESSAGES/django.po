@@ -57,7 +57,8 @@ msgstr "Erreur interne du serveur"
 #, fuzzy
 #| msgid "Sorry, there seems to be an error. Please try again soon."
 msgid "Sorry, something went wrong on our end. Please try again later."
-msgstr "Désolé, il semble y avoir une erreur. Veuillez réessayer bientôt."
+msgstr ""
+"Désolé, une erreur est survenue de notre côté. Veuillez réessayer plus tard."
 
 #: urban_platform/templates/500.html:25
 msgid "Reload the page"
