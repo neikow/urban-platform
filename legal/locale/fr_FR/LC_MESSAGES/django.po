@@ -1,0 +1,138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-07 09:51+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: legal/forms.py:6
+msgid "I agree to abide by the Code of Conduct"
+msgstr ""
+
+#: legal/models/code_of_conduct.py:25 legal/models/cookies_policy.py:25
+#: legal/models/legal_index.py:20 legal/models/privacy_policy.py:25
+#: legal/models/terms_of_service.py:25
+msgid "For search engines"
+msgstr ""
+
+#: legal/models/code_of_conduct.py:34
+msgid "Code of conduct body content"
+msgstr ""
+
+#: legal/models/code_of_conduct.py:36
+msgid ""
+"This content should not change often as the user is prompted to accept it "
+"whenever it changes."
+msgstr ""
+
+#: legal/models/code_of_conduct.py:41
+msgid "Code of Conduct Page"
+msgstr ""
+
+#: legal/models/code_of_conduct.py:42
+msgid "Code of Conduct Pages"
+msgstr ""
+
+#: legal/models/code_of_conduct_consent.py:11
+msgid "User"
+msgstr ""
+
+#: legal/models/code_of_conduct_consent.py:17
+msgid "Policy Version"
+msgstr ""
+
+#: legal/models/code_of_conduct_consent.py:21
+msgid "Consented at"
+msgstr ""
+
+#: legal/models/code_of_conduct_consent.py:26
+msgid "Consent IP Address"
+msgstr ""
+
+#: legal/models/code_of_conduct_consent.py:30
+msgid "Code of Conduct Consent"
+msgstr ""
+
+#: legal/models/code_of_conduct_consent.py:31
+msgid "Code of Conduct Consents"
+msgstr ""
+
+#: legal/models/cookies_policy.py:34
+msgid "Cookies policy body content"
+msgstr ""
+
+#: legal/models/cookies_policy.py:38
+msgid "Cookies Policy Page"
+msgstr ""
+
+#: legal/models/cookies_policy.py:39
+msgid "Cookies Policy Pages"
+msgstr ""
+
+#: legal/models/legal_index.py:27
+msgid "Legal Index Page"
+msgstr ""
+
+#: legal/models/legal_index.py:28
+msgid "Legal Index Pages"
+msgstr ""
+
+#: legal/models/privacy_policy.py:34
+msgid "Privacy policy body content"
+msgstr ""
+
+#: legal/models/privacy_policy.py:38
+msgid "Privacy Policy Page"
+msgstr ""
+
+#: legal/models/privacy_policy.py:39
+msgid "Privacy Policy Pages"
+msgstr ""
+
+#: legal/models/terms_of_service.py:34
+msgid "Terms of service body content"
+msgstr ""
+
+#: legal/models/terms_of_service.py:38
+msgid "Terms of Service Page"
+msgstr ""
+
+#: legal/models/terms_of_service.py:39
+msgid "Terms of Service Pages"
+msgstr ""
+
+#: legal/templates/legal/code_of_conduct_consent.html:4
+msgid "Code of conduct"
+msgstr ""
+
+#: legal/templates/legal/code_of_conduct_consent.html:10
+msgid "Signing the code of conduct"
+msgstr ""
+
+#: legal/templates/legal/code_of_conduct_consent.html:31
+msgid "I have read and accept the code of conduct"
+msgstr ""
+
+#: legal/templates/legal/code_of_conduct_consent.html:34
+msgid "Please read the entire charter before accepting"
+msgstr ""
+
+#: legal/templates/legal/code_of_conduct_consent.html:43
+msgid "Accept and continue"
+msgstr ""
+
+#: legal/templates/legal/legal_index_page.html:22
+msgid "No content available at the moment."
+msgstr ""
