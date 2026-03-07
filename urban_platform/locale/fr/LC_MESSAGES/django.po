@@ -3,16 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-07 09:51+0100\n"
+"POT-Creation-Date: 2026-03-03 16:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,23 +19,23 @@ msgstr ""
 #: search/templates/search/search.html:9 search/templates/search/search.html:13
 #: search/templates/search/search.html:17
 msgid "Search"
-msgstr ""
+msgstr "Rechercher"
 
 #: search/templates/search/search.html:35
 msgid "Previous"
-msgstr ""
+msgstr "Précédent"
 
 #: search/templates/search/search.html:40
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 #: search/templates/search/search.html:43
 msgid "No results found"
-msgstr ""
+msgstr "Aucun résultat trouvé"
 
 #: urban_platform/templates/404.html:4 urban_platform/templates/404.html:13
 msgid "Page not found"
-msgstr ""
+msgstr "Page non trouvée"
 
 #: urban_platform/templates/404.html:16
 msgid "Sorry, the page you are looking for does not exist or has been moved."
@@ -52,12 +51,21 @@ msgstr ""
 
 #: urban_platform/templates/500.html:7 urban_platform/templates/500.html:15
 msgid "Internal server error"
-msgstr ""
+msgstr "Erreur interne du serveur"
 
 #: urban_platform/templates/500.html:18
+#, fuzzy
+#| msgid "Sorry, there seems to be an error. Please try again soon."
 msgid "Sorry, something went wrong on our end. Please try again later."
 msgstr ""
+"Désolé, une erreur est survenue de notre côté. Veuillez réessayer plus tard."
 
 #: urban_platform/templates/500.html:25
 msgid "Reload the page"
 msgstr ""
+
+#~ msgid "Sorry, this page could not be found."
+#~ msgstr "Désolé, cette page n'a pas pu être trouvée."
+
+#~ msgid "No table of contents available"
+#~ msgstr "La table des matières est vide"

@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% if page.has_resource %}
     <div class="flex flex-col items-center gap-4 {{ class|default:"" }}">
         {% for resource in page.resources.all %}
@@ -7,16 +9,16 @@
                     class="btn btn-secondary w-min text-nowrap link-external"
                     target="_blank"
                     rel="noopener noreferrer"
-                >Accéder à la source</a>
+                >{% trans "Access the resource" %}</a>
             {% elif resource.document %}
                 <a
                     href="{{ resource.document.url }}"
                     class="btn btn-secondary w-min text-nowrap link-document"
                     target="_blank"
                     rel="noopener noreferrer"
-                >Télécharger la ressource</a>
+                >{% trans "Download the resource" %}</a>
             {% else %}
-                Type de ressource inconnu.
+                {% trans "Unknown resource type." %}
             {% endif %}
         {% endfor %}
     </div>

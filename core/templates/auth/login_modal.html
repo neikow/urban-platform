@@ -1,4 +1,4 @@
-{% load static forms %}
+{% load static forms i18n %}
 
 {% login_form as form %}
 
@@ -7,7 +7,7 @@
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
-        <h3 class="font-bold text-lg mb-4">Se connecter</h3>
+        <h3 class="font-bold text-lg mb-4">{% trans "Log in" %}</h3>
 
         <form id="login-form" method="post" action="{% url 'login' %}" class="space-y-4">
             {% csrf_token %}
@@ -41,27 +41,27 @@
                     class="text-sm link link-primary"
                     onclick="login_modal.close()"
                 >
-                    Mot de passe oublié ?
+                    {% trans "Forgot password?" %}
                 </a>
             </div>
 
             <div class="modal-action">
-                <button type="submit" class="btn btn-primary">Se connecter</button>
-                <button type="button" onclick="login_modal.close()" class="btn">Annuler</button>
+                <button type="submit" class="btn btn-primary">{% trans "Log in" %}</button>
+                <button type="button" onclick="login_modal.close()" class="btn">{% trans "Cancel" %}</button>
             </div>
         </form>
 
-        <div class="divider">OU</div>
+        <div class="divider">{% trans "OR" %}</div>
 
         <div class="text-center">
             <p class="text-sm">
-                Vous n'avez pas de compte ?
+                {% trans "Don't have an account?" %}
                 <a
                     href="{% url 'register' %}?next={{ request.path|urlencode }}"
                     class="link link-primary"
                     onclick="login_modal.close()"
                 >
-                    S'inscrire
+                    {% trans "Sign up" %}
                 </a>
             </p>
         </div>

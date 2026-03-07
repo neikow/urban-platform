@@ -2,7 +2,6 @@ from datetime import timedelta
 from unittest.mock import patch, MagicMock
 
 import pytest
-from django.contrib.auth import get_user_model
 from django.test import override_settings
 from django.utils import timezone
 
@@ -13,11 +12,12 @@ from core.emails.tasks import (
 )
 from core.models import EmailEvent, EmailEventStatus, EmailEventType
 
-User = get_user_model()
-
 
 @pytest.fixture
 def user(db):
+    from django.contrib.auth import get_user_model
+
+    User = get_user_model()
     return User.objects.create_user(
         email="task_test@example.com",
         password="testpass123",

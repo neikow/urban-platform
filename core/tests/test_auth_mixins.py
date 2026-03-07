@@ -1,6 +1,5 @@
 import pytest
 from django import forms
-from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 import json
 
@@ -9,8 +8,6 @@ from core.views.auth_mixins import (
     EmailValidationMixin,
     JsonResponseMixin,
 )
-
-User = get_user_model()
 
 
 class TestPasswordValidationMixin:
@@ -58,6 +55,9 @@ class TestEmailValidationMixin:
         assert result == email
 
     def test_validate_email_unique_duplicate_email(self):
+        from django.contrib.auth import get_user_model
+
+        User = get_user_model()
         email = "existing@example.com"
         User.objects.create_user(email=email, password="TestPass123")
 

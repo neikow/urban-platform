@@ -10,11 +10,21 @@ import os
 import sys
 import django
 import pytest
+from playwright.sync_api import BrowserContext
 
 # Server configuration
 E2E_SERVER_HOST = "127.0.0.1"
 E2E_SERVER_PORT = 8001
 E2E_BASE_URL = f"http://{E2E_SERVER_HOST}:{E2E_SERVER_PORT}"
+
+
+@pytest.fixture(scope="session")
+def browser_context_args(browser_context_args: dict) -> dict:
+    return {
+        **browser_context_args,
+        "locale": "fr-FR",
+        "timezone_id": "Europe/Paris",
+    }
 
 
 def pytest_configure(config: pytest.Config) -> None:

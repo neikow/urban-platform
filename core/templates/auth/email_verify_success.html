@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Email confirmé{% endblock %}
+{% block title %}{% trans "Email confirmed" %}{% endblock %}
 
 {% block content %}
     <div class="min-h-screen flex items-center justify-center px-8 lg:px-16 py-12">
@@ -23,16 +24,16 @@
                             />
                         </svg>
                     </div>
-                    <h1 class="text-2xl font-bold text-success">Email confirmé !</h1>
+                    <h1 class="text-2xl font-bold text-success">{% trans "Email confirmed!" %}</h1>
                     <p class="mt-4 text-gray-600">
-                        Votre adresse email a été vérifiée avec succès.
+                        {% trans "Your email address has been verified successfully." %}
                     </p>
                     <p class="text-gray-600">
-                        Vous pouvez maintenant profiter de toutes les fonctionnalités de la plateforme.
+                        {% trans "You can now enjoy all the features of the platform." %}
                     </p>
                     <div class="card-actions justify-center mt-6">
                         <a href="{% url 'me' %}" class="btn btn-primary">
-                            Accéder à mon profil
+                            {% trans "Go to my profile" %}
                         </a>
                     </div>
                 </div>

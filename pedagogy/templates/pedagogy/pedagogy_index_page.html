@@ -8,8 +8,8 @@
         {% include "core/components/page_header.html" %}
         <main class="container mx-auto">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-4">
-                <h2 class="text-2xl sm:text-3xl font-bold">
-                    Derniers ajouts
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                    {% trans "Latest additions" %}
                 </h2>
                 {% trans 'Search resources' as aria_label %}
                 {% trans "Search for a resource..." as placeholder %}
@@ -21,7 +21,7 @@
                     {% empty %}
                     <div class="min-h-64 flex items-center justify-center col-span-1 md:col-span-2 lg:col-span-3">
                         <p>
-                            Aucune ressource pédagogique trouvée
+                            {% trans "No educational resources found" %}
                         </p>
                     </div>
                 {% endfor %}

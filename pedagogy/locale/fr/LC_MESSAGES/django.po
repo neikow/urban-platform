@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -12,122 +11,131 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: pedagogy/models/pedagogy_card.py:24
 msgid "Pedagogy Card"
-msgstr ""
+msgstr "Fiche pédagogique"
 
 #: pedagogy/models/pedagogy_card.py:29
 msgid "Card body content"
-msgstr ""
+msgstr "Contenu de la fiche pédagogique"
 
 #: pedagogy/models/pedagogy_card.py:30
 msgid "The main content of the pedagogy card."
-msgstr ""
+msgstr "Le contenu principal de la fiche pédagogique."
 
 #: pedagogy/models/pedagogy_card.py:39
 msgid "Card image"
-msgstr ""
+msgstr "Image de la fiche pédagogique"
 
 #: pedagogy/models/pedagogy_card.py:44
 msgid "Card description"
-msgstr ""
+msgstr "Description de la fiche pédagogique"
 
 #: pedagogy/models/pedagogy_card.py:45
 msgid "A brief description of the pedagogy card."
-msgstr ""
+msgstr "Brève description de la fiche pédagogique."
 
 #: pedagogy/models/pedagogy_card.py:49
+#, fuzzy
+#| msgid "Page body content"
 msgid "Show table of contents"
-msgstr ""
+msgstr "Contenu de la page"
 
 #: pedagogy/models/pedagogy_card.py:51
 msgid "Display the table of contents in the sidebar"
-msgstr ""
+msgstr "Afficher la table des matières dans la barre latérale"
 
 #: pedagogy/models/pedagogy_card.py:62
 msgid "Resource"
-msgstr ""
+msgstr "Ressource"
 
 #: pedagogy/models/pedagogy_index.py:30
 msgid "For search engines"
-msgstr ""
+msgstr "Pour les moteurs de recherche"
 
 #: pedagogy/models/pedagogy_index.py:38
 msgid "Page introduction"
-msgstr ""
+msgstr "Introduction de la page"
 
 #: pedagogy/models/pedagogy_index.py:39
 msgid "Small introduction shown above the pedagogy card list."
 msgstr ""
+"Petite introduction affichée au-dessus de la liste des fiches pédagogiques."
 
 #: pedagogy/models/pedagogy_index.py:44
 msgid "Page body content"
-msgstr ""
+msgstr "Contenu de la page"
 
 #: pedagogy/models/pedagogy_index.py:45
 msgid "Content for the pedagogy entries page."
-msgstr ""
+msgstr "Contenu supplémentaire pour la page des fiches pédagogiques."
 
 #: pedagogy/models/pedagogy_index.py:60 pedagogy/models/pedagogy_index.py:86
 msgid "Pedagogy Entries Index"
-msgstr ""
+msgstr "Index des fiches pédagogiques"
 
 #: pedagogy/models/pedagogy_resource.py:15
 msgid "External URL"
-msgstr ""
+msgstr "URL externe"
 
 #: pedagogy/models/pedagogy_resource.py:22
 msgid "File Document"
-msgstr ""
+msgstr "Document"
 
 #: pedagogy/models/pedagogy_resource.py:33
 #: pedagogy/tests/test_pedagogy_resource.py:44
 msgid "Please provide either a URL or a Document, but not both."
-msgstr ""
+msgstr "Veuillez fournir soit une URL, soit un document, mais pas les deux."
 
 #: pedagogy/models/pedagogy_resource.py:35
 #: pedagogy/tests/test_pedagogy_resource.py:54
 msgid "Please provide either a URL or a Document."
-msgstr ""
+msgstr "Veuillez fournir soit une URL, soit un document."
 
 #: pedagogy/templates/pedagogy/components/pedagogy_card_page_resource.html:12
 msgid "Access the resource"
-msgstr ""
+msgstr "Accéder à la ressource"
 
 #: pedagogy/templates/pedagogy/components/pedagogy_card_page_resource.html:19
 msgid "Download the resource"
-msgstr ""
+msgstr "Télécharger la ressource"
 
 #: pedagogy/templates/pedagogy/components/pedagogy_card_page_resource.html:21
 msgid "Unknown resource type."
-msgstr ""
+msgstr "Type de ressource inconnu."
 
 #: pedagogy/templates/pedagogy/pedagogy_card_page.html:28
 #, python-format
 msgid "Preview image: %(title)s"
-msgstr ""
+msgstr "Aperçu de l'image: %(title)s"
 
 #: pedagogy/templates/pedagogy/pedagogy_card_page.html:58
 msgid "Table of Contents"
-msgstr ""
+msgstr "Table des matières"
 
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:12
 msgid "Latest additions"
-msgstr ""
+msgstr "Derniers ajouts"
 
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:14
 msgid "Search resources"
-msgstr ""
+msgstr "Rechercher des ressources"
 
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:15
 msgid "Search for a resource..."
-msgstr ""
+msgstr "Rechercher une ressource..."
 
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:24
 msgid "No educational resources found"
-msgstr ""
+msgstr "Aucune ressource pédagogique trouvée"
+
+#~ msgid "View more"
+#~ msgstr "Voir plus"
+
+#~ msgid "Quick access"
+#~ msgstr "Accès rapide"
