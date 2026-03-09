@@ -3,6 +3,7 @@ import uuid
 from django.contrib.auth import get_user_model
 from django.test import Client
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 import core.models
 from core.emails.tokens import generate_verification_token
@@ -72,7 +73,10 @@ class TestEmailVerifySuccessView:
         response = client.get(reverse("email_verify_success"))
 
         assert response.status_code == 200
-        assert "confirmé" in response.content.decode().lower()
+        assert (
+            _("Your email address has been verified successfully.").lower()
+            in response.content.decode().lower()
+        )
 
 
 @pytest.mark.django_db
@@ -82,6 +86,6 @@ class TestEmailVerifyErrorView:
 
         assert response.status_code == 200
         assert (
-            "expiré" in response.content.decode().lower()
-            or "invalide" in response.content.decode().lower()
+            _("The verification link is invalid or has expired.").lower()
+            in response.content.decode().lower()
         )

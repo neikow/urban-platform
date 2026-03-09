@@ -1,10 +1,10 @@
 from unittest.mock import patch
-import uuid
 
 import pytest
 from django.contrib.auth import get_user_model
 from django.test import Client
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 from core.emails.tokens import generate_password_reset_token
 
@@ -147,8 +147,8 @@ class TestPasswordResetErrorView:
 
         assert response.status_code == 200
         assert (
-            "expiré" in response.content.decode().lower()
-            or "invalide" in response.content.decode().lower()
+            _("The reset link is invalid or has expired.").lower()
+            in response.content.decode().lower()
         )
 
 
@@ -159,6 +159,6 @@ class TestPasswordResetCompleteView:
 
         assert response.status_code == 200
         assert (
-            "modifié" in response.content.decode().lower()
-            or "succès" in response.content.decode().lower()
+            _("Your password has been reset successfully.").lower()
+            in response.content.decode().lower()
         )
