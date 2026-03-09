@@ -55,7 +55,7 @@ class FooterComponentTest(TestCase):
         self.assertIn(_("Tools"), rendered)
         self.assertIn(_("Legal"), rendered)
         # The following check is not translated because the "Code of Conduct" page is not translated in the test setup
-        self.assertIn("Charte de conduite", rendered)
+        self.assertIn("Charte de bonne conduite", rendered)
 
         self.assertIn("footer", rendered)
         self.assertIn("bg-base-200", rendered)
