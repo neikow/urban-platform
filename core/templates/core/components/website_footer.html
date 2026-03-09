@@ -32,14 +32,14 @@
                         {{ website_name }}
                     </h2>
                     <p class="opacity-60">
-                        Co-construisons la ville de demain
+                        {% trans "Let's build tomorrow's city together" %}
                     </p>
                 </div>
             </a>
         </aside>
         <nav>
             <h3 class="footer-title">
-                Outils
+                {% trans "Tools" %}
             </h3>
             <ul class="space-y-2">
                 {% for menuitem in site_root.get_children.live.in_menu %}
@@ -51,7 +51,7 @@
         </nav>
         <nav>
             <h3 class="footer-title">
-                Légal
+                {% trans "Legal" %}
             </h3>
             <ul class="space-y-2">
                 {% for legal_page in legal_pages %}
@@ -64,7 +64,7 @@
     </div>
     <div>
         <p class="text-center mt-8 text-sm">
-            &copy; {% now "Y" %} {{ website_name }}. <span class="text-nowrap">Tous droits réservés.</span>
+            &copy; {% now "Y" %} {{ website_name }}. <span class="text-nowrap">{% trans "All rights reserved." %}</span>
         </p>
     </div>
 </footer>

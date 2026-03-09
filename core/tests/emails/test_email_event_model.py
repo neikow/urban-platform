@@ -1,13 +1,13 @@
 import pytest
-from django.contrib.auth import get_user_model
 
 from core.models import EmailEvent, EmailEventStatus, EmailEventType
-
-User = get_user_model()
 
 
 @pytest.fixture
 def user(db):
+    from django.contrib.auth import get_user_model
+
+    User = get_user_model()
     return User.objects.create_user(
         email="model_test@example.com",
         password="testpass123",

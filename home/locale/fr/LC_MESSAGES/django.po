@@ -3,32 +3,31 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-07 09:51+0100\n"
+"POT-Creation-Date: 2026-02-03 15:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: home/models.py:17
 msgid "Home page content"
-msgstr ""
+msgstr "Contenu de la page d'accueil"
 
 #: home/models.py:18
 msgid "The main content of the home page."
-msgstr ""
+msgstr "Le contenu principal de la page d'accueil."
 
 #: home/models.py:32
 msgid "Home Page"
-msgstr ""
+msgstr "Page d'accueil"
 
 #: home/models.py:33
 msgid "Home Pages"
-msgstr ""
+msgstr "Pages d'accueil"

@@ -3,6 +3,7 @@ from unittest.mock import patch
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 User = get_user_model()
 
@@ -30,7 +31,7 @@ class ProfileEditViewTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "core/profile_edit.html")
-        self.assertContains(response, "Modifier mon profil")
+        self.assertContains(response, _("Edit my profile"))
         self.assertContains(response, self.user.email)
         self.assertContains(response, self.user.first_name)
 

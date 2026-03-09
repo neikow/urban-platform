@@ -100,7 +100,7 @@
                                 />
                                 <circle stroke-linecap="round" stroke-linejoin="round" cx="12" cy="7" r="4" />
                             </svg>
-                            <span>Profil</span>
+                            <span>{% trans "Profile" %}</span>
                         </a>
                     </li>
                     {% if user.is_staff %}
@@ -154,7 +154,7 @@
                                         y2="12"
                                     />
                                 </svg>
-                                <span>Se déconnecter</span>
+                                <span>{% trans "Log out" %}</span>
                             </button>
                         </form>
                     </li>
@@ -166,7 +166,7 @@
                     onclick="login_modal.showModal()"
                     class="btn btn-ghost hover:text-primary transition-colors font-medium"
                 >
-                    Se connecter
+                    {% trans "Log in" %}
                 </button>
             </div>
         {% endif %}

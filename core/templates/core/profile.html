@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Mon profil{% endblock %}
+{% block title %}{% trans "My profile" %}{% endblock %}
 
 {% block content %}
     <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -8,24 +9,24 @@
             <div class="card bg-base-100 shadow-xl">
                 <div class="card-body">
                     <h1 class="card-title text-3xl font-bold mb-6">
-                        Mon profil
+                        {% trans "My profile" %}
                     </h1>
 
                     <div class="space-y-6">
                         <div class="border-b border-base-300 pb-6">
                             <h2 class="text-xl font-semibold mb-4 text-primary">
-                                Informations personnelles
+                                {% trans "Personal information" %}
                             </h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="label">
-                                        <span class="label-text font-semibold">Prénom</span>
+                                        <span class="label-text font-semibold">{% trans "First Name" %}</span>
                                     </label>
                                     <p class="text-base-content">{{ user.first_name }}</p>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <span class="label-text font-semibold">Nom</span>
+                                        <span class="label-text font-semibold">{% trans "Last Name" %}</span>
                                     </label>
                                     <p class="text-base-content">{{ user.last_name }}</p>
                                 </div>
@@ -34,22 +35,22 @@
 
                         <div class="border-b border-base-300 pb-6">
                             <h2 class="text-xl font-semibold mb-4 text-primary">
-                                Contact
+                                {% trans "Contact" %}
                             </h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="label">
-                                        <span class="label-text font-semibold">Email</span>
+                                        <span class="label-text font-semibold">{% trans "Email" %}</span>
                                     </label>
                                     <p class="text-base-content flex items-center gap-2">
                                         {{ user.email }}
                                         {% if user.is_verified %}
                                             <span class="badge badge-success badge-sm">
-                                                Vérifié
+                                                {% trans "Verified" %}
                                             </span>
                                         {% else %}
                                             <span class="badge badge-warning badge-sm">
-                                                Non vérifié
+                                                {% trans "Not verified" %}
                                             </span>
                                         {% endif %}
                                     </p>
@@ -57,7 +58,7 @@
                                 {% if user.phone_number %}
                                     <div>
                                         <label class="label">
-                                            <span class="label-text font-semibold">Téléphone</span>
+                                            <span class="label-text font-semibold">{% trans "Phone" %}</span>
                                         </label>
                                         <p class="text-base-content">{{ user.phone_number }}</p>
                                     </div>
@@ -70,7 +71,7 @@
                                 {% if user.neighborhood %}
                                     <div>
                                         <label class="label">
-                                            <span class="label-text font-semibold">Quartier</span>
+                                            <span class="label-text font-semibold">{% trans "Neighborhood" %}</span>
                                         </label>
                                         <p class="text-base-content">{{ user.neighborhood.full_name }}</p>
                                     </div>
@@ -78,7 +79,7 @@
                                 {% if user.postal_code %}
                                     <div>
                                         <label class="label">
-                                            <span class="label-text font-semibold">Code postal</span>
+                                            <span class="label-text font-semibold">{% trans "Postal code" %}</span>
                                         </label>
                                         <p class="text-base-content">{{ user.postal_code }}</p>
                                     </div>
@@ -88,32 +89,32 @@
 
                         <div class="border-b border-base-300 pb-6">
                             <h2 class="text-xl font-semibold mb-4 text-primary">
-                                Compte
+                                {% trans "Account" %}
                             </h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="label">
-                                        <span class="label-text font-semibold">Rôle</span>
+                                        <span class="label-text font-semibold">{% trans "Role" %}</span>
                                     </label>
                                     <p class="text-base-content">
                                         {% if user.role == 'CITIZEN' %}
-                                            <span class="badge badge-primary">Membre</span>
+                                            <span class="badge badge-primary">{% trans "Member" %}</span>
                                         {% elif user.role == 'ASSOCIATION_MEMBER' %}
-                                            <span class="badge badge-secondary">Membre d'association</span>
+                                            <span class="badge badge-secondary">{% trans "Association member" %}</span>
                                         {% elif user.role == 'ADMIN' %}
-                                            <span class="badge badge-accent">Administrateur</span>
+                                            <span class="badge badge-accent">{% trans "Administrator" %}</span>
                                         {% endif %}
                                     </p>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <span class="label-text font-semibold">Newsletter</span>
+                                        <span class="label-text font-semibold">{% trans "Newsletter" %}</span>
                                     </label>
                                     <p class="text-base-content">
                                         {% if user.newsletter_subscription %}
-                                            <span class="badge badge-success">Abonné</span>
+                                            <span class="badge badge-success">{% trans "Subscribed" %}</span>
                                         {% else %}
-                                            <span class="badge badge-ghost">Non abonné</span>
+                                            <span class="badge badge-ghost">{% trans "Not subscribed" %}</span>
                                         {% endif %}
                                     </p>
                                 </div>
@@ -122,18 +123,18 @@
 
                         <div>
                             <h2 class="text-xl font-semibold mb-4 text-primary">
-                                Informations du compte
+                                {% trans "Account information" %}
                             </h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="label">
-                                        <span class="label-text font-semibold">Membre depuis</span>
+                                        <span class="label-text font-semibold">{% trans "Member since" %}</span>
                                     </label>
                                     <p class="text-base-content">{{ user.created_at|date:"d/m/Y à H:i" }}</p>
                                 </div>
                                 <div>
                                     <label class="label">
-                                        <span class="label-text font-semibold">Dernière mise à jour</span>
+                                        <span class="label-text font-semibold">{% trans "Last update" %}</span>
                                     </label>
                                     <p class="text-base-content">{{ user.updated_at|date:"d/m/Y à H:i" }}</p>
                                 </div>
@@ -156,7 +157,7 @@
                                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                                     <path d="m15 5 4 4" />
                                 </svg>
-                                Modifier mon profil
+                                {% trans "Edit my profile" %}
                             </a>
                         </div>
                     </div>

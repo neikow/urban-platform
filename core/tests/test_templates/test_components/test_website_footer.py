@@ -1,6 +1,6 @@
-from bs4 import BeautifulSoup
 from django.conf import settings
 from django.test import TestCase, RequestFactory
+from django.utils.translation import gettext as _
 from django.template.loader import render_to_string
 from wagtail.models import Site, Page
 from home.models import HomePage
@@ -52,8 +52,9 @@ class FooterComponentTest(TestCase):
         self.assertIn('href="/page-2/"', rendered)
 
         self.assertIn(settings.WEBSITE_NAME, rendered)
-        self.assertIn("Outils", rendered)
-        self.assertIn("Légal", rendered)
+        self.assertIn(_("Tools"), rendered)
+        self.assertIn(_("Legal"), rendered)
+        # The following check is not translated because the "Code of Conduct" page is not translated in the test setup
         self.assertIn("Charte de bonne conduite", rendered)
 
         self.assertIn("footer", rendered)
