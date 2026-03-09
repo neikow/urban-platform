@@ -24,7 +24,7 @@ class MeViewTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "core/profile.html")
-        self.assertContains(response, "Mon profil")
+        self.assertContains(response, _("My profile"))
         self.assertContains(response, "Test")
         self.assertContains(response, "User")
         self.assertContains(response, "testuser@example.com")
