@@ -3,6 +3,7 @@ import re
 import pytest
 from django.urls import reverse
 from playwright.sync_api import Page, expect
+from django.utils.translation import gettext as _
 
 from e2e.utils import login_user
 
@@ -50,7 +51,7 @@ def test_registration_flow(page: Page, base_url: str):
     registration_form.locator("input[name='confirm_password']").fill("Password123")
     registration_form.locator("input[name='accept_terms']").click()
 
-    registration_form.locator("button[type='submit']", has_text="S'inscrire").click()
+    registration_form.locator("button[type='submit']", has_text=_("Sign up")).click()
 
     # Wait for consent page
     expect(page).to_have_url(
@@ -62,7 +63,7 @@ def test_registration_flow(page: Page, base_url: str):
     page.locator("input[name='consent']").click()
 
     # Click accept button and wait for redirect to me page
-    page.get_by_role("button", name="Accepter et continuer").click()
+    page.get_by_role("button", name=_("Accept and continue")).click()
     expect(page).to_have_url(base_url + reverse("me"))
 
 
@@ -83,14 +84,14 @@ def test_account_deletion_flow(page: Page, base_url: str, deletion_test_user_cre
     page.goto(base_url + reverse("profile_edit"))
 
     # Click on "Supprimer mon compte" button
-    page.get_by_role("link", name="Supprimer mon compte").click()
+    page.get_by_role("link", name=_("Delete my account")).click()
 
     # Should be on account deletion page
     expect(page).to_have_url(base_url + reverse("account_delete"))
 
     # Verify warning messages are displayed
-    expect(page.locator("text=Action irréversible")).to_be_visible()
-    expect(page.locator("text=Supprimer mon compte")).to_be_visible()
+    expect(page.locator(f"text={_('Warning: Irreversible action')}")).to_be_visible()
+    expect(page.locator(f"text={_('Delete my account')}")).to_be_visible()
 
     # Fill in password confirmation (use placeholder to distinguish from login modal password)
     page.get_by_placeholder("Entrez votre mot de passe pour confirmer").fill(password)
@@ -106,11 +107,11 @@ def test_account_deletion_flow(page: Page, base_url: str, deletion_test_user_cre
 
     # Try to login again with deleted account credentials - should fail
     page.goto(base_url)
-    page.get_by_role("button", name="Se connecter").click()
+    page.get_by_role("button", name=_("Log in")).click()
 
     page.locator("input[name='email']").fill(email)
     page.locator("input[name='password']").fill(password)
-    page.locator("#login_modal button[type='submit']", has_text="Se connecter").click()
+    page.locator("#login_modal button[type='submit']", has_text=_("Log in")).click()
 
     # Should show error message (account is deleted/deactivated)
     expect(page.locator("#login-error")).to_be_visible()
