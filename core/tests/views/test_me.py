@@ -1,7 +1,7 @@
-from django.http import HttpResponse
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from django.utils.translation import gettext as _
 
 User = get_user_model()
 
@@ -48,7 +48,7 @@ class MeViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "0612345678")
         self.assertContains(response, "13001")
-        self.assertContains(response, "Abonné")  # Newsletter subscription badge
+        self.assertContains(response, _("Subscribed"))  # Newsletter subscription badge
 
     def test_me_displays_role_badge(self) -> None:
         """Test that user role is displayed with correct badge."""
@@ -56,7 +56,7 @@ class MeViewTests(TestCase):
         response = self.client.get(self.me_url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Membre")  # Default role is CITIZEN
+        self.assertContains(response, _("Member"))
 
     def test_me_displays_verified_status(self) -> None:
         """Test that email verification status is displayed."""
@@ -64,11 +64,11 @@ class MeViewTests(TestCase):
         response = self.client.get(self.me_url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Non vérifié")  # Default is not verified
+        self.assertContains(response, _("Not verified"))  # Default is not verified
 
         # Update user to verified
         self.user.is_verified = True
         self.user.save()
         response = self.client.get(self.me_url)
 
-        self.assertContains(response, "Vérifié")
+        self.assertContains(response, _("Verified"))
