@@ -178,11 +178,11 @@
                             <form method="post" action="{% url 'password_change' %}" class="space-y-4">
                                 {% csrf_token %}
 
-                                {% include "components/forms/form_field.html" with field=password_form.current_password %}
+                                {% include "components/forms/password_field.html" with field=password_form.current_password %}
 
-                                {% include "components/forms/form_field.html" with field=password_form.new_password %}
+                                {% include "components/forms/password_field.html" with field=password_form.new_password %}
 
-                                {% include "components/forms/form_field.html" with field=password_form.confirm_password %}
+                                {% include "components/forms/password_field.html" with field=password_form.confirm_password %}
 
                                 <div class="flex justify-end pt-4">
                                     <button type="submit" class="btn btn-secondary">

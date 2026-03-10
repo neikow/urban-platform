@@ -53,7 +53,7 @@ class DaisyEmailInput(forms.EmailInput):
 class DaisyPasswordInput(forms.PasswordInput):
     def __init__(self, placeholder: str = ""):
         default_attrs = {
-            "class": "input input-bordered w-full aria-[invalid=true]:border-error",
+            "class": "input input-bordered w-full pr-12 aria-[invalid=true]:border-error",
             "placeholder": placeholder,
         }
         super().__init__(default_attrs)
