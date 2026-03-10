@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-07 09:51+0100\n"
+"POT-Creation-Date: 2026-03-10 14:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: publications/models/event.py:17 publications/models/event.py:91
+#: publications/models/event.py:17 publications/models/event.py:116
 #: publications/templates/publications/components/publication_preview.html:49
 #: publications/templates/publications/event_page.html:15
 msgid "Event"
@@ -81,7 +81,7 @@ msgstr ""
 msgid "Nombre maximum de participants (laisser vide si illimité)"
 msgstr ""
 
-#: publications/models/event.py:92
+#: publications/models/event.py:117
 #: publications/templates/publications/publication_index_page.html:37
 msgid "Events"
 msgstr ""
@@ -168,7 +168,7 @@ msgstr ""
 #: publications/models/form.py:41 publications/models/project.py:38
 #: publications/models/project.py:114
 #: publications/templates/publications/admin/vote_stats.html:14
-#: publications/templates/publications/components/publication_preview.html:54
+#: publications/templates/publications/components/publication_preview.html:58
 msgid "Project"
 msgstr ""
 
@@ -289,32 +289,32 @@ msgstr ""
 msgid "Publications"
 msgstr ""
 
-#: publications/models/publication.py:110
+#: publications/models/publication.py:145
 msgid "Description"
 msgstr ""
 
-#: publications/models/publication.py:111
+#: publications/models/publication.py:146
 msgid "A brief description shown in lists."
 msgstr ""
 
-#: publications/models/publication.py:120
+#: publications/models/publication.py:155
 msgid "Hero Image"
 msgstr ""
 
-#: publications/models/publication.py:121
+#: publications/models/publication.py:156
 msgid "Main image for this publication"
 msgstr ""
 
-#: publications/models/publication.py:127
+#: publications/models/publication.py:162
 msgid "Content"
 msgstr ""
 
-#: publications/models/publication.py:128
+#: publications/models/publication.py:163
 msgid "The main content of the page."
 msgstr ""
 
 #: publications/models/publication_index.py:35
-#: publications/models/publication_index.py:95
+#: publications/models/publication_index.py:100
 msgid "Publications Index"
 msgstr ""
 
@@ -421,6 +421,15 @@ msgstr ""
 msgid "Upcoming"
 msgstr ""
 
+#: publications/templates/publications/components/publication_preview.html:53
+msgid "Ongoing"
+msgstr ""
+
+#: publications/templates/publications/components/publication_preview.html:55
+#: publications/templates/publications/event_page.html:19
+msgid "Past"
+msgstr ""
+
 #: publications/templates/publications/components/vote_form.html:9
 msgid "Please select an option"
 msgstr ""
@@ -505,10 +514,6 @@ msgstr ""
 msgid "Voting is closed for this project"
 msgstr ""
 
-#: publications/templates/publications/event_page.html:19
-msgid "Past"
-msgstr ""
-
 #: publications/templates/publications/event_page.html:44
 msgid "Date"
 msgstr ""
@@ -563,7 +568,11 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
-#: publications/templates/publications/publication_index_page.html:69
+#: publications/templates/publications/publication_index_page.html:77
+msgid "Show past events"
+msgstr ""
+
+#: publications/templates/publications/publication_index_page.html:89
 msgid "No publications found"
 msgstr ""
 

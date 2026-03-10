@@ -78,10 +78,35 @@ class EventPage(PublicationPage):
 
     @property
     def is_past(self) -> bool:
+        """
+        Détermine si un événement est passé.
+        - Si end_date existe: l'événement est passé si end_date < maintenant
+        - Sinon: l'événement est passé si event_date à 23:59:59 < maintenant
+        Cela évite qu'un événement en cours soit marqué comme passé.
+        """
+        from datetime import datetime, time
+
         from django.utils import timezone
 
-        reference_date = self.end_date if self.end_date else self.event_date
-        return reference_date < timezone.now()
+        now = timezone.now()
+
+        if self.end_date:
+            return self.end_date < now
+
+        # Utilise 23:59:59 du jour de l'événement
+        event_day_end = datetime.combine(self.event_date.date(), time(23, 59, 59))
+        if timezone.is_aware(self.event_date):
+            event_day_end = timezone.make_aware(event_day_end, timezone.get_current_timezone())
+
+        return event_day_end < now
+
+    @property
+    def is_ongoing(self) -> bool:
+        """Détermine si un événement est en cours (a commencé mais pas encore terminé)."""
+        from django.utils import timezone
+
+        now = timezone.now()
+        return self.event_date <= now and not self.is_past
 
     @property
     def is_upcoming(self) -> bool:

@@ -49,6 +49,10 @@
                 <span class="badge badge-outline bg-secondary">{% trans "Event" %}</span>
                 {% if publication.is_upcoming %}
                     <span class="badge badge-outline bg-success">{% trans "Upcoming" %}</span>
+                {% elif publication.is_ongoing %}
+                    <span class="badge badge-outline bg-warning">{% trans "Ongoing" %}</span>
+                {% elif publication.is_past %}
+                    <span class="badge badge-outline bg-base-300">{% trans "Past" %}</span>
                 {% endif %}
             {% else %}
                 <span class="badge badge-outline bg-primary">{% trans "Project" %}</span>

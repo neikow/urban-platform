@@ -93,16 +93,51 @@ class PublicationPage(Page):
     @property
     def is_upcoming(self) -> bool:
         if self._meta.model.__name__ == "EventPage":
-            from django.utils import timezone
-
-            event_date = self.__dict__.get("event_date")
-            return event_date is not None and event_date >= timezone.now()
+            return not self.is_past
         real_instance = self.get_real_instance()
         if real_instance is not self and hasattr(real_instance, "is_upcoming"):
+            return real_instance.is_upcoming
+        return False
+
+    @property
+    def is_past(self) -> bool:
+        if self._meta.model.__name__ == "EventPage":
+            from datetime import datetime, time
+
             from django.utils import timezone
 
-            event_date = real_instance.__dict__.get("event_date")
-            return event_date is not None and event_date >= timezone.now()
+            now = timezone.now()
+            end_date = self.__dict__.get("end_date")
+            event_date = self.__dict__.get("event_date")
+
+            if end_date:
+                return end_date < now
+
+            if event_date:
+                event_day_end = datetime.combine(event_date.date(), time(23, 59, 59))
+                if timezone.is_aware(event_date):
+                    event_day_end = timezone.make_aware(
+                        event_day_end, timezone.get_current_timezone()
+                    )
+                return event_day_end < now
+
+            return False
+        real_instance = self.get_real_instance()
+        if real_instance is not self and hasattr(real_instance, "is_past"):
+            return real_instance.is_past
+        return False
+
+    @property
+    def is_ongoing(self) -> bool:
+        if self._meta.model.__name__ == "EventPage":
+            from django.utils import timezone
+
+            now = timezone.now()
+            event_date = self.__dict__.get("event_date")
+            return event_date is not None and event_date <= now and not self.is_past
+        real_instance = self.get_real_instance()
+        if real_instance is not self and hasattr(real_instance, "is_ongoing"):
+            return real_instance.is_ongoing
         return False
 
     description: models.TextField[str, str] = models.TextField(

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 16:39+0100\n"
+"POT-Creation-Date: 2026-03-10 14:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,27 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: e2e/tests/test_auth_flows.py:54
+msgid "Sign up"
+msgstr ""
+
+#: e2e/tests/test_auth_flows.py:66
+msgid "Accept and continue"
+msgstr ""
+
+#: e2e/tests/test_auth_flows.py:87 e2e/tests/test_auth_flows.py:94
+msgid "Delete my account"
+msgstr ""
+
+#: e2e/tests/test_auth_flows.py:93
+msgid "Warning: Irreversible action"
+msgstr ""
+
+#: e2e/tests/test_auth_flows.py:110 e2e/tests/test_auth_flows.py:114
+#: e2e/utils.py:23 e2e/utils.py:31
+msgid "Log in"
+msgstr ""
 
 #: search/templates/search/search.html:9 search/templates/search/search.html:13
 #: search/templates/search/search.html:17

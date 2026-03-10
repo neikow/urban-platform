@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-07 09:51+0100\n"
+"POT-Creation-Date: 2026-03-10 14:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -460,6 +460,7 @@ msgid "Invalid or expired link"
 msgstr ""
 
 #: core/templates/auth/email_verify_error.html:29
+#: core/tests/views/test_email_verify.py:89
 msgid "The verification link is invalid or has expired."
 msgstr ""
 
@@ -484,6 +485,7 @@ msgid "Email confirmed!"
 msgstr ""
 
 #: core/templates/auth/email_verify_success.html:29
+#: core/tests/views/test_email_verify.py:77
 msgid "Your email address has been verified successfully."
 msgstr ""
 
@@ -527,6 +529,7 @@ msgid "Password changed!"
 msgstr ""
 
 #: core/templates/auth/password_reset_complete.html:29
+#: core/tests/views/test_password_reset.py:162
 msgid "Your password has been reset successfully."
 msgstr ""
 
@@ -559,6 +562,7 @@ msgid "Expired link"
 msgstr ""
 
 #: core/templates/auth/password_reset_error.html:29
+#: core/tests/views/test_password_reset.py:150
 msgid "The reset link is invalid or has expired."
 msgstr ""
 
@@ -730,10 +734,12 @@ msgid "Let's build tomorrow's city together"
 msgstr ""
 
 #: core/templates/core/components/website_footer.html:42
+#: core/tests/test_templates/test_components/test_website_footer.py:55
 msgid "Tools"
 msgstr ""
 
 #: core/templates/core/components/website_footer.html:54
+#: core/tests/test_templates/test_components/test_website_footer.py:56
 msgid "Legal"
 msgstr ""
 
@@ -750,6 +756,7 @@ msgid "Log out"
 msgstr ""
 
 #: core/templates/core/profile.html:4 core/templates/core/profile.html:12
+#: core/tests/views/test_me.py:27
 msgid "My profile"
 msgstr ""
 
@@ -765,11 +772,11 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: core/templates/core/profile.html:49
+#: core/templates/core/profile.html:49 core/tests/views/test_me.py:74
 msgid "Verified"
 msgstr ""
 
-#: core/templates/core/profile.html:53
+#: core/templates/core/profile.html:53 core/tests/views/test_me.py:67
 msgid "Not verified"
 msgstr ""
 
@@ -785,7 +792,7 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
-#: core/templates/core/profile.html:101
+#: core/templates/core/profile.html:101 core/tests/views/test_me.py:59
 msgid "Member"
 msgstr ""
 
@@ -801,7 +808,7 @@ msgstr ""
 msgid "Newsletter"
 msgstr ""
 
-#: core/templates/core/profile.html:115
+#: core/templates/core/profile.html:115 core/tests/views/test_me.py:51
 msgid "Subscribed"
 msgstr ""
 
@@ -823,6 +830,7 @@ msgstr ""
 
 #: core/templates/core/profile.html:160 core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:52
+#: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
 msgstr ""
 
