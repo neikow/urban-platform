@@ -1,5 +1,6 @@
 from typing import Any, cast
 
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse
@@ -191,12 +192,13 @@ class PasswordChangeView(LoginRequiredMixin, FormView):
         user = cast(User, self.request.user)
         user.set_password(form.cleaned_data["new_password"])
         user.save()
+        update_session_auth_hash(self.request, user)
 
         messages.success(
             self.request,
-            "Votre mot de passe a été modifié avec succès. Veuillez vous reconnecter.",
+            "Votre mot de passe a été modifié avec succès.",
         )
         return super().form_valid(form)
 
     def get_success_url(self) -> str:
-        return reverse("login")
+        return reverse("profile_edit")

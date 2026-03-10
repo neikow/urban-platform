@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('login-form');
+    if (!loginForm) return;
     const errorDiv = document.getElementById('login-error');
     const errorText = document.getElementById('login-error-text');
 
