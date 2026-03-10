@@ -93,24 +93,58 @@ class FilterPublicationsByTypeTest(TestCase):
         mock_filtered_upcoming.order_by.assert_called_once_with("eventpage__event_date")
         self.assertEqual(result, mock_ordered)
 
-    def test_filter_by_all_returns_ordered(self) -> None:
+    @patch("django.contrib.contenttypes.models.ContentType.objects.get_for_model")
+    @patch("django.utils.timezone.now")
+    def test_filter_by_all_returns_ordered(
+        self, mock_now: MagicMock, mock_get_for_model: MagicMock
+    ) -> None:
+        mock_queryset = MagicMock()
+        mock_excluded = MagicMock()
+        mock_ordered = MagicMock()
+
+        mock_queryset.exclude.return_value = mock_excluded
+        mock_excluded.order_by.return_value = mock_ordered
+
+        mock_ct = MagicMock()
+        mock_get_for_model.return_value = mock_ct
+
+        result = filter_publications_by_type(mock_queryset, "all")
+
+        # By default, past events are excluded
+        mock_queryset.exclude.assert_called_once()
+        mock_excluded.order_by.assert_called_once_with("-first_published_at")
+        self.assertEqual(result, mock_ordered)
+
+    def test_filter_by_all_with_show_past_returns_ordered(self) -> None:
         mock_queryset = MagicMock()
         mock_ordered = MagicMock()
         mock_queryset.order_by.return_value = mock_ordered
 
-        result = filter_publications_by_type(mock_queryset, "all")
+        result = filter_publications_by_type(mock_queryset, "all", show_past_events=True)
 
         mock_queryset.order_by.assert_called_once_with("-first_published_at")
         self.assertEqual(result, mock_ordered)
 
-    def test_filter_by_unknown_type_returns_all(self) -> None:
+    @patch("django.contrib.contenttypes.models.ContentType.objects.get_for_model")
+    @patch("django.utils.timezone.now")
+    def test_filter_by_unknown_type_returns_all(
+        self, mock_now: MagicMock, mock_get_for_model: MagicMock
+    ) -> None:
         mock_queryset = MagicMock()
+        mock_excluded = MagicMock()
         mock_ordered = MagicMock()
-        mock_queryset.order_by.return_value = mock_ordered
+
+        mock_queryset.exclude.return_value = mock_excluded
+        mock_excluded.order_by.return_value = mock_ordered
+
+        mock_ct = MagicMock()
+        mock_get_for_model.return_value = mock_ct
 
         result = filter_publications_by_type(mock_queryset, "unknown")
 
-        mock_queryset.order_by.assert_called_once_with("-first_published_at")
+        # By default, past events are excluded even for unknown types
+        mock_queryset.exclude.assert_called_once()
+        mock_excluded.order_by.assert_called_once_with("-first_published_at")
         self.assertEqual(result, mock_ordered)
 
 
