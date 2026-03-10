@@ -7,4 +7,4 @@ register = template.Library()
 
 @register.simple_tag()
 def login_form() -> LoginForm:
-    return LoginForm()
+    return LoginForm(prefix="modal")

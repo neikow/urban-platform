@@ -44,9 +44,9 @@
                 </div>
             {% endif %}
         </figure>
-        <div class="flex gap-1 absolute top-2 left-2">
+        <div class="flex gap-1 absolute top-0 left-0 p-2 bg-base-100 rounded-br-2xl rounded-tl-lg shadow">
             {% if publication.is_event %}
-                <span class="badge badge-outline bg-secondary">{% trans "Event" %}</span>
+                <span class="badge badge-secondary">{% trans "Event" %}</span>
                 {% if publication.is_upcoming %}
                     <span class="badge badge-outline bg-success">{% trans "Upcoming" %}</span>
                 {% elif publication.is_ongoing %}
@@ -55,9 +55,9 @@
                     <span class="badge badge-outline bg-base-300">{% trans "Past" %}</span>
                 {% endif %}
             {% else %}
-                <span class="badge badge-outline bg-primary">{% trans "Project" %}</span>
+                <span class="badge badge-primary">{% trans "Project" %}</span>
                 {% if publication.category %}
-                    <span class="badge badge-outline bg-info">{{ publication.get_category_display }}</span>
+                    <span class="badge badge-info">{{ publication.get_category_display }}</span>
                 {% endif %}
             {% endif %}
         </div>

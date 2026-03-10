@@ -37,7 +37,7 @@ class LoginForm(forms.Form):
 
 class LoginView(JsonResponseMixin, View):
     def post(self, request: HttpRequest) -> HttpResponse:
-        form = LoginForm(request.POST)
+        form = LoginForm(request.POST, prefix="modal")
 
         if form.is_valid():
             user = form.cleaned_data["user"]

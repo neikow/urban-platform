@@ -22,8 +22,8 @@ def login_user(page: Page, base_url: str, email: str, password: str) -> None:
     page.goto(base_url)
     page.get_by_role("button", name=_("Log in")).click()
 
-    page.locator("input[name='email']").fill(email)
-    page.locator("input[name='password']").fill(password)
+    page.locator("input[name='modal-email']").fill(email)
+    page.locator("input[name='modal-password']").fill(password)
 
     with page.expect_response(
         lambda res: res.url.endswith(reverse("login")) and res.request.method == "POST"

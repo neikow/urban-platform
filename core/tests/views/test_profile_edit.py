@@ -200,11 +200,15 @@ class PasswordChangeViewTests(TestCase):
         response = self.client.post(self.password_change_url, data, follow=False)
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, reverse("login"))  # type: ignore[attr-defined]
+        self.assertEqual(response.url, reverse("profile_edit"))  # type: ignore[attr-defined]
 
         self.user.refresh_from_db()
         self.assertTrue(self.user.check_password("NewPassword123"))
         self.assertFalse(self.user.check_password("OldPassword123"))
+
+        # User should still be logged in
+        response = self.client.get(reverse("me"))
+        self.assertEqual(response.status_code, 200)
 
     def test_password_change_wrong_current_password(self) -> None:
         self.client.force_login(self.user)
