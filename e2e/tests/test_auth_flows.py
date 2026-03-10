@@ -109,8 +109,8 @@ def test_account_deletion_flow(page: Page, base_url: str, deletion_test_user_cre
     page.goto(base_url)
     page.get_by_role("button", name=_("Log in")).click()
 
-    page.locator("input[name='email']").fill(email)
-    page.locator("input[name='password']").fill(password)
+    page.locator("input[name='modal-email']").fill(email)
+    page.locator("input[name='modal-password']").fill(password)
     page.locator("#login_modal button[type='submit']", has_text=_("Log in")).click()
 
     # Should show error message (account is deleted/deactivated)

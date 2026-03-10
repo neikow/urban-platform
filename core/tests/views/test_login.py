@@ -140,8 +140,8 @@ class TestLoginView:
         response = client.post(
             reverse("login"),
             data={
-                "email": "testuser@example.com",
-                "password": "TestPass123",
+                "modal-email": "testuser@example.com",
+                "modal-password": "TestPass123",
             },
         )
 
@@ -160,8 +160,8 @@ class TestLoginView:
             reverse("login"),
             data={
                 "next": "/current-page/",
-                "email": "testuser@example.com",
-                "password": "TestPass123",
+                "modal-email": "testuser@example.com",
+                "modal-password": "TestPass123",
             },
         )
 
@@ -179,8 +179,8 @@ class TestLoginView:
         response = client.post(
             reverse("login"),
             data={
-                "email": "testuser@example.com",
-                "password": "TestPass123",
+                "modal-email": "testuser@example.com",
+                "modal-password": "TestPass123",
             },
         )
 
@@ -200,8 +200,8 @@ class TestLoginView:
         response = client.post(
             reverse("login"),
             data={
-                "email": "staffuser@example.com",
-                "password": "StaffPass123",
+                "modal-email": "staffuser@example.com",
+                "modal-password": "StaffPass123",
             },
         )
 
@@ -220,8 +220,8 @@ class TestLoginView:
             reverse("login"),
             data={
                 "next": "http://malicious.example.com/evil",
-                "email": "testuser@example.com",
-                "password": "TestPass123",
+                "modal-email": "testuser@example.com",
+                "modal-password": "TestPass123",
             },
         )
 
