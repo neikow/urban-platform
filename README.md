@@ -86,11 +86,11 @@
 | publications/services.py                                       |       64 |        1 |       14 |        1 |     97.44% |       106 |
 | publications/views/\_\_init\_\_.py                             |        0 |        0 |        0 |        0 |    100.00% |           |
 | publications/views/vote.py                                     |       70 |       12 |       20 |        5 |     81.11% |26-27, 46-47, 92-93, 99, 105, 117, 134-135, 141, 149->164 |
-| publications/views/vote\_stats.py                              |       44 |        0 |        6 |        0 |    100.00% |           |
+| publications/views/vote\_stats.py                              |       59 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **2335** |  **472** |  **398** |   **58** | **75.56%** |           |
+| **TOTAL**                                                      | **2350** |  **472** |  **400** |   **58** | **75.71%** |           |
 
 
 ## Setup coverage badge
