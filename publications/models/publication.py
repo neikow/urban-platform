@@ -1,7 +1,9 @@
+from datetime import datetime, time
 from typing import Any, Self, override
 
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
@@ -93,8 +95,6 @@ class PublicationPage(Page):
     @property
     def is_upcoming(self) -> bool:
         if self._meta.model.__name__ == "EventPage":
-            from django.utils import timezone
-
             event_date = self.__dict__.get("event_date")
             return event_date is not None and event_date > timezone.now()
         real_instance = self.get_real_instance()
@@ -105,10 +105,6 @@ class PublicationPage(Page):
     @property
     def is_past(self) -> bool:
         if self._meta.model.__name__ == "EventPage":
-            from datetime import datetime, time
-
-            from django.utils import timezone
-
             now = timezone.now()
             end_date = self.__dict__.get("end_date")
             event_date = self.__dict__.get("event_date")
@@ -133,8 +129,6 @@ class PublicationPage(Page):
     @property
     def is_ongoing(self) -> bool:
         if self._meta.model.__name__ == "EventPage":
-            from django.utils import timezone
-
             now = timezone.now()
             event_date = self.__dict__.get("event_date")
             return event_date is not None and event_date <= now and not self.is_past

@@ -1,6 +1,8 @@
+from datetime import datetime, time
 from typing import Any
 
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
 from wagtail.admin.panels import FieldPanel
@@ -84,9 +86,6 @@ class EventPage(PublicationPage):
         - Sinon: l'événement est passé si event_date à 23:59:59 < maintenant
         Cela évite qu'un événement en cours soit marqué comme passé.
         """
-        from datetime import datetime, time
-
-        from django.utils import timezone
 
         now = timezone.now()
 
@@ -103,7 +102,6 @@ class EventPage(PublicationPage):
     @property
     def is_ongoing(self) -> bool:
         """Détermine si un événement est en cours (a commencé mais pas encore terminé)."""
-        from django.utils import timezone
 
         now = timezone.now()
         return self.event_date <= now and not self.is_past
@@ -111,7 +109,6 @@ class EventPage(PublicationPage):
     @property
     def is_upcoming(self) -> bool:
         """Détermine si un événement n'a pas encore commencé."""
-        from django.utils import timezone
 
         return self.event_date > timezone.now()
 
