@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: publications/models/event.py:17 publications/models/event.py:91
+#: publications/models/event.py:17 publications/models/event.py:116
 #: publications/templates/publications/components/publication_preview.html:49
 #: publications/templates/publications/event_page.html:15
 msgid "Event"
@@ -80,7 +80,7 @@ msgstr "Nombre maximum de participants"
 msgid "Nombre maximum de participants (laisser vide si illimité)"
 msgstr "Nombre maximum de participants (laisser vide si illimité)"
 
-#: publications/models/event.py:92
+#: publications/models/event.py:117
 #: publications/templates/publications/publication_index_page.html:37
 msgid "Events"
 msgstr "Événements"
@@ -290,32 +290,32 @@ msgstr "Publication"
 msgid "Publications"
 msgstr "Publications"
 
-#: publications/models/publication.py:110
+#: publications/models/publication.py:145
 msgid "Description"
 msgstr "Description"
 
-#: publications/models/publication.py:111
+#: publications/models/publication.py:146
 msgid "A brief description shown in lists."
 msgstr "Une brève description affichée dans les listes."
 
-#: publications/models/publication.py:120
+#: publications/models/publication.py:155
 msgid "Hero Image"
 msgstr "Image principale"
 
-#: publications/models/publication.py:121
+#: publications/models/publication.py:156
 msgid "Main image for this publication"
 msgstr "Image principale pour cette publication"
 
-#: publications/models/publication.py:127
+#: publications/models/publication.py:162
 msgid "Content"
 msgstr "Contenu"
 
-#: publications/models/publication.py:128
+#: publications/models/publication.py:163
 msgid "The main content of the page."
 msgstr "Le contenu principal de la page."
 
 #: publications/models/publication_index.py:35
-#: publications/models/publication_index.py:95
+#: publications/models/publication_index.py:100
 msgid "Publications Index"
 msgstr "Index des publications"
 
@@ -436,6 +436,15 @@ msgstr "Aucun vote pour l'instant"
 msgid "Upcoming"
 msgstr "À venir"
 
+#: publications/templates/publications/components/publication_preview.html:53
+msgid "Ongoing"
+msgstr "En cours"
+
+#: publications/templates/publications/components/publication_preview.html:55
+#: publications/templates/publications/event_page.html:19
+msgid "Past"
+msgstr "Passé"
+
 #: publications/templates/publications/components/vote_form.html:9
 msgid "Please select an option"
 msgstr "Veuillez sélectionner une option"
@@ -524,10 +533,6 @@ msgstr "Retirer mon vote"
 msgid "Voting is closed for this project"
 msgstr "Le vote est fermé pour ce projet"
 
-#: publications/templates/publications/event_page.html:19
-msgid "Past"
-msgstr "Passé"
-
 #: publications/templates/publications/event_page.html:44
 msgid "Date"
 msgstr "Date"
@@ -584,7 +589,11 @@ msgstr "Tout"
 msgid "All categories"
 msgstr "Toutes les catégories"
 
-#: publications/templates/publications/publication_index_page.html:69
+#: publications/templates/publications/publication_index_page.html:77
+msgid "Show past events"
+msgstr "Afficher les événements passés"
+
+#: publications/templates/publications/publication_index_page.html:89
 msgid "No publications found"
 msgstr "Aucune publication trouvée"
 

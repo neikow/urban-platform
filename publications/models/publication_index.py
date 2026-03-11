@@ -89,6 +89,11 @@ class PublicationIndexPage(Page):
         context["categories"] = categories
         context["selected_category"] = request.GET.get("category", "")
         context["selected_type"] = request.GET.get("type", "all")
+        context["show_past_events"] = request.GET.get("show_past", "").lower() in (
+            "true",
+            "1",
+            "on",
+        )
         return context
 
     class Meta:

@@ -58,6 +58,30 @@
                         {% endfor %}
                     </div>
                 </div>
+            {% elif selected_type == 'events' or selected_type == 'all' %}
+                <div class="mb-6">
+                    <form method="get" class="flex items-center gap-2">
+                        {% if selected_type == 'events' %}
+                            <input type="hidden" name="type" value="events">
+                        {% endif %}
+                        {% if request.GET.search %}
+                            <input type="hidden" name="search" value="{{ request.GET.search }}">
+                        {% endif %}
+                        <label class="label cursor-pointer gap-2">
+                            <input
+                                type="checkbox"
+                                name="show_past"
+                                value="on"
+                                class="checkbox checkbox-sm"
+                                {% if show_past_events %}
+                                    checked
+                                {% endif %}
+                                onchange="this.form.submit()"
+                            >
+                            <span class="label-text">{% trans "Show past events" %}</span>
+                        </label>
+                    </form>
+                </div>
             {% endif %}
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
