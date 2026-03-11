@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 14:37+0100\n"
+"POT-Creation-Date: 2026-03-11 10:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,36 +119,36 @@ msgid "External Links"
 msgstr ""
 
 #: publications/models/form.py:7
-#: publications/templates/publications/admin/vote_stats_detail.html:110
-#: publications/templates/publications/admin/vote_stats_detail.html:211
-#: publications/templates/publications/admin/vote_stats_detail.html:267
-#: publications/templates/publications/admin/vote_stats_detail.html:307
+#: publications/templates/publications/admin/vote_stats_detail.html:129
+#: publications/templates/publications/admin/vote_stats_detail.html:230
+#: publications/templates/publications/admin/vote_stats_detail.html:286
+#: publications/templates/publications/admin/vote_stats_detail.html:326
 #: publications/templates/publications/components/vote_form.html:80
 msgid "Unfavorable"
 msgstr ""
 
 #: publications/models/form.py:8
-#: publications/templates/publications/admin/vote_stats_detail.html:191
-#: publications/templates/publications/admin/vote_stats_detail.html:260
-#: publications/templates/publications/admin/vote_stats_detail.html:307
+#: publications/templates/publications/admin/vote_stats_detail.html:210
+#: publications/templates/publications/admin/vote_stats_detail.html:279
+#: publications/templates/publications/admin/vote_stats_detail.html:326
 #: publications/templates/publications/components/vote_form.html:108
 msgid "Rather Unfavorable"
 msgstr ""
 
 #: publications/models/form.py:9
-#: publications/templates/publications/admin/vote_stats_detail.html:171
-#: publications/templates/publications/admin/vote_stats_detail.html:253
-#: publications/templates/publications/admin/vote_stats_detail.html:307
+#: publications/templates/publications/admin/vote_stats_detail.html:190
+#: publications/templates/publications/admin/vote_stats_detail.html:272
+#: publications/templates/publications/admin/vote_stats_detail.html:326
 #: publications/templates/publications/components/vote_form.html:130
 msgid "Rather Favorable"
 msgstr ""
 
 #: publications/models/form.py:10
-#: publications/templates/publications/admin/vote_stats.html:18
-#: publications/templates/publications/admin/vote_stats_detail.html:95
-#: publications/templates/publications/admin/vote_stats_detail.html:151
-#: publications/templates/publications/admin/vote_stats_detail.html:246
-#: publications/templates/publications/admin/vote_stats_detail.html:307
+#: publications/templates/publications/admin/vote_stats.html:38
+#: publications/templates/publications/admin/vote_stats_detail.html:114
+#: publications/templates/publications/admin/vote_stats_detail.html:170
+#: publications/templates/publications/admin/vote_stats_detail.html:265
+#: publications/templates/publications/admin/vote_stats_detail.html:326
 #: publications/templates/publications/components/vote_form.html:151
 msgid "Favorable"
 msgstr ""
@@ -167,8 +167,8 @@ msgstr ""
 
 #: publications/models/form.py:41 publications/models/project.py:38
 #: publications/models/project.py:114
-#: publications/templates/publications/admin/vote_stats.html:14
-#: publications/templates/publications/components/publication_preview.html:58
+#: publications/templates/publications/admin/vote_stats.html:34
+#: publications/templates/publications/components/publication_preview.html:54
 msgid "Project"
 msgstr ""
 
@@ -337,37 +337,51 @@ msgstr ""
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
-#: publications/views/vote_stats.py:20 publications/views/vote_stats.py:69
+#: publications/views/vote_stats.py:40 publications/views/vote_stats.py:95
 #: publications/wagtail_hooks.py:24
 msgid "Vote Statistics"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats.html:15
+#: publications/templates/publications/admin/vote_stats.html:20
+#: publications/templates/publications/admin/vote_stats_detail.html:94
+#, python-format
+msgid "Show votes from outside %(code)s"
+msgstr "Montrer les votes en dehors du %(code)s"
+
+#: publications/templates/publications/admin/vote_stats.html:26
+#: publications/templates/publications/admin/vote_stats_detail.html:99
+#, python-format
+msgid ""
+"Only votes from users with postal code %(code)s are shown. Check the box "
+"above to include all votes."
+msgstr "Seul les votes d'utilisateurs avec le code postal %(code)s sont affichés. Cochez la case ci-dessus pour inclure tous les votes."
+
+#: publications/templates/publications/admin/vote_stats.html:35
 msgid "Status"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats.html:16
+#: publications/templates/publications/admin/vote_stats.html:36
 msgid "Total votes"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats.html:17
-#: publications/templates/publications/admin/vote_stats_detail.html:139
+#: publications/templates/publications/admin/vote_stats.html:37
+#: publications/templates/publications/admin/vote_stats_detail.html:158
 msgid "With comment"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats.html:39
+#: publications/templates/publications/admin/vote_stats.html:59
 msgid "Open"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats.html:46
+#: publications/templates/publications/admin/vote_stats.html:66
 msgid "Closed"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats.html:67
+#: publications/templates/publications/admin/vote_stats.html:87
 msgid "View details"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats.html:75
+#: publications/templates/publications/admin/vote_stats.html:95
 msgid "No projects with voting enabled."
 msgstr ""
 
@@ -391,28 +405,28 @@ msgstr ""
 msgid "votes"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats_detail.html:132
+#: publications/templates/publications/admin/vote_stats_detail.html:151
 msgid "Type"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats_detail.html:135
+#: publications/templates/publications/admin/vote_stats_detail.html:154
 msgid "Count"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats_detail.html:231
+#: publications/templates/publications/admin/vote_stats_detail.html:250
 msgid "Comments"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats_detail.html:273
+#: publications/templates/publications/admin/vote_stats_detail.html:292
 #: publications/tests/test_vote_stats.py:291
 msgid "Deleted User"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats_detail.html:281
+#: publications/templates/publications/admin/vote_stats_detail.html:300
 msgid "Anonymous"
 msgstr ""
 
-#: publications/templates/publications/admin/vote_stats_detail.html:295
+#: publications/templates/publications/admin/vote_stats_detail.html:314
 msgid "No votes yet"
 msgstr ""
 
