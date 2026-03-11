@@ -15,7 +15,9 @@
                         <span class="badge badge-secondary badge-lg">{% trans "Event" %}</span>
                         {% if page.is_upcoming %}
                             <span class="badge badge-success badge-lg">{% trans "Upcoming" %}</span>
-                        {% else %}
+                        {% elif page.is_ongoing %}
+                            <span class="badge badge-warning badge-lg">{% trans "Ongoing" %}</span>
+                        {% elif page.is_past %}
                             <span class="badge badge-ghost badge-lg">{% trans "Past" %}</span>
                         {% endif %}
                     </div>

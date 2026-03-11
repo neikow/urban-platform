@@ -93,7 +93,10 @@ class PublicationPage(Page):
     @property
     def is_upcoming(self) -> bool:
         if self._meta.model.__name__ == "EventPage":
-            return not self.is_past
+            from django.utils import timezone
+
+            event_date = self.__dict__.get("event_date")
+            return event_date is not None and event_date > timezone.now()
         real_instance = self.get_real_instance()
         if real_instance is not self and hasattr(real_instance, "is_upcoming"):
             return real_instance.is_upcoming

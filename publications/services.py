@@ -39,6 +39,7 @@ def filter_publications_by_type(
     publications: QuerySet, publication_type: str, show_past_events: bool = False
 ) -> QuerySet:
     from django.contrib.contenttypes.models import ContentType
+    from django.db.models import Case, When
     from django.db.models.functions import Coalesce
     from django.utils import timezone
 
@@ -53,9 +54,7 @@ def filter_publications_by_type(
         event_ct = ContentType.objects.get_for_model(EventPage)
         now = timezone.now()
 
-        event_queryset = publications.filter(real_type=event_ct).annotate(
-            effective_end_date=Coalesce("eventpage__end_date", "eventpage__event_date")
-        )
+        event_queryset = publications.filter(real_type=event_ct)
 
         if not show_past_events:
             today = now.date()
@@ -64,10 +63,11 @@ def filter_publications_by_type(
                 | Q(eventpage__end_date__isnull=True, eventpage__event_date__date__gte=today)
             )
 
-        return event_queryset.order_by("eventpage__event_date")
+        return event_queryset.order_by("-eventpage__event_date")
+
+    event_ct = ContentType.objects.get_for_model(EventPage)
 
     if not show_past_events:
-        event_ct = ContentType.objects.get_for_model(EventPage)
         now = timezone.now()
         today = now.date()
 
@@ -77,7 +77,14 @@ def filter_publications_by_type(
         )
         publications = publications.exclude(past_events_filter)
 
-    return publications.order_by("-first_published_at")
+    publications = publications.annotate(
+        sort_date=Case(
+            When(real_type=event_ct, then="eventpage__event_date"),
+            default="first_published_at",
+        )
+    )
+
+    return publications.order_by("-sort_date")
 
 
 def filter_publications_by_category(publications: QuerySet, category: Optional[str]) -> QuerySet:

@@ -117,7 +117,8 @@ class EventPageModelTest(TestCase):
         self.publication_index.add_child(instance=ongoing_event)
 
         self.assertFalse(ongoing_event.is_past)
-        self.assertTrue(ongoing_event.is_upcoming)
+        self.assertFalse(ongoing_event.is_upcoming)
+        self.assertTrue(ongoing_event.is_ongoing)
 
     def test_is_past_with_end_date_in_past(self) -> None:
         finished_event = EventPage(

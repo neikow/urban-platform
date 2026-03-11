@@ -110,7 +110,10 @@ class EventPage(PublicationPage):
 
     @property
     def is_upcoming(self) -> bool:
-        return not self.is_past
+        """Détermine si un événement n'a pas encore commencé."""
+        from django.utils import timezone
+
+        return self.event_date > timezone.now()
 
     class Meta:
         verbose_name = _("Event")
