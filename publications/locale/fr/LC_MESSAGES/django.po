@@ -347,7 +347,7 @@ msgstr "Statistiques des votes"
 #: publications/templates/publications/admin/vote_stats_detail.html:94
 #, python-format
 msgid "Show votes from outside %(code)s"
-msgstr ""
+msgstr "Montrer les votes en dehors du %(code)s"
 
 #: publications/templates/publications/admin/vote_stats.html:26
 #: publications/templates/publications/admin/vote_stats_detail.html:99
@@ -355,7 +355,7 @@ msgstr ""
 msgid ""
 "Only votes from users with postal code %(code)s are shown. Check the box "
 "above to include all votes."
-msgstr ""
+msgstr "Seul les votes d'utilisateurs avec le code postal %(code)s sont affichés. Cochez la case ci-dessus pour inclure tous les votes."
 
 #: publications/templates/publications/admin/vote_stats.html:35
 msgid "Status"
