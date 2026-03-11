@@ -12,6 +12,8 @@ BASE_DIR = PROJECT_DIR.parent
 
 WEBSITE_NAME = os.environ.get("WEBSITE_NAME", "Urbix")
 
+LOCAL_POSTAL_CODE = os.environ.get("LOCAL_POSTAL_CODE", "13007")
+
 # Application definition
 
 INSTALLED_APPS = [

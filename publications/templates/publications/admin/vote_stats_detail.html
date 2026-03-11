@@ -19,7 +19,7 @@
     <div class="w-nice-padding w-px-6">
         <!-- Back link -->
         <a
-            href="{% url 'vote_statistics' %}"
+            href="{% url 'vote_statistics' %}{% if show_all %}?show_all=1{% endif %}"
             class="w-flex w-items-center w-gap-1 w-text-text-meta hover:w-text-primary w-mb-4"
         >
             <svg
@@ -80,6 +80,27 @@
             {% endif %}
             <span class="w-text-text-meta">{{ total_votes }} {% trans "votes" %}</span>
         </div>
+
+        <form method="get" class="w-flex w-items-center w-gap-3 w-mb-4">
+            <label class="w-flex w-items-center w-gap-2 w-text-sm w-cursor-pointer">
+                <input
+                    type="checkbox"
+                    name="show_all"
+                    value="1"
+                    {% if show_all %}
+                        checked
+                    {% endif %}
+                    onchange="this.form.submit()"
+                >
+                {% blocktrans with code=local_postal_code %}Show votes from outside {{ code }}{% endblocktrans %}
+            </label>
+        </form>
+        {% if not show_all %}
+            <p class="w-text-text-meta w-text-sm w-mb-4">
+                {% blocktrans with code=local_postal_code %}Only votes from users with postal code {{ code }} are shown.
+                    Check the box above to include all votes.{% endblocktrans %}
+            </p>
+        {% endif %}
 
         {% if total_votes > 0 %}
             <div class="w-bg-surface-page w-p-6 w-rounded-lg">

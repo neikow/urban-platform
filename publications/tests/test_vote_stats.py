@@ -25,6 +25,7 @@ def regular_user(db):
         password="UserPass123",
         first_name="Regular",
         last_name="User",
+        postal_code="13007",
     )
 
 
@@ -193,6 +194,7 @@ class TestVoteStatsDetailView:
             password="TestPass123",
             first_name="Anonymous",
             last_name="Voter",
+            postal_code="13007",
         )
 
         # Create anonymous vote with comment
@@ -228,6 +230,7 @@ class TestVoteStatsDetailView:
             password="TestPass123",
             first_name="Public",
             last_name="Voter",
+            postal_code="13007",
         )
 
         # Create non-anonymous vote with comment
@@ -260,6 +263,7 @@ class TestVoteStatsDetailView:
             password="TestPass123",
             first_name="ToBeDeleted",
             last_name="User",
+            postal_code="13007",
         )
 
         # Create non-anonymous vote with comment
@@ -333,6 +337,7 @@ def project_with_mixed_votes(db):
             password="TestPass123",
             first_name=email.split("@")[0],
             last_name="Tester",
+            postal_code="13007",
         )
         FormResponse.objects.create(
             user=user,
@@ -405,6 +410,7 @@ class TestVoteStatsDetailViewAggregates:
                 password="TestPass123",
                 first_name=email.split("@")[0],
                 last_name="Tester",
+                postal_code="13007",
             )
             FormResponse.objects.create(
                 user=user,
@@ -462,6 +468,7 @@ class TestVoteStatsDetailViewAggregates:
                 password="TestPass123",
                 first_name=f"User{i}",
                 last_name="Tester",
+                postal_code="13007",
             )
             FormResponse.objects.create(user=user, project=project, choice=choice)
 
@@ -504,6 +511,7 @@ class TestVoteStatsDetailViewAggregates:
                 password="TestPass123",
                 first_name=f"User{i}",
                 last_name="Tester",
+                postal_code="13007",
             )
             FormResponse.objects.create(user=user, project=project, choice=choice)
 
@@ -532,3 +540,166 @@ class TestVoteStatsDetailViewAggregates:
         all_choices = set(choice.value for choice in VoteChoice)
         grouped_choices = set(FAVORABLE_VALUES) | set(UNFAVORABLE_VALUES)
         assert all_choices == grouped_choices
+
+
+@pytest.fixture
+def project_with_local_and_outside_votes(db):
+    """Create a project with votes from both local (13007) and outside users."""
+    from wagtail.models import Page
+
+    root_page = Page.objects.get(depth=1)
+
+    index_page = PublicationIndexPage.objects.first()
+    if not index_page:
+        index_page = PublicationIndexPage(
+            title="Publications",
+            slug="publications-local-filter",
+        )
+        root_page.add_child(instance=index_page)
+
+    project = ProjectPage(
+        title="Local Filter Test Project",
+        slug="local-filter-test-project",
+        enable_voting=True,
+    )
+    index_page.add_child(instance=project)
+
+    # Local user (13007)
+    local_user = User.objects.create_user(
+        email="local_voter@example.com",
+        password="TestPass123",
+        first_name="Local",
+        last_name="Voter",
+        postal_code="13007",
+    )
+    FormResponse.objects.create(
+        user=local_user,
+        project=project,
+        choice=VoteChoice.FAVORABLE,
+        comment="Local comment",
+    )
+
+    # Outside user (different postal code)
+    outside_user = User.objects.create_user(
+        email="outside_voter@example.com",
+        password="TestPass123",
+        first_name="Outside",
+        last_name="Voter",
+        postal_code="75001",
+    )
+    FormResponse.objects.create(
+        user=outside_user,
+        project=project,
+        choice=VoteChoice.UNFAVORABLE,
+        comment="Outside comment",
+    )
+
+    return project
+
+
+@pytest.mark.django_db
+class TestVoteStatsLocalFilter:
+    """Tests for the local postal code filtering in vote statistics."""
+
+    def test_detail_view_hides_outside_votes_by_default(
+        self, client, admin_user, project_with_local_and_outside_votes
+    ):
+        """By default, only votes from LOCAL_POSTAL_CODE users are shown."""
+        client.force_login(admin_user)
+        response = client.get(f"/admin/vote-statistics/{project_with_local_and_outside_votes.pk}/")
+        assert response.status_code == 200
+        context = response.context
+        # Only the local vote should be counted
+        assert context["total_votes"] == 1
+        assert context["favorable_total"] == 1
+        assert context["unfavorable_total"] == 0
+
+    def test_detail_view_shows_all_votes_with_show_all(
+        self, client, admin_user, project_with_local_and_outside_votes
+    ):
+        """With show_all=1, votes from all users are shown."""
+        client.force_login(admin_user)
+        response = client.get(
+            f"/admin/vote-statistics/{project_with_local_and_outside_votes.pk}/?show_all=1"
+        )
+        assert response.status_code == 200
+        context = response.context
+        # Both votes should be counted
+        assert context["total_votes"] == 2
+        assert context["favorable_total"] == 1
+        assert context["unfavorable_total"] == 1
+
+    def test_detail_view_hides_outside_comments_by_default(
+        self, client, admin_user, project_with_local_and_outside_votes
+    ):
+        """By default, comments from outside users are not displayed."""
+        client.force_login(admin_user)
+        response = client.get(f"/admin/vote-statistics/{project_with_local_and_outside_votes.pk}/")
+        assert response.status_code == 200
+        content = response.content.decode()
+        assert "Local comment" in content
+        assert "Outside comment" not in content
+
+    def test_detail_view_shows_outside_comments_with_show_all(
+        self, client, admin_user, project_with_local_and_outside_votes
+    ):
+        """With show_all=1, comments from all users are displayed."""
+        client.force_login(admin_user)
+        response = client.get(
+            f"/admin/vote-statistics/{project_with_local_and_outside_votes.pk}/?show_all=1"
+        )
+        assert response.status_code == 200
+        content = response.content.decode()
+        assert "Local comment" in content
+        assert "Outside comment" in content
+
+    def test_detail_view_shows_local_postal_code_in_context(
+        self, client, admin_user, project_with_local_and_outside_votes
+    ):
+        """The local postal code is passed to the template context."""
+        client.force_login(admin_user)
+        response = client.get(f"/admin/vote-statistics/{project_with_local_and_outside_votes.pk}/")
+        assert response.status_code == 200
+        assert "local_postal_code" in response.context
+        assert "show_all" in response.context
+        assert response.context["show_all"] is False
+
+    def test_list_view_hides_outside_votes_by_default(
+        self, client, admin_user, project_with_local_and_outside_votes
+    ):
+        """The list view shows only local votes by default."""
+        client.force_login(admin_user)
+        response = client.get("/admin/vote-statistics/")
+        assert response.status_code == 200
+        stats = {s["project"].pk: s for s in response.context["projects_stats"]}
+        pk = project_with_local_and_outside_votes.pk
+        assert stats[pk]["total_votes"] == 1
+
+    def test_list_view_shows_all_votes_with_show_all(
+        self, client, admin_user, project_with_local_and_outside_votes
+    ):
+        """With show_all=1, the list view shows votes from all users."""
+        client.force_login(admin_user)
+        response = client.get("/admin/vote-statistics/?show_all=1")
+        assert response.status_code == 200
+        stats = {s["project"].pk: s for s in response.context["projects_stats"]}
+        pk = project_with_local_and_outside_votes.pk
+        assert stats[pk]["total_votes"] == 2
+
+    def test_detail_view_show_all_false_context(
+        self, client, admin_user, project_with_local_and_outside_votes
+    ):
+        """show_all is False in context when parameter is absent."""
+        client.force_login(admin_user)
+        response = client.get(f"/admin/vote-statistics/{project_with_local_and_outside_votes.pk}/")
+        assert response.context["show_all"] is False
+
+    def test_detail_view_show_all_true_context(
+        self, client, admin_user, project_with_local_and_outside_votes
+    ):
+        """show_all is True in context when parameter is present."""
+        client.force_login(admin_user)
+        response = client.get(
+            f"/admin/vote-statistics/{project_with_local_and_outside_votes.pk}/?show_all=1"
+        )
+        assert response.context["show_all"] is True
