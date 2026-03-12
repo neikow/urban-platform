@@ -19,6 +19,7 @@ LOCAL_POSTAL_CODE = os.environ.get("LOCAL_POSTAL_CODE", "13007")
 INSTALLED_APPS = [
     "core",
     "home",
+    "about",
     "legal",
     "search",
     "pedagogy",

@@ -1,0 +1,18 @@
+{% load i18n wagtailimages_tags %}
+
+<div class="card bg-base-100 shadow-md p-4 flex flex-col items-center gap-1">
+    {% if value.image %}
+        {% image value.image fill-120x120 class="rounded-full w-28 h-28 object-cover" %}
+    {% endif %}
+    <div class="text-center">
+        <p class="font-bold text-lg mb-0">{{ value.name }}</p>
+        {% if value.role %}
+            <p class="text-sm opacity-70 mb-1">{{ value.role }}</p>
+        {% endif %}
+        {% if value.description %}
+            <p class="text-sm mt-2">{{ value.description }}</p>
+        {% endif %}
+        {% block urls %}
+        {% endblock %}
+    </div>
+</div>

@@ -1,0 +1,17 @@
+{% extends "about/blocks/user_block_base.html" %}
+{% load i18n %}
+
+{% block urls %}
+    {% if value.facebook_url %}
+        <div class="flex justify-center gap-2 mt-2">
+            <a
+                href="{{ value.facebook_url }}"
+                class="link link-hover text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Facebook
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}

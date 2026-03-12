@@ -1,0 +1,37 @@
+{% extends "about/blocks/user_block_base.html" %}
+{% load i18n %}
+
+{% block urls %}
+    <div class="flex justify-center gap-2 mt-2">
+        {% if value.github_url %}
+            <a
+                href="{{ value.github_url }}"
+                class="link link-hover text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+            </a>
+        {% endif %}
+        {% if value.facebook_url %}
+            <a
+                href="{{ value.facebook_url }}"
+                class="link link-hover text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Facebook
+            </a>
+        {% endif %}
+        {% if value.facebook_url %}
+            <a
+                href="{{ value.facebook_url }}"
+                class="link link-hover text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {% trans 'Personal Website' %}
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}

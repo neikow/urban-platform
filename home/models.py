@@ -9,7 +9,11 @@ from core.blocks import WEBSITE_BLOCK_TYPES
 class HomePage(Page):
     max_count = 1
     parent_page_types: list[str] = []
-    subpage_types: list[str] = ["legal.LegalIndexPage", "pedagogy.PedagogyIndexPage"]
+    subpage_types: list[str] = [
+        "legal.LegalIndexPage",
+        "pedagogy.PedagogyIndexPage",
+        "about.AboutIndexPage",
+    ]
 
     content = StreamField(
         WEBSITE_BLOCK_TYPES,
