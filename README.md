@@ -4,6 +4,17 @@
 
 | Name                                                           |    Stmts |     Miss |   Branch |   BrPart |      Cover |   Missing |
 |--------------------------------------------------------------- | -------: | -------: | -------: | -------: | ---------: | --------: |
+| about/\_\_init\_\_.py                                          |        0 |        0 |        0 |        0 |    100.00% |           |
+| about/apps.py                                                  |        4 |        0 |        0 |        0 |    100.00% |           |
+| about/blocks.py                                                |       40 |        0 |        0 |        0 |    100.00% |           |
+| about/management/\_\_init\_\_.py                               |        0 |        0 |        0 |        0 |    100.00% |           |
+| about/management/commands/\_\_init\_\_.py                      |        0 |        0 |        0 |        0 |    100.00% |           |
+| about/management/commands/populate\_about\_pages.py            |       19 |       19 |        6 |        0 |      0.00% |      1-32 |
+| about/models/\_\_init\_\_.py                                   |        5 |        0 |        0 |        0 |    100.00% |           |
+| about/models/about\_commission.py                              |       16 |        0 |        0 |        0 |    100.00% |           |
+| about/models/about\_dev\_team.py                               |       16 |        0 |        0 |        0 |    100.00% |           |
+| about/models/about\_index.py                                   |       14 |        0 |        0 |        0 |    100.00% |           |
+| about/models/about\_website.py                                 |       14 |        0 |        0 |        0 |    100.00% |           |
 | core/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/apps.py                                                   |        4 |        0 |        0 |        0 |    100.00% |           |
 | core/blocks.py                                                 |      170 |        4 |        0 |        0 |     97.65% |   240-250 |
@@ -24,7 +35,7 @@
 | core/templatetags/\_\_init\_\_.py                              |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/templatetags/custom\_blocks.py                            |       18 |       11 |        8 |        0 |     26.92% |10-19, 24-39 |
 | core/templatetags/forms.py                                     |        6 |        0 |        0 |        0 |    100.00% |           |
-| core/templatetags/navigation\_tags.py                          |       43 |        2 |       14 |        3 |     91.23% |21->24, 35, 57 |
+| core/templatetags/navigation\_tags.py                          |       53 |        4 |       18 |        5 |     87.32% |22->25, 36, 48, 53, 70 |
 | core/templatetags/structured\_data.py                          |      112 |        6 |       42 |       15 |     86.36% |30-31, 90->93, 100, 125->128, 129->132, 133->138, 135->138, 139, 141, 154->157, 158->161, 162->165, 166->169, 173->189, 181->187, 200 |
 | core/toc.py                                                    |       41 |        1 |       22 |        1 |     96.83% |        52 |
 | core/utils.py                                                  |        6 |        0 |        2 |        0 |    100.00% |           |
@@ -38,14 +49,14 @@
 | core/views/password\_reset.py                                  |       70 |        4 |       10 |        3 |     91.25% |67, 80, 103-104, 109->114 |
 | core/views/profile\_edit.py                                    |      119 |        6 |       24 |        6 |     91.61% |62, 72, 76, 105, 115, 122 |
 | core/views/register.py                                         |       78 |       10 |       18 |        7 |     82.29% |66, 79, 85, 92, 94, 96, 107-109, 151 |
-| core/wagtail\_hooks.py                                         |       79 |        5 |       12 |        6 |     87.91% |59->74, 122, 157, 159, 161, 163 |
+| core/wagtail\_hooks.py                                         |       93 |        8 |       18 |        9 |     84.68% |60->75, 123, 158, 160, 162, 164, 204, 206, 208 |
 | core/widgets.py                                                |       45 |       19 |       16 |        3 |     47.54% |16, 28-35, 49, 68-71, 81-88, 98 |
 | home/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/apps.py                                                   |        4 |        0 |        0 |        0 |    100.00% |           |
 | home/management/\_\_init\_\_.py                                |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/management/commands/\_\_init\_\_.py                       |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/management/commands/mock\_home\_page\_content.py          |       15 |       15 |        2 |        0 |      0.00% |      1-56 |
-| home/models.py                                                 |       18 |        1 |        0 |        0 |     94.44% |        29 |
+| home/models.py                                                 |       18 |        1 |        0 |        0 |     94.44% |        33 |
 | legal/\_\_init\_\_.py                                          |        0 |        0 |        0 |        0 |    100.00% |           |
 | legal/apps.py                                                  |        4 |        0 |        0 |        0 |    100.00% |           |
 | legal/forms.py                                                 |        4 |        0 |        0 |        0 |    100.00% |           |
@@ -90,7 +101,7 @@
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **2401** |  **493** |  **422** |   **59** | **75.06%** |           |
+| **TOTAL**                                                      | **2553** |  **517** |  **438** |   **64** | **75.29%** |           |
 
 
 ## Setup coverage badge
