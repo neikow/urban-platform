@@ -299,21 +299,21 @@ def populate_database() -> None:
         },
     ]
 
-    for page_def in about_pages:
-        model = page_def["model"]
+    for about_page_def in about_pages:
+        model = about_page_def["model"]
         if not (page := model.objects.first()):
             page = model(
-                title=page_def["title"],
-                slug=page_def["slug"],
+                title=about_page_def["title"],
+                slug=about_page_def["slug"],
                 locale=locale,
                 show_in_menus=True,
             )
             about_index.add_child(instance=page)
             page.save_revision().publish()
-            print(f"  ✓ Created {page_def['title']}")
+            print(f"  ✓ Created {about_page_def['title']}")
         else:
             page.save_revision().publish()
-            print(f"  ✓ {page_def['title']} exists")
+            print(f"  ✓ {about_page_def['title']} exists")
 
     # Create root collection if needed
     if not Collection.objects.filter(depth=1).exists():
