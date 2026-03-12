@@ -1,0 +1,16 @@
+{% extends "about/base.html" %}
+{% load i18n wagtailcore_tags %}
+
+{% block about_content %}
+    {% if page.get_children.live %}
+        <ul class="space-y-4">
+            {% for child in page.get_children.live %}
+                <li>
+                    <a href="{% pageurl child %}" class="link link-hover">{{ child.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{% trans "No content available at the moment." %}</p>
+    {% endif %}
+{% endblock %}

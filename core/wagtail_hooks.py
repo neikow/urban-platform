@@ -11,6 +11,7 @@ from home.models import HomePage
 from legal.models import CodeOfConductPage, CookiesPolicyPage, PrivacyPolicyPage, TermsOfServicePage
 from pedagogy.models import PedagogyIndexPage
 from publications.models import PublicationIndexPage
+from about.models import AboutWebsitePage, AboutCommissionPage, AboutDevTeamPage
 from .models import NeighborhoodAssociation, EmailEvent
 from django.utils.translation import gettext_lazy as _
 
@@ -191,3 +192,41 @@ def register_legal_menu() -> MenuItem:
         ]
     )
     return SubmenuMenuItem(_("Légal"), submenu, icon_name="gavel", order=300)
+
+
+@hooks.register("register_admin_menu_item")
+def register_about_menu() -> MenuItem:
+    about_website = AboutWebsitePage.objects.live().first()
+    about_commission = AboutCommissionPage.objects.live().first()
+    about_dev_team = AboutDevTeamPage.objects.live().first()
+
+    if about_website is None:
+        raise AboutWebsitePage.DoesNotExist("No live AboutWebsitePage found.")
+    if about_commission is None:
+        raise AboutCommissionPage.DoesNotExist("No live AboutCommissionPage found.")
+    if about_dev_team is None:
+        raise AboutDevTeamPage.DoesNotExist("No live AboutDevTeamPage found.")
+
+    submenu = Menu(
+        items=[
+            MenuItem(
+                _("La plateforme"),
+                reverse("wagtailadmin_pages:edit", args=[about_website.id]),
+                icon_name="doc-full-inverse",
+                order=100,
+            ),
+            MenuItem(
+                _("La commission d'urbanisme"),
+                reverse("wagtailadmin_pages:edit", args=[about_commission.id]),
+                icon_name="doc-full-inverse",
+                order=200,
+            ),
+            MenuItem(
+                _("L'équipe de développement"),
+                reverse("wagtailadmin_pages:edit", args=[about_dev_team.id]),
+                icon_name="doc-full-inverse",
+                order=300,
+            ),
+        ]
+    )
+    return SubmenuMenuItem(_("À propos"), submenu, icon_name="info-circle", order=400)

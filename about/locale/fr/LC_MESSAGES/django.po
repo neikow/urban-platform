@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-12 00:00+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: about/blocks.py
+msgid "Name"
+msgstr "Nom"
+
+#: about/blocks.py
+msgid "Photo"
+msgstr "Photo"
+
+#: about/blocks.py
+msgid "Role"
+msgstr "Rôle"
+
+#: about/blocks.py
+msgid "Description"
+msgstr "Description"
+
+#: about/blocks.py
+msgid "GitHub Profile URL"
+msgstr "URL du profil GitHub"
+
+#: about/blocks.py
+msgid "Facebook Profile URL"
+msgstr "URL du profil Facebook"
+
+#: about/blocks.py
+msgid "User"
+msgstr "Utilisateur"
+
+#: about/blocks.py
+msgid "User List"
+msgstr "Liste des utilisateurs"
+
+#: about/blocks.py
+msgid "Member"
+msgstr "Membre"
+
+#: about/blocks.py
+msgid "Members List"
+msgstr "Liste des membres"
+
+#: about/models/about_commission.py
+msgid "Content"
+msgstr "Contenu"
+
+#: about/models/about_commission.py
+msgid "Commission Members"
+msgstr "Membres de la commission"
+
+#: about/models/about_commission.py
+msgid "About Commission Page"
+msgstr "Page à propos de la commission"
+
+#: about/models/about_commission.py
+msgid "About Commission Pages"
+msgstr "Pages à propos de la commission"
+
+#: about/models/about_dev_team.py
+msgid "Dev Team Members"
+msgstr "Membres de l'équipe de développement"
+
+#: about/models/about_dev_team.py
+msgid "About Dev Team Page"
+msgstr "Page à propos de l'équipe de développement"
+
+#: about/models/about_dev_team.py
+msgid "About Dev Team Pages"
+msgstr "Pages à propos de l'équipe de développement"
+
+#: about/models/about_index.py
+msgid "About Index Page"
+msgstr "Page d'index À propos"
+
+#: about/models/about_index.py
+msgid "About Index Pages"
+msgstr "Pages d'index À propos"
+
+#: about/models/about_website.py
+msgid "About Website Page"
+msgstr "Page à propos du site"
+
+#: about/models/about_website.py
+msgid "About Website Pages"
+msgstr "Pages à propos du site"
+
+#: about/templates/about/about_index_page.html
+msgid "No content available at the moment."
+msgstr "Aucun contenu disponible pour le moment."
+
+#: core/templates/core/components/website_footer.html
+msgid "About"
+msgstr "À propos"
+
+#: core/wagtail_hooks.py
+msgid "À propos du site"
+msgstr "À propos du site"
+
+#: core/wagtail_hooks.py
+msgid "À propos de la commission"
+msgstr "À propos de la commission"
+
+#: core/wagtail_hooks.py
+msgid "À propos de l'équipe"
+msgstr "À propos de l'équipe"
+
+#: core/wagtail_hooks.py
+msgid "À propos"
+msgstr "À propos"

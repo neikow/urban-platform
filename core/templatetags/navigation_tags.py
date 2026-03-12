@@ -8,6 +8,7 @@ from wagtail.models import Site, Page
 from wagtail.templatetags.wagtailcore_tags import pageurl
 
 from legal.models import LegalIndexPage
+from about.models import AboutIndexPage
 
 register = template.Library()
 
@@ -37,6 +38,18 @@ def get_legal_pages(context: BaseContext) -> list[Page]:
     legal_index = LegalIndexPage.objects.live().descendant_of(root).first()
     if legal_index:
         return legal_index.get_children().live().in_menu()
+    return []
+
+
+@register.simple_tag(takes_context=True)
+def get_about_pages(context: BaseContext) -> list[Page]:
+    root = get_site_root(context)
+    if not root:
+        return []
+
+    about_index = AboutIndexPage.objects.live().descendant_of(root).first()
+    if about_index:
+        return about_index.get_children().live().in_menu()
     return []
 
 

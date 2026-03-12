@@ -2,6 +2,7 @@
 
 {% get_site_root as site_root %}
 {% get_legal_pages as legal_pages %}
+{% get_about_pages as about_pages %}
 <footer class="bg-base-200 text-base-content p-8 mt-8 md:mt-16 rounded-t-lg">
     <div class="footer sm:footer-horizontal">
         <aside class="grid-flow-col items-center">
@@ -57,6 +58,18 @@
                 {% for legal_page in legal_pages %}
                     <li>
                         <a href="{% pageurl legal_page %}" class="link link-hover">{{ legal_page.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <nav>
+            <h3 class="footer-title">
+                {% trans "About" %}
+            </h3>
+            <ul class="space-y-2">
+                {% for about_page in about_pages %}
+                    <li>
+                        <a href="{% pageurl about_page %}" class="link link-hover">{{ about_page.title }}</a>
                     </li>
                 {% endfor %}
             </ul>

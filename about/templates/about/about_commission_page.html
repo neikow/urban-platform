@@ -1,0 +1,11 @@
+{% extends "about/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block about_content %}
+    {{ page.content|richtext }}
+    {% if page.members %}
+        {% for block in page.members %}
+            {% include_block block %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

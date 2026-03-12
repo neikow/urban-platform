@@ -115,6 +115,12 @@ def populate_database() -> None:
     )
     from pedagogy.models import PedagogyIndexPage
     from publications.models import PublicationIndexPage
+    from about.models import (
+        AboutIndexPage,
+        AboutWebsitePage,
+        AboutCommissionPage,
+        AboutDevTeamPage,
+    )
 
     print("🌱 Populating E2E database...")
 
@@ -254,6 +260,60 @@ def populate_database() -> None:
         else:
             page.save_revision().publish()
             print(f"  ✓ {page_def['title']} exists")
+
+    about_index = AboutIndexPage.objects.first()
+    if not about_index:
+        about_index = AboutIndexPage(
+            title="À propos",
+            slug="a-propos",
+            locale=locale,
+        )
+        home.add_child(instance=about_index)
+        about_index.save_revision().publish()
+        print("  ✓ Created about index")
+    else:
+        if not about_index.live:
+            about_index.save_revision().publish()
+        print("  ✓ About index exists")
+
+    class AboutPageDefinition(TypedDict):
+        model: type[Page]
+        title: str
+        slug: str
+
+    about_pages: list[AboutPageDefinition] = [
+        {
+            "model": AboutWebsitePage,
+            "title": "La plateforme",
+            "slug": "la-plateforme",
+        },
+        {
+            "model": AboutCommissionPage,
+            "title": "La commission urbanisme",
+            "slug": "commission-urbanisme",
+        },
+        {
+            "model": AboutDevTeamPage,
+            "title": "L'équipe de développement",
+            "slug": "equipe-de-developpement",
+        },
+    ]
+
+    for about_page_def in about_pages:
+        model = about_page_def["model"]
+        if not (page := model.objects.first()):
+            page = model(
+                title=about_page_def["title"],
+                slug=about_page_def["slug"],
+                locale=locale,
+                show_in_menus=True,
+            )
+            about_index.add_child(instance=page)
+            page.save_revision().publish()
+            print(f"  ✓ Created {about_page_def['title']}")
+        else:
+            page.save_revision().publish()
+            print(f"  ✓ {about_page_def['title']} exists")
 
     # Create root collection if needed
     if not Collection.objects.filter(depth=1).exists():
