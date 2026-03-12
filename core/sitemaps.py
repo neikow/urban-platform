@@ -3,6 +3,8 @@ from typing import Generic, TypeVar, Iterable
 
 from django.contrib.sitemaps import Sitemap
 from wagtail.models import Page
+
+from about.models import AboutWebsitePage, AboutDevTeamPage, AboutCommissionPage, AboutIndexPage
 from home.models import HomePage
 from publications.models import PublicationIndexPage, ProjectPage, EventPage
 from pedagogy.models import PedagogyIndexPage, PedagogyCardPage
@@ -103,8 +105,26 @@ class EventPageSitemap(WagtailPageSitemap):
         return EventPage.objects.live().public().order_by("-last_published_at")
 
 
+class AboutPageSitemap(WagtailPageSitemap):
+    priority = 0.3
+    changefreq = "monthly"
+
+    def items(self) -> Iterable[Page]:  # type: ignore[override]
+        page_types: list[type[Page]] = [
+            AboutIndexPage,
+            AboutWebsitePage,
+            AboutDevTeamPage,
+            AboutCommissionPage,
+        ]
+        pks: list[int] = []
+        for model in page_types:
+            pks.extend(model.objects.live().public().values_list("pk", flat=True))
+        return Page.objects.filter(pk__in=pks).specific().order_by("path")
+
+
 SITEMAPS = {
     "home": HomePageSitemap,
+    "about": AboutPageSitemap,
     "legal": LegalPagesSitemap,
     "pedagogy-index": PedagogyIndexSitemap,
     "pedagogy-cards": PedagogyCardSitemap,
