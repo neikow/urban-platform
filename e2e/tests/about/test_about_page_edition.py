@@ -2,6 +2,7 @@ import uuid
 
 import pytest
 from playwright.sync_api import Page, expect
+from django.utils.translation import gettext as _
 
 from e2e.utils import login_user
 
@@ -26,7 +27,7 @@ def test_about_website_page_edition(
 
     page.get_by_role("button", name="À propos").click()
     page.get_by_label("À propos").get_by_role("link", name="La plateforme").click()
-    page.get_by_role("region", name="Content").get_by_role("textbox").fill(TEST_CONTENT)
+    page.get_by_role("region", name=_("Content")).get_by_role("textbox").fill(TEST_CONTENT)
     page.get_by_role("button", name="Plus d'actions").click()
     page.get_by_role("button", name="Publier").click()
 
@@ -54,8 +55,8 @@ def test_about_commission_page_edition(
     page.goto(base_url + "/admin/")
 
     page.get_by_role("button", name="À propos").click()
-    page.get_by_label("À propos").get_by_role("link", name="À propos de la commission").click()
-    page.get_by_role("region", name="Content").get_by_role("textbox").fill(TEST_CONTENT)
+    page.get_by_label("À propos").get_by_role("link", name="La commission urbanisme").click()
+    page.get_by_role("region", name=_("Content")).get_by_role("textbox").fill(TEST_CONTENT)
     page.get_by_role("button", name="Plus d'actions").click()
     page.get_by_role("button", name="Publier").click()
 
@@ -83,8 +84,8 @@ def test_about_dev_team_page_edition(
     page.goto(base_url + "/admin/")
 
     page.get_by_role("button", name="À propos").click()
-    page.get_by_label("À propos").get_by_role("link", name="À propos de l'équipe").click()
-    page.get_by_role("region", name="Content").get_by_role("textbox").fill(TEST_CONTENT)
+    page.get_by_label("À propos").get_by_role("link", name="L'équipe de développement").click()
+    page.get_by_role("region", name=_("Content")).get_by_role("textbox").fill(TEST_CONTENT)
     page.get_by_role("button", name="Plus d'actions").click()
     page.get_by_role("button", name="Publier").click()
 
