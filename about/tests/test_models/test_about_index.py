@@ -31,4 +31,4 @@ class AboutIndexPageTests(WagtailPageTestCase):
     def test_about_index_page_slug(self) -> None:
         about_index = AboutIndexPage.objects.filter(path__startswith=self.home_page.path).first()
         self.assertIsNotNone(about_index, "AboutIndexPage does not exist under HomePage.")
-        self.assertEqual(about_index.slug, "about", "AboutIndexPage slug is not 'about'.")
+        self.assertEqual(about_index.slug, "a-propos", "AboutIndexPage slug is not 'about'.")
