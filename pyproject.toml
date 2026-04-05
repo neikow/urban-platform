@@ -4,16 +4,16 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.13"
 dependencies = [
-    "celery[redis]==5.6.2",
+    "celery[redis]==5.6.3",
     "django==6.0.3",
     "django-celery-beat", # we temporarily install this from git because Django 6.0 support is not yet released
-    "gunicorn==25.1.0",
+    "gunicorn==25.3.0",
     "pre-commit==4.5.1",
     "psycopg==3.3.3",
     "python-dotenv==1.2.2",
     "python-slugify==8.0.4",
     "redis==6.4.0",
-    "sentry-sdk==2.54.0",
+    "sentry-sdk==2.57.0",
     "sib-api-v3-sdk==7.6.0",
     "tqdm==4.67.3",
     "wagtail==7.3.1",
