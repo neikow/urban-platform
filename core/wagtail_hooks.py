@@ -64,6 +64,7 @@ def hide_menu_items(request: HttpRequest, menu_items: list[MenuItem | SubmenuMen
             "sites",
             "redirects",
             "collections",
+            "users",
         ]
 
         admin_setting.menu.registered_menu_items[:] = [
@@ -230,6 +231,16 @@ def register_about_menu() -> MenuItem:
         ]
     )
     return SubmenuMenuItem(_("À propos"), submenu, icon_name="info-circle", order=400)
+
+
+@hooks.register("register_admin_menu_item")
+def register_users_menu() -> MenuItem:
+    return MenuItem(
+        _("Utilisateurs"),
+        reverse("wagtailusers_users:index"),
+        icon_name="user",
+        order=500,
+    )
 
 
 @hooks.register("register_admin_menu_item")

@@ -14,15 +14,15 @@ class ProtectedDocsView(UserPassesTestMixin, View):
         )
 
     def get(self, request, path, *args, **kwargs):
-        if not path:
-            path = "index.html"
-
         docs_dir = os.path.join(settings.BASE_DIR, "docs", "site")
-        file_path = os.path.normpath(os.path.join(docs_dir, path))
+        file_path = os.path.normpath(os.path.join(docs_dir, path or ""))
 
         # Security check to prevent directory traversal
-        if not file_path.startswith(docs_dir):
+        if not file_path.startswith(docs_dir + os.sep) and file_path != docs_dir:
             raise Http404("Document not found")
+
+        if os.path.isdir(file_path):
+            file_path = os.path.join(file_path, "index.html")
 
         if not os.path.exists(file_path):
             raise Http404("Document not found")
