@@ -13,7 +13,10 @@
         data-msg-remove-error="{% trans 'An error occurred while removing the vote' %}"
         data-msg-confirm-remove="{% trans 'Are you sure you want to remove your vote?' %}"
     >
-        <div id="vote-card" class="card bg-base-200 shadow-md px-4 pt-4 pb-6 sm:px-6 sm:pt-5 sm:pb-6 scroll-mt-24">
+        <div
+            id="vote-card"
+            class="card bg-base-200 shadow-md px-4 pt-4 pb-6 sm:px-6 sm:pt-5 sm:pb-6 scroll-mt-24 no-page-style"
+        >
             <div class="flex items-center gap-2 mb-3">
                 <h3 class="text-lg font-bold mt-0 mb-0 leading-tight">{{ page.vote_question }}</h3>
                 <div

@@ -112,7 +112,7 @@
         @apply opacity-70;
     }
 
-    .numbered-headings {
+    .numbered-headings:not(.no-page-style, .no-page-style *) {
         counter-reset: body-h2;
 
         h2 {
