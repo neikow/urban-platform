@@ -35,8 +35,8 @@
 | core/templatetags/\_\_init\_\_.py                              |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/templatetags/custom\_blocks.py                            |       18 |       11 |        8 |        0 |     26.92% |10-19, 24-39 |
 | core/templatetags/forms.py                                     |        6 |        0 |        0 |        0 |    100.00% |           |
-| core/templatetags/navigation\_tags.py                          |       53 |        4 |       18 |        5 |     87.32% |22->25, 36, 48, 53, 70 |
-| core/templatetags/structured\_data.py                          |      112 |        6 |       42 |       15 |     86.36% |30-31, 90->93, 100, 125->128, 129->132, 133->138, 135->138, 139, 141, 154->157, 158->161, 162->165, 166->169, 173->189, 181->187, 200 |
+| core/templatetags/navigation\_tags.py                          |       53 |        4 |       18 |        5 |     87.32% |22-\>25, 36, 48, 53, 70 |
+| core/templatetags/structured\_data.py                          |      112 |        6 |       42 |       15 |     86.36% |30-31, 90-\>93, 100, 125-\>128, 129-\>132, 133-\>138, 135-\>138, 139, 141, 154-\>157, 158-\>161, 162-\>165, 166-\>169, 173-\>189, 181-\>187, 200 |
 | core/toc.py                                                    |       41 |        1 |       22 |        1 |     96.83% |        52 |
 | core/utils.py                                                  |        6 |        0 |        2 |        0 |    100.00% |           |
 | core/views/\_\_init\_\_.py                                     |        0 |        0 |        0 |        0 |    100.00% |           |
@@ -46,10 +46,10 @@
 | core/views/login.py                                            |       34 |        1 |       10 |        1 |     95.45% |        57 |
 | core/views/logout.py                                           |        8 |        0 |        0 |        0 |    100.00% |           |
 | core/views/me.py                                               |        9 |        0 |        0 |        0 |    100.00% |           |
-| core/views/password\_reset.py                                  |       70 |        4 |       10 |        3 |     91.25% |67, 80, 103-104, 109->114 |
+| core/views/password\_reset.py                                  |       70 |        4 |       10 |        3 |     91.25% |67, 80, 103-104, 109-\>114 |
 | core/views/profile\_edit.py                                    |      119 |        6 |       24 |        6 |     91.61% |62, 72, 76, 105, 115, 122 |
 | core/views/register.py                                         |       78 |       10 |       18 |        7 |     82.29% |66, 79, 85, 92, 94, 96, 107-109, 151 |
-| core/wagtail\_hooks.py                                         |       93 |        8 |       18 |        9 |     84.68% |60->75, 123, 158, 160, 162, 164, 204, 206, 208 |
+| core/wagtail\_hooks.py                                         |       93 |        8 |       18 |        9 |     84.68% |60-\>75, 123, 158, 160, 162, 164, 204, 206, 208 |
 | core/widgets.py                                                |       45 |       19 |       16 |        3 |     47.54% |16, 28-35, 49, 68-71, 81-88, 98 |
 | home/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/apps.py                                                   |        4 |        0 |        0 |        0 |    100.00% |           |
@@ -88,7 +88,7 @@
 | publications/management/commands/create\_mock\_publications.py |       66 |       66 |       22 |        0 |      0.00% |     1-117 |
 | publications/management/commands/create\_mock\_votes.py        |       90 |       90 |       30 |        0 |      0.00% |     1-319 |
 | publications/models/\_\_init\_\_.py                            |        6 |        0 |        0 |        0 |    100.00% |           |
-| publications/models/event.py                                   |       44 |        2 |        4 |        1 |     93.75% |19, 23, 97->100 |
+| publications/models/event.py                                   |       44 |        2 |        4 |        1 |     93.75% |19, 23, 97-\>100 |
 | publications/models/external\_link.py                          |       17 |        0 |        0 |        0 |    100.00% |           |
 | publications/models/form.py                                    |       26 |        1 |        0 |        0 |     96.15% |        70 |
 | publications/models/project.py                                 |       62 |        3 |        8 |        1 |     94.29% |38, 42, 98 |
@@ -96,7 +96,7 @@
 | publications/models/publication\_index.py                      |       46 |        1 |        0 |        0 |     97.83% |        35 |
 | publications/services.py                                       |       77 |        1 |       18 |        1 |     97.89% |       137 |
 | publications/views/\_\_init\_\_.py                             |        0 |        0 |        0 |        0 |    100.00% |           |
-| publications/views/vote.py                                     |       70 |       12 |       20 |        5 |     81.11% |26-27, 46-47, 92-93, 99, 105, 117, 134-135, 141, 149->164 |
+| publications/views/vote.py                                     |       70 |       12 |       20 |        5 |     81.11% |26-27, 46-47, 92-93, 99, 105, 117, 134-135, 141, 149-\>164 |
 | publications/views/vote\_stats.py                              |       59 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
