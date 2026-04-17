@@ -14,6 +14,8 @@ WEBSITE_NAME = os.environ.get("WEBSITE_NAME", "Urbix")
 
 LOCAL_POSTAL_CODE = os.environ.get("LOCAL_POSTAL_CODE", "13007")
 
+ANALYTICS_SCRIPT_URL = os.environ.get("ANALYTICS_SCRIPT_URL", "")
+
 # Application definition
 
 INSTALLED_APPS = [

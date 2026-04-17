@@ -1,5 +1,7 @@
-{% load static wagtailcore_tags wagtailuserbar i18n structured_data %}
+{% load static wagtailcore_tags wagtailuserbar i18n structured_data django_settings %}
 {% get_current_language as LANGUAGE_CODE %}
+
+{% get_setting "ANALYTICS_SCRIPT_URL" as analytics_script_url %}
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}" data-theme="light" class="scroll-smooth">
@@ -28,6 +30,9 @@
             href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet"
         >
+        {% if analytics_script_url %}
+            <script src="{{ analytics_script_url }}" defer></script>
+        {% endif %}
         {% if page.search_description %}
             <meta name="description" content="{{ page.search_description }}">
         {% endif %}
