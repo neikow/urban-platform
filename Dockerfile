@@ -1,3 +1,9 @@
+FROM python:3.13-slim-bookworm AS docs
+RUN pip install --no-cache-dir mkdocs-material
+WORKDIR /app
+COPY docs/ docs/
+RUN cd docs && mkdocs build
+
 FROM node:20-bookworm-slim AS assets
 WORKDIR /app
 COPY package.json package-lock.json ./
@@ -24,6 +30,7 @@ ENV PATH="/app/.venv/bin:$PATH"
 COPY . .
 
 COPY --from=assets /app/urban_platform/static/css/styles.css /app/urban_platform/static/css/styles.css
+COPY --from=docs /app/docs/site /app/docs/site
 
 RUN uv sync --locked
 

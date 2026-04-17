@@ -1,0 +1,32 @@
+site_name: Urban Platform — Guide utilisateur
+theme:
+  name: material
+  language: fr
+  palette:
+    primary: teal
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+
+nav:
+  - Accueil: index.md
+  - Premiers pas:
+    - Se connecter: connexion.md
+    - Tableau de bord: tableau-de-bord.md
+  - Publications:
+    - Vue d'ensemble: publications/index.md
+    - Événements: publications/evenements.md
+    - Projets: publications/projets.md
+  - Fiches pédagogiques: fiches-pedagogiques.md
+  - Statistiques des votes: statistiques-votes.md
+  - Médiathèque:
+    - Images: images.md
+    - Documents: documents.md
+  - Contenu du site:
+    - Page d'accueil: page-accueil.md
+    - À propos: a-propos.md
+    - Pages légales: legal.md
+  - Utilisateurs: utilisateurs.md
