@@ -1,19 +1,20 @@
 import mimetypes
 import os
+from typing import Any
 
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpRequest, HttpResponse
 from django.views import View
 
 
 class ProtectedDocsView(UserPassesTestMixin, View):
-    def test_func(self):
+    def test_func(self) -> bool:
         return self.request.user.is_authenticated and (
             self.request.user.is_staff or self.request.user.is_superuser
         )
 
-    def get(self, request, path, *args, **kwargs):
+    def get(self, request: HttpRequest, path: str, *args: Any, **kwargs: Any) -> HttpResponse:
         docs_dir = os.path.join(settings.BASE_DIR, "docs", "site")
         file_path = os.path.normpath(os.path.join(docs_dir, path or ""))
 
