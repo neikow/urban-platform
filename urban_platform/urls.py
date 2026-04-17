@@ -19,6 +19,7 @@ from core.views.me import MeView
 from core.views.profile_edit import ProfileEditView, PasswordChangeView
 from core.views.account_delete import AccountDeleteView
 from core.views.email_verify import EmailVerifyView, EmailVerifySuccessView, EmailVerifyErrorView
+from core.views.docs import ProtectedDocsView
 from core.views.password_reset import (
     PasswordResetRequestView,
     PasswordResetSentView,
@@ -30,6 +31,8 @@ from publications.views.vote import VoteView, VoteResultsView
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
+    path("admin/docs/", ProtectedDocsView.as_view(), kwargs={"path": ""}, name="docs_index"),
+    path("admin/docs/<path:path>/", ProtectedDocsView.as_view(), name="docs"),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),

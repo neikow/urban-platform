@@ -230,3 +230,14 @@ def register_about_menu() -> MenuItem:
         ]
     )
     return SubmenuMenuItem(_("À propos"), submenu, icon_name="info-circle", order=400)
+
+
+@hooks.register("register_admin_menu_item")
+def register_docs_menu_item() -> MenuItem:
+    return MenuItem(
+        _("Documentation"),
+        reverse("docs_index"),
+        name="documentation",
+        icon_name="help",
+        order=10000,
+    )

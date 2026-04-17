@@ -50,6 +50,7 @@ dev = [
     "django-browser-reload>=1.21.0",
     "django-stubs[compatible-mypy]>=5.2.8",
     "factory-boy>=3.3.3",
+    "mkdocs-material>=9.7.6",
     "mypy>=1.19.1",
     "playwright>=1.57.0",
     "pytest-cov>=7.0.0",
