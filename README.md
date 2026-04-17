@@ -34,8 +34,9 @@
 | core/sitemaps.py                                               |       72 |       21 |        6 |        0 |     65.38% |31-33, 36, 39, 47, 55-65, 73, 81, 89, 97, 105, 113-122 |
 | core/templatetags/\_\_init\_\_.py                              |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/templatetags/custom\_blocks.py                            |       18 |       11 |        8 |        0 |     26.92% |10-19, 24-39 |
+| core/templatetags/django\_settings.py                          |        6 |        0 |        0 |        0 |    100.00% |           |
 | core/templatetags/forms.py                                     |        6 |        0 |        0 |        0 |    100.00% |           |
-| core/templatetags/navigation\_tags.py                          |       53 |        4 |       18 |        5 |     87.32% |22-\>25, 36, 48, 53, 70 |
+| core/templatetags/navigation\_tags.py                          |       53 |        3 |       18 |        4 |     90.14% |22-\>25, 36, 48, 53 |
 | core/templatetags/structured\_data.py                          |      112 |        6 |       42 |       15 |     86.36% |30-31, 90-\>93, 100, 125-\>128, 129-\>132, 133-\>138, 135-\>138, 139, 141, 154-\>157, 158-\>161, 162-\>165, 166-\>169, 173-\>189, 181-\>187, 200 |
 | core/toc.py                                                    |       41 |        1 |       22 |        1 |     96.83% |        52 |
 | core/utils.py                                                  |        6 |        0 |        2 |        0 |    100.00% |           |
@@ -101,7 +102,7 @@
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **2563** |  **522** |  **440** |   **64** | **75.16%** |           |
+| **TOTAL**                                                      | **2569** |  **521** |  **440** |   **63** | **75.27%** |           |
 
 
 ## Setup coverage badge
