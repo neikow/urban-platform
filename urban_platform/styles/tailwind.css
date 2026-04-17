@@ -112,10 +112,10 @@
         @apply opacity-70;
     }
 
-    .numbered-headings:not(.no-page-style, .no-page-style *) {
+    .numbered-headings {
         counter-reset: body-h2;
 
-        h2 {
+        h2:not(.no-page-style, .no-page-style *) {
             counter-increment: body-h2;
             counter-reset: body-h3;
 
@@ -125,7 +125,7 @@
             }
         }
 
-        h3 {
+        h3:not(.no-page-style, .no-page-style *) {
             counter-increment: body-h3;
             counter-reset: body-h4;
 
@@ -135,7 +135,7 @@
             }
         }
 
-        h4 {
+        h4:not(.no-page-style, .no-page-style *) {
             counter-increment: body-h4;
 
             &::before {
