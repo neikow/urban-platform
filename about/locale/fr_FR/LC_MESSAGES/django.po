@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 19:53+0200\n"
+"POT-Creation-Date: 2026-04-20 19:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: fr\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: about/blocks.py:12 about/blocks.py:56
 msgid "Name"
@@ -51,7 +51,7 @@ msgstr "URL du profil GitHub"
 
 #: about/blocks.py:82
 msgid "Personal Website URL"
-msgstr ""
+msgstr "URL du site personnel"
 
 #: about/blocks.py:87
 msgid "Member"
@@ -72,11 +72,11 @@ msgstr "Membres de la commission"
 
 #: about/models/about_commission.py:34
 msgid "About Commission Page"
-msgstr "Page à propos de la commission"
+msgstr "Page de la commission"
 
 #: about/models/about_commission.py:35
 msgid "About Commission Pages"
-msgstr "Pages à propos de la commission"
+msgstr "Pages de la commission"
 
 #: about/models/about_dev_team.py:24
 msgid "Dev Team Members"
@@ -84,27 +84,27 @@ msgstr "Membres de l'équipe de développement"
 
 #: about/models/about_dev_team.py:34
 msgid "About Dev Team Page"
-msgstr "Page à propos de l'équipe de développement"
+msgstr "Page de l'équipe de développement"
 
 #: about/models/about_dev_team.py:35
 msgid "About Dev Team Pages"
-msgstr "Pages à propos de l'équipe de développement"
+msgstr "Pages de l'équipe de développement"
 
 #: about/models/about_index.py:20
 msgid "About Index Page"
-msgstr "Page d'index À propos"
+msgstr "Page d'index à propos"
 
 #: about/models/about_index.py:21
 msgid "About Index Pages"
-msgstr "Pages d'index À propos"
+msgstr "Pages d'index à propos"
 
 #: about/models/about_website.py:22
 msgid "About Website Page"
-msgstr "Page à propos du site"
+msgstr "Page à propos du site web"
 
 #: about/models/about_website.py:23
 msgid "About Website Pages"
-msgstr "Pages à propos du site"
+msgstr "Pages à propos du site web"
 
 #: about/templates/about/about_index_page.html:14
 msgid "No content available at the moment."
@@ -112,19 +112,4 @@ msgstr "Aucun contenu disponible pour le moment."
 
 #: about/templates/about/blocks/member_block.html:33
 msgid "Personal Website"
-msgstr "Site web personnel"
-
-#~ msgid "About"
-#~ msgstr "À propos"
-
-#~ msgid "À propos du site"
-#~ msgstr "À propos du site"
-
-#~ msgid "À propos de la commission"
-#~ msgstr "À propos de la commission"
-
-#~ msgid "À propos de l'équipe"
-#~ msgstr "À propos de l'équipe"
-
-#~ msgid "À propos"
-#~ msgstr "À propos"
+msgstr "Site personnel"

@@ -1,9 +1,17 @@
-<header class="my-6 md:my-8 lg:my-16 container mx-auto">
+<header class="my-8 md:my-14 lg:my-20 container mx-auto">
     {% include "components/navigation/breadcrumbs.html" with page=page %}
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl mb-4 font-extrabold">
+    <h1
+        class="
+            font-display font-black uppercase leading-tight
+            text-[clamp(2.5rem,6vw,5.5rem)]
+            mb-4 mt-3
+        "
+    >
         {{ page.title }}
     </h1>
-    <p class="text-sm sm:text-base leading-relaxed text-base-content/80">
-        {{ page.page_introduction }}
-    </p>
+    {% if page.page_introduction %}
+        <p class="text-base sm:text-lg leading-relaxed text-base-content/70 max-w-2xl">
+            {{ page.page_introduction }}
+        </p>
+    {% endif %}
 </header>

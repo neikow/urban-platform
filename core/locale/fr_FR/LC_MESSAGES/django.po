@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 10:00+0100\n"
+"POT-Creation-Date: 2026-04-20 20:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,870 +19,922 @@ msgstr ""
 
 #: core/blocks.py:13 core/blocks.py:18 core/blocks.py:29
 msgid "Left"
-msgstr ""
+msgstr "Gauche"
 
 #: core/blocks.py:14 core/blocks.py:20 core/blocks.py:31
 msgid "Right"
-msgstr ""
+msgstr "Droite"
 
 #: core/blocks.py:19 core/blocks.py:30
 msgid "Center"
-msgstr ""
+msgstr "Centre"
 
 #: core/blocks.py:24
 msgid "Primary"
-msgstr ""
+msgstr "Primaire"
 
 #: core/blocks.py:25
 msgid "Secondary"
-msgstr ""
+msgstr "Secondaire"
 
 #: core/blocks.py:32
 msgid "Justify"
-msgstr ""
+msgstr "Justifier"
 
 #: core/blocks.py:36
 msgid "Small (1/3 Width)"
-msgstr ""
+msgstr "Petit (1/3 de la largeur)"
 
 #: core/blocks.py:37
 msgid "Medium (1/2 Width)"
-msgstr ""
+msgstr "Moyen (1/2 de la largeur)"
 
 #: core/blocks.py:38
 msgid "Large (2/3 Width)"
-msgstr ""
+msgstr "Grand (2/3 de la largeur)"
 
 #: core/blocks.py:39
 msgid "Full Width"
-msgstr ""
+msgstr "Pleine largeur"
 
 #: core/blocks.py:50
 msgid "Leave blank to use the image's default alt text"
-msgstr ""
+msgstr "Laisser vide pour utiliser le texte alternatif par défaut de l'image"
 
 #: core/blocks.py:54 core/blocks.py:110
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 #: core/blocks.py:61
 msgid "Text Justification"
-msgstr ""
+msgstr "Justification du texte"
 
 #: core/blocks.py:81
 msgid "Content"
-msgstr ""
+msgstr "Contenu"
 
 #: core/blocks.py:86
 msgid "Max Width (in pixels, optional)"
-msgstr ""
+msgstr "Largeur maximale (en pixels, optionnel)"
 
 #: core/blocks.py:89
 msgid "Leave blank for full width"
-msgstr ""
+msgstr "Laisser vide pour pleine largeur"
 
 #: core/blocks.py:93 core/blocks.py:106
 msgid "Text"
-msgstr ""
+msgstr "Texte"
 
 #: core/blocks.py:100
 msgid "Image Position"
-msgstr ""
+msgstr "Position de l'image"
 
 #: core/blocks.py:114 core/blocks.py:152
 msgid ""
 "Image Alt Text (For accessibility, SEO, and in case the image fails to load)"
-msgstr ""
+msgstr "Texte alternatif de l'image (pour l'accessibilité, le référencement et au cas où l'image ne se charge pas)"
 
 #: core/blocks.py:120
 msgid "DEPRECATED Image & Text Row"
-msgstr ""
+msgstr "DEPRECATED Image & Text Row"
 
 #: core/blocks.py:130
 msgid "Left Column Content"
-msgstr ""
+msgstr "Contenu de la colonne de gauche"
 
 #: core/blocks.py:134
 msgid "Right Column Content"
-msgstr ""
+msgstr "Contenu de la colonne de droite"
 
 #: core/blocks.py:138
 msgid "Two Column Block"
-msgstr ""
+msgstr "Bloc à deux colonnes"
 
 #: core/blocks.py:146
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: core/blocks.py:147
 msgid "Subtitle (Optional)"
-msgstr ""
+msgstr "Sous-titre (optionnel)"
 
 #: core/blocks.py:149
 msgid "Background Image"
-msgstr ""
+msgstr "Image de fond"
 
 #: core/blocks.py:157
 msgid "Call-to-Action Link (Leave blank if no CTA button)"
-msgstr ""
+msgstr "Lien d'appel à l'action (laisser vide s'il n'y a pas de bouton CTA)"
 
 #: core/blocks.py:160
 msgid "Call-to-Action Text (Leave blank if no CTA button)"
-msgstr ""
+msgstr "Texte de l'appel à l'action (laisser vide s'il n'y a pas de bouton CTA)"
 
 #: core/blocks.py:164
 msgid "Hero Block"
-msgstr ""
+msgstr "Bloc Héro"
 
 #: core/blocks.py:171
 msgid "Card Title"
-msgstr ""
+msgstr "Titre de la carte"
 
 #: core/blocks.py:176
 msgid "Card Description"
-msgstr ""
+msgstr "Description de la carte"
 
 #: core/blocks.py:179
 msgid "Card Image (Optional)"
-msgstr ""
+msgstr "Image de la carte (optionnelle)"
 
 #: core/blocks.py:182
 msgid ""
 "Card Image Alt Text (For accessibility, SEO, and in case the image fails to "
 "load)"
-msgstr ""
+msgstr "Texte alternatif de l'image de la carte (pour l'accessibilité, le référencement et au cas où l'image ne se charge pas)"
 
 #: core/blocks.py:189
 msgid "Learn More Link (Optional)"
-msgstr ""
+msgstr "Lien En savoir plus (optionnel)"
 
 #: core/blocks.py:193
 msgid "Card"
-msgstr ""
+msgstr "Carte"
 
 #: core/blocks.py:203
 msgid "Card List Block"
-msgstr ""
+msgstr "Bloc de liste de cartes"
 
 #: core/blocks.py:209
 msgid "Testimonial Quote"
-msgstr ""
+msgstr "Citation de témoignage"
 
 #: core/blocks.py:210
 msgid "Author Name"
-msgstr ""
+msgstr "Nom de l'auteur"
 
 #: core/blocks.py:211
 msgid "Author Title (Optional)"
-msgstr ""
+msgstr "Titre de l'auteur (optionnel)"
 
 #: core/blocks.py:212
 msgid "Author Image (Optional)"
-msgstr ""
+msgstr "Image de l'auteur (optionnelle)"
 
 #: core/blocks.py:215
 msgid "Testimonial"
-msgstr ""
+msgstr "Témoignage"
 
 #: core/blocks.py:225
 msgid "Testimonial List Block"
-msgstr ""
+msgstr "Bloc de liste de témoignages"
 
 #: core/blocks.py:232
 msgid "Number of Publications"
-msgstr ""
+msgstr "Nombre de publications"
 
 #: core/blocks.py:254
 msgid "Recent Publications Block"
-msgstr ""
+msgstr "Bloc de publications récentes"
 
 #: core/blocks.py:259
 msgid "Question"
-msgstr ""
+msgstr "Question"
 
 #: core/blocks.py:260
 msgid "Answer"
-msgstr ""
+msgstr "Réponse"
 
 #: core/blocks.py:272
 msgid "FAQ Block"
-msgstr ""
+msgstr "Bloc de FAQ"
 
 #: core/blocks.py:279
 msgid "Height (in pixels)"
-msgstr ""
+msgstr "Hauteur (en pixels)"
 
 #: core/blocks.py:286
 msgid "Hide on Mobile"
-msgstr ""
+msgstr "Masquer sur mobile"
 
 #: core/blocks.py:292
 msgid "Vertical Spacer"
-msgstr ""
+msgstr "Espacement vertical"
 
 #: core/blocks.py:298
 msgid "Button Text"
-msgstr ""
+msgstr "Texte du bouton"
 
 #: core/blocks.py:300
 msgid "Button Type"
-msgstr ""
+msgstr "Type de bouton"
 
 #: core/blocks.py:306
 msgid "Button Alignment"
-msgstr ""
+msgstr "Alignement du bouton"
 
 #: core/blocks.py:317
 msgid "Button Link"
-msgstr ""
+msgstr "Lien du bouton"
 
 #: core/blocks.py:320
 msgid "Call-to-Action Button"
-msgstr ""
+msgstr "Bouton d'appel à l'action"
 
 #: core/blocks.py:326 core/blocks.py:329
 msgid "Document"
-msgstr ""
+msgstr "Document"
 
 #: core/models/city_district.py:11
 msgid "City District"
-msgstr ""
+msgstr "Quartier de la ville"
 
 #: core/models/city_district.py:12
 msgid "City Districts"
-msgstr ""
+msgstr "Quartiers de la ville"
 
 #: core/models/city_neighborhood.py:13
 #: core/models/neighborhood_association.py:8
 msgid "City Neighborhood"
-msgstr ""
+msgstr "Quartier de la ville"
 
 #: core/models/city_neighborhood.py:14
 msgid "City Neighborhoods"
-msgstr ""
+msgstr "Quartiers de la ville"
 
 #: core/models/email_event.py:9
 msgid "Email Verification"
-msgstr ""
+msgstr "Vérification de l'email"
 
 #: core/models/email_event.py:10
 msgid "Password Reset"
-msgstr ""
+msgstr "Réinitialisation du mot de passe"
 
 #: core/models/email_event.py:14
 msgid "Pending"
-msgstr ""
+msgstr "En attente"
 
 #: core/models/email_event.py:15
 msgid "Sent"
-msgstr ""
+msgstr "Envoyé"
 
 #: core/models/email_event.py:16
 msgid "Failed"
-msgstr ""
+msgstr "Échoué"
 
 #: core/models/email_event.py:27 core/models/user.py:120
 msgid "User"
-msgstr ""
+msgstr "Utilisateur"
 
 #: core/models/email_event.py:30
 msgid "Event Type"
-msgstr ""
+msgstr "Type d'événement"
 
 #: core/models/email_event.py:35
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: core/models/email_event.py:41
 msgid "Recipient Email"
-msgstr ""
+msgstr "Email du destinataire"
 
 #: core/models/email_event.py:42
 msgid "Stored temporarily, cleared on anonymization"
-msgstr ""
+msgstr "Stocké temporairement, effacé lors de l'anonymisation"
 
 #: core/models/email_event.py:45
 msgid "Sent At"
-msgstr ""
+msgstr "Envoyé à"
 
 #: core/models/email_event.py:50
 msgid "Created At"
-msgstr ""
+msgstr "Créé à"
 
 #: core/models/email_event.py:54
 msgid "Error Message"
-msgstr ""
+msgstr "Message d'erreur"
 
 #: core/models/email_event.py:59
 msgid "Email Event"
-msgstr ""
+msgstr "Événement de courriel"
 
 #: core/models/email_event.py:60
 msgid "Email Events"
-msgstr ""
+msgstr "Événements de courriel"
 
 #: core/models/neighborhood_association.py:12
 msgid "Contact Email"
-msgstr ""
+msgstr "Email de contact"
 
 #: core/models/neighborhood_association.py:13
 msgid "Contact Phone"
-msgstr ""
+msgstr "Téléphone de contact"
 
 #: core/models/neighborhood_association.py:14
 msgid "Website"
-msgstr ""
+msgstr "Site web"
 
 #: core/models/neighborhood_association.py:17
 #: core/models/neighborhood_association.py:26
 msgid "Neighborhood Association"
-msgstr ""
+msgstr "Association de quartier"
 
 #: core/models/neighborhood_association.py:18
 msgid "Neighborhood Associations"
-msgstr ""
+msgstr "Associations de quartier"
 
 #: core/models/user.py:14
 msgid "Citizen"
-msgstr ""
+msgstr "Citoyen"
 
 #: core/models/user.py:15
 msgid "Association Member"
-msgstr ""
+msgstr "Membre de l'association"
 
 #: core/models/user.py:16
 msgid "Admin"
-msgstr ""
+msgstr "Administrateur"
 
 #: core/models/user.py:34
 msgid "The Email field must be set"
-msgstr ""
+msgstr "Le champ Email doit être renseigné"
 
 #: core/models/user.py:50
 msgid "Superuser must have is_staff=True."
-msgstr ""
+msgstr "Le superutilisateur doit avoir is_staff=True."
 
 #: core/models/user.py:52
 msgid "Superuser must have is_superuser=True."
-msgstr ""
+msgstr "Le superutilisateur doit avoir is_superuser=True."
 
 #: core/models/user.py:58
 msgid "Email Address"
-msgstr ""
+msgstr "Adresse e-mail"
 
 #: core/models/user.py:59
 msgid "UUID"
-msgstr ""
+msgstr "Identifiant unique"
 
-#: core/models/user.py:61 core/templates/core/profile.html:23
+#: core/models/user.py:61 core/templates/core/profile.html:26
 msgid "First Name"
-msgstr ""
+msgstr "Prénom"
 
-#: core/models/user.py:62 core/templates/core/profile.html:29
+#: core/models/user.py:62 core/templates/core/profile.html:30
 msgid "Last Name"
-msgstr ""
+msgstr "Nom de famille"
 
-#: core/models/user.py:70 core/templates/core/profile.html:74
+#: core/models/user.py:70 core/templates/core/profile.html:35
 msgid "Neighborhood"
-msgstr ""
+msgstr "Quartier"
 
 #: core/models/user.py:72
 msgid "Postal Code"
-msgstr ""
+msgstr "Code postal"
 
 #: core/models/user.py:75
 msgid "Email Verified"
-msgstr ""
+msgstr "Email vérifié"
 
 #: core/models/user.py:77
 msgid "Is the user's email address verified?"
-msgstr ""
+msgstr "L'adresse email de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:80 core/templates/core/profile.html:97
+#: core/models/user.py:80 core/templates/core/profile.html:75
 msgid "Role"
-msgstr ""
+msgstr "Rôle"
 
 #: core/models/user.py:86
 msgid "Phone Number"
-msgstr ""
+msgstr "Numéro de téléphone"
 
 #: core/models/user.py:88
 msgid "Newsletter Subscription"
-msgstr ""
+msgstr "Abonnement à la newsletter"
 
 #: core/models/user.py:90
 msgid "Does the user want to receive the newsletter?"
-msgstr ""
+msgstr "L'utilisateur souhaite-t-il recevoir la newsletter ?"
 
 #: core/models/user.py:93
 msgid "Date Joined"
-msgstr ""
+msgstr "Date d'inscription"
 
 #: core/models/user.py:94
 msgid "Last Updated"
-msgstr ""
+msgstr "Dernière mise à jour"
 
 #: core/models/user.py:96
 msgid "Deleted At"
-msgstr ""
+msgstr "Supprimé à"
 
 #: core/models/user.py:99
 msgid "When the user account was soft-deleted. NULL if not deleted."
-msgstr ""
+msgstr "Quand le compte utilisateur a été supprimé. NULL si non supprimé."
 
 #: core/models/user.py:104
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #: core/models/user.py:106
 msgid "Designates whether this user should be treated as active."
-msgstr ""
+msgstr "Indique si cet utilisateur doit être traité comme actif."
 
 #: core/models/user.py:109
 msgid "Staff Status"
-msgstr ""
+msgstr "Statut du personnel"
 
 #: core/models/user.py:111
 msgid "Designates whether the user can log into the admin site."
-msgstr ""
+msgstr "Indique si l'utilisateur peut se connecter au site d'administration."
 
 #: core/models/user.py:121
 msgid "Users"
-msgstr ""
+msgstr "Utilisateurs"
 
 #: core/templates/auth/email_verify_error.html:4
 msgid "Verification error"
-msgstr ""
+msgstr "Erreur de vérification"
 
 #: core/templates/auth/email_verify_error.html:27
 #: core/templates/auth/password_reset_error.html:27
 msgid "Invalid or expired link"
-msgstr ""
+msgstr "Lien invalide ou expiré"
 
 #: core/templates/auth/email_verify_error.html:29
 #: core/tests/views/test_email_verify.py:89
 msgid "The verification link is invalid or has expired."
-msgstr ""
+msgstr "Le lien de vérification est invalide ou a expiré."
 
 #: core/templates/auth/email_verify_error.html:32
 msgid "Verification links are valid for 24 hours."
-msgstr ""
+msgstr "Les liens de vérification sont valides pendant 24 heures."
 
 #: core/templates/auth/email_verify_error.html:36
-#: core/templates/auth/login_modal.html:10
-#: core/templates/auth/login_modal.html:49
-#: core/templates/auth/register.html:129
-#: core/templates/core/components/website_header.html:169
+#: core/templates/auth/login_modal.html:15
+#: core/templates/auth/login_modal.html:39
+#: core/templates/auth/register.html:119
+#: core/templates/core/components/website_header.html:104
+#: core/templates/core/components/website_header.html:127
 msgid "Log in"
-msgstr ""
+msgstr "Se connecter"
 
 #: core/templates/auth/email_verify_success.html:4
 msgid "Email confirmed"
-msgstr ""
+msgstr "Email confirmé"
 
 #: core/templates/auth/email_verify_success.html:27
 msgid "Email confirmed!"
-msgstr ""
+msgstr "Email confirmé !"
 
 #: core/templates/auth/email_verify_success.html:29
 #: core/tests/views/test_email_verify.py:77
 msgid "Your email address has been verified successfully."
-msgstr ""
+msgstr "Votre adresse e-mail a été vérifiée avec succès."
 
 #: core/templates/auth/email_verify_success.html:32
 msgid "You can now enjoy all the features of the platform."
-msgstr ""
+msgstr "Vous pouvez maintenant profiter de toutes les fonctionnalités de la plateforme."
 
 #: core/templates/auth/email_verify_success.html:36
 msgid "Go to my profile"
-msgstr ""
+msgstr "Aller à mon profil"
 
-#: core/templates/auth/login_modal.html:44
+#: core/templates/auth/login_modal.html:8
+#: core/templates/core/components/image_lightbox.html:21
+msgid "Close"
+msgstr "Fermer"
+
+#: core/templates/auth/login_modal.html:16
+msgid "Welcome back"
+msgstr "Bon retour parmi nous"
+
+#: core/templates/auth/login_modal.html:34
 msgid "Forgot password?"
-msgstr ""
+msgstr "Mot de passe oublié ?"
 
-#: core/templates/auth/login_modal.html:50
+#: core/templates/auth/login_modal.html:40
 #: core/templates/core/account_delete.html:111
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
-#: core/templates/auth/login_modal.html:54
-#: core/templates/auth/register.html:123
+#: core/templates/auth/login_modal.html:44
+#: core/templates/auth/register.html:115
 msgid "OR"
-msgstr ""
+msgstr "OU"
 
-#: core/templates/auth/login_modal.html:58
+#: core/templates/auth/login_modal.html:47
 msgid "Don't have an account?"
-msgstr ""
+msgstr "Vous n'avez pas de compte ?"
 
-#: core/templates/auth/login_modal.html:64 core/templates/auth/register.html:4
-#: core/templates/auth/register.html:31 core/templates/auth/register.html:118
+#: core/templates/auth/login_modal.html:49 core/templates/auth/register.html:4
+#: core/templates/auth/register.html:55 core/templates/auth/register.html:110
 msgid "Sign up"
-msgstr ""
+msgstr "S'inscrire"
 
 #: core/templates/auth/password_reset_complete.html:4
 msgid "Password changed"
-msgstr ""
+msgstr "Mot de passe modifié"
 
 #: core/templates/auth/password_reset_complete.html:27
 msgid "Password changed!"
-msgstr ""
+msgstr "Mot de passe modifié !"
 
 #: core/templates/auth/password_reset_complete.html:29
 #: core/tests/views/test_password_reset.py:162
 msgid "Your password has been reset successfully."
-msgstr ""
+msgstr "Votre mot de passe a été réinitialisé avec succès."
 
 #: core/templates/auth/password_reset_complete.html:32
 msgid "You can now log in with your new password."
-msgstr ""
+msgstr "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
 
 #: core/templates/auth/password_reset_complete.html:36
 #: core/templates/auth/password_reset_request.html:49
 #: core/templates/auth/password_reset_sent.html:36
 msgid "Back to home"
-msgstr ""
+msgstr "Retour à l'accueil"
 
 #: core/templates/auth/password_reset_confirm.html:4
 #: core/templates/auth/password_reset_confirm.html:12
 msgid "New password"
-msgstr ""
+msgstr "Nouveau mot de passe"
 
 #: core/templates/auth/password_reset_confirm.html:15
 msgid "Choose a new password for your account."
-msgstr ""
+msgstr "Choisissez un nouveau mot de passe pour votre compte."
 
 #: core/templates/auth/password_reset_confirm.html:44
 #: core/templates/auth/password_reset_request.html:4
 msgid "Reset password"
-msgstr ""
+msgstr "Réinitialiser le mot de passe"
 
 #: core/templates/auth/password_reset_error.html:4
 msgid "Expired link"
-msgstr ""
+msgstr "Lien expiré"
 
 #: core/templates/auth/password_reset_error.html:29
 #: core/tests/views/test_password_reset.py:150
 msgid "The reset link is invalid or has expired."
-msgstr ""
+msgstr "Le lien de réinitialisation est invalide ou a expiré."
 
 #: core/templates/auth/password_reset_error.html:32
 msgid "Reset links are valid for 1 hour."
-msgstr ""
+msgstr "Les liens de réinitialisation sont valides pendant 1 heure."
 
 #: core/templates/auth/password_reset_error.html:36
 msgid "Request a new link"
-msgstr ""
+msgstr "Demander un nouveau lien"
 
 #: core/templates/auth/password_reset_request.html:12
 msgid "Forgot your password?"
-msgstr ""
+msgstr "Mot de passe oublié ?"
 
 #: core/templates/auth/password_reset_request.html:15
 msgid ""
 "Enter your email address and we will send you a link to reset your password."
-msgstr ""
+msgstr "Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe."
 
 #: core/templates/auth/password_reset_request.html:43
 msgid "Send the link"
-msgstr ""
+msgstr "Envoyer le lien"
 
 #: core/templates/auth/password_reset_sent.html:4
 msgid "Email sent"
-msgstr ""
+msgstr "Email envoyé"
 
 #: core/templates/auth/password_reset_sent.html:27
 msgid "Check your inbox"
-msgstr ""
+msgstr "Vérifiez votre boîte de réception"
 
 #: core/templates/auth/password_reset_sent.html:29
 msgid ""
 "If an account exists with this email address, you will receive a link to "
 "reset your password."
-msgstr ""
+msgstr "Si un compte existe avec cette adresse e-mail, vous recevrez un lien pour réinitialiser votre mot de passe."
 
 #: core/templates/auth/password_reset_sent.html:32
 msgid "The link is valid for 1 hour."
-msgstr ""
+msgstr "Le lien est valide pendant 1 heure."
 
-#: core/templates/auth/register.html:18
+#: core/templates/auth/register.html:19
 msgid "Become a member"
-msgstr ""
+msgstr "Devenir membre"
 
-#: core/templates/auth/register.html:21 core/templates/auth/register.html:138
+#: core/templates/auth/register.html:28 core/templates/auth/register.html:132
 msgid "Access educational resources"
-msgstr ""
+msgstr "Accéder aux ressources éducatives"
 
-#: core/templates/auth/register.html:22 core/templates/auth/register.html:139
+#: core/templates/auth/register.html:36 core/templates/auth/register.html:138
 msgid "Follow your neighborhood's news"
-msgstr ""
+msgstr "Suivre les actualités de votre quartier"
 
-#: core/templates/auth/register.html:23 core/templates/auth/register.html:140
+#: core/templates/auth/register.html:44 core/templates/auth/register.html:144
 msgid "Vote on initiatives"
-msgstr ""
+msgstr "Voter sur les initiatives"
 
-#: core/templates/auth/register.html:83
+#: core/templates/auth/register.html:53
+msgid "Registration"
+msgstr "Inscription"
+
+#: core/templates/auth/register.html:88
 msgid "I accept the"
-msgstr ""
+msgstr "J'accepte les"
 
 #: core/templates/auth/register.html:90
 msgid "terms of service"
-msgstr ""
+msgstr "les conditions d'utilisation"
 
-#: core/templates/auth/register.html:91
+#: core/templates/auth/register.html:90
 msgid "(opens in a new tab)"
-msgstr ""
+msgstr "(s'ouvre dans un nouvel onglet)"
 
-#: core/templates/auth/register.html:127
+#: core/templates/auth/register.html:118
 msgid "Already have an account?"
-msgstr ""
+msgstr "Vous avez déjà un compte ?"
 
-#: core/templates/auth/register.html:135
+#: core/templates/auth/register.html:125
 #, python-format
 msgid "Become a member of %(website_name)s"
-msgstr ""
+msgstr "Devenez membre de %(website_name)s"
 
 #: core/templates/core/account_delete.html:4
 #: core/templates/core/account_delete.html:13
 #: core/tests/views/test_account_delete.py:39
 msgid "Delete my account"
-msgstr ""
+msgstr "Supprimer mon compte"
 
 #: core/templates/core/account_delete.html:26
-#: core/templates/core/profile_edit.html:69
+#: core/templates/core/profile_edit.html:22
 msgid "Back"
-msgstr ""
+msgstr "Retour"
 
 #: core/templates/core/account_delete.html:44
 msgid "Warning: Irreversible action"
-msgstr ""
+msgstr "Attention : action irréversible"
 
 #: core/templates/core/account_delete.html:46
 msgid ""
 "Deleting your account will result in the permanent loss of all your data."
-msgstr ""
+msgstr "La suppression de votre compte entraînera la perte permanente de toutes vos données."
 
 #: core/templates/core/account_delete.html:53
 msgid "What happens when you delete your account?"
-msgstr ""
+msgstr "Que se passe-t-il lorsque vous supprimez votre compte ?"
 
 #: core/templates/core/account_delete.html:56
 msgid "All your personal information will be permanently deleted"
-msgstr ""
+msgstr "Toutes vos informations personnelles seront définitivement supprimées"
 
 #: core/templates/core/account_delete.html:57
 msgid "Your participations and votes will be anonymized"
-msgstr ""
+msgstr "Vos participations et votes seront anonymisés"
 
 #: core/templates/core/account_delete.html:58
 msgid "You will no longer be able to access your account"
-msgstr ""
+msgstr "Vous ne pourrez plus accéder à votre compte"
 
 #: core/templates/core/account_delete.html:59
 msgid "This action is irreversible and cannot be undone"
-msgstr ""
+msgstr "Cette action est irréversible et ne peut pas être annulée"
 
 #: core/templates/core/account_delete.html:149
 msgid "Permanently delete my account"
-msgstr ""
+msgstr "Supprimer définitivement mon compte"
 
 #: core/templates/core/blocks/faq_list_block.html:4
 msgid "Foire aux Questions"
-msgstr ""
+msgstr "Foire aux Questions"
 
 #: core/templates/core/blocks/image_block.html:15
 #, python-format
 msgid "Preview image: %(title)s"
-msgstr ""
+msgstr "Aperçu de l'image : %(title)s"
 
 #: core/templates/core/blocks/recent_publications_block.html:6
+#: core/wagtail_hooks.py:117
+msgid "Publications"
+msgstr "Publications"
+
+#: core/templates/core/blocks/recent_publications_block.html:8
 msgid "Recent Publications"
-msgstr ""
+msgstr "Publications récentes"
 
-#: core/templates/core/blocks/recent_publications_block.html:9
+#: core/templates/core/blocks/recent_publications_block.html:12
 msgid "View All"
-msgstr ""
+msgstr "Voir tout"
 
-#: core/templates/core/blocks/recent_publications_block.html:19
+#: core/templates/core/blocks/recent_publications_block.html:22
 msgid "No recent publications found."
-msgstr ""
+msgstr "Aucune publication récente trouvée."
 
 #: core/templates/core/components/image_lightbox.html:3
 msgid "Image preview"
-msgstr ""
+msgstr "Aperçu de l'image"
 
 #: core/templates/core/components/image_lightbox.html:8
 #: core/templates/core/components/image_lightbox.html:21
 msgid "Close preview"
-msgstr ""
-
-#: core/templates/core/components/image_lightbox.html:21
-msgid "Close"
-msgstr ""
+msgstr "Fermer l'aperçu"
 
 #: core/templates/core/components/io/learn_more_button.html:5
 #: core/templates/core/components/io/learn_more_button.html:10
 msgid "Learn More"
-msgstr ""
+msgstr "En savoir plus"
 
 #: core/templates/core/components/search/text_search_form.html:38
 msgid "Search"
-msgstr ""
+msgstr "Rechercher"
 
-#: core/templates/core/components/website_footer.html:35
+#: core/templates/core/components/website_footer.html:36
 msgid "Let's build tomorrow's city together"
-msgstr ""
+msgstr "Construisons ensemble la ville de demain"
 
-#: core/templates/core/components/website_footer.html:42
+#: core/templates/core/components/website_footer.html:43
 #: core/tests/test_templates/test_components/test_website_footer.py:55
 msgid "Tools"
-msgstr ""
+msgstr "Outils"
 
-#: core/templates/core/components/website_footer.html:54
+#: core/templates/core/components/website_footer.html:55
 #: core/tests/test_templates/test_components/test_website_footer.py:56
 msgid "Legal"
-msgstr ""
+msgstr "Juridique"
 
 #: core/templates/core/components/website_footer.html:67
+msgid "About"
+msgstr "À propos"
+
+#: core/templates/core/components/website_footer.html:80
 msgid "All rights reserved."
-msgstr ""
+msgstr "Tous droits réservés."
 
-#: core/templates/core/components/website_header.html:103
+#: core/templates/core/components/website_header.html:33
+msgid "Header Navigation"
+msgstr "Navigation de l'en-tête"
+
+#: core/templates/core/components/website_header.html:56
+msgid "Menu utilisateur"
+msgstr "Menu utilisateur"
+
+#: core/templates/core/components/website_header.html:70
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
-#: core/templates/core/components/website_header.html:157
+#: core/templates/core/components/website_header.html:93
 msgid "Log out"
-msgstr ""
+msgstr "Se déconnecter"
 
-#: core/templates/core/profile.html:4 core/templates/core/profile.html:12
+#: core/templates/core/components/website_header.html:112
+msgid "Navigation Menu"
+msgstr "Menu de navigation"
+
+#: core/templates/core/profile.html:4 core/templates/core/profile.html:13
 #: core/tests/views/test_me.py:27
 msgid "My profile"
-msgstr ""
+msgstr "Mon profil"
 
-#: core/templates/core/profile.html:18 core/templates/core/profile_edit.html:76
+#: core/templates/core/profile.html:10 core/templates/core/profile.html:72
+#: core/templates/core/profile_edit.html:11
+msgid "Account"
+msgstr "Compte"
+
+#: core/templates/core/profile.html:23 core/templates/core/profile_edit.html:51
 msgid "Personal information"
-msgstr ""
+msgstr "Informations personnelles"
 
-#: core/templates/core/profile.html:38
+#: core/templates/core/profile.html:41
+msgid "Postal code"
+msgstr "Code postal"
+
+#: core/templates/core/profile.html:49
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
-#: core/templates/core/profile.html:43
+#: core/templates/core/profile.html:52
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
-#: core/templates/core/profile.html:49 core/tests/views/test_me.py:74
+#: core/templates/core/profile.html:56 core/tests/views/test_me.py:74
 msgid "Verified"
-msgstr ""
+msgstr "Vérifié"
 
-#: core/templates/core/profile.html:53 core/tests/views/test_me.py:67
+#: core/templates/core/profile.html:58 core/tests/views/test_me.py:67
 msgid "Not verified"
-msgstr ""
+msgstr "Non vérifié"
 
-#: core/templates/core/profile.html:61
+#: core/templates/core/profile.html:64
 msgid "Phone"
-msgstr ""
+msgstr "Téléphone"
+
+#: core/templates/core/profile.html:78 core/tests/views/test_me.py:59
+msgid "Member"
+msgstr "Membre"
+
+#: core/templates/core/profile.html:80
+msgid "Association member"
+msgstr "Membre de l'association"
 
 #: core/templates/core/profile.html:82
-msgid "Postal code"
-msgstr ""
+msgid "Administrator"
+msgstr "Administrateur"
+
+#: core/templates/core/profile.html:87
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: core/templates/core/profile.html:90 core/tests/views/test_me.py:51
+msgid "Subscribed"
+msgstr "Inscrit"
 
 #: core/templates/core/profile.html:92
-msgid "Account"
-msgstr ""
-
-#: core/templates/core/profile.html:101 core/tests/views/test_me.py:59
-msgid "Member"
-msgstr ""
-
-#: core/templates/core/profile.html:103
-msgid "Association member"
-msgstr ""
-
-#: core/templates/core/profile.html:105
-msgid "Administrator"
-msgstr ""
-
-#: core/templates/core/profile.html:111
-msgid "Newsletter"
-msgstr ""
-
-#: core/templates/core/profile.html:115 core/tests/views/test_me.py:51
-msgid "Subscribed"
-msgstr ""
-
-#: core/templates/core/profile.html:117
 msgid "Not subscribed"
-msgstr ""
+msgstr "Non inscrit"
 
-#: core/templates/core/profile.html:126
-msgid "Account information"
-msgstr ""
-
-#: core/templates/core/profile.html:131
+#: core/templates/core/profile.html:97
 msgid "Member since"
-msgstr ""
+msgstr "Membre depuis"
 
-#: core/templates/core/profile.html:137
+#: core/templates/core/profile.html:101
 msgid "Last update"
-msgstr ""
+msgstr "Dernière mise à jour"
 
-#: core/templates/core/profile.html:160 core/templates/core/profile_edit.html:4
-#: core/templates/core/profile_edit.html:52
+#: core/templates/core/profile.html:113 core/templates/core/profile_edit.html:4
+#: core/templates/core/profile_edit.html:14
 #: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
-msgstr ""
+msgstr "Modifier mon profil"
 
-#: core/templates/core/profile_edit.html:146
+#: core/templates/core/profile_edit.html:89
 msgid "Save changes"
-msgstr ""
+msgstr "Enregistrer les modifications"
 
-#: core/templates/core/profile_edit.html:154
-#: core/templates/core/profile_edit.html:203
+#: core/templates/core/profile_edit.html:97
+#: core/templates/core/profile_edit.html:119
 msgid "Change password"
-msgstr ""
+msgstr "Modifier le mot de passe"
 
-#: core/templatetags/navigation_tags.py:63
+#: core/templates/core/profile_edit.html:127
+msgid "Danger zone"
+msgstr "Zone de danger"
+
+#: core/templatetags/navigation_tags.py:76
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
-#: core/wagtail_hooks.py:82 core/wagtail_hooks.py:96 core/wagtail_hooks.py:127
+#: core/wagtail_hooks.py:84 core/wagtail_hooks.py:98 core/wagtail_hooks.py:129
 msgid "Page d'accueil"
-msgstr ""
+msgstr "Accueil"
 
-#: core/wagtail_hooks.py:102 core/wagtail_hooks.py:133
+#: core/wagtail_hooks.py:104 core/wagtail_hooks.py:135
 msgid "Liste"
-msgstr ""
+msgstr "Liste"
 
-#: core/wagtail_hooks.py:108 core/wagtail_hooks.py:139
+#: core/wagtail_hooks.py:110 core/wagtail_hooks.py:141
 msgid "Ajouter"
-msgstr ""
+msgstr "Ajouter"
 
-#: core/wagtail_hooks.py:115
-msgid "Publications"
-msgstr ""
-
-#: core/wagtail_hooks.py:146
+#: core/wagtail_hooks.py:148
 msgid "Fiches Pédagogiques"
-msgstr ""
+msgstr "Fiches Pédagogiques"
 
-#: core/wagtail_hooks.py:168
+#: core/wagtail_hooks.py:170
 msgid "Charte de conduite"
-msgstr ""
+msgstr "Charte de conduite"
 
-#: core/wagtail_hooks.py:174
+#: core/wagtail_hooks.py:176
 msgid "Conditions d'utilisation"
-msgstr ""
+msgstr "Conditions d'utilisation"
 
-#: core/wagtail_hooks.py:180
+#: core/wagtail_hooks.py:182
 msgid "Politique de cookies"
-msgstr ""
+msgstr "Politique de cookies"
 
-#: core/wagtail_hooks.py:186
+#: core/wagtail_hooks.py:188
 msgid "Politique de confidentialité"
-msgstr ""
+msgstr "Politique de confidentialité"
 
-#: core/wagtail_hooks.py:193
+#: core/wagtail_hooks.py:195
 msgid "Légal"
-msgstr ""
+msgstr "Juridique"
+
+#: core/wagtail_hooks.py:214
+msgid "La plateforme"
+msgstr "La plateforme"
+
+#: core/wagtail_hooks.py:220
+msgid "La commission d'urbanisme"
+msgstr "La commission d'urbanisme"
+
+#: core/wagtail_hooks.py:226
+msgid "L'équipe de développement"
+msgstr "L'équipe de développement"
+
+#: core/wagtail_hooks.py:233
+msgid "À propos"
+msgstr "À propos"
+
+#: core/wagtail_hooks.py:239
+msgid "Utilisateurs"
+msgstr "Utilisateurs"
+
+#: core/wagtail_hooks.py:249
+msgid "Documentation"
+msgstr "Documentation"

@@ -1,33 +1,35 @@
 {% extends "base.html" %}
 {% load i18n %}
-
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
     <article class="mx-4">
         {% include "core/components/page_header.html" %}
         <main class="container mx-auto">
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-4">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                    {% trans "Latest additions" %}
-                </h2>
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-8 gap-4">
+                <div>
+                    <p class="section-label mb-1.5">{% trans "Resources" %}</p>
+                    <h2 class="font-display font-black uppercase text-[clamp(1.8rem,4vw,3rem)] leading-tight">
+                        {% trans "Latest additions" %}
+                    </h2>
+                </div>
                 {% trans 'Search resources' as aria_label %}
                 {% trans "Search for a resource..." as placeholder %}
-                {% include "core/components/search/text_search_form.html" with aria_label="Search pedagogy cards" placeholder="Search for a resource..." %}
+                {% include "core/components/search/text_search_form.html" with aria_label=aria_label placeholder=placeholder %}
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for pedagogy_entry in pedagogy_entries %}
                     {% include "pedagogy/components/pedagogy_card_preview.html" with pedagogy_entry=pedagogy_entry %}
                     {% empty %}
                     <div class="min-h-64 flex items-center justify-center col-span-1 md:col-span-2 lg:col-span-3">
-                        <p>
-                            {% trans "No educational resources found" %}
-                        </p>
+                        <p class="text-base-content/50">{% trans "No educational resources found" %}</p>
                     </div>
                 {% endfor %}
             </div>
+
             {% include "components/navigation/pagination.html" with page_data=pedagogy_entries %}
-            <article>{{ page.content|richtext }}</article>
+            <article class="mt-8">{{ page.content|richtext }}</article>
         </main>
     </article>
 {% endblock content %}

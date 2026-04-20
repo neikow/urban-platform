@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-07 09:51+0100\n"
+"POT-Creation-Date: 2026-04-20 19:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,33 +109,49 @@ msgstr "Télécharger la ressource"
 msgid "Unknown resource type."
 msgstr "Type de ressource inconnu."
 
-#: pedagogy/templates/pedagogy/pedagogy_card_page.html:28
+#: pedagogy/templates/pedagogy/components/pedagogy_card_preview.html:19
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:14
+#, fuzzy
+#| msgid "No educational resources found"
+msgid "Educational Resource"
+msgstr "Aucune ressource pédagogique trouvée"
+
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:36
 #, python-format
 msgid "Preview image: %(title)s"
 msgstr "Aperçu de l'image: %(title)s"
 
-#: pedagogy/templates/pedagogy/pedagogy_card_page.html:58
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:57
+#, fuzzy
+#| msgid "Quick access"
+msgid "Quick Access"
+msgstr "Accès rapide"
+
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:65
 msgid "Table of Contents"
 msgstr "Table des matières"
 
-#: pedagogy/templates/pedagogy/pedagogy_index_page.html:12
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:11
+#, fuzzy
+#| msgid "Resource"
+msgid "Resources"
+msgstr "Ressource"
+
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:13
 msgid "Latest additions"
 msgstr "Derniers ajouts"
 
-#: pedagogy/templates/pedagogy/pedagogy_index_page.html:14
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:16
 msgid "Search resources"
 msgstr "Rechercher des ressources"
 
-#: pedagogy/templates/pedagogy/pedagogy_index_page.html:15
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:17
 msgid "Search for a resource..."
 msgstr "Rechercher une ressource..."
 
-#: pedagogy/templates/pedagogy/pedagogy_index_page.html:24
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:26
 msgid "No educational resources found"
 msgstr "Aucune ressource pédagogique trouvée"
 
 #~ msgid "View more"
 #~ msgstr "Voir plus"
-
-#~ msgid "Quick access"
-#~ msgstr "Accès rapide"

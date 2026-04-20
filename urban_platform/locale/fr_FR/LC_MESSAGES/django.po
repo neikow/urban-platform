@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 10:00+0100\n"
+"POT-Creation-Date: 2026-04-20 19:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,66 +19,49 @@ msgstr ""
 
 #: e2e/tests/test_auth_flows.py:54
 msgid "Sign up"
-msgstr ""
+msgstr "S'inscrire"
 
 #: e2e/tests/test_auth_flows.py:66
 msgid "Accept and continue"
-msgstr ""
+msgstr "Accepter et continuer"
 
 #: e2e/tests/test_auth_flows.py:87 e2e/tests/test_auth_flows.py:94
 msgid "Delete my account"
-msgstr ""
+msgstr "Supprimer mon compte"
 
 #: e2e/tests/test_auth_flows.py:93
 msgid "Warning: Irreversible action"
-msgstr ""
+msgstr "Attention : Action irréversible"
 
 #: e2e/tests/test_auth_flows.py:110 e2e/tests/test_auth_flows.py:114
 #: e2e/utils.py:23 e2e/utils.py:31
 msgid "Log in"
-msgstr ""
-
-#: search/templates/search/search.html:9 search/templates/search/search.html:13
-#: search/templates/search/search.html:17
-msgid "Search"
-msgstr ""
-
-#: search/templates/search/search.html:35
-msgid "Previous"
-msgstr ""
-
-#: search/templates/search/search.html:40
-msgid "Next"
-msgstr ""
-
-#: search/templates/search/search.html:43
-msgid "No results found"
-msgstr ""
+msgstr "Se connecter"
 
 #: urban_platform/templates/404.html:4 urban_platform/templates/404.html:13
 msgid "Page not found"
-msgstr ""
+msgstr "Page non trouvée"
 
 #: urban_platform/templates/404.html:16
 msgid "Sorry, the page you are looking for does not exist or has been moved."
-msgstr ""
+msgstr "Désolé, la page que vous recherchez n'existe pas ou a été déplacée."
 
 #: urban_platform/templates/404.html:21 urban_platform/templates/500.html:22
 msgid "Back to home"
-msgstr ""
+msgstr "Retour à l'accueil"
 
 #: urban_platform/templates/404.html:24
 msgid "Go back"
-msgstr ""
+msgstr "Revenir en arrière"
 
 #: urban_platform/templates/500.html:7 urban_platform/templates/500.html:15
 msgid "Internal server error"
-msgstr ""
+msgstr "Erreur interne du serveur"
 
 #: urban_platform/templates/500.html:18
 msgid "Sorry, something went wrong on our end. Please try again later."
-msgstr ""
+msgstr "Désolé, quelque chose s'est mal passé de notre côté. Veuillez réessayer plus tard."
 
 #: urban_platform/templates/500.html:25
 msgid "Reload the page"
-msgstr ""
+msgstr "Recharger la page"

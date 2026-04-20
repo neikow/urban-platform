@@ -1,19 +1,19 @@
 {% load i18n wagtailimages_tags %}
 
-<div class="{% if container %} container mx-auto {% endif %} px-4 py-12 no-page-style">
+<div class="{% if container %} container mx-auto {% endif %} px-4 sm:px-6 py-12 no-page-style">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {% for card in self %}
-            <div class="card bg-base-100 shadow-sm">
+            <div class="bg-base-100 rounded-lg shadow-sm overflow-hidden flex flex-col">
                 {% if card.image %}
-                    <figure>
-                        {% image card.image fill-600x400 alt=card.alt_text %}
+                    <figure class="aspect-[4/3] overflow-hidden">
+                        {% image card.image fill-600x450 alt=card.alt_text class="w-full h-full object-cover" %}
                     </figure>
                 {% endif %}
-                <div class="card-body">
-                    <h2 class="card-title text-lg">{{ card.title }}</h2>
-                    <p class="text-sm leading-relaxed text-base-content/70">{{ card.description }}</p>
+                <div class="p-6 flex flex-col flex-1">
+                    <h2 class="font-display font-bold text-2xl leading-tight mb-3">{{ card.title }}</h2>
+                    <p class="text-sm leading-relaxed text-base-content/65 flex-1">{{ card.description }}</p>
                     {% if card.link %}
-                        <div class="card-actions justify-end">
+                        <div class="mt-5 pt-4">
                             {% include "core/components/io/learn_more_button.html" with url=card.link %}
                         </div>
                     {% endif %}

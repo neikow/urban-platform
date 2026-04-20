@@ -5,21 +5,41 @@
 <dialog id="login_modal" class="modal">
     <div class="modal-box w-full max-w-sm">
         <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            <button
+                class="btn btn-sm btn-ghost absolute right-3 top-3 text-base-content/50 hover:text-base-content"
+                aria-label="{% trans 'Close' %}"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+            </button>
         </form>
-        <h3 class="font-bold text-lg mb-4">{% trans "Log in" %}</h3>
+
+        <h3 class="font-display font-black uppercase text-2xl mb-1">{% trans "Log in" %}</h3>
+        <p class="text-sm text-base-content/50 mb-5">{% trans "Welcome back" %}</p>
 
         <form id="login-form" method="post" action="{% url 'login' %}" class="space-y-4">
             {% csrf_token %}
-
             <input type="hidden" name="next" value="{{ request.path }}">
 
             <div id="login-error" class="alert alert-error hidden" role="alert">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="stroke-current shrink-0 h-6 w-6"
+                    class="stroke-current shrink-0 h-5 w-5"
                     fill="none"
                     viewBox="0 0 24 24"
+                    aria-hidden="true"
                 >
                     <path
                         stroke-linecap="round"
@@ -32,39 +52,38 @@
             </div>
 
             {% include "components/forms/form_field.html" with field=form.email %}
-
             {% include "components/forms/password_field.html" with field=form.password %}
 
-            <div class="text-right mb-4">
+            <div class="text-right">
                 <a
                     href="{% url 'password_reset_request' %}"
-                    class="text-sm link link-primary"
+                    class="text-sm text-primary hover:underline"
                     onclick="login_modal.close()"
                 >
                     {% trans "Forgot password?" %}
                 </a>
             </div>
 
-            <div class="modal-action">
-                <button type="submit" class="btn btn-primary">{% trans "Log in" %}</button>
-                <button type="button" onclick="login_modal.close()" class="btn">{% trans "Cancel" %}</button>
+            <div class="flex gap-2 pt-1">
+                <button type="submit" class="btn btn-primary border-none font-semibold flex-1">
+                    {% trans "Log in" %}
+                </button>
+                <button type="button" onclick="login_modal.close()" class="btn btn-ghost">{% trans "Cancel" %}</button>
             </div>
         </form>
 
-        <div class="divider">{% trans "OR" %}</div>
+        <div class="divider text-xs text-base-content/40 my-4">{% trans "OR" %}</div>
 
-        <div class="text-center">
-            <p class="text-sm">
-                {% trans "Don't have an account?" %}
-                <a
-                    href="{% url 'register' %}?next={{ request.path|urlencode }}"
-                    class="link link-primary"
-                    onclick="login_modal.close()"
-                >
-                    {% trans "Sign up" %}
-                </a>
-            </p>
-        </div>
+        <p class="text-sm text-center text-base-content/70">
+            {% trans "Don't have an account?" %}
+            <a
+                href="{% url 'register' %}?next={{ request.path|urlencode }}"
+                class="text-primary font-semibold hover:underline"
+                onclick="login_modal.close()"
+            >
+                {% trans "Sign up" %}
+            </a>
+        </p>
     </div>
     <form method="dialog" class="modal-backdrop">
         <button>close</button>

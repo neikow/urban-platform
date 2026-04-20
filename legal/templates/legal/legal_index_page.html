@@ -3,25 +3,47 @@
 {% load wagtailcore_tags i18n %}
 
 {% block content %}
-    <article class="container mx-auto my-6 md:my-12 lg:my-24 px-4 min-h-screen">
-        <header>
-            {% include "components/navigation/breadcrumbs.html" with page=page %}
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl mb-4 font-extrabold">
-                {{ page.title }}
-            </h1>
+    <article>
+        <header class="bg-base-200/60 border-b border-base-300/70">
+            <div class="container mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
+                {% include "components/navigation/breadcrumbs.html" with page=page %}
+                <h1
+                    class="
+                        font-display font-black uppercase leading-tight text-balance
+                        text-[clamp(2.2rem,5.5vw,4.5rem)]
+                        mt-4
+                    "
+                >
+                    {{ page.title }}
+                </h1>
+            </div>
         </header>
-        <main class="page-content">
-            {% for child_pages in page.get_children.live.in_menu %}
-                <a href="{% pageurl child_pages %}">
-                    <h2 class="text-2xl sm:text-3xl font-bold mb-4">
-                        {{ child_pages.title }}
-                    </h2>
-                </a>
-                {% empty %}
-                <p>
-                    {% trans "No content available at the moment." %}
-                </p>
-            {% endfor %}
-        </main>
+        <div class="container mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16 min-h-[40vh]">
+            <main class="max-w-2xl">
+                {% for child_page in page.get_children.live.in_menu %}
+                    <a
+                        href="{% pageurl child_page %}"
+                        class="flex items-center justify-between py-6 group border-b border-base-300 first:border-t"
+                    >
+                        <h2 class="font-display font-bold text-2xl leading-tight group-hover:text-primary transition-colors duration-150">
+                            {{ child_page.title }}
+                        </h2>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 text-base-content/30 group-hover:text-primary transition-colors duration-150 shrink-0 ml-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            aria-hidden="true"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                    {% empty %}
+                    <p class="text-base-content/50">{% trans "No content available at the moment." %}</p>
+                {% endfor %}
+            </main>
+        </div>
     </article>
 {% endblock %}

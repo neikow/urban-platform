@@ -4,165 +4,165 @@
 {% block title %}{% trans "My profile" %}{% endblock %}
 
 {% block content %}
-    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto">
-            <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h1 class="card-title text-3xl font-bold mb-6">
-                        {% trans "My profile" %}
-                    </h1>
+    <article>
+        <header class="bg-base-200/60 border-b border-base-300/70">
+            <div class="container mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16">
+                <p class="section-label mb-2">{% trans "Account" %}</p>
+                <h1
+                    class="
+                        font-display font-black uppercase leading-tight
+                        text-[clamp(2.2rem,5vw,4rem)]
+                    "
+                >
+                    {% if user.first_name %}{{ user.first_name }}
+                        {{ user.last_name }}{% else %}{% trans "My profile" %}{% endif %}
+                </h1>
+                <p class="text-base-content/60 text-sm mt-2">{{ user.email }}</p>
+            </div>
+        </header>
 
-                    <div class="space-y-6">
-                        <div class="border-b border-base-300 pb-6">
-                            <h2 class="text-xl font-semibold mb-4 text-primary">
-                                {% trans "Personal information" %}
-                            </h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="label">
-                                        <span class="label-text font-semibold">{% trans "First Name" %}</span>
-                                    </label>
-                                    <p class="text-base-content">{{ user.first_name }}</p>
-                                </div>
-                                <div>
-                                    <label class="label">
-                                        <span class="label-text font-semibold">{% trans "Last Name" %}</span>
-                                    </label>
-                                    <p class="text-base-content">{{ user.last_name }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="border-b border-base-300 pb-6">
-                            <h2 class="text-xl font-semibold mb-4 text-primary">
-                                {% trans "Contact" %}
-                            </h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="label">
-                                        <span class="label-text font-semibold">{% trans "Email" %}</span>
-                                    </label>
-                                    <p class="text-base-content flex items-center gap-2">
-                                        {{ user.email }}
-                                        {% if user.is_verified %}
-                                            <span class="badge badge-success badge-sm">
-                                                {% trans "Verified" %}
-                                            </span>
-                                        {% else %}
-                                            <span class="badge badge-warning badge-sm">
-                                                {% trans "Not verified" %}
-                                            </span>
-                                        {% endif %}
-                                    </p>
-                                </div>
-                                {% if user.phone_number %}
-                                    <div>
-                                        <label class="label">
-                                            <span class="label-text font-semibold">{% trans "Phone" %}</span>
-                                        </label>
-                                        <p class="text-base-content">{{ user.phone_number }}</p>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="border-b border-base-300 pb-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {% if user.neighborhood %}
-                                    <div>
-                                        <label class="label">
-                                            <span class="label-text font-semibold">{% trans "Neighborhood" %}</span>
-                                        </label>
-                                        <p class="text-base-content">{{ user.neighborhood.full_name }}</p>
-                                    </div>
-                                {% endif %}
-                                {% if user.postal_code %}
-                                    <div>
-                                        <label class="label">
-                                            <span class="label-text font-semibold">{% trans "Postal code" %}</span>
-                                        </label>
-                                        <p class="text-base-content">{{ user.postal_code }}</p>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="border-b border-base-300 pb-6">
-                            <h2 class="text-xl font-semibold mb-4 text-primary">
-                                {% trans "Account" %}
-                            </h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="label">
-                                        <span class="label-text font-semibold">{% trans "Role" %}</span>
-                                    </label>
-                                    <p class="text-base-content">
-                                        {% if user.role == 'CITIZEN' %}
-                                            <span class="badge badge-primary">{% trans "Member" %}</span>
-                                        {% elif user.role == 'ASSOCIATION_MEMBER' %}
-                                            <span class="badge badge-secondary">{% trans "Association member" %}</span>
-                                        {% elif user.role == 'ADMIN' %}
-                                            <span class="badge badge-accent">{% trans "Administrator" %}</span>
-                                        {% endif %}
-                                    </p>
-                                </div>
-                                <div>
-                                    <label class="label">
-                                        <span class="label-text font-semibold">{% trans "Newsletter" %}</span>
-                                    </label>
-                                    <p class="text-base-content">
-                                        {% if user.newsletter_subscription %}
-                                            <span class="badge badge-success">{% trans "Subscribed" %}</span>
-                                        {% else %}
-                                            <span class="badge badge-ghost">{% trans "Not subscribed" %}</span>
-                                        {% endif %}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
+        <div class="container mx-auto px-6 sm:px-8 lg:px-12 py-10 md:py-14">
+            <div class="max-w-2xl space-y-10">
+                <section class="pb-8 border-b border-base-300">
+                    <p class="section-label mb-5">{% trans "Personal information" %}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                            <h2 class="text-xl font-semibold mb-4 text-primary">
-                                {% trans "Account information" %}
-                            </h2>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="label">
-                                        <span class="label-text font-semibold">{% trans "Member since" %}</span>
-                                    </label>
-                                    <p class="text-base-content">{{ user.created_at|date:"d/m/Y à H:i" }}</p>
-                                </div>
-                                <div>
-                                    <label class="label">
-                                        <span class="label-text font-semibold">{% trans "Last update" %}</span>
-                                    </label>
-                                    <p class="text-base-content">{{ user.updated_at|date:"d/m/Y à H:i" }}</p>
-                                </div>
-                            </div>
+                            <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                {% trans "First Name" %}
+                            </p>
+                            <p class="text-base font-medium">{{ user.first_name|default:"—" }}</p>
                         </div>
+                        <div>
+                            <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                {% trans "Last Name" %}
+                            </p>
+                            <p class="text-base font-medium">{{ user.last_name|default:"—" }}</p>
+                        </div>
+                        {% if user.neighborhood %}
+                            <div>
+                                <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                    {% trans "Neighborhood" %}
+                                </p>
+                                <p class="text-base font-medium">{{ user.neighborhood.full_name }}</p>
+                            </div>
+                        {% endif %}
+                        {% if user.postal_code %}
+                            <div>
+                                <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                    {% trans "Postal code" %}
+                                </p>
+                                <p class="text-base font-medium">{{ user.postal_code }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </section>
 
-                        <div class="flex justify-end pt-4">
-                            <a href="{% url 'profile_edit' %}" class="btn btn-primary">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                                    <path d="m15 5 4 4" />
-                                </svg>
-                                {% trans "Edit my profile" %}
-                            </a>
+                <section class="pb-8 border-b border-base-300">
+                    <p class="section-label mb-5">{% trans "Contact" %}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                {% trans "Email" %}
+                            </p>
+                            <p class="text-base font-medium flex items-center gap-2 flex-wrap">
+                                {{ user.email }}
+                                {% if user.is_verified %}
+                                    <span
+                                        class="badge badge-success badge-sm font-bold uppercase text-[10px] tracking-wide"
+                                    >{% trans "Verified" %}</span>
+                                {% else %}
+                                    <span
+                                        class="badge badge-warning badge-sm font-bold uppercase text-[10px] tracking-wide"
+                                    >{% trans "Not verified" %}</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        {% if user.phone_number %}
+                            <div>
+                                <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                    {% trans "Phone" %}
+                                </p>
+                                <p class="text-base font-medium">{{ user.phone_number }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </section>
+
+                <section class="pb-8 border-b border-base-300">
+                    <p class="section-label mb-5">{% trans "Account" %}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                {% trans "Role" %}
+                            </p>
+                            <p>
+                                {% if user.role == 'CITIZEN' %}
+                                    <span
+                                        class="badge badge-primary font-bold uppercase text-[10px] tracking-wide"
+                                    >{% trans "Member" %}</span>
+                                {% elif user.role == 'ASSOCIATION_MEMBER' %}
+                                    <span
+                                        class="badge badge-secondary font-bold uppercase text-[10px] tracking-wide"
+                                    >{% trans "Association member" %}</span>
+                                {% elif user.role == 'ADMIN' %}
+                                    <span
+                                        class="badge badge-accent font-bold uppercase text-[10px] tracking-wide"
+                                    >{% trans "Administrator" %}</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                {% trans "Newsletter" %}
+                            </p>
+                            <p>
+                                {% if user.newsletter_subscription %}
+                                    <span
+                                        class="badge badge-success font-bold uppercase text-[10px] tracking-wide"
+                                    >{% trans "Subscribed" %}</span>
+                                {% else %}
+                                    <span
+                                        class="badge badge-ghost font-bold uppercase text-[10px] tracking-wide"
+                                    >{% trans "Not subscribed" %}</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                {% trans "Member since" %}
+                            </p>
+                            <p class="text-base font-medium">{{ user.created_at|date:"d/m/Y" }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                {% trans "Last update" %}
+                            </p>
+                            <p class="text-base font-medium">{{ user.updated_at|date:"d/m/Y" }}</p>
                         </div>
                     </div>
+                </section>
+
+                <div class="flex justify-end">
+                    <a href="{% url 'profile_edit' %}" class="btn btn-primary border-none font-semibold">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                            <path d="m15 5 4 4" />
+                        </svg>
+                        {% trans "Edit my profile" %}
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
+    </article>
 {% endblock content %}
