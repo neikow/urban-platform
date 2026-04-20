@@ -6,96 +6,123 @@
     <article class="mx-4">
         {% include "core/components/page_header.html" %}
         <main class="container mx-auto">
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-4">
-                <h2 class="text-2xl sm:text-3xl font-bold">
-                    {% trans "Latest Publications" %}
-                </h2>
+            <!-- Section header + search -->
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-0 gap-4">
+                <div>
+                    <p class="section-label mb-1.5">{% trans "Publications" %}</p>
+                    <h2 class="font-display font-black uppercase text-[clamp(1.8rem,4vw,3rem)] leading-tight">
+                        {% trans "Latest Publications" %}
+                    </h2>
+                </div>
                 {% trans 'Search publications' as aria_label %}
                 {% trans "Search for a publication..." as placeholder %}
                 {% include "core/components/search/text_search_form.html" with aria_label=aria_label placeholder=placeholder %}
             </div>
 
-            <!-- Type filter -->
-            <div class="mb-6">
-                <div class="flex flex-wrap gap-2">
-                    <a
-                        href="{{ page.url }}{% if request.GET.search %}?search={{ request.GET.search }}{% endif %}"
-                        class="btn btn-sm {% if selected_type == 'all' %}btn-primary{% else %}btn-outline{% endif %}"
-                    >
-                        {% trans "All" %}
-                    </a>
-                    <a
-                        href="?type=projects{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
-                        class="btn btn-sm {% if selected_type == 'projects' %}btn-primary{% else %}btn-outline{% endif %}"
-                    >
-                        {% trans "Projects" %}
-                    </a>
-                    <a
-                        href="?type=events{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
-                        class="btn btn-sm {% if selected_type == 'events' %}btn-primary{% else %}btn-outline{% endif %}"
-                    >
-                        {% trans "Events" %}
-                    </a>
-                </div>
-            </div>
+            <!-- Tab-style type filter -->
+            <div class="flex items-center gap-0 border-b border-base-300 mt-6 mb-0">
+                <a
+                    href="{{ page.url }}{% if request.GET.search %}?search={{ request.GET.search }}{% endif %}"
+                    class="
+                        relative px-4 pb-3 pt-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-150
+                        {% if selected_type == 'all' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
+                    "
+                >
+                    {% trans "All" %}
+                    {% if selected_type == 'all' %}<span
+                            class="absolute bottom-0 inset-x-4 h-[2px] bg-primary"
+                        ></span>{% endif %}
+                </a>
+                <a
+                    href="?type=projects{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                    class="
+                        relative px-4 pb-3 pt-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-150
+                        {% if selected_type == 'projects' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
+                    "
+                >
+                    {% trans "Projects" %}
+                    {% if selected_type == 'projects' %}<span
+                            class="absolute bottom-0 inset-x-4 h-[2px] bg-primary"
+                        ></span>{% endif %}
+                </a>
+                <a
+                    href="?type=events{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                    class="
+                        relative px-4 pb-3 pt-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-150
+                        {% if selected_type == 'events' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
+                    "
+                >
+                    {% trans "Events" %}
+                    {% if selected_type == 'events' %}<span
+                            class="absolute bottom-0 inset-x-4 h-[2px] bg-primary"
+                        ></span>{% endif %}
+                </a>
 
-            {% if selected_type == 'projects' %}
-                <div class="mb-6">
-                    <div class="flex flex-wrap gap-2">
-                        <a
-                            href="?type=projects{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
-                            class="btn btn-xs {% if not selected_category %} btn-info {% else %} btn-ghost {% endif %}"
-                        >
-                            {% trans "All categories" %}
-                        </a>
-                        {% for category in categories %}
-                            <a
-                                href="{{ category.url }}"
-                                class="btn btn-xs {% if category.is_selected %} btn-info {% else %} btn-ghost {% endif %}"
-                            >
-                                {{ category.label }}
-                            </a>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% elif selected_type == 'events' or selected_type == 'all' %}
-                <div class="mb-6">
-                    <form method="get" class="flex items-center gap-2">
+                {% if selected_type == 'events' or selected_type == 'all' %}
+                    <form method="get" class="ml-auto flex items-center pb-3 pt-2">
                         {% if selected_type == 'events' %}
                             <input type="hidden" name="type" value="events">
                         {% endif %}
                         {% if request.GET.search %}
                             <input type="hidden" name="search" value="{{ request.GET.search }}">
                         {% endif %}
-                        <label class="label cursor-pointer gap-2">
+                        <label class="flex items-center gap-2 cursor-pointer">
                             <input
                                 type="checkbox"
                                 name="show_past"
                                 value="on"
-                                class="checkbox checkbox-sm"
+                                class="checkbox checkbox-xs"
                                 {% if show_past_events %}
                                     checked
                                 {% endif %}
                                 onchange="this.form.submit()"
                             >
-                            <span class="label-text">{% trans "Show past events" %}</span>
+                            <span
+                                class="text-[11px] font-medium text-base-content/60"
+                            >{% trans "Show past events" %}</span>
                         </label>
                     </form>
+                {% endif %}
+            </div>
+
+            <!-- Category sub-filter (projects only) -->
+            {% if selected_type == 'projects' %}
+                <div class="flex flex-wrap gap-2 pt-4 mb-2">
+                    <a
+                        href="?type=projects{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                        class="
+                            text-[11px] font-bold uppercase tracking-wide px-3 py-1.5 rounded transition-colors duration-150
+                            {% if not selected_category %}bg-secondary text-secondary-content{% else %}bg-base-200 text-base-content/60 hover:text-base-content{% endif %}
+                        "
+                    >
+                        {% trans "All" %}
+                    </a>
+                    {% for category in categories %}
+                        <a
+                            href="{{ category.url }}"
+                            class="
+                                text-[11px] font-bold uppercase tracking-wide px-3 py-1.5 rounded transition-colors duration-150
+                                {% if category.is_selected %}bg-secondary text-secondary-content{% else %}bg-base-200 text-base-content/60 hover:text-base-content{% endif %}
+                            "
+                        >
+                            {{ category.label }}
+                        </a>
+                    {% endfor %}
                 </div>
             {% endif %}
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
                 {% for publication in publications %}
                     {% include "publications/components/publication_preview.html" with publication=publication %}
                     {% empty %}
                     <div class="min-h-64 flex items-center justify-center col-span-1 md:col-span-2 lg:col-span-3">
-                        <p>
-                            {% trans "No publications found" %}
-                        </p>
+                        <p class="text-base-content/50">{% trans "No publications found" %}</p>
                     </div>
                 {% endfor %}
             </div>
+
             {% include "components/navigation/pagination.html" with page_data=publications %}
+
             {% if page.body %}
                 <article class="mt-8">{{ page.body|richtext }}</article>
             {% endif %}

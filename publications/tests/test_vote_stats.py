@@ -271,7 +271,7 @@ class TestVoteStatsDetailView:
             user=deleted_voter,
             project=project_without_votes,
             choice=VoteChoice.FAVORABLE,
-            comment=str(_("This vote is from a user who will be deleted")),
+            comment="This vote is from a user who will be deleted",
             anonymize=False,
         )
 
@@ -297,8 +297,8 @@ class TestVoteStatsDetailView:
         # The user should be marked as deleted
         deleted_voter_from_db = User.objects.with_deleted().get(pk=deleted_voter.pk)
         assert deleted_voter_from_db.is_deleted is True
-        assert deleted_voter_from_db.first_name == "Utilisateur"
-        assert deleted_voter_from_db.last_name == "Supprimé"
+        assert deleted_voter_from_db.first_name == "Utilisateur"  # Not translated
+        assert deleted_voter_from_db.last_name == "Supprimé"  # Not translated
 
 
 @pytest.fixture

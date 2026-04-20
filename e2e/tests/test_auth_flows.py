@@ -107,7 +107,7 @@ def test_account_deletion_flow(page: Page, base_url: str, deletion_test_user_cre
 
     # Try to login again with deleted account credentials - should fail
     page.goto(base_url)
-    page.get_by_role("button", name=_("Log in")).click()
+    page.get_by_role("button", name=_("Log in")).first.click()
 
     page.locator("input[name='modal-email']").fill(email)
     page.locator("input[name='modal-password']").fill(password)

@@ -1,31 +1,62 @@
 {% load wagtailimages_tags %}
 
-<div
-    class="hero {% if index == 1 %} min-h-screen {% else %} min-h-[30vh] {% endif %} no-page-style"
-    style="{% if self.image %}{% image self.image fill-1920x1080 as bg_img %}background-image: url({{ bg_img.url }});{% endif %}"
->
-    <div class="hero-overlay opacity-60 bg-neutral"></div>
-    <div class="hero-content text-center text-neutral-content">
-        <div class="max-w-md">
+{% if index == 1 %}
+    <div
+        class="relative min-h-screen no-page-style overflow-hidden bg-cover bg-center flex flex-col justify-end"
+        {% if self.image %}
+            style="{% image self.image fill-1920x1080 as bg_img %}background-image: url({{ bg_img.url }});"
+        {% endif %}
+    >
+        <div class="absolute inset-0 bg-neutral/55"></div>
+        <div class="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
             <h1
                 class="
-                    {% spaceless %}{% if index == 1 %}
-                    mb-5 text-4xl sm:text-5xl lg:text-6xl font-bold
-                    {% else %}
-                    mb-5 text-2xl sm:text-3xl lg:text-4xl font-bold
-                    {% endif %}{% endspaceless %}
+                    font-display font-black text-white leading-[0.88] uppercase
+                    text-[clamp(3.2rem,10vw,8.5rem)]
+                    mb-6 sm:mb-8 max-w-4xl
                 "
             >
                 {{ self.title }}
             </h1>
             {% if self.subtitle %}
-                <p class="mb-5 text-sm sm:text-base leading-relaxed opacity-90">{{ self.subtitle }}</p>
+                <p class="text-white/80 text-base sm:text-lg leading-relaxed max-w-lg mb-8">
+                    {{ self.subtitle }}
+                </p>
             {% endif %}
             {% if self.cta_link and self.cta_text %}
-                <a href="{{ self.cta_link }}" class="btn btn-primary border-none">
+                <a
+                    href="{{ self.cta_link }}"
+                    class="btn btn-primary btn-lg border-none font-semibold px-10 tracking-wide"
+                >
                     {{ self.cta_text }}
                 </a>
             {% endif %}
         </div>
     </div>
-</div>
+{% else %}
+    <div
+        class="relative no-page-style overflow-hidden bg-cover bg-center min-h-[40vh] flex flex-col justify-center"
+        {% if self.image %}
+            style="{% image self.image fill-1920x600 as bg_img %}background-image: url({{ bg_img.url }});"
+        {% endif %}
+    >
+        <div class="absolute inset-0 bg-neutral/60"></div>
+        <div class="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-16">
+            <h2
+                class="
+                    font-display font-black text-white leading-tight uppercase
+                    text-[clamp(2rem,5vw,4rem)]
+                    max-w-2xl
+                "
+            >
+                {{ self.title }}
+            </h2>
+            {% if self.subtitle %}
+                <p class="text-white/80 text-base sm:text-lg mt-4 max-w-xl leading-relaxed">{{ self.subtitle }}</p>
+            {% endif %}
+            {% if self.cta_link and self.cta_text %}
+                <a href="{{ self.cta_link }}" class="btn btn-primary mt-6 border-none">{{ self.cta_text }}</a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

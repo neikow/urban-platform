@@ -25,7 +25,7 @@ def test_pedagogy_card_index_page_edition(
     page.goto(base_url + "/admin/")
 
     page.get_by_role("button", name="Fiches Pédagogiques").click()
-    page.get_by_label("Fiches Pédagogiques").get_by_role("link", name="Page d'accueil").click()
+    page.get_by_label("Fiches Pédagogiques").get_by_role("link", name="Accueil").click()
     page.get_by_role("textbox", name="Introduction de la page").fill(TEST_CONTENT)
     page.get_by_role("button", name="Plus d'actions").click()
     page.get_by_role("button", name="Publier").click()

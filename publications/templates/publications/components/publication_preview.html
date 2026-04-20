@@ -2,89 +2,106 @@
 
 <a
     href="{{ publication.url }}"
-    class="card bg-base-100 w-full shadow-sm focus:shadow-lg hover:shadow-md transition-shadow duration-100"
+    class="group block overflow-hidden rounded-lg bg-base-100 shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
 >
-    <div class="relative">
-        <figure>
-            {% if publication.hero_image %}
-                {% image publication.hero_image fill-400x250 alt=publication.title class="w-full h-48 object-cover rounded-t-lg" %}
-            {% else %}
-                <div class="w-full h-48 bg-base-200 flex items-center justify-center">
-                    {% if publication.is_event %}
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-16 w-16 text-base-300"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                            />
-                        </svg>
-                    {% else %}
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-16 w-16 text-base-300"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                            />
-                        </svg>
-                    {% endif %}
-                </div>
-            {% endif %}
-        </figure>
-        <div class="flex gap-1 absolute top-0 left-0 p-2 bg-base-100 rounded-br-2xl rounded-tl-lg shadow">
+    <div class="relative overflow-hidden aspect-[16/10]">
+        {% if publication.hero_image %}
+            {% image publication.hero_image fill-600x375 alt=publication.title class="w-full h-full object-cover transition-transform duration-300 not-motion-reduce:group-hover:scale-105" %}
+        {% else %}
+            <div class="w-full h-full bg-primary/8 flex items-center justify-center">
+                {% if publication.is_event %}
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-14 w-14 text-primary/25"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                    </svg>
+                {% else %}
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-14 w-14 text-primary/25"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                        />
+                    </svg>
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="absolute top-3 left-3 flex items-center gap-1.5">
             {% if publication.is_event %}
-                <span class="badge badge-secondary">{% trans "Event" %}</span>
+                <span
+                    class="badge badge-secondary text-[10px] font-bold uppercase tracking-wide"
+                >{% trans "Event" %}</span>
                 {% if publication.is_upcoming %}
-                    <span class="badge badge-outline bg-success">{% trans "Upcoming" %}</span>
+                    <span
+                        class="badge badge-success text-[10px] font-bold uppercase tracking-wide"
+                    >{% trans "Upcoming" %}</span>
                 {% elif publication.is_ongoing %}
-                    <span class="badge badge-outline bg-warning">{% trans "Ongoing" %}</span>
+                    <span
+                        class="badge badge-warning text-[10px] font-bold uppercase tracking-wide"
+                    >{% trans "Ongoing" %}</span>
                 {% elif publication.is_past %}
-                    <span class="badge badge-outline bg-base-300">{% trans "Past" %}</span>
+                    <span
+                        class="badge badge-ghost text-[10px] font-bold uppercase tracking-wide bg-base-100/80"
+                    >{% trans "Past" %}</span>
                 {% endif %}
             {% else %}
-                <span class="badge badge-primary">{% trans "Project" %}</span>
+                <span
+                    class="badge badge-primary text-[10px] font-bold uppercase tracking-wide"
+                >{% trans "Project" %}</span>
                 {% if publication.category %}
-                    <span class="badge badge-info">{{ publication.get_category_display }}</span>
+                    <span
+                        class="badge badge-secondary text-[10px] font-bold uppercase tracking-wide"
+                    >{{ publication.get_category_display }}</span>
                 {% endif %}
             {% endif %}
         </div>
     </div>
-    <div class="card-body">
-        <h3 class="card-title text-lg">
+    <div class="p-5">
+        <div class="flex items-center gap-1 section-label mb-2.5">
+            {% if publication.is_event %}
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3 w-3 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    aria-hidden="true"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                </svg>
+                <span>{{ publication.event_date|date:"d/m/Y H:i" }}</span>
+            {% else %}
+                <span>{{ publication.first_published_at|date:"d/m/Y" }}</span>
+            {% endif %}
+        </div>
+        <h3 class="font-display font-bold text-2xl leading-tight text-base-content group-hover:text-primary transition-colors duration-200 mb-2">
             {{ publication.title }}
         </h3>
-        <p class="text-sm text-base-content/70">
+        <p class="text-sm text-base-content/60 leading-relaxed line-clamp-2">
             {{ publication.description|truncatewords:20 }}
         </p>
-        <div class="flex items-center justify-between mt-2 text-xs text-base-content/50">
-            {% if publication.is_event %}
-                <span class="flex items-center">
-                    {% include "icons/calendar.html" %}
-                    <span>{{ publication.event_date|date:"d/m/Y H:i" }}</span>
-                </span>
-            {% else %}
-                <span></span>
-            {% endif %}
-            <span class="flex items-center">
-                {% include "icons/globe.html" %}
-                <span>{{ publication.first_published_at|date:"d/m/Y" }}</span>
-            </span>
-        </div>
-        <div class="card-actions justify-end mt-2">
-            {% include "core/components/io/learn_more_button.html" %}
-        </div>
     </div>
 </a>
