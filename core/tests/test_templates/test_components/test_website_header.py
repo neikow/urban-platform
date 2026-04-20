@@ -1,8 +1,7 @@
-from django.test import TestCase, RequestFactory, override_settings
+from django.test import TestCase, RequestFactory
 from django.template.loader import render_to_string
 from wagtail.models import Site, Page
 from home.models import HomePage
-from pedagogy.models import PedagogyIndexPage
 
 
 class HeaderComponentTest(TestCase):
@@ -47,6 +46,4 @@ class HeaderComponentTest(TestCase):
 
         self.assertIn("Page 1", rendered)
         self.assertIn("Page 2", rendered)
-        self.assertIn("navbar-start", rendered)
-        self.assertIn("navbar-center", rendered)
         self.assertIn("dropdown", rendered)

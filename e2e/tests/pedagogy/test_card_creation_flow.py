@@ -2,6 +2,7 @@ import uuid
 
 import pytest
 from playwright.sync_api import Page, expect
+from django.utils.translation import gettext as _
 
 from e2e.utils import login_user
 
@@ -27,11 +28,11 @@ def test_pedagogy_card_creation_flow(
     )
     page.goto(base_url + "/admin/")
 
-    page.get_by_role("button", name="Fiches Pédagogiques").click()
+    page.get_by_role("button", name=str(_("Fiches Pédagogiques"))).click()
     page.get_by_role("link", name="Ajouter").click()
     page.get_by_role("textbox", name="Titre*").click()
     page.get_by_role("textbox", name="Titre*").fill(TEST_TITLE)
-    page.get_by_role("textbox", name="Description de la fiche pé").fill(TEST_DESCRIPTION)
+    page.get_by_role("textbox", name="description").fill(TEST_DESCRIPTION)
     page.get_by_role("button", name="Choisir une image").click()
     # Wait a moment for modal to appear
     page.wait_for_timeout(500)
