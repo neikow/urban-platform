@@ -20,7 +20,7 @@ def login_user(page: Page, base_url: str, email: str, password: str) -> None:
         password: User's password
     """
     page.goto(base_url)
-    page.get_by_role("button", name=_("Log in")).click()
+    page.get_by_role("button", name=_("Log in")).first.click()
 
     page.locator("input[name='modal-email']").fill(email)
     page.locator("input[name='modal-password']").fill(password)
@@ -28,7 +28,7 @@ def login_user(page: Page, base_url: str, email: str, password: str) -> None:
     with page.expect_response(
         lambda res: res.url.endswith(reverse("login")) and res.request.method == "POST"
     ) as response_info:
-        page.locator("#login_modal button[type='submit']", has_text=_("Log in")).click()
+        page.locator("#login_modal button[type='submit']", has_text=_("Log in")).first.click()
 
     response = response_info.value
     assert response.ok, f"Login failed with status {response.status}"
