@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from django.db import models
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel

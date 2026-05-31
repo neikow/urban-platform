@@ -1,5 +1,5 @@
 import json
-from typing import Any
+from typing import Any, cast
 
 from django.http import HttpRequest, HttpResponseBase, JsonResponse
 from django.utils.translation import gettext_lazy as _
@@ -21,6 +21,8 @@ class VoteView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request: HttpRequest, project_id: int) -> JsonResponse:
+        user = cast(User, request.user)
+
         try:
             project = ProjectPage.objects.get(pk=project_id)
         except ProjectPage.DoesNotExist:
@@ -60,7 +62,7 @@ class VoteView(View):
             )
 
         response, created = FormResponse.objects.update_or_create(
-            user=request.user,
+            user=user,
             project=project,
             defaults={
                 "choice": choice,
@@ -107,7 +109,7 @@ class VoteView(View):
                 status=400,
             )
 
-        user: User = request.user  # type: ignore[assignment]
+        user = cast(User, request.user)
         deleted_count, _deleted_types = FormResponse.objects.filter(
             user=user,
             project=project,
@@ -147,9 +149,10 @@ class VoteResultsView(View):
         has_voted = False
 
         if request.user.is_authenticated:
+            user = cast(User, request.user)
             try:
                 response = FormResponse.objects.get(
-                    user=request.user,
+                    user=user,
                     project=project,
                 )
                 has_voted = True

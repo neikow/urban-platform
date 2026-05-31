@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from django_stubs_ext import StrOrPromise
 from wagtail.admin.panels import FieldPanel
 from typing import override
