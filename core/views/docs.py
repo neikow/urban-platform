@@ -7,11 +7,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import Http404, HttpRequest, HttpResponse
 from django.views import View
 
+from core.models.user import UserRole
+
 
 class ProtectedDocsView(UserPassesTestMixin, View):
     def test_func(self) -> bool:
         return self.request.user.is_authenticated and (
-            self.request.user.is_staff or self.request.user.is_superuser
+            self.request.user.is_staff
+            or self.request.user.is_superuser
+            or self.request.user.role == UserRole.ASSOCIATION_MEMBER
+            or self.request.user.role == UserRole.ADMIN
         )
 
     def get(self, request: HttpRequest, path: str, *args: Any, **kwargs: Any) -> HttpResponse:
