@@ -44,7 +44,7 @@
 | core/views/\_\_init\_\_.py                                     |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/views/account\_delete.py                                  |       39 |        1 |        4 |        1 |     95.35% |        38 |
 | core/views/auth\_mixins.py                                     |       29 |        0 |       10 |        0 |    100.00% |           |
-| core/views/docs.py                                             |       26 |       16 |        8 |        0 |     29.41% | 13, 18-38 |
+| core/views/docs.py                                             |       27 |       16 |        8 |        0 |     31.43% | 15, 23-43 |
 | core/views/email\_verify.py                                    |       24 |        0 |        4 |        0 |    100.00% |           |
 | core/views/login.py                                            |       34 |        1 |       10 |        1 |     95.45% |        57 |
 | core/views/logout.py                                           |        8 |        0 |        0 |        0 |    100.00% |           |
@@ -104,7 +104,7 @@
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **2623** |  **537** |  **458** |   **64** | **75.04%** |           |
+| **TOTAL**                                                      | **2624** |  **537** |  **458** |   **64** | **75.05%** |           |
 
 
 ## Setup coverage badge
