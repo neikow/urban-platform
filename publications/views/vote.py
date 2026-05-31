@@ -21,8 +21,6 @@ class VoteView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request: HttpRequest, project_id: int) -> JsonResponse:
-        user = cast(User, request.user)
-
         try:
             project = ProjectPage.objects.get(pk=project_id)
         except ProjectPage.DoesNotExist:
@@ -61,6 +59,7 @@ class VoteView(View):
                 status=400,
             )
 
+        user = cast(User, request.user)
         response, created = FormResponse.objects.update_or_create(
             user=user,
             project=project,
