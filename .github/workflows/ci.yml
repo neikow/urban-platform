@@ -105,7 +105,7 @@ jobs:
       - name: Store Pull Request comment to be posted
         if: matrix.tests == 'unit' && steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
         id: coverage_comment_store
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: python-coverage-comment-action
           path: python-coverage-comment-action.txt
