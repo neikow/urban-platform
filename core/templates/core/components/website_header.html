@@ -96,7 +96,7 @@
                                     <span>{% trans "Profile" %}</span>
                                 </a>
                             </li>
-                            {% if user.is_staff or user.can_access_admin %}
+                            {% if user.can_access_admin %}
                                 <li>
                                     <a href="/admin/" class="flex items-center gap-2 py-2">
                                         <svg

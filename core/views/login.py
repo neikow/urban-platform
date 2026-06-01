@@ -50,7 +50,7 @@ class LoginView(JsonResponseMixin, View):
                 allowed_hosts={request.get_host()},
                 require_https=request.is_secure(),
             ):
-                redirect_url = "/admin/" if user.is_staff else "/"
+                redirect_url = "/admin/" if user.can_access_admin() else "/"
 
             return self.json_success_response(redirect_url=redirect_url)
 

@@ -234,8 +234,6 @@ class TestRoleUserCreationForm:
 @pytest.mark.django_db
 class TestUserAdminIntegration:
     def _grant_user_admin(self, user: User) -> None:
-        user.is_staff = True
-        user.save()
         perms = Permission.objects.filter(
             content_type__app_label="wagtailadmin", codename="access_admin"
         ) | Permission.objects.filter(
