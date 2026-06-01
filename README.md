@@ -30,7 +30,7 @@
 | core/models/city\_neighborhood.py                              |       15 |        2 |        0 |        0 |     86.67% |    18, 22 |
 | core/models/email\_event.py                                    |       27 |        0 |        0 |        0 |    100.00% |           |
 | core/models/neighborhood\_association.py                       |       13 |        1 |        0 |        0 |     92.31% |        26 |
-| core/models/user.py                                            |       80 |        4 |        6 |        3 |     91.86% |35, 51, 53, 133 |
+| core/models/user.py                                            |       82 |        4 |        6 |        3 |     92.05% |35, 51, 53, 136 |
 | core/permissions.py                                            |       19 |        0 |       10 |        0 |    100.00% |           |
 | core/sitemaps.py                                               |       72 |       21 |        6 |        0 |     65.38% |31-33, 36, 39, 47, 55-65, 73, 81, 89, 97, 105, 113-122 |
 | core/templatetags/\_\_init\_\_.py                              |        0 |        0 |        0 |        0 |    100.00% |           |
@@ -106,7 +106,7 @@
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **2686** |  **546** |  **466** |   **64** | **75.25%** |           |
+| **TOTAL**                                                      | **2688** |  **546** |  **466** |   **64** | **75.27%** |           |
 
 
 ## Setup coverage badge
