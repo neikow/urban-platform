@@ -1,0 +1,9 @@
+{% extends "wagtailusers/users/edit.html" %}
+{% load wagtailadmin_tags %}
+
+{% block extra_fields %}
+    {{ block.super }}
+    {% if form.role %}
+        <li>{% formattedfield form.role %}</li>
+    {% endif %}
+{% endblock %}
