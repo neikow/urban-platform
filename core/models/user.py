@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Any
 import uuid
 
@@ -55,6 +56,8 @@ class UserManager(BaseUserManager["User"]):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    objects: UserManager = UserManager()  # type: ignore[assignment]
+
     email = models.EmailField(_("Email Address"), unique=True)
     uuid = models.UUIDField(_("UUID"), unique=True, default=uuid.uuid4, editable=False)
 
@@ -110,8 +113,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=False,
         help_text=_("Designates whether the user can log into the admin site."),
     )
-
-    objects = UserManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
