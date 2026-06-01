@@ -114,6 +114,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         help_text=_("Designates whether the user can log into the admin site."),
     )
 
+    def can_access_admin(self) -> bool:
+        return self.is_staff or self.role in {UserRole.ADMIN, UserRole.ASSOCIATION_MEMBER}
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
