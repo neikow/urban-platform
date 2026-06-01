@@ -89,6 +89,12 @@ WSGI_APPLICATION = "urban_platform.wsgi.application"
 # Authentication
 AUTH_USER_MODEL = "core.User"
 
+# Grants Wagtail admin access (wagtailadmin.access_admin) based on user role,
+# replacing the deprecated is_staff flag. See core.auth_backends.
+AUTHENTICATION_BACKENDS = [
+    "core.auth_backends.RolePermissionsBackend",
+]
+
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases

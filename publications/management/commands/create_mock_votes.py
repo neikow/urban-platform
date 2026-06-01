@@ -204,7 +204,7 @@ class Command(BaseCommand):
             )
 
         if options["delete_users"]:
-            deleted_count = User.objects.filter(is_staff=False, is_superuser=False).delete()[0]
+            deleted_count = User.objects.filter(is_superuser=False).delete()[0]
             self.stdout.write(self.style.SUCCESS(f"Deleted {deleted_count} non-admin users."))
 
         users_count = options["users"]
@@ -241,7 +241,7 @@ class Command(BaseCommand):
 
         if not created_users:
             # Get existing non-admin users
-            created_users = list(User.objects.filter(is_staff=False, is_superuser=False))
+            created_users = list(User.objects.filter(is_superuser=False))
             if not created_users:
                 self.stderr.write(self.style.ERROR("No users available to create votes."))
                 return

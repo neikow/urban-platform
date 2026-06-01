@@ -188,14 +188,15 @@ class TestLoginView:
         assert data["redirect"] == "/"
 
     def test_login_without_next_redirects_to_admin_for_staff_user(self, client: Client):
-        user = User.objects.create_user(
+        from core.models import UserRole
+
+        User.objects.create_user(
             email="staffuser@example.com",
             password="StaffPass123",
             first_name="Staff",
             last_name="User",
+            role=UserRole.ADMIN,
         )
-        user.is_staff = True
-        user.save()
 
         response = client.post(
             reverse("login"),

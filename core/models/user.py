@@ -42,13 +42,10 @@ class UserManager(BaseUserManager["User"]):
     def create_superuser(
         self, email: str, password: str | None = None, **extra_fields: Any
     ) -> "User":
-        extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("role", UserRole.ADMIN)
         extra_fields.setdefault("is_verified", True)
 
-        if not extra_fields.get("is_staff"):
-            raise ValueError(_("Superuser must have is_staff=True."))
         if not extra_fields.get("is_superuser"):
             raise ValueError(_("Superuser must have is_superuser=True."))
 
@@ -108,14 +105,24 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=True,
         help_text=_("Designates whether this user should be treated as active."),
     )
-    is_staff = models.BooleanField(
-        _("Staff Status"),
-        default=False,
-        help_text=_("Designates whether the user can log into the admin site."),
-    )
+
+    @property
+    def is_staff(self) -> bool:
+        """Deprecated compatibility shim for ``django.contrib.admin``.
+
+        The stored ``is_staff`` field was removed. The Django admin
+        (``/django-admin/``) is reserved for superusers; Wagtail admin access is
+        governed by the ``wagtailadmin.access_admin`` permission, derived from
+        the user's role by :class:`core.auth_backends.RolePermissionsBackend`.
+        """
+        return self.is_superuser
 
     def can_access_admin(self) -> bool:
-        return self.is_staff or self.role in {UserRole.ADMIN, UserRole.ASSOCIATION_MEMBER}
+        """Whether the user may enter the Wagtail admin.
+
+        True for superusers and for any role granted ``wagtailadmin.access_admin``.
+        """
+        return self.has_perm("wagtailadmin.access_admin")
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

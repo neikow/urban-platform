@@ -396,7 +396,6 @@ def create_test_users() -> None:
             first_name="E2E",
             last_name="Admin",
             postal_code="13007",
-            is_staff=True,
         )
         editors_group = Group.objects.get(name="Moderator")
         admin_user.groups.add(editors_group)
