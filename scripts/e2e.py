@@ -385,6 +385,22 @@ def create_test_users() -> None:
     else:
         print(f"  ✓ Admin user exists: {admin_email}")
 
+    # Moderator test user (not superuser, gets admin access via Moderator group)
+    moderator_email = "e2e.moderator@email.com"
+    if not User.objects.filter(email=moderator_email).exists():
+        moderator_user = User.objects.create_user(
+            email=moderator_email,
+            password="password123",  # nosec
+            first_name="E2E",
+            last_name="Moderator",
+            postal_code="13007",
+        )
+        moderator_user.groups.add(Group.objects.get(name="Moderator"))
+        moderator_user.save()
+        print(f"  ✓ Created moderator user: {moderator_email}")
+    else:
+        print(f"  ✓ Moderator user exists: {moderator_email}")
+
     # Account deletion test user
     deletion_email = "e2e.delete.test@email.com"
     # Always recreate this user fresh for deletion tests
