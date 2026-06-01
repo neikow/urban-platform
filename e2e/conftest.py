@@ -64,3 +64,15 @@ def admin_email() -> str:
 def admin_password() -> str:
     """Admin test user password."""
     return "password123"
+
+
+@pytest.fixture
+def moderator_email() -> str:
+    """Moderator test user email (admin access via Moderator group, not superuser)."""
+    return "e2e.moderator@email.com"
+
+
+@pytest.fixture
+def moderator_password() -> str:
+    """Moderator test user password."""
+    return "password123"

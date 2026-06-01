@@ -1,18 +1,26 @@
 import mimetypes
 import os
-from typing import Any
+from typing import Any, cast
 
 from django.conf import settings
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import Http404, HttpRequest, HttpResponse
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect
 from django.views import View
+
+from core.models.user import User
 
 
 class ProtectedDocsView(UserPassesTestMixin, View):
     def test_func(self) -> bool:
-        return self.request.user.is_authenticated and (
-            self.request.user.is_staff or self.request.user.is_superuser
-        )
+        user = cast(User, self.request.user)
+        return user.is_authenticated and user.has_perm("wagtailadmin.access_admin")
+
+    def handle_no_permission(self) -> HttpResponseRedirect:
+        if self.request.user.is_authenticated:
+            return redirect("/")
+        else:
+            return redirect("login")
 
     def get(self, request: HttpRequest, path: str, *args: Any, **kwargs: Any) -> HttpResponse:
         docs_dir = os.path.join(settings.BASE_DIR, "docs", "site")

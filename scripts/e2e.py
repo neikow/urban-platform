@@ -64,6 +64,26 @@ def collect_static() -> None:
     print("✅ Static files collected")
 
 
+def build_docs() -> None:
+    """Build the MkDocs site served by the protected docs view (docs/site)."""
+    print("📚 Building docs...")
+    result = subprocess.run(  # nosec
+        [
+            sys.executable,
+            "-m",
+            "mkdocs",
+            "build",
+            "-f",
+            "docs/mkdocs.yml",
+        ],
+        cwd=PROJECT_ROOT,
+    )
+    if result.returncode != 0:
+        print("❌ Docs build failed")
+        sys.exit(1)
+    print("✅ Docs built")
+
+
 def delete_compiled_messages() -> None:
     """Delete compiled translation message files (.mo files), excluding .venv."""
     print("🗑️  Deleting compiled translation messages...")
@@ -385,6 +405,22 @@ def create_test_users() -> None:
     else:
         print(f"  ✓ Admin user exists: {admin_email}")
 
+    # Moderator test user (not superuser, gets admin access via Moderator group)
+    moderator_email = "e2e.moderator@email.com"
+    if not User.objects.filter(email=moderator_email).exists():
+        moderator_user = User.objects.create_user(
+            email=moderator_email,
+            password="password123",  # nosec
+            first_name="E2E",
+            last_name="Moderator",
+            postal_code="13007",
+        )
+        moderator_user.groups.add(Group.objects.get(name="Moderator"))
+        moderator_user.save()
+        print(f"  ✓ Created moderator user: {moderator_email}")
+    else:
+        print(f"  ✓ Moderator user exists: {moderator_email}")
+
     # Account deletion test user
     deletion_email = "e2e.delete.test@email.com"
     # Always recreate this user fresh for deletion tests
@@ -507,6 +543,7 @@ def setup(skip_static: bool = False, clean_messages: bool = False) -> None:
             delete_compiled_messages()
         compile_messages()
         collect_static()
+        build_docs()
 
     populate_database()
     create_test_users()
