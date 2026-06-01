@@ -64,6 +64,26 @@ def collect_static() -> None:
     print("✅ Static files collected")
 
 
+def build_docs() -> None:
+    """Build the MkDocs site served by the protected docs view (docs/site)."""
+    print("📚 Building docs...")
+    result = subprocess.run(  # nosec
+        [
+            sys.executable,
+            "-m",
+            "mkdocs",
+            "build",
+            "-f",
+            "docs/mkdocs.yml",
+        ],
+        cwd=PROJECT_ROOT,
+    )
+    if result.returncode != 0:
+        print("❌ Docs build failed")
+        sys.exit(1)
+    print("✅ Docs built")
+
+
 def delete_compiled_messages() -> None:
     """Delete compiled translation message files (.mo files), excluding .venv."""
     print("🗑️  Deleting compiled translation messages...")
@@ -523,6 +543,7 @@ def setup(skip_static: bool = False, clean_messages: bool = False) -> None:
             delete_compiled_messages()
         compile_messages()
         collect_static()
+        build_docs()
 
     populate_database()
     create_test_users()
