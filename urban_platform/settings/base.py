@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.redirects",
     "wagtail.embeds",
     "wagtail.sites",
-    "wagtail.users",
+    "core.apps.CustomUsersAppConfig",  # replaces "wagtail.users" to add role management
     "wagtail.snippets",
     "wagtail.documents",
     "wagtail.images",
