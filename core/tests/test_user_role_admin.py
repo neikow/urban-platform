@@ -51,7 +51,7 @@ def citizen(db):
 
 def edit_post_data(instance: User, **overrides: object) -> dict:
     """Build a complete, valid POST payload for the user edit form."""
-    data = {
+    data: dict[str, object] = {
         "email": instance.email,
         "first_name": instance.first_name or "First",
         "last_name": instance.last_name or "Last",
@@ -205,7 +205,7 @@ class TestRoleUserEditForm:
 @pytest.mark.django_db
 class TestRoleUserCreationForm:
     def _create_data(self, **overrides: object) -> dict:
-        data = {
+        data: dict[str, object] = {
             "email": "new@example.com",
             "first_name": "New",
             "last_name": "User",
