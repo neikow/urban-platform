@@ -47,12 +47,12 @@
 | core/views/auth\_mixins.py                                     |       29 |        0 |       10 |        0 |    100.00% |           |
 | core/views/docs.py                                             |       33 |       20 |       10 |        0 |     30.23% |16-17, 20-23, 26-46 |
 | core/views/email\_verify.py                                    |       24 |        0 |        4 |        0 |    100.00% |           |
-| core/views/login.py                                            |       34 |        1 |       10 |        1 |     95.45% |        57 |
+| core/views/login.py                                            |       39 |        0 |       12 |        0 |    100.00% |           |
 | core/views/logout.py                                           |        8 |        0 |        0 |        0 |    100.00% |           |
 | core/views/me.py                                               |        9 |        0 |        0 |        0 |    100.00% |           |
-| core/views/password\_reset.py                                  |       70 |        4 |       10 |        3 |     91.25% |67, 80, 103-104, 109-\>114 |
+| core/views/password\_reset.py                                  |       79 |        4 |       12 |        3 |     92.31% |77, 90, 113-114, 119-\>124 |
 | core/views/profile\_edit.py                                    |      119 |        6 |       24 |        6 |     91.61% |62, 72, 76, 105, 115, 122 |
-| core/views/register.py                                         |       78 |       10 |       18 |        7 |     82.29% |66, 79, 85, 92, 94, 96, 107-109, 151 |
+| core/views/register.py                                         |       87 |        7 |       20 |        7 |     86.92% |68, 81, 87, 94, 96, 98, 161 |
 | core/wagtail\_forms.py                                         |       35 |        2 |        6 |        2 |     90.24% |    33, 53 |
 | core/wagtail\_hooks.py                                         |       99 |        8 |       18 |        8 |     86.32% |124, 159, 161, 163, 165, 205, 207, 209 |
 | core/wagtail\_viewsets.py                                      |       19 |        3 |        0 |        0 |     84.21% |     22-24 |
@@ -107,7 +107,7 @@
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **2699** |  **546** |  **466** |   **63** | **75.39%** |           |
+| **TOTAL**                                                      | **2722** |  **542** |  **472** |   **62** | **75.77%** |           |
 
 
 ## Setup coverage badge
