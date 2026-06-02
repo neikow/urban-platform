@@ -281,3 +281,27 @@ class StructuredDataScriptTagTests(StructuredDataBaseTestCase):
     def test_fallback_for_unknown_page_type(self) -> None:
         schema = get_structured_data(self.request, self.home.get_parent())
         self.assertEqual(schema["@type"], "WebPage")
+
+    def test_script_breakout_payload_is_escaped(self) -> None:
+        """A page field containing "</script>" must not break out of the tag."""
+        from django.template import Context
+
+        payload = "</script><script>alert(1)</script>"
+        self.home.search_description = payload
+        self.home.save()
+
+        context = Context({"request": self.request, "page": self.home})
+        result = str(structured_data_script(context))
+
+        # The only literal </script> is the tag's own closer; the payload's
+        # closing tags are escaped to </script>.
+        self.assertEqual(result.count("</script>"), 1)
+        self.assertNotIn("<script>alert(1)", result)
+        self.assertIn("\\u003c", result)
+
+        # Still valid JSON, and the value round-trips back to the original.
+        json_str = result.replace('<script type="application/ld+json">', "").replace(
+            "</script>", ""
+        )
+        parsed = json.loads(json_str)
+        self.assertEqual(parsed["description"], payload)
