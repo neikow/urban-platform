@@ -23,9 +23,25 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
 
-CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(";")
+# TLS is terminated upstream (nginx forwards X-Forwarded-Proto=https). Redirect
+# any plaintext request and tell browsers to stick to HTTPS for a year.
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 31_536_000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(";")
+# Never send the session or CSRF cookie over plaintext.
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Defense-in-depth headers.
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Empty env vars must not become a single "" entry, which would be treated as a
+# valid host/origin.
+CSRF_TRUSTED_ORIGINS = [o for o in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(";") if o]
+
+ALLOWED_HOSTS = [h for h in os.environ.get("ALLOWED_HOSTS", "").split(";") if h]
 WAGTAILADMIN_BASE_URL = os.environ.get("BASE_URL", "")
 
 STORAGES["staticfiles"]["BACKEND"] = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
