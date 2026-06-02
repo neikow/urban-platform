@@ -5,6 +5,6 @@
         {% image value.image width-400 alt=value.alt_text class="w-full h-auto min-h-16 rounded-lg" %}
     </figure>
     <div class="w-full text-justify my-2 md:my-4 lg:my-8 px-4">
-        {{ value.paragraph|safe }}
+        {{ value.paragraph|linebreaks }}
     </div>
 </div>
