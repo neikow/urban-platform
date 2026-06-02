@@ -23,11 +23,19 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/0")
 
+# Separate Redis DB for the content fragment cache: it is flushed wholesale on
+# every page publish, so it must not share a DB with sessions (the default).
+CONTENT_CACHE_URL = os.environ.get("CONTENT_CACHE_URL") or REDIS_URL.rsplit("/", 1)[0] + "/1"
+
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": REDIS_URL,
-    }
+    },
+    "content": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": CONTENT_CACHE_URL,
+    },
 }
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
