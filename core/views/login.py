@@ -1,10 +1,12 @@
 from typing import Any
 
 from django.contrib.auth import authenticate, login as auth_login
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.utils.decorators import method_decorator
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views import View
 from django import forms
+from django_ratelimit.decorators import ratelimit
 
 from .auth_mixins import JsonResponseMixin
 from ..widgets import DaisyEmailInput, DaisyPasswordInput
@@ -35,8 +37,20 @@ class LoginForm(forms.Form):
         return cleaned_data
 
 
+@method_decorator(ratelimit(key="ip", rate="5/m", method="POST", block=False), name="post")
 class LoginView(JsonResponseMixin, View):
     def post(self, request: HttpRequest) -> HttpResponse:
+        if getattr(request, "limited", False):
+            return JsonResponse(
+                {
+                    "success": False,
+                    "errors": {
+                        "__all__": ["Trop de tentatives de connexion. Réessayez dans une minute."]
+                    },
+                },
+                status=429,
+            )
+
         form = LoginForm(request.POST, prefix="modal")
 
         if form.is_valid():

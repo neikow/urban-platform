@@ -2,10 +2,12 @@ import typing
 
 from django import forms
 from django.contrib.auth import get_user_model
-from django.http import HttpResponse, HttpResponseBase
+from django.http import HttpRequest, HttpResponse, HttpResponseBase
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import FormView, TemplateView
+from django_ratelimit.decorators import ratelimit
 
 from core.emails.tasks import send_password_reset_email
 from core.emails.tokens import verify_password_reset_token
@@ -26,10 +28,18 @@ class PasswordResetRequestForm(forms.Form):
     )
 
 
+@method_decorator(ratelimit(key="ip", rate="5/h", method="POST", block=False), name="post")
 class PasswordResetRequestView(FormView):
     template_name = "auth/password_reset_request.html"
     form_class = PasswordResetRequestForm
     success_url = reverse_lazy("password_reset_sent")
+
+    def post(self, request: HttpRequest, *args: typing.Any, **kwargs: typing.Any) -> HttpResponse:
+        if getattr(request, "limited", False):
+            form = self.get_form()
+            form.add_error(None, "Trop de demandes de réinitialisation. Réessayez plus tard.")
+            return self.form_invalid(form)
+        return super().post(request, *args, **kwargs)
 
     def form_valid(self, form: PasswordResetRequestForm) -> HttpResponse:
         email = form.cleaned_data["email"]
