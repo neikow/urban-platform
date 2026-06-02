@@ -237,9 +237,12 @@ def structured_data_script(context: Any) -> SafeString:
         return mark_safe("")  # nosec B308 B703 — literal empty string, no user input
 
     schema = get_structured_data(request, page)
-    # ensure_ascii=True causes json.dumps to escape <, > and & as \uXXXX,
-    # preventing script-injection even if page fields contain those characters.
     json_str = json.dumps(schema, ensure_ascii=True, indent=None)
-    return mark_safe(  # nosec B308 B703 — XSS-safe: HTML chars escaped by json.dumps
+    # json.dumps does NOT escape <, > or & — they are ASCII and pass through
+    # unchanged. A page field containing "</script>" would otherwise break out
+    # of the tag and allow script injection. Escape them the same way
+    # django.utils.html.json_script does.
+    json_str = json_str.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+    return mark_safe(  # nosec B308 B703 — HTML-significant chars escaped above
         f'<script type="application/ld+json">{json_str}</script>'
     )
