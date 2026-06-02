@@ -2,11 +2,13 @@ import typing
 from typing import Any
 
 from django.contrib.auth import get_user_model, login
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.generic.edit import FormView
 from django import forms
+from django_ratelimit.decorators import ratelimit
 
 from core.emails.tasks import send_verification_email
 from legal.utils import has_valid_code_of_conduct_consent
@@ -97,11 +99,19 @@ class UserRegistrationForm(PasswordValidationMixin, EmailValidationMixin, forms.
         return postal_code
 
 
+@method_decorator(ratelimit(key="ip", rate="10/h", method="POST", block=False), name="post")
 class RegisterFormView(FormView):
     template_name = "auth/register.html"
     form_class = UserRegistrationForm
 
     user: User
+
+    def post(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        if getattr(request, "limited", False):
+            form = self.get_form()
+            form.add_error(None, "Trop de tentatives d'inscription. Réessayez plus tard.")
+            return self.form_invalid(form)
+        return super().post(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
