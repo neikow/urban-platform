@@ -47,8 +47,8 @@ def test_registration_flow(page: Page, base_url: str):
     registration_form.locator("input[name='first_name']").fill("E2E")
     registration_form.locator("input[name='last_name']").fill("Test")
     registration_form.locator("input[name='postal_code']").fill("13007")
-    registration_form.locator("input[name='password']").fill("Password123")
-    registration_form.locator("input[name='confirm_password']").fill("Password123")
+    registration_form.locator("input[name='password']").fill("SecurePass123")
+    registration_form.locator("input[name='confirm_password']").fill("SecurePass123")
     registration_form.locator("input[name='accept_terms']").click()
 
     registration_form.locator("button[type='submit']", has_text=_("Sign up")).click()

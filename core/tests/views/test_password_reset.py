@@ -77,7 +77,7 @@ class TestPasswordResetSentView:
 @pytest.mark.django_db
 class TestPasswordResetConfirmView:
     def test_valid_token_renders_form(self, client, user):
-        token = generate_password_reset_token(user.uuid)
+        token = generate_password_reset_token(user)
 
         response = client.get(reverse("password_reset_confirm", kwargs={"token": token}))
 
@@ -91,7 +91,7 @@ class TestPasswordResetConfirmView:
         assert response.url == reverse("password_reset_error")
 
     def test_valid_submission_changes_password(self, client, user):
-        token = generate_password_reset_token(user.uuid)
+        token = generate_password_reset_token(user)
         old_password_hash = user.password
 
         response = client.post(
@@ -110,7 +110,7 @@ class TestPasswordResetConfirmView:
         assert user.check_password("NewPassword123")
 
     def test_mismatched_passwords_shows_error(self, client, user):
-        token = generate_password_reset_token(user.uuid)
+        token = generate_password_reset_token(user)
 
         response = client.post(
             reverse("password_reset_confirm", kwargs={"token": token}),
@@ -125,7 +125,7 @@ class TestPasswordResetConfirmView:
         assert user.check_password("oldpassword123")
 
     def test_weak_password_shows_error(self, client, user):
-        token = generate_password_reset_token(user.uuid)
+        token = generate_password_reset_token(user)
 
         response = client.post(
             reverse("password_reset_confirm", kwargs={"token": token}),
