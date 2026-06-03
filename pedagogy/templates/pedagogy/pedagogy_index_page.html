@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n cache %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
@@ -18,17 +18,19 @@
                 {% include "core/components/search/text_search_form.html" with aria_label=aria_label placeholder=placeholder %}
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {% for pedagogy_entry in pedagogy_entries %}
-                    {% include "pedagogy/components/pedagogy_card_preview.html" with pedagogy_entry=pedagogy_entry %}
-                    {% empty %}
-                    <div class="min-h-64 flex items-center justify-center col-span-1 md:col-span-2 lg:col-span-3">
-                        <p class="text-base-content/50">{% trans "No educational resources found" %}</p>
-                    </div>
-                {% endfor %}
-            </div>
+            {% cache 300 pedagogy_list page.id request.GET.urlencode using="content" %}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for pedagogy_entry in pedagogy_entries %}
+                        {% include "pedagogy/components/pedagogy_card_preview.html" with pedagogy_entry=pedagogy_entry %}
+                        {% empty %}
+                        <div class="min-h-64 flex items-center justify-center col-span-1 md:col-span-2 lg:col-span-3">
+                            <p class="text-base-content/50">{% trans "No educational resources found" %}</p>
+                        </div>
+                    {% endfor %}
+                </div>
 
-            {% include "components/navigation/pagination.html" with page_data=pedagogy_entries %}
+                {% include "components/navigation/pagination.html" with page_data=pedagogy_entries %}
+            {% endcache %}
             <article class="mt-8">{{ page.content|richtext }}</article>
         </main>
     </article>
