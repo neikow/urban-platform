@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        check: [ lint, format, types ]
+        check: [ lint, format, types, security ]
 
     steps:
       - name: Checkout code
@@ -51,6 +51,10 @@ jobs:
       - name: Run Mypy Type Checker
         if: matrix.check == 'types'
         run: uv run mypy .
+
+      - name: Run Bandit Security Scan
+        if: matrix.check == 'security'
+        run: uv run bandit -c pyproject.toml -r core home about legal pedagogy publications search urban_platform scripts
 
   test:
     name: Run Tests
