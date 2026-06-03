@@ -18,6 +18,7 @@ from django.core.management.base import BaseCommand, CommandParser
 from wagtail.documents.models import Document
 from wagtail.images.models import Image
 
+from home.models import HomePage
 from pedagogy.models.pedagogy_card import PedagogyCardPage
 from publications.models.event import EventPage
 from publications.models.project import ProjectPage
@@ -94,8 +95,9 @@ class Command(BaseCommand):
         return f"content-{stamp}.zip"
 
     @staticmethod
-    def _iter_pages() -> list[ProjectPage | EventPage | PedagogyCardPage]:
+    def _iter_pages() -> list[HomePage | ProjectPage | EventPage | PedagogyCardPage]:
         return [
+            *HomePage.objects.all(),
             *ProjectPage.objects.all(),
             *EventPage.objects.all(),
             *PedagogyCardPage.objects.all(),
@@ -107,8 +109,10 @@ class Command(BaseCommand):
 
         raw_content = page.content.get_prep_value()
         image_ids, document_ids = collect_media_ids(raw_content)
-        if page.hero_image_id:
-            image_ids.add(page.hero_image_id)
+        # HomePage has no hero image; other transferred pages do.
+        hero_image_id = getattr(page, "hero_image_id", None)
+        if hero_image_id:
+            image_ids.add(hero_image_id)
 
         entry: dict[str, Any] = {
             "model": label,
@@ -116,7 +120,7 @@ class Command(BaseCommand):
             "slug": page.slug,
             "title": page.title,
             "live": page.live,
-            "hero_image_pk": page.hero_image_id,
+            "hero_image_pk": hero_image_id,
             "content": raw_content,
             "fields": {
                 name: serialize_field(page, name)

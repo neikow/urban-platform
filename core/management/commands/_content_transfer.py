@@ -32,6 +32,9 @@ from django.db import models
 PROJECT_LABEL = "publications.projectpage"
 EVENT_LABEL = "publications.eventpage"
 PEDAGOGY_CARD_LABEL = "pedagogy.pedagogycardpage"
+# Singleton (max_count=1) site root; upserted in place rather than by slug under
+# a parent index, since it lives directly under the Wagtail tree root.
+HOME_LABEL = "home.homepage"
 
 # Concrete, non-tree scalar fields exported per page model (common Page fields
 # such as title/slug/seo are handled separately).
