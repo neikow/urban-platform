@@ -59,7 +59,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push web image
         uses: docker/build-push-action@v7
         with:
           context: .
@@ -67,6 +67,13 @@ jobs:
           tags: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}:latest
           build-args: |
             SENTRY_RELEASE=${{ github.sha }}
+
+      - name: Build and push nginx image
+        uses: docker/build-push-action@v7
+        with:
+          context: ./nginx
+          push: true
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}-nginx:latest
 
   deploy:
     name: Trigger Portainer Deployment (staging)
