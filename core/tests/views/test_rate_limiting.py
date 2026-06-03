@@ -15,9 +15,17 @@ _LOCMEM_CACHE = {
 
 
 @pytest.fixture
-def locmem_ratelimit(settings):
-    """Enable a real cache so django-ratelimit actually counts, then reset it."""
+def locmem_ratelimit(settings, monkeypatch):
+    """Enable a real cache so django-ratelimit actually counts, then reset it.
+
+    django-ratelimit buckets counts into fixed wall-clock windows
+    (``_get_window``). On a loaded CI runner the handful of POSTs in these
+    tests can straddle a window boundary, resetting the count and making the
+    throttle assertion flaky. Pin the window to a constant so every request in
+    a test shares one bucket.
+    """
     settings.CACHES = _LOCMEM_CACHE
+    monkeypatch.setattr("django_ratelimit.core._get_window", lambda value, period: 1)
     cache.clear()
     yield
     cache.clear()
