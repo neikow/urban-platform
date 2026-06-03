@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags i18n %}
+{% load wagtailcore_tags wagtailimages_tags i18n cache %}
 
 {% block content %}
     <article class="mx-4">
@@ -111,17 +111,19 @@
                 </div>
             {% endif %}
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
-                {% for publication in publications %}
-                    {% include "publications/components/publication_preview.html" with publication=publication %}
-                    {% empty %}
-                    <div class="min-h-64 flex items-center justify-center col-span-1 md:col-span-2 lg:col-span-3">
-                        <p class="text-base-content/50">{% trans "No publications found" %}</p>
-                    </div>
-                {% endfor %}
-            </div>
+            {% cache 300 publications_list page.id request.GET.urlencode using="content" %}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
+                    {% for publication in publications %}
+                        {% include "publications/components/publication_preview.html" with publication=publication %}
+                        {% empty %}
+                        <div class="min-h-64 flex items-center justify-center col-span-1 md:col-span-2 lg:col-span-3">
+                            <p class="text-base-content/50">{% trans "No publications found" %}</p>
+                        </div>
+                    {% endfor %}
+                </div>
 
-            {% include "components/navigation/pagination.html" with page_data=publications %}
+                {% include "components/navigation/pagination.html" with page_data=publications %}
+            {% endcache %}
 
             {% if page.body %}
                 <article class="mt-8">{{ page.body|richtext }}</article>
