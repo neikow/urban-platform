@@ -49,6 +49,8 @@ services:
                 condition: service_healthy
             volume_init:
                 condition: service_completed_successfully
+            migrator:
+                condition: service_completed_successfully
         restart: always
         networks:
             internal:
@@ -99,6 +101,8 @@ services:
             cache:
                 condition: service_started
             volume_init:
+                condition: service_completed_successfully
+            migrator:
                 condition: service_completed_successfully
         restart: always
         healthcheck:
