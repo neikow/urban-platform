@@ -55,9 +55,7 @@ services:
 
     nginx:
         container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}
-        build:
-            context: nginx
-            dockerfile: Dockerfile
+        image: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}-nginx:latest
         volumes:
             - static_volume:/app/staticfiles
             - media_volume:/app/mediafiles
