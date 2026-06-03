@@ -25,6 +25,9 @@
 | core/emails/tasks.py                                           |       66 |       10 |        4 |        0 |     85.71% |44-48, 81-85 |
 | core/emails/tokens.py                                          |       27 |        0 |        0 |        0 |    100.00% |           |
 | core/management/\_\_init\_\_.py                                |        0 |        0 |        0 |        0 |    100.00% |           |
+| core/management/commands/\_content\_transfer.py                |       50 |        3 |       22 |        3 |     91.67% |102, 123, 131 |
+| core/management/commands/export\_content.py                    |      102 |       12 |       28 |        7 |     85.38% |66-\>64, 72-\>70, 93-94, 148-\>140, 157-158, 162-163, 181-182, 186-187, 208-209 |
+| core/management/commands/import\_content.py                    |      132 |       14 |       36 |        6 |     86.90% |57-58, 64, 98-101, 119, 132-133, 161-162, 172, 175 |
 | core/models/\_\_init\_\_.py                                    |        6 |        0 |        0 |        0 |    100.00% |           |
 | core/models/city.py                                            |        5 |        1 |        0 |        0 |     80.00% |         8 |
 | core/models/city\_district.py                                  |       10 |        0 |        0 |        0 |    100.00% |           |
@@ -107,7 +110,7 @@
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **2723** |  **542** |  **472** |   **62** | **75.77%** |           |
+| **TOTAL**                                                      | **3007** |  **571** |  **558** |   **78** | **76.97%** |           |
 
 
 ## Setup coverage badge
