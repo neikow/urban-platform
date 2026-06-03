@@ -45,4 +45,11 @@ ARG DB_PORT=5432
 
 RUN python manage.py compilemessages
 
+# Drop root: run as an unprivileged user. Done last so the build steps above
+# (uv sync, compilemessages) still run as root, then ownership is handed over.
+RUN useradd --create-home --uid 1000 appuser \
+    && mkdir -p /app/staticfiles /app/mediafiles \
+    && chown -R appuser:appuser /app
+USER appuser
+
 CMD ["gunicorn", "urban_platform.wsgi:application", "--bind", "0.0.0.0:8000"]
