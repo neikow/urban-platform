@@ -47,6 +47,8 @@ services:
                 condition: service_healthy
             cache:
                 condition: service_healthy
+            volume_init:
+                condition: service_completed_successfully
         restart: always
         networks:
             internal:
@@ -94,8 +96,12 @@ services:
             - media_volume:/app/mediafiles
             - uv_cache:/app/.cache/uv
         depends_on:
-            - db
-            - cache
+            db:
+                condition: service_started
+            cache:
+                condition: service_started
+            volume_init:
+                condition: service_completed_successfully
         restart: always
         healthcheck:
             test: [ "CMD-SHELL", "uv run celery -A urban_platform inspect ping" ]
@@ -134,6 +140,20 @@ services:
             timeout: 5s
             retries: 5
 
+    # One-shot: named volumes mounted over the image's appuser-owned dirs keep
+    # their own (often root) ownership, which blocks the non-root containers from
+    # writing. Chown them to the runtime uid (1000, "appuser") before those
+    # containers start. Runs as root, idempotent, exits 0.
+    volume_init:
+        image: alpine:3.21
+        container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-volume-init
+        command: chown -R 1000:1000 /app/staticfiles /app/mediafiles /app/.cache/uv
+        volumes:
+            - static_volume:/app/staticfiles
+            - media_volume:/app/mediafiles
+            - uv_cache:/app/.cache/uv
+        restart: "no"
+
     static_collector:
         <<: *django-common
         container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-static-collector
@@ -144,6 +164,8 @@ services:
         depends_on:
             db:
                 condition: service_healthy
+            volume_init:
+                condition: service_completed_successfully
         restart: "no"
 
     migrator:
@@ -153,6 +175,8 @@ services:
         depends_on:
             db:
                 condition: service_healthy
+            volume_init:
+                condition: service_completed_successfully
         restart: "no"
 
 volumes:
