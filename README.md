@@ -16,9 +16,10 @@
 | about/models/about\_index.py                                   |       14 |        0 |        0 |        0 |    100.00% |           |
 | about/models/about\_website.py                                 |       14 |        0 |        0 |        0 |    100.00% |           |
 | core/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
-| core/apps.py                                                   |        8 |        0 |        0 |        0 |    100.00% |           |
+| core/apps.py                                                   |       13 |        0 |        0 |        0 |    100.00% |           |
 | core/auth\_backends.py                                         |       12 |        0 |        2 |        0 |    100.00% |           |
-| core/blocks.py                                                 |      170 |        4 |        0 |        0 |     97.65% |   240-250 |
+| core/blocks.py                                                 |      179 |        0 |        4 |        2 |     98.91% |255-\>262, 259-\>262 |
+| core/cache.py                                                  |       16 |        2 |        2 |        1 |     83.33% |33-34, 40-\>exit |
 | core/context\_processors.py                                    |        6 |        0 |        0 |        0 |    100.00% |           |
 | core/emails/\_\_init\_\_.py                                    |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/emails/services.py                                        |       48 |        2 |        2 |        0 |     96.00% |   26, 112 |
@@ -47,7 +48,7 @@
 | core/utils.py                                                  |        6 |        0 |        2 |        0 |    100.00% |           |
 | core/views/\_\_init\_\_.py                                     |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/views/account\_delete.py                                  |       39 |        1 |        4 |        1 |     95.35% |        38 |
-| core/views/auth\_mixins.py                                     |       29 |        0 |       10 |        0 |    100.00% |           |
+| core/views/auth\_mixins.py                                     |       32 |        0 |       10 |        0 |    100.00% |           |
 | core/views/docs.py                                             |       33 |       20 |       10 |        0 |     30.23% |16-17, 20-23, 26-46 |
 | core/views/email\_verify.py                                    |       24 |        0 |        4 |        0 |    100.00% |           |
 | core/views/login.py                                            |       39 |        0 |       12 |        0 |    100.00% |           |
@@ -88,7 +89,7 @@
 | pedagogy/management/commands/create\_mock\_pedagogy\_cards.py  |       37 |       37 |       12 |        0 |      0.00% |      1-61 |
 | pedagogy/models/\_\_init\_\_.py                                |        3 |        0 |        0 |        0 |    100.00% |           |
 | pedagogy/models/pedagogy\_card.py                              |       34 |        2 |        4 |        0 |     94.74% |    24, 68 |
-| pedagogy/models/pedagogy\_index.py                             |       39 |       12 |        2 |        0 |     65.85% |60, 63-78, 81-83 |
+| pedagogy/models/pedagogy\_index.py                             |       39 |        2 |        2 |        1 |     92.68% |    60, 68 |
 | pedagogy/models/pedagogy\_resource.py                          |       17 |        0 |        4 |        0 |    100.00% |           |
 | publications/\_\_init\_\_.py                                   |        0 |        0 |        0 |        0 |    100.00% |           |
 | publications/apps.py                                           |        4 |        0 |        0 |        0 |    100.00% |           |
@@ -110,7 +111,7 @@
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **3007** |  **571** |  **558** |   **78** | **76.97%** |           |
+| **TOTAL**                                                      | **3040** |  **559** |  **564** |   **82** | **77.50%** |           |
 
 
 ## Setup coverage badge
