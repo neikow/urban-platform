@@ -5,9 +5,11 @@ from django.core.management import call_command
 from django.test import TestCase
 from wagtail.documents.models import Document
 from wagtail.images.models import Image
+from wagtail.rich_text import RichText
 
 from core.management.commands._content_transfer import collect_media_ids
 from core.tests.utils.factories import DocumentFactory
+from home.models import HomePage
 from pedagogy.models.pedagogy_card import PedagogyCardPage
 from pedagogy.models.pedagogy_index import PedagogyIndexPage
 from pedagogy.models.pedagogy_resource import PedagogyResource
@@ -97,6 +99,25 @@ class ContentTransferTestCase(TestCase):
         self.assertEqual(ProjectPage.objects.filter(slug="mobilite-douce").count(), 1)
         self.assertEqual(PedagogyCardPage.objects.filter(slug="comprendre-le-plu").count(), 1)
         self.assertEqual(self.project.external_links.count(), 1)
+
+    def test_home_page_content_round_trips(self) -> None:
+        # The home page is a max_count=1 singleton seeded by a data migration;
+        # it is upserted in place rather than under an index parent.
+        home: HomePage = HomePage.objects.get()
+        home.content = [("rich_text", {"text": RichText("<p>Bienvenue à Marseille</p>")})]
+        home.save_revision().publish()
+
+        archive = self._export()
+
+        # Mutate the live home page, then re-importing the archive restores it.
+        home.content = [("rich_text", {"text": RichText("<p>Texte modifié</p>")})]
+        home.save_revision().publish()
+
+        call_command("import_content", str(archive))
+
+        home.refresh_from_db()
+        self.assertEqual(HomePage.objects.count(), 1)
+        self.assertIn("Bienvenue à Marseille", str(home.content))
 
     def test_import_updates_existing_page_fields(self) -> None:
         archive = self._export()

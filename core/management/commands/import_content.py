@@ -31,6 +31,7 @@ from publications.models.publication_index import PublicationIndexPage
 
 from ._content_transfer import (
     ARCHIVE_VERSION,
+    HOME_LABEL,
     MANIFEST_NAME,
     deserialize_field,
     sha256_bytes,
@@ -139,21 +140,28 @@ class Command(BaseCommand):
 
         for entry in entries:
             model = apps.get_model(*entry["model"].split("."))
-            parent = self._resolve_parent(entry["parent_model"])
 
-            existing = model.objects.child_of(parent).filter(slug=entry["slug"]).first()
-
-            if existing is None:
-                page = model()
-                self._apply_fields(page, entry, model)
-                page.live = entry["live"]
-                parent.add_child(instance=page)
-                counts["created"] += 1
-            else:
-                page = existing
+            if entry["model"] == HOME_LABEL:
+                # Singleton site root: update the existing instance in place.
+                page = self._resolve_home(model)
                 self._apply_fields(page, entry, model)
                 page.save()
                 counts["updated"] += 1
+            else:
+                parent = self._resolve_parent(entry["parent_model"])
+                existing = model.objects.child_of(parent).filter(slug=entry["slug"]).first()
+
+                if existing is None:
+                    page = model()
+                    self._apply_fields(page, entry, model)
+                    page.live = entry["live"]
+                    parent.add_child(instance=page)
+                    counts["created"] += 1
+                else:
+                    page = existing
+                    self._apply_fields(page, entry, model)
+                    page.save()
+                    counts["updated"] += 1
 
             revision = page.save_revision()
             if entry["live"]:
@@ -164,6 +172,15 @@ class Command(BaseCommand):
             self._sync_children(page, entry["children_relations"])
 
         return counts
+
+    @staticmethod
+    def _resolve_home(model: type[Page]) -> Page:
+        page = model.objects.first()
+        if page is None:
+            raise CommandError(
+                f"No {model.__name__} exists on this site; create it before importing."
+            )
+        return page
 
     @staticmethod
     def _resolve_parent(parent_label: str) -> Page:
@@ -181,7 +198,9 @@ class Command(BaseCommand):
     def _apply_fields(page: Any, entry: dict[str, Any], model: type[Page]) -> None:
         page.title = entry["title"]
         page.slug = entry["slug"]
-        page.hero_image_id = entry["hero_image_pk"]
+        # HomePage has no hero image; skip the field when the model lacks it.
+        if hasattr(page, "hero_image_id"):
+            page.hero_image_id = entry["hero_image_pk"]
         for name, value in entry["fields"].items():
             setattr(page, name, deserialize_field(model, name, value))
 
