@@ -9,8 +9,8 @@ from core.views.register import RegisterFormView
 
 VALID_REQUEST = {
     "email": "testuser@example.com",
-    "password": "Password123",
-    "confirm_password": "Password123",
+    "password": "SecurePass123",
+    "confirm_password": "SecurePass123",
     "first_name": "Test",
     "last_name": "User",
     "postal_code": "13001",
