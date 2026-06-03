@@ -36,6 +36,12 @@ class TestPasswordValidationMixin:
             PasswordValidationMixin.validate_password_strength(no_digit)
         assert "chiffre" in str(exc_info.value)
 
+    def test_validate_password_strength_rejects_common_password(self):
+        # Passes the custom length/upper/digit rules but is a well-known common
+        # password, so Django's CommonPasswordValidator must reject it.
+        with pytest.raises(forms.ValidationError):
+            PasswordValidationMixin.validate_password_strength("Password1")
+
     def test_validate_password_strength_empty_password(self):
         with pytest.raises(forms.ValidationError) as exc_info:
             PasswordValidationMixin.validate_password_strength("")
