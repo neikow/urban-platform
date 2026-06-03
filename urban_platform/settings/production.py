@@ -52,11 +52,19 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 # Cache settings (Redis)
 REDIS_URL = os.environ.get("REDIS_URL", "redis://cache:6379/0")
 
+# Separate Redis DB for the content fragment cache: it is flushed wholesale on
+# every page publish, so it must not share a DB with sessions (the default).
+CONTENT_CACHE_URL = os.environ.get("CONTENT_CACHE_URL") or REDIS_URL.rsplit("/", 1)[0] + "/1"
+
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": REDIS_URL,
-    }
+    },
+    "content": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": CONTENT_CACHE_URL,
+    },
 }
 
 # Session backend using cache
