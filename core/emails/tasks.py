@@ -62,7 +62,7 @@ def send_password_reset_email(self: Task, user_id: int) -> bool:
         recipient_email=user.email,
     )
 
-    token = generate_password_reset_token(user.uuid)
+    token = generate_password_reset_token(user)
     base_url = getattr(settings, "WAGTAILADMIN_BASE_URL", "http://localhost:8000")
     reset_url = f"{base_url}/auth/password-reset/{token}/"
 

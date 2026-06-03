@@ -241,12 +241,25 @@ class RecentPublicationsBlock(blocks.StructBlock):
 
         from publications.models import PublicationPage
 
-        # TODO: URB-148 Add caching to this query to avoid hitting the database on every page load
-        context["publications"] = (
-            PublicationPage.objects.live()
-            .public()
-            .order_by("-first_published_at")[: value["number_of_publications"]]
+        from core.cache import (
+            CONTENT_CACHE_TIMEOUT,
+            RECENT_PUBLICATIONS_KEY,
+            get_content_cache,
         )
+
+        count = value["number_of_publications"]
+        cache = get_content_cache()
+        cache_key = RECENT_PUBLICATIONS_KEY.format(count=count)
+
+        publications = cache.get(cache_key) if cache is not None else None
+        if publications is None:
+            publications = list(
+                PublicationPage.objects.live().public().order_by("-first_published_at")[:count]
+            )
+            if cache is not None:
+                cache.set(cache_key, publications, CONTENT_CACHE_TIMEOUT)
+
+        context["publications"] = publications
         return context
 
     class Meta:

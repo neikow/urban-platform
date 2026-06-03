@@ -113,7 +113,7 @@ class PasswordChangeForm(PasswordValidationMixin, forms.Form):
         new_password = self.cleaned_data.get("new_password")
         if not new_password:
             raise forms.ValidationError("Le nouveau mot de passe est requis.")
-        self.validate_password_strength(new_password)
+        self.validate_password_strength(new_password, user=self.user)
         return new_password
 
     def clean(self) -> dict[str, Any] | None:
