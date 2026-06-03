@@ -31,7 +31,11 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.dummy.DummyCache",
         "LOCATION": "",
-    }
+    },
+    "content": {
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+        "LOCATION": "",
+    },
 }
 
 # Celery settings for e2e testing

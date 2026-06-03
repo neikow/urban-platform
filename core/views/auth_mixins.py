@@ -1,4 +1,6 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.password_validation import validate_password
 from django import forms
 from django.http import JsonResponse
 
@@ -7,7 +9,7 @@ User = get_user_model()
 
 class PasswordValidationMixin:
     @staticmethod
-    def validate_password_strength(password: str) -> None:
+    def validate_password_strength(password: str, user: AbstractBaseUser | None = None) -> None:
         if not password:
             raise forms.ValidationError("Le mot de passe est requis.")
 
@@ -19,6 +21,12 @@ class PasswordValidationMixin:
             raise forms.ValidationError(
                 "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule et un chiffre."
             )
+
+        # Also enforce Django's AUTH_PASSWORD_VALIDATORS (common-password,
+        # user-attribute similarity, numeric-only…), which the custom rules above
+        # do not cover. Raises django.core.exceptions.ValidationError, which forms
+        # handle like forms.ValidationError.
+        validate_password(password, user)  # type: ignore[arg-type]  # custom user model
 
 
 class EmailValidationMixin:
