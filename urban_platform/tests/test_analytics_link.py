@@ -4,9 +4,11 @@ from django.test import override_settings
 
 
 @pytest.mark.django_db
-@override_settings(ANALYTICS_SCRIPT_URL="https://analytics.example.com")
+@override_settings(
+    ANALYTICS_SCRIPT_TAG='<script src="https://analytics.example.com" defer></script>'
+)
 def test_analytics_link_in_base_template():
     template = get_template("base.html")
     rendered = template.render({"request": None})
 
-    assert 'src="https://analytics.example.com"' in rendered
+    assert '<script src="https://analytics.example.com" defer></script>' in rendered
