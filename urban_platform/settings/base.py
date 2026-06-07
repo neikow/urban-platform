@@ -89,6 +89,12 @@ WSGI_APPLICATION = "urban_platform.wsgi.application"
 # Authentication
 AUTH_USER_MODEL = "core.User"
 
+# Point Django auth (e.g. LoginRequiredMixin) at the platform's own login route
+# instead of the framework default /accounts/login/, which does not exist here
+# and would 404 unauthenticated users (e.g. after email verification).
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "me"
+
 # Grants Wagtail admin access (wagtailadmin.access_admin) based on user role,
 # replacing the deprecated is_staff flag. See core.auth_backends.
 AUTHENTICATION_BACKENDS = [
