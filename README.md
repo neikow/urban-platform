@@ -17,7 +17,7 @@
 | about/models/about\_website.py                                 |       14 |        0 |        0 |        0 |    100.00% |           |
 | core/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/apps.py                                                   |       13 |        0 |        0 |        0 |    100.00% |           |
-| core/auth\_backends.py                                         |       12 |        0 |        2 |        0 |    100.00% |           |
+| core/auth\_backends.py                                         |       17 |        2 |        4 |        2 |     80.95% |    63, 66 |
 | core/blocks.py                                                 |      179 |        0 |        4 |        2 |     98.91% |255-\>262, 259-\>262 |
 | core/cache.py                                                  |       16 |        2 |        2 |        1 |     83.33% |33-34, 40-\>exit |
 | core/context\_processors.py                                    |        6 |        0 |        0 |        0 |    100.00% |           |
@@ -111,7 +111,7 @@
 | publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **3074** |  **559** |  **576** |   **87** | **77.81%** |           |
+| **TOTAL**                                                      | **3079** |  **561** |  **578** |   **89** | **77.74%** |           |
 
 
 ## Setup coverage badge
