@@ -495,8 +495,8 @@ msgid "You can now enjoy all the features of the platform."
 msgstr "Vous pouvez maintenant profiter de toutes les fonctionnalités de la plateforme."
 
 #: core/templates/auth/email_verify_success.html:36
-msgid "Go to my profile"
-msgstr "Aller à mon profil"
+msgid "Go to home page"
+msgstr "Aller à l'accueil"
 
 #: core/templates/auth/login_modal.html:8
 #: core/templates/core/components/image_lightbox.html:21
