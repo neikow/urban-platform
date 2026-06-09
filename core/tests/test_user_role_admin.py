@@ -280,3 +280,39 @@ class TestUserAdminIntegration:
         assert response.status_code == 302
         citizen.refresh_from_db()
         assert citizen.role == UserRole.ASSOCIATION_MEMBER
+
+
+# --- role-derived permissions ----------------------------------------------
+
+
+@pytest.mark.django_db
+class TestRoleDerivedPermissions:
+    """The ``RolePermissionsBackend`` grants user-admin perms from the role
+    alone, with no database-stored permissions."""
+
+    def test_member_can_access_admin_and_manage_users(self, moderator):
+        assert moderator.has_perm("wagtailadmin.access_admin")
+        assert moderator.has_perm("core.add_user")
+        assert moderator.has_perm("core.change_user")
+        assert moderator.has_perm("core.delete_user")
+        assert moderator.has_perm("core.view_user")
+
+    def test_admin_can_manage_users(self, admin):
+        assert admin.has_perm("wagtailadmin.access_admin")
+        assert admin.has_perm("core.change_user")
+
+    def test_citizen_cannot_manage_users(self, citizen):
+        assert not citizen.has_perm("wagtailadmin.access_admin")
+        assert not citizen.has_perm("core.add_user")
+        assert not citizen.has_perm("core.change_user")
+
+    def test_inactive_member_gets_no_role_perms(self, moderator):
+        moderator.is_active = False
+        moderator.save()
+        assert not moderator.has_perm("core.change_user")
+
+    def test_member_reaches_users_index_without_db_grant(self, client, moderator):
+        """No call to ``_grant_user_admin``: access comes from the role."""
+        client.force_login(moderator)
+        response = client.get(reverse("wagtailusers_users:index"))
+        assert response.status_code == 200
