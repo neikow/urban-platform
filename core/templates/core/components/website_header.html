@@ -47,8 +47,15 @@
             </nav>
 
             <!-- Right side: user actions -->
-            <div class="ml-auto lg:ml-0 hidden lg:flex items-center">
+            <div class="ml-auto lg:ml-0 hidden lg:flex items-center gap-1">
                 {% if user.is_authenticated %}
+                    <a
+                        href="{% url 'me' %}"
+                        title="{{ user.first_name }}"
+                        class="block max-w-[10rem] truncate text-[11px] font-bold uppercase tracking-wide text-base-content/70 hover:text-primary transition-colors"
+                    >
+                        {{ user.first_name }}
+                    </a>
                     <div class="dropdown dropdown-end">
                         <div
                             tabindex="0"
@@ -172,7 +179,16 @@
             </div>
 
             <!-- Mobile hamburger -->
-            <div class="lg:hidden ml-auto flex items-center">
+            <div class="lg:hidden ml-auto flex items-center gap-1">
+                {% if user.is_authenticated %}
+                    <a
+                        href="{% url 'me' %}"
+                        title="{{ user.first_name }}"
+                        class="block max-w-[7rem] truncate text-xs font-bold uppercase tracking-wide text-base-content/70 hover:text-primary transition-colors"
+                    >
+                        {{ user.first_name }}
+                    </a>
+                {% endif %}
                 <div class="dropdown dropdown-end">
                     <div
                         tabindex="0"
