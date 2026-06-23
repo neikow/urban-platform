@@ -630,10 +630,8 @@ msgid "Vote on initiatives"
 msgstr "Votez sur les initiatives"
 
 #: core/templates/auth/register.html:87
-#, fuzzy
-#| msgid "Question"
 msgid "Registration"
-msgstr "Question"
+msgstr "Inscription"
 
 #: core/templates/auth/register.html:136
 msgid "I accept the"
@@ -942,8 +940,6 @@ msgid "Utilisateurs"
 msgstr "Utilisateurs"
 
 #: core/wagtail_hooks.py:249
-#, fuzzy
-#| msgid "Document"
 msgid "Documentation"
 msgstr "Documentation"
 
