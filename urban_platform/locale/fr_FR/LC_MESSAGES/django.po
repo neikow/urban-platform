@@ -1,21 +1,23 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# French (France) translations.
+# Copyright (C) 2026 Urban Platform
+# This file is distributed under the same license as the urban-platform package.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 19:31+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2026-06-23 09:30+0200\n"
+"PO-Revision-Date: 2026-06-23 10:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: French (France)\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: e2e/tests/pedagogy/test_card_creation_flow.py:31
+msgid "Fiches Pédagogiques"
+msgstr "Fiches pédagogiques"
 
 #: e2e/tests/test_auth_flows.py:54
 msgid "Sign up"
@@ -60,7 +62,9 @@ msgstr "Erreur interne du serveur"
 
 #: urban_platform/templates/500.html:18
 msgid "Sorry, something went wrong on our end. Please try again later."
-msgstr "Désolé, quelque chose s'est mal passé de notre côté. Veuillez réessayer plus tard."
+msgstr ""
+"Désolé, quelque chose s'est mal passé de notre côté. Veuillez réessayer plus "
+"tard."
 
 #: urban_platform/templates/500.html:25
 msgid "Reload the page"
