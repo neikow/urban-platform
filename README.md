@@ -43,7 +43,7 @@
 | core/templatetags/django\_settings.py                          |        6 |        0 |        0 |        0 |    100.00% |           |
 | core/templatetags/forms.py                                     |        6 |        0 |        0 |        0 |    100.00% |           |
 | core/templatetags/navigation\_tags.py                          |       53 |        3 |       18 |        4 |     90.14% |22-\>25, 36, 48, 53 |
-| core/templatetags/structured\_data.py                          |      113 |        6 |       42 |       15 |     86.45% |30-31, 90-\>93, 100, 125-\>128, 129-\>132, 133-\>138, 135-\>138, 139, 141, 154-\>157, 158-\>161, 162-\>165, 166-\>169, 173-\>189, 181-\>187, 200 |
+| core/templatetags/structured\_data.py                          |      113 |        4 |       42 |       11 |     90.32% |30-31, 90-\>93, 100, 133-\>138, 135-\>138, 154-\>157, 158-\>161, 162-\>165, 166-\>169, 173-\>189, 181-\>187, 200 |
 | core/toc.py                                                    |       41 |        1 |       22 |        1 |     96.83% |        52 |
 | core/utils.py                                                  |        6 |        0 |        2 |        0 |    100.00% |           |
 | core/views/\_\_init\_\_.py                                     |        0 |        0 |        0 |        0 |    100.00% |           |
@@ -95,23 +95,26 @@
 | publications/apps.py                                           |        4 |        0 |        0 |        0 |    100.00% |           |
 | publications/management/\_\_init\_\_.py                        |        0 |        0 |        0 |        0 |    100.00% |           |
 | publications/management/commands/\_\_init\_\_.py               |        0 |        0 |        0 |        0 |    100.00% |           |
-| publications/management/commands/create\_mock\_publications.py |       66 |       66 |       22 |        0 |      0.00% |     1-117 |
-| publications/management/commands/create\_mock\_votes.py        |       90 |       90 |       30 |        0 |      0.00% |     1-319 |
-| publications/models/\_\_init\_\_.py                            |        6 |        0 |        0 |        0 |    100.00% |           |
+| publications/management/commands/create\_mock\_publications.py |       66 |       66 |       22 |        0 |      0.00% |     1-119 |
+| publications/management/commands/create\_mock\_votes.py        |       91 |       91 |       30 |        0 |      0.00% |     1-323 |
+| publications/models/\_\_init\_\_.py                            |        7 |        0 |        0 |        0 |    100.00% |           |
 | publications/models/event.py                                   |       44 |        2 |        4 |        1 |     93.75% |19, 23, 97-\>100 |
 | publications/models/external\_link.py                          |       17 |        0 |        0 |        0 |    100.00% |           |
 | publications/models/form.py                                    |       26 |        1 |        0 |        0 |     96.15% |        70 |
-| publications/models/project.py                                 |       62 |        3 |        8 |        1 |     94.29% |38, 42, 98 |
+| publications/models/idea.py                                    |       16 |        1 |        0 |        0 |     93.75% |        51 |
+| publications/models/project.py                                 |       75 |        3 |        8 |        1 |     95.18% |51, 55, 127 |
 | publications/models/publication.py                             |      115 |       72 |       50 |        0 |     27.27% |38-42, 46-51, 55-60, 64-69, 72-84, 88-93, 97-103, 107-127, 131-138 |
 | publications/models/publication\_index.py                      |       46 |        1 |        0 |        0 |     97.83% |        35 |
 | publications/services.py                                       |       77 |        1 |       18 |        1 |     97.89% |       137 |
 | publications/views/\_\_init\_\_.py                             |        0 |        0 |        0 |        0 |    100.00% |           |
+| publications/views/idea.py                                     |       60 |       10 |       14 |        3 |     82.43% |25-26, 39-40, 79-80, 86, 98, 117-118, 132-\>143 |
+| publications/views/idea\_stats.py                              |       41 |        0 |        2 |        0 |    100.00% |           |
 | publications/views/vote.py                                     |       70 |       12 |       20 |        5 |     81.11% |26-27, 46-47, 92-93, 99, 105, 117, 134-135, 141, 149-\>164 |
 | publications/views/vote\_stats.py                              |       59 |        0 |        8 |        0 |    100.00% |           |
-| publications/wagtail\_hooks.py                                 |       11 |        0 |        0 |        0 |    100.00% |           |
+| publications/wagtail\_hooks.py                                 |       18 |        0 |        0 |        0 |    100.00% |           |
 | search/\_\_init\_\_.py                                         |        0 |        0 |        0 |        0 |    100.00% |           |
 | search/views.py                                                |       18 |       13 |        2 |        0 |     25.00% |     16-40 |
-| **TOTAL**                                                      | **3089** |  **564** |  **582** |   **90** | **77.66%** |           |
+| **TOTAL**                                                      | **3228** |  **574** |  **598** |   **89** | **78.33%** |           |
 
 
 ## Setup coverage badge
