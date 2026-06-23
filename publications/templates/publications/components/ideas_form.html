@@ -1,0 +1,175 @@
+{% load static i18n %}
+
+{% if page.enable_ideas %}
+    <div
+        id="ideas-component"
+        data-project-id="{{ page.id }}"
+        data-is-authenticated="{{ user.is_authenticated|yesno:'true,false' }}"
+        data-csrf-token="{{ csrf_token }}"
+        data-msg-empty="{% trans 'Please describe your idea' %}"
+        data-msg-generic-error="{% trans 'An error occurred' %}"
+        data-msg-load-error="{% trans 'An error occurred while loading' %}"
+        data-msg-submit-error="{% trans 'An error occurred while submitting your idea' %}"
+        data-msg-remove-error="{% trans 'An error occurred while removing your idea' %}"
+        data-msg-confirm-remove="{% trans 'Are you sure you want to remove your idea?' %}"
+    >
+        <div
+            id="ideas-card"
+            class="bg-base-200/70 rounded-xl px-6 pt-6 pb-8 sm:px-8 scroll-mt-24 no-page-style"
+        >
+            <div class="flex items-start gap-3 mb-6">
+                <div class="shrink-0 w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center mt-0.5">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="text-primary"
+                        aria-hidden="true"
+                    >
+                        <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1v.2h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z" />
+                    </svg>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-display font-bold text-xl leading-tight mt-0 mb-0">
+                        {% trans "Share your ideas for this project" %}
+                    </h3>
+                    <p class="text-xs text-base-content/50 mt-1">
+                        {% trans "This project is in its early stages — propose your ideas or an alternative to help shape it." %}
+                    </p>
+                </div>
+                <div
+                    class="tooltip tooltip-top shrink-0"
+                    data-tip="{% trans 'Your idea is only visible to you and the administrators.' %}"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="text-base-content/30 cursor-help"
+                        aria-label="{% trans 'More information' %}"
+                    >
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 16v-4" />
+                        <path d="M12 8h.01" />
+                    </svg>
+                </div>
+            </div>
+
+            {% if not user.is_authenticated %}
+                <div id="ideas-login-prompt" class="text-center py-6 px-4 bg-base-100 rounded-lg">
+                    <p class="text-base-content/70 mb-4 text-sm">
+                        {% trans "Log in to share your idea on this project" %}
+                    </p>
+                    <button
+                        type="button"
+                        onclick="document.getElementById('login_modal').showModal()"
+                        class="btn btn-primary border-none font-semibold"
+                    >
+                        {% trans "Log in to participate" %}
+                    </button>
+                </div>
+            {% else %}
+                <div id="ideas-form-container">
+                    <form id="ideas-form" class="space-y-5">
+                        <div class="form-control w-full">
+                            <label class="label pb-1" for="ideas-description">
+                                <span class="label-text font-medium">{% trans "Your idea" %}</span>
+                            </label>
+                            <textarea
+                                id="ideas-description"
+                                name="description"
+                                class="textarea textarea-bordered h-32 w-full text-sm"
+                                maxlength="2000"
+                                placeholder="{% trans 'Describe your idea or alternative proposal...' %}"
+                                required
+                            ></textarea>
+                            <p class="text-xs text-base-content/50 mt-1.5">
+                                {% trans "Only you and administrators can see your idea" %}
+                            </p>
+                        </div>
+
+                        <div id="ideas-error" class="alert alert-error hidden">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="stroke-current shrink-0 h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                            </svg>
+                            <span id="ideas-error-text"></span>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label cursor-pointer justify-start gap-3">
+                                <input
+                                    type="checkbox"
+                                    id="ideas-anonymous"
+                                    name="is_anonymous"
+                                    class="checkbox checkbox-sm"
+                                >
+                                <span
+                                    class="label-text text-sm"
+                                >{% trans "Submit my idea anonymously (my name will not be linked to it)" %}</span>
+                            </label>
+                        </div>
+
+                        <div class="flex gap-2">
+                            <button
+                                type="submit"
+                                id="ideas-submit-btn"
+                                class="btn btn-primary flex-1 border-none font-semibold"
+                            >
+                                {% trans "Submit my idea" %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="ideas-result-container" class="hidden">
+                    <div class="p-4 bg-base-300/60 rounded-lg">
+                        <p class="text-xs text-base-content/60 uppercase tracking-wide font-bold mb-1">
+                            {% trans "Your idea:" %}
+                        </p>
+                        <p id="ideas-result-text" class="text-sm whitespace-pre-line"></p>
+                    </div>
+
+                    <div class="flex gap-2 mt-4">
+                        <button type="button" id="ideas-change-btn" class="btn btn-outline btn-sm flex-1">
+                            {% trans "Edit my idea" %}
+                        </button>
+                        <button type="button" id="ideas-remove-btn" class="btn btn-ghost btn-sm text-error">
+                            {% trans "Remove my idea" %}
+                        </button>
+                    </div>
+                </div>
+
+                <div id="ideas-loading" class="hidden flex justify-center py-4">
+                    <span class="loading loading-spinner loading-md"></span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% include "auth/login_modal.html" %}
+
+    <script src="{% static 'publications/js/ideas.js' %}"></script>
+{% endif %}

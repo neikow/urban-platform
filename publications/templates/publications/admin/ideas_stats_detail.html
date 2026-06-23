@@ -1,0 +1,111 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n wagtailadmin_tags %}
+
+{% block titletag %}{% trans "Idea Collection" %} - {{ project.title }}{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title=project.title icon="clipboard-list" %}
+
+    <div class="w-nice-padding w-px-6">
+        <!-- Back link -->
+        <a
+            href="{% url 'idea_statistics' %}{% if show_all %}?show_all=1{% endif %}"
+            class="w-flex w-items-center w-gap-1 w-text-text-meta hover:w-text-primary w-mb-4"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            {% trans "Back to list" %}
+        </a>
+
+        <!-- Project info -->
+        <div class="w-flex w-items-center w-gap-4 w-mb-6">
+            <h2 class="w-text-xl w-font-bold">{{ project.title }}</h2>
+            <a
+                href="{{ project.url }}"
+                target="_blank"
+                class="w-text-text-meta hover:w-text-primary"
+                title="{% trans 'View project' %}"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+            </a>
+            <span class="w-text-text-meta">{{ total_ideas }} {% trans "ideas" %}</span>
+        </div>
+
+        <form method="get" class="w-flex w-items-center w-gap-3 w-mb-4">
+            <label class="w-flex w-items-center w-gap-2 w-text-sm w-cursor-pointer">
+                <input
+                    type="checkbox"
+                    name="show_all"
+                    value="1"
+                    {% if show_all %}
+                        checked
+                    {% endif %}
+                    onchange="this.form.submit()"
+                >
+                {% blocktrans with code=local_postal_code %}Show ideas from outside {{ code }}{% endblocktrans %}
+            </label>
+        </form>
+        {% if not show_all %}
+            <p class="w-text-text-meta w-text-sm w-mb-4">
+                {% blocktrans with code=local_postal_code %}Only ideas from users with postal code {{ code }} are shown.
+                    Check the box above to include all ideas.{% endblocktrans %}
+            </p>
+        {% endif %}
+
+        {% if ideas %}
+            <div class="w-flex w-flex-col w-gap-4">
+                {% for idea in ideas %}
+                    <div
+                        class="w-bg-surface-page w-p-4 w-border w-border-border-furniture"
+                        style="border-radius: 12px"
+                    >
+                        <div class="w-flex w-flex-wrap w-justify-between w-items-start w-gap-2 w-mb-2">
+                            <div class="w-flex w-flex-wrap w-items-center w-gap-2">
+                                {% if not idea.anonymize %}
+                                    {% if idea.user.is_deleted %}
+                                        <span class="w-text-text-meta w-text-sm w-italic">
+                                            {% trans "Deleted User" %}
+                                        </span>
+                                    {% else %}
+                                        <span class="w-text-text-meta w-text-sm">{{ idea.user.email }}</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="w-text-text-meta w-text-sm w-italic">{% trans "Anonymous" %}</span>
+                                {% endif %}
+                            </div>
+                            <span class="w-text-text-meta w-text-xs">{{ idea.created_at|date:"d/m/Y H:i" }}</span>
+                        </div>
+                        <p class="w-text-sm w-whitespace-pre-line">{{ idea.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="w-text-text-meta w-text-sm w-italic">{% trans "No ideas yet" %}</p>
+        {% endif %}
+    </div>
+{% endblock %}

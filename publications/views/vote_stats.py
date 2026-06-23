@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 from wagtail.admin.views.generic.base import WagtailAdminTemplateMixin
 
-from publications.models import ProjectPage
+from publications.models import ParticipationMode, ProjectPage
 from publications.models.form import (
     FAVORABLE_VALUES,
     FormResponse,
@@ -47,7 +47,7 @@ class VoteStatsView(WagtailAdminTemplateMixin, TemplateView):
 
         projects = (
             ProjectPage.objects.live()
-            .filter(enable_voting=True)
+            .filter(participation_mode=ParticipationMode.VOTING)
             .annotate(
                 total_votes=Count("vote_responses", filter=local_filter),
                 with_comments=Count(

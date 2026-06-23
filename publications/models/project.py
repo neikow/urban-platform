@@ -29,6 +29,19 @@ class ProjectCategory(models.TextChoices):
     OTHER = "OTHER", _("Other")
 
 
+class ParticipationMode(models.TextChoices):
+    """How residents may participate on a project.
+
+    Voting and idea collection are mutually exclusive: a project still in its
+    early stages collects ideas, while a more mature one is put to a vote.
+    Switching mode never deletes responses already collected for the other one.
+    """
+
+    NONE = "NONE", _("No participation")
+    VOTING = "VOTING", _("Voting")
+    IDEAS = "IDEAS", _("Idea collection")
+
+
 class ProjectPage(PublicationPage):
     parent_page_types: list[str] = ["publications.PublicationIndexPage"]
     child_page_types: list[str] = []
@@ -48,17 +61,23 @@ class ProjectPage(PublicationPage):
         default=ProjectCategory.OTHER,
     )
 
-    enable_voting: models.BooleanField[bool, bool] = models.BooleanField(
-        _("Enable Voting"),
-        default=True,
-        help_text=_("Allow users to vote on this project"),
+    participation_mode: models.CharField[str, str] = models.CharField(
+        _("Participation mode"),
+        max_length=20,
+        choices=ParticipationMode.choices,
+        default=ParticipationMode.VOTING,
+        help_text=_(
+            "Voting lets residents give an opinion; idea collection lets them "
+            "propose ideas on a project still in its early stages. The two are "
+            "mutually exclusive — switching keeps responses already collected."
+        ),
     )
 
     voting_end_date: models.DateTimeField[datetime | None, datetime | None] = models.DateTimeField(
         _("Voting End Date"),
         null=True,
         blank=True,
-        help_text=_("Leave empty for no end date"),
+        help_text=_("Leave empty for no end date (only applies to voting)"),
     )
 
     show_toc: models.BooleanField[bool, bool] = models.BooleanField(
@@ -74,10 +93,20 @@ class ProjectPage(PublicationPage):
     content_panels = PublicationPage.content_panels + [
         FieldPanel("category"),
         InlinePanel("external_links", label=_("External Links")),
-        FieldPanel("enable_voting"),
+        FieldPanel("participation_mode"),
         FieldPanel("voting_end_date"),
         FieldPanel("show_toc"),
     ]
+
+    @property
+    def enable_voting(self) -> bool:
+        """Backward-compatible flag: True when the project is in voting mode."""
+        return self.participation_mode == ParticipationMode.VOTING
+
+    @property
+    def enable_ideas(self) -> bool:
+        """True when the project collects ideas instead of votes."""
+        return self.participation_mode == ParticipationMode.IDEAS
 
     def clean(self) -> None:
         super().clean()
@@ -100,6 +129,11 @@ class ProjectPage(PublicationPage):
             return True
 
         return timezone.now() <= self.voting_end_date
+
+    @property
+    def is_ideas_open(self) -> bool:
+        """Idea collection has no deadline; it is open whenever the mode is active."""
+        return self.enable_ideas
 
     @cached_property
     def has_external_links(self) -> bool:
