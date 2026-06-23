@@ -31,7 +31,7 @@ services:
     web:
         <<: *django-common
         container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-web
-        command: uv run gunicorn urban_platform.wsgi:application --bind 0.0.0.0:8000
+        command: uv run gunicorn urban_platform.wsgi:application -c gunicorn.conf.py
         volumes:
             - static_volume:/app/staticfiles
             - media_volume:/app/mediafiles
