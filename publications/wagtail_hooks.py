@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from wagtail import hooks
 from wagtail.admin.menu import MenuItem
 
+from publications.views.idea_stats import IdeaStatsView, IdeaStatsDetailView
 from publications.views.vote_stats import VoteStatsView, VoteStatsDetailView
 
 
@@ -25,4 +26,26 @@ def register_vote_stats_menu_item() -> MenuItem:
         reverse("vote_statistics"),
         icon_name="success",
         order=202,
+    )
+
+
+@hooks.register("register_admin_urls")
+def register_idea_stats_url() -> list[URLPattern]:
+    return [
+        path("idea-collection/", IdeaStatsView.as_view(), name="idea_statistics"),
+        path(
+            "idea-collection/<int:project_id>/",
+            IdeaStatsDetailView.as_view(),
+            name="idea_statistics_detail",
+        ),
+    ]
+
+
+@hooks.register("register_admin_menu_item")
+def register_idea_stats_menu_item() -> MenuItem:
+    return MenuItem(
+        _("Idea Collection"),
+        reverse("idea_statistics"),
+        icon_name="clipboard-list",
+        order=203,
     )

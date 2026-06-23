@@ -8,7 +8,7 @@ from django.core.management.base import BaseCommand
 from django.utils import timezone
 
 from publications.factories import EventPageFactory, ProjectPageFactory, ProjectExternalLinkFactory
-from publications.models import PublicationIndexPage
+from publications.models import ParticipationMode, PublicationIndexPage
 
 
 class Command(BaseCommand):
@@ -75,7 +75,9 @@ class Command(BaseCommand):
 
                 page = ProjectPageFactory.create(
                     parent=index_page,
-                    enable_voting=enable_voting,
+                    participation_mode=(
+                        ParticipationMode.VOTING if enable_voting else ParticipationMode.NONE
+                    ),
                     voting_end_date=voting_end_date,
                 )
                 page.save_revision().publish()

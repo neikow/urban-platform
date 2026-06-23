@@ -27,6 +27,7 @@ from core.views.password_reset import (
     PasswordResetErrorView,
     PasswordResetCompleteView,
 )
+from publications.views.idea import IdeaMineView, IdeaView
 from publications.views.vote import VoteView, VoteResultsView
 
 urlpatterns = [
@@ -81,6 +82,12 @@ urlpatterns = [
         "api/projects/<int:project_id>/vote/results/",
         VoteResultsView.as_view(),
         name="project_vote_results",
+    ),
+    path("api/projects/<int:project_id>/idea/", IdeaView.as_view(), name="project_idea"),
+    path(
+        "api/projects/<int:project_id>/idea/mine/",
+        IdeaMineView.as_view(),
+        name="project_idea_mine",
     ),
 ]
 
