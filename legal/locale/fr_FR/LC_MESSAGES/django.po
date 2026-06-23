@@ -1,18 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# French (France) translations for legal app.
+# Copyright (C) 2026 Urban Platform
+# This file is distributed under the same license as the urban-platform package.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 19:31+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: fr\n"
+"POT-Creation-Date: 2026-06-23 09:30+0200\n"
+"PO-Revision-Date: 2026-06-23 10:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: French (France)\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,7 +33,9 @@ msgstr "Le contenu de la charte de bonne conduite"
 msgid ""
 "This content should not change often as the user is prompted to accept it "
 "whenever it changes."
-msgstr "Ce contenu ne devrait pas changer souvent car l'utilisateur est invité à l'accepter chaque fois qu'il change."
+msgstr ""
+"Ce contenu ne devrait pas changer souvent car l'utilisateur est invité à "
+"l'accepter chaque fois qu'il change."
 
 #: legal/models/code_of_conduct.py:41
 msgid "Code of Conduct Page"
@@ -121,22 +121,22 @@ msgstr "Charte de bonne conduite"
 msgid "Legal"
 msgstr "Juridique"
 
-#: legal/templates/legal/code_of_conduct_consent.html:13
+#: legal/templates/legal/code_of_conduct_consent.html:17
 msgid "Signing the code of conduct"
 msgstr "Signature de la charte de bonne conduite"
 
-#: legal/templates/legal/code_of_conduct_consent.html:37
+#: legal/templates/legal/code_of_conduct_consent.html:45
 msgid "I have read and accept the code of conduct"
 msgstr "J'ai lu et j'accepte la charte de bonne conduite"
 
-#: legal/templates/legal/code_of_conduct_consent.html:40
+#: legal/templates/legal/code_of_conduct_consent.html:48
 msgid "Please read the entire charter before accepting"
 msgstr "Veuillez lire l'ensemble de la charte avant de l'accepter"
 
-#: legal/templates/legal/code_of_conduct_consent.html:49
+#: legal/templates/legal/code_of_conduct_consent.html:57
 msgid "Accept and continue"
 msgstr "Accepter et continuer"
 
-#: legal/templates/legal/legal_index_page.html:32
+#: legal/templates/legal/legal_index_page.html:44
 msgid "No content available at the moment."
 msgstr "Aucun contenu disponible pour le moment."

@@ -1,18 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# French (France) translations for pedagogy app.
+# Copyright (C) 2026 Urban Platform
+# This file is distributed under the same license as the urban-platform package.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 19:31+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2026-06-23 09:30+0200\n"
+"PO-Revision-Date: 2026-06-23 10:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: French (France)\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -63,7 +61,8 @@ msgstr "Introduction de la page"
 
 #: pedagogy/models/pedagogy_index.py:39
 msgid "Small introduction shown above the pedagogy card list."
-msgstr "Petite introduction affichée au-dessus de la liste des cartes pédagogiques."
+msgstr ""
+"Petite introduction affichée au-dessus de la liste des cartes pédagogiques."
 
 #: pedagogy/models/pedagogy_index.py:44
 msgid "Page body content"
@@ -107,21 +106,21 @@ msgstr "Télécharger la ressource"
 msgid "Unknown resource type."
 msgstr "Type de ressource inconnu."
 
-#: pedagogy/templates/pedagogy/components/pedagogy_card_preview.html:19
-#: pedagogy/templates/pedagogy/pedagogy_card_page.html:14
+#: pedagogy/templates/pedagogy/components/pedagogy_card_preview.html:33
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:16
 msgid "Educational Resource"
-msgstr "Ressources Pédagogiques"
+msgstr "Ressource pédagogique"
 
-#: pedagogy/templates/pedagogy/pedagogy_card_page.html:36
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:42
 #, python-format
 msgid "Preview image: %(title)s"
-msgstr "Image de prévisualisation : %(title)s"
+msgstr "Aperçu de l'image: %(title)s"
 
-#: pedagogy/templates/pedagogy/pedagogy_card_page.html:57
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:63
 msgid "Quick Access"
 msgstr "Accès rapide"
 
-#: pedagogy/templates/pedagogy/pedagogy_card_page.html:65
+#: pedagogy/templates/pedagogy/pedagogy_card_page.html:71
 msgid "Table of Contents"
 msgstr "Table des matières"
 
@@ -131,7 +130,7 @@ msgstr "Ressources"
 
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:13
 msgid "Latest additions"
-msgstr "Dernières ajouts"
+msgstr "Derniers ajouts"
 
 #: pedagogy/templates/pedagogy/pedagogy_index_page.html:16
 msgid "Search resources"
@@ -141,6 +140,6 @@ msgstr "Rechercher des ressources"
 msgid "Search for a resource..."
 msgstr "Rechercher une ressource..."
 
-#: pedagogy/templates/pedagogy/pedagogy_index_page.html:26
+#: pedagogy/templates/pedagogy/pedagogy_index_page.html:27
 msgid "No educational resources found"
 msgstr "Aucune ressource pédagogique trouvée"
