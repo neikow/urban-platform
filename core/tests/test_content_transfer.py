@@ -8,7 +8,7 @@ from wagtail.images.models import Image
 from wagtail.rich_text import RichText
 
 from core.management.commands._content_transfer import collect_media_ids
-from core.tests.utils.factories import DocumentFactory
+from core.tests.utils.factories import DocumentFactory, ImageFactory
 from home.models import HomePage
 from pedagogy.models.pedagogy_card import PedagogyCardPage
 from pedagogy.models.pedagogy_index import PedagogyIndexPage
@@ -118,6 +118,26 @@ class ContentTransferTestCase(TestCase):
         home.refresh_from_db()
         self.assertEqual(HomePage.objects.count(), 1)
         self.assertIn("Bienvenue à Marseille", str(home.content))
+
+    def test_new_media_creatable_after_import(self) -> None:
+        # Media is inserted with explicit primary keys, which on PostgreSQL leaves
+        # the id sequence behind MAX(pk). The import realigns it so the next upload
+        # (a new pk-less insert, as the Wagtail admin does) does not collide.
+        archive = self._export()
+
+        Image.objects.all().delete()
+        Document.objects.all().delete()
+
+        call_command("import_content", str(archive))
+
+        max_image_pk = Image.objects.order_by("-pk").first().pk
+        max_doc_pk = Document.objects.order_by("-pk").first().pk
+
+        new_image = ImageFactory.create()
+        new_doc = DocumentFactory.create()
+
+        self.assertGreater(new_image.pk, max_image_pk)
+        self.assertGreater(new_doc.pk, max_doc_pk)
 
     def test_import_updates_existing_page_fields(self) -> None:
         archive = self._export()
