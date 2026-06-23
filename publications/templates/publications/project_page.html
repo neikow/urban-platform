@@ -20,6 +20,10 @@
                                 <span
                                     class="badge badge-success text-[10px] uppercase tracking-wide font-bold"
                                 >{% trans "Vote open" %}</span>
+                            {% elif page.enable_ideas %}
+                                <span
+                                    class="badge badge-success text-[10px] uppercase tracking-wide font-bold"
+                                >{% trans "Ideas open" %}</span>
                             {% endif %}
                         </div>
                         <h1
@@ -59,14 +63,18 @@
             <main class="flex-1 page-content prose prose-lg max-w-none numbered-headings min-w-0">
                 {% include_block page.content %}
 
-                {% if page.enable_voting %}
+                {% if page.enable_voting or page.enable_ideas %}
                     <div class="not-prose my-16">
                         <div class="flex items-center gap-4 mb-8">
                             <div class="h-px flex-1 bg-base-300"></div>
                             <span class="section-label">{% trans "Citizen Participation" %}</span>
                             <div class="h-px flex-1 bg-base-300"></div>
                         </div>
-                        {% include "publications/components/vote_form.html" with page=page %}
+                        {% if page.enable_voting %}
+                            {% include "publications/components/vote_form.html" with page=page %}
+                        {% else %}
+                            {% include "publications/components/ideas_form.html" with page=page %}
+                        {% endif %}
                     </div>
                 {% endif %}
             </main>
@@ -94,6 +102,28 @@
                                 />
                             </svg>
                             <span>{% trans "Give your opinion" %}</span>
+                        </a>
+                    {% elif page.enable_ideas %}
+                        <a
+                            href="#ideas-card"
+                            class="btn btn-primary btn-block mb-4 font-semibold tracking-wide border-none"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 mr-1 shrink-0"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7c.6.5 1 1.3 1 2.1v.2h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0012 2z"
+                                />
+                            </svg>
+                            <span>{% trans "Share your idea" %}</span>
                         </a>
                     {% endif %}
                     {% if page.show_toc and toc %}

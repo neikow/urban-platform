@@ -2,7 +2,13 @@ import pytest
 from django.utils.translation import gettext_lazy as _
 
 from core.models import User
-from publications.models import FormResponse, ProjectPage, PublicationIndexPage, VoteChoice
+from publications.models import (
+    FormResponse,
+    ParticipationMode,
+    ProjectPage,
+    PublicationIndexPage,
+    VoteChoice,
+)
 from publications.models.form import FAVORABLE_VALUES, UNFAVORABLE_VALUES
 
 
@@ -49,7 +55,7 @@ def project_with_votes(db, regular_user):
     project = ProjectPage(
         title="Test Project with Votes",
         slug="test-project-votes",
-        enable_voting=True,
+        participation_mode=ParticipationMode.VOTING,
     )
     index_page.add_child(instance=project)
 
@@ -82,7 +88,7 @@ def project_without_votes(db):
     project = ProjectPage(
         title="Empty Project",
         slug="empty-project",
-        enable_voting=True,
+        participation_mode=ParticipationMode.VOTING,
     )
     index_page.add_child(instance=project)
 
@@ -124,7 +130,7 @@ class TestVoteStatsView:
     def test_empty_state_when_no_projects(self, client, admin_user, db):
         """Test empty state message when no projects have voting enabled."""
         # Delete all projects with voting
-        ProjectPage.objects.filter(enable_voting=True).delete()
+        ProjectPage.objects.filter(participation_mode=ParticipationMode.VOTING).delete()
 
         client.force_login(admin_user)
         response = client.get("/admin/vote-statistics/")
@@ -319,7 +325,7 @@ def project_with_mixed_votes(db):
     project = ProjectPage(
         title="Mixed Votes Project",
         slug="mixed-votes-project",
-        enable_voting=True,
+        participation_mode=ParticipationMode.VOTING,
     )
     index_page.add_child(instance=project)
 
@@ -394,7 +400,7 @@ class TestVoteStatsDetailViewAggregates:
         project = ProjectPage(
             title="Rounding Test Project",
             slug="rounding-test-project",
-            enable_voting=True,
+            participation_mode=ParticipationMode.VOTING,
         )
         index_page.add_child(instance=project)
 
@@ -457,7 +463,7 @@ class TestVoteStatsDetailViewAggregates:
         project = ProjectPage(
             title="All Favorable Project",
             slug="all-favorable-project",
-            enable_voting=True,
+            participation_mode=ParticipationMode.VOTING,
         )
         index_page.add_child(instance=project)
 
@@ -500,7 +506,7 @@ class TestVoteStatsDetailViewAggregates:
         project = ProjectPage(
             title="All Unfavorable Project",
             slug="all-unfavorable-project",
-            enable_voting=True,
+            participation_mode=ParticipationMode.VOTING,
         )
         index_page.add_child(instance=project)
 
@@ -560,7 +566,7 @@ def project_with_local_and_outside_votes(db):
     project = ProjectPage(
         title="Local Filter Test Project",
         slug="local-filter-test-project",
-        enable_voting=True,
+        participation_mode=ParticipationMode.VOTING,
     )
     index_page.add_child(instance=project)
 

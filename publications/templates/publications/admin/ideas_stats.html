@@ -1,0 +1,69 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n wagtailadmin_tags %}
+
+{% block titletag %}{% trans "Idea Collection" %}{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title=_("Idea Collection") icon="clipboard-list" %}
+
+    <div class="w-nice-padding w-px-6">
+        <form method="get" class="w-flex w-items-center w-gap-3 w-mb-4">
+            <label class="w-flex w-items-center w-gap-2 w-text-sm w-cursor-pointer">
+                <input
+                    type="checkbox"
+                    name="show_all"
+                    value="1"
+                    {% if show_all %}
+                        checked
+                    {% endif %}
+                    onchange="this.form.submit()"
+                >
+                {% blocktrans with code=local_postal_code %}Show ideas from outside {{ code }}{% endblocktrans %}
+            </label>
+        </form>
+
+        {% if not show_all %}
+            <p class="w-text-text-meta w-text-sm w-mb-4">
+                {% blocktrans with code=local_postal_code %}Only ideas from users with postal code {{ code }} are shown.
+                    Check the box above to include all ideas.{% endblocktrans %}
+            </p>
+        {% endif %}
+
+        {% if projects_stats %}
+            <table class="listing">
+                <thead>
+                    <tr>
+                        <th>{% trans "Project" %}</th>
+                        <th class="w-text-center">{% trans "Total ideas" %}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in projects_stats %}
+                        <tr>
+                            <td>
+                                <a
+                                    href="{% url 'wagtailadmin_pages:edit' stat.project.id %}"
+                                    class="w-text-primary hover:w-underline w-font-medium"
+                                >
+                                    {{ stat.project.title }}
+                                </a>
+                            </td>
+                            <td class="w-text-center">{{ stat.total_ideas }}</td>
+                            <td class="w-text-right">
+                                <a
+                                    href="{% url 'idea_statistics_detail' stat.project.id %}{% if show_all %}?show_all=1{% endif %}"
+                                    class="button button-small button-secondary"
+                                >
+                                    {% trans "View ideas" %}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="w-text-text-meta">{% trans "No projects collecting ideas." %}</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -42,7 +42,7 @@ PAGE_FIELD_SPECS: dict[str, list[str]] = {
     PROJECT_LABEL: [
         "description",
         "category",
-        "enable_voting",
+        "participation_mode",
         "voting_end_date",
         "show_toc",
     ],

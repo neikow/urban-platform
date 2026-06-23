@@ -247,7 +247,11 @@ class Command(BaseCommand):
                 return
 
         # Get projects with voting enabled
-        projects_with_voting = ProjectPage.objects.filter(enable_voting=True)
+        from publications.models import ParticipationMode
+
+        projects_with_voting = ProjectPage.objects.filter(
+            participation_mode=ParticipationMode.VOTING
+        )
 
         if not projects_with_voting.exists():
             self.stderr.write(
