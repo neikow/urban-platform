@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 20:01+0200\n"
+"POT-Creation-Date: 2026-06-23 08:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,55 +196,55 @@ msgstr "Bloc Liste de témoignages"
 msgid "Number of Publications"
 msgstr "Nombre de publications"
 
-#: core/blocks.py:254
+#: core/blocks.py:267
 msgid "Recent Publications Block"
 msgstr "Bloc des publications récentes"
 
-#: core/blocks.py:259
+#: core/blocks.py:272
 msgid "Question"
 msgstr "Question"
 
-#: core/blocks.py:260
+#: core/blocks.py:273
 msgid "Answer"
 msgstr "Réponse"
 
-#: core/blocks.py:272
+#: core/blocks.py:285
 msgid "FAQ Block"
 msgstr "Bloc FAQ"
 
-#: core/blocks.py:279
+#: core/blocks.py:292
 msgid "Height (in pixels)"
 msgstr "Hauteur (en pixels)"
 
-#: core/blocks.py:286
+#: core/blocks.py:299
 msgid "Hide on Mobile"
 msgstr "Masquer sur mobile"
 
-#: core/blocks.py:292
+#: core/blocks.py:305
 msgid "Vertical Spacer"
 msgstr "Espace vertical"
 
-#: core/blocks.py:298
+#: core/blocks.py:311
 msgid "Button Text"
 msgstr "Texte du bouton"
 
-#: core/blocks.py:300
+#: core/blocks.py:313
 msgid "Button Type"
 msgstr "Type de bouton"
 
-#: core/blocks.py:306
+#: core/blocks.py:319
 msgid "Button Alignment"
 msgstr "Alignement du bouton"
 
-#: core/blocks.py:317
+#: core/blocks.py:330
 msgid "Button Link"
 msgstr "Lien du bouton"
 
-#: core/blocks.py:320
+#: core/blocks.py:333
 msgid "Call-to-Action Button"
 msgstr "CTA - Bouton d'appel à l'action"
 
-#: core/blocks.py:326 core/blocks.py:329
+#: core/blocks.py:339 core/blocks.py:342
 msgid "Document"
 msgstr "Document"
 
@@ -285,7 +285,7 @@ msgstr "Envoyé"
 msgid "Failed"
 msgstr "Échec"
 
-#: core/models/email_event.py:27 core/models/user.py:120
+#: core/models/email_event.py:27 core/models/user.py:131
 msgid "User"
 msgstr "Utilisateur"
 
@@ -346,27 +346,23 @@ msgstr "Comité d'intérêt de quartier"
 msgid "Neighborhood Associations"
 msgstr "Comités d'intérêt de quartier"
 
-#: core/models/user.py:14
+#: core/models/user.py:15
 msgid "Citizen"
 msgstr "Citoyen"
 
-#: core/models/user.py:15
+#: core/models/user.py:16
 msgid "Association Member"
 msgstr "Membre d'association"
 
-#: core/models/user.py:16
+#: core/models/user.py:17
 msgid "Admin"
 msgstr "Administrateur"
 
-#: core/models/user.py:34
+#: core/models/user.py:35
 msgid "The Email field must be set"
 msgstr "Le champ email doit être renseigné"
 
 #: core/models/user.py:50
-msgid "Superuser must have is_staff=True."
-msgstr "Le superutilisateur doit avoir is_staff=True."
-
-#: core/models/user.py:52
 msgid "Superuser must have is_superuser=True."
 msgstr "Le superutilisateur doit avoir is_superuser=True."
 
@@ -378,15 +374,15 @@ msgstr "Adresse e-mail"
 msgid "UUID"
 msgstr "UUID"
 
-#: core/models/user.py:61 core/templates/core/profile.html:26
+#: core/models/user.py:61 core/templates/core/profile.html:31
 msgid "First Name"
 msgstr "Prénom"
 
-#: core/models/user.py:62 core/templates/core/profile.html:30
+#: core/models/user.py:62 core/templates/core/profile.html:37
 msgid "Last Name"
 msgstr "Nom de famille"
 
-#: core/models/user.py:70 core/templates/core/profile.html:35
+#: core/models/user.py:70 core/templates/core/profile.html:44
 msgid "Neighborhood"
 msgstr "Quartier"
 
@@ -402,7 +398,7 @@ msgstr "Email vérifié"
 msgid "Is the user's email address verified?"
 msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:80 core/templates/core/profile.html:75
+#: core/models/user.py:80 core/templates/core/profile.html:96
 msgid "Role"
 msgstr "Rôle"
 
@@ -442,16 +438,7 @@ msgstr "Actif"
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:109
-msgid "Staff Status"
-msgstr "Statut du personnel"
-
-#: core/models/user.py:111
-msgid "Designates whether the user can log into the admin site."
-msgstr ""
-"Indique si l'utilisateur peut se connecter à l'interface d'administration."
-
-#: core/models/user.py:121
+#: core/models/user.py:132
 msgid "Users"
 msgstr "Utilisateurs"
 
@@ -474,11 +461,11 @@ msgid "Verification links are valid for 24 hours."
 msgstr "Les liens de vérification sont valables 24 heures."
 
 #: core/templates/auth/email_verify_error.html:36
-#: core/templates/auth/login_modal.html:15
-#: core/templates/auth/login_modal.html:39
-#: core/templates/auth/register.html:119
-#: core/templates/core/components/website_header.html:104
-#: core/templates/core/components/website_header.html:127
+#: core/templates/auth/login_modal.html:29
+#: core/templates/auth/login_modal.html:69
+#: core/templates/auth/register.html:185
+#: core/templates/core/components/website_header.html:176
+#: core/templates/core/components/website_header.html:225
 msgid "Log in"
 msgstr "Se connecter"
 
@@ -505,35 +492,35 @@ msgstr ""
 msgid "Go to home page"
 msgstr "Aller à l'accueil"
 
-#: core/templates/auth/login_modal.html:8
+#: core/templates/auth/login_modal.html:10
 #: core/templates/core/components/image_lightbox.html:21
 msgid "Close"
 msgstr "Fermer"
 
-#: core/templates/auth/login_modal.html:16
+#: core/templates/auth/login_modal.html:30
 msgid "Welcome back"
 msgstr "Bon retour parmi nous"
 
-#: core/templates/auth/login_modal.html:34
+#: core/templates/auth/login_modal.html:63
 msgid "Forgot password?"
 msgstr "Mot de passe oublié ?"
 
-#: core/templates/auth/login_modal.html:40
+#: core/templates/auth/login_modal.html:71
 #: core/templates/core/account_delete.html:111
 msgid "Cancel"
 msgstr "Annuler"
 
-#: core/templates/auth/login_modal.html:44
-#: core/templates/auth/register.html:115
+#: core/templates/auth/login_modal.html:75
+#: core/templates/auth/register.html:175
 msgid "OR"
 msgstr "OU"
 
-#: core/templates/auth/login_modal.html:47
+#: core/templates/auth/login_modal.html:78
 msgid "Don't have an account?"
 msgstr "Vous n'avez pas de compte ?"
 
-#: core/templates/auth/login_modal.html:49 core/templates/auth/register.html:4
-#: core/templates/auth/register.html:55 core/templates/auth/register.html:110
+#: core/templates/auth/login_modal.html:84 core/templates/auth/register.html:4
+#: core/templates/auth/register.html:89 core/templates/auth/register.html:170
 msgid "Sign up"
 msgstr "S'inscrire"
 
@@ -630,41 +617,41 @@ msgstr "Le lien est valable pendant 1 heure."
 msgid "Become a member"
 msgstr "Devenez membre"
 
-#: core/templates/auth/register.html:28 core/templates/auth/register.html:132
+#: core/templates/auth/register.html:40 core/templates/auth/register.html:210
 msgid "Access educational resources"
 msgstr "Accédez aux fiches pédagogiques"
 
-#: core/templates/auth/register.html:36 core/templates/auth/register.html:138
+#: core/templates/auth/register.html:60 core/templates/auth/register.html:228
 msgid "Follow your neighborhood's news"
 msgstr "Suivez les actualités de votre quartier"
 
-#: core/templates/auth/register.html:44 core/templates/auth/register.html:144
+#: core/templates/auth/register.html:78 core/templates/auth/register.html:246
 msgid "Vote on initiatives"
 msgstr "Votez sur les initiatives"
 
-#: core/templates/auth/register.html:53
+#: core/templates/auth/register.html:87
 #, fuzzy
 #| msgid "Question"
 msgid "Registration"
 msgstr "Question"
 
-#: core/templates/auth/register.html:88
+#: core/templates/auth/register.html:136
 msgid "I accept the"
 msgstr "J'accepte les"
 
-#: core/templates/auth/register.html:90
+#: core/templates/auth/register.html:143
 msgid "terms of service"
 msgstr "conditions d'utilisation"
 
-#: core/templates/auth/register.html:90
+#: core/templates/auth/register.html:145
 msgid "(opens in a new tab)"
 msgstr "(ouvre dans un nouvel onglet)"
 
-#: core/templates/auth/register.html:118
+#: core/templates/auth/register.html:178
 msgid "Already have an account?"
 msgstr "Vous avez déjà un compte ?"
 
-#: core/templates/auth/register.html:125
+#: core/templates/auth/register.html:191
 #, python-format
 msgid "Become a member of %(website_name)s"
 msgstr "Devenez membre de %(website_name)s"
@@ -676,7 +663,7 @@ msgid "Delete my account"
 msgstr "Supprimer mon compte"
 
 #: core/templates/core/account_delete.html:26
-#: core/templates/core/profile_edit.html:22
+#: core/templates/core/profile_edit.html:37
 msgid "Back"
 msgstr "Retour"
 
@@ -781,118 +768,122 @@ msgstr "À propos"
 msgid "All rights reserved."
 msgstr "Tous droits réservés."
 
-#: core/templates/core/components/website_header.html:33
+#: core/templates/core/components/website_header.html:32
 msgid "Header Navigation"
 msgstr "Navigation de l'en-tête"
 
-#: core/templates/core/components/website_header.html:56
+#: core/templates/core/components/website_header.html:64
 msgid "Menu utilisateur"
 msgstr "Menu utilisateur"
 
-#: core/templates/core/components/website_header.html:70
+#: core/templates/core/components/website_header.html:103
 msgid "Profile"
 msgstr "Profil"
 
-#: core/templates/core/components/website_header.html:93
+#: core/templates/core/components/website_header.html:165
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: core/templates/core/components/website_header.html:112
+#: core/templates/core/components/website_header.html:197
 msgid "Navigation Menu"
 msgstr "Menu de navigation"
 
-#: core/templates/core/profile.html:4 core/templates/core/profile.html:13
+#: core/templates/core/profile.html:4 core/templates/core/profile.html:18
 #: core/tests/views/test_me.py:27
 msgid "My profile"
 msgstr "Mon profil"
 
-#: core/templates/core/profile.html:10 core/templates/core/profile.html:72
+#: core/templates/core/profile.html:10 core/templates/core/profile.html:92
 #: core/templates/core/profile_edit.html:11
 msgid "Account"
 msgstr "Compte"
 
-#: core/templates/core/profile.html:23 core/templates/core/profile_edit.html:51
+#: core/templates/core/profile.html:27 core/templates/core/profile_edit.html:86
 msgid "Personal information"
 msgstr "Informations personnelles"
 
-#: core/templates/core/profile.html:41
+#: core/templates/core/profile.html:52
 msgid "Postal code"
 msgstr "Code postal"
 
-#: core/templates/core/profile.html:49
+#: core/templates/core/profile.html:61
 msgid "Contact"
 msgstr "Contact"
 
-#: core/templates/core/profile.html:52
+#: core/templates/core/profile.html:65
 msgid "Email"
 msgstr "Email"
 
-#: core/templates/core/profile.html:56 core/tests/views/test_me.py:74
+#: core/templates/core/profile.html:72 core/tests/views/test_me.py:74
 msgid "Verified"
 msgstr "Vérifié"
 
-#: core/templates/core/profile.html:58 core/tests/views/test_me.py:67
+#: core/templates/core/profile.html:76 core/tests/views/test_me.py:67
 msgid "Not verified"
 msgstr "Non vérifié"
 
-#: core/templates/core/profile.html:64
+#: core/templates/core/profile.html:83
 msgid "Phone"
 msgstr "Téléphone"
 
-#: core/templates/core/profile.html:78 core/tests/views/test_me.py:59
+#: core/templates/core/profile.html:102 core/tests/views/test_me.py:59
 msgid "Member"
 msgstr "Membre"
 
-#: core/templates/core/profile.html:80
+#: core/templates/core/profile.html:106
 msgid "Association member"
 msgstr "Membre d'association"
 
-#: core/templates/core/profile.html:82
+#: core/templates/core/profile.html:110
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: core/templates/core/profile.html:87
+#: core/templates/core/profile.html:116
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: core/templates/core/profile.html:90 core/tests/views/test_me.py:51
+#: core/templates/core/profile.html:122 core/tests/views/test_me.py:51
 msgid "Subscribed"
 msgstr "Abonné"
 
-#: core/templates/core/profile.html:92
+#: core/templates/core/profile.html:126
 msgid "Not subscribed"
 msgstr "Non abonné"
 
-#: core/templates/core/profile.html:97
+#: core/templates/core/profile.html:132
 msgid "Member since"
 msgstr "Membre depuis"
 
-#: core/templates/core/profile.html:101
+#: core/templates/core/profile.html:138
 msgid "Last update"
 msgstr "Dernière mise à jour"
 
-#: core/templates/core/profile.html:113 core/templates/core/profile_edit.html:4
-#: core/templates/core/profile_edit.html:14
+#: core/templates/core/profile.html:162 core/templates/core/profile_edit.html:4
+#: core/templates/core/profile_edit.html:18
 #: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
 msgstr "Modifier mon profil"
 
-#: core/templates/core/profile_edit.html:89
+#: core/templates/core/profile_edit.html:148
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: core/templates/core/profile_edit.html:97
-#: core/templates/core/profile_edit.html:119
+#: core/templates/core/profile_edit.html:156
+#: core/templates/core/profile_edit.html:200
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
-#: core/templates/core/profile_edit.html:127
+#: core/templates/core/profile_edit.html:208
 msgid "Danger zone"
 msgstr "Zone de danger"
 
 #: core/templatetags/navigation_tags.py:76
 msgid "Home"
 msgstr "Accueil"
+
+#: core/wagtail_forms.py:54
+msgid "You do not have permission to assign this role."
+msgstr "Vous n'avez pas la permission d'attribuer ce rôle."
 
 #: core/wagtail_hooks.py:84 core/wagtail_hooks.py:98 core/wagtail_hooks.py:129
 msgid "Page d'accueil"
@@ -955,6 +946,16 @@ msgstr "Utilisateurs"
 #| msgid "Document"
 msgid "Documentation"
 msgstr "Documentation"
+
+#~ msgid "Superuser must have is_staff=True."
+#~ msgstr "Le superutilisateur doit avoir is_staff=True."
+
+#~ msgid "Staff Status"
+#~ msgstr "Statut du personnel"
+
+#~ msgid "Designates whether the user can log into the admin site."
+#~ msgstr ""
+#~ "Indique si l'utilisateur peut se connecter à l'interface d'administration."
 
 #~ msgid "Account information"
 #~ msgstr "Informations du compte"

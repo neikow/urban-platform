@@ -17,7 +17,8 @@ from typing import Any
 from django.apps import apps
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand, CommandError, CommandParser
-from django.db import transaction
+from django.core.management.color import no_style
+from django.db import connection, transaction
 from wagtail.documents.models import Document
 from wagtail.images.models import Image
 from wagtail.models import Page
@@ -70,6 +71,11 @@ class Command(BaseCommand):
                 images = self._import_images(archive, manifest["images"])
                 documents = self._import_documents(archive, manifest["documents"])
                 pages = self._import_pages(manifest["pages"])
+                # Media is inserted with explicit primary keys (see module docstring),
+                # which on PostgreSQL leaves the table's id sequence untouched. Realign
+                # it to MAX(pk) so the next admin upload doesn't collide with an
+                # existing row (IntegrityError: duplicate key ..._pkey).
+                self._reset_media_sequences()
 
         self.stdout.write(
             self.style.SUCCESS(
@@ -121,6 +127,19 @@ class Command(BaseCommand):
             existing.save()
 
         return len(entries)
+
+    @staticmethod
+    def _reset_media_sequences() -> None:
+        """Realign the Image/Document id sequences to MAX(pk) after explicit-pk inserts.
+
+        On backends without sequences (e.g. SQLite in tests) this is a no-op.
+        """
+        statements = connection.ops.sequence_reset_sql(no_style(), [Image, Document])
+        if not statements:
+            return
+        with connection.cursor() as cursor:
+            for sql in statements:
+                cursor.execute(sql)
 
     @staticmethod
     def _read_hash(obj: Any) -> str | None:

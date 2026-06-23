@@ -3,7 +3,7 @@ import json
 import pytest
 
 from core.models import User
-from publications.models import FormResponse, ProjectPage, VoteChoice
+from publications.models import FormResponse, ParticipationMode, ProjectPage, VoteChoice
 
 
 @pytest.fixture
@@ -61,7 +61,7 @@ def project_with_voting(publication_index):
     project = ProjectPage(
         title="Test Project",
         slug="test-project",
-        enable_voting=True,
+        participation_mode=ParticipationMode.VOTING,
     )
     publication_index.add_child(instance=project)
 
@@ -78,7 +78,7 @@ def closed_project(publication_index):
     project = ProjectPage(
         title="Closed Voting Project",
         slug="closed-voting-project",
-        enable_voting=True,
+        participation_mode=ParticipationMode.VOTING,
         voting_end_date=timezone.now() - timedelta(days=1),
     )
     publication_index.add_child(instance=project)
@@ -101,7 +101,7 @@ class TestProjectVoting:
         project = ProjectPage(
             title="Test Project",
             slug="test-proj",
-            enable_voting=True,
+            participation_mode=ParticipationMode.VOTING,
         )
         index_page.add_child(instance=project)
 
@@ -124,7 +124,7 @@ class TestProjectVoting:
         open_project = ProjectPage(
             title="Open Project",
             slug="open-proj",
-            enable_voting=True,
+            participation_mode=ParticipationMode.VOTING,
             voting_end_date=timezone.now() + timedelta(days=7),
         )
         index_page.add_child(instance=open_project)
@@ -134,7 +134,7 @@ class TestProjectVoting:
         closed_project = ProjectPage(
             title="Closed Project",
             slug="closed-proj",
-            enable_voting=True,
+            participation_mode=ParticipationMode.VOTING,
             voting_end_date=timezone.now() - timedelta(days=1),
         )
         index_page.add_child(instance=closed_project)
@@ -295,7 +295,7 @@ class TestVoteAPI:
         project = ProjectPage(
             title="Project Without Voting",
             slug="project-without-voting",
-            enable_voting=False,
+            participation_mode=ParticipationMode.NONE,
         )
         publication_index.add_child(instance=project)
 
