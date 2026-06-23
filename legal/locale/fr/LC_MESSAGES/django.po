@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-20 19:53+0200\n"
+"POT-Creation-Date: 2026-06-23 08:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,22 +123,22 @@ msgstr "Charte de bonne conduite"
 msgid "Legal"
 msgstr "Juridique"
 
-#: legal/templates/legal/code_of_conduct_consent.html:13
+#: legal/templates/legal/code_of_conduct_consent.html:17
 msgid "Signing the code of conduct"
 msgstr "Signature de la charte de bonne conduite"
 
-#: legal/templates/legal/code_of_conduct_consent.html:37
+#: legal/templates/legal/code_of_conduct_consent.html:45
 msgid "I have read and accept the code of conduct"
 msgstr "J'ai lu et j'accepte la charte de bonne conduite"
 
-#: legal/templates/legal/code_of_conduct_consent.html:40
+#: legal/templates/legal/code_of_conduct_consent.html:48
 msgid "Please read the entire charter before accepting"
 msgstr "Veuillez lire la charte en entier avant de pouvoir accepter"
 
-#: legal/templates/legal/code_of_conduct_consent.html:49
+#: legal/templates/legal/code_of_conduct_consent.html:57
 msgid "Accept and continue"
 msgstr "Accepter et continuer"
 
-#: legal/templates/legal/legal_index_page.html:32
+#: legal/templates/legal/legal_index_page.html:44
 msgid "No content available at the moment."
 msgstr "Aucun contenu disponible pour le moment."
