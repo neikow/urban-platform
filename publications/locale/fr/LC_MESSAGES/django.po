@@ -553,7 +553,7 @@ msgid ""
 "This project is in its early stages — propose your ideas or an alternative "
 "to help shape it."
 msgstr ""
-"Ce projet est à ses débuts — proposez vos idées ou une alternative pour "
+"Ce projet en est à ses débuts — proposez vos idées ou une alternative pour "
 "aider à le façonner."
 
 #: publications/templates/publications/components/ideas_form.html:48

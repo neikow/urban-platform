@@ -28,7 +28,7 @@ def test_pedagogy_card_creation_flow(
     )
     page.goto(base_url + "/admin/")
 
-    page.get_by_role("button", name=str(_("Fiches Pédagogiques"))).click()
+    page.get_by_role("button", name=str(_("Informations utiles"))).click()
     page.get_by_role("link", name="Ajouter").click()
     page.get_by_role("textbox", name="Titre*").click()
     page.get_by_role("textbox", name="Titre*").fill(TEST_TITLE)

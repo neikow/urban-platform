@@ -114,7 +114,7 @@ def register_publications_menu() -> MenuItem:
             ),
         ]
     )
-    return SubmenuMenuItem(_("Publications"), submenu, icon_name="doc-full-inverse", order=100)
+    return SubmenuMenuItem(_("Actualités"), submenu, icon_name="doc-full-inverse", order=100)
 
 
 @hooks.register("register_admin_menu_item")
@@ -145,7 +145,7 @@ def register_pedagogic_entries_menu() -> MenuItem:
             ),
         ]
     )
-    return SubmenuMenuItem(_("Fiches Pédagogiques"), submenu, icon_name="graduation-cap", order=200)
+    return SubmenuMenuItem(_("Informations utiles"), submenu, icon_name="graduation-cap", order=200)
 
 
 @hooks.register("register_admin_menu_item")
