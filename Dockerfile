@@ -52,4 +52,4 @@ RUN useradd --create-home --uid 1000 appuser \
     && chown -R appuser:appuser /app
 USER appuser
 
-CMD ["gunicorn", "urban_platform.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "urban_platform.wsgi:application", "-c", "gunicorn.conf.py"]

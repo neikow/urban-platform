@@ -10,6 +10,15 @@ INSTALLED_APPS = INSTALLED_APPS_BASE + [
     "django.contrib.postgres",
 ]
 
+# statement_timeout (ms) bounds any single query so a runaway/locked query cannot
+# hang a worker forever. Applies to every connection using these settings,
+# including the migrator and collectstatic — keep it comfortably above the
+# slowest expected migration, or set DB_STATEMENT_TIMEOUT_MS=0 to disable.
+DB_STATEMENT_TIMEOUT_MS = int(os.environ.get("DB_STATEMENT_TIMEOUT_MS", "30000"))
+_pg_options = (
+    "-c statement_timeout=%d" % DB_STATEMENT_TIMEOUT_MS if DB_STATEMENT_TIMEOUT_MS > 0 else ""
+)
+
 DATABASES["default"] = {
     "ENGINE": "django.db.backends.postgresql",
     "NAME": os.environ.get("DB_NAME"),
@@ -17,7 +26,17 @@ DATABASES["default"] = {
     "PASSWORD": os.environ.get("DB_PASSWORD"),
     "HOST": os.environ.get("DB_HOST"),
     "PORT": os.environ.get("DB_PORT"),
+    # connect_timeout caps how long a request blocks when Postgres is
+    # unreachable but not actively refusing (firewall drop, dead host) — the
+    # failure mode that otherwise hangs a worker indefinitely.
+    "OPTIONS": {"connect_timeout": int(os.environ.get("DB_CONNECT_TIMEOUT", "5"))},
+    # Reuse connections across requests instead of reconnecting every time, and
+    # health-check a pooled connection before use so a stale one is replaced.
+    "CONN_MAX_AGE": int(os.environ.get("DB_CONN_MAX_AGE", "60")),
+    "CONN_HEALTH_CHECKS": True,
 }
+if _pg_options:
+    DATABASES["default"]["OPTIONS"]["options"] = _pg_options  # type: ignore[index]
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 USE_X_FORWARDED_HOST = True
@@ -56,14 +75,26 @@ REDIS_URL = os.environ.get("REDIS_URL", "redis://cache:6379/0")
 # every page publish, so it must not share a DB with sessions (the default).
 CONTENT_CACHE_URL = os.environ.get("CONTENT_CACHE_URL") or REDIS_URL.rsplit("/", 1)[0] + "/1"
 
+# Fail fast when Redis is unreachable or unresponsive. Without these, the
+# builtin RedisCache blocks indefinitely — and because sessions live in the
+# cache (see SESSION_ENGINE below), every request would hang, taking the whole
+# site down. Bounded timeouts turn that into a fast error instead.
+REDIS_CACHE_OPTIONS = {
+    "socket_connect_timeout": int(os.environ.get("REDIS_CONNECT_TIMEOUT", "2")),
+    "socket_timeout": int(os.environ.get("REDIS_SOCKET_TIMEOUT", "2")),
+    "retry_on_timeout": True,
+}
+
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": REDIS_URL,
+        "OPTIONS": REDIS_CACHE_OPTIONS,
     },
     "content": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": CONTENT_CACHE_URL,
+        "OPTIONS": REDIS_CACHE_OPTIONS,
     },
 }
 
