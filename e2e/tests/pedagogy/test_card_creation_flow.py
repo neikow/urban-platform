@@ -34,13 +34,10 @@ def test_pedagogy_card_creation_flow(
     page.get_by_role("textbox", name="Titre*").fill(TEST_TITLE)
     page.get_by_role("textbox", name="description").fill(TEST_DESCRIPTION)
     page.get_by_role("button", name="Choisir une image").click()
-    # Wait a moment for modal to appear
-    page.wait_for_timeout(500)
 
     # Try to find and click on any image in the chooser
     images = page.locator("#search-results a.image-choice")
-
-    assert images.count() > 0, "No images found in the chooser modal"
+    expect(images.first).to_be_visible(timeout=10000)
     images.first.click()
 
     page.get_by_role("button", name="Ajouter un(e) Ressource").click()
