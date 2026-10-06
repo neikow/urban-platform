@@ -22,7 +22,7 @@
             <!-- Tab-style type filter -->
             <div class="flex items-center gap-0 border-b border-base-300 mt-6 mb-0">
                 <a
-                    href="{{ page.url }}{% if request.GET.search %}?search={{ request.GET.search }}{% endif %}"
+                    href="{% querystring type=None category=None page=None %}"
                     class="
                         relative px-4 pb-3 pt-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-150
                         {% if selected_type == 'all' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
@@ -34,7 +34,7 @@
                         ></span>{% endif %}
                 </a>
                 <a
-                    href="?type=projects{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                    href="{% querystring type='projects' category=None page=None show_past=None %}"
                     class="
                         relative px-4 pb-3 pt-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-150
                         {% if selected_type == 'projects' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
@@ -46,7 +46,7 @@
                         ></span>{% endif %}
                 </a>
                 <a
-                    href="?type=events{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                    href="{% querystring type='events' category=None page=None %}"
                     class="
                         relative px-4 pb-3 pt-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-150
                         {% if selected_type == 'events' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
@@ -89,7 +89,7 @@
             {% if selected_type == 'projects' %}
                 <div class="flex flex-wrap gap-2 pt-4 mb-2">
                     <a
-                        href="?type=projects{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"
+                        href="{% querystring category=None page=None %}"
                         class="
                             text-[11px] font-bold uppercase tracking-wide px-3 py-1.5 rounded transition-colors duration-150
                             {% if not selected_category %}bg-secondary text-secondary-content{% else %}bg-base-200 text-base-content/60 hover:text-base-content{% endif %}
@@ -99,7 +99,7 @@
                     </a>
                     {% for category in categories %}
                         <a
-                            href="{{ category.url }}"
+                            href="{% querystring category=category.value page=None %}"
                             class="
                                 text-[11px] font-bold uppercase tracking-wide px-3 py-1.5 rounded transition-colors duration-150
                                 {% if category.is_selected %}bg-secondary text-secondary-content{% else %}bg-base-200 text-base-content/60 hover:text-base-content{% endif %}

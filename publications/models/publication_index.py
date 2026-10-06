@@ -19,7 +19,6 @@ class CategoryFilter:
     label: StrOrPromise
     value: str
     is_selected: bool
-    url: str
 
 
 class PublicationIndexPage(Page):
@@ -73,15 +72,11 @@ class PublicationIndexPage(Page):
         context = super().get_context(request, *args, **kwargs)
         context["publications"] = self.get_publications(request)
 
-        searched_value = request.GET.get("search", "")
-        search = ("&search=" + searched_value) if searched_value else ""
-
         categories = [
             CategoryFilter(
                 label=label,
                 value=value,
                 is_selected=(value == request.GET.get("category", "")),
-                url=f"?type=projects&category={value}{search}",
             )
             for value, label in ProjectCategory.choices
         ]

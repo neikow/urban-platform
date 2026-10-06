@@ -19,18 +19,17 @@ class PublicationFilters:
     publication_type: str = "all"
     category: Optional[str] = None
     search_query: str = ""
-    page_number: Optional[int] = None
+    page_number: Optional[str] = None
     show_past_events: bool = False
 
     @classmethod
     def from_request(cls, request: HttpRequest) -> "PublicationFilters":
-        page_str = request.GET.get("page")
-        page_number = int(page_str) if page_str is not None else None
         return cls(
             publication_type=request.GET.get("type", "all"),
             category=request.GET.get("category"),
             search_query=request.GET.get("search", ""),
-            page_number=page_number,
+            # Kept as raw input: Paginator.get_page() falls back to a valid page.
+            page_number=request.GET.get("page"),
             show_past_events=request.GET.get("show_past", "").lower() in ("true", "1", "on"),
         )
 
@@ -103,7 +102,7 @@ def search_publications(publications: QuerySet, search_query: str) -> QuerySet:
 
 def paginate_publications(
     publications: Union[QuerySet, Sequence],
-    page_number: Optional[int] = None,
+    page_number: int | str | None = None,
     per_page: int = 12,
 ) -> PaginatorPage:
     paginator = Paginator(publications, per_page)
