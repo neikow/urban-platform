@@ -50,9 +50,7 @@ class ProjectPage(PublicationPage):
     def get_verbose_name(cls) -> StrOrPromise:
         return _("Project")
 
-    @property
-    def is_project(self) -> bool:
-        return True
+    is_project = True
 
     category: models.CharField[str, str] = models.CharField(
         _("Category"),

@@ -18,9 +18,7 @@ class EventPage(PublicationPage):
     def get_verbose_name(cls) -> StrOrPromise:
         return _("Event")
 
-    @property
-    def is_event(self) -> bool:
-        return True
+    is_event = True
 
     event_date: models.DateTimeField[Any, Any] = models.DateTimeField(
         verbose_name=_("Event Date"),
