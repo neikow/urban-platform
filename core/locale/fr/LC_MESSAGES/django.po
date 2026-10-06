@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:50+0200\n"
+"POT-Creation-Date: 2026-10-06 16:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -318,7 +318,7 @@ msgstr "Email du destinataire"
 msgid "Stored temporarily, cleared on anonymization"
 msgstr "Stocké temporairement, effacé lors de l'anonymisation"
 
-#: core/models/email_event.py:48 core/models/notification_dispatch.py:15
+#: core/models/email_event.py:48 core/models/notification_dispatch.py:17
 msgid "Sent At"
 msgstr "Envoyé à"
 
@@ -363,19 +363,19 @@ msgstr "Comités d'intérêt de quartier"
 msgid "Kind"
 msgstr "Type"
 
-#: core/models/notification_dispatch.py:14
+#: core/models/notification_dispatch.py:15
 msgid "Key"
 msgstr "Clé"
 
-#: core/models/notification_dispatch.py:14
+#: core/models/notification_dispatch.py:15
 msgid "What was notified, e.g. project:12"
 msgstr "Objet de la notification, par ex. project:12"
 
-#: core/models/notification_dispatch.py:18
+#: core/models/notification_dispatch.py:20
 msgid "Notification sent"
 msgstr "Notification envoyée"
 
-#: core/models/notification_dispatch.py:19
+#: core/models/notification_dispatch.py:21
 msgid "Notifications sent"
 msgstr "Notifications envoyées"
 
@@ -890,7 +890,7 @@ msgstr "Notifications par email"
 msgid "Invalid link"
 msgstr "Lien invalide"
 
-#: core/templates/core/notification_unsubscribe.html:14
+#: core/templates/core/notification_unsubscribe.html:15
 msgid ""
 "This unsubscribe link is not valid. You can manage your notifications from "
 "your profile."
@@ -898,26 +898,26 @@ msgstr ""
 "Ce lien de désinscription n'est pas valide. Vous pouvez gérer vos "
 "notifications depuis votre profil."
 
-#: core/templates/core/notification_unsubscribe.html:16
+#: core/templates/core/notification_unsubscribe.html:18
 msgid "You are unsubscribed"
 msgstr "Vous êtes désinscrit·e"
 
-#: core/templates/core/notification_unsubscribe.html:18
+#: core/templates/core/notification_unsubscribe.html:20
 #, python-format
 msgid "You will no longer receive emails about %(label)s."
 msgstr "Vous ne recevrez plus d'emails concernant %(label)s."
 
-#: core/templates/core/notification_unsubscribe.html:23
-#: core/templates/core/notification_unsubscribe.html:30
+#: core/templates/core/notification_unsubscribe.html:25
+#: core/templates/core/notification_unsubscribe.html:32
 msgid "Unsubscribe"
 msgstr "Se désinscrire"
 
-#: core/templates/core/notification_unsubscribe.html:25
+#: core/templates/core/notification_unsubscribe.html:27
 #, python-format
 msgid "Stop receiving emails about %(label)s?"
 msgstr "Ne plus recevoir d'emails concernant %(label)s ?"
 
-#: core/templates/core/notification_unsubscribe.html:34
+#: core/templates/core/notification_unsubscribe.html:39
 msgid "Manage all my notifications"
 msgstr "Gérer toutes mes notifications"
 
@@ -1005,19 +1005,19 @@ msgstr "Non abonné"
 msgid "None"
 msgstr "Aucune"
 
-#: core/templates/core/profile.html:180
+#: core/templates/core/profile.html:183
 msgid "Change"
 msgstr "Modifier"
 
-#: core/templates/core/profile.html:184
+#: core/templates/core/profile.html:187
 msgid "Member since"
 msgstr "Membre depuis"
 
-#: core/templates/core/profile.html:190
+#: core/templates/core/profile.html:193
 msgid "Last update"
 msgstr "Dernière mise à jour"
 
-#: core/templates/core/profile.html:214
+#: core/templates/core/profile.html:217
 #: core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:18
 #: core/tests/views/test_profile_edit.py:34
@@ -1048,12 +1048,12 @@ msgstr "Changer le mot de passe"
 msgid "Danger zone"
 msgstr "Zone de danger"
 
-#: core/templates/emails/notifications/base.html:40
+#: core/templates/emails/notifications/base.html:112
 #, python-format
 msgid "Hello %(name)s,"
 msgstr "Bonjour %(name)s,"
 
-#: core/templates/emails/notifications/base.html:45
+#: core/templates/emails/notifications/base.html:117
 #, python-format
 msgid ""
 "You receive this email because you asked to be notified about %(label)s."
@@ -1061,13 +1061,33 @@ msgstr ""
 "Vous recevez cet email car vous avez demandé à être informé·e concernant "
 "%(label)s."
 
-#: core/templates/emails/notifications/base.html:50
+#: core/templates/emails/notifications/base.html:122
 msgid "Unsubscribe from these emails"
 msgstr "Se désinscrire de ces emails"
 
-#: core/templates/emails/notifications/base.html:52
+#: core/templates/emails/notifications/base.html:124
 msgid "Manage my notifications"
 msgstr "Gérer mes notifications"
+
+#: core/templates/emails/notifications/poll_results.html:6
+#, python-format
+msgid "The poll on “%(title)s” is closed"
+msgstr "Le vote sur « %(title)s » est clos"
+
+#: core/templates/emails/notifications/poll_results.html:7
+msgid "Thank you for voting. Here are the final results:"
+msgstr "Merci d'avoir voté. Voici les résultats définitifs :"
+
+#: core/templates/emails/notifications/poll_results.html:18
+#, python-format
+msgid "%(total)s vote in total"
+msgid_plural "%(total)s votes in total"
+msgstr[0] "%(total)s vote au total"
+msgstr[1] "%(total)s votes au total"
+
+#: core/templates/emails/notifications/poll_results.html:24
+msgid "See the project"
+msgstr "Voir le projet"
 
 #: core/templatetags/navigation_tags.py:76
 msgid "Home"

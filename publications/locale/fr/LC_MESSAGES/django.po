@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:50+0200\n"
+"POT-Creation-Date: 2026-10-06 16:52+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -182,7 +182,8 @@ msgid "Updated At"
 msgstr "Mis à jour le"
 
 #: publications/models/form.py:44 publications/models/idea.py:31
-#: publications/models/project.py:56 publications/models/project.py:172
+#: publications/models/poll_closure.py:22 publications/models/project.py:56
+#: publications/models/project.py:181
 #: publications/templates/publications/admin/ideas_stats.html:36
 #: publications/templates/publications/admin/vote_stats.html:36
 #: publications/templates/publications/components/publication_preview.html:68
@@ -238,6 +239,34 @@ msgstr "Réponse d'idée"
 #: publications/models/idea.py:45
 msgid "Idea Responses"
 msgstr "Réponses d'idées"
+
+#: publications/models/poll_closure.py:7
+msgid "End date reached"
+msgstr "Date de fin atteinte"
+
+#: publications/models/poll_closure.py:8
+msgid "Closed by an editor"
+msgstr "Clos par un éditeur"
+
+#: publications/models/poll_closure.py:24
+msgid "Closed at"
+msgstr "Clos le"
+
+#: publications/models/poll_closure.py:25
+msgid "Reason"
+msgstr "Motif"
+
+#: publications/models/poll_closure.py:32
+msgid "Closed by"
+msgstr "Clos par"
+
+#: publications/models/poll_closure.py:36
+msgid "Poll closure"
+msgstr "Clôture de vote"
+
+#: publications/models/poll_closure.py:37
+msgid "Poll closures"
+msgstr "Clôtures de vote"
 
 #: publications/models/project.py:20
 msgid "What is your opinion on this project?"
@@ -338,7 +367,7 @@ msgstr "Afficher la table des matières"
 msgid "Display the table of contents in the sidebar"
 msgstr "Afficher la table des matières dans la barre latérale"
 
-#: publications/models/project.py:173
+#: publications/models/project.py:182
 #: publications/templates/publications/publication_index_page.html:47
 msgid "Projects"
 msgstr "Projets"
@@ -397,11 +426,43 @@ msgstr "Contenu de la page"
 msgid "Additional content for the publications page."
 msgstr "Contenu supplémentaire pour la page des publications."
 
+#: publications/polls.py:73
+#, python-format
+msgid "Poll results: %(title)s"
+msgstr "Résultats du vote : %(title)s"
+
+#: publications/templates/publications/admin/close_poll_confirm.html:5
+#: publications/templates/publications/admin/close_poll_confirm.html:8
+msgid "Close the poll"
+msgstr "Clore le vote"
+
+#: publications/templates/publications/admin/close_poll_confirm.html:11
+msgid ""
+"Voting stops immediately, everyone sees the final results on the project "
+"page, and voters who opted in receive them by email."
+msgstr ""
+"Le vote s'arrête immédiatement, les résultats définitifs s'affichent pour "
+"tous sur la page du projet, et les votants qui l'ont demandé les reçoivent "
+"par email."
+
+#: publications/templates/publications/admin/close_poll_confirm.html:12
+msgid "This cannot be undone."
+msgstr "Cette action est irréversible."
+
+#: publications/templates/publications/admin/close_poll_confirm.html:15
+#: publications/wagtail_hooks.py:75
+msgid "Close the poll and send the results"
+msgstr "Clore le vote et envoyer les résultats"
+
+#: publications/templates/publications/admin/close_poll_confirm.html:16
+msgid "Cancel"
+msgstr "Annuler"
+
 #: publications/templates/publications/admin/ideas_stats.html:4
 #: publications/templates/publications/admin/ideas_stats.html:7
 #: publications/templates/publications/admin/ideas_stats_detail.html:4
 #: publications/views/idea_stats.py:35 publications/views/idea_stats.py:71
-#: publications/wagtail_hooks.py:47
+#: publications/wagtail_hooks.py:49
 msgid "Idea Collection"
 msgstr "Collecte d'idées"
 
@@ -466,7 +527,7 @@ msgstr "Aucune idée pour le moment"
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
 #: publications/views/vote_stats.py:48 publications/views/vote_stats.py:103
-#: publications/wagtail_hooks.py:25
+#: publications/wagtail_hooks.py:27
 msgid "Vote Statistics"
 msgstr "Statistiques des votes"
 
@@ -840,19 +901,23 @@ msgstr ""
 msgid "Submit my vote"
 msgstr "Soumettre mon vote"
 
-#: publications/templates/publications/components/vote_form.html:259
+#: publications/templates/publications/components/vote_form.html:257
+msgid "Get the final results by email when the poll closes"
+msgstr "Recevoir les résultats par email à la clôture du vote"
+
+#: publications/templates/publications/components/vote_form.html:264
 msgid "Your vote:"
 msgstr "Votre vote :"
 
-#: publications/templates/publications/components/vote_form.html:263
+#: publications/templates/publications/components/vote_form.html:268
 msgid "Your comment:"
 msgstr "Votre commentaire :"
 
-#: publications/templates/publications/components/vote_form.html:271
+#: publications/templates/publications/components/vote_form.html:276
 msgid "Change my vote"
 msgstr "Modifier mon vote"
 
-#: publications/templates/publications/components/vote_form.html:274
+#: publications/templates/publications/components/vote_form.html:279
 msgid "Remove my vote"
 msgstr "Retirer mon vote"
 
@@ -1026,6 +1091,19 @@ msgstr "Veuillez accepter la charte de bonne conduite avant de participer."
 #: publications/views/mixins.py:75
 msgid "Too many requests. Please try again in a minute."
 msgstr "Trop de requêtes. Réessayez dans une minute."
+
+#: publications/views/poll_close.py:35
+#, python-format
+msgid ""
+"The poll on “%(title)s” is closed. Results are being sent to voters who "
+"opted in."
+msgstr ""
+"Le vote sur « %(title)s » est clos. Les résultats sont envoyés aux votants "
+"qui l'ont demandé."
+
+#: publications/views/poll_close.py:39
+msgid "This poll was already closed."
+msgstr "Ce vote était déjà clos."
 
 #: publications/views/vote.py:21 publications/views/vote.py:90
 #: publications/views/vote.py:130

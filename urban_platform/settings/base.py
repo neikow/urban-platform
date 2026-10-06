@@ -237,6 +237,10 @@ CELERY_IMPORTS = ("core.emails.tasks", "core.notifications.tasks")
 CELERY_TIMEZONE = TIME_ZONE
 
 CELERY_BEAT_SCHEDULE = {
+    "close-expired-polls": {
+        "task": "publications.tasks.close_expired_polls",
+        "schedule": 15 * 60,
+    },
     "anonymize-old-email-events": {
         "task": "core.emails.tasks.anonymize_old_email_events",
         "schedule": 86400,

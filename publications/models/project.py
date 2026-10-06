@@ -133,9 +133,18 @@ class ProjectPage(PublicationPage):
         return str(DEFAULT_VOTE_QUESTION)
 
     @property
+    def is_voting_closed_manually(self) -> bool:
+        from publications.models.poll_closure import PollClosure
+
+        try:
+            return self.poll_closure is not None
+        except PollClosure.DoesNotExist:
+            return False
+
+    @property
     def is_voting_open(self) -> bool:
-        """Check if voting is still open for this project."""
-        if not self.enable_voting:
+        """Voting is open until its end date, unless the poll was closed earlier."""
+        if not self.enable_voting or self.is_voting_closed_manually:
             return False
         if self.voting_end_date is None:
             return True

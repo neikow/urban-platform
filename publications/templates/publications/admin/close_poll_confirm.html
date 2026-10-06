@@ -1,0 +1,24 @@
+{% extends "wagtailadmin/base.html" %}
+
+{% load i18n %}
+
+{% block titletag %}{% trans "Close the poll" %} - {{ project.title }}{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title=_("Close the poll") subtitle=project.title icon="lock" %}
+
+    <div class="nice-padding">
+        <p>
+            {% trans "Voting stops immediately, everyone sees the final results on the project page, and voters who opted in receive them by email." %}
+        </p>
+        <p><strong>{% trans "This cannot be undone." %}</strong></p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="button">{% trans "Close the poll and send the results" %}</button>
+            <a
+                href="{% url 'wagtailadmin_pages:edit' project.pk %}"
+                class="button button-secondary"
+            >{% trans "Cancel" %}</a>
+        </form>
+    </div>
+{% endblock %}
