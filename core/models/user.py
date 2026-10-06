@@ -89,6 +89,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=False,
         help_text=_("Does the user want to receive the newsletter?"),
     )
+    newsletter_consent_at = models.DateTimeField(
+        _("Newsletter consent date"),
+        null=True,
+        blank=True,
+        help_text=_(
+            "When the user last agreed to receive the newsletter (GDPR proof of consent). "
+            "Empty if they are not subscribed, or subscribed before this date was recorded."
+        ),
+    )
 
     created_at = models.DateTimeField(_("Date Joined"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Last Updated"), auto_now=True)
@@ -142,6 +151,16 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self) -> str:
         return self.first_name or self.email.split("@")[0]
 
+    def set_newsletter_subscription(self, subscribed: bool) -> None:
+        """Change the subscription and keep the consent date in step (not saved)."""
+        from django.utils import timezone
+
+        if subscribed and not self.newsletter_subscription:
+            self.newsletter_consent_at = timezone.now()
+        elif not subscribed:
+            self.newsletter_consent_at = None
+        self.newsletter_subscription = subscribed
+
     @property
     def is_deleted(self) -> bool:
         return self.deleted_at is not None
@@ -159,6 +178,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.email = f"deleted.{self.uuid}@deleted.local"
         self.phone_number = ""
         self.newsletter_subscription = False
+        self.newsletter_consent_at = None
         self.is_verified = False
 
         self.save()

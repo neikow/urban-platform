@@ -154,7 +154,7 @@ class ProfileEditView(LoginRequiredMixin, FormView):
         user.last_name = form.cleaned_data["last_name"]
         user.postal_code = form.cleaned_data["postal_code"]
         user.phone_number = form.cleaned_data.get("phone_number", "")
-        user.newsletter_subscription = form.cleaned_data.get("newsletter_subscription", False)
+        user.set_newsletter_subscription(form.cleaned_data.get("newsletter_subscription", False))
 
         if email_changed:
             user.is_verified = False

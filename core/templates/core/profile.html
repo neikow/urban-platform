@@ -151,6 +151,12 @@
                                     <span
                                         class="badge badge-success font-bold uppercase text-3xs tracking-wide"
                                     >{% trans "Subscribed" %}</span>
+                                    {% if user.newsletter_consent_at %}
+                                        <span class="text-xs text-base-content/60">
+                                            {% blocktrans with date=user.newsletter_consent_at|date:"j F Y" %}since
+                                                {{ date }}{% endblocktrans %}
+                                        </span>
+                                    {% endif %}
                                 {% else %}
                                     <span
                                         class="badge badge-ghost font-bold uppercase text-3xs tracking-wide"
