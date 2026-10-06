@@ -97,6 +97,29 @@
                 </section>
 
                 <section class="pb-8 border-b border-base-300">
+                    <p class="section-label mb-5">{% trans "My events" %}</p>
+                    {% if interesting_events %}
+                        <ul class="space-y-3">
+                            {% for event in interesting_events %}
+                                <li class="flex flex-wrap items-baseline justify-between gap-2">
+                                    <a
+                                        class="link link-primary font-medium"
+                                        href="{{ event.url }}"
+                                    >{{ event.title }}</a>
+                                    <span class="text-sm text-base-content/60">
+                                        {{ event.event_date|date:"l j F Y, H:i" }}
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-sm text-base-content/60">
+                            {% trans "Events you are interested in will appear here." %}
+                        </p>
+                    {% endif %}
+                </section>
+
+                <section class="pb-8 border-b border-base-300">
                     <p class="section-label mb-5">{% trans "Account" %}</p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>

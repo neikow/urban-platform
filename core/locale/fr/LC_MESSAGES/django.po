@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:20+0200\n"
+"POT-Creation-Date: 2026-10-06 16:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -398,7 +398,7 @@ msgstr "Email vérifié"
 msgid "Is the user's email address verified?"
 msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:80 core/templates/core/profile.html:104
+#: core/models/user.py:80 core/templates/core/profile.html:124
 msgid "Role"
 msgstr "Rôle"
 
@@ -800,7 +800,7 @@ msgstr "Menu de navigation"
 msgid "My profile"
 msgstr "Mon profil"
 
-#: core/templates/core/profile.html:10 core/templates/core/profile.html:100
+#: core/templates/core/profile.html:10 core/templates/core/profile.html:120
 #: core/templates/core/profile_edit.html:11
 msgid "Account"
 msgstr "Compte"
@@ -838,39 +838,47 @@ msgstr "Renvoyer le lien de vérification"
 msgid "Phone"
 msgstr "Téléphone"
 
-#: core/templates/core/profile.html:110 core/tests/views/test_me.py:59
+#: core/templates/core/profile.html:100
+msgid "My events"
+msgstr "Mes événements"
+
+#: core/templates/core/profile.html:114
+msgid "Events you are interested in will appear here."
+msgstr "Les événements qui vous intéressent apparaîtront ici."
+
+#: core/templates/core/profile.html:130 core/tests/views/test_me.py:59
 msgid "Member"
 msgstr "Membre"
 
-#: core/templates/core/profile.html:114
+#: core/templates/core/profile.html:134
 msgid "Association member"
 msgstr "Membre d'association"
 
-#: core/templates/core/profile.html:118
+#: core/templates/core/profile.html:138
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: core/templates/core/profile.html:124
+#: core/templates/core/profile.html:144
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: core/templates/core/profile.html:130 core/tests/views/test_me.py:51
+#: core/templates/core/profile.html:150 core/tests/views/test_me.py:51
 msgid "Subscribed"
 msgstr "Abonné"
 
-#: core/templates/core/profile.html:134
+#: core/templates/core/profile.html:154
 msgid "Not subscribed"
 msgstr "Non abonné"
 
-#: core/templates/core/profile.html:140
+#: core/templates/core/profile.html:160
 msgid "Member since"
 msgstr "Membre depuis"
 
-#: core/templates/core/profile.html:146
+#: core/templates/core/profile.html:166
 msgid "Last update"
 msgstr "Dernière mise à jour"
 
-#: core/templates/core/profile.html:170
+#: core/templates/core/profile.html:190
 #: core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:18
 #: core/tests/views/test_profile_edit.py:34

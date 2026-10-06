@@ -32,6 +32,7 @@ from core.views.password_reset import (
     PasswordResetErrorView,
     PasswordResetCompleteView,
 )
+from publications.views.event_interest import EventInterestView
 from publications.views.feeds import PublicationsFeed, event_ical, events_ical
 from publications.views.idea import IdeaMineView, IdeaView
 from publications.views.vote import VoteView, VoteResultsView
@@ -94,6 +95,11 @@ urlpatterns = [
     path("feeds/actualites.rss", PublicationsFeed(), name="publications_rss"),
     path("feeds/evenements.ics", events_ical, name="events_ical"),
     path("evenements/<int:event_id>/agenda.ics", event_ical, name="event_ical"),
+    path(
+        "api/events/<int:event_id>/interest/",
+        EventInterestView.as_view(),
+        name="event_interest",
+    ),
     path(
         "api/projects/<int:project_id>/idea/mine/",
         IdeaMineView.as_view(),

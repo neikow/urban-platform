@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => ({
         "admin-location": src("admin/location-input.ts"),
         "projects-map": src("pages/projects-map.ts"),
         "project-location": src("pages/project-location.ts"),
+        "event-interest": src("pages/event-interest.ts"),
       },
       output: {
         entryFileNames: "[name].js",
