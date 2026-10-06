@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:57+0200\n"
+"POT-Creation-Date: 2026-10-06 17:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1017,7 +1017,26 @@ msgstr "Membre depuis"
 msgid "Last update"
 msgstr "Dernière mise à jour"
 
-#: core/templates/core/profile.html:217
+#: core/templates/core/profile.html:201
+msgid "My data"
+msgstr "Mes données"
+
+#: core/templates/core/profile.html:203
+msgid ""
+"Download everything we store about you: your account, votes, ideas, events "
+"you follow, consents and the emails we sent you. The file is in JSON, a "
+"format other services can import."
+msgstr ""
+"Téléchargez tout ce que nous conservons à votre sujet : votre compte, vos "
+"votes, vos idées, les événements que vous suivez, vos consentements et les "
+"emails que nous vous avons envoyés. Le fichier est au format JSON, "
+"importable par d'autres services."
+
+#: core/templates/core/profile.html:216
+msgid "Download my data"
+msgstr "Télécharger mes données"
+
+#: core/templates/core/profile.html:237
 #: core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:18
 #: core/tests/views/test_profile_edit.py:34
@@ -1048,6 +1067,10 @@ msgstr "Changer le mot de passe"
 msgid "Danger zone"
 msgstr "Zone de danger"
 
+#: core/templates/core/profile_edit.html:207
+msgid "Download a copy of my data first"
+msgstr "Télécharger d'abord une copie de mes données"
+
 #: core/templates/emails/notifications/base.html:112
 #, python-format
 msgid "Hello %(name)s,"
@@ -1077,19 +1100,19 @@ msgstr "Un événement qui vous intéresse a lieu demain :"
 msgid "When:"
 msgstr "Quand :"
 
-#: core/templates/emails/notifications/event_reminder.html:12
+#: core/templates/emails/notifications/event_reminder.html:13
 msgid "Where:"
 msgstr "Où :"
 
-#: core/templates/emails/notifications/event_reminder.html:16
+#: core/templates/emails/notifications/event_reminder.html:17
 msgid "Online:"
 msgstr "En ligne :"
 
-#: core/templates/emails/notifications/event_reminder.html:19
+#: core/templates/emails/notifications/event_reminder.html:20
 msgid "See the event"
 msgstr "Voir l'événement"
 
-#: core/templates/emails/notifications/event_reminder.html:20
+#: core/templates/emails/notifications/event_reminder.html:21
 msgid "Add to my calendar"
 msgstr "Ajouter à mon agenda"
 

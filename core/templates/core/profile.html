@@ -197,6 +197,30 @@
                     </div>
                 </section>
 
+                <section class="pb-8 border-b border-base-300">
+                    <p class="section-label mb-5">{% trans "My data" %}</p>
+                    <p class="text-sm text-base-content/70 mb-4 max-w-prose">
+                        {% trans "Download everything we store about you: your account, votes, ideas, events you follow, consents and the emails we sent you. The file is in JSON, a format other services can import." %}
+                    </p>
+                    <a href="{% url 'data_export' %}" class="btn btn-outline btn-sm" download>
+                        <svg
+                            aria-hidden="true"
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"
+                            />
+                        </svg>
+                        {% trans "Download my data" %}
+                    </a>
+                </section>
+
                 <div class="flex justify-end">
                     <a href="{% url 'profile_edit' %}" class="btn btn-primary border-none font-semibold">
                         <svg
