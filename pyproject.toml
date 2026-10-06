@@ -4,19 +4,19 @@ version = "0.1.0"
 description = "Civic participation platform for Marseille's 7th arrondissement (Django + Wagtail)"
 requires-python = ">=3.13"
 dependencies = [
-    "celery[redis]==5.6.2",
+    "celery[redis]==5.6.3",
     "django==6.0.3",
     "django-celery-beat==2.9.0",
     "django-ratelimit==4.1.0",
-    "gunicorn==25.1.0",
-    "psycopg==3.3.3",
-    "python-dotenv==1.2.2",
+    "gunicorn==26.2.0",
+    "psycopg==3.3.6",
+    "python-dotenv==1.2.4",
     "python-slugify==8.0.4",
-    "redis==6.4.0",
-    "sentry-sdk==2.54.0",
+    "redis==8.1.0",
+    "sentry-sdk==2.71.0",
     "sib-api-v3-sdk==7.6.0",
-    "tqdm==4.67.3",
-    "wagtail==7.3.1",
+    "tqdm==4.70.1",
+    "wagtail==8.0",
 ]
 
 [tool.mypy]
@@ -51,7 +51,7 @@ dev = [
     "mkdocs-material>=9.7.6",
     "mypy>=1.19.1",
     "playwright>=1.57.0",
-    "pre-commit==4.5.1",
+    "pre-commit==4.6.2",
     "pytest-cov>=7.0.0",
     "pytest-django>=4.11.1",
     "pytest-env>=1.2.0",
