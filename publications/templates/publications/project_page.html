@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags i18n %}
+{% load static wagtailcore_tags wagtailimages_tags i18n %}
+
+{% block extra_css %}
+    {% if project_map %}
+        <link rel="stylesheet" href="{% static 'dist/map.css' %}">
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <article>
@@ -60,8 +66,10 @@
         </header>
 
         <div class="container mx-auto px-6 sm:px-8 lg:px-12 flex flex-col-reverse lg:flex-row gap-8 lg:gap-16 mb-16 lg:mb-24 mt-10 lg:mt-14">
-            <main class="flex-1 page-content prose prose-lg max-w-none numbered-headings min-w-0">
+            <div class="flex-1 page-content prose prose-lg max-w-none numbered-headings min-w-0">
                 {% include_block page.content %}
+
+                {% include "publications/components/project_timeline.html" %}
 
                 {% if page.enable_voting or page.enable_ideas %}
                     <div class="not-prose my-16">
@@ -77,7 +85,7 @@
                         {% endif %}
                     </div>
                 {% endif %}
-            </main>
+            </div>
 
             <aside class="w-full lg:w-72 shrink-0 lg:sticky lg:top-20 self-start">
                 {% with toc=page.table_of_contents %}
@@ -125,6 +133,9 @@
                             </svg>
                             <span>{% trans "Share your idea" %}</span>
                         </a>
+                    {% endif %}
+                    {% if project_map %}
+                        {% include "publications/components/project_location.html" %}
                     {% endif %}
                     {% if page.show_toc and toc %}
                         <div class="bg-base-100 rounded-lg shadow-sm p-5">

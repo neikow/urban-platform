@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:10+0200\n"
+"POT-Creation-Date: 2026-10-06 16:41+0200\n"
 "PO-Revision-Date: 2026-06-23 10:00+0100\n"
 "Last-Translator: Urban Platform Team\n"
 "Language-Team: French\n"
@@ -45,6 +45,15 @@ msgstr ""
 #: urban_platform/templates/500.html:25
 msgid "Reload the page"
 msgstr "Recharger la page"
+
+#: urban_platform/templates/base.html:30
+#, python-format
+msgid "%(website_name)s — news"
+msgstr "%(website_name)s — actualités"
+
+#: urban_platform/templates/base.html:52
+msgid "Skip to content"
+msgstr "Aller au contenu"
 
 #~ msgid "Sign up"
 #~ msgstr "S'inscrire"

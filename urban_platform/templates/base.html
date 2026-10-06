@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar i18n structured_data django_settings %}
+{% load static wagtailcore_tags wagtailuserbar i18n structured_data social_meta django_settings %}
 {% get_current_language as LANGUAGE_CODE %}
 
 {% get_setting "ANALYTICS_SCRIPT_TAG" as analytics_script_tag %}
@@ -24,9 +24,15 @@
         {% if analytics_script_tag %}
             {{ analytics_script_tag|safe }}
         {% endif %}
-        {% if page.search_description %}
-            <meta name="description" content="{{ page.search_description }}">
-        {% endif %}
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="{% blocktrans %}{{ website_name }} — news{% endblocktrans %}"
+            href="{% url 'publications_rss' %}"
+        >
+        {% block social_meta %}
+            {% social_meta %}
+        {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% if request.in_preview_panel %}
             <base target="_blank">
@@ -40,14 +46,19 @@
         {% endblock %}
     </head>
     <body class="{% block body_class %}{% endblock %}">
+        <a
+            href="#main-content"
+            class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-100 btn btn-primary btn-sm"
+        >{% trans "Skip to content" %}</a>
         {% wagtailuserbar %}
         {% block header %}
             {% include "core/components/website_header.html" %}
             <div class="pt-16"></div>
         {% endblock header %}
         {% include "core/components/messages.html" %}
-        {% block content %}
-        {% endblock %}
+        <main id="main-content" tabindex="-1" class="focus:outline-none">
+            {% block content %} {% endblock %}
+        </main>
         {% include "core/components/website_footer.html" %}
         {% include "core/components/image_lightbox.html" %}
         {% block extra_js %}

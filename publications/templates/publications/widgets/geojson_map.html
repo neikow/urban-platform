@@ -1,0 +1,6 @@
+<geojson-map-input data-config="{{ map_config }}">
+    <div data-map class="geojson-map-input__map"></div>
+    <p class="help">{{ help }}</p>
+    <textarea name="{{ widget.name }}" hidden {% include "django/forms/widgets/attrs.html" %}
+    >{% if widget.value %}{{ widget.value }}{% endif %}</textarea>
+</geojson-map-input>

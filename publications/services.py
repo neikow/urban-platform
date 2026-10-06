@@ -159,3 +159,30 @@ def get_vote_results(project: "ProjectPage") -> dict[str, Any]:
         "total_votes": total_votes,
         "choices": choices_results,
     }
+
+
+# Display order and daisyUI progress colour, from favorable to unfavorable.
+FINAL_RESULTS_DISPLAY = (
+    ("FAVORABLE", "progress-success"),
+    ("RATHER_FAVORABLE", "progress-info"),
+    ("RATHER_UNFAVORABLE", "progress-warning"),
+    ("UNFAVORABLE", "progress-error"),
+)
+
+
+def get_final_vote_results(project: "ProjectPage") -> dict[str, Any]:
+    """Vote results ready for the public summary shown once voting is closed."""
+    from publications.models.form import VoteChoice
+
+    results = get_vote_results(project)
+    labels = dict(VoteChoice.choices)
+    results["ordered"] = [
+        {
+            "value": value,
+            "label": labels[value],
+            "color": color,
+            **results["choices"][value],
+        }
+        for value, color in FINAL_RESULTS_DISPLAY
+    ]
+    return results

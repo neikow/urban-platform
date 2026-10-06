@@ -1,5 +1,8 @@
 from datetime import datetime
 from functools import cached_property
+from typing import Any
+
+from django.http import HttpRequest
 
 from django.db import models
 from django.utils import timezone
@@ -9,7 +12,9 @@ from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.search import index
 
 from core.toc import TableOfContentsItem, generate_header_ids, get_table_of_contents
+from publications.geo import validate_geometry
 from publications.models.publication import PublicationPage
+from publications.widgets import GeoJSONMapWidget
 
 
 DEFAULT_VOTE_QUESTION = _("What is your opinion on this project?")
@@ -78,6 +83,14 @@ class ProjectPage(PublicationPage):
         help_text=_("Leave empty for no end date (only applies to voting)"),
     )
 
+    location: models.JSONField[Any, Any] = models.JSONField(
+        _("Location"),
+        null=True,
+        blank=True,
+        validators=[validate_geometry],
+        help_text=_("Where the project takes place: a point or an area."),
+    )
+
     show_toc: models.BooleanField[bool, bool] = models.BooleanField(
         _("Show table of contents"),
         default=True,
@@ -90,7 +103,13 @@ class ProjectPage(PublicationPage):
 
     content_panels = PublicationPage.content_panels + [
         FieldPanel("category"),
+        FieldPanel("location", widget=GeoJSONMapWidget),
         InlinePanel("external_links", label=_("External Links")),
+        InlinePanel(
+            "updates",
+            label=_("Project timeline"),
+            help_text=_("News about the project, newest first on the page."),
+        ),
         FieldPanel("participation_mode"),
         FieldPanel("voting_end_date"),
         FieldPanel("show_toc"),
@@ -119,9 +138,18 @@ class ProjectPage(PublicationPage):
         return str(DEFAULT_VOTE_QUESTION)
 
     @property
+    def is_voting_closed_manually(self) -> bool:
+        from publications.models.poll_closure import PollClosure
+
+        try:
+            return self.poll_closure is not None
+        except PollClosure.DoesNotExist:
+            return False
+
+    @property
     def is_voting_open(self) -> bool:
-        """Check if voting is still open for this project."""
-        if not self.enable_voting:
+        """Voting is open until its end date, unless the poll was closed earlier."""
+        if not self.enable_voting or self.is_voting_closed_manually:
             return False
         if self.voting_end_date is None:
             return True
@@ -137,6 +165,24 @@ class ProjectPage(PublicationPage):
     def has_external_links(self) -> bool:
         """Check if this project has any external links."""
         return self.external_links.exists()
+
+    def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context(request, *args, **kwargs)
+        if self.location:
+            from publications.geo import map_config, project_feature
+
+            context["project_map"] = {**map_config(), "feature": project_feature(self)}
+        if self.enable_voting and not self.is_voting_open:
+            from publications.services import get_final_vote_results
+
+            context["final_vote_results"] = get_final_vote_results(self)
+        return context
+
+    @property
+    def timeline(self) -> list[Any]:
+        return sorted(
+            self.updates.all(), key=lambda update: (update.date, update.pk or 0), reverse=True
+        )
 
     @property
     def table_of_contents(self) -> list[TableOfContentsItem]:

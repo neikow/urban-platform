@@ -341,6 +341,7 @@ def populate_database() -> None:
     participation_projects = [
         ("Projet soumis au vote", "projet-vote", ParticipationMode.VOTING),
         ("Projet ouvert aux idées", "projet-idees", ParticipationMode.IDEAS),
+        ("Projet à clore", "projet-a-clore", ParticipationMode.VOTING),
     ]
     for title, slug, mode in participation_projects:
         if not ProjectPage.objects.filter(slug=slug).exists():
@@ -356,6 +357,38 @@ def populate_database() -> None:
             print(f"  ✓ Created project: {title}")
         else:
             print(f"  ✓ Project exists: {title}")
+
+    # The poll-closing test closes this one: reopen it for every run.
+    from core.models import NotificationDispatch
+    from publications.models import PollClosure
+
+    to_close = ProjectPage.objects.get(slug="projet-a-clore")
+    PollClosure.objects.filter(project=to_close).delete()
+    NotificationDispatch.objects.filter(key=f"project:{to_close.pk}").delete()
+
+    from datetime import timedelta
+
+    from django.utils import timezone
+
+    from publications.models import EventPage
+
+    # Always a week ahead, so the event stays upcoming whatever the run date.
+    start = (timezone.now() + timedelta(days=7)).replace(hour=18, minute=0, second=0, microsecond=0)
+    event = EventPage.objects.filter(slug="fete-du-quartier").first()
+    if event is None:
+        event = EventPage(
+            title="Fête du quartier",
+            slug="fete-du-quartier",
+            description="Événement de test.",
+            location="Place Saint-Eugène",
+            event_date=start,
+            locale=locale,
+        )
+        publication_index.add_child(instance=event)
+    event.event_date = start
+    event.end_date = start + timedelta(hours=3)
+    event.save_revision().publish()
+    print("  ✓ Upcoming event ready")
 
     # Create root collection if needed
     if not Collection.objects.filter(depth=1).exists():
@@ -446,7 +479,7 @@ def create_test_users() -> None:
     # republished on every setup, so the consent is recorded again each time
     # and previous votes/ideas are cleared to start from a known state.
     from legal.utils import create_code_of_conduct_consent_record, has_valid_code_of_conduct_consent
-    from publications.models import FormResponse, IdeaResponse
+    from publications.models import EventInterest, FormResponse, IdeaResponse
 
     voter_email = "e2e.voter@email.com"
     voter, created = User.objects.get_or_create(
@@ -461,6 +494,7 @@ def create_test_users() -> None:
         create_code_of_conduct_consent_record(voter)
     FormResponse.objects.filter(user=voter).delete()
     IdeaResponse.objects.filter(user=voter).delete()
+    EventInterest.objects.filter(user=voter).delete()
     print(f"  ✓ Verified voter ready: {voter_email}")
 
     # Account deletion test user

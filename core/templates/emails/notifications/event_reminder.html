@@ -1,0 +1,22 @@
+{% extends "emails/notifications/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <p>{% trans "An event you are interested in takes place tomorrow:" %}</p>
+    <h1>{{ event_title }}</h1>
+    <p>
+        <strong>{% trans "When:" %}</strong>
+        {{ event_when }}
+        {% if event_where %}
+            <br>
+            <strong>{% trans "Where:" %}</strong> {{ event_where }}
+        {% endif %}
+        {% if online_link %}
+            <br>
+            <strong>{% trans "Online:" %}</strong> <a href="{{ online_link }}">{{ online_link }}</a>
+        {% endif %}
+    </p>
+    <a class="button" href="{{ event_url }}">{% trans "See the event" %}</a>
+    <p><a href="{{ calendar_url }}">{% trans "Add to my calendar" %}</a></p>
+{% endblock %}
