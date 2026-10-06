@@ -50,9 +50,9 @@
         </header>
 
         <div class="container mx-auto px-6 sm:px-8 lg:px-12 flex flex-col-reverse lg:flex-row gap-8 lg:gap-16 mb-16 lg:mb-24 mt-10 lg:mt-14">
-            <main class="flex-1 page-content numbered-headings min-w-0">
+            <div class="flex-1 page-content numbered-headings min-w-0">
                 {% include_block page.content %}
-            </main>
+            </div>
 
             {% with toc=page.table_of_contents %}
                 {% if page.has_resource or page.show_toc and toc %}

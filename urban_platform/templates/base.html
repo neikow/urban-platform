@@ -40,14 +40,19 @@
         {% endblock %}
     </head>
     <body class="{% block body_class %}{% endblock %}">
+        <a
+            href="#main-content"
+            class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-100 btn btn-primary btn-sm"
+        >{% trans "Skip to content" %}</a>
         {% wagtailuserbar %}
         {% block header %}
             {% include "core/components/website_header.html" %}
             <div class="pt-16"></div>
         {% endblock header %}
         {% include "core/components/messages.html" %}
-        {% block content %}
-        {% endblock %}
+        <main id="main-content" tabindex="-1" class="focus:outline-none">
+            {% block content %} {% endblock %}
+        </main>
         {% include "core/components/website_footer.html" %}
         {% include "core/components/image_lightbox.html" %}
         {% block extra_js %}

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:09+0200\n"
+"POT-Creation-Date: 2026-10-06 16:20+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -39,7 +39,7 @@ msgid "End date and time of the event (optional)"
 msgstr "Date et heure de fin de l'événement (optionnel)"
 
 #: publications/models/event.py:36
-#: publications/templates/publications/event_page.html:78
+#: publications/templates/publications/event_page.html:80
 msgid "Location"
 msgstr "Lieu"
 
@@ -48,7 +48,7 @@ msgid "Venue of the event"
 msgstr "Lieu de l'événement"
 
 #: publications/models/event.py:43
-#: publications/templates/publications/event_page.html:165
+#: publications/templates/publications/event_page.html:169
 msgid "Address"
 msgstr "Adresse"
 
@@ -423,7 +423,7 @@ msgstr "idées"
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:92
 #: publications/templates/publications/admin/vote_stats_detail.html:289
-#: publications/tests/test_vote_stats.py:301
+#: publications/tests/test_vote_stats.py:319
 msgid "Deleted User"
 msgstr "Utilisateur supprimé"
 
@@ -439,7 +439,7 @@ msgstr "Aucune idée pour le moment"
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
-#: publications/views/vote_stats.py:48 publications/views/vote_stats.py:109
+#: publications/views/vote_stats.py:48 publications/views/vote_stats.py:103
 #: publications/wagtail_hooks.py:25
 msgid "Vote Statistics"
 msgstr "Statistiques des votes"
@@ -732,31 +732,35 @@ msgstr "Retirer mon vote"
 msgid "Voting is closed for this project"
 msgstr "Le vote est fermé pour ce projet"
 
-#: publications/templates/publications/event_page.html:46
+#: publications/templates/publications/event_page.html:47
 msgid "Date"
 msgstr "Date"
 
-#: publications/templates/publications/event_page.html:104
+#: publications/templates/publications/event_page.html:107
 msgid "Online"
 msgstr "En ligne"
 
-#: publications/templates/publications/event_page.html:105
+#: publications/templates/publications/event_page.html:108
 msgid "Yes"
 msgstr "Oui"
 
-#: publications/templates/publications/event_page.html:111
+#: publications/templates/publications/event_page.html:114
 msgid "Join"
 msgstr "Rejoindre"
 
-#: publications/templates/publications/event_page.html:135
+#: publications/templates/publications/event_page.html:139
 msgid "Max Participants"
 msgstr "Participants max"
 
-#: publications/templates/publications/event_page.html:150
+#: publications/templates/publications/event_page.html:154
 #: publications/templates/publications/project_page.html:52
 #, python-format
 msgid "Preview image: %(title)s"
 msgstr "Image d'aperçu: %(title)s"
+
+#: publications/templates/publications/event_page.html:178
+msgid "View on a map"
+msgstr "Voir sur une carte"
 
 #: publications/templates/publications/project_page.html:22
 msgid "Vote open"
