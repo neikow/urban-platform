@@ -4,7 +4,7 @@
 
 ## Getting started
 
-Requirements: [uv](https://docs.astral.sh/uv/), Node.js 20+, Docker (for Redis) and
+Requirements: [uv](https://docs.astral.sh/uv/), Node.js 24 (see `.nvmrc`), Docker (for Redis) and
 GNU gettext (`brew install gettext` / `apt install gettext`).
 
 ```bash
@@ -24,6 +24,20 @@ Run `make help` for every task. The ones you will use most:
 | `make check`    | What CI runs before tests: ruff, mypy, bandit, missing migrations |
 | `make format`   | Format Python code and templates                                |
 | `make messages` | Update and compile the French translations                      |
+
+### Front end
+
+TypeScript and the Tailwind stylesheet live in `frontend/src/` and are built by Vite into
+`urban_platform/static/dist/` (git-ignored), which templates load with `{% static 'dist/…' %}`.
+`make dev` rebuilds on change; `make assets` type-checks and builds once.
+
+- `main.ts` is loaded on every page; page-specific entries (`pages/vote.ts`, …) are listed in
+  `vite.config.ts` and loaded with `<script type="module">` from the template that needs them.
+- Templates contain no JavaScript. Use the data attributes handled by
+  `frontend/src/lib/behaviors.ts` (`data-dialog-open`, `data-dialog-close`, `data-dismiss`,
+  `data-autosubmit`, `data-password-toggle`) and pass data with `json_script`.
+- Prefer theme tokens (`text-2xs`, `tracking-label`, `text-display-*`, defined in
+  `frontend/src/styles/main.css`) over arbitrary values.
 
 ### Translations
 

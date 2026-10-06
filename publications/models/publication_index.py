@@ -11,6 +11,7 @@ from wagtail.fields import RichTextField
 from wagtail.models import Page
 from wagtail.search import index
 
+from publications.geo import feature_collection, map_config
 from publications.services import PublicationFilters, get_filtered_publications
 
 
@@ -66,6 +67,19 @@ class PublicationIndexPage(Page):
             base_queryset, filters, per_page=self.PUBLICATIONS_PER_PAGE
         )
 
+    def get_projects_map(self) -> dict[str, Any]:
+        """Located, published projects as GeoJSON for the "projects near me" map."""
+        from publications.models.project import ProjectPage
+
+        projects = (
+            ProjectPage.objects.live()
+            .public()
+            .descendant_of(self)
+            .filter(location__isnull=False)
+            .order_by("-first_published_at")
+        )
+        return feature_collection(projects)
+
     def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Context:
         from publications.models.project import ProjectCategory
 
@@ -82,6 +96,8 @@ class PublicationIndexPage(Page):
         ]
 
         context["categories"] = categories
+        context["projects_map"] = self.get_projects_map()
+        context["map_config"] = map_config()
         context["selected_category"] = request.GET.get("category", "")
         context["selected_type"] = request.GET.get("type", "all")
         context["show_past_events"] = request.GET.get("show_past", "").lower() in (

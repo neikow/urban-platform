@@ -12,7 +12,7 @@
                     <h1
                         class="
                             font-display font-black uppercase leading-tight
-                            text-[clamp(2.2rem,5vw,4rem)]
+                            text-display-md
                         "
                     >
                         {% trans "Edit my profile" %}
@@ -87,6 +87,25 @@
                                 >{{ form.newsletter_subscription.errors.0 }}</span>
                             {% endif %}
                         </div>
+                        <fieldset id="notifications" class="scroll-mt-24 space-y-1">
+                            <legend class="font-medium mb-1">{% trans "Email notifications" %}</legend>
+                            <p class="text-sm text-base-content/60 mb-2">
+                                {% trans "Only what you choose. Each email has a link to stop receiving it." %}
+                            </p>
+                            {% for field in form %}
+                                {% if field.name in form.NOTIFICATION_FIELDS %}
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        {{ field }}
+                                        <span class="label-text">{{ field.label }}</span>
+                                    </label>
+                                {% endif %}
+                            {% endfor %}
+                            {% if not user.is_verified %}
+                                <p class="text-sm text-warning-content bg-warning/20 rounded px-3 py-2">
+                                    {% trans "Notifications are only sent once your email address is verified." %}
+                                </p>
+                            {% endif %}
+                        </fieldset>
                         <div class="flex justify-end pt-2">
                             <button type="submit" class="btn btn-primary border-none font-semibold">
                                 <svg
@@ -184,6 +203,13 @@
                         <span>La suppression de votre compte est <strong>irréversible</strong> et entraînera la perte
                             définitive de toutes vos données.</span>
                     </div>
+                    <p class="text-sm mb-4">
+                        <a
+                            class="link link-primary"
+                            href="{% url 'data_export' %}"
+                            download
+                        >{% trans "Download a copy of my data first" %}</a>
+                    </p>
                     <a href="{% url 'account_delete' %}" class="btn btn-error border-none font-semibold">
                         <svg
                             class="w-4 h-4"

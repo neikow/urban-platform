@@ -2,8 +2,10 @@ from django.urls import URLPattern, path, reverse
 from django.utils.translation import gettext_lazy as _
 from wagtail import hooks
 from wagtail.admin.menu import MenuItem
+from wagtail.admin.widgets import Button
 
 from publications.views.idea_stats import IdeaStatsView, IdeaStatsDetailView
+from publications.views.poll_close import ClosePollView
 from publications.views.vote_stats import VoteStatsView, VoteStatsDetailView
 
 
@@ -49,3 +51,29 @@ def register_idea_stats_menu_item() -> MenuItem:
         icon_name="clipboard-list",
         order=203,
     )
+
+
+@hooks.register("register_admin_urls")
+def register_close_poll_url() -> list[URLPattern]:
+    return [
+        path("projects/<int:project_id>/close-poll/", ClosePollView.as_view(), name="close_poll"),
+    ]
+
+
+@hooks.register("register_page_header_buttons")
+def close_poll_header_button(page, user, view_name, next_url=None):  # type: ignore[no-untyped-def]
+    from publications.models import ProjectPage
+
+    specific = page.specific
+    if (
+        isinstance(specific, ProjectPage)
+        and specific.live
+        and specific.is_voting_open
+        and page.permissions_for_user(user).can_publish()
+    ):
+        yield Button(
+            _("Close the poll and send the results"),
+            reverse("close_poll", args=[page.pk]),
+            icon_name="lock",
+            priority=40,
+        )

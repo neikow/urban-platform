@@ -1,0 +1,25 @@
+{% extends "emails/notifications/base.html" %}
+
+{% load i18n l10n %}
+
+{% block content %}
+    <h1>{% blocktrans with title=project_title %}The poll on “{{ title }}” is closed{% endblocktrans %}</h1>
+    <p>{% trans "Thank you for voting. Here are the final results:" %}</p>
+    <p class="quote">{{ question }}</p>
+    <table class="results" role="presentation">
+        {% for row in rows %}
+            <tr>
+                <td>{{ row.label }}</td>
+                <td class="num">{{ row.percentage }}&nbsp;% ({{ row.count }})</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p>
+        {% blocktrans trimmed count total=total_votes %}
+            {{ total }} vote in total
+            {% plural %}
+            {{ total }} votes in total
+        {% endblocktrans %}
+    </p>
+    <a class="button" href="{{ project_url }}">{% trans "See the project" %}</a>
+{% endblock %}

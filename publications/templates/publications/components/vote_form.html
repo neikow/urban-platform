@@ -4,7 +4,7 @@
     <div
         id="vote-component"
         data-project-id="{{ page.id }}"
-        data-can-participate="{% if user.is_authenticated and user.is_verified %}true{% else %}false{% endif %}"
+        data-can-participate="{% if page.is_voting_open and user.is_authenticated and user.is_verified %}true{% else %}false{% endif %}"
         data-csrf-token="{{ csrf_token }}"
         data-msg-select-option="{% trans 'Please select an option' %}"
         data-msg-generic-error="{% trans 'An error occurred' %}"
@@ -12,6 +12,8 @@
         data-msg-submit-error="{% trans 'An error occurred while submitting the vote' %}"
         data-msg-remove-error="{% trans 'An error occurred while removing the vote' %}"
         data-msg-confirm-remove="{% trans 'Are you sure you want to remove your vote?' %}"
+        data-msg-total-one="{% trans '{count} vote in total' %}"
+        data-msg-total-other="{% trans '{count} votes in total' %}"
     >
         <div
             id="vote-card"
@@ -65,12 +67,14 @@
                 </div>
             </div>
 
-            {% if not user.is_authenticated %}
+            {% if not page.is_voting_open %}
+                {% include "publications/components/vote_final_results.html" with results=final_vote_results %}
+            {% elif not user.is_authenticated %}
                 <div id="vote-login-prompt" class="text-center py-6 px-4 bg-base-100 rounded-lg">
                     <p class="text-base-content/70 mb-4 text-sm">{% trans "Log in to vote on this project" %}</p>
                     <button
                         type="button"
-                        onclick="document.getElementById('login_modal').showModal()"
+                        data-dialog-open="login_modal"
                         class="btn btn-primary border-none font-semibold"
                     >
                         {% trans "Log in to vote" %}
@@ -89,7 +93,7 @@
                         >
                             <label class="vote-choice-btn cursor-pointer order-4 sm:order-3 xl:order-1">
                                 <input type="radio" name="vote_choice" value="UNFAVORABLE" class="sr-only peer">
-                                <div class="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-base-300 bg-base-100 hover:border-error hover:bg-error/8 peer-checked:border-error peer-checked:bg-error/15 peer-focus-visible:ring-2 peer-focus-visible:ring-error peer-focus-visible:ring-offset-2 transition-all h-full min-h-[80px]">
+                                <div class="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-base-300 bg-base-100 hover:border-error hover:bg-error/8 peer-checked:border-error peer-checked:bg-error/15 peer-focus-visible:ring-2 peer-focus-visible:ring-error peer-focus-visible:ring-offset-2 transition-all h-full min-h-20">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="28"
@@ -113,7 +117,7 @@
                             </label>
                             <label class="vote-choice-btn cursor-pointer order-3 sm:order-4 xl:order-2">
                                 <input type="radio" name="vote_choice" value="RATHER_UNFAVORABLE" class="sr-only peer">
-                                <div class="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-base-300 bg-base-100 hover:border-warning hover:bg-warning/8 peer-checked:border-warning peer-checked:bg-warning/15 peer-focus-visible:ring-2 peer-focus-visible:ring-warning peer-focus-visible:ring-offset-2 transition-all h-full min-h-[80px]">
+                                <div class="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-base-300 bg-base-100 hover:border-warning hover:bg-warning/8 peer-checked:border-warning peer-checked:bg-warning/15 peer-focus-visible:ring-2 peer-focus-visible:ring-warning peer-focus-visible:ring-offset-2 transition-all h-full min-h-20">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="28"
@@ -137,7 +141,7 @@
                             </label>
                             <label class="vote-choice-btn cursor-pointer order-2 xl:order-3">
                                 <input type="radio" name="vote_choice" value="RATHER_FAVORABLE" class="sr-only peer">
-                                <div class="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-base-300 bg-base-100 hover:border-info hover:bg-info/8 peer-checked:border-info peer-checked:bg-info/15 peer-focus-visible:ring-2 peer-focus-visible:ring-info peer-focus-visible:ring-offset-2 transition-all h-full min-h-[80px]">
+                                <div class="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-base-300 bg-base-100 hover:border-info hover:bg-info/8 peer-checked:border-info peer-checked:bg-info/15 peer-focus-visible:ring-2 peer-focus-visible:ring-info peer-focus-visible:ring-offset-2 transition-all h-full min-h-20">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="28"
@@ -162,7 +166,7 @@
                             </label>
                             <label class="vote-choice-btn cursor-pointer order-1 xl:order-4">
                                 <input type="radio" name="vote_choice" value="FAVORABLE" class="sr-only peer">
-                                <div class="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-base-300 bg-base-100 hover:border-success hover:bg-success/8 peer-checked:border-success peer-checked:bg-success/15 peer-focus-visible:ring-2 peer-focus-visible:ring-success peer-focus-visible:ring-offset-2 transition-all h-full min-h-[80px]">
+                                <div class="flex flex-col items-center justify-center p-4 rounded-lg border-2 border-base-300 bg-base-100 hover:border-success hover:bg-success/8 peer-checked:border-success peer-checked:bg-success/15 peer-focus-visible:ring-2 peer-focus-visible:ring-success peer-focus-visible:ring-offset-2 transition-all h-full min-h-20">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="28"
@@ -248,6 +252,14 @@
                 </div>
 
                 <div id="vote-results-container" class="hidden">
+                    {% if not user.notify_poll_results %}
+                        <p class="text-xs text-base-content/60 mb-3">
+                            <a
+                                class="link"
+                                href="{% url 'profile_edit' %}#notifications"
+                            >{% trans "Get the final results by email when the poll closes" %}</a>
+                        </p>
+                    {% endif %}
                     <div id="vote-results" class="space-y-3"></div>
 
                     <div id="user-vote-info" class="mt-4 p-4 bg-base-300/60 rounded-lg">
@@ -276,30 +288,8 @@
                     <span class="loading loading-spinner loading-md"></span>
                 </div>
             {% endif %}
-
-            {% if not page.is_voting_open %}
-                <div class="alert alert-warning mt-4">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="stroke-current shrink-0 h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                        />
-                    </svg>
-                    <span>{% trans "Voting is closed for this project" %}</span>
-                </div>
-            {% endif %}
         </div>
     </div>
 
-    {% include "auth/login_modal.html" %}
-
-    <script src="{% static 'publications/js/vote.js' %}"></script>
+    <script type="module" src="{% static 'dist/vote.js' %}"></script>
 {% endif %}

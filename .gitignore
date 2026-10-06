@@ -8,7 +8,7 @@ node_modules
 *.sqlite3
 __pycache__/
 *.mo
-urban_platform/static/css/styles.css
+urban_platform/static/dist/
 .coverage
 
 # MkDocs

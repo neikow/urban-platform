@@ -76,6 +76,21 @@ jobs:
       - name: Check for missing migrations
         run: uv run python manage.py makemigrations --check --dry-run
 
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+
+      - name: Install front-end dependencies
+        run: npm ci
+
+      - name: Type-check TypeScript
+        run: npm run typecheck
+
+      - name: Build front-end assets
+        run: npm run build
+
   test:
     name: Run Tests
     runs-on: ubuntu-latest
@@ -140,18 +155,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gettext
 
-      # Without the stylesheet, classes such as "hidden" have no effect and
-      # visibility assertions test nothing.
       - name: Set up Node
         if: matrix.tests == 'e2e'
         uses: actions/setup-node@v7
         with:
-          node-version: "20"
+          node-version-file: ".nvmrc"
           cache: npm
 
-      - name: Build styles
+      - name: Build front-end assets
         if: matrix.tests == 'e2e'
-        run: npm ci && npm run styles:build
+        run: npm ci && npm run build
 
       - name: Install Playwright browsers
         if: matrix.tests == 'e2e'

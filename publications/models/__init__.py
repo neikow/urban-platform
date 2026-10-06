@@ -2,6 +2,7 @@ from .publication import PublicationPage
 from .publication_index import PublicationIndexPage
 from .project import ParticipationMode, ProjectPage, ProjectCategory
 from .event import EventPage
+from .event_interest import EventInterest
 from .form import (
     FAVORABLE_CHOICES,
     FAVORABLE_VALUES,
@@ -11,4 +12,6 @@ from .form import (
     VoteChoice,
 )
 from .idea import IdeaResponse
+from .poll_closure import PollClosure, PollClosureReason
+from .project_update import ProjectUpdate
 from .external_link import ProjectExternalLink

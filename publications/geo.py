@@ -1,0 +1,95 @@
+"""Project locations stored as GeoJSON geometries (no PostGIS needed).
+
+A location is either a Point (a precise spot) or a Polygon (an area, e.g. a
+street or a park), in WGS84 longitude/latitude as GeoJSON mandates.
+"""
+
+from collections.abc import Iterable
+from typing import TYPE_CHECKING, Any
+
+from django.core.exceptions import ValidationError
+from django.templatetags.static import static
+from django.utils.translation import gettext_lazy as _
+
+if TYPE_CHECKING:
+    from publications.models import ProjectPage
+
+ALLOWED_GEOMETRY_TYPES = ("Point", "Polygon")
+
+# Boundary drawn on the public map (Marseille 7e arrondissement, INSEE 13207,
+# from geo.api.gouv.fr).
+LOCAL_AREA_BOUNDARY_PATH = "publications/geo/marseille-7e.geojson"
+# Used before the boundary has loaded and as the admin widget's default view.
+LOCAL_AREA_CENTER = (43.2805, 5.3530)  # lat, lon
+LOCAL_AREA_ZOOM = 14
+
+
+def _is_position(value: Any) -> bool:
+    return (
+        isinstance(value, list)
+        and len(value) in (2, 3)
+        and all(isinstance(c, int | float) and not isinstance(c, bool) for c in value)
+        and -180 <= value[0] <= 180
+        and -90 <= value[1] <= 90
+    )
+
+
+def _is_linear_ring(ring: Any) -> bool:
+    return (
+        isinstance(ring, list)
+        and len(ring) >= 4
+        and all(_is_position(p) for p in ring)
+        and ring[0][:2] == ring[-1][:2]
+    )
+
+
+def validate_geometry(value: Any) -> None:
+    """Accept a GeoJSON Point or Polygon geometry, reject anything else."""
+    if value in (None, ""):
+        return
+    if not isinstance(value, dict) or value.get("type") not in ALLOWED_GEOMETRY_TYPES:
+        raise ValidationError(_("The location must be a point or a polygon."))
+
+    coordinates = value.get("coordinates")
+    if value["type"] == "Point":
+        valid = _is_position(coordinates)
+    else:
+        valid = (
+            isinstance(coordinates, list)
+            and len(coordinates) >= 1
+            and all(_is_linear_ring(ring) for ring in coordinates)
+        )
+    if not valid:
+        raise ValidationError(_("The location coordinates are invalid."))
+
+
+def project_feature(project: "ProjectPage") -> dict[str, Any]:
+    """GeoJSON Feature describing a project for the public maps."""
+    return {
+        "type": "Feature",
+        "geometry": project.location,
+        "properties": {
+            "title": project.title,
+            "url": project.url,
+            "category": project.get_category_display(),
+            "description": project.description[:200],
+            "participation": project.participation_mode,
+            "isOpen": project.is_voting_open or project.is_ideas_open,
+        },
+    }
+
+
+def feature_collection(projects: Iterable["ProjectPage"]) -> dict[str, Any]:
+    return {
+        "type": "FeatureCollection",
+        "features": [project_feature(p) for p in projects if p.location],
+    }
+
+
+def map_config() -> dict[str, Any]:
+    """Settings shared by the public maps and the admin widget."""
+    return {
+        "boundaryUrl": static(LOCAL_AREA_BOUNDARY_PATH),
+        "center": LOCAL_AREA_CENTER,
+        "zoom": LOCAL_AREA_ZOOM,
+    }

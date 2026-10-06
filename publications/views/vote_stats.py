@@ -17,6 +17,14 @@ from publications.models.form import (
 
 LOCAL_POSTAL_CODE: str = getattr(settings, "LOCAL_POSTAL_CODE", "13007")
 
+# Pie chart order and colours, from favorable to unfavorable.
+PIE_CHART_COLORS = {
+    VoteChoice.FAVORABLE: "#22c55e",
+    VoteChoice.RATHER_FAVORABLE: "#3b82f6",
+    VoteChoice.RATHER_UNFAVORABLE: "#eab308",
+    VoteChoice.UNFAVORABLE: "#ef4444",
+}
+
 
 def _is_show_all(request: Any) -> bool:
     return request.GET.get("show_all") == "1"
@@ -148,6 +156,12 @@ class VoteStatsDetailView(WagtailAdminTemplateMixin, TemplateView):
                 "unfavorable_percentage": unfavorable_percentage,
                 "is_voting_open": project.is_voting_open,
                 "votes_with_comments": votes_with_comments,
+                # Rendered with json_script for the chart script.
+                "pie_chart_data": {
+                    "labels": [str(choice.label) for choice in PIE_CHART_COLORS],
+                    "counts": [counts[choice.value] for choice in PIE_CHART_COLORS],
+                    "colors": list(PIE_CHART_COLORS.values()),
+                },
                 "vote_choices": VoteChoice,
                 "show_all": show_all,
                 "local_postal_code": LOCAL_POSTAL_CODE,

@@ -1,7 +1,7 @@
 {% load i18n %}
 <form class="flex gap-2">
     <label class="input">
-        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <svg aria-hidden="true" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <g
                 stroke-linejoin="round"
                 stroke-linecap="round"
@@ -21,8 +21,8 @@
             value="{{ request.GET.search|default:"" }}"
         >
     </label>
-    <button type="submit" class="btn btn-primary">
-        <svg class="h-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <button type="submit" class="btn btn-primary" aria-label="{% trans 'Search' %}">
+        <svg aria-hidden="true" class="h-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <g
                 stroke-linejoin="round"
                 stroke-linecap="round"

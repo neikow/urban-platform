@@ -49,8 +49,8 @@ repos:
         pass_filenames: false
         stages: [ pre-push ]
       - id: run-tailwindcss-build
-        name: Run TailwindCSS Build
-        entry: npm run styles:build
+        name: Build front-end assets
+        entry: npm run build
         pass_filenames: false
         always_run: true
         language: system
