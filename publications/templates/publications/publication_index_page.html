@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags i18n cache %}
+{% load static wagtailcore_tags wagtailimages_tags i18n cache %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'dist/map.css' %}">
+{% endblock %}
 
 {% block content %}
     <article class="mx-4">
@@ -124,6 +128,18 @@
 
                 {% include "components/navigation/pagination.html" with page_data=publications %}
             {% endcache %}
+
+            <p class="flex flex-wrap gap-x-4 gap-y-1 text-sm mt-2">
+                <span class="text-base-content/60">{% trans "Follow the news:" %}</span>
+                <a class="link link-primary" href="{% url 'publications_rss' %}">{% trans "RSS feed" %}</a>
+                {# webcal:// makes Apple Calendar and Outlook subscribe; Google Calendar takes the https link. #}
+                <a class="link link-primary" href="webcal://{{ request.get_host }}{% url 'events_ical' %}">
+                    {% trans "Subscribe to the events calendar" %}
+                </a>
+                <a class="link link-primary" href="{% url 'events_ical' %}">{% trans "iCal link" %}</a>
+            </p>
+
+            {% include "publications/components/projects_map.html" %}
 
             {% if page.body %}
                 <article class="mt-8">{{ page.body|richtext }}</article>

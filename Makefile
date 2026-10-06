@@ -49,7 +49,8 @@ test: ## Run unit tests in parallel
 	uv run pytest -n auto
 
 .PHONY: e2e
-e2e: ## Run the end-to-end suite headless (sets up its own database and server)
+e2e: ## Build assets, then run the end-to-end suite headless (own database and server)
+	npm run build
 	uv run python scripts/e2e.py ci
 
 .PHONY: lint

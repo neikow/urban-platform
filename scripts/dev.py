@@ -108,13 +108,13 @@ class DevServer:
             )
         )
 
-        # Future: Add Celery beat here
-        # self.services.append(
-        #     Service(
-        #         name="Celery Beat",
-        #         start=self._start_celery_beat,
-        #     )
-        # )
+        # Schedules poll closing and event reminders (CELERY_BEAT_SCHEDULE).
+        self.services.append(
+            Service(
+                name="Celery Beat",
+                start=self._start_celery_beat,
+            )
+        )
 
     def _setup_signal_handlers(self) -> None:
         signal.signal(signal.SIGINT, self._handle_shutdown)
@@ -202,6 +202,8 @@ class DevServer:
                 "urban_platform",
                 "beat",
                 "--loglevel=info",
+                "--scheduler",
+                "django_celery_beat.schedulers:DatabaseScheduler",
             ],
             cwd=PROJECT_ROOT,
             env=env,

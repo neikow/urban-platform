@@ -24,6 +24,12 @@
         {% if analytics_script_tag %}
             {{ analytics_script_tag|safe }}
         {% endif %}
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="{% blocktrans %}{{ website_name }} — news{% endblocktrans %}"
+            href="{% url 'publications_rss' %}"
+        >
         {% block social_meta %}
             {% social_meta %}
         {% endblock %}
