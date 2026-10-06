@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.views.generic.edit import FormView
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
 from core.emails.tasks import send_verification_email
 
@@ -42,6 +43,28 @@ class ProfileUpdateForm(forms.Form):
         widget=DaisyCheckboxInput(),
     )
 
+    notify_poll_results = forms.BooleanField(
+        required=False,
+        label=_("Results of polls I voted in, when they close"),
+        widget=DaisyCheckboxInput(),
+    )
+    notify_project_updates = forms.BooleanField(
+        required=False,
+        label=_("News of projects I voted on or shared an idea about"),
+        widget=DaisyCheckboxInput(),
+    )
+    notify_event_reminders = forms.BooleanField(
+        required=False,
+        label=_("A reminder the day before events I am interested in"),
+        widget=DaisyCheckboxInput(),
+    )
+
+    NOTIFICATION_FIELDS = (
+        "notify_poll_results",
+        "notify_project_updates",
+        "notify_event_reminders",
+    )
+
     def __init__(self, user: User, *args: Any, **kwargs: Any) -> None:
         self.user = user
         super().__init__(*args, **kwargs)
@@ -54,6 +77,7 @@ class ProfileUpdateForm(forms.Form):
                 "postal_code": user.postal_code,
                 "phone_number": user.phone_number,
                 "newsletter_subscription": user.newsletter_subscription,
+                **{name: getattr(user, name) for name in self.NOTIFICATION_FIELDS},
             }
 
     def clean_email(self) -> str:
@@ -154,7 +178,9 @@ class ProfileEditView(LoginRequiredMixin, FormView):
         user.last_name = form.cleaned_data["last_name"]
         user.postal_code = form.cleaned_data["postal_code"]
         user.phone_number = form.cleaned_data.get("phone_number", "")
-        user.newsletter_subscription = form.cleaned_data.get("newsletter_subscription", False)
+        user.set_newsletter_subscription(form.cleaned_data.get("newsletter_subscription", False))
+        for name in ProfileUpdateForm.NOTIFICATION_FIELDS:
+            setattr(user, name, form.cleaned_data.get(name, False))
 
         if email_changed:
             user.is_verified = False

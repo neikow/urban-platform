@@ -24,7 +24,9 @@ from core.views.email_verify import (
     EmailVerifyResendView,
 )
 from core.views.docs import ProtectedDocsView
+from core.views.data_export import DataExportView
 from core.views.health import healthz
+from core.views.notifications import NotificationUnsubscribeView
 from core.views.password_reset import (
     PasswordResetRequestView,
     PasswordResetSentView,
@@ -85,6 +87,12 @@ urlpatterns = [
     path("auth/me/edit/", ProfileEditView.as_view(), name="profile_edit"),
     path("auth/me/password/", PasswordChangeView.as_view(), name="password_change"),
     path("auth/me/delete/", AccountDeleteView.as_view(), name="account_delete"),
+    path("auth/me/export/", DataExportView.as_view(), name="data_export"),
+    path(
+        "notifications/unsubscribe/<str:token>/",
+        NotificationUnsubscribeView.as_view(),
+        name="notification_unsubscribe",
+    ),
     path("api/projects/<int:project_id>/vote/", VoteView.as_view(), name="project_vote"),
     path(
         "api/projects/<int:project_id>/vote/results/",

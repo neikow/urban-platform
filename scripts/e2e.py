@@ -341,6 +341,7 @@ def populate_database() -> None:
     participation_projects = [
         ("Projet soumis au vote", "projet-vote", ParticipationMode.VOTING),
         ("Projet ouvert aux idées", "projet-idees", ParticipationMode.IDEAS),
+        ("Projet à clore", "projet-a-clore", ParticipationMode.VOTING),
     ]
     for title, slug, mode in participation_projects:
         if not ProjectPage.objects.filter(slug=slug).exists():
@@ -356,6 +357,14 @@ def populate_database() -> None:
             print(f"  ✓ Created project: {title}")
         else:
             print(f"  ✓ Project exists: {title}")
+
+    # The poll-closing test closes this one: reopen it for every run.
+    from core.models import NotificationDispatch
+    from publications.models import PollClosure
+
+    to_close = ProjectPage.objects.get(slug="projet-a-clore")
+    PollClosure.objects.filter(project=to_close).delete()
+    NotificationDispatch.objects.filter(key=f"project:{to_close.pk}").delete()
 
     from datetime import timedelta
 

@@ -17,6 +17,7 @@ Disallow: /auth/
 Disallow: /user/
 Disallow: /api/
 Disallow: /documents/
+Disallow: /notifications/
 Allow: /
 
 Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml

@@ -105,6 +105,11 @@ class ProjectPage(PublicationPage):
         FieldPanel("category"),
         FieldPanel("location", widget=GeoJSONMapWidget),
         InlinePanel("external_links", label=_("External Links")),
+        InlinePanel(
+            "updates",
+            label=_("Project timeline"),
+            help_text=_("News about the project, newest first on the page."),
+        ),
         FieldPanel("participation_mode"),
         FieldPanel("voting_end_date"),
         FieldPanel("show_toc"),
@@ -133,9 +138,18 @@ class ProjectPage(PublicationPage):
         return str(DEFAULT_VOTE_QUESTION)
 
     @property
+    def is_voting_closed_manually(self) -> bool:
+        from publications.models.poll_closure import PollClosure
+
+        try:
+            return self.poll_closure is not None
+        except PollClosure.DoesNotExist:
+            return False
+
+    @property
     def is_voting_open(self) -> bool:
-        """Check if voting is still open for this project."""
-        if not self.enable_voting:
+        """Voting is open until its end date, unless the poll was closed earlier."""
+        if not self.enable_voting or self.is_voting_closed_manually:
             return False
         if self.voting_end_date is None:
             return True
@@ -163,6 +177,12 @@ class ProjectPage(PublicationPage):
 
             context["final_vote_results"] = get_final_vote_results(self)
         return context
+
+    @property
+    def timeline(self) -> list[Any]:
+        return sorted(
+            self.updates.all(), key=lambda update: (update.date, update.pk or 0), reverse=True
+        )
 
     @property
     def table_of_contents(self) -> list[TableOfContentsItem]:
