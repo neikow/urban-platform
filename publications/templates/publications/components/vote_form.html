@@ -4,7 +4,7 @@
     <div
         id="vote-component"
         data-project-id="{{ page.id }}"
-        data-can-participate="{% if user.is_authenticated and user.is_verified %}true{% else %}false{% endif %}"
+        data-can-participate="{% if page.is_voting_open and user.is_authenticated and user.is_verified %}true{% else %}false{% endif %}"
         data-csrf-token="{{ csrf_token }}"
         data-msg-select-option="{% trans 'Please select an option' %}"
         data-msg-generic-error="{% trans 'An error occurred' %}"
@@ -67,7 +67,9 @@
                 </div>
             </div>
 
-            {% if not user.is_authenticated %}
+            {% if not page.is_voting_open %}
+                {% include "publications/components/vote_final_results.html" with results=final_vote_results %}
+            {% elif not user.is_authenticated %}
                 <div id="vote-login-prompt" class="text-center py-6 px-4 bg-base-100 rounded-lg">
                     <p class="text-base-content/70 mb-4 text-sm">{% trans "Log in to vote on this project" %}</p>
                     <button
@@ -276,26 +278,6 @@
 
                 <div id="vote-loading" class="hidden flex justify-center py-4">
                     <span class="loading loading-spinner loading-md"></span>
-                </div>
-            {% endif %}
-
-            {% if not page.is_voting_open %}
-                <div class="alert alert-warning mt-4">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="stroke-current shrink-0 h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                        />
-                    </svg>
-                    <span>{% trans "Voting is closed for this project" %}</span>
                 </div>
             {% endif %}
         </div>

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:20+0200\n"
+"POT-Creation-Date: 2026-10-06 16:23+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -48,7 +48,7 @@ msgid "Venue of the event"
 msgstr "Lieu de l'événement"
 
 #: publications/models/event.py:43
-#: publications/templates/publications/event_page.html:169
+#: publications/templates/publications/event_page.html:171
 msgid "Address"
 msgstr "Adresse"
 
@@ -113,7 +113,7 @@ msgstr "Texte affiché au survol (optionnel)"
 msgid "External Link"
 msgstr "Lien externe"
 
-#: publications/models/external_link.py:46 publications/models/project.py:93
+#: publications/models/external_link.py:46 publications/models/project.py:96
 msgid "External Links"
 msgstr "Liens externes"
 
@@ -121,21 +121,21 @@ msgstr "Liens externes"
 #: publications/templates/publications/admin/vote_stats_detail.html:126
 #: publications/templates/publications/admin/vote_stats_detail.html:227
 #: publications/templates/publications/admin/vote_stats_detail.html:283
-#: publications/templates/publications/components/vote_form.html:113
+#: publications/templates/publications/components/vote_form.html:115
 msgid "Unfavorable"
 msgstr "Défavorable"
 
 #: publications/models/form.py:11
 #: publications/templates/publications/admin/vote_stats_detail.html:207
 #: publications/templates/publications/admin/vote_stats_detail.html:276
-#: publications/templates/publications/components/vote_form.html:137
+#: publications/templates/publications/components/vote_form.html:139
 msgid "Rather Unfavorable"
 msgstr "Plutôt défavorable"
 
 #: publications/models/form.py:12
 #: publications/templates/publications/admin/vote_stats_detail.html:187
 #: publications/templates/publications/admin/vote_stats_detail.html:269
-#: publications/templates/publications/components/vote_form.html:162
+#: publications/templates/publications/components/vote_form.html:164
 msgid "Rather Favorable"
 msgstr "Plutôt favorable"
 
@@ -144,7 +144,7 @@ msgstr "Plutôt favorable"
 #: publications/templates/publications/admin/vote_stats_detail.html:111
 #: publications/templates/publications/admin/vote_stats_detail.html:167
 #: publications/templates/publications/admin/vote_stats_detail.html:262
-#: publications/templates/publications/components/vote_form.html:186
+#: publications/templates/publications/components/vote_form.html:188
 msgid "Favorable"
 msgstr "Favorable"
 
@@ -161,7 +161,7 @@ msgid "User"
 msgstr "Utilisateur"
 
 #: publications/models/form.py:44 publications/models/idea.py:31
-#: publications/models/project.py:51 publications/models/project.py:146
+#: publications/models/project.py:54 publications/models/project.py:157
 #: publications/templates/publications/admin/ideas_stats.html:36
 #: publications/templates/publications/admin/vote_stats.html:36
 #: publications/templates/publications/components/publication_preview.html:68
@@ -217,75 +217,75 @@ msgstr "Réponse d'idée"
 msgid "Idea Responses"
 msgstr "Réponses d'idées"
 
-#: publications/models/project.py:15
+#: publications/models/project.py:18
 msgid "What is your opinion on this project?"
 msgstr "Quel est votre avis sur ce projet ?"
 
-#: publications/models/project.py:19
+#: publications/models/project.py:22
 msgid "Urban Planning"
 msgstr "Urbanisme"
 
-#: publications/models/project.py:20
+#: publications/models/project.py:23
 msgid "Environment"
 msgstr "Environnement"
 
-#: publications/models/project.py:21
+#: publications/models/project.py:24
 msgid "Mobility"
 msgstr "Mobilité"
 
-#: publications/models/project.py:22
+#: publications/models/project.py:25
 msgid "Housing"
 msgstr "Logement"
 
-#: publications/models/project.py:23
+#: publications/models/project.py:26
 msgid "Culture"
 msgstr "Culture"
 
-#: publications/models/project.py:24
+#: publications/models/project.py:27
 msgid "Sport"
 msgstr "Sport"
 
-#: publications/models/project.py:25
+#: publications/models/project.py:28
 msgid "Education"
 msgstr "Éducation"
 
-#: publications/models/project.py:26
+#: publications/models/project.py:29
 msgid "Health"
 msgstr "Santé"
 
-#: publications/models/project.py:27
+#: publications/models/project.py:30
 msgid "Social"
 msgstr "Social"
 
-#: publications/models/project.py:28
+#: publications/models/project.py:31
 msgid "Economy"
 msgstr "Économie"
 
-#: publications/models/project.py:29
+#: publications/models/project.py:32
 msgid "Other"
 msgstr "Autre"
 
-#: publications/models/project.py:40
+#: publications/models/project.py:43
 msgid "No participation"
 msgstr "Aucune participation"
 
-#: publications/models/project.py:41
+#: publications/models/project.py:44
 msgid "Voting"
 msgstr "Vote"
 
-#: publications/models/project.py:42
+#: publications/models/project.py:45
 msgid "Idea collection"
 msgstr "Collecte d'idées"
 
-#: publications/models/project.py:56
+#: publications/models/project.py:59
 msgid "Category"
 msgstr "Catégorie"
 
-#: publications/models/project.py:63
+#: publications/models/project.py:66
 msgid "Participation mode"
 msgstr "Mode de participation"
 
-#: publications/models/project.py:68
+#: publications/models/project.py:71
 msgid ""
 "Voting lets residents give an opinion; idea collection lets them propose "
 "ideas on a project still in its early stages. The two are mutually exclusive"
@@ -296,23 +296,23 @@ msgstr ""
 "sont mutuellement exclusifs — le changement conserve les réponses déjà "
 "collectées."
 
-#: publications/models/project.py:75
+#: publications/models/project.py:78
 msgid "Voting End Date"
 msgstr "Date de fin du vote"
 
-#: publications/models/project.py:78
+#: publications/models/project.py:81
 msgid "Leave empty for no end date (only applies to voting)"
 msgstr "Laisser vide pour pas de date de fin (s'applique uniquement au vote)"
 
-#: publications/models/project.py:82
+#: publications/models/project.py:85
 msgid "Show table of contents"
 msgstr "Afficher la table des matières"
 
-#: publications/models/project.py:84
+#: publications/models/project.py:87
 msgid "Display the table of contents in the sidebar"
 msgstr "Afficher la table des matières dans la barre latérale"
 
-#: publications/models/project.py:147
+#: publications/models/project.py:158
 #: publications/templates/publications/publication_index_page.html:43
 msgid "Projects"
 msgstr "Projets"
@@ -635,6 +635,21 @@ msgstr ""
 msgid "Resend the verification link"
 msgstr "Renvoyer le lien de vérification"
 
+#: publications/templates/publications/components/vote_final_results.html:5
+msgid "Voting is closed: final results"
+msgstr "Le vote est clos : résultats définitifs"
+
+#: publications/templates/publications/components/vote_final_results.html:9
+#, python-format
+msgid "%(total)s vote in total"
+msgid_plural "%(total)s votes in total"
+msgstr[0] "%(total)s vote au total"
+msgstr[1] "%(total)s votes au total"
+
+#: publications/templates/publications/components/vote_final_results.html:32
+msgid "No votes were cast on this project."
+msgstr "Aucun vote n'a été exprimé sur ce projet."
+
 #: publications/templates/publications/components/vote_form.html:9
 msgid "Please select an option"
 msgstr "Veuillez sélectionner une option"
@@ -677,88 +692,83 @@ msgstr ""
 "Tous les votes sont analysés et pris en compte dans les décisions finales du"
 " projet."
 
-#: publications/templates/publications/components/vote_form.html:72
+#: publications/templates/publications/components/vote_form.html:74
 msgid "Log in to vote on this project"
 msgstr "Connectez-vous pour voter sur ce projet"
 
-#: publications/templates/publications/components/vote_form.html:78
+#: publications/templates/publications/components/vote_form.html:80
 msgid "Log in to vote"
 msgstr "Se connecter pour voter"
 
-#: publications/templates/publications/components/vote_form.html:90
+#: publications/templates/publications/components/vote_form.html:92
 msgid "Vote choice"
 msgstr "Choix de vote"
 
-#: publications/templates/publications/components/vote_form.html:193
+#: publications/templates/publications/components/vote_form.html:195
 msgid "Comment (optional)"
 msgstr "Commentaire (optionnel)"
 
-#: publications/templates/publications/components/vote_form.html:200
+#: publications/templates/publications/components/vote_form.html:202
 msgid "Explain your vote..."
 msgstr "Expliquez votre vote..."
 
-#: publications/templates/publications/components/vote_form.html:203
+#: publications/templates/publications/components/vote_form.html:205
 msgid "Only you and administrators can see your comment"
 msgstr "Seuls vous et les administrateurs peuvent voir votre commentaire"
 
-#: publications/templates/publications/components/vote_form.html:235
+#: publications/templates/publications/components/vote_form.html:237
 msgid "Submit my vote anonymously (my name will not be linked to this vote)"
 msgstr ""
 "Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce "
 "vote)"
 
-#: publications/templates/publications/components/vote_form.html:246
+#: publications/templates/publications/components/vote_form.html:248
 msgid "Submit my vote"
 msgstr "Soumettre mon vote"
 
-#: publications/templates/publications/components/vote_form.html:257
+#: publications/templates/publications/components/vote_form.html:259
 msgid "Your vote:"
 msgstr "Votre vote :"
 
-#: publications/templates/publications/components/vote_form.html:261
+#: publications/templates/publications/components/vote_form.html:263
 msgid "Your comment:"
 msgstr "Votre commentaire :"
 
-#: publications/templates/publications/components/vote_form.html:269
+#: publications/templates/publications/components/vote_form.html:271
 msgid "Change my vote"
 msgstr "Modifier mon vote"
 
-#: publications/templates/publications/components/vote_form.html:272
+#: publications/templates/publications/components/vote_form.html:274
 msgid "Remove my vote"
 msgstr "Retirer mon vote"
-
-#: publications/templates/publications/components/vote_form.html:298
-#: publications/views/vote.py:27 publications/views/vote.py:96
-msgid "Voting is closed for this project"
-msgstr "Le vote est fermé pour ce projet"
 
 #: publications/templates/publications/event_page.html:47
 msgid "Date"
 msgstr "Date"
 
-#: publications/templates/publications/event_page.html:107
+#: publications/templates/publications/event_page.html:109
 msgid "Online"
 msgstr "En ligne"
 
-#: publications/templates/publications/event_page.html:108
+#: publications/templates/publications/event_page.html:110
 msgid "Yes"
 msgstr "Oui"
 
-#: publications/templates/publications/event_page.html:114
+#: publications/templates/publications/event_page.html:116
 msgid "Join"
 msgstr "Rejoindre"
 
-#: publications/templates/publications/event_page.html:139
+#: publications/templates/publications/event_page.html:141
 msgid "Max Participants"
 msgstr "Participants max"
 
-#: publications/templates/publications/event_page.html:154
+#: publications/templates/publications/event_page.html:156
 #: publications/templates/publications/project_page.html:52
 #, python-format
 msgid "Preview image: %(title)s"
 msgstr "Image d'aperçu: %(title)s"
 
-#: publications/templates/publications/event_page.html:178
+#: publications/templates/publications/event_page.html:180
 msgid "View on a map"
 msgstr "Voir sur une carte"
 
@@ -867,6 +877,10 @@ msgstr "Trop de requêtes. Réessayez dans une minute."
 #: publications/views/vote.py:130
 msgid "This project does not have voting enabled"
 msgstr "Ce projet n'a pas de vote activé"
+
+#: publications/views/vote.py:27 publications/views/vote.py:96
+msgid "Voting is closed for this project"
+msgstr "Le vote est fermé pour ce projet"
 
 #: publications/views/vote.py:45
 msgid "Invalid vote choice"

@@ -1,5 +1,8 @@
 from datetime import datetime
 from functools import cached_property
+from typing import Any
+
+from django.http import HttpRequest
 
 from django.db import models
 from django.utils import timezone
@@ -137,6 +140,14 @@ class ProjectPage(PublicationPage):
     def has_external_links(self) -> bool:
         """Check if this project has any external links."""
         return self.external_links.exists()
+
+    def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context(request, *args, **kwargs)
+        if self.enable_voting and not self.is_voting_open:
+            from publications.services import get_final_vote_results
+
+            context["final_vote_results"] = get_final_vote_results(self)
+        return context
 
     @property
     def table_of_contents(self) -> list[TableOfContentsItem]:
