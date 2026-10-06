@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     "home",
     "about",
     "legal",
-    "search",
     "pedagogy",
     "publications",
     "wagtail.contrib.forms",

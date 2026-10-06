@@ -32,6 +32,5 @@ Disallow: /auth/
 Disallow: /user/
 Disallow: /api/
 Disallow: /documents/
-Disallow: /search/
 
 Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml

@@ -54,7 +54,7 @@ jobs:
 
       - name: Run Bandit Security Scan
         if: matrix.check == 'security'
-        run: uv run bandit -c pyproject.toml -r core home about legal pedagogy publications search urban_platform scripts
+        run: uv run bandit -c pyproject.toml -r core home about legal pedagogy publications urban_platform scripts
 
   test:
     name: Run Tests

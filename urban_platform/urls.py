@@ -10,7 +10,6 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from core.sitemaps import SITEMAPS
 
-from search import views as search_views
 from legal import views as legal_views
 from core.views.register import RegisterFormView
 from core.views.login import LoginView
@@ -36,7 +35,6 @@ urlpatterns = [
     path("admin/docs/<path:path>", ProtectedDocsView.as_view(), name="docs"),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
-    path("search/", search_views.search, name="search"),
     path(
         "sitemap.xml", sitemap, {"sitemaps": SITEMAPS}, name="django.contrib.sitemaps.views.sitemap"
     ),
