@@ -2,6 +2,7 @@ from datetime import datetime, time
 from typing import Any
 
 from django.db import models
+from django.http import HttpRequest
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
@@ -75,6 +76,14 @@ class EventPage(PublicationPage):
         FieldPanel("online_link"),
         FieldPanel("max_participants"),
     ]
+
+    def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context(request, *args, **kwargs)
+        context["interest_count"] = self.interests.count()
+        context["user_interested"] = (
+            request.user.is_authenticated and self.interests.filter(user=request.user).exists()
+        )
+        return context
 
     @property
     def is_past(self) -> bool:

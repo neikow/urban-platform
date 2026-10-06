@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "Email notifications" %}
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto px-6 py-16 max-w-xl">
+        <p class="section-label mb-2">{% trans "Email notifications" %}</p>
+        {% if invalid %}
+            <h1 class="font-display font-black uppercase text-display-sm mb-4">{% trans "Invalid link" %}</h1>
+            <p>
+                {% trans "This unsubscribe link is not valid. You can manage your notifications from your profile." %}
+            </p>
+        {% elif done %}
+            <h1 class="font-display font-black uppercase text-display-sm mb-4">{% trans "You are unsubscribed" %}</h1>
+            <p>
+                {% blocktrans trimmed with label=kind.label %}
+                    You will no longer receive emails about {{ label }}.
+                {% endblocktrans %}
+            </p>
+        {% else %}
+            <h1 class="font-display font-black uppercase text-display-sm mb-4">{% trans "Unsubscribe" %}</h1>
+            <p class="mb-6">
+                {% blocktrans trimmed with label=kind.label %}
+                    Stop receiving emails about {{ label }}?
+                {% endblocktrans %}
+            </p>
+            <form method="post">
+                <button type="submit" class="btn btn-primary">{% trans "Unsubscribe" %}</button>
+            </form>
+        {% endif %}
+        <p class="mt-8 text-sm">
+            <a
+                class="link link-primary"
+                href="{% url 'profile_edit' %}#notifications"
+            >{% trans "Manage all my notifications" %}</a>
+        </p>
+    </div>
+{% endblock %}

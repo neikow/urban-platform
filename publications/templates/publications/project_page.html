@@ -69,6 +69,8 @@
             <div class="flex-1 page-content prose prose-lg max-w-none numbered-headings min-w-0">
                 {% include_block page.content %}
 
+                {% include "publications/components/project_timeline.html" %}
+
                 {% if page.enable_voting or page.enable_ideas %}
                     <div class="not-prose my-16">
                         <div class="flex items-center gap-4 mb-8">

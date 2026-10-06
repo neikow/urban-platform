@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:34+0200\n"
+"POT-Creation-Date: 2026-10-06 17:00+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -16,6 +16,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: publications/event_reminders.py:33
+#, python-format
+msgid "Tomorrow: %(title)s"
+msgstr "Demain : %(title)s"
+
 #: publications/geo.py:51
 msgid "The location must be a point or a polygon."
 msgstr "La localisation doit être un point ou un polygone."
@@ -24,75 +29,95 @@ msgstr "La localisation doit être un point ou un polygone."
 msgid "The location coordinates are invalid."
 msgstr "Les coordonnées de la localisation sont invalides."
 
-#: publications/models/event.py:19 publications/models/event.py:114
+#: publications/models/event.py:20 publications/models/event.py:123
+#: publications/models/event_interest.py:23
 #: publications/templates/publications/components/publication_preview.html:51
 #: publications/templates/publications/event_page.html:15
+#: publications/views/feeds.py:79
 msgid "Event"
 msgstr "Événement"
 
-#: publications/models/event.py:24
+#: publications/models/event.py:25
 msgid "Event Date"
 msgstr "Date de l'événement"
 
-#: publications/models/event.py:25
+#: publications/models/event.py:26
 msgid "Start date and time of the event"
 msgstr "Date et heure de début de l'événement"
 
-#: publications/models/event.py:29
+#: publications/models/event.py:30
 msgid "End Date"
 msgstr "Date de fin"
 
-#: publications/models/event.py:32
+#: publications/models/event.py:33
 msgid "End date and time of the event (optional)"
 msgstr "Date et heure de fin de l'événement (optionnel)"
 
-#: publications/models/event.py:36 publications/models/project.py:87
+#: publications/models/event.py:37 publications/models/project.py:87
 #: publications/templates/publications/components/project_location.html:5
-#: publications/templates/publications/event_page.html:80
+#: publications/templates/publications/event_page.html:82
 msgid "Location"
 msgstr "Lieu"
 
-#: publications/models/event.py:39
+#: publications/models/event.py:40
 msgid "Venue of the event"
 msgstr "Lieu de l'événement"
 
-#: publications/models/event.py:43
-#: publications/templates/publications/event_page.html:171
+#: publications/models/event.py:44
+#: publications/templates/publications/event_page.html:173
 msgid "Address"
 msgstr "Adresse"
 
-#: publications/models/event.py:45
+#: publications/models/event.py:46
 msgid "Full address of the event"
 msgstr "Adresse complète de l'événement"
 
-#: publications/models/event.py:49
+#: publications/models/event.py:50
 msgid "Online Event"
 msgstr "Événement en ligne"
 
-#: publications/models/event.py:51
+#: publications/models/event.py:52
 msgid "Check if the event takes place online"
 msgstr "Cochez si l'événement est en ligne"
 
-#: publications/models/event.py:55
+#: publications/models/event.py:56
 msgid "Online Link"
 msgstr "Lien en ligne"
 
-#: publications/models/event.py:57
+#: publications/models/event.py:58
 msgid "Link to the online event (if applicable)"
 msgstr "Lien vers l'événement en ligne (si applicable)"
 
-#: publications/models/event.py:62
+#: publications/models/event.py:63
 msgid "Maximum Participants"
 msgstr "Nombre maximum de participants"
 
-#: publications/models/event.py:65
+#: publications/models/event.py:66
 msgid "Maximum number of participants (leave empty if unlimited)"
 msgstr "Nombre maximum de participants (laisser vide si illimité)"
 
-#: publications/models/event.py:115
+#: publications/models/event.py:124
 #: publications/templates/publications/publication_index_page.html:59
 msgid "Events"
 msgstr "Événements"
+
+#: publications/models/event_interest.py:17 publications/models/form.py:38
+#: publications/models/idea.py:25
+msgid "User"
+msgstr "Utilisateur"
+
+#: publications/models/event_interest.py:25 publications/models/form.py:31
+#: publications/models/idea.py:18
+msgid "Created At"
+msgstr "Créé le"
+
+#: publications/models/event_interest.py:28
+msgid "Event interest"
+msgstr "Intérêt pour un événement"
+
+#: publications/models/event_interest.py:29
+msgid "Event interests"
+msgstr "Intérêts pour des événements"
 
 #: publications/models/external_link.py:20
 msgid "Button Text"
@@ -157,24 +182,18 @@ msgstr "Plutôt favorable"
 msgid "Favorable"
 msgstr "Favorable"
 
-#: publications/models/form.py:31 publications/models/idea.py:18
-msgid "Created At"
-msgstr "Créé le"
-
 #: publications/models/form.py:32 publications/models/idea.py:19
 msgid "Updated At"
 msgstr "Mis à jour le"
 
-#: publications/models/form.py:38 publications/models/idea.py:25
-msgid "User"
-msgstr "Utilisateur"
-
 #: publications/models/form.py:44 publications/models/idea.py:31
-#: publications/models/project.py:56 publications/models/project.py:172
+#: publications/models/poll_closure.py:22 publications/models/project.py:56
+#: publications/models/project.py:192
 #: publications/templates/publications/admin/ideas_stats.html:36
 #: publications/templates/publications/admin/vote_stats.html:36
 #: publications/templates/publications/components/publication_preview.html:68
 #: publications/templates/publications/project_page.html:21
+#: publications/views/feeds.py:79
 msgid "Project"
 msgstr "Projet"
 
@@ -225,6 +244,34 @@ msgstr "Réponse d'idée"
 #: publications/models/idea.py:45
 msgid "Idea Responses"
 msgstr "Réponses d'idées"
+
+#: publications/models/poll_closure.py:7
+msgid "End date reached"
+msgstr "Date de fin atteinte"
+
+#: publications/models/poll_closure.py:8
+msgid "Closed by an editor"
+msgstr "Clos par un éditeur"
+
+#: publications/models/poll_closure.py:24
+msgid "Closed at"
+msgstr "Clos le"
+
+#: publications/models/poll_closure.py:25
+msgid "Reason"
+msgstr "Motif"
+
+#: publications/models/poll_closure.py:32
+msgid "Closed by"
+msgstr "Clos par"
+
+#: publications/models/poll_closure.py:36
+msgid "Poll closure"
+msgstr "Clôture de vote"
+
+#: publications/models/poll_closure.py:37
+msgid "Poll closures"
+msgstr "Clôtures de vote"
 
 #: publications/models/project.py:20
 msgid "What is your opinion on this project?"
@@ -325,10 +372,55 @@ msgstr "Afficher la table des matières"
 msgid "Display the table of contents in the sidebar"
 msgstr "Afficher la table des matières dans la barre latérale"
 
-#: publications/models/project.py:173
+#: publications/models/project.py:110
+#: publications/templates/publications/components/project_timeline.html:8
+msgid "Project timeline"
+msgstr "Suivi du projet"
+
+#: publications/models/project.py:111
+msgid "News about the project, newest first on the page."
+msgstr ""
+"Actualités du projet, de la plus récente à la plus ancienne sur la page."
+
+#: publications/models/project.py:193
 #: publications/templates/publications/publication_index_page.html:47
 msgid "Projects"
 msgstr "Projets"
+
+#: publications/models/project_update.py:22
+#: publications/templates/publications/event_page.html:49
+msgid "Date"
+msgstr "Date"
+
+#: publications/models/project_update.py:23
+msgid "Title"
+msgstr "Titre"
+
+#: publications/models/project_update.py:24
+msgid "Text"
+msgstr "Texte"
+
+#: publications/models/project_update.py:26
+msgid "Email participants"
+msgstr "Prévenir les participants par email"
+
+#: publications/models/project_update.py:29
+msgid ""
+"Sent once, when the page is published, to people who voted or shared an idea"
+" and asked for project updates. Untick for past events you are adding to the"
+" timeline."
+msgstr ""
+"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté"
+" ou proposé une idée et demandé à suivre les projets. Décochez pour les "
+"étapes passées ajoutées à l'historique."
+
+#: publications/models/project_update.py:43
+msgid "Project update"
+msgstr "Actualité du projet"
+
+#: publications/models/project_update.py:44
+msgid "Project updates"
+msgstr "Actualités des projets"
 
 #: publications/models/publication.py:17
 msgid "Publication"
@@ -384,11 +476,48 @@ msgstr "Contenu de la page"
 msgid "Additional content for the publications page."
 msgstr "Contenu supplémentaire pour la page des publications."
 
+#: publications/polls.py:73
+#, python-format
+msgid "Poll results: %(title)s"
+msgstr "Résultats du vote : %(title)s"
+
+#: publications/project_updates.py:42
+#, python-format
+msgid "%(project)s: %(title)s"
+msgstr "%(project)s : %(title)s"
+
+#: publications/templates/publications/admin/close_poll_confirm.html:5
+#: publications/templates/publications/admin/close_poll_confirm.html:8
+msgid "Close the poll"
+msgstr "Clore le vote"
+
+#: publications/templates/publications/admin/close_poll_confirm.html:12
+msgid ""
+"Voting stops immediately, everyone sees the final results on the project "
+"page, and voters who opted in receive them by email."
+msgstr ""
+"Le vote s'arrête immédiatement, les résultats définitifs s'affichent pour "
+"tous sur la page du projet, et les votants qui l'ont demandé les reçoivent "
+"par email."
+
+#: publications/templates/publications/admin/close_poll_confirm.html:14
+msgid "This cannot be undone."
+msgstr "Cette action est irréversible."
+
+#: publications/templates/publications/admin/close_poll_confirm.html:17
+#: publications/wagtail_hooks.py:75
+msgid "Close the poll and send the results"
+msgstr "Clore le vote et envoyer les résultats"
+
+#: publications/templates/publications/admin/close_poll_confirm.html:21
+msgid "Cancel"
+msgstr "Annuler"
+
 #: publications/templates/publications/admin/ideas_stats.html:4
 #: publications/templates/publications/admin/ideas_stats.html:7
 #: publications/templates/publications/admin/ideas_stats_detail.html:4
 #: publications/views/idea_stats.py:35 publications/views/idea_stats.py:71
-#: publications/wagtail_hooks.py:47
+#: publications/wagtail_hooks.py:49
 msgid "Idea Collection"
 msgstr "Collecte d'idées"
 
@@ -453,7 +582,7 @@ msgstr "Aucune idée pour le moment"
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
 #: publications/views/vote_stats.py:48 publications/views/vote_stats.py:103
-#: publications/wagtail_hooks.py:25
+#: publications/wagtail_hooks.py:27
 msgid "Vote Statistics"
 msgstr "Statistiques des votes"
 
@@ -530,15 +659,55 @@ msgstr "Commentaires"
 msgid "No votes yet"
 msgstr "Aucun vote pour l'instant"
 
-#: publications/templates/publications/components/ideas_form.html:9
-#: publications/views/idea.py:37
-msgid "Please describe your idea"
-msgstr "Veuillez décrire votre idée"
+#: publications/templates/publications/components/event_interest.html:8
+#: publications/templates/publications/components/event_interest.html:32
+msgid "Be the first to show interest"
+msgstr "Soyez la première personne intéressée"
 
+#: publications/templates/publications/components/event_interest.html:9
+#, python-brace-format
+msgid "{count} person is interested"
+msgstr "{count} personne intéressée"
+
+#: publications/templates/publications/components/event_interest.html:10
+#, python-brace-format
+msgid "{count} people are interested"
+msgstr "{count} personnes intéressées"
+
+#: publications/templates/publications/components/event_interest.html:11
 #: publications/templates/publications/components/ideas_form.html:10
 #: publications/templates/publications/components/vote_form.html:10
 msgid "An error occurred"
 msgstr "Une erreur est survenue"
+
+#: publications/templates/publications/components/event_interest.html:21
+#: publications/templates/publications/components/event_interest.html:26
+msgid "I'm interested"
+msgstr "Ça m'intéresse"
+
+#: publications/templates/publications/components/event_interest.html:22
+msgid "Interested ✓"
+msgstr "Intéressé·e ✓"
+
+#: publications/templates/publications/components/event_interest.html:34
+#, python-format
+msgid "%(count)s person is interested"
+msgid_plural "%(count)s people are interested"
+msgstr[0] "%(count)s personne intéressée"
+msgstr[1] "%(count)s personnes intéressées"
+
+#: publications/templates/publications/components/event_interest.html:57
+msgid "Add to my calendar"
+msgstr "Ajouter à mon agenda"
+
+#: publications/templates/publications/components/event_interest.html:61
+msgid "Get a reminder by email the day before"
+msgstr "Recevoir un rappel par email la veille"
+
+#: publications/templates/publications/components/ideas_form.html:9
+#: publications/views/idea.py:37
+msgid "Please describe your idea"
+msgstr "Veuillez décrire votre idée"
 
 #: publications/templates/publications/components/ideas_form.html:11
 #: publications/templates/publications/components/vote_form.html:11
@@ -625,6 +794,10 @@ msgstr "Retirer mon idée"
 msgid "Map showing where “%(title)s” takes place"
 msgstr "Carte du lieu du projet « %(title)s »"
 
+#: publications/templates/publications/components/project_timeline.html:33
+msgid "Get the project news by email"
+msgstr "Recevoir les actualités du projet par email"
+
 #: publications/templates/publications/components/projects_map.html:6
 msgid "Around you"
 msgstr "Autour de vous"
@@ -661,14 +834,14 @@ msgstr "Participation ouverte"
 msgid "See the project"
 msgstr "Voir le projet"
 
-#: publications/templates/publications/components/projects_map.html:44
+#: publications/templates/publications/components/projects_map.html:45
 #, python-format
 msgid "%(total)s project on the map"
 msgid_plural "%(total)s projects on the map"
 msgstr[0] "%(total)s projet sur la carte"
 msgstr[1] "%(total)s projets sur la carte"
 
-#: publications/templates/publications/components/projects_map.html:59
+#: publications/templates/publications/components/projects_map.html:63
 msgid "No project has been placed on the map yet."
 msgstr "Aucun projet n'est encore placé sur la carte."
 
@@ -791,49 +964,49 @@ msgstr ""
 msgid "Submit my vote"
 msgstr "Soumettre mon vote"
 
-#: publications/templates/publications/components/vote_form.html:259
+#: publications/templates/publications/components/vote_form.html:260
+msgid "Get the final results by email when the poll closes"
+msgstr "Recevoir les résultats par email à la clôture du vote"
+
+#: publications/templates/publications/components/vote_form.html:267
 msgid "Your vote:"
 msgstr "Votre vote :"
 
-#: publications/templates/publications/components/vote_form.html:263
+#: publications/templates/publications/components/vote_form.html:271
 msgid "Your comment:"
 msgstr "Votre commentaire :"
 
-#: publications/templates/publications/components/vote_form.html:271
+#: publications/templates/publications/components/vote_form.html:279
 msgid "Change my vote"
 msgstr "Modifier mon vote"
 
-#: publications/templates/publications/components/vote_form.html:274
+#: publications/templates/publications/components/vote_form.html:282
 msgid "Remove my vote"
 msgstr "Retirer mon vote"
 
-#: publications/templates/publications/event_page.html:47
-msgid "Date"
-msgstr "Date"
-
-#: publications/templates/publications/event_page.html:109
+#: publications/templates/publications/event_page.html:111
 msgid "Online"
 msgstr "En ligne"
 
-#: publications/templates/publications/event_page.html:110
+#: publications/templates/publications/event_page.html:112
 msgid "Yes"
 msgstr "Oui"
 
-#: publications/templates/publications/event_page.html:116
+#: publications/templates/publications/event_page.html:118
 msgid "Join"
 msgstr "Rejoindre"
 
-#: publications/templates/publications/event_page.html:141
+#: publications/templates/publications/event_page.html:143
 msgid "Max Participants"
 msgstr "Participants max"
 
-#: publications/templates/publications/event_page.html:156
+#: publications/templates/publications/event_page.html:158
 #: publications/templates/publications/project_page.html:58
 #, python-format
 msgid "Preview image: %(title)s"
 msgstr "Image d'aperçu: %(title)s"
 
-#: publications/templates/publications/event_page.html:180
+#: publications/templates/publications/event_page.html:182
 msgid "View on a map"
 msgstr "Voir sur une carte"
 
@@ -845,19 +1018,19 @@ msgstr "Vote ouvert"
 msgid "Ideas open"
 msgstr "Idées ouvertes"
 
-#: publications/templates/publications/project_page.html:76
+#: publications/templates/publications/project_page.html:78
 msgid "Citizen Participation"
 msgstr "Participation citoyenne"
 
-#: publications/templates/publications/project_page.html:110
+#: publications/templates/publications/project_page.html:112
 msgid "Give your opinion"
 msgstr "Donner votre avis"
 
-#: publications/templates/publications/project_page.html:132
+#: publications/templates/publications/project_page.html:134
 msgid "Share your idea"
 msgstr "Partager votre idée"
 
-#: publications/templates/publications/project_page.html:141
+#: publications/templates/publications/project_page.html:143
 msgid "Table of Contents"
 msgstr "Table des matières"
 
@@ -885,6 +1058,46 @@ msgstr "Afficher les événements passés"
 #: publications/templates/publications/publication_index_page.html:124
 msgid "No publications found"
 msgstr "Aucune publication trouvée"
+
+#: publications/templates/publications/publication_index_page.html:133
+msgid "Follow the news:"
+msgstr "Suivre l'actualité :"
+
+#: publications/templates/publications/publication_index_page.html:134
+msgid "RSS feed"
+msgstr "Flux RSS"
+
+#: publications/templates/publications/publication_index_page.html:137
+msgid "Subscribe to the events calendar"
+msgstr "S'abonner à l'agenda des événements"
+
+#: publications/templates/publications/publication_index_page.html:139
+msgid "iCal link"
+msgstr "Lien iCal"
+
+#: publications/views/event_interest.py:39
+#: publications/views/event_interest.py:45
+#: publications/views/event_interest.py:54
+msgid "Event not found"
+msgstr "Événement introuvable"
+
+#: publications/views/event_interest.py:47
+msgid "This event is over."
+msgstr "Cet événement est terminé."
+
+#: publications/views/feeds.py:31
+#, python-format
+msgid "%(site)s — events"
+msgstr "%(site)s — événements"
+
+#: publications/views/feeds.py:49
+#, python-format
+msgid "%(site)s — news"
+msgstr "%(site)s — actualités"
+
+#: publications/views/feeds.py:52
+msgid "Projects and events in the 7th arrondissement of Marseille."
+msgstr "Projets et événements du 7e arrondissement de Marseille."
 
 #: publications/views/idea.py:16 publications/views/idea.py:72
 #: publications/views/idea.py:108 publications/views/vote.py:17
@@ -922,21 +1135,34 @@ msgstr "Aucune idée à supprimer"
 msgid "Idea removed successfully"
 msgstr "Idée supprimée avec succès"
 
-#: publications/views/mixins.py:33
+#: publications/views/mixins.py:35 publications/views/mixins.py:39
 msgid "Authentication required"
 msgstr "Authentification requise"
 
-#: publications/views/mixins.py:47
+#: publications/views/mixins.py:51
 msgid "Please verify your email address before taking part."
 msgstr "Veuillez vérifier votre adresse email avant de participer."
 
-#: publications/views/mixins.py:57
+#: publications/views/mixins.py:61
 msgid "Please accept the code of conduct before taking part."
 msgstr "Veuillez accepter la charte de bonne conduite avant de participer."
 
-#: publications/views/mixins.py:71
+#: publications/views/mixins.py:75
 msgid "Too many requests. Please try again in a minute."
 msgstr "Trop de requêtes. Réessayez dans une minute."
+
+#: publications/views/poll_close.py:36
+#, python-format
+msgid ""
+"The poll on “%(title)s” is closed. Results are being sent to voters who "
+"opted in."
+msgstr ""
+"Le vote sur « %(title)s » est clos. Les résultats sont envoyés aux votants "
+"qui l'ont demandé."
+
+#: publications/views/poll_close.py:41
+msgid "This poll was already closed."
+msgstr "Ce vote était déjà clos."
 
 #: publications/views/vote.py:21 publications/views/vote.py:90
 #: publications/views/vote.py:130
