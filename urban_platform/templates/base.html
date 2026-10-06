@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar i18n structured_data django_settings %}
+{% load static wagtailcore_tags wagtailuserbar i18n structured_data social_meta django_settings %}
 {% get_current_language as LANGUAGE_CODE %}
 
 {% get_setting "ANALYTICS_SCRIPT_TAG" as analytics_script_tag %}
@@ -24,9 +24,9 @@
         {% if analytics_script_tag %}
             {{ analytics_script_tag|safe }}
         {% endif %}
-        {% if page.search_description %}
-            <meta name="description" content="{{ page.search_description }}">
-        {% endif %}
+        {% block social_meta %}
+            {% social_meta %}
+        {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% if request.in_preview_panel %}
             <base target="_blank">
