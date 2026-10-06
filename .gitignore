@@ -14,3 +14,4 @@ urban_platform/static/dist/
 # MkDocs
 docs/site/
 test-results/
+publications/static/publications/geo/*.pmtiles

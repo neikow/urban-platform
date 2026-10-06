@@ -37,20 +37,21 @@ def test_admin_places_project_on_map(
 
 
 @pytest.mark.e2e
-def test_map_tiles_are_requested_with_a_referer(page: Page, base_url: str):
-    """tile.openstreetmap.org blocks browser requests without a Referer (403)."""
-    referers = []
+def test_map_tiles_are_self_hosted(page: Page, base_url: str):
+    """The basemap is read from our own PMTiles archive, with range requests."""
+    tile_requests = []
     page.on(
         "request",
         lambda request: (
-            referers.append(request.headers.get("referer"))
-            if "tile.openstreetmap.org" in request.url
-            else None
+            tile_requests.append(request) if request.resource_type in ("fetch", "image") else None
         ),
     )
 
     page.goto(base_url + "/actualites/")
     page.locator("#projects-map .leaflet-tile-loaded").first.wait_for()
 
-    assert referers
-    assert all(referer == base_url + "/" for referer in referers)
+    assert tile_requests
+    assert all(request.url.startswith(base_url) for request in tile_requests)
+    archive = [r for r in tile_requests if r.url.endswith(".pmtiles")]
+    assert archive
+    assert all(r.headers.get("range", "").startswith("bytes=") for r in archive)
