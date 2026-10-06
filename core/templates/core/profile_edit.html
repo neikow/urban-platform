@@ -203,6 +203,13 @@
                         <span>La suppression de votre compte est <strong>irréversible</strong> et entraînera la perte
                             définitive de toutes vos données.</span>
                     </div>
+                    <p class="text-sm mb-4">
+                        <a
+                            class="link link-primary"
+                            href="{% url 'data_export' %}"
+                            download
+                        >{% trans "Download a copy of my data first" %}</a>
+                    </p>
                     <a href="{% url 'account_delete' %}" class="btn btn-error border-none font-semibold">
                         <svg
                             class="w-4 h-4"
