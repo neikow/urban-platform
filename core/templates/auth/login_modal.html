@@ -29,7 +29,13 @@
         <h3 class="font-display font-black uppercase text-2xl mb-1">{% trans "Log in" %}</h3>
         <p class="text-sm text-base-content/50 mb-5">{% trans "Welcome back" %}</p>
 
-        <form id="login-form" method="post" action="{% url 'login' %}" class="space-y-4">
+        <form
+            id="login-form"
+            method="post"
+            action="{% url 'login' %}"
+            class="space-y-4"
+            data-msg-error="{% trans 'An error occurred. Please check your details and try again.' %}"
+        >
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
 
@@ -58,7 +64,7 @@
                 <a
                     href="{% url 'password_reset_request' %}"
                     class="text-sm text-primary hover:underline"
-                    onclick="login_modal.close()"
+                    data-dialog-close
                 >
                     {% trans "Forgot password?" %}
                 </a>
@@ -68,7 +74,7 @@
                 <button type="submit" class="btn btn-primary border-none font-semibold flex-1">
                     {% trans "Log in" %}
                 </button>
-                <button type="button" onclick="login_modal.close()" class="btn btn-ghost">{% trans "Cancel" %}</button>
+                <button type="button" data-dialog-close class="btn btn-ghost">{% trans "Cancel" %}</button>
             </div>
         </form>
 
@@ -79,7 +85,7 @@
             <a
                 href="{% url 'register' %}?next={{ request.path|urlencode }}"
                 class="text-primary font-semibold hover:underline"
-                onclick="login_modal.close()"
+                data-dialog-close
             >
                 {% trans "Sign up" %}
             </a>
@@ -89,5 +95,3 @@
         <button>close</button>
     </form>
 </dialog>
-
-<script src="{% static 'js/login_modal.js' %}"></script>

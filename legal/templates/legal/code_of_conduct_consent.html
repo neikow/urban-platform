@@ -41,7 +41,7 @@
                     class="checkbox checkbox-primary checkbox-sm mt-0.5 sm:mt-0"
                     disabled
                 >
-                <span id="consent-label-read" class="text-sm font-medium" style="display: none">
+                <span id="consent-label-read" class="text-sm font-medium hidden">
                     {% trans "I have read and accept the code of conduct" %}
                 </span>
                 <span id="consent-label-unread" class="text-sm text-base-content/60">
@@ -61,5 +61,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script type="text/javascript" src="{% static 'js/code_of_conduct_page.js' %}"></script>
+    <script type="module" src="{% static 'dist/code-of-conduct.js' %}"></script>
 {% endblock %}

@@ -7,7 +7,10 @@
         aria-live="polite"
     >
         {% for message in messages %}
-            <div class="alert shadow-lg {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-error{% elif message.tags == 'warning' %}alert-warning{% else %}alert-info{% endif %}">
+            <div
+                data-dismissible
+                class="alert shadow-lg {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-error{% elif message.tags == 'warning' %}alert-warning{% else %}alert-info{% endif %}"
+            >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="stroke-current shrink-0 h-6 w-6"
@@ -43,7 +46,7 @@
                     type="button"
                     class="btn btn-ghost btn-xs btn-square"
                     aria-label="{% trans 'Close' %}"
-                    onclick="this.closest('.alert').remove()"
+                    data-dismiss
                 >
                     ✕
                 </button>

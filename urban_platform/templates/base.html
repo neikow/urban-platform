@@ -37,7 +37,8 @@
         {% if request.in_preview_panel %}
             <base target="_blank">
         {% endif %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+        <script type="module" src="{% static 'dist/main.js' %}"></script>
         {% block extra_css %}
         {% endblock %}
         {% block extra_head %}
@@ -55,8 +56,6 @@
         {% endblock %}
         {% include "core/components/website_footer.html" %}
         {% include "core/components/image_lightbox.html" %}
-        <script type="text/javascript" src="{% static 'js/lightbox.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/password_toggle.js' %}"></script>
         {% block extra_js %}
         {% endblock %}
     </body>

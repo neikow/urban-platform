@@ -74,7 +74,7 @@
                     </p>
                     <button
                         type="button"
-                        onclick="document.getElementById('login_modal').showModal()"
+                        data-dialog-open="login_modal"
                         class="btn btn-primary border-none font-semibold"
                     >
                         {% trans "Log in to participate" %}
@@ -173,5 +173,5 @@
 
     {% include "auth/login_modal.html" %}
 
-    <script src="{% static 'publications/js/ideas.js' %}"></script>
+    <script type="module" src="{% static 'dist/ideas.js' %}"></script>
 {% endif %}

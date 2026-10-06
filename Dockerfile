@@ -4,12 +4,12 @@ WORKDIR /app
 COPY docs/ docs/
 RUN cd docs && mkdocs build
 
-FROM node:20-bookworm-slim AS assets
+FROM node:24-bookworm-slim AS assets
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-RUN npm run styles:build
+RUN npm run typecheck && npm run build
 
 FROM python:3.13-slim-bookworm AS builder
 COPY --from=ghcr.io/astral-sh/uv:0.12.23 /uv /bin/uv
@@ -28,7 +28,7 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 COPY . .
 
-COPY --from=assets /app/urban_platform/static/css/styles.css /app/urban_platform/static/css/styles.css
+COPY --from=assets /app/urban_platform/static/dist /app/urban_platform/static/dist
 COPY --from=docs /app/docs/site /app/docs/site
 
 RUN uv sync --locked

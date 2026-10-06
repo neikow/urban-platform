@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 15:48+0200\n"
+"POT-Creation-Date: 2026-10-06 16:09+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -118,37 +118,33 @@ msgid "External Links"
 msgstr "Liens externes"
 
 #: publications/models/form.py:10
-#: publications/templates/publications/admin/vote_stats_detail.html:131
-#: publications/templates/publications/admin/vote_stats_detail.html:232
-#: publications/templates/publications/admin/vote_stats_detail.html:288
-#: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:111
+#: publications/templates/publications/admin/vote_stats_detail.html:126
+#: publications/templates/publications/admin/vote_stats_detail.html:227
+#: publications/templates/publications/admin/vote_stats_detail.html:283
+#: publications/templates/publications/components/vote_form.html:113
 msgid "Unfavorable"
 msgstr "Défavorable"
 
 #: publications/models/form.py:11
-#: publications/templates/publications/admin/vote_stats_detail.html:212
-#: publications/templates/publications/admin/vote_stats_detail.html:281
-#: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:135
+#: publications/templates/publications/admin/vote_stats_detail.html:207
+#: publications/templates/publications/admin/vote_stats_detail.html:276
+#: publications/templates/publications/components/vote_form.html:137
 msgid "Rather Unfavorable"
 msgstr "Plutôt défavorable"
 
 #: publications/models/form.py:12
-#: publications/templates/publications/admin/vote_stats_detail.html:192
-#: publications/templates/publications/admin/vote_stats_detail.html:274
-#: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:160
+#: publications/templates/publications/admin/vote_stats_detail.html:187
+#: publications/templates/publications/admin/vote_stats_detail.html:269
+#: publications/templates/publications/components/vote_form.html:162
 msgid "Rather Favorable"
 msgstr "Plutôt favorable"
 
 #: publications/models/form.py:13
 #: publications/templates/publications/admin/vote_stats.html:40
-#: publications/templates/publications/admin/vote_stats_detail.html:116
-#: publications/templates/publications/admin/vote_stats_detail.html:172
-#: publications/templates/publications/admin/vote_stats_detail.html:267
-#: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:184
+#: publications/templates/publications/admin/vote_stats_detail.html:111
+#: publications/templates/publications/admin/vote_stats_detail.html:167
+#: publications/templates/publications/admin/vote_stats_detail.html:262
+#: publications/templates/publications/components/vote_form.html:186
 msgid "Favorable"
 msgstr "Favorable"
 
@@ -412,12 +408,12 @@ msgid "No projects collecting ideas."
 msgstr "Aucun projet en collecte d'idées."
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:28
-#: publications/templates/publications/admin/vote_stats_detail.html:38
+#: publications/templates/publications/admin/vote_stats_detail.html:33
 msgid "Back to list"
 msgstr "Retour à la liste"
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:38
-#: publications/templates/publications/admin/vote_stats_detail.html:48
+#: publications/templates/publications/admin/vote_stats_detail.html:43
 msgid "View project"
 msgstr "Voir le projet"
 
@@ -426,13 +422,13 @@ msgid "ideas"
 msgstr "idées"
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:92
-#: publications/templates/publications/admin/vote_stats_detail.html:294
+#: publications/templates/publications/admin/vote_stats_detail.html:289
 #: publications/tests/test_vote_stats.py:301
 msgid "Deleted User"
 msgstr "Utilisateur supprimé"
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:98
-#: publications/templates/publications/admin/vote_stats_detail.html:302
+#: publications/templates/publications/admin/vote_stats_detail.html:297
 msgid "Anonymous"
 msgstr "Anonyme"
 
@@ -443,19 +439,19 @@ msgstr "Aucune idée pour le moment"
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
-#: publications/views/vote_stats.py:40 publications/views/vote_stats.py:95
+#: publications/views/vote_stats.py:48 publications/views/vote_stats.py:109
 #: publications/wagtail_hooks.py:25
 msgid "Vote Statistics"
 msgstr "Statistiques des votes"
 
 #: publications/templates/publications/admin/vote_stats.html:21
-#: publications/templates/publications/admin/vote_stats_detail.html:95
+#: publications/templates/publications/admin/vote_stats_detail.html:90
 #, python-format
 msgid "Show votes from outside %(code)s"
 msgstr "Montrer les votes en dehors du %(code)s"
 
 #: publications/templates/publications/admin/vote_stats.html:27
-#: publications/templates/publications/admin/vote_stats_detail.html:100
+#: publications/templates/publications/admin/vote_stats_detail.html:95
 #, python-format
 msgid ""
 "Only votes from users with postal code %(code)s are shown.\n"
@@ -473,7 +469,7 @@ msgid "Total votes"
 msgstr "Total des votes"
 
 #: publications/templates/publications/admin/vote_stats.html:39
-#: publications/templates/publications/admin/vote_stats_detail.html:160
+#: publications/templates/publications/admin/vote_stats_detail.html:155
 msgid "With comment"
 msgstr "Avec commentaire"
 
@@ -493,31 +489,31 @@ msgstr "Voir les détails"
 msgid "No projects with voting enabled."
 msgstr "Aucun projet avec le vote activé."
 
-#: publications/templates/publications/admin/vote_stats_detail.html:71
+#: publications/templates/publications/admin/vote_stats_detail.html:66
 msgid "Voting open"
 msgstr "Vote ouvert"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:78
+#: publications/templates/publications/admin/vote_stats_detail.html:73
 msgid "Voting closed"
 msgstr "Vote fermé"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:81
+#: publications/templates/publications/admin/vote_stats_detail.html:76
 msgid "votes"
 msgstr "votes"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:153
+#: publications/templates/publications/admin/vote_stats_detail.html:148
 msgid "Type"
 msgstr "Type"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:156
+#: publications/templates/publications/admin/vote_stats_detail.html:151
 msgid "Count"
 msgstr "Nombre"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:252
+#: publications/templates/publications/admin/vote_stats_detail.html:247
 msgid "Comments"
 msgstr "Commentaires"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:316
+#: publications/templates/publications/admin/vote_stats_detail.html:311
 msgid "No votes yet"
 msgstr "Aucun vote pour l'instant"
 
@@ -565,7 +561,7 @@ msgid "Your idea is only visible to you and the administrators."
 msgstr "Votre idée n'est visible que pour vous et les administrateurs."
 
 #: publications/templates/publications/components/ideas_form.html:61
-#: publications/templates/publications/components/vote_form.html:59
+#: publications/templates/publications/components/vote_form.html:61
 msgid "More information"
 msgstr "Plus d'informations"
 
@@ -655,7 +651,17 @@ msgstr "Une erreur est survenue lors de la suppression du vote"
 msgid "Are you sure you want to remove your vote?"
 msgstr "Êtes-vous sûr de vouloir retirer votre vote ?"
 
-#: publications/templates/publications/components/vote_form.html:41
+#: publications/templates/publications/components/vote_form.html:15
+#, python-brace-format
+msgid "{count} vote in total"
+msgstr "{count} vote au total"
+
+#: publications/templates/publications/components/vote_form.html:16
+#, python-brace-format
+msgid "{count} votes in total"
+msgstr "{count} votes au total"
+
+#: publications/templates/publications/components/vote_form.html:43
 msgid ""
 "Your opinion matters! Votes help decision-makers understand residents "
 "priorities."
@@ -663,7 +669,7 @@ msgstr ""
 "Votre avis compte ! Les votes aident les décideurs à comprendre les "
 "priorités des habitants."
 
-#: publications/templates/publications/components/vote_form.html:46
+#: publications/templates/publications/components/vote_form.html:48
 msgid ""
 "All votes are analyzed and taken into account in the final project "
 "decisions."
@@ -671,57 +677,57 @@ msgstr ""
 "Tous les votes sont analysés et pris en compte dans les décisions finales du"
 " projet."
 
-#: publications/templates/publications/components/vote_form.html:70
+#: publications/templates/publications/components/vote_form.html:72
 msgid "Log in to vote on this project"
 msgstr "Connectez-vous pour voter sur ce projet"
 
-#: publications/templates/publications/components/vote_form.html:76
+#: publications/templates/publications/components/vote_form.html:78
 msgid "Log in to vote"
 msgstr "Se connecter pour voter"
 
-#: publications/templates/publications/components/vote_form.html:88
+#: publications/templates/publications/components/vote_form.html:90
 msgid "Vote choice"
 msgstr "Choix de vote"
 
-#: publications/templates/publications/components/vote_form.html:191
+#: publications/templates/publications/components/vote_form.html:193
 msgid "Comment (optional)"
 msgstr "Commentaire (optionnel)"
 
-#: publications/templates/publications/components/vote_form.html:198
+#: publications/templates/publications/components/vote_form.html:200
 msgid "Explain your vote..."
 msgstr "Expliquez votre vote..."
 
-#: publications/templates/publications/components/vote_form.html:201
+#: publications/templates/publications/components/vote_form.html:203
 msgid "Only you and administrators can see your comment"
 msgstr "Seuls vous et les administrateurs peuvent voir votre commentaire"
 
-#: publications/templates/publications/components/vote_form.html:233
+#: publications/templates/publications/components/vote_form.html:235
 msgid "Submit my vote anonymously (my name will not be linked to this vote)"
 msgstr ""
 "Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce "
 "vote)"
 
-#: publications/templates/publications/components/vote_form.html:244
+#: publications/templates/publications/components/vote_form.html:246
 msgid "Submit my vote"
 msgstr "Soumettre mon vote"
 
-#: publications/templates/publications/components/vote_form.html:255
+#: publications/templates/publications/components/vote_form.html:257
 msgid "Your vote:"
 msgstr "Votre vote :"
 
-#: publications/templates/publications/components/vote_form.html:259
+#: publications/templates/publications/components/vote_form.html:261
 msgid "Your comment:"
 msgstr "Votre commentaire :"
 
-#: publications/templates/publications/components/vote_form.html:267
+#: publications/templates/publications/components/vote_form.html:269
 msgid "Change my vote"
 msgstr "Modifier mon vote"
 
-#: publications/templates/publications/components/vote_form.html:270
+#: publications/templates/publications/components/vote_form.html:272
 msgid "Remove my vote"
 msgstr "Retirer mon vote"
 
-#: publications/templates/publications/components/vote_form.html:296
+#: publications/templates/publications/components/vote_form.html:298
 #: publications/views/vote.py:27 publications/views/vote.py:96
 msgid "Voting is closed for this project"
 msgstr "Le vote est fermé pour ce projet"

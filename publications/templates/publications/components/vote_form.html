@@ -12,6 +12,8 @@
         data-msg-submit-error="{% trans 'An error occurred while submitting the vote' %}"
         data-msg-remove-error="{% trans 'An error occurred while removing the vote' %}"
         data-msg-confirm-remove="{% trans 'Are you sure you want to remove your vote?' %}"
+        data-msg-total-one="{% trans '{count} vote in total' %}"
+        data-msg-total-other="{% trans '{count} votes in total' %}"
     >
         <div
             id="vote-card"
@@ -70,7 +72,7 @@
                     <p class="text-base-content/70 mb-4 text-sm">{% trans "Log in to vote on this project" %}</p>
                     <button
                         type="button"
-                        onclick="document.getElementById('login_modal').showModal()"
+                        data-dialog-open="login_modal"
                         class="btn btn-primary border-none font-semibold"
                     >
                         {% trans "Log in to vote" %}
@@ -301,5 +303,5 @@
 
     {% include "auth/login_modal.html" %}
 
-    <script src="{% static 'publications/js/vote.js' %}"></script>
+    <script type="module" src="{% static 'dist/vote.js' %}"></script>
 {% endif %}

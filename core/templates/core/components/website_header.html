@@ -170,8 +170,8 @@
                     </div>
                 {% else %}
                     <button
-                        onclick="login_modal.showModal()"
-                        class="btn btn-ghost btn-sm hover:text-primary transition-colors font-bold uppercase tracking-wide text-[11px]"
+                        data-dialog-open="login_modal"
+                        class="btn btn-ghost btn-sm hover:text-primary transition-colors font-bold uppercase tracking-wide text-2xs"
                     >
                         {% trans "Log in" %}
                     </button>
@@ -221,7 +221,7 @@
                         {% endfor %}
                         {% if not user.is_authenticated %}
                             <li class="mt-2">
-                                <button onclick="login_modal.showModal()" class="btn btn-primary btn-sm w-full">
+                                <button data-dialog-open="login_modal" class="btn btn-primary btn-sm w-full">
                                     {% trans "Log in" %}
                                 </button>
                             </li>

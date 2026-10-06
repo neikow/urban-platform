@@ -16,10 +16,10 @@ install: ## Install dependencies, the e2e browser, git hooks and a local .env
 	@test -f .env || (cp .env.example .env && echo "Created .env from .env.example")
 	$(MANAGE) migrate
 	$(MANAGE) compilemessages --ignore=.venv --ignore=node_modules
-	npm run styles:build
+	npm run build
 
 .PHONY: dev
-dev: ## Run Redis (Docker), Django, Tailwind watcher and Celery together
+dev: ## Run Redis (Docker), Django, the Vite watcher and Celery together
 	uv run python scripts/dev.py
 
 .PHONY: dev-no-docker
@@ -36,12 +36,13 @@ migrations: ## Create migrations for model changes
 
 .PHONY: messages
 messages: ## Update the French catalogs, then compile them
-	$(MANAGE) makemessages -l fr --ignore=node_modules --ignore=.venv --ignore=docs
+	$(MANAGE) makemessages -l fr --ignore=node_modules --ignore=.venv --ignore=docs --ignore=e2e
 	$(MANAGE) compilemessages --ignore=.venv --ignore=node_modules
 
-.PHONY: css
-css: ## Build the Tailwind stylesheet once
-	npm run styles:build
+.PHONY: assets
+assets: ## Type-check and build the TypeScript and CSS bundles once
+	npm run typecheck
+	npm run build
 
 .PHONY: test
 test: ## Run unit tests in parallel
@@ -67,6 +68,7 @@ types: ## Type-check with mypy
 
 .PHONY: check
 check: ## Everything CI runs before tests: lint, format check, types, security, migrations
+	npm run typecheck
 	uv run ruff check .
 	uv run ruff format --check .
 	uv run mypy .

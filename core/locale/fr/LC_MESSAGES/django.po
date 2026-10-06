@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 15:47+0200\n"
+"POT-Creation-Date: 2026-10-06 16:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -462,8 +462,8 @@ msgstr "Les liens de vérification sont valables 24 heures."
 
 #: core/templates/auth/email_verify_error.html:36
 #: core/templates/auth/login_modal.html:29
-#: core/templates/auth/login_modal.html:69
-#: core/templates/auth/register.html:185
+#: core/templates/auth/login_modal.html:75
+#: core/templates/auth/register.html:184
 #: core/templates/core/components/website_header.html:176
 #: core/templates/core/components/website_header.html:225
 msgid "Log in"
@@ -502,25 +502,30 @@ msgstr "Fermer"
 msgid "Welcome back"
 msgstr "Bon retour parmi nous"
 
-#: core/templates/auth/login_modal.html:63
+#: core/templates/auth/login_modal.html:37
+msgid "An error occurred. Please check your details and try again."
+msgstr ""
+"Une erreur est survenue. Veuillez vérifier vos informations et réessayer."
+
+#: core/templates/auth/login_modal.html:69
 msgid "Forgot password?"
 msgstr "Mot de passe oublié ?"
 
-#: core/templates/auth/login_modal.html:71
+#: core/templates/auth/login_modal.html:77
 #: core/templates/core/account_delete.html:111
 msgid "Cancel"
 msgstr "Annuler"
 
-#: core/templates/auth/login_modal.html:75
+#: core/templates/auth/login_modal.html:81
 #: core/templates/auth/register.html:175
 msgid "OR"
 msgstr "OU"
 
-#: core/templates/auth/login_modal.html:78
+#: core/templates/auth/login_modal.html:84
 msgid "Don't have an account?"
 msgstr "Vous n'avez pas de compte ?"
 
-#: core/templates/auth/login_modal.html:84 core/templates/auth/register.html:4
+#: core/templates/auth/login_modal.html:90 core/templates/auth/register.html:4
 #: core/templates/auth/register.html:89 core/templates/auth/register.html:170
 msgid "Sign up"
 msgstr "S'inscrire"
@@ -619,15 +624,15 @@ msgstr "Le lien est valable pendant 1 heure."
 msgid "Become a member"
 msgstr "Devenez membre"
 
-#: core/templates/auth/register.html:40 core/templates/auth/register.html:210
+#: core/templates/auth/register.html:40 core/templates/auth/register.html:209
 msgid "Access educational resources"
 msgstr "Accédez aux fiches pédagogiques"
 
-#: core/templates/auth/register.html:60 core/templates/auth/register.html:228
+#: core/templates/auth/register.html:60 core/templates/auth/register.html:227
 msgid "Follow your neighborhood's news"
 msgstr "Suivez les actualités de votre quartier"
 
-#: core/templates/auth/register.html:78 core/templates/auth/register.html:246
+#: core/templates/auth/register.html:78 core/templates/auth/register.html:245
 msgid "Vote on initiatives"
 msgstr "Votez sur les initiatives"
 
@@ -651,7 +656,7 @@ msgstr "(ouvre dans un nouvel onglet)"
 msgid "Already have an account?"
 msgstr "Vous avez déjà un compte ?"
 
-#: core/templates/auth/register.html:191
+#: core/templates/auth/register.html:190
 #, python-format
 msgid "Become a member of %(website_name)s"
 msgstr "Devenez membre de %(website_name)s"
