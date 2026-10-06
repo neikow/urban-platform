@@ -14,7 +14,10 @@
 @source not "../../../**/migrations";
 @source not "../../../**/tests";
 
-@plugin "daisyui";
+/* Only the custom theme below: the built-in "light" theme would otherwise win on specificity. */
+@plugin "daisyui" {
+    themes: false;
+}
 @plugin "daisyui/theme" {
     name: "light";
     default: true;
