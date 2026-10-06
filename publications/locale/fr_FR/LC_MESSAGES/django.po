@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 15:39+0200\n"
+"POT-Creation-Date: 2026-10-06 15:48+0200\n"
 "PO-Revision-Date: 2026-06-23 10:00+0100\n"
 "Last-Translator: Urban Platform Team\n"
 "Language-Team: French (France)\n"
@@ -354,24 +354,24 @@ msgstr "Contenu"
 msgid "The main content of the page."
 msgstr "Le contenu principal de la page."
 
-#: publications/models/publication_index.py:35
-#: publications/models/publication_index.py:100
+#: publications/models/publication_index.py:34
+#: publications/models/publication_index.py:95
 msgid "Publications Index"
 msgstr "Index des publications"
 
-#: publications/models/publication_index.py:39
+#: publications/models/publication_index.py:38
 msgid "Page introduction"
 msgstr "Introduction de la page"
 
-#: publications/models/publication_index.py:40
+#: publications/models/publication_index.py:39
 msgid "Small introduction shown above the publications list."
 msgstr "Petite introduction affichée au-dessus de la liste des publications."
 
-#: publications/models/publication_index.py:46
+#: publications/models/publication_index.py:45
 msgid "Page body content"
 msgstr "Contenu de la page"
 
-#: publications/models/publication_index.py:47
+#: publications/models/publication_index.py:46
 msgid "Additional content for the publications page."
 msgstr "Contenu supplémentaire pour la page des publications."
 
@@ -635,7 +635,7 @@ msgstr ""
 "Vérifiez votre adresse email (%(email)s) pour participer. Consultez votre "
 "boîte de réception : nous vous avons envoyé un lien."
 
-#: publications/templates/publications/components/verify_email_prompt.html:11
+#: publications/templates/publications/components/verify_email_prompt.html:13
 msgid "Resend the verification link"
 msgstr "Renvoyer le lien de vérification"
 
