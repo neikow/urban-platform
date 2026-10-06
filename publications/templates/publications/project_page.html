@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags i18n %}
+{% load static wagtailcore_tags wagtailimages_tags i18n %}
+
+{% block extra_css %}
+    {% if project_map %}
+        <link rel="stylesheet" href="{% static 'dist/map.css' %}">
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <article>
@@ -125,6 +131,9 @@
                             </svg>
                             <span>{% trans "Share your idea" %}</span>
                         </a>
+                    {% endif %}
+                    {% if project_map %}
+                        {% include "publications/components/project_location.html" %}
                     {% endif %}
                     {% if page.show_toc and toc %}
                         <div class="bg-base-100 rounded-lg shadow-sm p-5">

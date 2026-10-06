@@ -29,6 +29,8 @@ export default defineConfig(({ mode }) => ({
         admin: src("admin/main.ts"),
         "admin-vote-stats": src("admin/vote-stats.ts"),
         "admin-location": src("admin/location-input.ts"),
+        "projects-map": src("pages/projects-map.ts"),
+        "project-location": src("pages/project-location.ts"),
       },
       output: {
         entryFileNames: "[name].js",

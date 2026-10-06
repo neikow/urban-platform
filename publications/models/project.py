@@ -154,6 +154,10 @@ class ProjectPage(PublicationPage):
 
     def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context(request, *args, **kwargs)
+        if self.location:
+            from publications.geo import map_config, project_feature
+
+            context["project_map"] = {**map_config(), "feature": project_feature(self)}
         if self.enable_voting and not self.is_voting_open:
             from publications.services import get_final_vote_results
 

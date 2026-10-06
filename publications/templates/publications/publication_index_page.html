@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags i18n cache %}
+{% load static wagtailcore_tags wagtailimages_tags i18n cache %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'dist/map.css' %}">
+{% endblock %}
 
 {% block content %}
     <article class="mx-4">
@@ -124,6 +128,8 @@
 
                 {% include "components/navigation/pagination.html" with page_data=publications %}
             {% endcache %}
+
+            {% include "publications/components/projects_map.html" %}
 
             {% if page.body %}
                 <article class="mt-8">{{ page.body|richtext }}</article>
