@@ -25,10 +25,13 @@
                         {{ page.description }}
                     </p>
 
+                    {% include "publications/components/event_interest.html" %}
+
                     <div class="stats stats-vertical lg:stats-horizontal shadow">
                         <div class="stat">
                             <div class="stat-figure text-secondary">
                                 <svg
+                                    aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     class="h-8 w-8"
                                     fill="none"
@@ -55,6 +58,7 @@
                             <div class="stat">
                                 <div class="stat-figure text-secondary">
                                     <svg
+                                        aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg"
                                         class="h-8 w-8"
                                         fill="none"
@@ -78,7 +82,9 @@
                                 <div class="stat-title">{% trans "Location" %}</div>
                                 <div class="stat-value text-lg">{{ page.location }}</div>
                                 {% if page.address %}
-                                    <div class="stat-desc">{{ page.address|truncatewords:5 }}</div>
+                                    <div class="stat-desc" title="{{ page.address }}">
+                                        {{ page.address|truncatewords:5 }}
+                                    </div>
                                 {% endif %}
                             </div>
                         {% endif %}
@@ -87,6 +93,7 @@
                             <div class="stat">
                                 <div class="stat-figure text-secondary">
                                     <svg
+                                        aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg"
                                         class="h-8 w-8"
                                         fill="none"
@@ -118,6 +125,7 @@
                             <div class="stat">
                                 <div class="stat-figure text-secondary">
                                     <svg
+                                        aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg"
                                         class="h-8 w-8"
                                         fill="none"
@@ -156,14 +164,22 @@
             </div>
         </header>
         <div class="container mx-auto flex flex-col gap-4 lg:gap-16 mb-12 lg:mb-24 mt-16 lg:mt-0">
-            <main class="flex-1 page-content prose prose-lg max-w-none numbered-headings">
+            <div class="flex-1 page-content prose prose-lg max-w-none numbered-headings">
                 {% include_block page.content %}
-            </main>
+            </div>
 
             {% if page.address %}
                 <aside class="mt-8">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-4">{% trans "Address" %}</h2>
-                    <p class="text-sm sm:text-base leading-relaxed text-base-content/70">{{ page.address }}</p>
+                    <address class="not-italic text-sm sm:text-base leading-relaxed text-base-content/70">
+                        {{ page.address|linebreaksbr }}
+                    </address>
+                    <a
+                        href="https://www.openstreetmap.org/search?query={{ page.address|urlencode }}"
+                        class="link link-primary text-sm mt-2 inline-block"
+                        target="_blank"
+                        rel="noopener"
+                    >{% trans "View on a map" %}</a>
                 </aside>
             {% endif %}
         </div>

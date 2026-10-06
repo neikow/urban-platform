@@ -254,7 +254,10 @@ class RecentPublicationsBlock(blocks.StructBlock):
         publications = cache.get(cache_key) if cache is not None else None
         if publications is None:
             publications = list(
-                PublicationPage.objects.live().public().order_by("-first_published_at")[:count]
+                PublicationPage.objects.live()
+                .public()
+                .order_by("-first_published_at")
+                .specific()[:count]
             )
             if cache is not None:
                 cache.set(cache_key, publications, CONTENT_CACHE_TIMEOUT)

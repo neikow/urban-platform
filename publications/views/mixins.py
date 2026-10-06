@@ -21,11 +21,13 @@ class ParticipationMixin:
     """Shared guards for the vote and idea JSON endpoints.
 
     Every request must be authenticated. Writes (POST/DELETE) additionally
-    require a verified email address and an up-to-date code of conduct
-    consent, and are rate-limited per user.
+    require a verified email address and, unless `requires_code_of_conduct`
+    is turned off, an up-to-date code of conduct consent. Writes are
+    rate-limited per user.
     """
 
     requires_authentication = True
+    requires_code_of_conduct = True
     write_methods = ("post", "delete")
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponseBase:
@@ -33,6 +35,8 @@ class ParticipationMixin:
             return json_error(_("Authentication required"), status=401)
 
         if request.method and request.method.lower() in self.write_methods:
+            if not request.user.is_authenticated:
+                return json_error(_("Authentication required"), status=401)
             refusal = self.check_can_participate(request)
             if refusal is not None:
                 return refusal
@@ -49,7 +53,7 @@ class ParticipationMixin:
                 code="email_not_verified",
             )
 
-        if needs_code_of_conduct_consent(user):  # type: ignore[arg-type]
+        if self.requires_code_of_conduct and needs_code_of_conduct_consent(user):  # type: ignore[arg-type]
             consent_url = reverse(
                 "code_of_conduct_consent", query={"next": request.headers.get("Referer", "/")}
             )

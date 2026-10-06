@@ -11,7 +11,7 @@
                     <div class="flex-1 flex flex-col justify-center">
                         <div class="flex items-center gap-2 mb-4">
                             <span
-                                class="text-[10px] font-bold uppercase tracking-wide bg-accent/30 text-accent-content px-2.5 py-1 rounded"
+                                class="text-3xs font-bold uppercase tracking-wide bg-accent/30 text-accent-content px-2.5 py-1 rounded"
                             >
                                 {% trans "Educational Resource" %}
                             </span>
@@ -19,7 +19,7 @@
                         <h1
                             class="
                                 font-display font-black uppercase leading-[0.9]
-                                text-[clamp(2.2rem,5.5vw,4.5rem)] text-balance
+                                text-display-lg text-balance
                                 mb-5
                             "
                         >
@@ -50,9 +50,9 @@
         </header>
 
         <div class="container mx-auto px-6 sm:px-8 lg:px-12 flex flex-col-reverse lg:flex-row gap-8 lg:gap-16 mb-16 lg:mb-24 mt-10 lg:mt-14">
-            <main class="flex-1 page-content numbered-headings min-w-0">
+            <div class="flex-1 page-content numbered-headings min-w-0">
                 {% include_block page.content %}
-            </main>
+            </div>
 
             {% with toc=page.table_of_contents %}
                 {% if page.has_resource or page.show_toc and toc %}

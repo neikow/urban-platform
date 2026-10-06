@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar i18n structured_data django_settings %}
+{% load static wagtailcore_tags wagtailuserbar i18n structured_data social_meta django_settings %}
 {% get_current_language as LANGUAGE_CODE %}
 
 {% get_setting "ANALYTICS_SCRIPT_TAG" as analytics_script_tag %}
@@ -21,23 +21,24 @@
         </title>
         <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
         <link rel="alternate icon" href="{% static 'favicon.ico' %}">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-            rel="stylesheet"
-        >
         {% if analytics_script_tag %}
             {{ analytics_script_tag|safe }}
         {% endif %}
-        {% if page.search_description %}
-            <meta name="description" content="{{ page.search_description }}">
-        {% endif %}
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="{% blocktrans %}{{ website_name }} — news{% endblocktrans %}"
+            href="{% url 'publications_rss' %}"
+        >
+        {% block social_meta %}
+            {% social_meta %}
+        {% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% if request.in_preview_panel %}
             <base target="_blank">
         {% endif %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+        <script type="module" src="{% static 'dist/main.js' %}"></script>
         {% block extra_css %}
         {% endblock %}
         {% block extra_head %}
@@ -45,18 +46,21 @@
         {% endblock %}
     </head>
     <body class="{% block body_class %}{% endblock %}">
+        <a
+            href="#main-content"
+            class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-100 btn btn-primary btn-sm"
+        >{% trans "Skip to content" %}</a>
         {% wagtailuserbar %}
         {% block header %}
             {% include "core/components/website_header.html" %}
             <div class="pt-16"></div>
         {% endblock header %}
         {% include "core/components/messages.html" %}
-        {% block content %}
-        {% endblock %}
+        <main id="main-content" tabindex="-1" class="focus:outline-none">
+            {% block content %} {% endblock %}
+        </main>
         {% include "core/components/website_footer.html" %}
         {% include "core/components/image_lightbox.html" %}
-        <script type="text/javascript" src="{% static 'js/lightbox.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/password_toggle.js' %}"></script>
         {% block extra_js %}
         {% endblock %}
     </body>

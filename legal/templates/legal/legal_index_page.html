@@ -10,7 +10,7 @@
                 <h1
                     class="
                         font-display font-black uppercase leading-tight text-balance
-                        text-[clamp(2.2rem,5.5vw,4.5rem)]
+                        text-display-lg
                         mt-4
                     "
                 >
@@ -19,7 +19,7 @@
             </div>
         </header>
         <div class="container mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16 min-h-[40vh]">
-            <main class="max-w-2xl">
+            <div class="max-w-2xl">
                 {% for child_page in page.get_children.live.in_menu %}
                     <a
                         href="{% pageurl child_page %}"
@@ -43,7 +43,7 @@
                     {% empty %}
                     <p class="text-base-content/50">{% trans "No content available at the moment." %}</p>
                 {% endfor %}
-            </main>
+            </div>
         </div>
     </article>
 {% endblock %}

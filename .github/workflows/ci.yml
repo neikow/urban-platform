@@ -5,19 +5,52 @@ on:
   workflow_call:
 
 jobs:
-  quality:
-    name: Quality (${{ matrix.check }})
+  # Job names are required status checks on main: keep them stable.
+  lint:
+    name: Quality (lint)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      # Ruff and Bandit need no project dependencies: run the versions pinned
+      # in uv.lock instead of syncing the whole environment.
+      - name: Read pinned tool versions
+        run: |
+          uv export --only-dev --no-hashes > /tmp/dev-requirements.txt
+          echo "RUFF=$(grep -oP '^ruff==\K[^ ;]+' /tmp/dev-requirements.txt)" >> "$GITHUB_ENV"
+          echo "BANDIT=$(grep -oP '^bandit==\K[^ ;]+' /tmp/dev-requirements.txt)" >> "$GITHUB_ENV"
+
+      - name: Run Ruff Linter
+        run: uvx ruff@$RUFF check --output-format=github
+
+      - name: Run Bandit Security Scan
+        run: uvx --from "bandit[toml]==$BANDIT" bandit -c pyproject.toml -r core home about legal pedagogy publications urban_platform scripts
+
+  format:
+    name: Quality (format)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Run Ruff Formatter
+        run: uvx ruff@$(uv export --only-dev --no-hashes | grep -oP '^ruff==\K[^ ;]+') format --check
+
+  types:
+    name: Quality (types)
     runs-on: ubuntu-latest
 
     env:
       DJANGO_SETTINGS_MODULE: urban_platform.settings.test
       SECRET_KEY: "test-key"
       ENVIRONMENT: "test"
-
-    strategy:
-      fail-fast: false
-      matrix:
-        check: [ lint, format, types, security ]
 
     steps:
       - name: Checkout code
@@ -37,24 +70,26 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras --dev
 
-      - name: Install Ruff
-        run: uv tool install ruff
-
-      - name: Run Ruff Linter
-        if: matrix.check == 'lint'
-        run: uv run ruff check --output-format=github
-
-      - name: Run Ruff Formatter
-        if: matrix.check == 'format'
-        run: uv run ruff format --check
-
       - name: Run Mypy Type Checker
-        if: matrix.check == 'types'
         run: uv run mypy .
 
-      - name: Run Bandit Security Scan
-        if: matrix.check == 'security'
-        run: uv run bandit -c pyproject.toml -r core home about legal pedagogy publications urban_platform scripts
+      - name: Check for missing migrations
+        run: uv run python manage.py makemigrations --check --dry-run
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+
+      - name: Install front-end dependencies
+        run: npm ci
+
+      - name: Type-check TypeScript
+        run: npm run typecheck
+
+      - name: Build front-end assets
+        run: npm run build
 
   test:
     name: Run Tests
@@ -119,6 +154,17 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y gettext
+
+      - name: Set up Node
+        if: matrix.tests == 'e2e'
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+
+      - name: Build front-end assets
+        if: matrix.tests == 'e2e'
+        run: npm ci && npm run build
 
       - name: Install Playwright browsers
         if: matrix.tests == 'e2e'

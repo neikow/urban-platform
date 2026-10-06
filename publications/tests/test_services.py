@@ -83,7 +83,7 @@ class FilterPublicationsByTypeTest(TestCase):
 
         result = filter_publications_by_type(mock_queryset, "projects")
 
-        mock_queryset.filter.assert_called_once_with(real_type=mock_ct)
+        mock_queryset.filter.assert_called_once_with(content_type=mock_ct)
         mock_filtered.order_by.assert_called_once_with("-first_published_at")
         self.assertEqual(result, mock_ordered)
 
@@ -104,7 +104,7 @@ class FilterPublicationsByTypeTest(TestCase):
 
         result = filter_publications_by_type(mock_queryset, "events")
 
-        mock_queryset.filter.assert_called_once_with(real_type=mock_ct)
+        mock_queryset.filter.assert_called_once_with(content_type=mock_ct)
         mock_filtered.filter.assert_called_once()
         mock_filtered_upcoming.order_by.assert_called_once_with("-eventpage__event_date")
         self.assertEqual(result, mock_ordered)
@@ -126,7 +126,7 @@ class FilterPublicationsByTypeTest(TestCase):
 
         result = filter_publications_by_type(mock_queryset, "events", show_past_events=True)
 
-        mock_queryset.filter.assert_called_once_with(real_type=mock_ct)
+        mock_queryset.filter.assert_called_once_with(content_type=mock_ct)
         # No additional filter when showing past events
         mock_filtered.filter.assert_not_called()
         mock_filtered.order_by.assert_called_once_with("-eventpage__event_date")

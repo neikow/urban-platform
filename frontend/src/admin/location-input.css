@@ -1,0 +1,9 @@
+geojson-map-input {
+    display: block;
+}
+
+.geojson-map-input__map {
+    height: 26rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--w-color-border-field-default, #ccc);
+}

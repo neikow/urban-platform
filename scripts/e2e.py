@@ -335,6 +335,61 @@ def populate_database() -> None:
             page.save_revision().publish()
             print(f"  ✓ {about_page_def['title']} exists")
 
+    from publications.models import ParticipationMode, ProjectPage
+
+    publication_index = PublicationIndexPage.objects.first()
+    participation_projects = [
+        ("Projet soumis au vote", "projet-vote", ParticipationMode.VOTING),
+        ("Projet ouvert aux idées", "projet-idees", ParticipationMode.IDEAS),
+        ("Projet à clore", "projet-a-clore", ParticipationMode.VOTING),
+    ]
+    for title, slug, mode in participation_projects:
+        if not ProjectPage.objects.filter(slug=slug).exists():
+            project = ProjectPage(
+                title=title,
+                slug=slug,
+                description="Projet de test pour la participation.",
+                participation_mode=mode,
+                locale=locale,
+            )
+            publication_index.add_child(instance=project)
+            project.save_revision().publish()
+            print(f"  ✓ Created project: {title}")
+        else:
+            print(f"  ✓ Project exists: {title}")
+
+    # The poll-closing test closes this one: reopen it for every run.
+    from core.models import NotificationDispatch
+    from publications.models import PollClosure
+
+    to_close = ProjectPage.objects.get(slug="projet-a-clore")
+    PollClosure.objects.filter(project=to_close).delete()
+    NotificationDispatch.objects.filter(key=f"project:{to_close.pk}").delete()
+
+    from datetime import timedelta
+
+    from django.utils import timezone
+
+    from publications.models import EventPage
+
+    # Always a week ahead, so the event stays upcoming whatever the run date.
+    start = (timezone.now() + timedelta(days=7)).replace(hour=18, minute=0, second=0, microsecond=0)
+    event = EventPage.objects.filter(slug="fete-du-quartier").first()
+    if event is None:
+        event = EventPage(
+            title="Fête du quartier",
+            slug="fete-du-quartier",
+            description="Événement de test.",
+            location="Place Saint-Eugène",
+            event_date=start,
+            locale=locale,
+        )
+        publication_index.add_child(instance=event)
+    event.event_date = start
+    event.end_date = start + timedelta(hours=3)
+    event.save_revision().publish()
+    print("  ✓ Upcoming event ready")
+
     # Create root collection if needed
     if not Collection.objects.filter(depth=1).exists():
         Collection.add_root(name="Root")
@@ -419,6 +474,28 @@ def create_test_users() -> None:
         print(f"  ✓ Created moderator user: {moderator_email}")
     else:
         print(f"  ✓ Moderator user exists: {moderator_email}")
+
+    # Verified voter who accepted the code of conduct. The legal pages are
+    # republished on every setup, so the consent is recorded again each time
+    # and previous votes/ideas are cleared to start from a known state.
+    from legal.utils import create_code_of_conduct_consent_record, has_valid_code_of_conduct_consent
+    from publications.models import EventInterest, FormResponse, IdeaResponse
+
+    voter_email = "e2e.voter@email.com"
+    voter, created = User.objects.get_or_create(
+        email=voter_email,
+        defaults={"first_name": "E2E", "last_name": "Voter", "postal_code": "13007"},
+    )
+    if created:
+        voter.set_password("password123")  # nosec
+    voter.is_verified = True
+    voter.save()
+    if not has_valid_code_of_conduct_consent(voter):
+        create_code_of_conduct_consent_record(voter)
+    FormResponse.objects.filter(user=voter).delete()
+    IdeaResponse.objects.filter(user=voter).delete()
+    EventInterest.objects.filter(user=voter).delete()
+    print(f"  ✓ Verified voter ready: {voter_email}")
 
     # Account deletion test user
     deletion_email = "e2e.delete.test@email.com"

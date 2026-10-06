@@ -8,9 +8,9 @@
 {% endblock header %}
 
 {% block content %}
-    <main class="page-content">
+    <div class="page-content">
         {% for block in page.content %}
             {% include_block block with index=forloop.counter container=True %}
         {% endfor %}
-    </main>
+    </div>
 {% endblock content %}

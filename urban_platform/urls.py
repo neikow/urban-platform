@@ -24,6 +24,9 @@ from core.views.email_verify import (
     EmailVerifyResendView,
 )
 from core.views.docs import ProtectedDocsView
+from core.views.data_export import DataExportView
+from core.views.health import healthz
+from core.views.notifications import NotificationUnsubscribeView
 from core.views.password_reset import (
     PasswordResetRequestView,
     PasswordResetSentView,
@@ -31,6 +34,8 @@ from core.views.password_reset import (
     PasswordResetErrorView,
     PasswordResetCompleteView,
 )
+from publications.views.event_interest import EventInterestView
+from publications.views.feeds import PublicationsFeed, event_ical, events_ical
 from publications.views.idea import IdeaMineView, IdeaView
 from publications.views.vote import VoteView, VoteResultsView
 
@@ -40,6 +45,7 @@ urlpatterns = [
     path("admin/docs/<path:path>", ProtectedDocsView.as_view(), name="docs"),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
+    path("healthz/", healthz, name="healthz"),
     path(
         "sitemap.xml", sitemap, {"sitemaps": SITEMAPS}, name="django.contrib.sitemaps.views.sitemap"
     ),
@@ -81,6 +87,12 @@ urlpatterns = [
     path("auth/me/edit/", ProfileEditView.as_view(), name="profile_edit"),
     path("auth/me/password/", PasswordChangeView.as_view(), name="password_change"),
     path("auth/me/delete/", AccountDeleteView.as_view(), name="account_delete"),
+    path("auth/me/export/", DataExportView.as_view(), name="data_export"),
+    path(
+        "notifications/unsubscribe/<str:token>/",
+        NotificationUnsubscribeView.as_view(),
+        name="notification_unsubscribe",
+    ),
     path("api/projects/<int:project_id>/vote/", VoteView.as_view(), name="project_vote"),
     path(
         "api/projects/<int:project_id>/vote/results/",
@@ -88,6 +100,14 @@ urlpatterns = [
         name="project_vote_results",
     ),
     path("api/projects/<int:project_id>/idea/", IdeaView.as_view(), name="project_idea"),
+    path("feeds/actualites.rss", PublicationsFeed(), name="publications_rss"),
+    path("feeds/evenements.ics", events_ical, name="events_ical"),
+    path("evenements/<int:event_id>/agenda.ics", event_ical, name="event_ical"),
+    path(
+        "api/events/<int:event_id>/interest/",
+        EventInterestView.as_view(),
+        name="event_interest",
+    ),
     path(
         "api/projects/<int:project_id>/idea/mine/",
         IdeaMineView.as_view(),

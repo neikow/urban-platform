@@ -7,6 +7,7 @@ from django.db.models import Count, Q, QuerySet
 from django.core.paginator import Page as PaginatorPage
 from django.core.paginator import Paginator
 from django.http import HttpRequest
+from wagtail.query import PageQuerySet
 
 from publications.models.project import ProjectCategory
 
@@ -35,8 +36,8 @@ class PublicationFilters:
 
 
 def filter_publications_by_type(
-    publications: QuerySet, publication_type: str, show_past_events: bool = False
-) -> QuerySet:
+    publications: PageQuerySet, publication_type: str, show_past_events: bool = False
+) -> PageQuerySet:
     from django.contrib.contenttypes.models import ContentType
     from django.db.models import Case, When
     from django.db.models.functions import Coalesce
@@ -47,13 +48,13 @@ def filter_publications_by_type(
 
     if publication_type == "projects":
         project_ct = ContentType.objects.get_for_model(ProjectPage)
-        return publications.filter(real_type=project_ct).order_by("-first_published_at")
+        return publications.filter(content_type=project_ct).order_by("-first_published_at")
 
     elif publication_type == "events":
         event_ct = ContentType.objects.get_for_model(EventPage)
         now = timezone.now()
 
-        event_queryset = publications.filter(real_type=event_ct)
+        event_queryset = publications.filter(content_type=event_ct)
 
         if not show_past_events:
             today = now.date()
@@ -70,7 +71,7 @@ def filter_publications_by_type(
         now = timezone.now()
         today = now.date()
 
-        past_events_filter = Q(real_type=event_ct) & (
+        past_events_filter = Q(content_type=event_ct) & (
             Q(eventpage__end_date__lt=now)
             | Q(eventpage__end_date__isnull=True, eventpage__event_date__date__lt=today)
         )
@@ -78,7 +79,7 @@ def filter_publications_by_type(
 
     publications = publications.annotate(
         sort_date=Case(
-            When(real_type=event_ct, then="eventpage__event_date"),
+            When(content_type=event_ct, then="eventpage__event_date"),
             default="first_published_at",
         )
     )
@@ -86,13 +87,15 @@ def filter_publications_by_type(
     return publications.order_by("-sort_date")
 
 
-def filter_publications_by_category(publications: QuerySet, category: Optional[str]) -> QuerySet:
+def filter_publications_by_category(
+    publications: PageQuerySet, category: Optional[str]
+) -> PageQuerySet:
     if category and category in [c.value for c in ProjectCategory]:
         return publications.filter(projectpage__category=category)
     return publications
 
 
-def search_publications(publications: QuerySet, search_query: str) -> QuerySet:
+def search_publications(publications: PageQuerySet, search_query: str) -> PageQuerySet:
     if search_query:
         return publications.filter(
             Q(title__icontains=search_query) | Q(description__icontains=search_query)
@@ -110,7 +113,7 @@ def paginate_publications(
 
 
 def get_filtered_publications(
-    base_queryset: QuerySet,
+    base_queryset: PageQuerySet,
     filters: PublicationFilters,
     per_page: int = 12,
 ) -> PaginatorPage:
@@ -123,7 +126,7 @@ def get_filtered_publications(
 
     publications = search_publications(publications, filters.search_query)
 
-    return paginate_publications(publications, filters.page_number, per_page)
+    return paginate_publications(publications.specific(), filters.page_number, per_page)
 
 
 def get_vote_results(project: "ProjectPage") -> dict[str, Any]:
@@ -156,3 +159,30 @@ def get_vote_results(project: "ProjectPage") -> dict[str, Any]:
         "total_votes": total_votes,
         "choices": choices_results,
     }
+
+
+# Display order and daisyUI progress colour, from favorable to unfavorable.
+FINAL_RESULTS_DISPLAY = (
+    ("FAVORABLE", "progress-success"),
+    ("RATHER_FAVORABLE", "progress-info"),
+    ("RATHER_UNFAVORABLE", "progress-warning"),
+    ("UNFAVORABLE", "progress-error"),
+)
+
+
+def get_final_vote_results(project: "ProjectPage") -> dict[str, Any]:
+    """Vote results ready for the public summary shown once voting is closed."""
+    from publications.models.form import VoteChoice
+
+    results = get_vote_results(project)
+    labels = dict(VoteChoice.choices)
+    results["ordered"] = [
+        {
+            "value": value,
+            "label": labels[value],
+            "color": color,
+            **results["choices"][value],
+        }
+        for value, color in FINAL_RESULTS_DISPLAY
+    ]
+    return results
