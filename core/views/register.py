@@ -132,8 +132,10 @@ class RegisterFormView(FormView):
             first_name=first_name,
             last_name=last_name,
             postal_code=postal_code,
-            newsletter_subscription=newsletter_subscription,
         )
+        if newsletter_subscription:
+            self.user.set_newsletter_subscription(True)
+            self.user.save(update_fields=["newsletter_subscription", "newsletter_consent_at"])
 
         send_verification_email.delay(self.user.pk)  # type: ignore[attr-defined]
 

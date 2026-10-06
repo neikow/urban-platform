@@ -1,19 +1,33 @@
-<nav class="flex justify-center my-8">
+{% load i18n %}
+
+<nav class="flex justify-center my-8" aria-label="{% trans 'Pagination' %}">
     <div class="join">
         {% if page_data.has_previous %}
-            <a href="?page={{ page_data.previous_page_number }}" class="join-item btn btn-md">&lt;</a>
+            <a
+                href="{% querystring page=page_data.previous_page_number %}"
+                class="join-item btn btn-md"
+                rel="prev"
+                aria-label="{% trans 'Previous page' %}"
+            >&lt;</a>
         {% endif %}
         {% for num in page_data.paginator.page_range %}
             {% if page_data.number == num %}
-                <button class="join-item btn btn-md btn-active">
-                    {{ num }}
-                </button>
+                <span class="join-item btn btn-md btn-active" aria-current="page">{{ num }}</span>
             {% elif num > page_data.number|add:'-3' and num < page_data.number|add:'3' %}
-                <a href="?page={{ num }}" class="join-item btn btn-md">{{ num }}</a>
+                <a
+                    href="{% querystring page=num %}"
+                    class="join-item btn btn-md"
+                    aria-label="{% blocktrans with number=num %}Page {{ number }}{% endblocktrans %}"
+                >{{ num }}</a>
             {% endif %}
         {% endfor %}
         {% if page_data.has_next %}
-            <a href="?page={{ page_data.next_page_number }}" class="join-item btn btn-md">&gt;</a>
+            <a
+                href="{% querystring page=page_data.next_page_number %}"
+                class="join-item btn btn-md"
+                rel="next"
+                aria-label="{% trans 'Next page' %}"
+            >&gt;</a>
         {% endif %}
     </div>
 </nav>

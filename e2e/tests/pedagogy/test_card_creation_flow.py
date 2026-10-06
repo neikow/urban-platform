@@ -2,7 +2,6 @@ import uuid
 
 import pytest
 from playwright.sync_api import Page, expect
-from django.utils.translation import gettext as _
 
 from e2e.utils import login_user
 
@@ -28,19 +27,16 @@ def test_pedagogy_card_creation_flow(
     )
     page.goto(base_url + "/admin/")
 
-    page.get_by_role("button", name=str(_("Fiches Pédagogiques"))).click()
+    page.get_by_role("button", name="Informations utiles").click()
     page.get_by_role("link", name="Ajouter").click()
     page.get_by_role("textbox", name="Titre*").click()
     page.get_by_role("textbox", name="Titre*").fill(TEST_TITLE)
     page.get_by_role("textbox", name="description").fill(TEST_DESCRIPTION)
     page.get_by_role("button", name="Choisir une image").click()
-    # Wait a moment for modal to appear
-    page.wait_for_timeout(500)
 
     # Try to find and click on any image in the chooser
     images = page.locator("#search-results a.image-choice")
-
-    assert images.count() > 0, "No images found in the chooser modal"
+    expect(images.first).to_be_visible(timeout=10000)
     images.first.click()
 
     page.get_by_role("button", name="Ajouter un(e) Ressource").click()
@@ -61,5 +57,5 @@ def test_pedagogy_card_creation_flow(
     expect(page.locator("h1", has_text=TEST_TITLE)).to_be_visible()
     expect(page.get_by_text(TEST_DESCRIPTION)).to_be_visible()
     expect(page.locator(f"a[href='{TEST_URL}']").first).to_be_visible()
-    page.screenshot(path=f"card_creation_{unique_id}.png", full_page=True)
+    page.screenshot(path=f"test-results/card_creation_{unique_id}.png", full_page=True)
     expect(page.locator("p", has_text=TEST_CONTENT)).to_be_visible(timeout=60000)

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-23 08:54+0200\n"
+"POT-Creation-Date: 2026-10-06 17:00+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -16,74 +16,108 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: publications/models/event.py:19 publications/models/event.py:116
+#: publications/event_reminders.py:33
+#, python-format
+msgid "Tomorrow: %(title)s"
+msgstr "Demain : %(title)s"
+
+#: publications/geo.py:51
+msgid "The location must be a point or a polygon."
+msgstr "La localisation doit être un point ou un polygone."
+
+#: publications/geo.py:63
+msgid "The location coordinates are invalid."
+msgstr "Les coordonnées de la localisation sont invalides."
+
+#: publications/models/event.py:20 publications/models/event.py:123
+#: publications/models/event_interest.py:23
 #: publications/templates/publications/components/publication_preview.html:51
 #: publications/templates/publications/event_page.html:15
+#: publications/views/feeds.py:79
 msgid "Event"
 msgstr "Événement"
 
-#: publications/models/event.py:26
+#: publications/models/event.py:25
 msgid "Event Date"
 msgstr "Date de l'événement"
 
-#: publications/models/event.py:27
-msgid "Date et heure de début de l'événement"
+#: publications/models/event.py:26
+msgid "Start date and time of the event"
 msgstr "Date et heure de début de l'événement"
 
-#: publications/models/event.py:31
+#: publications/models/event.py:30
 msgid "End Date"
 msgstr "Date de fin"
 
-#: publications/models/event.py:34
-msgid "Date et heure de fin de l'événement (optionnel)"
+#: publications/models/event.py:33
+msgid "End date and time of the event (optional)"
 msgstr "Date et heure de fin de l'événement (optionnel)"
 
-#: publications/models/event.py:38
-#: publications/templates/publications/event_page.html:78
+#: publications/models/event.py:37 publications/models/project.py:87
+#: publications/templates/publications/components/project_location.html:5
+#: publications/templates/publications/event_page.html:82
 msgid "Location"
 msgstr "Lieu"
 
-#: publications/models/event.py:41
-msgid "Lieu de l'événement"
+#: publications/models/event.py:40
+msgid "Venue of the event"
 msgstr "Lieu de l'événement"
 
-#: publications/models/event.py:45
-#: publications/templates/publications/event_page.html:165
+#: publications/models/event.py:44
+#: publications/templates/publications/event_page.html:173
 msgid "Address"
 msgstr "Adresse"
 
-#: publications/models/event.py:47
-msgid "Adresse complète de l'événement"
+#: publications/models/event.py:46
+msgid "Full address of the event"
 msgstr "Adresse complète de l'événement"
 
-#: publications/models/event.py:51
+#: publications/models/event.py:50
 msgid "Online Event"
 msgstr "Événement en ligne"
 
-#: publications/models/event.py:53
-msgid "Cochez si l'événement est en ligne"
+#: publications/models/event.py:52
+msgid "Check if the event takes place online"
 msgstr "Cochez si l'événement est en ligne"
 
-#: publications/models/event.py:57
+#: publications/models/event.py:56
 msgid "Online Link"
 msgstr "Lien en ligne"
 
-#: publications/models/event.py:59
-msgid "Lien vers l'événement en ligne (si applicable)"
+#: publications/models/event.py:58
+msgid "Link to the online event (if applicable)"
 msgstr "Lien vers l'événement en ligne (si applicable)"
 
-#: publications/models/event.py:64
+#: publications/models/event.py:63
 msgid "Maximum Participants"
 msgstr "Nombre maximum de participants"
 
-#: publications/models/event.py:67
-msgid "Nombre maximum de participants (laisser vide si illimité)"
+#: publications/models/event.py:66
+msgid "Maximum number of participants (leave empty if unlimited)"
 msgstr "Nombre maximum de participants (laisser vide si illimité)"
 
-#: publications/models/event.py:117
-#: publications/templates/publications/publication_index_page.html:55
+#: publications/models/event.py:124
+#: publications/templates/publications/publication_index_page.html:59
 msgid "Events"
 msgstr "Événements"
+
+#: publications/models/event_interest.py:17 publications/models/form.py:38
+#: publications/models/idea.py:25
+msgid "User"
+msgstr "Utilisateur"
+
+#: publications/models/event_interest.py:25 publications/models/form.py:31
+#: publications/models/idea.py:18
+msgid "Created At"
+msgstr "Créé le"
+
+#: publications/models/event_interest.py:28
+msgid "Event interest"
+msgstr "Intérêt pour un événement"
+
+#: publications/models/event_interest.py:29
+msgid "Event interests"
+msgstr "Intérêts pour des événements"
 
 #: publications/models/external_link.py:20
 msgid "Button Text"
@@ -113,261 +147,316 @@ msgstr "Texte affiché au survol (optionnel)"
 msgid "External Link"
 msgstr "Lien externe"
 
-#: publications/models/external_link.py:46 publications/models/project.py:95
+#: publications/models/external_link.py:46 publications/models/project.py:107
 msgid "External Links"
 msgstr "Liens externes"
 
-#: publications/models/form.py:7
-#: publications/templates/publications/admin/vote_stats_detail.html:131
-#: publications/templates/publications/admin/vote_stats_detail.html:232
-#: publications/templates/publications/admin/vote_stats_detail.html:288
-#: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:109
+#: publications/models/form.py:10
+#: publications/templates/publications/admin/vote_stats_detail.html:126
+#: publications/templates/publications/admin/vote_stats_detail.html:227
+#: publications/templates/publications/admin/vote_stats_detail.html:283
+#: publications/templates/publications/components/vote_form.html:115
 msgid "Unfavorable"
 msgstr "Défavorable"
 
-#: publications/models/form.py:8
-#: publications/templates/publications/admin/vote_stats_detail.html:212
-#: publications/templates/publications/admin/vote_stats_detail.html:281
-#: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:133
+#: publications/models/form.py:11
+#: publications/templates/publications/admin/vote_stats_detail.html:207
+#: publications/templates/publications/admin/vote_stats_detail.html:276
+#: publications/templates/publications/components/vote_form.html:139
 msgid "Rather Unfavorable"
 msgstr "Plutôt défavorable"
 
-#: publications/models/form.py:9
-#: publications/templates/publications/admin/vote_stats_detail.html:192
-#: publications/templates/publications/admin/vote_stats_detail.html:274
-#: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:158
+#: publications/models/form.py:12
+#: publications/templates/publications/admin/vote_stats_detail.html:187
+#: publications/templates/publications/admin/vote_stats_detail.html:269
+#: publications/templates/publications/components/vote_form.html:164
 msgid "Rather Favorable"
 msgstr "Plutôt favorable"
 
-#: publications/models/form.py:10
+#: publications/models/form.py:13
 #: publications/templates/publications/admin/vote_stats.html:40
-#: publications/templates/publications/admin/vote_stats_detail.html:116
-#: publications/templates/publications/admin/vote_stats_detail.html:172
-#: publications/templates/publications/admin/vote_stats_detail.html:267
-#: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:182
+#: publications/templates/publications/admin/vote_stats_detail.html:111
+#: publications/templates/publications/admin/vote_stats_detail.html:167
+#: publications/templates/publications/admin/vote_stats_detail.html:262
+#: publications/templates/publications/components/vote_form.html:188
 msgid "Favorable"
 msgstr "Favorable"
 
-#: publications/models/form.py:28 publications/models/idea.py:15
-msgid "Created At"
-msgstr "Créé le"
-
-#: publications/models/form.py:29 publications/models/idea.py:16
+#: publications/models/form.py:32 publications/models/idea.py:19
 msgid "Updated At"
 msgstr "Mis à jour le"
 
-#: publications/models/form.py:35 publications/models/idea.py:22
-msgid "User"
-msgstr "Utilisateur"
-
-#: publications/models/form.py:41 publications/models/idea.py:28
-#: publications/models/project.py:51 publications/models/project.py:148
+#: publications/models/form.py:44 publications/models/idea.py:31
+#: publications/models/poll_closure.py:22 publications/models/project.py:56
+#: publications/models/project.py:192
 #: publications/templates/publications/admin/ideas_stats.html:36
 #: publications/templates/publications/admin/vote_stats.html:36
 #: publications/templates/publications/components/publication_preview.html:68
-#: publications/templates/publications/project_page.html:15
+#: publications/templates/publications/project_page.html:21
+#: publications/views/feeds.py:79
 msgid "Project"
 msgstr "Projet"
 
-#: publications/models/form.py:44
+#: publications/models/form.py:47
 msgid "Choice"
 msgstr "Choix"
 
-#: publications/models/form.py:49
+#: publications/models/form.py:52
 msgid "Comment"
 msgstr "Commentaire"
 
-#: publications/models/form.py:51
+#: publications/models/form.py:54
 msgid "Optional comment to explain your vote"
 msgstr "Commentaire optionnel pour expliquer votre vote"
 
-#: publications/models/form.py:54 publications/models/idea.py:35
+#: publications/models/form.py:57 publications/models/idea.py:38
 msgid "Anonymize"
 msgstr "Anonymiser"
 
-#: publications/models/form.py:56
+#: publications/models/form.py:59
 msgid "Hide your identity in public displays"
 msgstr "Masquer votre identité dans les affichages publics"
 
-#: publications/models/form.py:60
+#: publications/models/form.py:63
 msgid "Vote Response"
 msgstr "Réponse de vote"
 
-#: publications/models/form.py:61
+#: publications/models/form.py:64
 msgid "Vote Responses"
 msgstr "Réponses de vote"
 
-#: publications/models/idea.py:31
+#: publications/models/idea.py:34
 msgid "Idea"
 msgstr "Idée"
 
-#: publications/models/idea.py:32
+#: publications/models/idea.py:35
 msgid "Describe your idea or alternative proposal for this project"
 msgstr "Décrivez votre idée ou proposition alternative pour ce projet"
 
-#: publications/models/idea.py:37
-#, fuzzy
-#| msgid "Hide your identity in public displays"
+#: publications/models/idea.py:40
 msgid "Hide your identity in administrator displays"
-msgstr "Masquer votre identité dans les affichages publics"
+msgstr "Masquer votre identité dans les affichages des administrateurs"
 
-#: publications/models/idea.py:41
-#, fuzzy
-#| msgid "Vote Response"
+#: publications/models/idea.py:44
 msgid "Idea Response"
-msgstr "Réponse de vote"
+msgstr "Réponse d'idée"
 
-#: publications/models/idea.py:42
-#, fuzzy
-#| msgid "Vote Responses"
+#: publications/models/idea.py:45
 msgid "Idea Responses"
-msgstr "Réponses de vote"
+msgstr "Réponses d'idées"
 
-#: publications/models/project.py:15
+#: publications/models/poll_closure.py:7
+msgid "End date reached"
+msgstr "Date de fin atteinte"
+
+#: publications/models/poll_closure.py:8
+msgid "Closed by an editor"
+msgstr "Clos par un éditeur"
+
+#: publications/models/poll_closure.py:24
+msgid "Closed at"
+msgstr "Clos le"
+
+#: publications/models/poll_closure.py:25
+msgid "Reason"
+msgstr "Motif"
+
+#: publications/models/poll_closure.py:32
+msgid "Closed by"
+msgstr "Clos par"
+
+#: publications/models/poll_closure.py:36
+msgid "Poll closure"
+msgstr "Clôture de vote"
+
+#: publications/models/poll_closure.py:37
+msgid "Poll closures"
+msgstr "Clôtures de vote"
+
+#: publications/models/project.py:20
 msgid "What is your opinion on this project?"
 msgstr "Quel est votre avis sur ce projet ?"
 
-#: publications/models/project.py:19
+#: publications/models/project.py:24
 msgid "Urban Planning"
 msgstr "Urbanisme"
 
-#: publications/models/project.py:20
+#: publications/models/project.py:25
 msgid "Environment"
 msgstr "Environnement"
 
-#: publications/models/project.py:21
+#: publications/models/project.py:26
 msgid "Mobility"
 msgstr "Mobilité"
 
-#: publications/models/project.py:22
+#: publications/models/project.py:27
 msgid "Housing"
 msgstr "Logement"
 
-#: publications/models/project.py:23
+#: publications/models/project.py:28
 msgid "Culture"
 msgstr "Culture"
 
-#: publications/models/project.py:24
+#: publications/models/project.py:29
 msgid "Sport"
 msgstr "Sport"
 
-#: publications/models/project.py:25
+#: publications/models/project.py:30
 msgid "Education"
 msgstr "Éducation"
 
-#: publications/models/project.py:26
+#: publications/models/project.py:31
 msgid "Health"
 msgstr "Santé"
 
-#: publications/models/project.py:27
+#: publications/models/project.py:32
 msgid "Social"
 msgstr "Social"
 
-#: publications/models/project.py:28
+#: publications/models/project.py:33
 msgid "Economy"
 msgstr "Économie"
 
-#: publications/models/project.py:29
+#: publications/models/project.py:34
 msgid "Other"
 msgstr "Autre"
 
-#: publications/models/project.py:40
-#, fuzzy
-#| msgid "Citizen Participation"
+#: publications/models/project.py:45
 msgid "No participation"
-msgstr "Participation citoyenne"
+msgstr "Aucune participation"
 
-#: publications/models/project.py:41
-#, fuzzy
-#| msgid "Voting open"
+#: publications/models/project.py:46
 msgid "Voting"
-msgstr "Vote ouvert"
+msgstr "Vote"
 
-#: publications/models/project.py:42
+#: publications/models/project.py:47
 msgid "Idea collection"
 msgstr "Collecte d'idées"
 
-#: publications/models/project.py:58
+#: publications/models/project.py:61
 msgid "Category"
 msgstr "Catégorie"
 
-#: publications/models/project.py:65
-#, fuzzy
-#| msgid "Citizen Participation"
+#: publications/models/project.py:68
 msgid "Participation mode"
 msgstr "Mode de participation"
 
-#: publications/models/project.py:70
+#: publications/models/project.py:73
 msgid ""
 "Voting lets residents give an opinion; idea collection lets them propose "
-"ideas on a project still in its early stages. The two are mutually exclusive "
-"— switching keeps responses already collected."
-msgstr "Le vote permet aux habitants de donner leur avis ; la collecte d'idées leur permet de proposer des idées sur un projet encore à ses débuts. Les deux sont mutuellement exclusifs — le changement conserve les réponses déjà collectées."
+"ideas on a project still in its early stages. The two are mutually exclusive"
+" — switching keeps responses already collected."
+msgstr ""
+"Le vote permet aux habitants de donner leur avis ; la collecte d'idées leur "
+"permet de proposer des idées sur un projet encore à ses débuts. Les deux "
+"sont mutuellement exclusifs — le changement conserve les réponses déjà "
+"collectées."
 
-#: publications/models/project.py:77
+#: publications/models/project.py:80
 msgid "Voting End Date"
 msgstr "Date de fin du vote"
 
-#: publications/models/project.py:80
-#, fuzzy
-#| msgid "Leave empty for no end date"
+#: publications/models/project.py:83
 msgid "Leave empty for no end date (only applies to voting)"
-msgstr "Laisser vide pour pas de date de fin"
+msgstr "Laisser vide pour pas de date de fin (s'applique uniquement au vote)"
 
-#: publications/models/project.py:84
-#, fuzzy
-#| msgid "Page body content"
+#: publications/models/project.py:91
+msgid "Where the project takes place: a point or an area."
+msgstr "Lieu du projet : un point ou une zone."
+
+#: publications/models/project.py:95
 msgid "Show table of contents"
 msgstr "Afficher la table des matières"
 
-#: publications/models/project.py:86
+#: publications/models/project.py:97
 msgid "Display the table of contents in the sidebar"
 msgstr "Afficher la table des matières dans la barre latérale"
 
-#: publications/models/project.py:149
-#: publications/templates/publications/publication_index_page.html:43
+#: publications/models/project.py:110
+#: publications/templates/publications/components/project_timeline.html:8
+msgid "Project timeline"
+msgstr "Suivi du projet"
+
+#: publications/models/project.py:111
+msgid "News about the project, newest first on the page."
+msgstr ""
+"Actualités du projet, de la plus récente à la plus ancienne sur la page."
+
+#: publications/models/project.py:193
+#: publications/templates/publications/publication_index_page.html:47
 msgid "Projects"
 msgstr "Projets"
 
-#: publications/models/publication.py:20
+#: publications/models/project_update.py:22
+#: publications/templates/publications/event_page.html:49
+msgid "Date"
+msgstr "Date"
+
+#: publications/models/project_update.py:23
+msgid "Title"
+msgstr "Titre"
+
+#: publications/models/project_update.py:24
+msgid "Text"
+msgstr "Texte"
+
+#: publications/models/project_update.py:26
+msgid "Email participants"
+msgstr "Prévenir les participants par email"
+
+#: publications/models/project_update.py:29
+msgid ""
+"Sent once, when the page is published, to people who voted or shared an idea"
+" and asked for project updates. Untick for past events you are adding to the"
+" timeline."
+msgstr ""
+"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté"
+" ou proposé une idée et demandé à suivre les projets. Décochez pour les "
+"étapes passées ajoutées à l'historique."
+
+#: publications/models/project_update.py:43
+msgid "Project update"
+msgstr "Actualité du projet"
+
+#: publications/models/project_update.py:44
+msgid "Project updates"
+msgstr "Actualités des projets"
+
+#: publications/models/publication.py:17
 msgid "Publication"
 msgstr "Publication"
 
-#: publications/models/publication.py:21
-#: publications/templates/publications/publication_index_page.html:12
+#: publications/models/publication.py:18
+#: publications/templates/publications/publication_index_page.html:16
 msgid "Publications"
 msgstr "Publications"
 
-#: publications/models/publication.py:142
+#: publications/models/publication.py:27
 msgid "Description"
 msgstr "Description"
 
-#: publications/models/publication.py:143
+#: publications/models/publication.py:28
 msgid "A brief description shown in lists."
 msgstr "Une brève description affichée dans les listes."
 
-#: publications/models/publication.py:152
+#: publications/models/publication.py:37
 msgid "Hero Image"
 msgstr "Image principale"
 
-#: publications/models/publication.py:153
+#: publications/models/publication.py:38
 msgid "Main image for this publication"
 msgstr "Image principale pour cette publication"
 
-#: publications/models/publication.py:159
+#: publications/models/publication.py:44
 msgid "Content"
 msgstr "Contenu"
 
-#: publications/models/publication.py:160
+#: publications/models/publication.py:45
 msgid "The main content of the page."
 msgstr "Le contenu principal de la page."
 
 #: publications/models/publication_index.py:35
-#: publications/models/publication_index.py:100
+#: publications/models/publication_index.py:111
 msgid "Publications Index"
 msgstr "Index des publications"
 
@@ -387,108 +476,130 @@ msgstr "Contenu de la page"
 msgid "Additional content for the publications page."
 msgstr "Contenu supplémentaire pour la page des publications."
 
+#: publications/polls.py:73
+#, python-format
+msgid "Poll results: %(title)s"
+msgstr "Résultats du vote : %(title)s"
+
+#: publications/project_updates.py:42
+#, python-format
+msgid "%(project)s: %(title)s"
+msgstr "%(project)s : %(title)s"
+
+#: publications/templates/publications/admin/close_poll_confirm.html:5
+#: publications/templates/publications/admin/close_poll_confirm.html:8
+msgid "Close the poll"
+msgstr "Clore le vote"
+
+#: publications/templates/publications/admin/close_poll_confirm.html:12
+msgid ""
+"Voting stops immediately, everyone sees the final results on the project "
+"page, and voters who opted in receive them by email."
+msgstr ""
+"Le vote s'arrête immédiatement, les résultats définitifs s'affichent pour "
+"tous sur la page du projet, et les votants qui l'ont demandé les reçoivent "
+"par email."
+
+#: publications/templates/publications/admin/close_poll_confirm.html:14
+msgid "This cannot be undone."
+msgstr "Cette action est irréversible."
+
+#: publications/templates/publications/admin/close_poll_confirm.html:17
+#: publications/wagtail_hooks.py:75
+msgid "Close the poll and send the results"
+msgstr "Clore le vote et envoyer les résultats"
+
+#: publications/templates/publications/admin/close_poll_confirm.html:21
+msgid "Cancel"
+msgstr "Annuler"
+
 #: publications/templates/publications/admin/ideas_stats.html:4
 #: publications/templates/publications/admin/ideas_stats.html:7
 #: publications/templates/publications/admin/ideas_stats_detail.html:4
 #: publications/views/idea_stats.py:35 publications/views/idea_stats.py:71
-#: publications/wagtail_hooks.py:47
+#: publications/wagtail_hooks.py:49
 msgid "Idea Collection"
 msgstr "Collecte d'idées"
 
 #: publications/templates/publications/admin/ideas_stats.html:21
 #: publications/templates/publications/admin/ideas_stats_detail.html:70
-#, fuzzy, python-format
-#| msgid "Show votes from outside %(code)s"
+#, python-format
 msgid "Show ideas from outside %(code)s"
 msgstr "Montrer les idées en dehors du %(code)s"
 
 #: publications/templates/publications/admin/ideas_stats.html:27
 #: publications/templates/publications/admin/ideas_stats_detail.html:75
-#, fuzzy, python-format
-#| msgid ""
-#| "Only votes from users with postal code %(code)s are shown. Check the box "
-#| "above to include all votes."
+#, python-format
 msgid ""
 "Only ideas from users with postal code %(code)s are shown.\n"
 "                    Check the box above to include all ideas."
 msgstr ""
-"Seul les idées d'utilisateurs avec le code postal %(code)s sont affichées. "
-"Cochez la case ci-dessus pour inclure toutes les idées."
+"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées."
+" Cochez la case ci-dessus pour inclure toutes les idées."
 
 #: publications/templates/publications/admin/ideas_stats.html:37
-#, fuzzy
-#| msgid "Total votes"
 msgid "Total ideas"
-msgstr "Total des votes"
+msgstr "Total des idées"
 
 #: publications/templates/publications/admin/ideas_stats.html:58
-#, fuzzy
-#| msgid "View details"
 msgid "View ideas"
-msgstr "Voir les détails"
+msgstr "Voir les idées"
 
 #: publications/templates/publications/admin/ideas_stats.html:66
-#, fuzzy
-#| msgid "No projects with voting enabled."
 msgid "No projects collecting ideas."
-msgstr "Aucun projet avec le vote activé."
+msgstr "Aucun projet en collecte d'idées."
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:28
-#: publications/templates/publications/admin/vote_stats_detail.html:38
+#: publications/templates/publications/admin/vote_stats_detail.html:33
 msgid "Back to list"
 msgstr "Retour à la liste"
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:38
-#: publications/templates/publications/admin/vote_stats_detail.html:48
+#: publications/templates/publications/admin/vote_stats_detail.html:43
 msgid "View project"
 msgstr "Voir le projet"
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:56
 msgid "ideas"
-msgstr ""
+msgstr "idées"
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:92
-#: publications/templates/publications/admin/vote_stats_detail.html:294
-#: publications/tests/test_vote_stats.py:301
+#: publications/templates/publications/admin/vote_stats_detail.html:289
+#: publications/tests/test_vote_stats.py:319
 msgid "Deleted User"
 msgstr "Utilisateur supprimé"
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:98
-#: publications/templates/publications/admin/vote_stats_detail.html:302
+#: publications/templates/publications/admin/vote_stats_detail.html:297
 msgid "Anonymous"
 msgstr "Anonyme"
 
 #: publications/templates/publications/admin/ideas_stats_detail.html:108
-#, fuzzy
-#| msgid "No votes yet"
 msgid "No ideas yet"
-msgstr "Aucun vote pour l'instant"
+msgstr "Aucune idée pour le moment"
 
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
-#: publications/views/vote_stats.py:40 publications/views/vote_stats.py:95
-#: publications/wagtail_hooks.py:25
+#: publications/views/vote_stats.py:48 publications/views/vote_stats.py:103
+#: publications/wagtail_hooks.py:27
 msgid "Vote Statistics"
 msgstr "Statistiques des votes"
 
 #: publications/templates/publications/admin/vote_stats.html:21
-#: publications/templates/publications/admin/vote_stats_detail.html:95
+#: publications/templates/publications/admin/vote_stats_detail.html:90
 #, python-format
 msgid "Show votes from outside %(code)s"
 msgstr "Montrer les votes en dehors du %(code)s"
 
 #: publications/templates/publications/admin/vote_stats.html:27
-#: publications/templates/publications/admin/vote_stats_detail.html:100
-#, fuzzy, python-format
-#| msgid ""
-#| "Only votes from users with postal code %(code)s are shown. Check the box "
-#| "above to include all votes."
+#: publications/templates/publications/admin/vote_stats_detail.html:95
+#, python-format
 msgid ""
 "Only votes from users with postal code %(code)s are shown.\n"
 "                    Check the box above to include all votes."
 msgstr ""
-"Seul les votes d'utilisateurs avec le code postal %(code)s sont affichés. "
+"Seuls les votes d'utilisateurs avec le code postal %(code)s sont affichés. "
 "Cochez la case ci-dessus pour inclure tous les votes."
 
 #: publications/templates/publications/admin/vote_stats.html:37
@@ -500,7 +611,7 @@ msgid "Total votes"
 msgstr "Total des votes"
 
 #: publications/templates/publications/admin/vote_stats.html:39
-#: publications/templates/publications/admin/vote_stats_detail.html:160
+#: publications/templates/publications/admin/vote_stats_detail.html:155
 msgid "With comment"
 msgstr "Avec commentaire"
 
@@ -520,43 +631,83 @@ msgstr "Voir les détails"
 msgid "No projects with voting enabled."
 msgstr "Aucun projet avec le vote activé."
 
-#: publications/templates/publications/admin/vote_stats_detail.html:71
+#: publications/templates/publications/admin/vote_stats_detail.html:66
 msgid "Voting open"
 msgstr "Vote ouvert"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:78
+#: publications/templates/publications/admin/vote_stats_detail.html:73
 msgid "Voting closed"
 msgstr "Vote fermé"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:81
+#: publications/templates/publications/admin/vote_stats_detail.html:76
 msgid "votes"
 msgstr "votes"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:153
+#: publications/templates/publications/admin/vote_stats_detail.html:148
 msgid "Type"
 msgstr "Type"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:156
+#: publications/templates/publications/admin/vote_stats_detail.html:151
 msgid "Count"
 msgstr "Nombre"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:252
+#: publications/templates/publications/admin/vote_stats_detail.html:247
 msgid "Comments"
 msgstr "Commentaires"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:316
+#: publications/templates/publications/admin/vote_stats_detail.html:311
 msgid "No votes yet"
 msgstr "Aucun vote pour l'instant"
 
-#: publications/templates/publications/components/ideas_form.html:9
-#: publications/views/idea.py:50
-msgid "Please describe your idea"
-msgstr ""
+#: publications/templates/publications/components/event_interest.html:8
+#: publications/templates/publications/components/event_interest.html:32
+msgid "Be the first to show interest"
+msgstr "Soyez la première personne intéressée"
 
+#: publications/templates/publications/components/event_interest.html:9
+#, python-brace-format
+msgid "{count} person is interested"
+msgstr "{count} personne intéressée"
+
+#: publications/templates/publications/components/event_interest.html:10
+#, python-brace-format
+msgid "{count} people are interested"
+msgstr "{count} personnes intéressées"
+
+#: publications/templates/publications/components/event_interest.html:11
 #: publications/templates/publications/components/ideas_form.html:10
 #: publications/templates/publications/components/vote_form.html:10
 msgid "An error occurred"
 msgstr "Une erreur est survenue"
+
+#: publications/templates/publications/components/event_interest.html:21
+#: publications/templates/publications/components/event_interest.html:26
+msgid "I'm interested"
+msgstr "Ça m'intéresse"
+
+#: publications/templates/publications/components/event_interest.html:22
+msgid "Interested ✓"
+msgstr "Intéressé·e ✓"
+
+#: publications/templates/publications/components/event_interest.html:34
+#, python-format
+msgid "%(count)s person is interested"
+msgid_plural "%(count)s people are interested"
+msgstr[0] "%(count)s personne intéressée"
+msgstr[1] "%(count)s personnes intéressées"
+
+#: publications/templates/publications/components/event_interest.html:57
+msgid "Add to my calendar"
+msgstr "Ajouter à mon agenda"
+
+#: publications/templates/publications/components/event_interest.html:61
+msgid "Get a reminder by email the day before"
+msgstr "Recevoir un rappel par email la veille"
+
+#: publications/templates/publications/components/ideas_form.html:9
+#: publications/views/idea.py:37
+msgid "Please describe your idea"
+msgstr "Veuillez décrire votre idée"
 
 #: publications/templates/publications/components/ideas_form.html:11
 #: publications/templates/publications/components/vote_form.html:11
@@ -564,100 +715,135 @@ msgid "An error occurred while loading"
 msgstr "Une erreur est survenue lors du chargement"
 
 #: publications/templates/publications/components/ideas_form.html:12
-#, fuzzy
-#| msgid "An error occurred while submitting the vote"
 msgid "An error occurred while submitting your idea"
-msgstr "Une erreur est survenue lors de l'envoi du vote"
+msgstr "Une erreur est survenue lors de l'envoi de votre idée"
 
 #: publications/templates/publications/components/ideas_form.html:13
-#, fuzzy
-#| msgid "An error occurred while removing the vote"
 msgid "An error occurred while removing your idea"
-msgstr "Une erreur est survenue lors de la suppression du vote"
+msgstr "Une erreur est survenue lors de la suppression de votre idée"
 
 #: publications/templates/publications/components/ideas_form.html:14
-#, fuzzy
-#| msgid "Are you sure you want to remove your vote?"
 msgid "Are you sure you want to remove your idea?"
-msgstr "Êtes-vous sûr de vouloir retirer votre vote ?"
+msgstr "Êtes-vous sûr de vouloir retirer votre idée ?"
 
 #: publications/templates/publications/components/ideas_form.html:40
-#, fuzzy
-#| msgid "What is your opinion on this project?"
 msgid "Share your ideas for this project"
-msgstr "Quel est votre avis sur ce projet ?"
+msgstr "Partagez vos idées pour ce projet"
 
 #: publications/templates/publications/components/ideas_form.html:43
 msgid ""
 "This project is in its early stages — propose your ideas or an alternative "
 "to help shape it."
 msgstr ""
+"Ce projet en est à ses débuts — proposez vos idées ou une alternative pour "
+"aider à le façonner."
 
 #: publications/templates/publications/components/ideas_form.html:48
 msgid "Your idea is only visible to you and the administrators."
-msgstr ""
+msgstr "Votre idée n'est visible que pour vous et les administrateurs."
 
 #: publications/templates/publications/components/ideas_form.html:61
-#: publications/templates/publications/components/vote_form.html:59
+#: publications/templates/publications/components/vote_form.html:61
 msgid "More information"
 msgstr "Plus d'informations"
 
 #: publications/templates/publications/components/ideas_form.html:73
-#, fuzzy
-#| msgid "Log in to vote on this project"
 msgid "Log in to share your idea on this project"
-msgstr "Connectez-vous pour voter sur ce projet"
+msgstr "Connectez-vous pour partager votre idée sur ce projet"
 
 #: publications/templates/publications/components/ideas_form.html:80
-#, fuzzy
-#| msgid "Log in to vote"
 msgid "Log in to participate"
-msgstr "Se connecter pour voter"
+msgstr "Connectez-vous pour participer"
 
-#: publications/templates/publications/components/ideas_form.html:88
-#, fuzzy
-#| msgid "Your vote:"
+#: publications/templates/publications/components/ideas_form.html:90
 msgid "Your idea"
-msgstr "Votre vote :"
+msgstr "Votre idée"
 
-#: publications/templates/publications/components/ideas_form.html:95
+#: publications/templates/publications/components/ideas_form.html:97
 msgid "Describe your idea or alternative proposal..."
-msgstr ""
+msgstr "Décrivez votre idée ou proposition alternative..."
 
-#: publications/templates/publications/components/ideas_form.html:99
-#, fuzzy
-#| msgid "Only you and administrators can see your comment"
+#: publications/templates/publications/components/ideas_form.html:101
 msgid "Only you and administrators can see your idea"
-msgstr "Seuls vous et les administrateurs peuvent voir votre commentaire"
+msgstr "Seuls vous et les administrateurs peuvent voir votre idée"
 
-#: publications/templates/publications/components/ideas_form.html:131
-#, fuzzy
-#| msgid "Submit my vote anonymously (my name will not be linked to this vote)"
+#: publications/templates/publications/components/ideas_form.html:133
 msgid "Submit my idea anonymously (my name will not be linked to it)"
 msgstr ""
-"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce vote)"
+"Soumettre mon idée de manière anonyme (mon nom ne sera pas associé à celle-"
+"ci)"
 
-#: publications/templates/publications/components/ideas_form.html:141
-#, fuzzy
-#| msgid "Submit my vote"
+#: publications/templates/publications/components/ideas_form.html:143
 msgid "Submit my idea"
-msgstr "Soumettre mon vote"
+msgstr "Soumettre mon idée"
 
-#: publications/templates/publications/components/ideas_form.html:150
-#, fuzzy
-#| msgid "Your vote:"
+#: publications/templates/publications/components/ideas_form.html:152
 msgid "Your idea:"
-msgstr "Votre vote :"
+msgstr "Votre idée :"
 
-#: publications/templates/publications/components/ideas_form.html:157
+#: publications/templates/publications/components/ideas_form.html:159
 msgid "Edit my idea"
-msgstr ""
+msgstr "Modifier mon idée"
 
-#: publications/templates/publications/components/ideas_form.html:160
-#, fuzzy
-#| msgid "Remove my vote"
+#: publications/templates/publications/components/ideas_form.html:162
 msgid "Remove my idea"
-msgstr "Retirer mon vote"
+msgstr "Retirer mon idée"
+
+#: publications/templates/publications/components/project_location.html:11
+#, python-format
+msgid "Map showing where “%(title)s” takes place"
+msgstr "Carte du lieu du projet « %(title)s »"
+
+#: publications/templates/publications/components/project_timeline.html:33
+msgid "Get the project news by email"
+msgstr "Recevoir les actualités du projet par email"
+
+#: publications/templates/publications/components/projects_map.html:6
+msgid "Around you"
+msgstr "Autour de vous"
+
+#: publications/templates/publications/components/projects_map.html:8
+msgid "Projects near me"
+msgstr "Projets près de chez moi"
+
+#: publications/templates/publications/components/projects_map.html:11
+msgid "Projects located in the 7th arrondissement of Marseille."
+msgstr "Les projets situés dans le 7e arrondissement de Marseille."
+
+#: publications/templates/publications/components/projects_map.html:27
+msgid "Show my position"
+msgstr "Afficher ma position"
+
+#: publications/templates/publications/components/projects_map.html:34
+msgid "Map of projects"
+msgstr "Carte des projets"
+
+#: publications/templates/publications/components/projects_map.html:35
+msgid "Your position could not be found."
+msgstr "Votre position n'a pas pu être déterminée."
+
+#: publications/templates/publications/components/projects_map.html:36
+msgid "You are here"
+msgstr "Vous êtes ici"
+
+#: publications/templates/publications/components/projects_map.html:37
+msgid "Open for participation"
+msgstr "Participation ouverte"
+
+#: publications/templates/publications/components/projects_map.html:38
+msgid "See the project"
+msgstr "Voir le projet"
+
+#: publications/templates/publications/components/projects_map.html:45
+#, python-format
+msgid "%(total)s project on the map"
+msgid_plural "%(total)s projects on the map"
+msgstr[0] "%(total)s projet sur la carte"
+msgstr[1] "%(total)s projets sur la carte"
+
+#: publications/templates/publications/components/projects_map.html:63
+msgid "No project has been placed on the map yet."
+msgstr "Aucun projet n'est encore placé sur la carte."
 
 #: publications/templates/publications/components/publication_preview.html:55
 #: publications/templates/publications/event_page.html:17
@@ -673,6 +859,34 @@ msgstr "En cours"
 #: publications/templates/publications/event_page.html:21
 msgid "Past"
 msgstr "Passé"
+
+#: publications/templates/publications/components/verify_email_prompt.html:5
+#, python-format
+msgid ""
+"Verify your email address (%(email)s) to take part. Check your inbox for the"
+" link we sent you."
+msgstr ""
+"Vérifiez votre adresse email (%(email)s) pour participer. Consultez votre "
+"boîte de réception : nous vous avons envoyé un lien."
+
+#: publications/templates/publications/components/verify_email_prompt.html:13
+msgid "Resend the verification link"
+msgstr "Renvoyer le lien de vérification"
+
+#: publications/templates/publications/components/vote_final_results.html:5
+msgid "Voting is closed: final results"
+msgstr "Le vote est clos : résultats définitifs"
+
+#: publications/templates/publications/components/vote_final_results.html:9
+#, python-format
+msgid "%(total)s vote in total"
+msgid_plural "%(total)s votes in total"
+msgstr[0] "%(total)s vote au total"
+msgstr[1] "%(total)s votes au total"
+
+#: publications/templates/publications/components/vote_final_results.html:33
+msgid "No votes were cast on this project."
+msgstr "Aucun vote n'a été exprimé sur ce projet."
 
 #: publications/templates/publications/components/vote_form.html:9
 msgid "Please select an option"
@@ -690,237 +904,322 @@ msgstr "Une erreur est survenue lors de la suppression du vote"
 msgid "Are you sure you want to remove your vote?"
 msgstr "Êtes-vous sûr de vouloir retirer votre vote ?"
 
-#: publications/templates/publications/components/vote_form.html:41
-#, fuzzy
-#| msgid ""
-#| "Your opinion matters! Votes help decision-makers understand residents "
-#| "priorities. All votes are analyzed and taken into account in the final "
-#| "project decisions."
+#: publications/templates/publications/components/vote_form.html:15
+#, python-brace-format
+msgid "{count} vote in total"
+msgstr "{count} vote au total"
+
+#: publications/templates/publications/components/vote_form.html:16
+#, python-brace-format
+msgid "{count} votes in total"
+msgstr "{count} votes au total"
+
+#: publications/templates/publications/components/vote_form.html:43
 msgid ""
 "Your opinion matters! Votes help decision-makers understand residents "
 "priorities."
 msgstr ""
 "Votre avis compte ! Les votes aident les décideurs à comprendre les "
-"priorités des habitants. Tous les votes sont analysés et pris en compte dans "
-"les décisions finales du projet."
+"priorités des habitants."
 
-#: publications/templates/publications/components/vote_form.html:46
-#, fuzzy
-#| msgid ""
-#| "Your opinion matters! Votes help decision-makers understand residents "
-#| "priorities. All votes are analyzed and taken into account in the final "
-#| "project decisions."
+#: publications/templates/publications/components/vote_form.html:48
 msgid ""
-"All votes are analyzed and taken into account in the final project decisions."
+"All votes are analyzed and taken into account in the final project "
+"decisions."
 msgstr ""
-"Votre avis compte ! Les votes aident les décideurs à comprendre les "
-"priorités des habitants. Tous les votes sont analysés et pris en compte dans "
-"les décisions finales du projet."
+"Tous les votes sont analysés et pris en compte dans les décisions finales du"
+" projet."
 
-#: publications/templates/publications/components/vote_form.html:70
+#: publications/templates/publications/components/vote_form.html:74
 msgid "Log in to vote on this project"
 msgstr "Connectez-vous pour voter sur ce projet"
 
-#: publications/templates/publications/components/vote_form.html:76
+#: publications/templates/publications/components/vote_form.html:80
 msgid "Log in to vote"
 msgstr "Se connecter pour voter"
 
-#: publications/templates/publications/components/vote_form.html:86
+#: publications/templates/publications/components/vote_form.html:92
 msgid "Vote choice"
 msgstr "Choix de vote"
 
-#: publications/templates/publications/components/vote_form.html:189
+#: publications/templates/publications/components/vote_form.html:195
 msgid "Comment (optional)"
 msgstr "Commentaire (optionnel)"
 
-#: publications/templates/publications/components/vote_form.html:196
+#: publications/templates/publications/components/vote_form.html:202
 msgid "Explain your vote..."
 msgstr "Expliquez votre vote..."
 
-#: publications/templates/publications/components/vote_form.html:199
+#: publications/templates/publications/components/vote_form.html:205
 msgid "Only you and administrators can see your comment"
 msgstr "Seuls vous et les administrateurs peuvent voir votre commentaire"
 
-#: publications/templates/publications/components/vote_form.html:231
+#: publications/templates/publications/components/vote_form.html:237
 msgid "Submit my vote anonymously (my name will not be linked to this vote)"
 msgstr ""
-"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce vote)"
+"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce "
+"vote)"
 
-#: publications/templates/publications/components/vote_form.html:242
+#: publications/templates/publications/components/vote_form.html:248
 msgid "Submit my vote"
 msgstr "Soumettre mon vote"
 
-#: publications/templates/publications/components/vote_form.html:253
+#: publications/templates/publications/components/vote_form.html:260
+msgid "Get the final results by email when the poll closes"
+msgstr "Recevoir les résultats par email à la clôture du vote"
+
+#: publications/templates/publications/components/vote_form.html:267
 msgid "Your vote:"
 msgstr "Votre vote :"
 
-#: publications/templates/publications/components/vote_form.html:257
+#: publications/templates/publications/components/vote_form.html:271
 msgid "Your comment:"
 msgstr "Votre commentaire :"
 
-#: publications/templates/publications/components/vote_form.html:265
+#: publications/templates/publications/components/vote_form.html:279
 msgid "Change my vote"
 msgstr "Modifier mon vote"
 
-#: publications/templates/publications/components/vote_form.html:268
+#: publications/templates/publications/components/vote_form.html:282
 msgid "Remove my vote"
 msgstr "Retirer mon vote"
 
-#: publications/templates/publications/components/vote_form.html:294
-#: publications/views/vote.py:40 publications/views/vote.py:106
-msgid "Voting is closed for this project"
-msgstr "Le vote est fermé pour ce projet"
-
-#: publications/templates/publications/event_page.html:46
-msgid "Date"
-msgstr "Date"
-
-#: publications/templates/publications/event_page.html:104
+#: publications/templates/publications/event_page.html:111
 msgid "Online"
 msgstr "En ligne"
 
-#: publications/templates/publications/event_page.html:105
+#: publications/templates/publications/event_page.html:112
 msgid "Yes"
 msgstr "Oui"
 
-#: publications/templates/publications/event_page.html:111
+#: publications/templates/publications/event_page.html:118
 msgid "Join"
 msgstr "Rejoindre"
 
-#: publications/templates/publications/event_page.html:135
+#: publications/templates/publications/event_page.html:143
 msgid "Max Participants"
 msgstr "Participants max"
 
-#: publications/templates/publications/event_page.html:150
-#: publications/templates/publications/project_page.html:52
+#: publications/templates/publications/event_page.html:158
+#: publications/templates/publications/project_page.html:58
 #, python-format
 msgid "Preview image: %(title)s"
 msgstr "Image d'aperçu: %(title)s"
 
-#: publications/templates/publications/project_page.html:22
-#, fuzzy
-#| msgid "Voting open"
+#: publications/templates/publications/event_page.html:182
+msgid "View on a map"
+msgstr "Voir sur une carte"
+
+#: publications/templates/publications/project_page.html:28
 msgid "Vote open"
 msgstr "Vote ouvert"
 
-#: publications/templates/publications/project_page.html:26
-#, fuzzy
-#| msgid "Voting open"
+#: publications/templates/publications/project_page.html:32
 msgid "Ideas open"
-msgstr "Vote ouvert"
+msgstr "Idées ouvertes"
 
-#: publications/templates/publications/project_page.html:70
+#: publications/templates/publications/project_page.html:78
 msgid "Citizen Participation"
 msgstr "Participation citoyenne"
 
-#: publications/templates/publications/project_page.html:104
+#: publications/templates/publications/project_page.html:112
 msgid "Give your opinion"
 msgstr "Donner votre avis"
 
-#: publications/templates/publications/project_page.html:126
+#: publications/templates/publications/project_page.html:134
 msgid "Share your idea"
-msgstr ""
+msgstr "Partager votre idée"
 
-#: publications/templates/publications/project_page.html:132
-#, fuzzy
-#| msgid "Page body content"
+#: publications/templates/publications/project_page.html:143
 msgid "Table of Contents"
 msgstr "Table des matières"
 
-#: publications/templates/publications/publication_index_page.html:14
+#: publications/templates/publications/publication_index_page.html:18
 msgid "Latest Publications"
 msgstr "Dernières publications"
 
-#: publications/templates/publications/publication_index_page.html:17
+#: publications/templates/publications/publication_index_page.html:21
 msgid "Search publications"
 msgstr "Rechercher des publications"
 
-#: publications/templates/publications/publication_index_page.html:18
+#: publications/templates/publications/publication_index_page.html:22
 msgid "Search for a publication..."
 msgstr "Rechercher une publication..."
 
-#: publications/templates/publications/publication_index_page.html:31
-#: publications/templates/publications/publication_index_page.html:98
+#: publications/templates/publications/publication_index_page.html:35
+#: publications/templates/publications/publication_index_page.html:102
 msgid "All"
 msgstr "Tout"
 
-#: publications/templates/publications/publication_index_page.html:82
+#: publications/templates/publications/publication_index_page.html:86
 msgid "Show past events"
 msgstr "Afficher les événements passés"
 
-#: publications/templates/publications/publication_index_page.html:120
+#: publications/templates/publications/publication_index_page.html:124
 msgid "No publications found"
 msgstr "Aucune publication trouvée"
 
-#: publications/views/idea.py:17 publications/views/vote.py:18
-msgid "Authentication required"
-msgstr "Authentification requise"
+#: publications/templates/publications/publication_index_page.html:133
+msgid "Follow the news:"
+msgstr "Suivre l'actualité :"
 
-#: publications/views/idea.py:27 publications/views/idea.py:81
-#: publications/views/idea.py:119 publications/views/vote.py:28
-#: publications/views/vote.py:94 publications/views/vote.py:136
+#: publications/templates/publications/publication_index_page.html:134
+msgid "RSS feed"
+msgstr "Flux RSS"
+
+#: publications/templates/publications/publication_index_page.html:137
+msgid "Subscribe to the events calendar"
+msgstr "S'abonner à l'agenda des événements"
+
+#: publications/templates/publications/publication_index_page.html:139
+msgid "iCal link"
+msgstr "Lien iCal"
+
+#: publications/views/event_interest.py:39
+#: publications/views/event_interest.py:45
+#: publications/views/event_interest.py:54
+msgid "Event not found"
+msgstr "Événement introuvable"
+
+#: publications/views/event_interest.py:47
+msgid "This event is over."
+msgstr "Cet événement est terminé."
+
+#: publications/views/feeds.py:31
+#, python-format
+msgid "%(site)s — events"
+msgstr "%(site)s — événements"
+
+#: publications/views/feeds.py:49
+#, python-format
+msgid "%(site)s — news"
+msgstr "%(site)s — actualités"
+
+#: publications/views/feeds.py:52
+msgid "Projects and events in the 7th arrondissement of Marseille."
+msgstr "Projets et événements du 7e arrondissement de Marseille."
+
+#: publications/views/idea.py:16 publications/views/idea.py:72
+#: publications/views/idea.py:108 publications/views/vote.py:17
+#: publications/views/vote.py:86 publications/views/vote.py:126
 msgid "Project not found"
 msgstr "Projet non trouvé"
 
-#: publications/views/idea.py:33 publications/views/idea.py:87
-#: publications/views/idea.py:125
-#, fuzzy
-#| msgid "This project does not have voting enabled"
+#: publications/views/idea.py:20 publications/views/idea.py:76
+#: publications/views/idea.py:112
 msgid "This project does not collect ideas"
-msgstr "Ce projet n'a pas de vote activé"
+msgstr "Ce projet n'est pas en collecte d'idées"
 
-#: publications/views/idea.py:41 publications/views/vote.py:48
+#: publications/views/idea.py:28 publications/views/vote.py:35
 msgid "Invalid JSON data"
 msgstr "Données JSON invalides"
 
-#: publications/views/idea.py:66
-#, fuzzy
-#| msgid "Vote submitted successfully"
+#: publications/views/idea.py:43
+#, python-format
+msgid "Your idea must not exceed %(max)d characters."
+msgstr "Votre idée ne doit pas dépasser %(max)d caractères."
+
+#: publications/views/idea.py:59
 msgid "Idea submitted successfully"
-msgstr "Vote soumis avec succès"
+msgstr "Idée soumise avec succès"
 
-#: publications/views/idea.py:68
-#, fuzzy
-#| msgid "Vote updated successfully"
+#: publications/views/idea.py:61
 msgid "Idea updated successfully"
-msgstr "Vote mis à jour avec succès"
+msgstr "Idée mise à jour avec succès"
 
-#: publications/views/idea.py:99
-#, fuzzy
-#| msgid "No vote found to remove"
+#: publications/views/idea.py:88
 msgid "No idea found to remove"
-msgstr "Aucun vote à supprimer"
+msgstr "Aucune idée à supprimer"
 
-#: publications/views/idea.py:106
-#, fuzzy
-#| msgid "Vote removed successfully"
+#: publications/views/idea.py:95
 msgid "Idea removed successfully"
-msgstr "Vote supprimé avec succès"
+msgstr "Idée supprimée avec succès"
 
-#: publications/views/vote.py:34 publications/views/vote.py:100
-#: publications/views/vote.py:142
+#: publications/views/mixins.py:35 publications/views/mixins.py:39
+msgid "Authentication required"
+msgstr "Authentification requise"
+
+#: publications/views/mixins.py:51
+msgid "Please verify your email address before taking part."
+msgstr "Veuillez vérifier votre adresse email avant de participer."
+
+#: publications/views/mixins.py:61
+msgid "Please accept the code of conduct before taking part."
+msgstr "Veuillez accepter la charte de bonne conduite avant de participer."
+
+#: publications/views/mixins.py:75
+msgid "Too many requests. Please try again in a minute."
+msgstr "Trop de requêtes. Réessayez dans une minute."
+
+#: publications/views/poll_close.py:36
+#, python-format
+msgid ""
+"The poll on “%(title)s” is closed. Results are being sent to voters who "
+"opted in."
+msgstr ""
+"Le vote sur « %(title)s » est clos. Les résultats sont envoyés aux votants "
+"qui l'ont demandé."
+
+#: publications/views/poll_close.py:41
+msgid "This poll was already closed."
+msgstr "Ce vote était déjà clos."
+
+#: publications/views/vote.py:21 publications/views/vote.py:90
+#: publications/views/vote.py:130
 msgid "This project does not have voting enabled"
 msgstr "Ce projet n'a pas de vote activé"
 
-#: publications/views/vote.py:58
+#: publications/views/vote.py:27 publications/views/vote.py:96
+msgid "Voting is closed for this project"
+msgstr "Le vote est fermé pour ce projet"
+
+#: publications/views/vote.py:45
 msgid "Invalid vote choice"
 msgstr "Choix de vote invalide"
 
-#: publications/views/vote.py:77
+#: publications/views/vote.py:51
+#, python-format
+msgid "Your comment must not exceed %(max)d characters."
+msgstr "Votre commentaire ne doit pas dépasser %(max)d caractères."
+
+#: publications/views/vote.py:71
 msgid "Vote submitted successfully"
 msgstr "Vote soumis avec succès"
 
-#: publications/views/vote.py:79
+#: publications/views/vote.py:73
 msgid "Vote updated successfully"
 msgstr "Vote mis à jour avec succès"
 
-#: publications/views/vote.py:118
+#: publications/views/vote.py:108
 msgid "No vote found to remove"
 msgstr "Aucun vote à supprimer"
 
-#: publications/views/vote.py:125
+#: publications/views/vote.py:115
 msgid "Vote removed successfully"
 msgstr "Vote supprimé avec succès"
+
+#: publications/widgets.py:28
+msgid ""
+"Place a marker for a precise spot, or draw a polygon for an area. Drawing a "
+"new shape replaces the previous one."
+msgstr ""
+"Placez un marqueur pour un lieu précis, ou dessinez un polygone pour une "
+"zone. Une nouvelle forme remplace la précédente."
+
+#~ msgid "Date et heure de début de l'événement"
+#~ msgstr "Date et heure de début de l'événement"
+
+#~ msgid "Date et heure de fin de l'événement (optionnel)"
+#~ msgstr "Date et heure de fin de l'événement (optionnel)"
+
+#~ msgid "Lieu de l'événement"
+#~ msgstr "Lieu de l'événement"
+
+#~ msgid "Adresse complète de l'événement"
+#~ msgstr "Adresse complète de l'événement"
+
+#~ msgid "Cochez si l'événement est en ligne"
+#~ msgstr "Cochez si l'événement est en ligne"
 
 #~ msgid "Enable Voting"
 #~ msgstr "Activer le vote"
@@ -935,7 +1234,6 @@ msgstr "Vote supprimé avec succès"
 #~ msgstr "Toutes les catégories"
 
 #, fuzzy
-#~| msgid "View project"
 #~ msgid "View more"
 #~ msgstr "Voir la suite"
 

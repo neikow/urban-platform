@@ -4,32 +4,31 @@ WORKDIR /app
 COPY docs/ docs/
 RUN cd docs && mkdocs build
 
-FROM node:20-bookworm-slim AS assets
+FROM node:24-bookworm-slim AS assets
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-RUN npm run styles:build
+RUN npm run typecheck && npm run build
 
 FROM python:3.13-slim-bookworm AS builder
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.12.23 /uv /bin/uv
 WORKDIR /app
 ENV UV_COMPILE_BYTECODE=1 UV_NO_DEV=1
 
 ARG SENTRY_RELEASE
 ENV SENTRY_RELEASE=${SENTRY_RELEASE}
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq5 \
     gettext \
-    git \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/app/.venv/bin:$PATH"
 
 COPY . .
 
-COPY --from=assets /app/urban_platform/static/css/styles.css /app/urban_platform/static/css/styles.css
+COPY --from=assets /app/urban_platform/static/dist /app/urban_platform/static/dist
 COPY --from=docs /app/docs/site /app/docs/site
 
 RUN uv sync --locked
@@ -52,4 +51,4 @@ RUN useradd --create-home --uid 1000 appuser \
     && chown -R appuser:appuser /app
 USER appuser
 
-CMD ["gunicorn", "urban_platform.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "urban_platform.wsgi:application", "-c", "gunicorn.conf.py"]

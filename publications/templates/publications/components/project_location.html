@@ -1,0 +1,16 @@
+{% load i18n static %}
+
+<section class="bg-base-100 rounded-lg shadow-sm p-5 mb-4" aria-labelledby="project-location-title">
+    <h2 id="project-location-title" class="text-sm font-bold uppercase tracking-widest text-base-content/50 mb-3">
+        {% trans "Location" %}
+    </h2>
+    <div
+        id="project-location-map"
+        class="h-56 rounded-box overflow-hidden bg-base-200 z-0"
+        role="img"
+        aria-label="{% blocktrans with title=page.title %}Map showing where “{{ title }}” takes place{% endblocktrans %}"
+    >
+    </div>
+    {{ project_map|json_script:"project-location-data" }}
+    <script type="module" src="{% static 'dist/project-location.js' %}"></script>
+</section>

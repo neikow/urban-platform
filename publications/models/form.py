@@ -3,6 +3,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+VOTE_COMMENT_MAX_LENGTH = 1000
+
+
 class VoteChoice(models.TextChoices):
     UNFAVORABLE = "UNFAVORABLE", _("Unfavorable")
     RATHER_UNFAVORABLE = "RATHER_UNFAVORABLE", _("Rather Unfavorable")

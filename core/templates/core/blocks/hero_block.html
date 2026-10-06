@@ -12,14 +12,14 @@
             <h1
                 class="
                     font-display font-black text-white leading-[0.88] uppercase
-                    text-[clamp(3.2rem,10vw,8.5rem)]
+                    text-display-2xl
                     mb-6 sm:mb-8 max-w-4xl
                 "
             >
                 {{ self.title }}
             </h1>
             {% if self.subtitle %}
-                <p class="text-white/80 text-base sm:text-lg leading-relaxed max-w-lg mb-8">
+                <p class="text-white/80 text-xl sm:text-2xl lg:text-3xl leading-relaxed max-w-2xl mb-8">
                     {{ self.subtitle }}
                 </p>
             {% endif %}
@@ -45,14 +45,14 @@
             <h2
                 class="
                     font-display font-black text-white leading-tight uppercase
-                    text-[clamp(2rem,5vw,4rem)]
+                    text-display-md
                     max-w-2xl
                 "
             >
                 {{ self.title }}
             </h2>
             {% if self.subtitle %}
-                <p class="text-white/80 text-base sm:text-lg mt-4 max-w-xl leading-relaxed">{{ self.subtitle }}</p>
+                <p class="text-white/80 text-lg sm:text-xl mt-4 max-w-xl leading-relaxed">{{ self.subtitle }}</p>
             {% endif %}
             {% if self.cta_link and self.cta_text %}
                 <a href="{{ self.cta_link }}" class="btn btn-primary mt-6 border-none">{{ self.cta_text }}</a>

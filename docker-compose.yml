@@ -31,13 +31,20 @@ services:
     web:
         <<: *django-common
         container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-web
-        command: uv run gunicorn urban_platform.wsgi:application --bind 0.0.0.0:8000
+        command: uv run gunicorn urban_platform.wsgi:application -c gunicorn.conf.py
         volumes:
             - static_volume:/app/staticfiles
             - media_volume:/app/mediafiles
             - uv_cache:/app/.cache/uv
         healthcheck:
-            test: [ "CMD-SHELL", "curl -f http://localhost:8000/ || exit 1" ]
+            # The slim image has no curl. Send an allowed Host and the proxy's
+            # X-Forwarded-Proto so neither ALLOWED_HOSTS nor the HTTPS redirect
+            # turn the probe into a 400/301.
+            test:
+                - CMD
+                - python
+                - -c
+                - "import os, urllib.request as r; h = os.environ['ALLOWED_HOSTS'].split(';')[0]; r.urlopen(r.Request('http://localhost:8000/healthz/', headers={'Host': h, 'X-Forwarded-Proto': 'https'}), timeout=4)"
             interval: 1m30s
             timeout: 5s
             retries: 3
@@ -112,18 +119,18 @@ services:
             retries: 3
             start_period: 15s
 
-    #  celery_beat:
-    #    container_name: urban-platform-staging-celery-beat
-    #    image: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
-    #    command: uv run celery -A urban_platform beat --loglevel=info
-    #    volumes:
-    #      - uv_cache:/app/.cache/uv
-    #    depends_on:
-    #      - db
-    #      - cache
-    #    restart: always
-    #    networks:
-    #      - internal
+    beat:
+        <<: *django-common
+        container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-beat
+        # Schedules live in the database (django_celery_beat), seeded from
+        # CELERY_BEAT_SCHEDULE, so no schedule file needs to be writable.
+        command: uv run celery -A urban_platform beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+        depends_on:
+            cache:
+                condition: service_healthy
+            migrator:
+                condition: service_completed_successfully
+        restart: always
 
     db:
         image: postgres:17

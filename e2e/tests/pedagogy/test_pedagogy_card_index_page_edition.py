@@ -24,17 +24,17 @@ def test_pedagogy_card_index_page_edition(
     )
     page.goto(base_url + "/admin/")
 
-    page.get_by_role("button", name="Fiches Pédagogiques").click()
-    page.get_by_label("Fiches Pédagogiques").get_by_role("link", name="Accueil").click()
+    page.get_by_role("button", name="Informations utiles").click()
+    page.get_by_label("Informations utiles").get_by_role("link", name="Accueil").click()
     page.get_by_role("textbox", name="Introduction de la page").fill(TEST_CONTENT)
     page.get_by_role("button", name="Plus d'actions").click()
     page.get_by_role("button", name="Publier").click()
-    page.get_by_role("link", name="Fiches pédagogiques", exact=True).click()
+    page.get_by_role("link", name="Informations utiles", exact=True).click()
     page.get_by_role("button", name="Actions", exact=True).click()
     page.get_by_role("button", name="Actions", exact=True).press("Escape")
     page.get_by_role("tab", name="Promotion").click()
     page.get_by_role("tab", name="Contenu").click()
 
-    page.goto(base_url + "/fiches-pedagogiques/")
+    page.goto(base_url + "/informations-utiles/")
 
     expect(page.get_by_text(TEST_CONTENT)).to_be_visible()

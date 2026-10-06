@@ -19,7 +19,5 @@
 
 {% block extra_js %}
     {{ block.super }}
-    <script>
-        document.documentElement.setAttribute("data-theme", "light");
-    </script>
+    <script type="module" src="{% static 'dist/admin.js' %}"></script>
 {% endblock %}

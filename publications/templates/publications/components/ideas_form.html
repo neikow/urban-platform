@@ -4,7 +4,7 @@
     <div
         id="ideas-component"
         data-project-id="{{ page.id }}"
-        data-is-authenticated="{{ user.is_authenticated|yesno:'true,false' }}"
+        data-can-participate="{% if user.is_authenticated and user.is_verified %}true{% else %}false{% endif %}"
         data-csrf-token="{{ csrf_token }}"
         data-msg-empty="{% trans 'Please describe your idea' %}"
         data-msg-generic-error="{% trans 'An error occurred' %}"
@@ -74,12 +74,14 @@
                     </p>
                     <button
                         type="button"
-                        onclick="document.getElementById('login_modal').showModal()"
+                        data-dialog-open="login_modal"
                         class="btn btn-primary border-none font-semibold"
                     >
                         {% trans "Log in to participate" %}
                     </button>
                 </div>
+            {% elif not user.is_verified %}
+                {% include "publications/components/verify_email_prompt.html" %}
             {% else %}
                 <div id="ideas-form-container">
                     <form id="ideas-form" class="space-y-5">
@@ -169,7 +171,5 @@
         </div>
     </div>
 
-    {% include "auth/login_modal.html" %}
-
-    <script src="{% static 'publications/js/ideas.js' %}"></script>
+    <script type="module" src="{% static 'dist/ideas.js' %}"></script>
 {% endif %}

@@ -11,7 +11,7 @@
                 <h1
                     class="
                         font-display font-black uppercase leading-tight text-balance
-                        text-[clamp(2rem,5vw,4rem)]
+                        text-display-md
                     "
                 >
                     {% trans "Signing the code of conduct" %}
@@ -19,10 +19,10 @@
             </div>
         </header>
         <div class="container mx-auto px-6 sm:px-8 lg:px-12 py-12 pb-40">
-            <main class="page-content max-w-3xl">
+            <div class="page-content max-w-3xl">
                 {{ content|richtext }}
                 <span id="page-content-end"></span>
-            </main>
+            </div>
         </div>
     </article>
 
@@ -41,7 +41,7 @@
                     class="checkbox checkbox-primary checkbox-sm mt-0.5 sm:mt-0"
                     disabled
                 >
-                <span id="consent-label-read" class="text-sm font-medium" style="display: none">
+                <span id="consent-label-read" class="text-sm font-medium hidden">
                     {% trans "I have read and accept the code of conduct" %}
                 </span>
                 <span id="consent-label-unread" class="text-sm text-base-content/60">
@@ -61,5 +61,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script type="text/javascript" src="{% static 'js/code_of_conduct_page.js' %}"></script>
+    <script type="module" src="{% static 'dist/code-of-conduct.js' %}"></script>
 {% endblock %}

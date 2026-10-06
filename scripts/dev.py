@@ -89,8 +89,8 @@ class DevServer:
 
         self.services.append(
             Service(
-                name="Tailwind CSS Watcher",
-                start=self._start_tailwind_watcher,
+                name="Vite watcher (TypeScript + Tailwind)",
+                start=self._start_vite_watcher,
             )
         )
 
@@ -108,13 +108,13 @@ class DevServer:
             )
         )
 
-        # Future: Add Celery beat here
-        # self.services.append(
-        #     Service(
-        #         name="Celery Beat",
-        #         start=self._start_celery_beat,
-        #     )
-        # )
+        # Schedules poll closing and event reminders (CELERY_BEAT_SCHEDULE).
+        self.services.append(
+            Service(
+                name="Celery Beat",
+                start=self._start_celery_beat,
+            )
+        )
 
     def _setup_signal_handlers(self) -> None:
         signal.signal(signal.SIGINT, self._handle_shutdown)
@@ -126,14 +126,14 @@ class DevServer:
         self.cleanup()
         sys.exit(0)
 
-    def _start_tailwind_watcher(self) -> subprocess.Popen:
-        print("🎨 Starting Tailwind CSS watcher...")
+    def _start_vite_watcher(self) -> subprocess.Popen:
+        print("🎨 Starting Vite watcher...")
         process = subprocess.Popen(  # nosec
-            ["npm", "run", "styles:watch"],
+            ["npm", "run", "dev"],
             cwd=PROJECT_ROOT,
         )
         self.processes.append(process)
-        print("✅ Tailwind CSS watcher started")
+        print("✅ Vite watcher started")
         return process
 
     def _start_docker_compose(self) -> subprocess.Popen | None:
@@ -202,6 +202,8 @@ class DevServer:
                 "urban_platform",
                 "beat",
                 "--loglevel=info",
+                "--scheduler",
+                "django_celery_beat.schedulers:DatabaseScheduler",
             ],
             cwd=PROJECT_ROOT,
             env=env,

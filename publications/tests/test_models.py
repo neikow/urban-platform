@@ -199,6 +199,46 @@ class PublicationIndexPageModelTest(TestCase):
         request = self.factory.get("/publications/?type=projects&page=2")
         self.assertEqual(len(self.publication_index.get_publications(request)), 5)
 
+    def test_get_publications_invalid_page_falls_back(self) -> None:
+        for i in range(15):
+            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.OTHER)
+            self.publication_index.add_child(instance=project)
+            project.save_revision().publish()
+
+        for page in ("abc", "-1", "999"):
+            request = self.factory.get(f"/publications/?type=projects&page={page}")
+            self.assertGreater(len(self.publication_index.get_publications(request)), 0)
+
+    def test_index_page_renders_with_invalid_page(self) -> None:
+        self.publication_index.save_revision().publish()
+
+        response = self.client.get(self.publication_index.url + "?page=abc")
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_filter_links_keep_other_params_and_encode_values(self) -> None:
+        self.publication_index.save_revision().publish()
+
+        response = self.client.get(
+            self.publication_index.url + "?type=projects&search=a%26b&category=MOBILITY"
+        )
+
+        content = response.content.decode()
+        # Category links keep the search term, URL-encoded, and drop the page.
+        self.assertIn("type=projects&amp;search=a%26b&amp;category=HOUSING", content)
+        self.assertNotIn("search=a&b", content)
+
+    def test_pagination_links_keep_filters(self) -> None:
+        for i in range(15):
+            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.OTHER)
+            self.publication_index.add_child(instance=project)
+            project.save_revision().publish()
+        self.publication_index.save_revision().publish()
+
+        response = self.client.get(self.publication_index.url + "?type=projects&category=OTHER")
+
+        self.assertIn("?type=projects&amp;category=OTHER&amp;page=2", response.content.decode())
+
     def test_get_context_returns_expected_keys(self) -> None:
         request = self.factory.get("/publications/?type=events&category=URBAN_PLANNING")
         context = self.publication_index.get_context(request)
