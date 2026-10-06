@@ -47,28 +47,28 @@
         <div class="absolute top-3 left-3 flex items-center gap-1.5">
             {% if publication.is_event %}
                 <span
-                    class="badge badge-secondary text-[10px] font-bold uppercase tracking-wide"
+                    class="badge badge-secondary text-3xs font-bold uppercase tracking-wide"
                 >{% trans "Event" %}</span>
                 {% if publication.is_upcoming %}
                     <span
-                        class="badge badge-success text-[10px] font-bold uppercase tracking-wide"
+                        class="badge badge-success text-3xs font-bold uppercase tracking-wide"
                     >{% trans "Upcoming" %}</span>
                 {% elif publication.is_ongoing %}
                     <span
-                        class="badge badge-warning text-[10px] font-bold uppercase tracking-wide"
+                        class="badge badge-warning text-3xs font-bold uppercase tracking-wide"
                     >{% trans "Ongoing" %}</span>
                 {% elif publication.is_past %}
                     <span
-                        class="badge badge-ghost text-[10px] font-bold uppercase tracking-wide bg-base-100/80"
+                        class="badge badge-ghost text-3xs font-bold uppercase tracking-wide bg-base-100/80"
                     >{% trans "Past" %}</span>
                 {% endif %}
             {% else %}
                 <span
-                    class="badge badge-primary text-[10px] font-bold uppercase tracking-wide"
+                    class="badge badge-primary text-3xs font-bold uppercase tracking-wide"
                 >{% trans "Project" %}</span>
                 {% if publication.category %}
                     <span
-                        class="badge badge-secondary text-[10px] font-bold uppercase tracking-wide"
+                        class="badge badge-secondary text-3xs font-bold uppercase tracking-wide"
                     >{{ publication.get_category_display }}</span>
                 {% endif %}
             {% endif %}

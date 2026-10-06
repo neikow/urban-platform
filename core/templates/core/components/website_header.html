@@ -34,13 +34,13 @@
                     <a
                         href="{{ menuitem.url }}"
                         class="
-                            relative flex items-center px-3 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-150
+                            relative flex items-center px-3 text-2xs font-bold uppercase tracking-label transition-colors duration-150
                             {% if menuitem.is_active %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
                         "
                     >
                         {{ menuitem.title }}
                         {% if menuitem.is_active %}
-                            <span class="absolute bottom-0 inset-x-2 h-[2px] bg-primary"></span>
+                            <span class="absolute bottom-0 inset-x-2 h-0.5 bg-primary"></span>
                         {% endif %}
                     </a>
                 {% endfor %}
@@ -52,7 +52,7 @@
                     <a
                         href="{% url 'me' %}"
                         title="{{ user.first_name }}"
-                        class="block max-w-[10rem] truncate text-[11px] font-bold uppercase tracking-wide text-base-content/70 hover:text-primary transition-colors"
+                        class="block max-w-[10rem] truncate text-2xs font-bold uppercase tracking-wide text-base-content/70 hover:text-primary transition-colors"
                     >
                         {{ user.first_name }}
                     </a>

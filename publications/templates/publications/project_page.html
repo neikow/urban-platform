@@ -11,25 +11,25 @@
                     <div class="flex-1 flex flex-col justify-center">
                         <div class="flex items-center gap-3 mb-4">
                             <span
-                                class="badge badge-primary font-bold uppercase text-[10px] tracking-wide"
+                                class="badge badge-primary font-bold uppercase text-3xs tracking-wide"
                             >{% trans "Project" %}</span>
                             {% if page.category %}
-                                <span class="badge badge-info text-[10px]">{{ page.get_category_display }}</span>
+                                <span class="badge badge-info text-3xs">{{ page.get_category_display }}</span>
                             {% endif %}
                             {% if page.enable_voting and page.is_voting_open %}
                                 <span
-                                    class="badge badge-success text-[10px] uppercase tracking-wide font-bold"
+                                    class="badge badge-success text-3xs uppercase tracking-wide font-bold"
                                 >{% trans "Vote open" %}</span>
                             {% elif page.enable_ideas %}
                                 <span
-                                    class="badge badge-success text-[10px] uppercase tracking-wide font-bold"
+                                    class="badge badge-success text-3xs uppercase tracking-wide font-bold"
                                 >{% trans "Ideas open" %}</span>
                             {% endif %}
                         </div>
                         <h1
                             class="
                                 font-display font-black uppercase leading-[0.9]
-                                text-[clamp(2.2rem,5.5vw,4.5rem)] text-balance
+                                text-display-lg text-balance
                                 mb-5
                             "
                         >

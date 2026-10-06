@@ -11,7 +11,7 @@
                 <h1
                     class="
                         font-display font-black uppercase leading-tight
-                        text-[clamp(2.2rem,5vw,4rem)]
+                        text-display-md
                     "
                 >
                     {% if user.first_name %}{{ user.first_name }}
@@ -68,11 +68,11 @@
                                 {{ user.email }}
                                 {% if user.is_verified %}
                                     <span
-                                        class="badge badge-success badge-sm font-bold uppercase text-[10px] tracking-wide"
+                                        class="badge badge-success badge-sm font-bold uppercase text-3xs tracking-wide"
                                     >{% trans "Verified" %}</span>
                                 {% else %}
                                     <span
-                                        class="badge badge-warning badge-sm font-bold uppercase text-[10px] tracking-wide"
+                                        class="badge badge-warning badge-sm font-bold uppercase text-3xs tracking-wide"
                                     >{% trans "Not verified" %}</span>
                                 {% endif %}
                             </p>
@@ -106,15 +106,15 @@
                             <p>
                                 {% if user.role == 'CITIZEN' %}
                                     <span
-                                        class="badge badge-primary font-bold uppercase text-[10px] tracking-wide"
+                                        class="badge badge-primary font-bold uppercase text-3xs tracking-wide"
                                     >{% trans "Member" %}</span>
                                 {% elif user.role == 'ASSOCIATION_MEMBER' %}
                                     <span
-                                        class="badge badge-secondary font-bold uppercase text-[10px] tracking-wide"
+                                        class="badge badge-secondary font-bold uppercase text-3xs tracking-wide"
                                     >{% trans "Association member" %}</span>
                                 {% elif user.role == 'ADMIN' %}
                                     <span
-                                        class="badge badge-accent font-bold uppercase text-[10px] tracking-wide"
+                                        class="badge badge-accent font-bold uppercase text-3xs tracking-wide"
                                     >{% trans "Administrator" %}</span>
                                 {% endif %}
                             </p>
@@ -126,11 +126,11 @@
                             <p>
                                 {% if user.newsletter_subscription %}
                                     <span
-                                        class="badge badge-success font-bold uppercase text-[10px] tracking-wide"
+                                        class="badge badge-success font-bold uppercase text-3xs tracking-wide"
                                     >{% trans "Subscribed" %}</span>
                                 {% else %}
                                     <span
-                                        class="badge badge-ghost font-bold uppercase text-[10px] tracking-wide"
+                                        class="badge badge-ghost font-bold uppercase text-3xs tracking-wide"
                                     >{% trans "Not subscribed" %}</span>
                                 {% endif %}
                             </p>

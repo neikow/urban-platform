@@ -10,7 +10,7 @@
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-0 gap-4">
                 <div>
                     <p class="section-label mb-1.5">{% trans "Publications" %}</p>
-                    <h2 class="font-display font-black uppercase text-[clamp(1.8rem,4vw,3rem)] leading-tight">
+                    <h2 class="font-display font-black uppercase text-display-sm leading-tight">
                         {% trans "Latest Publications" %}
                     </h2>
                 </div>
@@ -24,37 +24,37 @@
                 <a
                     href="{% querystring type=None category=None page=None %}"
                     class="
-                        relative px-4 pb-3 pt-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-150
+                        relative px-4 pb-3 pt-2 text-2xs font-bold uppercase tracking-label transition-colors duration-150
                         {% if selected_type == 'all' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
                     "
                 >
                     {% trans "All" %}
                     {% if selected_type == 'all' %}<span
-                            class="absolute bottom-0 inset-x-4 h-[2px] bg-primary"
+                            class="absolute bottom-0 inset-x-4 h-0.5 bg-primary"
                         ></span>{% endif %}
                 </a>
                 <a
                     href="{% querystring type='projects' category=None page=None show_past=None %}"
                     class="
-                        relative px-4 pb-3 pt-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-150
+                        relative px-4 pb-3 pt-2 text-2xs font-bold uppercase tracking-label transition-colors duration-150
                         {% if selected_type == 'projects' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
                     "
                 >
                     {% trans "Projects" %}
                     {% if selected_type == 'projects' %}<span
-                            class="absolute bottom-0 inset-x-4 h-[2px] bg-primary"
+                            class="absolute bottom-0 inset-x-4 h-0.5 bg-primary"
                         ></span>{% endif %}
                 </a>
                 <a
                     href="{% querystring type='events' category=None page=None %}"
                     class="
-                        relative px-4 pb-3 pt-2 text-[11px] font-bold uppercase tracking-[0.12em] transition-colors duration-150
+                        relative px-4 pb-3 pt-2 text-2xs font-bold uppercase tracking-label transition-colors duration-150
                         {% if selected_type == 'events' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
                     "
                 >
                     {% trans "Events" %}
                     {% if selected_type == 'events' %}<span
-                            class="absolute bottom-0 inset-x-4 h-[2px] bg-primary"
+                            class="absolute bottom-0 inset-x-4 h-0.5 bg-primary"
                         ></span>{% endif %}
                 </a>
 
@@ -91,7 +91,7 @@
                     <a
                         href="{% querystring category=None page=None %}"
                         class="
-                            text-[11px] font-bold uppercase tracking-wide px-3 py-1.5 rounded transition-colors duration-150
+                            text-2xs font-bold uppercase tracking-wide px-3 py-1.5 rounded transition-colors duration-150
                             {% if not selected_category %}bg-secondary text-secondary-content{% else %}bg-base-200 text-base-content/60 hover:text-base-content{% endif %}
                         "
                     >
@@ -101,7 +101,7 @@
                         <a
                             href="{% querystring category=category.value page=None %}"
                             class="
-                                text-[11px] font-bold uppercase tracking-wide px-3 py-1.5 rounded transition-colors duration-150
+                                text-2xs font-bold uppercase tracking-wide px-3 py-1.5 rounded transition-colors duration-150
                                 {% if category.is_selected %}bg-secondary text-secondary-content{% else %}bg-base-200 text-base-content/60 hover:text-base-content{% endif %}
                             "
                         >
