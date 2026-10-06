@@ -20,6 +20,16 @@ def has_valid_code_of_conduct_consent(user: User) -> bool:
     return True
 
 
+def needs_code_of_conduct_consent(user: User) -> bool:
+    """True when a code of conduct is published and the user has not accepted its latest version.
+
+    Without a live code of conduct there is nothing to consent to, so participation is not blocked.
+    """
+    if not CodeOfConductPage.objects.live().exists():
+        return False
+    return not has_valid_code_of_conduct_consent(user)
+
+
 def get_latest_code_of_conduct_revision() -> Revision:
     code_of_conduct_page: CodeOfConductPage | None = CodeOfConductPage.objects.live().first()
     if code_of_conduct_page is None:

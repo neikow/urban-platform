@@ -13,13 +13,16 @@ from publications.models import (
 
 
 @pytest.fixture
-def user(db):
-    return User.objects.create_user(
+def user(db, give_code_of_conduct_consent):
+    user = User.objects.create_user(
         email="ideauser@example.com",
         password="TestPass123",
         first_name="Idea",
         last_name="User",
+        is_verified=True,
     )
+    give_code_of_conduct_consent(user)
+    return user
 
 
 @pytest.fixture

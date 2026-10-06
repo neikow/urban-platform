@@ -1,0 +1,38 @@
+{% load i18n %}
+
+{% with updates=page.timeline %}
+    {% if updates %}
+        <section id="suivi" class="not-prose my-16 scroll-mt-24" aria-labelledby="timeline-title">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-px flex-1 bg-base-300"></div>
+                <h2 id="timeline-title" class="section-label">{% trans "Project timeline" %}</h2>
+                <div class="h-px flex-1 bg-base-300"></div>
+            </div>
+            <ol class="relative border-s-2 border-base-300 ms-2 space-y-8">
+                {% for update in updates %}
+                    <li class="ms-6">
+                        <span
+                            class="absolute -start-[7px] mt-1.5 h-3 w-3 rounded-full {% if forloop.first %}bg-primary{% else %}bg-base-300{% endif %}"
+                        ></span>
+                        <time
+                            class="text-xs font-semibold uppercase tracking-label text-base-content/60"
+                            datetime="{{ update.date|date:'Y-m-d' }}"
+                        >
+                            {{ update.date|date:"j F Y" }}
+                        </time>
+                        <h3 class="font-semibold text-lg mt-1">{{ update.title }}</h3>
+                        <p class="text-base-content/80 mt-1">{{ update.body|linebreaksbr }}</p>
+                    </li>
+                {% endfor %}
+            </ol>
+            {% if user.is_authenticated and not user.notify_project_updates %}
+                <p class="text-xs text-base-content/60 mt-6">
+                    <a
+                        class="link"
+                        href="{% url 'profile_edit' %}#notifications"
+                    >{% trans "Get the project news by email" %}</a>
+                </p>
+            {% endif %}
+        </section>
+    {% endif %}
+{% endwith %}

@@ -5,11 +5,11 @@
 {% block content %}
     <article class="mx-4">
         {% include "core/components/page_header.html" %}
-        <main class="container mx-auto">
+        <div class="container mx-auto">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-8 gap-4">
                 <div>
                     <p class="section-label mb-1.5">{% trans "Resources" %}</p>
-                    <h2 class="font-display font-black uppercase text-[clamp(1.8rem,4vw,3rem)] leading-tight">
+                    <h2 class="font-display font-black uppercase text-display-sm leading-tight">
                         {% trans "Latest additions" %}
                     </h2>
                 </div>
@@ -32,6 +32,6 @@
                 {% include "components/navigation/pagination.html" with page_data=pedagogy_entries %}
             {% endcache %}
             <article class="mt-8">{{ page.content|richtext }}</article>
-        </main>
+        </div>
     </article>
 {% endblock content %}

@@ -16,7 +16,7 @@
                     {% if show_all %}
                         checked
                     {% endif %}
-                    onchange="this.form.submit()"
+                    data-autosubmit
                 >
                 {% blocktrans with code=local_postal_code %}Show votes from outside {{ code }}{% endblocktrans %}
             </label>

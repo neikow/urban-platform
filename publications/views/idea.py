@@ -1,32 +1,19 @@
 import json
-from typing import Any
 
-from django.http import HttpRequest, HttpResponseBase, JsonResponse
+from django.http import HttpRequest, JsonResponse
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 
 from core.models import User
-from publications.models.idea import IdeaResponse
-from publications.models.project import ProjectPage
+from publications.models.idea import IDEA_MAX_LENGTH, IdeaResponse
+from publications.views.mixins import ParticipationMixin, json_error
 
 
-class IdeaView(View):
-    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponseBase:
-        if not request.user.is_authenticated:
-            return JsonResponse(
-                {"success": False, "error": _("Authentication required")},
-                status=401,
-            )
-        return super().dispatch(request, *args, **kwargs)
-
+class IdeaView(ParticipationMixin, View):
     def post(self, request: HttpRequest, project_id: int) -> JsonResponse:
-        try:
-            project = ProjectPage.objects.get(pk=project_id)
-        except ProjectPage.DoesNotExist:
-            return JsonResponse(
-                {"success": False, "error": _("Project not found")},
-                status=404,
-            )
+        project = self.get_live_project(project_id)
+        if project is None:
+            return json_error(_("Project not found"), status=404)
 
         if not project.enable_ideas:
             return JsonResponse(
@@ -42,12 +29,18 @@ class IdeaView(View):
                 status=400,
             )
 
-        description = (data.get("description") or "").strip()
+        description = str(data.get("description") or "").strip()
         anonymize = bool(data.get("anonymize", False))
 
         if not description:
             return JsonResponse(
                 {"success": False, "error": _("Please describe your idea")},
+                status=400,
+            )
+
+        if len(description) > IDEA_MAX_LENGTH:
+            return json_error(
+                _("Your idea must not exceed %(max)d characters.") % {"max": IDEA_MAX_LENGTH},
                 status=400,
             )
 
@@ -74,13 +67,9 @@ class IdeaView(View):
         )
 
     def delete(self, request: HttpRequest, project_id: int) -> JsonResponse:
-        try:
-            project = ProjectPage.objects.get(pk=project_id)
-        except ProjectPage.DoesNotExist:
-            return JsonResponse(
-                {"success": False, "error": _("Project not found")},
-                status=404,
-            )
+        project = self.get_live_project(project_id)
+        if project is None:
+            return json_error(_("Project not found"), status=404)
 
         if not project.enable_ideas:
             return JsonResponse(
@@ -108,17 +97,15 @@ class IdeaView(View):
         )
 
 
-class IdeaMineView(View):
+class IdeaMineView(ParticipationMixin, View):
     """Return the requesting user's own idea (ideas are private to user + admins)."""
 
+    requires_authentication = False
+
     def get(self, request: HttpRequest, project_id: int) -> JsonResponse:
-        try:
-            project = ProjectPage.objects.get(pk=project_id)
-        except ProjectPage.DoesNotExist:
-            return JsonResponse(
-                {"success": False, "error": _("Project not found")},
-                status=404,
-            )
+        project = self.get_live_project(project_id)
+        if project is None:
+            return json_error(_("Project not found"), status=404)
 
         if not project.enable_ideas:
             return JsonResponse(

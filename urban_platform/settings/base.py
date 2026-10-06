@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+from celery.schedules import crontab
 from dotenv import load_dotenv
 
 from urban_platform.tools.setup_sentry import setup_sentry
@@ -23,7 +24,6 @@ INSTALLED_APPS = [
     "home",
     "about",
     "legal",
-    "search",
     "pedagogy",
     "publications",
     "wagtail.contrib.forms",
@@ -233,7 +233,20 @@ BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@example.com")
 DEFAULT_FROM_NAME = os.environ.get("DEFAULT_FROM_NAME", WEBSITE_NAME)
 
+# Task modules outside "<app>.tasks", which autodiscovery would miss.
+CELERY_IMPORTS = ("core.emails.tasks", "core.notifications.tasks")
+CELERY_TIMEZONE = TIME_ZONE
+
 CELERY_BEAT_SCHEDULE = {
+    "send-event-reminders": {
+        "task": "publications.tasks.send_event_reminders",
+        # The day before, at 9:00 Paris time (CELERY_TIMEZONE).
+        "schedule": crontab(hour="9", minute="0"),
+    },
+    "close-expired-polls": {
+        "task": "publications.tasks.close_expired_polls",
+        "schedule": 15 * 60,
+    },
     "anonymize-old-email-events": {
         "task": "core.emails.tasks.anonymize_old_email_events",
         "schedule": 86400,

@@ -51,7 +51,7 @@ msgstr "URL du profil GitHub"
 
 #: about/blocks.py:82
 msgid "Personal Website URL"
-msgstr ""
+msgstr "URL du site personnel"
 
 #: about/blocks.py:87
 msgid "Member"

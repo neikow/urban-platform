@@ -1,0 +1,68 @@
+{% load i18n static %}
+
+<section class="mt-12 mb-4" aria-labelledby="projects-map-title">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4">
+        <div>
+            <p class="section-label mb-1.5">{% trans "Around you" %}</p>
+            <h2 id="projects-map-title" class="font-display font-black uppercase text-display-sm leading-tight">
+                {% trans "Projects near me" %}
+            </h2>
+            <p class="text-sm text-base-content/70 mt-1">
+                {% trans "Projects located in the 7th arrondissement of Marseille." %}
+            </p>
+        </div>
+        <button type="button" id="projects-map-locate" class="btn btn-outline btn-sm hidden">
+            <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+            >
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 2v3m0 14v3M2 12h3m14 0h3" />
+            </svg>
+            {% trans "Show my position" %}
+        </button>
+    </div>
+    <div
+        id="projects-map"
+        class="h-[28rem] rounded-box overflow-hidden bg-base-200 z-0"
+        role="region"
+        aria-label="{% trans 'Map of projects' %}"
+        data-msg-locate-error="{% trans 'Your position could not be found.' %}"
+        data-msg-you-are-here="{% trans 'You are here' %}"
+        data-msg-open="{% trans 'Open for participation' %}"
+        data-msg-see-project="{% trans 'See the project' %}"
+    >
+    </div>
+    {% if projects_map.features %}
+        {# Same projects as a list, for keyboard and screen reader users. #}
+        <details class="mt-3 text-sm">
+            <summary class="cursor-pointer text-base-content/70">
+                {% blocktrans trimmed count total=projects_map.features|length %}
+                    {{ total }} project on the map
+                    {% plural %}
+                    {{ total }} projects on the map
+                {% endblocktrans %}
+            </summary>
+            <ul class="mt-2 space-y-1">
+                {% for feature in projects_map.features %}
+                    <li>
+                        <a
+                            class="link link-primary"
+                            href="{{ feature.properties.url }}"
+                        >{{ feature.properties.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </details>
+    {% else %}
+        <p class="mt-3 text-sm text-base-content/60">{% trans "No project has been placed on the map yet." %}</p>
+    {% endif %}
+    {{ projects_map|json_script:"projects-map-data" }}
+    {{ map_config|json_script:"projects-map-config" }}
+    <script type="module" src="{% static 'dist/projects-map.js' %}"></script>
+</section>

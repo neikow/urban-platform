@@ -372,8 +372,8 @@ wheels = [
 
 [[package]]
 name = "django-celery-beat"
-version = "2.8.1"
-source = { git = "https://github.com/celery/django-celery-beat?rev=5ca807e9fe446961073ee5d594fea0124ba0e6c0#5ca807e9fe446961073ee5d594fea0124ba0e6c0" }
+version = "2.9.0"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "celery" },
     { name = "cron-descriptor" },
@@ -381,6 +381,10 @@ dependencies = [
     { name = "django-timezone-field" },
     { name = "python-crontab" },
     { name = "tzdata" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/05/45/fc97bc1d9af8e7dc07f1e37044d9551a30e6793249864cef802341e2e3a8/django_celery_beat-2.9.0.tar.gz", hash = "sha256:92404650f52fcb44cf08e2b09635cb1558327c54b1a5d570f0e2d3a22130934c", size = 177667, upload-time = "2026-02-28T16:45:34.749Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/71/ae/9befa7ae37f5e5c41be636a254fcf47ff30dd5c88bd115070e252f6b9162/django_celery_beat-2.9.0-py3-none-any.whl", hash = "sha256:4a9e5ebe26d6f8d7215e1fc5c46e466016279dc102435a28141108649bdf2157", size = 105013, upload-time = "2026-02-28T16:45:32.822Z" },
 ]
 
 [[package]]
@@ -1598,7 +1602,6 @@ dependencies = [
     { name = "django-celery-beat" },
     { name = "django-ratelimit" },
     { name = "gunicorn" },
-    { name = "pre-commit" },
     { name = "psycopg" },
     { name = "python-dotenv" },
     { name = "python-slugify" },
@@ -1619,6 +1622,7 @@ dev = [
     { name = "mkdocs-material" },
     { name = "mypy" },
     { name = "playwright" },
+    { name = "pre-commit" },
     { name = "pytest-cov" },
     { name = "pytest-django" },
     { name = "pytest-env" },
@@ -1631,10 +1635,9 @@ dev = [
 requires-dist = [
     { name = "celery", extras = ["redis"], specifier = "==5.6.2" },
     { name = "django", specifier = "==6.0.3" },
-    { name = "django-celery-beat", git = "https://github.com/celery/django-celery-beat?rev=5ca807e9fe446961073ee5d594fea0124ba0e6c0" },
+    { name = "django-celery-beat", specifier = "==2.9.0" },
     { name = "django-ratelimit", specifier = "==4.1.0" },
     { name = "gunicorn", specifier = "==25.1.0" },
-    { name = "pre-commit", specifier = "==4.5.1" },
     { name = "psycopg", specifier = "==3.3.3" },
     { name = "python-dotenv", specifier = "==1.2.2" },
     { name = "python-slugify", specifier = "==8.0.4" },
@@ -1655,6 +1658,7 @@ dev = [
     { name = "mkdocs-material", specifier = ">=9.7.6" },
     { name = "mypy", specifier = ">=1.19.1" },
     { name = "playwright", specifier = ">=1.57.0" },
+    { name = "pre-commit", specifier = "==4.5.1" },
     { name = "pytest-cov", specifier = ">=7.0.0" },
     { name = "pytest-django", specifier = ">=4.11.1" },
     { name = "pytest-env", specifier = ">=1.2.0" },

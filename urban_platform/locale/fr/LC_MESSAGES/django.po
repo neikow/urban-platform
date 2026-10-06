@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-23 08:54+0200\n"
+"POT-Creation-Date: 2026-10-06 16:41+0200\n"
 "PO-Revision-Date: 2026-06-23 10:00+0100\n"
 "Last-Translator: Urban Platform Team\n"
 "Language-Team: French\n"
@@ -16,31 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#: e2e/tests/pedagogy/test_card_creation_flow.py:31
-msgid "Fiches Pédagogiques"
-msgstr "Fiches Pédagogiques"
-
-#: e2e/tests/test_auth_flows.py:54
-msgid "Sign up"
-msgstr "S'inscrire"
-
-#: e2e/tests/test_auth_flows.py:66
-msgid "Accept and continue"
-msgstr "Accepter et continuer"
-
-#: e2e/tests/test_auth_flows.py:87 e2e/tests/test_auth_flows.py:94
-msgid "Delete my account"
-msgstr "Supprimer mon compte"
-
-#: e2e/tests/test_auth_flows.py:93
-msgid "Warning: Irreversible action"
-msgstr "Attention : Action irréversible"
-
-#: e2e/tests/test_auth_flows.py:110 e2e/tests/test_auth_flows.py:114
-#: e2e/utils.py:23 e2e/utils.py:31
-msgid "Log in"
-msgstr "Se connecter"
 
 #: urban_platform/templates/404.html:4 urban_platform/templates/404.html:13
 msgid "Page not found"
@@ -64,11 +39,39 @@ msgstr "Erreur interne du serveur"
 
 #: urban_platform/templates/500.html:18
 msgid "Sorry, something went wrong on our end. Please try again later."
-msgstr "Désolé, une erreur est survenue de notre côté. Veuillez réessayer plus tard."
+msgstr ""
+"Désolé, une erreur est survenue de notre côté. Veuillez réessayer plus tard."
 
 #: urban_platform/templates/500.html:25
 msgid "Reload the page"
 msgstr "Recharger la page"
+
+#: urban_platform/templates/base.html:30
+#, python-format
+msgid "%(website_name)s — news"
+msgstr "%(website_name)s — actualités"
+
+#: urban_platform/templates/base.html:52
+msgid "Skip to content"
+msgstr "Aller au contenu"
+
+#~ msgid "Sign up"
+#~ msgstr "S'inscrire"
+
+#~ msgid "Accept and continue"
+#~ msgstr "Accepter et continuer"
+
+#~ msgid "Delete my account"
+#~ msgstr "Supprimer mon compte"
+
+#~ msgid "Warning: Irreversible action"
+#~ msgstr "Attention : Action irréversible"
+
+#~ msgid "Log in"
+#~ msgstr "Se connecter"
+
+#~ msgid "Fiches Pédagogiques"
+#~ msgstr "Fiches Pédagogiques"
 
 #~ msgid "Search"
 #~ msgstr "Rechercher"

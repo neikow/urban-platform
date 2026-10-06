@@ -176,6 +176,24 @@ class TestVoteStatsDetailView:
         assert response.status_code == 200
         assert b"Great project!" in response.content
 
+    def test_pie_chart_data_is_rendered_as_json(self, client, admin_user, project_with_votes):
+        """Chart data goes through json_script rather than being pasted into JavaScript."""
+        import json
+        import re
+
+        client.force_login(admin_user)
+        response = client.get(f"/admin/vote-statistics/{project_with_votes.pk}/")
+
+        content = response.content.decode()
+        match = re.search(
+            r'<script id="vote-pie-data" type="application/json">(.*?)</script>', content
+        )
+        assert match is not None
+        data = json.loads(match.group(1))
+        assert len(data["labels"]) == len(data["counts"]) == len(data["colors"]) == 4
+        assert sum(data["counts"]) == response.context["total_votes"]
+        assert "new Chart(" not in content
+
     def test_returns_404_for_nonexistent_project(self, client, admin_user, db):
         """Test that 404 is returned for nonexistent project."""
         client.force_login(admin_user)

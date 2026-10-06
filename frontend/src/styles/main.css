@@ -1,0 +1,258 @@
+/* Fonts are self-hosted (no request to Google Fonts, no third-party cookie banner). */
+@import "@fontsource-variable/jost";
+@import "@fontsource-variable/jost/wght-italic.css";
+@import "@fontsource-variable/big-shoulders-display";
+
+/* Only scan what renders markup; automatic detection would also crawl docs/site, media, etc. */
+@import "tailwindcss" source(none);
+@source "../../../{core,home,about,legal,pedagogy,publications,urban_platform}/**/templates/**/*.html";
+@source "../../../{core,home,about,legal,pedagogy,publications,urban_platform}/**/*.py";
+@source "../**/*.ts";
+@source not "../../../.venv";
+@source not "../../../node_modules";
+@source not "../../../docs";
+@source not "../../../**/migrations";
+@source not "../../../**/tests";
+
+/* Only the custom theme below: the built-in "light" theme would otherwise win on specificity. */
+@plugin "daisyui" {
+    themes: false;
+}
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    prefersdark: false;
+    color-scheme: "light";
+    /* Neutrals tinted warm toward primary orange hue (55–75) */
+    --color-base-100: oklch(0.988 0.004 75);
+    --color-base-200: oklch(0.955 0.009 70);
+    --color-base-300: oklch(0.918 0.014 65);
+    --color-base-content: oklch(0.185 0.022 50);
+    /* Primary: warm orange — unchanged, anchors everything */
+    --color-primary: oklch(0.637 0.194 31.558);
+    --color-primary-content: oklch(0.988 0.004 75);
+    /* Secondary: deep Mediterranean navy (replaces teal) */
+    --color-secondary: oklch(0.37 0.13 256);
+    --color-secondary-content: oklch(0.988 0.004 75);
+    /* Accent: warm limestone/sand (replaces magenta) */
+    --color-accent: oklch(0.84 0.07 78);
+    --color-accent-content: oklch(0.2 0.04 60);
+    /* Neutral: warm dark near-black */
+    --color-neutral: oklch(0.22 0.03 55);
+    --color-neutral-content: oklch(0.96 0.008 70);
+    --color-info: oklch(74% 0.16 232.661);
+    --color-info-content: oklch(29% 0.066 243.157);
+    --color-success: oklch(76% 0.177 163.223);
+    --color-success-content: oklch(37% 0.077 168.94);
+    --color-warning: oklch(82% 0.189 84.429);
+    --color-warning-content: oklch(41% 0.112 45.904);
+    --color-error: oklch(71% 0.194 13.428);
+    --color-error-content: oklch(27% 0.105 12.094);
+    /* Architectural geometry — not pill-shaped */
+    --radius-selector: 0.375rem;
+    --radius-field: 0.25rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.28125rem;
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
+}
+
+@theme {
+    --font-sans: "Jost Variable", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Big Shoulders Display Variable", ui-sans-serif, system-ui, sans-serif;
+
+    /* Small caps-style labels used for badges, tabs and navigation. */
+    --text-3xs: 0.625rem;
+    --text-2xs: 0.6875rem;
+    --tracking-label: 0.12em;
+
+    /* Fluid display headings (Big Shoulders). */
+    --text-display-sm: clamp(1.8rem, 4vw, 3rem);
+    --text-display-md: clamp(2.2rem, 5vw, 4rem);
+    --text-display-lg: clamp(2.2rem, 5.5vw, 4.5rem);
+    --text-display-xl: clamp(2.5rem, 6vw, 5.5rem);
+    --text-display-2xl: clamp(3.2rem, 10vw, 8.5rem);
+}
+
+/* Marks off-site links with an arrow and document links with an icon. */
+@utility link-external {
+    &:not([href^="/"]):not([href^="#"])::after {
+        content: "↗";
+        @apply inline-block ml-0.5 text-[1em] opacity-70 align-super;
+    }
+}
+
+@utility link-document {
+    &[href^="/documents"]::before {
+        content: "📄";
+        @apply inline-block mr-0.5 text-[0.8em];
+    }
+}
+
+@layer utilities {
+    .last-breadcrumb {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .last-breadcrumb:before {
+        content: "";
+        margin-right: calc(0.25rem * 3);
+        margin-left: calc(0.25rem * 2);
+        display: block;
+        height: calc(0.25rem * 1.5);
+        width: calc(0.25rem * 1.5);
+        opacity: 40%;
+        rotate: 45deg;
+        border-top: 1px solid;
+        border-right: 1px solid;
+        background-color: #0000;
+    }
+
+    [dir="rtl"] .last-breadcrumb:before {
+        rotate: -135deg;
+    }
+
+    .toc-container {
+        counter-reset: toc-h2;
+    }
+
+    .toc-item-2 {
+        counter-increment: toc-h2;
+        counter-reset: toc-h3;
+    }
+
+    .toc-item-2::before {
+        content: counter(toc-h2, upper-roman) ". ";
+        @apply opacity-70;
+    }
+
+    .toc-item-3 {
+        counter-increment: toc-h3;
+        counter-reset: toc-h4;
+    }
+
+    .toc-item-3::before {
+        content: counter(toc-h3, decimal) ". ";
+        @apply opacity-70;
+    }
+
+    .toc-item-4 {
+        counter-increment: toc-h4;
+    }
+
+    .toc-item-4::before {
+        content: counter(toc-h4, lower-alpha) ". ";
+        @apply opacity-70;
+    }
+
+    .numbered-headings {
+        counter-reset: body-h2;
+
+        h2:not(.no-page-style, .no-page-style *) {
+            counter-increment: body-h2;
+            counter-reset: body-h3;
+
+            &::before {
+                content: counter(body-h2, upper-roman) ". ";
+                @apply opacity-70 font-bold;
+            }
+        }
+
+        h3:not(.no-page-style, .no-page-style *) {
+            counter-increment: body-h3;
+            counter-reset: body-h4;
+
+            &::before {
+                content: counter(body-h3, decimal) ". ";
+                @apply opacity-70 font-bold;
+            }
+        }
+
+        h4:not(.no-page-style, .no-page-style *) {
+            counter-increment: body-h4;
+
+            &::before {
+                content: counter(body-h4, lower-alpha) ". ";
+                @apply opacity-70 font-bold;
+            }
+        }
+    }
+}
+
+@layer components {
+    .page-content {
+        h2:not(.no-page-style, .no-page-style *) {
+            @apply mt-8 mb-4 text-2xl sm:text-3xl font-bold scroll-mt-20;
+        }
+
+        h3:not(.no-page-style, .no-page-style *) {
+            @apply mt-6 mb-3 text-xl sm:text-2xl font-semibold scroll-mt-20;
+        }
+
+        h4:not(.no-page-style, .no-page-style *) {
+            @apply mt-4 mb-2 text-lg font-semibold scroll-mt-20;
+        }
+
+        p:not(.no-page-style, .no-page-style *) {
+            @apply mb-4 text-sm sm:text-base leading-7 sm:leading-8;
+        }
+
+        ul:not(.no-page-style, .no-page-style *) {
+            @apply mb-4 pl-6 list-disc;
+        }
+
+        ol:not(.no-page-style, .no-page-style *) {
+            @apply mb-4 pl-6 list-decimal;
+        }
+
+        ol ol:not(.no-page-style, .no-page-style *) {
+            @apply list-[lower-alpha];
+        }
+
+        ol ol ol:not(.no-page-style, .no-page-style *) {
+            @apply list-[lower-roman];
+        }
+
+        ol ol ol ol:not(.no-page-style, .no-page-style *) {
+            @apply list-decimal;
+        }
+
+        ol ol ol ol ol:not(.no-page-style, .no-page-style *) {
+            @apply list-[lower-alpha];
+        }
+
+        li:not(.no-page-style, .no-page-style *) {
+            @apply mb-2;
+        }
+
+        a:not(.no-page-style, .no-page-style *) {
+            @apply link text-primary hover:text-secondary transition-colors duration-200;
+
+            @apply link-external link-document;
+        }
+
+        blockquote:not(.no-page-style, .no-page-style *) {
+            @apply bg-base-200 px-6 py-5 italic my-8 rounded text-base-content/75 text-lg leading-relaxed;
+        }
+    }
+
+    form a::after {
+        content: none !important;
+    }
+
+    /* Force wrapping in forms texts */
+    form .label-text-alt,
+    form label {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .section-label {
+        @apply text-2xs font-bold uppercase tracking-[0.2em] text-base-content/50;
+    }
+}

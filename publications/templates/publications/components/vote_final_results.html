@@ -1,0 +1,35 @@
+{% load i18n l10n %}
+
+<section id="vote-final-results" class="bg-base-100 rounded-lg p-5" aria-labelledby="vote-final-results-title">
+    <h4 id="vote-final-results-title" class="font-semibold text-base mb-1">
+        {% trans "Voting is closed: final results" %}
+    </h4>
+    {% if results.total_votes %}
+        <p class="text-sm text-base-content/70 mb-4">
+            {% blocktrans trimmed count total=results.total_votes %}
+                {{ total }} vote in total
+                {% plural %}
+                {{ total }} votes in total
+            {% endblocktrans %}
+        </p>
+        <ul class="space-y-3">
+            {% for choice in results.ordered %}
+                <li>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span>{{ choice.label }}</span>
+                        <span>{{ choice.percentage }}&nbsp;% ({{ choice.count }})</span>
+                    </div>
+                    <progress
+                        class="progress {{ choice.color }} w-full h-3"
+                        value="{{ choice.percentage|unlocalize }}"
+                        max="100"
+                        aria-label="{{ choice.label }}"
+                    >
+                    </progress>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-sm text-base-content/70">{% trans "No votes were cast on this project." %}</p>
+    {% endif %}
+</section>
