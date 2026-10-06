@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:52+0200\n"
+"POT-Creation-Date: 2026-10-06 16:57+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -183,7 +183,7 @@ msgstr "Mis à jour le"
 
 #: publications/models/form.py:44 publications/models/idea.py:31
 #: publications/models/poll_closure.py:22 publications/models/project.py:56
-#: publications/models/project.py:181
+#: publications/models/project.py:192
 #: publications/templates/publications/admin/ideas_stats.html:36
 #: publications/templates/publications/admin/vote_stats.html:36
 #: publications/templates/publications/components/publication_preview.html:68
@@ -367,10 +367,55 @@ msgstr "Afficher la table des matières"
 msgid "Display the table of contents in the sidebar"
 msgstr "Afficher la table des matières dans la barre latérale"
 
-#: publications/models/project.py:182
+#: publications/models/project.py:110
+#: publications/templates/publications/components/project_timeline.html:8
+msgid "Project timeline"
+msgstr "Suivi du projet"
+
+#: publications/models/project.py:111
+msgid "News about the project, newest first on the page."
+msgstr ""
+"Actualités du projet, de la plus récente à la plus ancienne sur la page."
+
+#: publications/models/project.py:193
 #: publications/templates/publications/publication_index_page.html:47
 msgid "Projects"
 msgstr "Projets"
+
+#: publications/models/project_update.py:22
+#: publications/templates/publications/event_page.html:49
+msgid "Date"
+msgstr "Date"
+
+#: publications/models/project_update.py:23
+msgid "Title"
+msgstr "Titre"
+
+#: publications/models/project_update.py:24
+msgid "Text"
+msgstr "Texte"
+
+#: publications/models/project_update.py:26
+msgid "Email participants"
+msgstr "Prévenir les participants par email"
+
+#: publications/models/project_update.py:29
+msgid ""
+"Sent once, when the page is published, to people who voted or shared an idea"
+" and asked for project updates. Untick for past events you are adding to the"
+" timeline."
+msgstr ""
+"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté"
+" ou proposé une idée et demandé à suivre les projets. Décochez pour les "
+"étapes passées ajoutées à l'historique."
+
+#: publications/models/project_update.py:43
+msgid "Project update"
+msgstr "Actualité du projet"
+
+#: publications/models/project_update.py:44
+msgid "Project updates"
+msgstr "Actualités des projets"
 
 #: publications/models/publication.py:17
 msgid "Publication"
@@ -431,12 +476,17 @@ msgstr "Contenu supplémentaire pour la page des publications."
 msgid "Poll results: %(title)s"
 msgstr "Résultats du vote : %(title)s"
 
+#: publications/project_updates.py:42
+#, python-format
+msgid "%(project)s: %(title)s"
+msgstr "%(project)s : %(title)s"
+
 #: publications/templates/publications/admin/close_poll_confirm.html:5
 #: publications/templates/publications/admin/close_poll_confirm.html:8
 msgid "Close the poll"
 msgstr "Clore le vote"
 
-#: publications/templates/publications/admin/close_poll_confirm.html:11
+#: publications/templates/publications/admin/close_poll_confirm.html:12
 msgid ""
 "Voting stops immediately, everyone sees the final results on the project "
 "page, and voters who opted in receive them by email."
@@ -445,16 +495,16 @@ msgstr ""
 "tous sur la page du projet, et les votants qui l'ont demandé les reçoivent "
 "par email."
 
-#: publications/templates/publications/admin/close_poll_confirm.html:12
+#: publications/templates/publications/admin/close_poll_confirm.html:14
 msgid "This cannot be undone."
 msgstr "Cette action est irréversible."
 
-#: publications/templates/publications/admin/close_poll_confirm.html:15
+#: publications/templates/publications/admin/close_poll_confirm.html:17
 #: publications/wagtail_hooks.py:75
 msgid "Close the poll and send the results"
 msgstr "Clore le vote et envoyer les résultats"
 
-#: publications/templates/publications/admin/close_poll_confirm.html:16
+#: publications/templates/publications/admin/close_poll_confirm.html:21
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -735,6 +785,10 @@ msgstr "Retirer mon idée"
 msgid "Map showing where “%(title)s” takes place"
 msgstr "Carte du lieu du projet « %(title)s »"
 
+#: publications/templates/publications/components/project_timeline.html:33
+msgid "Get the project news by email"
+msgstr "Recevoir les actualités du projet par email"
+
 #: publications/templates/publications/components/projects_map.html:6
 msgid "Around you"
 msgstr "Autour de vous"
@@ -901,29 +955,25 @@ msgstr ""
 msgid "Submit my vote"
 msgstr "Soumettre mon vote"
 
-#: publications/templates/publications/components/vote_form.html:257
+#: publications/templates/publications/components/vote_form.html:260
 msgid "Get the final results by email when the poll closes"
 msgstr "Recevoir les résultats par email à la clôture du vote"
 
-#: publications/templates/publications/components/vote_form.html:264
+#: publications/templates/publications/components/vote_form.html:267
 msgid "Your vote:"
 msgstr "Votre vote :"
 
-#: publications/templates/publications/components/vote_form.html:268
+#: publications/templates/publications/components/vote_form.html:271
 msgid "Your comment:"
 msgstr "Votre commentaire :"
 
-#: publications/templates/publications/components/vote_form.html:276
+#: publications/templates/publications/components/vote_form.html:279
 msgid "Change my vote"
 msgstr "Modifier mon vote"
 
-#: publications/templates/publications/components/vote_form.html:279
+#: publications/templates/publications/components/vote_form.html:282
 msgid "Remove my vote"
 msgstr "Retirer mon vote"
-
-#: publications/templates/publications/event_page.html:49
-msgid "Date"
-msgstr "Date"
 
 #: publications/templates/publications/event_page.html:111
 msgid "Online"
@@ -959,19 +1009,19 @@ msgstr "Vote ouvert"
 msgid "Ideas open"
 msgstr "Idées ouvertes"
 
-#: publications/templates/publications/project_page.html:76
+#: publications/templates/publications/project_page.html:78
 msgid "Citizen Participation"
 msgstr "Participation citoyenne"
 
-#: publications/templates/publications/project_page.html:110
+#: publications/templates/publications/project_page.html:112
 msgid "Give your opinion"
 msgstr "Donner votre avis"
 
-#: publications/templates/publications/project_page.html:132
+#: publications/templates/publications/project_page.html:134
 msgid "Share your idea"
 msgstr "Partager votre idée"
 
-#: publications/templates/publications/project_page.html:141
+#: publications/templates/publications/project_page.html:143
 msgid "Table of Contents"
 msgstr "Table des matières"
 
@@ -1092,7 +1142,7 @@ msgstr "Veuillez accepter la charte de bonne conduite avant de participer."
 msgid "Too many requests. Please try again in a minute."
 msgstr "Trop de requêtes. Réessayez dans une minute."
 
-#: publications/views/poll_close.py:35
+#: publications/views/poll_close.py:36
 #, python-format
 msgid ""
 "The poll on “%(title)s” is closed. Results are being sent to voters who "
@@ -1101,7 +1151,7 @@ msgstr ""
 "Le vote sur « %(title)s » est clos. Les résultats sont envoyés aux votants "
 "qui l'ont demandé."
 
-#: publications/views/poll_close.py:39
+#: publications/views/poll_close.py:41
 msgid "This poll was already closed."
 msgstr "Ce vote était déjà clos."
 

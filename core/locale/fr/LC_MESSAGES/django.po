@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:52+0200\n"
+"POT-Creation-Date: 2026-10-06 16:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -280,7 +280,7 @@ msgstr "Résultats des votes"
 
 #: core/models/email_event.py:12
 msgid "Project update"
-msgstr "Actualité de projet"
+msgstr "Actualité du projet"
 
 #: core/models/email_event.py:13
 msgid "Event reminder"
@@ -1086,8 +1086,14 @@ msgstr[0] "%(total)s vote au total"
 msgstr[1] "%(total)s votes au total"
 
 #: core/templates/emails/notifications/poll_results.html:24
+#: core/templates/emails/notifications/project_update.html:13
 msgid "See the project"
 msgstr "Voir le projet"
+
+#: core/templates/emails/notifications/project_update.html:7
+#, python-format
+msgid "News about “%(title)s”, a project you took part in:"
+msgstr "Du nouveau sur « %(title)s », un projet auquel vous avez participé :"
 
 #: core/templatetags/navigation_tags.py:76
 msgid "Home"

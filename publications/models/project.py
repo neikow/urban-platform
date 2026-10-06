@@ -105,6 +105,11 @@ class ProjectPage(PublicationPage):
         FieldPanel("category"),
         FieldPanel("location", widget=GeoJSONMapWidget),
         InlinePanel("external_links", label=_("External Links")),
+        InlinePanel(
+            "updates",
+            label=_("Project timeline"),
+            help_text=_("News about the project, newest first on the page."),
+        ),
         FieldPanel("participation_mode"),
         FieldPanel("voting_end_date"),
         FieldPanel("show_toc"),
@@ -172,6 +177,12 @@ class ProjectPage(PublicationPage):
 
             context["final_vote_results"] = get_final_vote_results(self)
         return context
+
+    @property
+    def timeline(self) -> list[Any]:
+        return sorted(
+            self.updates.all(), key=lambda update: (update.date, update.pk or 0), reverse=True
+        )
 
     @property
     def table_of_contents(self) -> list[TableOfContentsItem]:
