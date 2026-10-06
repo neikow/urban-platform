@@ -34,3 +34,23 @@ def test_admin_places_project_on_map(
 
     page.goto(f"{base_url}/actualites/")
     expect(page.locator("#projects-map .leaflet-interactive.map-project").first).to_be_visible()
+
+
+@pytest.mark.e2e
+def test_map_tiles_are_requested_with_a_referer(page: Page, base_url: str):
+    """tile.openstreetmap.org blocks browser requests without a Referer (403)."""
+    referers = []
+    page.on(
+        "request",
+        lambda request: (
+            referers.append(request.headers.get("referer"))
+            if "tile.openstreetmap.org" in request.url
+            else None
+        ),
+    )
+
+    page.goto(base_url + "/actualites/")
+    page.locator("#projects-map .leaflet-tile-loaded").first.wait_for()
+
+    assert referers
+    assert all(referer == base_url + "/" for referer in referers)

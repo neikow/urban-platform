@@ -29,7 +29,14 @@ export function createMap(element: HTMLElement, config: MapConfig, options: L.Ma
     scrollWheelZoom: false,
     ...options,
   });
-  L.tileLayer(OSM_TILES, { maxZoom: 19, attribution: OSM_ATTRIBUTION }).addTo(map);
+  L.tileLayer(OSM_TILES, {
+    maxZoom: 19,
+    attribution: OSM_ATTRIBUTION,
+    // The OSM tile policy requires a Referer and blocks requests without one
+    // ("403 Access blocked"). Pages use Django's "same-origin" Referrer-Policy,
+    // which drops it on cross-origin requests: send the origin for tiles.
+    referrerPolicy: "strict-origin-when-cross-origin",
+  }).addTo(map);
 
   // Containers inside tabs or collapsed panels start with no size.
   new ResizeObserver(() => map.invalidateSize()).observe(element);
