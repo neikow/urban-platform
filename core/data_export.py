@@ -16,6 +16,7 @@ from core.models import User
 EXCLUDED_RELATIONS = {
     "wagtailusers.UserProfile": "admin interface preferences (language, theme)",
     "wagtailadmin.EditingSession": "transient editor presence, purged automatically",
+    "wagtailadmin.FormState": "unsaved editor form state for previews, purged automatically",
     "wagtailcore.Revision": "page history, covered by owned pages",
     "wagtailcore.UploadedFile": "temporary uploads",
     "wagtailcore.WorkflowState": "moderation workflow internals",
@@ -153,6 +154,20 @@ def editorial(user: User) -> dict[str, Any]:
     }
 
 
+def api_tokens(user: User) -> list[dict[str, Any]]:
+    """Wagtail API tokens: metadata only, never the key or its hash."""
+    return [
+        {
+            "name": token.name,
+            "prefix": token.prefix,
+            "created_at": _iso(token.created),
+            "last_used_at": _iso(token.last_used_at),
+            "revoked_at": _iso(token.revoked_at),
+        }
+        for token in user.api_tokens.order_by("created")  # type: ignore[attr-defined]
+    ]
+
+
 def export_user_data(user: User) -> dict[str, Any]:
     data: dict[str, Any] = {
         "generated_at": _iso(timezone.now()),
@@ -161,6 +176,7 @@ def export_user_data(user: User) -> dict[str, Any]:
         "participation": participation(user),
         "code_of_conduct_consents": consents(user),
         "emails_sent": emails(user),
+        "api_tokens": api_tokens(user),
     }
     if user.can_access_admin():
         data["editorial_activity"] = editorial(user)

@@ -1,12 +1,18 @@
 import os
 from pathlib import Path
 
+import django_stubs_ext
 from celery.schedules import crontab
 from dotenv import load_dotenv
 
 from urban_platform.tools.setup_sentry import setup_sentry
 
 load_dotenv()
+
+# Models annotate fields as generics (models.CharField[str, str]); Django's
+# field classes only accept subscripting once django-stubs-ext patches them.
+# This used to happen implicitly when Wagtail pulled in django-tasks.
+django_stubs_ext.monkeypatch()
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = PROJECT_DIR.parent

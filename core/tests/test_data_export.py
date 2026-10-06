@@ -27,6 +27,7 @@ COVERED_RELATIONS = {
     "publications.FormResponse",
     "publications.IdeaResponse",
     "wagtailcore.Comment",
+    "wagtailcore.APIToken",
 }
 
 

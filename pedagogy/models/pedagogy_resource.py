@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from modelcluster.fields import ParentalKey
@@ -13,7 +15,7 @@ class PedagogyResource(Orderable):
         related_name="resources",
     )
     url: models.URLField = models.URLField(blank=True, verbose_name=_("External URL"))
-    document: models.ForeignKey = models.ForeignKey(
+    document: models.ForeignKey[Any, Any] = models.ForeignKey(
         "wagtaildocs.Document",
         null=True,
         blank=True,
