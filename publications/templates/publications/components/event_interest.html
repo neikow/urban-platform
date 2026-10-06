@@ -56,6 +56,11 @@
         </svg>
         {% trans "Add to my calendar" %}
     </a>
+    {% if user.is_authenticated and not user.notify_event_reminders and not page.is_past %}
+        <a class="w-full text-center text-xs link text-base-content/60" href="{% url 'profile_edit' %}#notifications">
+            {% trans "Get a reminder by email the day before" %}
+        </a>
+    {% endif %}
     <p id="event-interest-error" class="w-full text-center text-sm text-error" role="alert" hidden></p>
     {% if user.is_authenticated and not page.is_past %}
         <script type="module" src="{% static 'dist/event-interest.js' %}"></script>

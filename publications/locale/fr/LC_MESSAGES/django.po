@@ -16,6 +16,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: publications/event_reminders.py:31
+#, python-format
+msgid "Tomorrow: %(title)s"
+msgstr "Demain : %(title)s"
+
 #: publications/geo.py:51
 msgid "The location must be a point or a polygon."
 msgstr "La localisation doit être un point ou un polygone."
@@ -694,6 +699,10 @@ msgstr[1] "%(count)s personnes intéressées"
 #: publications/templates/publications/components/event_interest.html:57
 msgid "Add to my calendar"
 msgstr "Ajouter à mon agenda"
+
+#: publications/templates/publications/components/event_interest.html:61
+msgid "Get a reminder by email the day before"
+msgstr "Recevoir un rappel par email la veille"
 
 #: publications/templates/publications/components/ideas_form.html:9
 #: publications/views/idea.py:37

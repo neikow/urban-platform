@@ -25,3 +25,10 @@ def send_project_update(update_id: int) -> int:
 
     update = ProjectUpdate.objects.filter(pk=update_id).first()
     return send_project_update_now(update) if update else 0
+
+
+@shared_task
+def send_event_reminders() -> int:
+    from publications.event_reminders import send_event_reminders as send
+
+    return send()

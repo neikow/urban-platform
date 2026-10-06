@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+from celery.schedules import crontab
 from dotenv import load_dotenv
 
 from urban_platform.tools.setup_sentry import setup_sentry
@@ -237,6 +238,11 @@ CELERY_IMPORTS = ("core.emails.tasks", "core.notifications.tasks")
 CELERY_TIMEZONE = TIME_ZONE
 
 CELERY_BEAT_SCHEDULE = {
+    "send-event-reminders": {
+        "task": "publications.tasks.send_event_reminders",
+        # The day before, at 9:00 Paris time (CELERY_TIMEZONE).
+        "schedule": crontab(hour="9", minute="0"),
+    },
     "close-expired-polls": {
         "task": "publications.tasks.close_expired_polls",
         "schedule": 15 * 60,

@@ -1069,6 +1069,30 @@ msgstr "Se désinscrire de ces emails"
 msgid "Manage my notifications"
 msgstr "Gérer mes notifications"
 
+#: core/templates/emails/notifications/event_reminder.html:6
+msgid "An event you are interested in takes place tomorrow:"
+msgstr "Un événement qui vous intéresse a lieu demain :"
+
+#: core/templates/emails/notifications/event_reminder.html:9
+msgid "When:"
+msgstr "Quand :"
+
+#: core/templates/emails/notifications/event_reminder.html:12
+msgid "Where:"
+msgstr "Où :"
+
+#: core/templates/emails/notifications/event_reminder.html:16
+msgid "Online:"
+msgstr "En ligne :"
+
+#: core/templates/emails/notifications/event_reminder.html:19
+msgid "See the event"
+msgstr "Voir l'événement"
+
+#: core/templates/emails/notifications/event_reminder.html:20
+msgid "Add to my calendar"
+msgstr "Ajouter à mon agenda"
+
 #: core/templates/emails/notifications/poll_results.html:6
 #, python-format
 msgid "The poll on “%(title)s” is closed"
