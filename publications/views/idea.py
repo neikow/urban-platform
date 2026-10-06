@@ -1,4 +1,5 @@
 import json
+from typing import cast
 
 from django.http import HttpRequest, JsonResponse
 from django.utils.translation import gettext_lazy as _
@@ -45,7 +46,7 @@ class IdeaView(ParticipationMixin, View):
             )
 
         response, created = IdeaResponse.objects.update_or_create(
-            user=request.user,
+            user=cast(User, request.user),
             project=project,
             defaults={
                 "description": description,

@@ -1,6 +1,6 @@
 from django_stubs_ext import StrOrPromise
 from wagtail.admin.panels import FieldPanel
-from typing import override
+from typing import Any, override
 
 from wagtail.admin.panels import InlinePanel
 from wagtail.models import Page
@@ -30,7 +30,7 @@ class PedagogyCardPage(Page):
         help_text=_("The main content of the pedagogy card."),
     )
 
-    hero_image: models.ForeignKey = models.ForeignKey(
+    hero_image: models.ForeignKey[Any, Any] = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
         blank=True,

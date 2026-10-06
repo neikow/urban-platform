@@ -8,6 +8,7 @@ dependencies = [
     "django==6.0.3",
     "django-celery-beat==2.9.0",
     "django-ratelimit==4.1.0",
+    "django-stubs-ext==6.1.2",
     "gunicorn==26.2.0",
     "psycopg==3.3.6",
     "python-dotenv==1.2.4",
@@ -27,7 +28,15 @@ strict_optional = true
 disallow_untyped_defs = true
 
 [[tool.mypy.overrides]]
-module = ["wagtail.*", "modelcluster.*", "django_ratelimit.*"]
+module = [
+    "wagtail.*",
+    "modelcluster.*",
+    "django_ratelimit.*",
+    "django_celery_beat.*",
+    "modelsearch.*",
+    "taggit.*",
+    "treebeard.*",
+]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
@@ -101,6 +110,9 @@ indent-style = "space"
 docstring-code-format = true
 
 [tool.ruff.lint]
+# Ruff's pre-0.16 default rule set, pinned so upgrading ruff does not change
+# what CI enforces. Widening it (isort, pyupgrade, RUF...) is a separate change.
+select = ["E4", "E7", "E9", "F"]
 ignore = [
     "F401" # use explicit re-export
 ]

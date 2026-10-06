@@ -1,4 +1,5 @@
 import json
+from typing import cast
 
 from django.http import HttpRequest, JsonResponse
 from django.utils.translation import gettext_lazy as _
@@ -54,7 +55,7 @@ class VoteView(ParticipationMixin, View):
             )
 
         response, created = FormResponse.objects.update_or_create(
-            user=request.user,
+            user=cast(User, request.user),
             project=project,
             defaults={
                 "choice": choice,
