@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!ideasComponent) return;
 
     const projectId = ideasComponent.dataset.projectId;
-    const isAuthenticated = ideasComponent.dataset.isAuthenticated === 'true';
+    const canParticipate = ideasComponent.dataset.canParticipate === 'true';
     const csrfToken = ideasComponent.dataset.csrfToken;
 
     const messages = {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const descriptionTextarea = document.getElementById('ideas-description');
     const anonymousCheckbox = document.getElementById('ideas-anonymous');
 
-    if (!isAuthenticated) return;
+    if (!canParticipate) return;
 
     loadIdeaState();
 
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     showForm();
                 }
             } else {
-                showError(data.error || messages.genericError);
+                handleFailure(data);
             }
         } catch (error) {
             console.error('Error loading idea state:', error);
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.success) {
                 displayIdea(data.idea);
             } else {
-                showError(data.error || messages.genericError);
+                handleFailure(data);
                 showForm();
             }
         } catch (error) {
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (anonymousCheckbox) anonymousCheckbox.checked = false;
                 showForm();
             } else {
-                showError(data.error || messages.genericError);
+                handleFailure(data);
             }
         } catch (error) {
             console.error('Error removing idea:', error);
@@ -193,6 +193,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 ideasLoading.classList.add('hidden');
             }
         }
+    }
+
+    function handleFailure(data) {
+        // The server asks for consent to the latest code of conduct first;
+        // the consent page sends the user back here afterwards.
+        if (data.code === 'code_of_conduct_required' && data.action_url) {
+            window.location.href = data.action_url;
+            return;
+        }
+        showError(data.error || messages.genericError);
     }
 
     function showError(message) {

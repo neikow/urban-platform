@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-23 08:54+0200\n"
+"POT-Creation-Date: 2026-10-06 15:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -398,7 +398,7 @@ msgstr "Email vérifié"
 msgid "Is the user's email address verified?"
 msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:80 core/templates/core/profile.html:96
+#: core/models/user.py:80 core/templates/core/profile.html:104
 msgid "Role"
 msgstr "Rôle"
 
@@ -494,6 +494,7 @@ msgstr "Aller à l'accueil"
 
 #: core/templates/auth/login_modal.html:10
 #: core/templates/core/components/image_lightbox.html:21
+#: core/templates/core/components/messages.html:45
 msgid "Close"
 msgstr "Fermer"
 
@@ -539,7 +540,8 @@ msgstr "Votre mot de passe a été réinitialisé avec succès."
 
 #: core/templates/auth/password_reset_complete.html:32
 msgid "You can now log in with your new password."
-msgstr "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
+msgstr ""
+"Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
 
 #: core/templates/auth/password_reset_complete.html:36
 #: core/templates/auth/password_reset_request.html:49
@@ -586,8 +588,8 @@ msgstr "Mot de passe oublié ?"
 msgid ""
 "Enter your email address and we will send you a link to reset your password."
 msgstr ""
-"Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser "
-"votre mot de passe."
+"Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser"
+" votre mot de passe."
 
 #: core/templates/auth/password_reset_request.html:43
 msgid "Send the link"
@@ -710,7 +712,6 @@ msgid "Preview image: %(title)s"
 msgstr "Aperçu de l'image: %(title)s"
 
 #: core/templates/core/blocks/recent_publications_block.html:6
-#: core/wagtail_hooks.py:117
 msgid "Publications"
 msgstr "Publications"
 
@@ -791,12 +792,13 @@ msgstr "Menu de navigation"
 msgid "My profile"
 msgstr "Mon profil"
 
-#: core/templates/core/profile.html:10 core/templates/core/profile.html:92
+#: core/templates/core/profile.html:10 core/templates/core/profile.html:100
 #: core/templates/core/profile_edit.html:11
 msgid "Account"
 msgstr "Compte"
 
-#: core/templates/core/profile.html:27 core/templates/core/profile_edit.html:86
+#: core/templates/core/profile.html:27
+#: core/templates/core/profile_edit.html:46
 msgid "Personal information"
 msgstr "Informations personnelles"
 
@@ -821,57 +823,62 @@ msgid "Not verified"
 msgstr "Non vérifié"
 
 #: core/templates/core/profile.html:83
+msgid "Resend the verification link"
+msgstr "Renvoyer le lien de vérification"
+
+#: core/templates/core/profile.html:91
 msgid "Phone"
 msgstr "Téléphone"
 
-#: core/templates/core/profile.html:102 core/tests/views/test_me.py:59
+#: core/templates/core/profile.html:110 core/tests/views/test_me.py:59
 msgid "Member"
 msgstr "Membre"
 
-#: core/templates/core/profile.html:106
+#: core/templates/core/profile.html:114
 msgid "Association member"
 msgstr "Membre d'association"
 
-#: core/templates/core/profile.html:110
+#: core/templates/core/profile.html:118
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: core/templates/core/profile.html:116
+#: core/templates/core/profile.html:124
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: core/templates/core/profile.html:122 core/tests/views/test_me.py:51
+#: core/templates/core/profile.html:130 core/tests/views/test_me.py:51
 msgid "Subscribed"
 msgstr "Abonné"
 
-#: core/templates/core/profile.html:126
+#: core/templates/core/profile.html:134
 msgid "Not subscribed"
 msgstr "Non abonné"
 
-#: core/templates/core/profile.html:132
+#: core/templates/core/profile.html:140
 msgid "Member since"
 msgstr "Membre depuis"
 
-#: core/templates/core/profile.html:138
+#: core/templates/core/profile.html:146
 msgid "Last update"
 msgstr "Dernière mise à jour"
 
-#: core/templates/core/profile.html:162 core/templates/core/profile_edit.html:4
+#: core/templates/core/profile.html:170
+#: core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:18
 #: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
 msgstr "Modifier mon profil"
 
-#: core/templates/core/profile_edit.html:148
+#: core/templates/core/profile_edit.html:108
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: core/templates/core/profile_edit.html:156
-#: core/templates/core/profile_edit.html:200
+#: core/templates/core/profile_edit.html:116
+#: core/templates/core/profile_edit.html:160
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
-#: core/templates/core/profile_edit.html:208
+#: core/templates/core/profile_edit.html:168
 msgid "Danger zone"
 msgstr "Zone de danger"
 
@@ -895,9 +902,13 @@ msgstr "Liste"
 msgid "Ajouter"
 msgstr "Ajouter"
 
+#: core/wagtail_hooks.py:117
+msgid "Actualités"
+msgstr ""
+
 #: core/wagtail_hooks.py:148
-msgid "Fiches Pédagogiques"
-msgstr "Fiches Pédagogiques"
+msgid "Informations utiles"
+msgstr ""
 
 #: core/wagtail_hooks.py:170
 msgid "Charte de conduite"
@@ -942,6 +953,9 @@ msgstr "Utilisateurs"
 #: core/wagtail_hooks.py:249
 msgid "Documentation"
 msgstr "Documentation"
+
+#~ msgid "Fiches Pédagogiques"
+#~ msgstr "Fiches Pédagogiques"
 
 #~ msgid "Superuser must have is_staff=True."
 #~ msgstr "Le superutilisateur doit avoir is_staff=True."

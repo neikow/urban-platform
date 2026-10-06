@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-23 08:54+0200\n"
+"POT-Creation-Date: 2026-10-06 15:39+0200\n"
 "PO-Revision-Date: 2026-06-23 10:00+0100\n"
 "Last-Translator: Urban Platform Team\n"
 "Language-Team: French (France)\n"
@@ -117,54 +117,54 @@ msgstr "Lien externe"
 msgid "External Links"
 msgstr "Liens externes"
 
-#: publications/models/form.py:7
+#: publications/models/form.py:10
 #: publications/templates/publications/admin/vote_stats_detail.html:131
 #: publications/templates/publications/admin/vote_stats_detail.html:232
 #: publications/templates/publications/admin/vote_stats_detail.html:288
 #: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:109
+#: publications/templates/publications/components/vote_form.html:111
 msgid "Unfavorable"
 msgstr "Défavorable"
 
-#: publications/models/form.py:8
+#: publications/models/form.py:11
 #: publications/templates/publications/admin/vote_stats_detail.html:212
 #: publications/templates/publications/admin/vote_stats_detail.html:281
 #: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:133
+#: publications/templates/publications/components/vote_form.html:135
 msgid "Rather Unfavorable"
 msgstr "Plutôt défavorable"
 
-#: publications/models/form.py:9
+#: publications/models/form.py:12
 #: publications/templates/publications/admin/vote_stats_detail.html:192
 #: publications/templates/publications/admin/vote_stats_detail.html:274
 #: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:158
+#: publications/templates/publications/components/vote_form.html:160
 msgid "Rather Favorable"
 msgstr "Plutôt favorable"
 
-#: publications/models/form.py:10
+#: publications/models/form.py:13
 #: publications/templates/publications/admin/vote_stats.html:40
 #: publications/templates/publications/admin/vote_stats_detail.html:116
 #: publications/templates/publications/admin/vote_stats_detail.html:172
 #: publications/templates/publications/admin/vote_stats_detail.html:267
 #: publications/templates/publications/admin/vote_stats_detail.html:328
-#: publications/templates/publications/components/vote_form.html:182
+#: publications/templates/publications/components/vote_form.html:184
 msgid "Favorable"
 msgstr "Favorable"
 
-#: publications/models/form.py:28 publications/models/idea.py:15
+#: publications/models/form.py:31 publications/models/idea.py:18
 msgid "Created At"
 msgstr "Créé le"
 
-#: publications/models/form.py:29 publications/models/idea.py:16
+#: publications/models/form.py:32 publications/models/idea.py:19
 msgid "Updated At"
 msgstr "Mis à jour le"
 
-#: publications/models/form.py:35 publications/models/idea.py:22
+#: publications/models/form.py:38 publications/models/idea.py:25
 msgid "User"
 msgstr "Utilisateur"
 
-#: publications/models/form.py:41 publications/models/idea.py:28
+#: publications/models/form.py:44 publications/models/idea.py:31
 #: publications/models/project.py:51 publications/models/project.py:148
 #: publications/templates/publications/admin/ideas_stats.html:36
 #: publications/templates/publications/admin/vote_stats.html:36
@@ -173,51 +173,51 @@ msgstr "Utilisateur"
 msgid "Project"
 msgstr "Projet"
 
-#: publications/models/form.py:44
+#: publications/models/form.py:47
 msgid "Choice"
 msgstr "Choix"
 
-#: publications/models/form.py:49
+#: publications/models/form.py:52
 msgid "Comment"
 msgstr "Commentaire"
 
-#: publications/models/form.py:51
+#: publications/models/form.py:54
 msgid "Optional comment to explain your vote"
 msgstr "Commentaire optionnel pour expliquer votre vote"
 
-#: publications/models/form.py:54 publications/models/idea.py:35
+#: publications/models/form.py:57 publications/models/idea.py:38
 msgid "Anonymize"
 msgstr "Anonymiser"
 
-#: publications/models/form.py:56
+#: publications/models/form.py:59
 msgid "Hide your identity in public displays"
 msgstr "Masquer votre identité dans les affichages publics"
 
-#: publications/models/form.py:60
+#: publications/models/form.py:63
 msgid "Vote Response"
 msgstr "Réponse de vote"
 
-#: publications/models/form.py:61
+#: publications/models/form.py:64
 msgid "Vote Responses"
 msgstr "Réponses de vote"
 
-#: publications/models/idea.py:31
+#: publications/models/idea.py:34
 msgid "Idea"
 msgstr "Idée"
 
-#: publications/models/idea.py:32
+#: publications/models/idea.py:35
 msgid "Describe your idea or alternative proposal for this project"
 msgstr "Décrivez votre idée ou proposition alternative pour ce projet"
 
-#: publications/models/idea.py:37
+#: publications/models/idea.py:40
 msgid "Hide your identity in administrator displays"
 msgstr "Masquer votre identité dans les affichages des administrateurs"
 
-#: publications/models/idea.py:41
+#: publications/models/idea.py:44
 msgid "Idea Response"
 msgstr "Réponse d'idée"
 
-#: publications/models/idea.py:42
+#: publications/models/idea.py:45
 msgid "Idea Responses"
 msgstr "Réponses d'idées"
 
@@ -292,9 +292,13 @@ msgstr "Mode de participation"
 #: publications/models/project.py:70
 msgid ""
 "Voting lets residents give an opinion; idea collection lets them propose "
-"ideas on a project still in its early stages. The two are mutually exclusive "
-"— switching keeps responses already collected."
-msgstr "Le vote permet aux habitants de donner leur avis ; la collecte d'idées leur permet de proposer des idées sur un projet encore à ses débuts. Les deux sont mutuellement exclusifs — le changement conserve les réponses déjà collectées."
+"ideas on a project still in its early stages. The two are mutually exclusive"
+" — switching keeps responses already collected."
+msgstr ""
+"Le vote permet aux habitants de donner leur avis ; la collecte d'idées leur "
+"permet de proposer des idées sur un projet encore à ses débuts. Les deux "
+"sont mutuellement exclusifs — le changement conserve les réponses déjà "
+"collectées."
 
 #: publications/models/project.py:77
 msgid "Voting End Date"
@@ -392,8 +396,8 @@ msgid ""
 "Only ideas from users with postal code %(code)s are shown.\n"
 "                    Check the box above to include all ideas."
 msgstr ""
-"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées. "
-"Cochez la case ci-dessus pour inclure toutes les idées."
+"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées."
+" Cochez la case ci-dessus pour inclure toutes les idées."
 
 #: publications/templates/publications/admin/ideas_stats.html:37
 msgid "Total ideas"
@@ -518,7 +522,7 @@ msgid "No votes yet"
 msgstr "Aucun vote pour l'instant"
 
 #: publications/templates/publications/components/ideas_form.html:9
-#: publications/views/idea.py:50
+#: publications/views/idea.py:37
 msgid "Please describe your idea"
 msgstr "Veuillez décrire votre idée"
 
@@ -573,35 +577,37 @@ msgstr "Connectez-vous pour partager votre idée sur ce projet"
 msgid "Log in to participate"
 msgstr "Connectez-vous pour participer"
 
-#: publications/templates/publications/components/ideas_form.html:88
+#: publications/templates/publications/components/ideas_form.html:90
 msgid "Your idea"
 msgstr "Votre idée"
 
-#: publications/templates/publications/components/ideas_form.html:95
+#: publications/templates/publications/components/ideas_form.html:97
 msgid "Describe your idea or alternative proposal..."
 msgstr "Décrivez votre idée ou proposition alternative..."
 
-#: publications/templates/publications/components/ideas_form.html:99
+#: publications/templates/publications/components/ideas_form.html:101
 msgid "Only you and administrators can see your idea"
 msgstr "Seuls vous et les administrateurs peuvent voir votre idée"
 
-#: publications/templates/publications/components/ideas_form.html:131
+#: publications/templates/publications/components/ideas_form.html:133
 msgid "Submit my idea anonymously (my name will not be linked to it)"
-msgstr "Soumettre mon idée de manière anonyme (mon nom ne sera pas associé à celle-ci)"
+msgstr ""
+"Soumettre mon idée de manière anonyme (mon nom ne sera pas associé à celle-"
+"ci)"
 
-#: publications/templates/publications/components/ideas_form.html:141
+#: publications/templates/publications/components/ideas_form.html:143
 msgid "Submit my idea"
 msgstr "Soumettre mon idée"
 
-#: publications/templates/publications/components/ideas_form.html:150
+#: publications/templates/publications/components/ideas_form.html:152
 msgid "Your idea:"
 msgstr "Votre idée :"
 
-#: publications/templates/publications/components/ideas_form.html:157
+#: publications/templates/publications/components/ideas_form.html:159
 msgid "Edit my idea"
 msgstr "Modifier mon idée"
 
-#: publications/templates/publications/components/ideas_form.html:160
+#: publications/templates/publications/components/ideas_form.html:162
 msgid "Remove my idea"
 msgstr "Retirer mon idée"
 
@@ -619,6 +625,19 @@ msgstr "En cours"
 #: publications/templates/publications/event_page.html:21
 msgid "Past"
 msgstr "Passé"
+
+#: publications/templates/publications/components/verify_email_prompt.html:5
+#, python-format
+msgid ""
+"Verify your email address (%(email)s) to take part. Check your inbox for the"
+" link we sent you."
+msgstr ""
+"Vérifiez votre adresse email (%(email)s) pour participer. Consultez votre "
+"boîte de réception : nous vous avons envoyé un lien."
+
+#: publications/templates/publications/components/verify_email_prompt.html:11
+msgid "Resend the verification link"
+msgstr "Renvoyer le lien de vérification"
 
 #: publications/templates/publications/components/vote_form.html:9
 msgid "Please select an option"
@@ -646,10 +665,11 @@ msgstr ""
 
 #: publications/templates/publications/components/vote_form.html:46
 msgid ""
-"All votes are analyzed and taken into account in the final project decisions."
+"All votes are analyzed and taken into account in the final project "
+"decisions."
 msgstr ""
-"Tous les votes sont analysés et pris en compte dans les décisions finales du "
-"projet."
+"Tous les votes sont analysés et pris en compte dans les décisions finales du"
+" projet."
 
 #: publications/templates/publications/components/vote_form.html:70
 msgid "Log in to vote on this project"
@@ -659,49 +679,50 @@ msgstr "Connectez-vous pour voter sur ce projet"
 msgid "Log in to vote"
 msgstr "Se connecter pour voter"
 
-#: publications/templates/publications/components/vote_form.html:86
+#: publications/templates/publications/components/vote_form.html:88
 msgid "Vote choice"
 msgstr "Choix de vote"
 
-#: publications/templates/publications/components/vote_form.html:189
+#: publications/templates/publications/components/vote_form.html:191
 msgid "Comment (optional)"
 msgstr "Commentaire (optionnel)"
 
-#: publications/templates/publications/components/vote_form.html:196
+#: publications/templates/publications/components/vote_form.html:198
 msgid "Explain your vote..."
 msgstr "Expliquez votre vote..."
 
-#: publications/templates/publications/components/vote_form.html:199
+#: publications/templates/publications/components/vote_form.html:201
 msgid "Only you and administrators can see your comment"
 msgstr "Seuls vous et les administrateurs peuvent voir votre commentaire"
 
-#: publications/templates/publications/components/vote_form.html:231
+#: publications/templates/publications/components/vote_form.html:233
 msgid "Submit my vote anonymously (my name will not be linked to this vote)"
 msgstr ""
-"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce vote)"
+"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce "
+"vote)"
 
-#: publications/templates/publications/components/vote_form.html:242
+#: publications/templates/publications/components/vote_form.html:244
 msgid "Submit my vote"
 msgstr "Soumettre mon vote"
 
-#: publications/templates/publications/components/vote_form.html:253
+#: publications/templates/publications/components/vote_form.html:255
 msgid "Your vote:"
 msgstr "Votre vote :"
 
-#: publications/templates/publications/components/vote_form.html:257
+#: publications/templates/publications/components/vote_form.html:259
 msgid "Your comment:"
 msgstr "Votre commentaire :"
 
-#: publications/templates/publications/components/vote_form.html:265
+#: publications/templates/publications/components/vote_form.html:267
 msgid "Change my vote"
 msgstr "Modifier mon vote"
 
-#: publications/templates/publications/components/vote_form.html:268
+#: publications/templates/publications/components/vote_form.html:270
 msgid "Remove my vote"
 msgstr "Retirer mon vote"
 
-#: publications/templates/publications/components/vote_form.html:294
-#: publications/views/vote.py:40 publications/views/vote.py:106
+#: publications/templates/publications/components/vote_form.html:296
+#: publications/views/vote.py:27 publications/views/vote.py:96
 msgid "Voting is closed for this project"
 msgstr "Le vote est fermé pour ce projet"
 
@@ -780,63 +801,85 @@ msgstr "Afficher les événements passés"
 msgid "No publications found"
 msgstr "Aucune publication trouvée"
 
-#: publications/views/idea.py:17 publications/views/vote.py:18
-msgid "Authentication required"
-msgstr "Authentification requise"
-
-#: publications/views/idea.py:27 publications/views/idea.py:81
-#: publications/views/idea.py:119 publications/views/vote.py:28
-#: publications/views/vote.py:94 publications/views/vote.py:136
+#: publications/views/idea.py:16 publications/views/idea.py:72
+#: publications/views/idea.py:108 publications/views/vote.py:17
+#: publications/views/vote.py:86 publications/views/vote.py:126
 msgid "Project not found"
 msgstr "Projet non trouvé"
 
-#: publications/views/idea.py:33 publications/views/idea.py:87
-#: publications/views/idea.py:125
+#: publications/views/idea.py:20 publications/views/idea.py:76
+#: publications/views/idea.py:112
 msgid "This project does not collect ideas"
 msgstr "Ce projet n'est pas en collecte d'idées"
 
-#: publications/views/idea.py:41 publications/views/vote.py:48
+#: publications/views/idea.py:28 publications/views/vote.py:35
 msgid "Invalid JSON data"
 msgstr "Données JSON invalides"
 
-#: publications/views/idea.py:66
+#: publications/views/idea.py:43
+#, python-format
+msgid "Your idea must not exceed %(max)d characters."
+msgstr "Votre idée ne doit pas dépasser %(max)d caractères."
+
+#: publications/views/idea.py:59
 msgid "Idea submitted successfully"
 msgstr "Idée soumise avec succès"
 
-#: publications/views/idea.py:68
+#: publications/views/idea.py:61
 msgid "Idea updated successfully"
 msgstr "Idée mise à jour avec succès"
 
-#: publications/views/idea.py:99
+#: publications/views/idea.py:88
 msgid "No idea found to remove"
 msgstr "Aucune idée à supprimer"
 
-#: publications/views/idea.py:106
+#: publications/views/idea.py:95
 msgid "Idea removed successfully"
 msgstr "Idée supprimée avec succès"
 
-#: publications/views/vote.py:34 publications/views/vote.py:100
-#: publications/views/vote.py:142
+#: publications/views/mixins.py:33
+msgid "Authentication required"
+msgstr "Authentification requise"
+
+#: publications/views/mixins.py:47
+msgid "Please verify your email address before taking part."
+msgstr "Veuillez vérifier votre adresse email avant de participer."
+
+#: publications/views/mixins.py:57
+msgid "Please accept the code of conduct before taking part."
+msgstr "Veuillez accepter la charte de bonne conduite avant de participer."
+
+#: publications/views/mixins.py:71
+msgid "Too many requests. Please try again in a minute."
+msgstr "Trop de requêtes. Réessayez dans une minute."
+
+#: publications/views/vote.py:21 publications/views/vote.py:90
+#: publications/views/vote.py:130
 msgid "This project does not have voting enabled"
 msgstr "Ce projet n'a pas de vote activé"
 
-#: publications/views/vote.py:58
+#: publications/views/vote.py:45
 msgid "Invalid vote choice"
 msgstr "Choix de vote invalide"
 
-#: publications/views/vote.py:77
+#: publications/views/vote.py:51
+#, python-format
+msgid "Your comment must not exceed %(max)d characters."
+msgstr "Votre commentaire ne doit pas dépasser %(max)d caractères."
+
+#: publications/views/vote.py:71
 msgid "Vote submitted successfully"
 msgstr "Vote soumis avec succès"
 
-#: publications/views/vote.py:79
+#: publications/views/vote.py:73
 msgid "Vote updated successfully"
 msgstr "Vote mis à jour avec succès"
 
-#: publications/views/vote.py:118
+#: publications/views/vote.py:108
 msgid "No vote found to remove"
 msgstr "Aucun vote à supprimer"
 
-#: publications/views/vote.py:125
+#: publications/views/vote.py:115
 msgid "Vote removed successfully"
 msgstr "Vote supprimé avec succès"
 
@@ -853,7 +896,6 @@ msgstr "Vote supprimé avec succès"
 #~ msgstr "Toutes les catégories"
 
 #, fuzzy
-#~| msgid "View project"
 #~ msgid "View more"
 #~ msgstr "Voir la suite"
 

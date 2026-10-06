@@ -3,6 +3,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+IDEA_MAX_LENGTH = 2000
+
+
 class IdeaResponse(models.Model):
     """An idea a resident proposes on a project that collects ideas.
 

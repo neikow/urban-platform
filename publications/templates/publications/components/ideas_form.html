@@ -4,7 +4,7 @@
     <div
         id="ideas-component"
         data-project-id="{{ page.id }}"
-        data-is-authenticated="{{ user.is_authenticated|yesno:'true,false' }}"
+        data-can-participate="{% if user.is_authenticated and user.is_verified %}true{% else %}false{% endif %}"
         data-csrf-token="{{ csrf_token }}"
         data-msg-empty="{% trans 'Please describe your idea' %}"
         data-msg-generic-error="{% trans 'An error occurred' %}"
@@ -80,6 +80,8 @@
                         {% trans "Log in to participate" %}
                     </button>
                 </div>
+            {% elif not user.is_verified %}
+                {% include "publications/components/verify_email_prompt.html" %}
             {% else %}
                 <div id="ideas-form-container">
                     <form id="ideas-form" class="space-y-5">

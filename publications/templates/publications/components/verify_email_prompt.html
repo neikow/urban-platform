@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<div class="text-center py-6 px-4 bg-base-100 rounded-lg">
+    <p class="text-base-content/70 mb-4 text-sm">
+        {% blocktrans with email=user.email %}Verify your email address ({{ email }}) to take part. Check your inbox for
+            the link we sent you.{% endblocktrans %}
+    </p>
+    <form method="post" action="{% url 'email_verify_resend' %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" class="btn btn-primary border-none font-semibold">
+            {% trans "Resend the verification link" %}
+        </button>
+    </form>
+</div>

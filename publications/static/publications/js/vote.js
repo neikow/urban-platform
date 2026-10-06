@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!voteComponent) return;
 
     const projectId = voteComponent.dataset.projectId;
-    const isAuthenticated = voteComponent.dataset.isAuthenticated === 'true';
+    const canParticipate = voteComponent.dataset.canParticipate === 'true';
     const csrfToken = voteComponent.dataset.csrfToken;
 
     const messages = {
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'FAVORABLE': 'bg-success'
     };
 
-    if (!isAuthenticated) return;
+    if (!canParticipate) return;
 
     loadVoteState();
 
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     showVoteForm();
                 }
             } else {
-                showError(data.error || messages.genericError);
+                handleFailure(data);
             }
         } catch (error) {
             console.error('Error loading vote state:', error);
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 displayResults(data.results, data.vote);
             } else {
-                showError(data.error || messages.genericError);
+                handleFailure(data);
                 showVoteForm();
             }
         } catch (error) {
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 voteSubmitBtn.disabled = true;
                 showVoteForm();
             } else {
-                showError(data.error || messages.genericError);
+                handleFailure(data);
             }
         } catch (error) {
             console.error('Error removing vote:', error);
@@ -301,6 +301,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 voteLoading.classList.add('hidden');
             }
         }
+    }
+
+    function handleFailure(data) {
+        // The server asks for consent to the latest code of conduct first;
+        // the consent page sends the user back here afterwards.
+        if (data.code === 'code_of_conduct_required' && data.action_url) {
+            window.location.href = data.action_url;
+            return;
+        }
+        showError(data.error || messages.genericError);
     }
 
     function showError(message) {

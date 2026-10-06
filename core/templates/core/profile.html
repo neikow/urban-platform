@@ -76,6 +76,14 @@
                                     >{% trans "Not verified" %}</span>
                                 {% endif %}
                             </p>
+                            {% if not user.is_verified %}
+                                <form method="post" action="{% url 'email_verify_resend' %}" class="mt-2">
+                                    {% csrf_token %}
+                                    <button type="submit" class="link link-primary text-sm">
+                                        {% trans "Resend the verification link" %}
+                                    </button>
+                                </form>
+                            {% endif %}
                         </div>
                         {% if user.phone_number %}
                             <div>

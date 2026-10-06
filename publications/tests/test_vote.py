@@ -7,14 +7,17 @@ from publications.models import FormResponse, ParticipationMode, ProjectPage, Vo
 
 
 @pytest.fixture
-def user(db):
+def user(db, give_code_of_conduct_consent):
     """Create a test user."""
-    return User.objects.create_user(
+    user = User.objects.create_user(
         email="testuser@example.com",
         password="TestPass123",
         first_name="Test",
         last_name="User",
+        is_verified=True,
     )
+    give_code_of_conduct_consent(user)
+    return user
 
 
 @pytest.fixture
