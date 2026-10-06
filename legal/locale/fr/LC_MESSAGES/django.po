@@ -121,7 +121,7 @@ msgstr "Charte de bonne conduite"
 
 #: legal/templates/legal/code_of_conduct_consent.html:10
 msgid "Legal"
-msgstr "Juridique"
+msgstr "Légal"
 
 #: legal/templates/legal/code_of_conduct_consent.html:17
 msgid "Signing the code of conduct"

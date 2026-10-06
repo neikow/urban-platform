@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 15:39+0200\n"
+"POT-Creation-Date: 2026-10-06 15:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,55 +196,55 @@ msgstr "Bloc Liste de témoignages"
 msgid "Number of Publications"
 msgstr "Nombre de publications"
 
-#: core/blocks.py:267
+#: core/blocks.py:270
 msgid "Recent Publications Block"
 msgstr "Bloc des publications récentes"
 
-#: core/blocks.py:272
+#: core/blocks.py:275
 msgid "Question"
 msgstr "Question"
 
-#: core/blocks.py:273
+#: core/blocks.py:276
 msgid "Answer"
 msgstr "Réponse"
 
-#: core/blocks.py:285
+#: core/blocks.py:288
 msgid "FAQ Block"
 msgstr "Bloc FAQ"
 
-#: core/blocks.py:292
+#: core/blocks.py:295
 msgid "Height (in pixels)"
 msgstr "Hauteur (en pixels)"
 
-#: core/blocks.py:299
+#: core/blocks.py:302
 msgid "Hide on Mobile"
 msgstr "Masquer sur mobile"
 
-#: core/blocks.py:305
+#: core/blocks.py:308
 msgid "Vertical Spacer"
 msgstr "Espace vertical"
 
-#: core/blocks.py:311
+#: core/blocks.py:314
 msgid "Button Text"
 msgstr "Texte du bouton"
 
-#: core/blocks.py:313
+#: core/blocks.py:316
 msgid "Button Type"
 msgstr "Type de bouton"
 
-#: core/blocks.py:319
+#: core/blocks.py:322
 msgid "Button Alignment"
 msgstr "Alignement du bouton"
 
-#: core/blocks.py:330
+#: core/blocks.py:333
 msgid "Button Link"
 msgstr "Lien du bouton"
 
-#: core/blocks.py:333
+#: core/blocks.py:336
 msgid "Call-to-Action Button"
 msgstr "CTA - Bouton d'appel à l'action"
 
-#: core/blocks.py:339 core/blocks.py:342
+#: core/blocks.py:342 core/blocks.py:345
 msgid "Document"
 msgstr "Document"
 
@@ -438,7 +438,7 @@ msgstr "Actif"
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:132
+#: core/models/user.py:132 core/wagtail_hooks.py:239
 msgid "Users"
 msgstr "Utilisateurs"
 
@@ -756,10 +756,12 @@ msgstr "Outils"
 
 #: core/templates/core/components/website_footer.html:55
 #: core/tests/test_templates/test_components/test_website_footer.py:56
+#: core/wagtail_hooks.py:195
 msgid "Legal"
 msgstr "Légal"
 
 #: core/templates/core/components/website_footer.html:67
+#: core/wagtail_hooks.py:233
 msgid "About"
 msgstr "À propos"
 
@@ -891,68 +893,86 @@ msgid "You do not have permission to assign this role."
 msgstr "Vous n'avez pas la permission d'attribuer ce rôle."
 
 #: core/wagtail_hooks.py:84 core/wagtail_hooks.py:98 core/wagtail_hooks.py:129
-msgid "Page d'accueil"
+msgid "Home page"
 msgstr "Page d'accueil"
 
 #: core/wagtail_hooks.py:104 core/wagtail_hooks.py:135
-msgid "Liste"
+msgid "List"
 msgstr "Liste"
 
 #: core/wagtail_hooks.py:110 core/wagtail_hooks.py:141
-msgid "Ajouter"
+msgid "Add"
 msgstr "Ajouter"
 
 #: core/wagtail_hooks.py:117
-msgid "Actualités"
-msgstr ""
+msgid "News"
+msgstr "Actualités"
 
 #: core/wagtail_hooks.py:148
-msgid "Informations utiles"
-msgstr ""
+msgid "Useful information"
+msgstr "Informations utiles"
 
 #: core/wagtail_hooks.py:170
-msgid "Charte de conduite"
+msgid "Code of conduct"
 msgstr "Charte de bonne conduite"
 
 #: core/wagtail_hooks.py:176
-msgid "Conditions d'utilisation"
+msgid "Terms of service"
 msgstr "Conditions d'utilisation"
 
 #: core/wagtail_hooks.py:182
-msgid "Politique de cookies"
+msgid "Cookies policy"
 msgstr "Politique de cookies"
 
 #: core/wagtail_hooks.py:188
-msgid "Politique de confidentialité"
+msgid "Privacy policy"
 msgstr "Politique de confidentialité"
 
-#: core/wagtail_hooks.py:195
-msgid "Légal"
-msgstr "Juridique"
-
 #: core/wagtail_hooks.py:214
-msgid "La plateforme"
+msgid "The platform"
 msgstr "La plateforme"
 
 #: core/wagtail_hooks.py:220
-msgid "La commission d'urbanisme"
+msgid "The urban planning commission"
 msgstr "La commission d'urbanisme"
 
 #: core/wagtail_hooks.py:226
-msgid "L'équipe de développement"
+msgid "The development team"
 msgstr "L'équipe de développement"
-
-#: core/wagtail_hooks.py:233
-msgid "À propos"
-msgstr "À propos"
-
-#: core/wagtail_hooks.py:239
-msgid "Utilisateurs"
-msgstr "Utilisateurs"
 
 #: core/wagtail_hooks.py:249
 msgid "Documentation"
 msgstr "Documentation"
+
+#~ msgid "Page d'accueil"
+#~ msgstr "Page d'accueil"
+
+#~ msgid "Ajouter"
+#~ msgstr "Ajouter"
+
+#~ msgid "Conditions d'utilisation"
+#~ msgstr "Conditions d'utilisation"
+
+#~ msgid "Politique de cookies"
+#~ msgstr "Politique de cookies"
+
+#~ msgid "Politique de confidentialité"
+#~ msgstr "Politique de confidentialité"
+
+#~ msgid "Légal"
+#~ msgstr "Juridique"
+
+#~ msgid "La commission d'urbanisme"
+#~ msgstr "La commission d'urbanisme"
+
+#~ msgid "L'équipe de développement"
+#~ msgstr "L'équipe de développement"
+
+#~ msgid "À propos"
+#~ msgstr "À propos"
+
+#~ msgid "Utilisateurs"
+#~ msgstr "Utilisateurs"
 
 #~ msgid "Fiches Pédagogiques"
 #~ msgstr "Fiches Pédagogiques"

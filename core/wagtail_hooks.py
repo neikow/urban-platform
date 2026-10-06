@@ -81,7 +81,7 @@ def register_home_page_edition_menu() -> MenuItem:
     home_page = HomePage.objects.first()
 
     return MenuItem(
-        _("Page d'accueil"),
+        _("Home page"),
         reverse("wagtailadmin_pages:edit", args=[home_page.id]),
         icon_name="home",
         order=0,
@@ -95,26 +95,26 @@ def register_publications_menu() -> MenuItem:
     submenu = Menu(
         items=[
             MenuItem(
-                _("Page d'accueil"),
+                _("Home page"),
                 reverse("wagtailadmin_pages:edit", args=[index_page.id]),
                 icon_name="home",
                 order=100,
             ),
             MenuItem(
-                _("Liste"),
+                _("List"),
                 reverse("wagtailadmin_explore", args=[index_page.id]),
                 icon_name="folder-open-inverse",
                 order=200,
             ),
             MenuItem(
-                _("Ajouter"),
+                _("Add"),
                 reverse("wagtailadmin_pages:add_subpage", args=[index_page.id]),
                 icon_name="plus",
                 order=300,
             ),
         ]
     )
-    return SubmenuMenuItem(_("Actualités"), submenu, icon_name="doc-full-inverse", order=100)
+    return SubmenuMenuItem(_("News"), submenu, icon_name="doc-full-inverse", order=100)
 
 
 @hooks.register("register_admin_menu_item")
@@ -126,26 +126,26 @@ def register_pedagogic_entries_menu() -> MenuItem:
     submenu = Menu(
         items=[
             MenuItem(
-                _("Page d'accueil"),
+                _("Home page"),
                 reverse("wagtailadmin_pages:edit", args=[index_page.id]),
                 icon_name="home",
                 order=100,
             ),
             MenuItem(
-                _("Liste"),
+                _("List"),
                 reverse("wagtailadmin_explore", args=[index_page.id]),
                 icon_name="folder-open-inverse",
                 order=200,
             ),
             MenuItem(
-                _("Ajouter"),
+                _("Add"),
                 reverse("wagtailadmin_pages:add_subpage", args=[index_page.id]),
                 icon_name="plus",
                 order=300,
             ),
         ]
     )
-    return SubmenuMenuItem(_("Informations utiles"), submenu, icon_name="graduation-cap", order=200)
+    return SubmenuMenuItem(_("Useful information"), submenu, icon_name="graduation-cap", order=200)
 
 
 @hooks.register("register_admin_menu_item")
@@ -167,32 +167,32 @@ def register_legal_menu() -> MenuItem:
     submenu = Menu(
         items=[
             MenuItem(
-                _("Charte de conduite"),
+                _("Code of conduct"),
                 reverse("wagtailadmin_pages:edit", args=[code_of_conduct.id]),
                 icon_name="doc-full-inverse",
                 order=100,
             ),
             MenuItem(
-                _("Conditions d'utilisation"),
+                _("Terms of service"),
                 reverse("wagtailadmin_pages:edit", args=[terms_of_service.id]),
                 icon_name="doc-full-inverse",
                 order=200,
             ),
             MenuItem(
-                _("Politique de cookies"),
+                _("Cookies policy"),
                 reverse("wagtailadmin_pages:edit", args=[cookies_policy.id]),
                 icon_name="doc-full-inverse",
                 order=300,
             ),
             MenuItem(
-                _("Politique de confidentialité"),
+                _("Privacy policy"),
                 reverse("wagtailadmin_pages:edit", args=[privacy_policy.id]),
                 icon_name="doc-full-inverse",
                 order=400,
             ),
         ]
     )
-    return SubmenuMenuItem(_("Légal"), submenu, icon_name="gavel", order=300)
+    return SubmenuMenuItem(_("Legal"), submenu, icon_name="gavel", order=300)
 
 
 @hooks.register("register_admin_menu_item")
@@ -211,32 +211,32 @@ def register_about_menu() -> MenuItem:
     submenu = Menu(
         items=[
             MenuItem(
-                _("La plateforme"),
+                _("The platform"),
                 reverse("wagtailadmin_pages:edit", args=[about_website.id]),
                 icon_name="doc-full-inverse",
                 order=100,
             ),
             MenuItem(
-                _("La commission d'urbanisme"),
+                _("The urban planning commission"),
                 reverse("wagtailadmin_pages:edit", args=[about_commission.id]),
                 icon_name="doc-full-inverse",
                 order=200,
             ),
             MenuItem(
-                _("L'équipe de développement"),
+                _("The development team"),
                 reverse("wagtailadmin_pages:edit", args=[about_dev_team.id]),
                 icon_name="doc-full-inverse",
                 order=300,
             ),
         ]
     )
-    return SubmenuMenuItem(_("À propos"), submenu, icon_name="info-circle", order=400)
+    return SubmenuMenuItem(_("About"), submenu, icon_name="info-circle", order=400)
 
 
 @hooks.register("register_admin_menu_item")
 def register_users_menu() -> MenuItem:
     return MenuItem(
-        _("Utilisateurs"),
+        _("Users"),
         reverse("wagtailusers_users:index"),
         icon_name="user",
         order=500,

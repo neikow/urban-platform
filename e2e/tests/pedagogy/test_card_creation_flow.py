@@ -2,7 +2,6 @@ import uuid
 
 import pytest
 from playwright.sync_api import Page, expect
-from django.utils.translation import gettext as _
 
 from e2e.utils import login_user
 
@@ -28,7 +27,7 @@ def test_pedagogy_card_creation_flow(
     )
     page.goto(base_url + "/admin/")
 
-    page.get_by_role("button", name=str(_("Informations utiles"))).click()
+    page.get_by_role("button", name="Informations utiles").click()
     page.get_by_role("link", name="Ajouter").click()
     page.get_by_role("textbox", name="Titre*").click()
     page.get_by_role("textbox", name="Titre*").fill(TEST_TITLE)

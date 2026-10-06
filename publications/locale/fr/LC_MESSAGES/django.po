@@ -16,71 +16,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: publications/models/event.py:19 publications/models/event.py:116
+#: publications/models/event.py:19 publications/models/event.py:114
 #: publications/templates/publications/components/publication_preview.html:51
 #: publications/templates/publications/event_page.html:15
 msgid "Event"
 msgstr "Événement"
 
-#: publications/models/event.py:26
+#: publications/models/event.py:24
 msgid "Event Date"
 msgstr "Date de l'événement"
 
-#: publications/models/event.py:27
-msgid "Date et heure de début de l'événement"
+#: publications/models/event.py:25
+msgid "Start date and time of the event"
 msgstr "Date et heure de début de l'événement"
 
-#: publications/models/event.py:31
+#: publications/models/event.py:29
 msgid "End Date"
 msgstr "Date de fin"
 
-#: publications/models/event.py:34
-msgid "Date et heure de fin de l'événement (optionnel)"
+#: publications/models/event.py:32
+msgid "End date and time of the event (optional)"
 msgstr "Date et heure de fin de l'événement (optionnel)"
 
-#: publications/models/event.py:38
+#: publications/models/event.py:36
 #: publications/templates/publications/event_page.html:78
 msgid "Location"
 msgstr "Lieu"
 
-#: publications/models/event.py:41
-msgid "Lieu de l'événement"
+#: publications/models/event.py:39
+msgid "Venue of the event"
 msgstr "Lieu de l'événement"
 
-#: publications/models/event.py:45
+#: publications/models/event.py:43
 #: publications/templates/publications/event_page.html:165
 msgid "Address"
 msgstr "Adresse"
 
-#: publications/models/event.py:47
-msgid "Adresse complète de l'événement"
+#: publications/models/event.py:45
+msgid "Full address of the event"
 msgstr "Adresse complète de l'événement"
 
-#: publications/models/event.py:51
+#: publications/models/event.py:49
 msgid "Online Event"
 msgstr "Événement en ligne"
 
-#: publications/models/event.py:53
-msgid "Cochez si l'événement est en ligne"
+#: publications/models/event.py:51
+msgid "Check if the event takes place online"
 msgstr "Cochez si l'événement est en ligne"
 
-#: publications/models/event.py:57
+#: publications/models/event.py:55
 msgid "Online Link"
 msgstr "Lien en ligne"
 
-#: publications/models/event.py:59
-msgid "Lien vers l'événement en ligne (si applicable)"
+#: publications/models/event.py:57
+msgid "Link to the online event (if applicable)"
 msgstr "Lien vers l'événement en ligne (si applicable)"
 
-#: publications/models/event.py:64
+#: publications/models/event.py:62
 msgid "Maximum Participants"
 msgstr "Nombre maximum de participants"
 
-#: publications/models/event.py:67
-msgid "Nombre maximum de participants (laisser vide si illimité)"
+#: publications/models/event.py:65
+msgid "Maximum number of participants (leave empty if unlimited)"
 msgstr "Nombre maximum de participants (laisser vide si illimité)"
 
-#: publications/models/event.py:117
+#: publications/models/event.py:115
 #: publications/templates/publications/publication_index_page.html:55
 msgid "Events"
 msgstr "Événements"
@@ -113,7 +113,7 @@ msgstr "Texte affiché au survol (optionnel)"
 msgid "External Link"
 msgstr "Lien externe"
 
-#: publications/models/external_link.py:46 publications/models/project.py:95
+#: publications/models/external_link.py:46 publications/models/project.py:93
 msgid "External Links"
 msgstr "Liens externes"
 
@@ -165,7 +165,7 @@ msgid "User"
 msgstr "Utilisateur"
 
 #: publications/models/form.py:44 publications/models/idea.py:31
-#: publications/models/project.py:51 publications/models/project.py:148
+#: publications/models/project.py:51 publications/models/project.py:146
 #: publications/templates/publications/admin/ideas_stats.html:36
 #: publications/templates/publications/admin/vote_stats.html:36
 #: publications/templates/publications/components/publication_preview.html:68
@@ -281,15 +281,15 @@ msgstr "Vote"
 msgid "Idea collection"
 msgstr "Collecte d'idées"
 
-#: publications/models/project.py:58
+#: publications/models/project.py:56
 msgid "Category"
 msgstr "Catégorie"
 
-#: publications/models/project.py:65
+#: publications/models/project.py:63
 msgid "Participation mode"
 msgstr "Mode de participation"
 
-#: publications/models/project.py:70
+#: publications/models/project.py:68
 msgid ""
 "Voting lets residents give an opinion; idea collection lets them propose "
 "ideas on a project still in its early stages. The two are mutually exclusive"
@@ -300,57 +300,57 @@ msgstr ""
 "sont mutuellement exclusifs — le changement conserve les réponses déjà "
 "collectées."
 
-#: publications/models/project.py:77
+#: publications/models/project.py:75
 msgid "Voting End Date"
 msgstr "Date de fin du vote"
 
-#: publications/models/project.py:80
+#: publications/models/project.py:78
 msgid "Leave empty for no end date (only applies to voting)"
 msgstr "Laisser vide pour pas de date de fin (s'applique uniquement au vote)"
 
-#: publications/models/project.py:84
+#: publications/models/project.py:82
 msgid "Show table of contents"
 msgstr "Afficher la table des matières"
 
-#: publications/models/project.py:86
+#: publications/models/project.py:84
 msgid "Display the table of contents in the sidebar"
 msgstr "Afficher la table des matières dans la barre latérale"
 
-#: publications/models/project.py:149
+#: publications/models/project.py:147
 #: publications/templates/publications/publication_index_page.html:43
 msgid "Projects"
 msgstr "Projets"
 
-#: publications/models/publication.py:20
+#: publications/models/publication.py:17
 msgid "Publication"
 msgstr "Publication"
 
-#: publications/models/publication.py:21
+#: publications/models/publication.py:18
 #: publications/templates/publications/publication_index_page.html:12
 msgid "Publications"
 msgstr "Publications"
 
-#: publications/models/publication.py:142
+#: publications/models/publication.py:27
 msgid "Description"
 msgstr "Description"
 
-#: publications/models/publication.py:143
+#: publications/models/publication.py:28
 msgid "A brief description shown in lists."
 msgstr "Une brève description affichée dans les listes."
 
-#: publications/models/publication.py:152
+#: publications/models/publication.py:37
 msgid "Hero Image"
 msgstr "Image principale"
 
-#: publications/models/publication.py:153
+#: publications/models/publication.py:38
 msgid "Main image for this publication"
 msgstr "Image principale pour cette publication"
 
-#: publications/models/publication.py:159
+#: publications/models/publication.py:44
 msgid "Content"
 msgstr "Contenu"
 
-#: publications/models/publication.py:160
+#: publications/models/publication.py:45
 msgid "The main content of the page."
 msgstr "Le contenu principal de la page."
 
@@ -882,6 +882,21 @@ msgstr "Aucun vote à supprimer"
 #: publications/views/vote.py:115
 msgid "Vote removed successfully"
 msgstr "Vote supprimé avec succès"
+
+#~ msgid "Date et heure de début de l'événement"
+#~ msgstr "Date et heure de début de l'événement"
+
+#~ msgid "Date et heure de fin de l'événement (optionnel)"
+#~ msgstr "Date et heure de fin de l'événement (optionnel)"
+
+#~ msgid "Lieu de l'événement"
+#~ msgstr "Lieu de l'événement"
+
+#~ msgid "Adresse complète de l'événement"
+#~ msgstr "Adresse complète de l'événement"
+
+#~ msgid "Cochez si l'événement est en ligne"
+#~ msgstr "Cochez si l'événement est en ligne"
 
 #~ msgid "Enable Voting"
 #~ msgstr "Activer le vote"

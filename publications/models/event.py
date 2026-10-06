@@ -22,39 +22,39 @@ class EventPage(PublicationPage):
 
     event_date: models.DateTimeField[Any, Any] = models.DateTimeField(
         verbose_name=_("Event Date"),
-        help_text=_("Date et heure de début de l'événement"),
+        help_text=_("Start date and time of the event"),
     )
 
     end_date: models.DateTimeField[Any, Any] = models.DateTimeField(
         verbose_name=_("End Date"),
         null=True,
         blank=True,
-        help_text=_("Date et heure de fin de l'événement (optionnel)"),
+        help_text=_("End date and time of the event (optional)"),
     )
 
     location: models.CharField[str, str] = models.CharField(
         _("Location"),
         max_length=255,
         blank=True,
-        help_text=_("Lieu de l'événement"),
+        help_text=_("Venue of the event"),
     )
 
     address: models.TextField[str, str] = models.TextField(
         _("Address"),
         blank=True,
-        help_text=_("Adresse complète de l'événement"),
+        help_text=_("Full address of the event"),
     )
 
     is_online: models.BooleanField[bool, bool] = models.BooleanField(
         _("Online Event"),
         default=False,
-        help_text=_("Cochez si l'événement est en ligne"),
+        help_text=_("Check if the event takes place online"),
     )
 
     online_link: models.URLField[str, str] = models.URLField(
         _("Online Link"),
         blank=True,
-        help_text=_("Lien vers l'événement en ligne (si applicable)"),
+        help_text=_("Link to the online event (if applicable)"),
     )
 
     max_participants: models.PositiveIntegerField[int | None, int | None] = (
@@ -62,7 +62,7 @@ class EventPage(PublicationPage):
             _("Maximum Participants"),
             null=True,
             blank=True,
-            help_text=_("Nombre maximum de participants (laisser vide si illimité)"),
+            help_text=_("Maximum number of participants (leave empty if unlimited)"),
         )
     )
 
