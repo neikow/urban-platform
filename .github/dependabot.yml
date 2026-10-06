@@ -10,6 +10,11 @@ updates:
         npm-deps:
             patterns:
             - "*"
+    ignore:
+        # Type definitions follow the Node major we run (.nvmrc, Dockerfile),
+        # not the latest Node release. Bump them together with Node.
+        - dependency-name: "@types/node"
+          update-types: ["version-update:semver-major"]
 
   # Maintain dependencies for uv
   # https://github.com/astral-sh/uv/issues/2512
