@@ -104,12 +104,14 @@
 | publications/\_\_init\_\_.py                                   |        0 |        0 |        0 |        0 |    100.00% |           |
 | publications/apps.py                                           |        6 |        0 |        0 |        0 |    100.00% |           |
 | publications/event\_reminders.py                               |       21 |        0 |        2 |        0 |    100.00% |           |
-| publications/geo.py                                            |       30 |        0 |        8 |        0 |    100.00% |           |
+| publications/geo.py                                            |       34 |        0 |        8 |        0 |    100.00% |           |
 | publications/ical.py                                           |       47 |        1 |       14 |        3 |     93.44% |55, 64-\>66, 71-\>73 |
 | publications/management/\_\_init\_\_.py                        |        0 |        0 |        0 |        0 |    100.00% |           |
 | publications/management/commands/\_\_init\_\_.py               |        0 |        0 |        0 |        0 |    100.00% |           |
+| publications/management/commands/build\_map\_tiles.py          |       43 |       43 |        4 |        0 |      0.00% |     11-95 |
 | publications/management/commands/create\_mock\_publications.py |       66 |       66 |       22 |        0 |      0.00% |     1-119 |
 | publications/management/commands/create\_mock\_votes.py        |       91 |       91 |       30 |        0 |      0.00% |     1-323 |
+| publications/management/commands/runserver.py                  |       40 |        9 |       10 |        1 |     72.00% |28, 49-52, 57-60 |
 | publications/models/\_\_init\_\_.py                            |       10 |        0 |        0 |        0 |    100.00% |           |
 | publications/models/event.py                                   |       48 |        1 |        4 |        1 |     96.15% |20, 104-\>107 |
 | publications/models/event\_interest.py                         |       13 |        1 |        0 |        0 |     92.31% |        35 |
@@ -137,7 +139,7 @@
 | publications/views/vote\_stats.py                              |       60 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       29 |        0 |        2 |        1 |     96.77% | 68-\>exit |
 | publications/widgets.py                                        |       20 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **3837** |  **497** |  **670** |  **103** | **84.11%** |           |
+| **TOTAL**                                                      | **3924** |  **549** |  **684** |  **104** | **83.14%** |           |
 
 
 ## Setup coverage badge
