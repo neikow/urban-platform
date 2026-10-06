@@ -21,7 +21,7 @@
 | core/blocks.py                                                 |      179 |        0 |        4 |        2 |     98.91% |255-\>265, 262-\>265 |
 | core/cache.py                                                  |       16 |        2 |        2 |        1 |     83.33% |33-34, 40-\>exit |
 | core/context\_processors.py                                    |        6 |        0 |        0 |        0 |    100.00% |           |
-| core/data\_export.py                                           |       34 |        0 |        2 |        0 |    100.00% |           |
+| core/data\_export.py                                           |       36 |        0 |        2 |        0 |    100.00% |           |
 | core/emails/\_\_init\_\_.py                                    |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/emails/services.py                                        |       50 |        3 |        4 |        1 |     92.59% |27, 79, 118 |
 | core/emails/tasks.py                                           |       66 |       10 |        4 |        0 |     85.71% |44-48, 81-85 |
@@ -100,7 +100,7 @@
 | pedagogy/models/\_\_init\_\_.py                                |        3 |        0 |        0 |        0 |    100.00% |           |
 | pedagogy/models/pedagogy\_card.py                              |       34 |        2 |        4 |        0 |     94.74% |    24, 68 |
 | pedagogy/models/pedagogy\_index.py                             |       39 |        2 |        2 |        1 |     92.68% |    60, 68 |
-| pedagogy/models/pedagogy\_resource.py                          |       17 |        0 |        4 |        0 |    100.00% |           |
+| pedagogy/models/pedagogy\_resource.py                          |       18 |        0 |        4 |        0 |    100.00% |           |
 | publications/\_\_init\_\_.py                                   |        0 |        0 |        0 |        0 |    100.00% |           |
 | publications/apps.py                                           |        6 |        0 |        0 |        0 |    100.00% |           |
 | publications/event\_reminders.py                               |       21 |        0 |        2 |        0 |    100.00% |           |
@@ -129,15 +129,15 @@
 | publications/views/\_\_init\_\_.py                             |        0 |        0 |        0 |        0 |    100.00% |           |
 | publications/views/event\_interest.py                          |       34 |        2 |        8 |        2 |     90.48% |    39, 54 |
 | publications/views/feeds.py                                    |       49 |        0 |        2 |        0 |    100.00% |           |
-| publications/views/idea.py                                     |       55 |        6 |       20 |        5 |     85.33% |26-27, 72, 75, 87, 108, 119-\>130 |
+| publications/views/idea.py                                     |       56 |        6 |       20 |        5 |     85.53% |27-28, 73, 76, 88, 109, 120-\>131 |
 | publications/views/idea\_stats.py                              |       41 |        0 |        2 |        0 |    100.00% |           |
 | publications/views/mixins.py                                   |       37 |        0 |       14 |        0 |    100.00% |           |
 | publications/views/poll\_close.py                              |       26 |        2 |        4 |        2 |     86.67% |    24, 41 |
-| publications/views/vote.py                                     |       65 |        7 |       26 |        6 |     85.71% |33-34, 86, 89, 95, 107, 129, 137-\>152 |
+| publications/views/vote.py                                     |       66 |        7 |       26 |        6 |     85.87% |34-35, 87, 90, 96, 108, 130, 138-\>153 |
 | publications/views/vote\_stats.py                              |       60 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       29 |        0 |        2 |        1 |     96.77% | 68-\>exit |
 | publications/widgets.py                                        |       20 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **3832** |  **497** |  **670** |  **103** | **84.10%** |           |
+| **TOTAL**                                                      | **3837** |  **497** |  **670** |  **103** | **84.11%** |           |
 
 
 ## Setup coverage badge
