@@ -2,48 +2,35 @@
 
 ![Coverage](https://github.com/neikow/urban-platform/blob/python-coverage-comment-action-data/badge.svg)
 
-## Installation
+## Getting started
 
-### Development Environment Setup
-
-We use [uv](https://docs.astral.sh/uv/) to manage our development
-$environment. To set up the project, follow these steps:
+Requirements: [uv](https://docs.astral.sh/uv/), Node.js 20+, Docker (for Redis) and
+GNU gettext (`brew install gettext` / `apt install gettext`).
 
 ```bash
 git clone git@github.com:neikow/urban-platform.git
 cd urban-platform
 
-uv sync
-pre-commit install
-
-cp .env.example .env
+make install   # Python + JS deps, git hooks, .env, migrations, translations, CSS
+make dev       # Redis, Django on :8000, Tailwind watcher and Celery, stopped with Ctrl+C
 ```
 
-This will install all necessary dependencies and set up the development
-environment.
+Run `make help` for every task. The ones you will use most:
 
-### Running the Application
+| Command         | What it does                                                    |
+|-----------------|-----------------------------------------------------------------|
+| `make test`     | Unit tests, in parallel                                         |
+| `make e2e`      | End-to-end suite, headless (see below for the interactive mode) |
+| `make check`    | What CI runs before tests: ruff, mypy, bandit, missing migrations |
+| `make format`   | Format Python code and templates                                |
+| `make messages` | Update and compile the French translations                      |
 
-To run the application in development mode, use the following command:
+### Translations
 
-```bash
-python manage.py migrate
-python manage.py runserver
-```
-
-### Internationalization
-
-To collect translation messages, run:
-
-```bash
-python manage.py makemessages -a
-```
-
-To compile translation messages, run:
-
-```bash
-python manage.py compilemessages
-```
+Code and templates use English strings; the French catalog lives in each app's
+`locale/fr/`. After adding or changing a string, run `make messages` and fill in the
+new `msgstr` entries. Prefer `{% blocktrans trimmed %}` for multi-line text so the
+template formatter cannot change the msgid.
 
 ## E2E Testing
 
