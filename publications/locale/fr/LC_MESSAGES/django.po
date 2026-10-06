@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:23+0200\n"
+"POT-Creation-Date: 2026-10-06 16:34+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -15,6 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: publications/geo.py:51
+msgid "The location must be a point or a polygon."
+msgstr "La localisation doit être un point ou un polygone."
+
+#: publications/geo.py:63
+msgid "The location coordinates are invalid."
+msgstr "Les coordonnées de la localisation sont invalides."
 
 #: publications/models/event.py:19 publications/models/event.py:114
 #: publications/templates/publications/components/publication_preview.html:51
@@ -38,7 +46,8 @@ msgstr "Date de fin"
 msgid "End date and time of the event (optional)"
 msgstr "Date et heure de fin de l'événement (optionnel)"
 
-#: publications/models/event.py:36
+#: publications/models/event.py:36 publications/models/project.py:87
+#: publications/templates/publications/components/project_location.html:5
 #: publications/templates/publications/event_page.html:80
 msgid "Location"
 msgstr "Lieu"
@@ -81,7 +90,7 @@ msgid "Maximum number of participants (leave empty if unlimited)"
 msgstr "Nombre maximum de participants (laisser vide si illimité)"
 
 #: publications/models/event.py:115
-#: publications/templates/publications/publication_index_page.html:55
+#: publications/templates/publications/publication_index_page.html:59
 msgid "Events"
 msgstr "Événements"
 
@@ -113,7 +122,7 @@ msgstr "Texte affiché au survol (optionnel)"
 msgid "External Link"
 msgstr "Lien externe"
 
-#: publications/models/external_link.py:46 publications/models/project.py:96
+#: publications/models/external_link.py:46 publications/models/project.py:107
 msgid "External Links"
 msgstr "Liens externes"
 
@@ -161,11 +170,11 @@ msgid "User"
 msgstr "Utilisateur"
 
 #: publications/models/form.py:44 publications/models/idea.py:31
-#: publications/models/project.py:54 publications/models/project.py:157
+#: publications/models/project.py:56 publications/models/project.py:172
 #: publications/templates/publications/admin/ideas_stats.html:36
 #: publications/templates/publications/admin/vote_stats.html:36
 #: publications/templates/publications/components/publication_preview.html:68
-#: publications/templates/publications/project_page.html:15
+#: publications/templates/publications/project_page.html:21
 msgid "Project"
 msgstr "Projet"
 
@@ -217,75 +226,75 @@ msgstr "Réponse d'idée"
 msgid "Idea Responses"
 msgstr "Réponses d'idées"
 
-#: publications/models/project.py:18
+#: publications/models/project.py:20
 msgid "What is your opinion on this project?"
 msgstr "Quel est votre avis sur ce projet ?"
 
-#: publications/models/project.py:22
+#: publications/models/project.py:24
 msgid "Urban Planning"
 msgstr "Urbanisme"
 
-#: publications/models/project.py:23
+#: publications/models/project.py:25
 msgid "Environment"
 msgstr "Environnement"
 
-#: publications/models/project.py:24
+#: publications/models/project.py:26
 msgid "Mobility"
 msgstr "Mobilité"
 
-#: publications/models/project.py:25
+#: publications/models/project.py:27
 msgid "Housing"
 msgstr "Logement"
 
-#: publications/models/project.py:26
+#: publications/models/project.py:28
 msgid "Culture"
 msgstr "Culture"
 
-#: publications/models/project.py:27
+#: publications/models/project.py:29
 msgid "Sport"
 msgstr "Sport"
 
-#: publications/models/project.py:28
+#: publications/models/project.py:30
 msgid "Education"
 msgstr "Éducation"
 
-#: publications/models/project.py:29
+#: publications/models/project.py:31
 msgid "Health"
 msgstr "Santé"
 
-#: publications/models/project.py:30
+#: publications/models/project.py:32
 msgid "Social"
 msgstr "Social"
 
-#: publications/models/project.py:31
+#: publications/models/project.py:33
 msgid "Economy"
 msgstr "Économie"
 
-#: publications/models/project.py:32
+#: publications/models/project.py:34
 msgid "Other"
 msgstr "Autre"
 
-#: publications/models/project.py:43
+#: publications/models/project.py:45
 msgid "No participation"
 msgstr "Aucune participation"
 
-#: publications/models/project.py:44
+#: publications/models/project.py:46
 msgid "Voting"
 msgstr "Vote"
 
-#: publications/models/project.py:45
+#: publications/models/project.py:47
 msgid "Idea collection"
 msgstr "Collecte d'idées"
 
-#: publications/models/project.py:59
+#: publications/models/project.py:61
 msgid "Category"
 msgstr "Catégorie"
 
-#: publications/models/project.py:66
+#: publications/models/project.py:68
 msgid "Participation mode"
 msgstr "Mode de participation"
 
-#: publications/models/project.py:71
+#: publications/models/project.py:73
 msgid ""
 "Voting lets residents give an opinion; idea collection lets them propose "
 "ideas on a project still in its early stages. The two are mutually exclusive"
@@ -296,24 +305,28 @@ msgstr ""
 "sont mutuellement exclusifs — le changement conserve les réponses déjà "
 "collectées."
 
-#: publications/models/project.py:78
+#: publications/models/project.py:80
 msgid "Voting End Date"
 msgstr "Date de fin du vote"
 
-#: publications/models/project.py:81
+#: publications/models/project.py:83
 msgid "Leave empty for no end date (only applies to voting)"
 msgstr "Laisser vide pour pas de date de fin (s'applique uniquement au vote)"
 
-#: publications/models/project.py:85
+#: publications/models/project.py:91
+msgid "Where the project takes place: a point or an area."
+msgstr "Lieu du projet : un point ou une zone."
+
+#: publications/models/project.py:95
 msgid "Show table of contents"
 msgstr "Afficher la table des matières"
 
-#: publications/models/project.py:87
+#: publications/models/project.py:97
 msgid "Display the table of contents in the sidebar"
 msgstr "Afficher la table des matières dans la barre latérale"
 
-#: publications/models/project.py:158
-#: publications/templates/publications/publication_index_page.html:43
+#: publications/models/project.py:173
+#: publications/templates/publications/publication_index_page.html:47
 msgid "Projects"
 msgstr "Projets"
 
@@ -322,7 +335,7 @@ msgid "Publication"
 msgstr "Publication"
 
 #: publications/models/publication.py:18
-#: publications/templates/publications/publication_index_page.html:12
+#: publications/templates/publications/publication_index_page.html:16
 msgid "Publications"
 msgstr "Publications"
 
@@ -350,24 +363,24 @@ msgstr "Contenu"
 msgid "The main content of the page."
 msgstr "Le contenu principal de la page."
 
-#: publications/models/publication_index.py:34
-#: publications/models/publication_index.py:95
+#: publications/models/publication_index.py:35
+#: publications/models/publication_index.py:111
 msgid "Publications Index"
 msgstr "Index des publications"
 
-#: publications/models/publication_index.py:38
+#: publications/models/publication_index.py:39
 msgid "Page introduction"
 msgstr "Introduction de la page"
 
-#: publications/models/publication_index.py:39
+#: publications/models/publication_index.py:40
 msgid "Small introduction shown above the publications list."
 msgstr "Petite introduction affichée au-dessus de la liste des publications."
 
-#: publications/models/publication_index.py:45
+#: publications/models/publication_index.py:46
 msgid "Page body content"
 msgstr "Contenu de la page"
 
-#: publications/models/publication_index.py:46
+#: publications/models/publication_index.py:47
 msgid "Additional content for the publications page."
 msgstr "Contenu supplémentaire pour la page des publications."
 
@@ -607,6 +620,58 @@ msgstr "Modifier mon idée"
 msgid "Remove my idea"
 msgstr "Retirer mon idée"
 
+#: publications/templates/publications/components/project_location.html:11
+#, python-format
+msgid "Map showing where “%(title)s” takes place"
+msgstr "Carte du lieu du projet « %(title)s »"
+
+#: publications/templates/publications/components/projects_map.html:6
+msgid "Around you"
+msgstr "Autour de vous"
+
+#: publications/templates/publications/components/projects_map.html:8
+msgid "Projects near me"
+msgstr "Projets près de chez moi"
+
+#: publications/templates/publications/components/projects_map.html:11
+msgid "Projects located in the 7th arrondissement of Marseille."
+msgstr "Les projets situés dans le 7e arrondissement de Marseille."
+
+#: publications/templates/publications/components/projects_map.html:27
+msgid "Show my position"
+msgstr "Afficher ma position"
+
+#: publications/templates/publications/components/projects_map.html:34
+msgid "Map of projects"
+msgstr "Carte des projets"
+
+#: publications/templates/publications/components/projects_map.html:35
+msgid "Your position could not be found."
+msgstr "Votre position n'a pas pu être déterminée."
+
+#: publications/templates/publications/components/projects_map.html:36
+msgid "You are here"
+msgstr "Vous êtes ici"
+
+#: publications/templates/publications/components/projects_map.html:37
+msgid "Open for participation"
+msgstr "Participation ouverte"
+
+#: publications/templates/publications/components/projects_map.html:38
+msgid "See the project"
+msgstr "Voir le projet"
+
+#: publications/templates/publications/components/projects_map.html:44
+#, python-format
+msgid "%(total)s project on the map"
+msgid_plural "%(total)s projects on the map"
+msgstr[0] "%(total)s projet sur la carte"
+msgstr[1] "%(total)s projets sur la carte"
+
+#: publications/templates/publications/components/projects_map.html:59
+msgid "No project has been placed on the map yet."
+msgstr "Aucun projet n'est encore placé sur la carte."
+
 #: publications/templates/publications/components/publication_preview.html:55
 #: publications/templates/publications/event_page.html:17
 msgid "Upcoming"
@@ -646,7 +711,7 @@ msgid_plural "%(total)s votes in total"
 msgstr[0] "%(total)s vote au total"
 msgstr[1] "%(total)s votes au total"
 
-#: publications/templates/publications/components/vote_final_results.html:32
+#: publications/templates/publications/components/vote_final_results.html:33
 msgid "No votes were cast on this project."
 msgstr "Aucun vote n'a été exprimé sur ce projet."
 
@@ -763,7 +828,7 @@ msgid "Max Participants"
 msgstr "Participants max"
 
 #: publications/templates/publications/event_page.html:156
-#: publications/templates/publications/project_page.html:52
+#: publications/templates/publications/project_page.html:58
 #, python-format
 msgid "Preview image: %(title)s"
 msgstr "Image d'aperçu: %(title)s"
@@ -772,52 +837,52 @@ msgstr "Image d'aperçu: %(title)s"
 msgid "View on a map"
 msgstr "Voir sur une carte"
 
-#: publications/templates/publications/project_page.html:22
+#: publications/templates/publications/project_page.html:28
 msgid "Vote open"
 msgstr "Vote ouvert"
 
-#: publications/templates/publications/project_page.html:26
+#: publications/templates/publications/project_page.html:32
 msgid "Ideas open"
 msgstr "Idées ouvertes"
 
-#: publications/templates/publications/project_page.html:70
+#: publications/templates/publications/project_page.html:76
 msgid "Citizen Participation"
 msgstr "Participation citoyenne"
 
-#: publications/templates/publications/project_page.html:104
+#: publications/templates/publications/project_page.html:110
 msgid "Give your opinion"
 msgstr "Donner votre avis"
 
-#: publications/templates/publications/project_page.html:126
+#: publications/templates/publications/project_page.html:132
 msgid "Share your idea"
 msgstr "Partager votre idée"
 
-#: publications/templates/publications/project_page.html:132
+#: publications/templates/publications/project_page.html:141
 msgid "Table of Contents"
 msgstr "Table des matières"
 
-#: publications/templates/publications/publication_index_page.html:14
+#: publications/templates/publications/publication_index_page.html:18
 msgid "Latest Publications"
 msgstr "Dernières publications"
 
-#: publications/templates/publications/publication_index_page.html:17
+#: publications/templates/publications/publication_index_page.html:21
 msgid "Search publications"
 msgstr "Rechercher des publications"
 
-#: publications/templates/publications/publication_index_page.html:18
+#: publications/templates/publications/publication_index_page.html:22
 msgid "Search for a publication..."
 msgstr "Rechercher une publication..."
 
-#: publications/templates/publications/publication_index_page.html:31
-#: publications/templates/publications/publication_index_page.html:98
+#: publications/templates/publications/publication_index_page.html:35
+#: publications/templates/publications/publication_index_page.html:102
 msgid "All"
 msgstr "Tout"
 
-#: publications/templates/publications/publication_index_page.html:82
+#: publications/templates/publications/publication_index_page.html:86
 msgid "Show past events"
 msgstr "Afficher les événements passés"
 
-#: publications/templates/publications/publication_index_page.html:120
+#: publications/templates/publications/publication_index_page.html:124
 msgid "No publications found"
 msgstr "Aucune publication trouvée"
 
@@ -906,6 +971,14 @@ msgstr "Aucun vote à supprimer"
 #: publications/views/vote.py:115
 msgid "Vote removed successfully"
 msgstr "Vote supprimé avec succès"
+
+#: publications/widgets.py:28
+msgid ""
+"Place a marker for a precise spot, or draw a polygon for an area. Drawing a "
+"new shape replaces the previous one."
+msgstr ""
+"Placez un marqueur pour un lieu précis, ou dessinez un polygone pour une "
+"zone. Une nouvelle forme remplace la précédente."
 
 #~ msgid "Date et heure de début de l'événement"
 #~ msgstr "Date et heure de début de l'événement"

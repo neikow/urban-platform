@@ -22,11 +22,13 @@ export default defineConfig(({ mode }) => ({
       input: {
         main: src("main.ts"),
         styles: src("styles/main.css"),
+        map: src("styles/map.css"),
         vote: src("pages/vote.ts"),
         ideas: src("pages/ideas.ts"),
         "code-of-conduct": src("pages/code-of-conduct.ts"),
         admin: src("admin/main.ts"),
         "admin-vote-stats": src("admin/vote-stats.ts"),
+        "admin-location": src("admin/location-input.ts"),
       },
       output: {
         entryFileNames: "[name].js",

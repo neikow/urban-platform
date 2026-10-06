@@ -12,7 +12,9 @@ from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.search import index
 
 from core.toc import TableOfContentsItem, generate_header_ids, get_table_of_contents
+from publications.geo import validate_geometry
 from publications.models.publication import PublicationPage
+from publications.widgets import GeoJSONMapWidget
 
 
 DEFAULT_VOTE_QUESTION = _("What is your opinion on this project?")
@@ -81,6 +83,14 @@ class ProjectPage(PublicationPage):
         help_text=_("Leave empty for no end date (only applies to voting)"),
     )
 
+    location: models.JSONField[Any, Any] = models.JSONField(
+        _("Location"),
+        null=True,
+        blank=True,
+        validators=[validate_geometry],
+        help_text=_("Where the project takes place: a point or an area."),
+    )
+
     show_toc: models.BooleanField[bool, bool] = models.BooleanField(
         _("Show table of contents"),
         default=True,
@@ -93,6 +103,7 @@ class ProjectPage(PublicationPage):
 
     content_panels = PublicationPage.content_panels + [
         FieldPanel("category"),
+        FieldPanel("location", widget=GeoJSONMapWidget),
         InlinePanel("external_links", label=_("External Links")),
         FieldPanel("participation_mode"),
         FieldPanel("voting_end_date"),
