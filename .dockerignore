@@ -37,3 +37,6 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Map tiles: downloaded during the image build
+publications/static/publications/geo/*.pmtiles

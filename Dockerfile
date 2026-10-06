@@ -33,6 +33,9 @@ COPY --from=docs /app/docs/site /app/docs/site
 
 RUN uv sync --locked
 
+# Self-hosted basemap: fetched at each build, so every deploy ships fresh OSM data.
+COPY --from=protomaps/go-pmtiles:v1.31.2 /go-pmtiles /usr/local/bin/pmtiles
+
 ENV DJANGO_SETTINGS_MODULE="urban_platform.settings.production"
 
 ARG SECRET_KEY=build-only-secret-key
@@ -43,6 +46,7 @@ ARG DB_HOST=localhost
 ARG DB_PORT=5432
 
 RUN python manage.py compilemessages
+RUN python manage.py build_map_tiles
 
 # Drop root: run as an unprivileged user. Done last so the build steps above
 # (uv sync, compilemessages) still run as root, then ownership is handed over.

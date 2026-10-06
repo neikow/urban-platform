@@ -1,10 +1,16 @@
 // Styles: the "map" CSS entry (styles/map.css), linked by templates that show a map.
 import L from "leaflet";
+import { leafletLayer } from "protomaps-leaflet";
 
 export interface MapConfig {
   boundaryUrl: string;
   center: [number, number];
   zoom: number;
+  /** Self-hosted PMTiles archive covering `maxBounds` only. */
+  tilesUrl: string;
+  tilesMaxZoom: number;
+  /** [[south, west], [north, east]]: the maps cannot leave the tiled area. */
+  maxBounds: [[number, number], [number, number]];
 }
 
 export interface ProjectProperties {
@@ -18,28 +24,39 @@ export interface ProjectProperties {
 
 export type ProjectFeature = GeoJSON.Feature<GeoJSON.Point | GeoJSON.Polygon, ProjectProperties>;
 
-const OSM_TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-const OSM_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+const ATTRIBUTION =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
+  '<a href="https://protomaps.com">Protomaps</a>';
 
-/** A Leaflet map on OpenStreetMap tiles. Scroll-wheel zoom is off so the page keeps scrolling. */
+/**
+ * A Leaflet map on the self-hosted basemap, locked to the tiled area: it can
+ * neither be panned out of it nor zoomed out past the level where it fills
+ * the container. Scroll-wheel zoom is off so the page keeps scrolling.
+ */
 export function createMap(element: HTMLElement, config: MapConfig, options: L.MapOptions = {}): L.Map {
+  const maxBounds = L.latLngBounds(config.maxBounds);
   const map = L.map(element, {
     center: config.center,
     zoom: config.zoom,
+    maxZoom: 19,
+    maxBounds,
+    maxBoundsViscosity: 1,
     scrollWheelZoom: false,
     ...options,
   });
-  L.tileLayer(OSM_TILES, {
-    maxZoom: 19,
-    attribution: OSM_ATTRIBUTION,
-    // The OSM tile policy requires a Referer and blocks requests without one
-    // ("403 Access blocked"). Pages use Django's "same-origin" Referrer-Policy,
-    // which drops it on cross-origin requests: send the origin for tiles.
-    referrerPolicy: "strict-origin-when-cross-origin",
+  leafletLayer({
+    url: config.tilesUrl,
+    maxDataZoom: config.tilesMaxZoom,
+    flavor: "light",
+    lang: "fr",
+    attribution: ATTRIBUTION,
   }).addTo(map);
 
   // Containers inside tabs or collapsed panels start with no size.
-  new ResizeObserver(() => map.invalidateSize()).observe(element);
+  new ResizeObserver(() => {
+    map.invalidateSize();
+    if (element.clientWidth && element.clientHeight) map.setMinZoom(map.getBoundsZoom(maxBounds, true));
+  }).observe(element);
   return map;
 }
 

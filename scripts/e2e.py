@@ -64,6 +64,23 @@ def collect_static() -> None:
     print("✅ Static files collected")
 
 
+def build_map_tiles() -> None:
+    """Download the basemap tiles, once: they are not committed."""
+    tiles = PROJECT_ROOT / "publications/static/publications/geo/local-area.pmtiles"
+    if tiles.exists():
+        print("✓ Map tiles exist")
+        return
+    print("🗺️  Downloading map tiles...")
+    result = subprocess.run(  # nosec
+        [sys.executable, "manage.py", "build_map_tiles", "--settings", E2E_SETTINGS_MODULE],
+        cwd=PROJECT_ROOT,
+    )
+    if result.returncode != 0:
+        print("❌ Map tiles download failed")
+        sys.exit(1)
+    print("✅ Map tiles downloaded")
+
+
 def build_docs() -> None:
     """Build the MkDocs site served by the protected docs view (docs/site)."""
     print("📚 Building docs...")
@@ -618,6 +635,7 @@ def setup(skip_static: bool = False, clean_messages: bool = False) -> None:
         if clean_messages:
             delete_compiled_messages()
         compile_messages()
+        build_map_tiles()
         collect_static()
         build_docs()
 

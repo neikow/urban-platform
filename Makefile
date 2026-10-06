@@ -16,6 +16,7 @@ install: ## Install dependencies, the e2e browser, git hooks and a local .env
 	@test -f .env || (cp .env.example .env && echo "Created .env from .env.example")
 	$(MANAGE) migrate
 	$(MANAGE) compilemessages --ignore=.venv --ignore=node_modules
+	$(MANAGE) build_map_tiles
 	npm run build
 
 .PHONY: dev
@@ -38,6 +39,10 @@ migrations: ## Create migrations for model changes
 messages: ## Update the French catalogs, then compile them
 	$(MANAGE) makemessages -l fr --ignore=node_modules --ignore=.venv --ignore=docs --ignore=e2e
 	$(MANAGE) compilemessages --ignore=.venv --ignore=node_modules
+
+.PHONY: map-tiles
+map-tiles: ## Download the latest basemap tiles of the local area (needs pmtiles or Docker)
+	$(MANAGE) build_map_tiles
 
 .PHONY: assets
 assets: ## Type-check and build the TypeScript and CSS bundles once

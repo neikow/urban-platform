@@ -4,7 +4,7 @@ import re
 import pytest
 from django.core.exceptions import ValidationError
 
-from publications.geo import validate_geometry
+from publications.geo import LOCAL_AREA_CENTER, map_config, validate_geometry
 from publications.widgets import GeoJSONMapWidget
 
 POINT = {"type": "Point", "coordinates": [5.3601, 43.2841]}
@@ -61,3 +61,18 @@ class TestWidget:
 
         assert 'type="module"' in media
         assert "dist/admin-location.js" in media
+
+
+class TestMapConfig:
+    def test_points_to_the_self_hosted_tiles(self):
+        config = map_config()
+
+        assert config["tilesUrl"].endswith(".pmtiles")
+        assert config["tilesUrl"].startswith("/static/")
+
+    def test_max_bounds_contain_the_initial_view(self):
+        (south, west), (north, east) = map_config()["maxBounds"]
+        lat, lon = LOCAL_AREA_CENTER
+
+        assert south < lat < north
+        assert west < lon < east
