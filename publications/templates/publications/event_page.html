@@ -80,7 +80,9 @@
                                 <div class="stat-title">{% trans "Location" %}</div>
                                 <div class="stat-value text-lg">{{ page.location }}</div>
                                 {% if page.address %}
-                                    <div class="stat-desc">{{ page.address|truncatewords:5 }}</div>
+                                    <div class="stat-desc" title="{{ page.address }}">
+                                        {{ page.address|truncatewords:5 }}
+                                    </div>
                                 {% endif %}
                             </div>
                         {% endif %}
@@ -167,7 +169,15 @@
             {% if page.address %}
                 <aside class="mt-8">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-4">{% trans "Address" %}</h2>
-                    <p class="text-sm sm:text-base leading-relaxed text-base-content/70">{{ page.address }}</p>
+                    <address class="not-italic text-sm sm:text-base leading-relaxed text-base-content/70">
+                        {{ page.address|linebreaksbr }}
+                    </address>
+                    <a
+                        href="https://www.openstreetmap.org/search?query={{ page.address|urlencode }}"
+                        class="link link-primary text-sm mt-2 inline-block"
+                        target="_blank"
+                        rel="noopener"
+                    >{% trans "View on a map" %}</a>
                 </aside>
             {% endif %}
         </div>
