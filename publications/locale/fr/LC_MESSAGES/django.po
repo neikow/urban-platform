@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:41+0200\n"
+"POT-Creation-Date: 2026-10-06 16:50+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -28,7 +28,7 @@ msgstr "Les coordonnées de la localisation sont invalides."
 #: publications/models/event_interest.py:23
 #: publications/templates/publications/components/publication_preview.html:51
 #: publications/templates/publications/event_page.html:15
-#: publications/views/feeds.py:77
+#: publications/views/feeds.py:79
 msgid "Event"
 msgstr "Événement"
 
@@ -187,7 +187,7 @@ msgstr "Mis à jour le"
 #: publications/templates/publications/admin/vote_stats.html:36
 #: publications/templates/publications/components/publication_preview.html:68
 #: publications/templates/publications/project_page.html:21
-#: publications/views/feeds.py:77
+#: publications/views/feeds.py:79
 msgid "Project"
 msgstr "Projet"
 
@@ -580,7 +580,7 @@ msgid_plural "%(count)s people are interested"
 msgstr[0] "%(count)s personne intéressée"
 msgstr[1] "%(count)s personnes intéressées"
 
-#: publications/templates/publications/components/event_interest.html:53
+#: publications/templates/publications/components/event_interest.html:57
 msgid "Add to my calendar"
 msgstr "Ajouter à mon agenda"
 

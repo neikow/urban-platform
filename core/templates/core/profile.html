@@ -153,8 +153,9 @@
                                     >{% trans "Subscribed" %}</span>
                                     {% if user.newsletter_consent_at %}
                                         <span class="text-xs text-base-content/60">
-                                            {% blocktrans with date=user.newsletter_consent_at|date:"j F Y" %}since
-                                                {{ date }}{% endblocktrans %}
+                                            {% blocktrans trimmed with date=user.newsletter_consent_at|date:"j F Y" %}
+                                                since {{ date }}
+                                            {% endblocktrans %}
                                         </span>
                                     {% endif %}
                                 {% else %}
@@ -163,6 +164,23 @@
                                     >{% trans "Not subscribed" %}</span>
                                 {% endif %}
                             </p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                {% trans "Email notifications" %}
+                            </p>
+                            <ul class="text-sm space-y-0.5">
+                                {% if user.notify_poll_results %}<li>{% trans "Poll results" %}</li>{% endif %}
+                                {% if user.notify_project_updates %}<li>{% trans "Project updates" %}</li>{% endif %}
+                                {% if user.notify_event_reminders %}<li>{% trans "Event reminders" %}</li>{% endif %}
+                                {% if not user.notify_poll_results and not user.notify_project_updates and not user.notify_event_reminders %}
+                                    <li class="text-base-content/60">{% trans "None" %}</li>
+                                {% endif %}
+                            </ul>
+                            <a
+                                class="link link-primary text-sm"
+                                href="{% url 'profile_edit' %}#notifications"
+                            >{% trans "Change" %}</a>
                         </div>
                         <div>
                             <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">

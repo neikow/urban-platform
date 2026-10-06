@@ -22,6 +22,7 @@ class EmailService(ABC):
         to_name: str,
         subject: str,
         html_content: str,
+        headers: dict[str, str] | None = None,
     ) -> bool:
         pass
 
@@ -66,6 +67,7 @@ class ConsoleEmailService(EmailService):
         to_name: str,
         subject: str,
         html_content: str,
+        headers: dict[str, str] | None = None,
     ) -> bool:
         print("=" * 60)
         print("EMAIL SENT")
@@ -73,6 +75,8 @@ class ConsoleEmailService(EmailService):
         print(f"To: {to_name} <{to_email}>")
         print(f"From: {settings.DEFAULT_FROM_NAME} <{settings.DEFAULT_FROM_EMAIL}>")
         print(f"Subject: {subject}")
+        for name, value in (headers or {}).items():
+            print(f"{name}: {value}")
         print("-" * 60)
         print(html_content)
         print("=" * 60)
@@ -95,6 +99,7 @@ class BrevoEmailService(EmailService):
         to_name: str,
         subject: str,
         html_content: str,
+        headers: dict[str, str] | None = None,
     ) -> bool:
         import sib_api_v3_sdk
 
@@ -103,6 +108,7 @@ class BrevoEmailService(EmailService):
             sender={"email": settings.DEFAULT_FROM_EMAIL, "name": settings.DEFAULT_FROM_NAME},
             subject=subject,
             html_content=html_content,
+            headers=headers or None,
         )
 
         try:

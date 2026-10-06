@@ -99,6 +99,23 @@ class User(AbstractBaseUser, PermissionsMixin):
         ),
     )
 
+    # Email notifications, all opt-in (see core.notifications).
+    notify_poll_results = models.BooleanField(
+        _("Poll results"),
+        default=False,
+        help_text=_("Email the results when a poll I voted in closes."),
+    )
+    notify_project_updates = models.BooleanField(
+        _("Project updates"),
+        default=False,
+        help_text=_("Email the news of projects I voted on or shared an idea about."),
+    )
+    notify_event_reminders = models.BooleanField(
+        _("Event reminders"),
+        default=False,
+        help_text=_("Email a reminder the day before events I am interested in."),
+    )
+
     created_at = models.DateTimeField(_("Date Joined"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Last Updated"), auto_now=True)
     deleted_at = models.DateTimeField(
@@ -179,6 +196,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.phone_number = ""
         self.newsletter_subscription = False
         self.newsletter_consent_at = None
+        self.notify_poll_results = False
+        self.notify_project_updates = False
+        self.notify_event_reminders = False
         self.is_verified = False
 
         self.save()

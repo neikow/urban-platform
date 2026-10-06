@@ -87,6 +87,25 @@
                                 >{{ form.newsletter_subscription.errors.0 }}</span>
                             {% endif %}
                         </div>
+                        <fieldset id="notifications" class="scroll-mt-24 space-y-1">
+                            <legend class="font-medium mb-1">{% trans "Email notifications" %}</legend>
+                            <p class="text-sm text-base-content/60 mb-2">
+                                {% trans "Only what you choose. Each email has a link to stop receiving it." %}
+                            </p>
+                            {% for field in form %}
+                                {% if field.name in form.NOTIFICATION_FIELDS %}
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        {{ field }}
+                                        <span class="label-text">{{ field.label }}</span>
+                                    </label>
+                                {% endif %}
+                            {% endfor %}
+                            {% if not user.is_verified %}
+                                <p class="text-sm text-warning-content bg-warning/20 rounded px-3 py-2">
+                                    {% trans "Notifications are only sent once your email address is verified." %}
+                                </p>
+                            {% endif %}
+                        </fieldset>
                         <div class="flex justify-end pt-2">
                             <button type="submit" class="btn btn-primary border-none font-semibold">
                                 <svg

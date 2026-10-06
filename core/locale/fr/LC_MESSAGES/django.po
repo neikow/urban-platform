@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:41+0200\n"
+"POT-Creation-Date: 2026-10-06 16:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -273,55 +273,68 @@ msgstr "Vérification d'email"
 msgid "Password Reset"
 msgstr "Réinitialisation du mot de passe"
 
-#: core/models/email_event.py:14
+#: core/models/email_event.py:11 core/models/user.py:104
+#: core/templates/core/profile.html:173
+msgid "Poll results"
+msgstr "Résultats des votes"
+
+#: core/models/email_event.py:12
+msgid "Project update"
+msgstr "Actualité de projet"
+
+#: core/models/email_event.py:13
+msgid "Event reminder"
+msgstr "Rappel d'événement"
+
+#: core/models/email_event.py:17
 msgid "Pending"
 msgstr "En attente"
 
-#: core/models/email_event.py:15
+#: core/models/email_event.py:18
 msgid "Sent"
 msgstr "Envoyé"
 
-#: core/models/email_event.py:16
+#: core/models/email_event.py:19
 msgid "Failed"
 msgstr "Échec"
 
-#: core/models/email_event.py:27 core/models/user.py:131
+#: core/models/email_event.py:30 core/models/user.py:157
 msgid "User"
 msgstr "Utilisateur"
 
-#: core/models/email_event.py:30
+#: core/models/email_event.py:33
 msgid "Event Type"
 msgstr "Type d'événement"
 
-#: core/models/email_event.py:35
+#: core/models/email_event.py:38
 msgid "Status"
 msgstr "Statut"
 
-#: core/models/email_event.py:41
+#: core/models/email_event.py:44
 msgid "Recipient Email"
 msgstr "Email du destinataire"
 
-#: core/models/email_event.py:42
+#: core/models/email_event.py:45
 msgid "Stored temporarily, cleared on anonymization"
 msgstr "Stocké temporairement, effacé lors de l'anonymisation"
 
-#: core/models/email_event.py:45
+#: core/models/email_event.py:48 core/models/notification_dispatch.py:15
 msgid "Sent At"
 msgstr "Envoyé à"
 
-#: core/models/email_event.py:50
+#: core/models/email_event.py:53
 msgid "Created At"
 msgstr "Créé à"
 
-#: core/models/email_event.py:54
+#: core/models/email_event.py:57
 msgid "Error Message"
 msgstr "Message d'erreur"
 
-#: core/models/email_event.py:59
+#: core/models/email_event.py:62
 msgid "Email Event"
 msgstr "Événement de courriel"
 
-#: core/models/email_event.py:60
+#: core/models/email_event.py:63
 msgid "Email Events"
 msgstr "Événements d'email"
 
@@ -345,6 +358,26 @@ msgstr "Comité d'intérêt de quartier"
 #: core/models/neighborhood_association.py:18
 msgid "Neighborhood Associations"
 msgstr "Comités d'intérêt de quartier"
+
+#: core/models/notification_dispatch.py:13
+msgid "Kind"
+msgstr "Type"
+
+#: core/models/notification_dispatch.py:14
+msgid "Key"
+msgstr "Clé"
+
+#: core/models/notification_dispatch.py:14
+msgid "What was notified, e.g. project:12"
+msgstr "Objet de la notification, par ex. project:12"
+
+#: core/models/notification_dispatch.py:18
+msgid "Notification sent"
+msgstr "Notification envoyée"
+
+#: core/models/notification_dispatch.py:19
+msgid "Notifications sent"
+msgstr "Notifications envoyées"
 
 #: core/models/user.py:15
 msgid "Citizen"
@@ -398,7 +431,7 @@ msgstr "Email vérifié"
 msgid "Is the user's email address verified?"
 msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:80 core/templates/core/profile.html:124
+#: core/models/user.py:80 core/templates/core/profile.html:127
 msgid "Role"
 msgstr "Rôle"
 
@@ -415,32 +448,83 @@ msgid "Does the user want to receive the newsletter?"
 msgstr "L'utilisateur souhaite-t-il recevoir la newsletter ?"
 
 #: core/models/user.py:93
+msgid "Newsletter consent date"
+msgstr "Date du consentement à la newsletter"
+
+#: core/models/user.py:97
+msgid ""
+"When the user last agreed to receive the newsletter (GDPR proof of consent)."
+" Empty if they are not subscribed, or subscribed before this date was "
+"recorded."
+msgstr ""
+"Date à laquelle l'utilisateur a accepté de recevoir la newsletter (preuve du"
+" consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
+"l'enregistrement de cette date."
+
+#: core/models/user.py:106
+msgid "Email the results when a poll I voted in closes."
+msgstr ""
+"Recevoir les résultats par email à la clôture d'un vote auquel j'ai "
+"participé."
+
+#: core/models/user.py:109 core/templates/core/profile.html:174
+msgid "Project updates"
+msgstr "Actualités des projets"
+
+#: core/models/user.py:111
+msgid "Email the news of projects I voted on or shared an idea about."
+msgstr ""
+"Recevoir par email les actualités des projets sur lesquels j'ai voté ou "
+"proposé une idée."
+
+#: core/models/user.py:114 core/templates/core/profile.html:175
+msgid "Event reminders"
+msgstr "Rappels d'événements"
+
+#: core/models/user.py:116
+msgid "Email a reminder the day before events I am interested in."
+msgstr ""
+"Recevoir un rappel par email la veille des événements qui m'intéressent."
+
+#: core/models/user.py:119
 msgid "Date Joined"
 msgstr "Date d'inscription"
 
-#: core/models/user.py:94
+#: core/models/user.py:120
 msgid "Last Updated"
 msgstr "Dernière mise à jour"
 
-#: core/models/user.py:96
+#: core/models/user.py:122
 msgid "Deleted At"
 msgstr "Supprimé le"
 
-#: core/models/user.py:99
+#: core/models/user.py:125
 msgid "When the user account was soft-deleted. NULL if not deleted."
 msgstr "Quand le compte utilisateur a été supprimé. NULL si non supprimé."
 
-#: core/models/user.py:104
+#: core/models/user.py:130
 msgid "Active"
 msgstr "Actif"
 
-#: core/models/user.py:106
+#: core/models/user.py:132
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:132 core/wagtail_hooks.py:239
+#: core/models/user.py:158 core/wagtail_hooks.py:239
 msgid "Users"
 msgstr "Utilisateurs"
+
+#: core/notifications/__init__.py:40
+msgid "poll results"
+msgstr "les résultats des votes"
+
+#: core/notifications/__init__.py:41
+msgid "project updates"
+msgstr "les actualités des projets"
+
+#: core/notifications/__init__.py:42
+msgid "event reminders"
+msgstr "les rappels d'événements"
 
 #: core/templates/auth/email_verify_error.html:4
 msgid "Verification error"
@@ -795,12 +879,54 @@ msgstr "Se déconnecter"
 msgid "Navigation Menu"
 msgstr "Menu de navigation"
 
+#: core/templates/core/notification_unsubscribe.html:6
+#: core/templates/core/notification_unsubscribe.html:11
+#: core/templates/core/profile.html:170
+#: core/templates/core/profile_edit.html:91
+msgid "Email notifications"
+msgstr "Notifications par email"
+
+#: core/templates/core/notification_unsubscribe.html:13
+msgid "Invalid link"
+msgstr "Lien invalide"
+
+#: core/templates/core/notification_unsubscribe.html:14
+msgid ""
+"This unsubscribe link is not valid. You can manage your notifications from "
+"your profile."
+msgstr ""
+"Ce lien de désinscription n'est pas valide. Vous pouvez gérer vos "
+"notifications depuis votre profil."
+
+#: core/templates/core/notification_unsubscribe.html:16
+msgid "You are unsubscribed"
+msgstr "Vous êtes désinscrit·e"
+
+#: core/templates/core/notification_unsubscribe.html:18
+#, python-format
+msgid "You will no longer receive emails about %(label)s."
+msgstr "Vous ne recevrez plus d'emails concernant %(label)s."
+
+#: core/templates/core/notification_unsubscribe.html:23
+#: core/templates/core/notification_unsubscribe.html:30
+msgid "Unsubscribe"
+msgstr "Se désinscrire"
+
+#: core/templates/core/notification_unsubscribe.html:25
+#, python-format
+msgid "Stop receiving emails about %(label)s?"
+msgstr "Ne plus recevoir d'emails concernant %(label)s ?"
+
+#: core/templates/core/notification_unsubscribe.html:34
+msgid "Manage all my notifications"
+msgstr "Gérer toutes mes notifications"
+
 #: core/templates/core/profile.html:4 core/templates/core/profile.html:18
 #: core/tests/views/test_me.py:27
 msgid "My profile"
 msgstr "Mon profil"
 
-#: core/templates/core/profile.html:10 core/templates/core/profile.html:120
+#: core/templates/core/profile.html:10 core/templates/core/profile.html:123
 #: core/templates/core/profile_edit.html:11
 msgid "Account"
 msgstr "Compte"
@@ -842,65 +968,122 @@ msgstr "Téléphone"
 msgid "My events"
 msgstr "Mes événements"
 
-#: core/templates/core/profile.html:114
+#: core/templates/core/profile.html:117
 msgid "Events you are interested in will appear here."
 msgstr "Les événements qui vous intéressent apparaîtront ici."
 
-#: core/templates/core/profile.html:130 core/tests/views/test_me.py:59
+#: core/templates/core/profile.html:133 core/tests/views/test_me.py:59
 msgid "Member"
 msgstr "Membre"
 
-#: core/templates/core/profile.html:134
+#: core/templates/core/profile.html:137
 msgid "Association member"
 msgstr "Membre d'association"
 
-#: core/templates/core/profile.html:138
+#: core/templates/core/profile.html:141
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: core/templates/core/profile.html:144
+#: core/templates/core/profile.html:147
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: core/templates/core/profile.html:150 core/tests/views/test_me.py:51
+#: core/templates/core/profile.html:153 core/tests/views/test_me.py:51
 msgid "Subscribed"
 msgstr "Abonné"
 
-#: core/templates/core/profile.html:154
+#: core/templates/core/profile.html:156
+#, python-format
+msgid "since %(date)s"
+msgstr "depuis le %(date)s"
+
+#: core/templates/core/profile.html:164
 msgid "Not subscribed"
 msgstr "Non abonné"
 
-#: core/templates/core/profile.html:160
+#: core/templates/core/profile.html:177
+msgid "None"
+msgstr "Aucune"
+
+#: core/templates/core/profile.html:180
+msgid "Change"
+msgstr "Modifier"
+
+#: core/templates/core/profile.html:184
 msgid "Member since"
 msgstr "Membre depuis"
 
-#: core/templates/core/profile.html:166
+#: core/templates/core/profile.html:190
 msgid "Last update"
 msgstr "Dernière mise à jour"
 
-#: core/templates/core/profile.html:190
+#: core/templates/core/profile.html:214
 #: core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:18
 #: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
 msgstr "Modifier mon profil"
 
-#: core/templates/core/profile_edit.html:108
+#: core/templates/core/profile_edit.html:93
+msgid "Only what you choose. Each email has a link to stop receiving it."
+msgstr ""
+"Uniquement ce que vous choisissez. Chaque email contient un lien pour ne "
+"plus le recevoir."
+
+#: core/templates/core/profile_edit.html:105
+msgid "Notifications are only sent once your email address is verified."
+msgstr ""
+"Les notifications ne sont envoyées qu'une fois votre adresse email vérifiée."
+
+#: core/templates/core/profile_edit.html:127
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: core/templates/core/profile_edit.html:116
-#: core/templates/core/profile_edit.html:160
+#: core/templates/core/profile_edit.html:135
+#: core/templates/core/profile_edit.html:179
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
-#: core/templates/core/profile_edit.html:168
+#: core/templates/core/profile_edit.html:187
 msgid "Danger zone"
 msgstr "Zone de danger"
+
+#: core/templates/emails/notifications/base.html:40
+#, python-format
+msgid "Hello %(name)s,"
+msgstr "Bonjour %(name)s,"
+
+#: core/templates/emails/notifications/base.html:45
+#, python-format
+msgid ""
+"You receive this email because you asked to be notified about %(label)s."
+msgstr ""
+"Vous recevez cet email car vous avez demandé à être informé·e concernant "
+"%(label)s."
+
+#: core/templates/emails/notifications/base.html:50
+msgid "Unsubscribe from these emails"
+msgstr "Se désinscrire de ces emails"
+
+#: core/templates/emails/notifications/base.html:52
+msgid "Manage my notifications"
+msgstr "Gérer mes notifications"
 
 #: core/templatetags/navigation_tags.py:76
 msgid "Home"
 msgstr "Accueil"
+
+#: core/views/profile_edit.py:48
+msgid "Results of polls I voted in, when they close"
+msgstr "Les résultats des votes auxquels j'ai participé, à leur clôture"
+
+#: core/views/profile_edit.py:53
+msgid "News of projects I voted on or shared an idea about"
+msgstr "Les actualités des projets sur lesquels j'ai voté ou proposé une idée"
+
+#: core/views/profile_edit.py:58
+msgid "A reminder the day before events I am interested in"
+msgstr "Un rappel la veille des événements qui m'intéressent"
 
 #: core/wagtail_forms.py:54
 msgid "You do not have permission to assign this role."

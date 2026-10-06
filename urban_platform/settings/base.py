@@ -232,6 +232,10 @@ BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@example.com")
 DEFAULT_FROM_NAME = os.environ.get("DEFAULT_FROM_NAME", WEBSITE_NAME)
 
+# Task modules outside "<app>.tasks", which autodiscovery would miss.
+CELERY_IMPORTS = ("core.emails.tasks", "core.notifications.tasks")
+CELERY_TIMEZONE = TIME_ZONE
+
 CELERY_BEAT_SCHEDULE = {
     "anonymize-old-email-events": {
         "task": "core.emails.tasks.anonymize_old_email_events",
