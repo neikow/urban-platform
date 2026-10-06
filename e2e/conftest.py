@@ -76,3 +76,14 @@ def moderator_email() -> str:
 def moderator_password() -> str:
     """Moderator test user password."""
     return "password123"
+
+
+@pytest.fixture
+def voter_email() -> str:
+    """Verified user who accepted the code of conduct, with no vote or idea yet."""
+    return "e2e.voter@email.com"
+
+
+@pytest.fixture
+def voter_password() -> str:
+    return "password123"

@@ -8,9 +8,10 @@ help: ## Show this help
 	@grep -hE '^[a-zA-Z0-9_-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "} {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: install
-install: ## Install Python and JS dependencies, git hooks and a local .env
+install: ## Install dependencies, the e2e browser, git hooks and a local .env
 	uv sync
 	npm ci
+	uv run playwright install chromium
 	uv run pre-commit install
 	@test -f .env || (cp .env.example .env && echo "Created .env from .env.example")
 	$(MANAGE) migrate
