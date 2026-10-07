@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 16:20+0200\n"
+"POT-Creation-Date: 2026-10-07 17:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,227 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: home/blocks.py:49
+msgid "Sections"
+msgstr "Sections"
+
+#: home/blocks.py:50
+msgid "Live content"
+msgstr "Contenu automatique"
+
+#: home/blocks.py:51
+msgid "Other blocks"
+msgstr "Autres blocs"
+
+#: home/blocks.py:57
+msgid "Plain"
+msgstr "Uni"
+
+#: home/blocks.py:58
+msgid "Sand"
+msgstr "Sable"
+
+#: home/blocks.py:59
+msgid "Navy"
+msgstr "Bleu marine"
+
+#: home/blocks.py:63
+msgid "Title above the content"
+msgstr "Titre au-dessus du contenu"
+
+#: home/blocks.py:64
+msgid "Title on the left, content on the right"
+msgstr "Titre à gauche, contenu à droite"
+
+#: home/blocks.py:80 home/blocks.py:87 home/blocks.py:381
+msgid "Text"
+msgstr "Texte"
+
+#: home/blocks.py:86 home/blocks.py:216 home/blocks.py:288 home/blocks.py:380
+msgid "Title"
+msgstr "Titre"
+
+#: home/blocks.py:95
+msgid "Steps"
+msgstr "Étapes"
+
+#: home/blocks.py:98
+msgid "Numbered steps, e.g. how to take part."
+msgstr "Des étapes numérotées, par exemple pour expliquer comment participer."
+
+#: home/blocks.py:102 home/blocks.py:315
+msgid "Open consultations"
+msgstr "Consultations en cours"
+
+#: home/blocks.py:103
+msgid "Published projects"
+msgstr "Projets publiés"
+
+#: home/blocks.py:104
+msgid "Votes cast"
+msgstr "Votes exprimés"
+
+#: home/blocks.py:105
+msgid "Ideas submitted"
+msgstr "Idées proposées"
+
+#: home/blocks.py:106
+msgid "People who took part"
+msgstr "Personnes ayant participé"
+
+#: home/blocks.py:107
+msgid "Registered members"
+msgstr "Membres inscrits"
+
+#: home/blocks.py:108
+msgid "Events"
+msgstr "Événements"
+
+#: home/blocks.py:109
+msgid "Number typed below"
+msgstr "Nombre saisi ci-dessous"
+
+#: home/blocks.py:137
+msgid "Figure"
+msgstr "Chiffre"
+
+#: home/blocks.py:140
+msgid "Counted from the website, so it is always up to date."
+msgstr "Compté à partir du site : il est toujours à jour."
+
+#: home/blocks.py:143
+msgid "Number"
+msgstr "Nombre"
+
+#: home/blocks.py:146
+msgid "Only for “Number typed below”, e.g. 7 or 1 200."
+msgstr "Uniquement pour « Nombre saisi ci-dessous », par exemple 7 ou 1 200."
+
+#: home/blocks.py:148
+msgid "Label"
+msgstr "Libellé"
+
+#: home/blocks.py:167
+msgid "Key figures"
+msgstr "Chiffres clés"
+
+#: home/blocks.py:170
+msgid "Two to four large numbers, counted live from the website."
+msgstr "Deux à quatre grands chiffres, comptés en direct à partir du site."
+
+#: home/blocks.py:174
+msgid "Quote"
+msgstr "Citation"
+
+#: home/blocks.py:175
+msgid "Author"
+msgstr "Auteur"
+
+#: home/blocks.py:176
+msgid "Role or neighbourhood"
+msgstr "Rôle ou quartier"
+
+#: home/blocks.py:184
+msgid "Quotes"
+msgstr "Citations"
+
+#: home/blocks.py:187
+msgid "What residents say, up to three quotes."
+msgstr "Ce que disent les habitants, jusqu'à trois citations."
+
+#: home/blocks.py:194
+msgid "Questions and answers"
+msgstr "Questions et réponses"
+
+#: home/blocks.py:211 home/blocks.py:287
+msgid "Small label"
+msgstr "Petit libellé"
+
+#: home/blocks.py:214
+msgid "Shown above the title, e.g. “Who we are”."
+msgstr "Affiché au-dessus du titre, par exemple « Qui sommes-nous »."
+
+#: home/blocks.py:217 home/blocks.py:350
+msgid "Introduction"
+msgstr "Introduction"
+
+#: home/blocks.py:219
+msgid "Background"
+msgstr "Fond"
+
+#: home/blocks.py:222
+msgid "Layout"
+msgstr "Mise en page"
+
+#: home/blocks.py:224
+msgid "Content"
+msgstr "Contenu"
+
+#: home/blocks.py:227
+msgid "Section"
+msgstr "Section"
+
+#: home/blocks.py:232
+msgid ""
+"A titled part of the page with a background: text, steps, key figures, "
+"quotes or questions."
+msgstr "Une partie de la page avec un titre et un fond : texte, étapes, chiffres clés, citations ou questions."
+
+#: home/blocks.py:302
+msgid "Maximum number of projects"
+msgstr "Nombre maximum de projets"
+
+#: home/blocks.py:319
+msgid ""
+"Projects open for votes or ideas, closing soonest first. Hidden when none is "
+"open."
+msgstr "Les projets ouverts aux votes ou aux idées, ceux qui ferment le plus tôt en premier. Masqué quand aucun n'est ouvert."
+
+#: home/blocks.py:325
+msgid "Maximum number of events"
+msgstr "Nombre maximum d'événements"
+
+#: home/blocks.py:342
+msgid "Upcoming events"
+msgstr "Événements à venir"
+
+#: home/blocks.py:345
+msgid "The next events, soonest first. Hidden when none is planned."
+msgstr "Les prochains événements, du plus proche au plus lointain. Masqué quand aucun n'est prévu."
+
+#: home/blocks.py:368
+msgid "Projects map"
+msgstr "Carte des projets"
+
+#: home/blocks.py:371
+msgid "Every located project on a map of the area."
+msgstr "Tous les projets localisés, sur une carte du quartier."
+
+#: home/blocks.py:383
+msgid "Button for visitors"
+msgstr "Bouton pour les visiteurs"
+
+#: home/blocks.py:385
+msgid "Leads to the registration form."
+msgstr "Mène au formulaire d'inscription."
+
+#: home/blocks.py:388
+msgid "Button for signed-in members"
+msgstr "Bouton pour les membres connectés"
+
+#: home/blocks.py:390
+msgid "Leads to their email notification settings."
+msgstr "Mène à leurs préférences de notifications par email."
+
+#: home/blocks.py:394
+msgid "Join the platform"
+msgstr "Rejoindre la plateforme"
+
+#: home/blocks.py:398
+msgid ""
+"An invitation to create an account, or to members, to turn on email updates."
+msgstr "Une invitation à créer un compte, ou pour les membres, à activer les notifications par email."
 
 #: home/models.py:21
 msgid "Home page content"
@@ -31,6 +252,30 @@ msgstr "Page d'accueil"
 #: home/models.py:37
 msgid "Home Pages"
 msgstr "Pages d'accueil"
+
+#: home/page_templates.py:194
+msgid "Recent publications"
+msgstr "Publications récentes"
+
+#: home/page_templates.py:207
+msgid "Participation"
+msgstr "Participation"
+
+#: home/page_templates.py:209
+msgid ""
+"The full page: who you are, open consultations, how it works, key figures, "
+"events, the map, news, the CIQ and questions."
+msgstr "La page complète : qui vous êtes, les consultations en cours, le fonctionnement, les chiffres clés, l'agenda, la carte, les actualités, le CIQ et les questions."
+
+#: home/page_templates.py:227
+msgid "Essentials"
+msgstr "L'essentiel"
+
+#: home/page_templates.py:228
+msgid ""
+"A short page focused on what is happening now: consultations, news and "
+"events."
+msgstr "Une page courte centrée sur l'actualité : consultations, publications et événements."
 
 #: home/templates/components/forms/password_field.html:24
 msgid "Show password"
@@ -52,3 +297,79 @@ msgstr "Page %(number)s"
 #: home/templates/components/navigation/pagination.html:29
 msgid "Next page"
 msgstr "Page suivante"
+
+#: home/templates/home/admin/page_templates.html:5
+msgid "Home page templates"
+msgstr "Modèles de page d'accueil"
+
+#: home/templates/home/admin/page_templates.html:8 home/wagtail_hooks.py:26
+msgid "Start from a template"
+msgstr "Partir d'un modèle"
+
+#: home/templates/home/admin/page_templates.html:12
+msgid ""
+"The template replaces the content of the home page in a new draft. Your hero "
+"and its photo are kept. Nothing changes on the website until you publish, "
+"and the current version stays in the page history."
+msgstr "Le modèle remplace le contenu de la page d'accueil dans un nouveau brouillon. Votre bandeau principal et sa photo sont conservés. Rien ne change sur le site avant la publication, et la version actuelle reste dans l'historique de la page."
+
+#: home/templates/home/admin/page_templates.html:26
+#, python-format
+msgid "Use “%(name)s”"
+msgstr "Utiliser « %(name)s »"
+
+#: home/templates/home/admin/page_templates.html:32
+msgid "Cancel"
+msgstr "Annuler"
+
+#: home/templates/home/blocks/open_projects.html:6
+msgid "All projects"
+msgstr "Tous les projets"
+
+#: home/templates/home/blocks/open_projects.html:35
+msgid "Vote open"
+msgstr "Vote ouvert"
+
+#: home/templates/home/blocks/open_projects.html:35
+msgid "Ideas welcome"
+msgstr "Idées bienvenues"
+
+#: home/templates/home/blocks/open_projects.html:39
+#, python-format
+msgid "Until %(date)s"
+msgstr "Jusqu'au %(date)s"
+
+#: home/templates/home/blocks/open_projects.html:43
+msgid "Take part"
+msgstr "Participer"
+
+#: home/templates/home/blocks/open_projects.html:50
+msgid ""
+"No consultation is open right now: this block is hidden on the website until "
+"one opens."
+msgstr "Aucune consultation n'est ouverte : ce bloc reste masqué sur le site jusqu'à la prochaine."
+
+#: home/templates/home/blocks/upcoming_events.html:6
+msgid "All events"
+msgstr "Tout l'agenda"
+
+#: home/templates/home/blocks/upcoming_events.html:24
+msgid "Online"
+msgstr "En ligne"
+
+#: home/templates/home/blocks/upcoming_events.html:31
+msgid "Details"
+msgstr "Détails"
+
+#: home/templates/home/blocks/upcoming_events.html:39
+msgid ""
+"No event is planned: this block is hidden on the website until one is "
+"published."
+msgstr "Aucun événement n'est prévu : ce bloc reste masqué sur le site jusqu'à la publication du prochain."
+
+#: home/views.py:46
+#, python-format
+msgid ""
+"The “%(name)s” template is saved as a draft. Edit the texts, preview, then "
+"publish. The previous version stays in the history."
+msgstr "Le modèle « %(name)s » est enregistré en brouillon. Adaptez les textes, prévisualisez, puis publiez. La version précédente reste dans l'historique."

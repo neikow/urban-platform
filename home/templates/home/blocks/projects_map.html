@@ -1,0 +1,9 @@
+{% load static %}
+
+<div class="home-section home-section--plain no-page-style">
+    {# Inside the wrapper: a sibling before it would break the spacing between parts. #}
+    <link rel="stylesheet" href="{% static 'dist/map.css' %}">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        {% include "publications/components/projects_map.html" with map_label=value.label map_title=value.title map_introduction=value.introduction map_section_class="m-0" map_title_class="text-display-md leading-[1.05]" %}
+    </div>
+</div>

@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<section class="home-section home-section--navy no-page-style" aria-labelledby="join-title">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-16">
+        <h2
+            id="join-title"
+            class="lg:col-span-7 font-display font-black uppercase text-display-lg leading-[0.9] text-balance"
+        >
+            {{ value.title }}
+        </h2>
+        <div class="lg:col-span-5">
+            {% if value.text %}<p class="home-intro text-lg leading-relaxed">{{ value.text }}</p>{% endif %}
+            {% if request.user.is_authenticated %}
+                <a
+                    href="{% url 'profile_edit' %}#notifications"
+                    class="btn btn-primary btn-lg mt-6"
+                >{{ value.member_button }}</a>
+            {% else %}
+                <a href="{% url 'register' %}" class="btn btn-primary btn-lg mt-6">{{ value.button }}</a>
+            {% endif %}
+        </div>
+    </div>
+</section>

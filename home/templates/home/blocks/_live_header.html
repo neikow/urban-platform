@@ -1,0 +1,16 @@
+{% load i18n %}
+{% comment %}Header of a live block, with a "see all" link on the right. Takes `value`, `heading_id`, `all_url`, `all_label`.{% endcomment %}
+<div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-4 mb-10">
+    <div class="max-w-3xl">
+        {% include "home/blocks/_header.html" with label=value.label title=value.title introduction=value.introduction heading_id=heading_id %}
+    </div>
+    {% if all_url %}
+        <a
+            href="{{ all_url }}"
+            class="link link-hover inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-label"
+        >
+            {{ all_label }}
+            {% include "icons/arrow_right.html" %}
+        </a>
+    {% endif %}
+</div>

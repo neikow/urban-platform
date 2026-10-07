@@ -1,0 +1,12 @@
+<ol class="grid gap-x-8 gap-y-10 sm:grid-cols-2 {% if value|length == 4 %}lg:grid-cols-4{% elif value|length == 2 %}lg:grid-cols-2{% else %}lg:grid-cols-3{% endif %}">
+    {% for step in value %}
+        <li class="border-t-2 border-current/15 pt-5">
+            <span
+                class="home-accent block font-display font-black text-display-sm leading-none"
+                aria-hidden="true"
+            >{{ forloop.counter|stringformat:"02d" }}</span>
+            <h3 class="mt-4 text-lg font-semibold leading-snug">{{ step.title }}</h3>
+            {% if step.text %}<p class="home-muted mt-2 leading-relaxed">{{ step.text }}</p>{% endif %}
+        </li>
+    {% endfor %}
+</ol>

@@ -1,0 +1,12 @@
+<div class="grid gap-6 {% if value|length == 2 %}md:grid-cols-2{% elif value|length > 2 %}md:grid-cols-3{% endif %}">
+    {% for item in value %}
+        <figure class="home-quote rounded-box p-6 sm:p-8 flex flex-col">
+            <span class="home-accent font-display font-black text-6xl leading-[0.6] h-8" aria-hidden="true">“</span>
+            <blockquote class="text-lg leading-relaxed flex-1">{{ item.quote }}</blockquote>
+            <figcaption class="mt-6 text-sm">
+                <span class="font-semibold">{{ item.author }}</span>
+                {% if item.role %}<span class="home-muted"> · {{ item.role }}</span>{% endif %}
+            </figcaption>
+        </figure>
+    {% endfor %}
+</div>

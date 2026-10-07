@@ -1,0 +1,61 @@
+{% load i18n wagtailcore_tags wagtailimages_tags %}
+
+{% if projects or is_block_preview %}
+    <section class="home-section home-section--plain no-page-style" aria-labelledby="open-projects-title">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+            {% trans "All projects" as all_label %}
+            {% include "home/blocks/_live_header.html" with heading_id="open-projects-title" all_url=projects_url all_label=all_label %}
+            {% if projects %}
+                <ol class="border-t border-base-300">
+                    {% for project in projects %}
+                        <li class="border-b border-base-300">
+                            <a
+                                href="{% pageurl project %}"
+                                class="group grid gap-5 py-6 {% if show_images %}sm:grid-cols-[9rem_1fr] lg:grid-cols-[11rem_1fr_auto]{% else %}lg:grid-cols-[1fr_auto]{% endif %} lg:items-center lg:gap-8"
+                            >
+                                {% if show_images %}
+                                    {% if project.hero_image %}
+                                        {% image project.hero_image fill-352x264 class="hidden sm:block aspect-[4/3] w-full rounded-box object-cover" alt="" %}
+                                    {% else %}
+                                        <span
+                                            class="hidden sm:block aspect-[4/3] w-full rounded-box bg-primary/10"
+                                            aria-hidden="true"
+                                        ></span>
+                                    {% endif %}
+                                {% endif %}
+                                <div>
+                                    <p class="section-label">{{ project.get_category_display }}</p>
+                                    <h3 class="mt-1 font-display font-extrabold uppercase text-3xl leading-tight transition-colors group-hover:text-primary">
+                                        {{ project.title }}
+                                    </h3>
+                                    {% if project.description %}
+                                        <p class="mt-2 max-w-2xl text-base-content/70 line-clamp-2">
+                                            {{ project.description }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                                <div class="flex flex-wrap items-center gap-x-5 gap-y-2 {% if show_images %}sm:col-start-2 lg:col-start-auto{% endif %} lg:flex-col lg:items-end lg:text-right">
+                                    <p class="text-sm">
+                                        <span class="font-semibold">
+                                            {% if project.is_voting_open %}{% trans "Vote open" %}{% else %}{% trans "Ideas welcome" %}{% endif %}
+                                        </span>
+                                        {% if project.is_voting_open and project.voting_end_date %}
+                                            <span class="block text-base-content/60">
+                                                {% blocktrans with date=project.voting_end_date|date:"j F" %}Until
+                                                    {{ date }}{% endblocktrans %}
+                                            </span>
+                                        {% endif %}
+                                    </p>
+                                    <span class="btn btn-primary btn-sm">{% trans "Take part" %}</span>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% else %}
+                {% trans "No consultation is open right now: this block is hidden on the website until one opens." as message %}
+                {% include "home/blocks/_empty_preview.html" %}
+            {% endif %}
+        </div>
+    </section>
+{% endif %}

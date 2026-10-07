@@ -3,7 +3,7 @@ from wagtail.models import Page
 from wagtail.fields import StreamField
 from django.utils.translation import gettext_lazy as _
 
-from core.blocks import WEBSITE_BLOCK_TYPES
+from home.blocks import HOME_BLOCK_TYPES
 
 
 class HomePage(Page):
@@ -16,7 +16,7 @@ class HomePage(Page):
     ]
 
     content = StreamField(
-        WEBSITE_BLOCK_TYPES,
+        HOME_BLOCK_TYPES,
         blank=True,
         verbose_name=_("Home page content"),
         help_text=_("The main content of the home page."),
