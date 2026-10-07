@@ -12,7 +12,8 @@ def test_editor_creates_a_project_from_a_template(
     login_user(page=page, base_url=base_url, email=admin_email, password=admin_password)
     page.goto(base_url + "/admin/")
     page.get_by_role("button", name="Actualités").click()
-    page.get_by_role("link", name=_("New project")).click()
+    # The sidebar entry (the dashboard has the same shortcut).
+    page.get_by_label(_("News")).get_by_role("link", name=_("New project"), exact=True).click()
 
     expect(page.get_by_role("heading", name=_("Project put to the vote"))).to_be_visible()
     page.get_by_role(
