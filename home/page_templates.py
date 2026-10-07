@@ -1,23 +1,16 @@
 """Ready-made home pages, so editors do not start from a blank page.
 
-Applying one saves a new *draft* of the home page (see ``home.views``): the
-published page does not change until an editor publishes it, and the previous
-content stays in the page history. The hero of the current draft is kept, so
-its photo is not lost.
+Applied as described in ``core.page_templates``. The hero of the current
+draft is kept, so its photo is not lost.
 
 The texts are starting points written for Urba7Marseille, meant to be edited.
 """
 
-from dataclasses import dataclass
-from typing import Any
-
 from django.utils.translation import gettext_lazy as _
-from django_stubs_ext import StrOrPromise
 
 from core.blocks import BLOCK_TYPE_HERO, BLOCK_TYPE_RECENT_PUBLICATIONS
+from core.page_templates import PageTemplate, RawBlock
 from home.blocks import FigureMetric, SectionLayout, SectionTone
-
-RawBlock = dict[str, Any]
 
 
 def section(
@@ -180,28 +173,8 @@ JOIN = {
 }
 
 
-@dataclass(frozen=True)
-class HomePageTemplate:
-    slug: str
-    name: StrOrPromise
-    description: StrOrPromise
-    blocks: tuple[RawBlock, ...]
-
-    @property
-    def outline(self) -> list[str]:
-        """The title of each part, for the template chooser."""
-        return [
-            block["value"].get("title") or str(_("Recent publications")) for block in self.blocks
-        ]
-
-    def content(self, current: list[RawBlock]) -> list[RawBlock]:
-        """The new stream data, keeping the hero of ``current`` (the raw data) if any."""
-        hero = next((block for block in current if block["type"] == BLOCK_TYPE_HERO), None)
-        return ([hero] if hero else []) + [dict(block) for block in self.blocks]
-
-
 TEMPLATES = (
-    HomePageTemplate(
+    PageTemplate(
         slug="participation",
         name=_("Participation"),
         description=_(
@@ -220,17 +193,15 @@ TEMPLATES = (
             FAQ,
             JOIN,
         ),
+        keep=(BLOCK_TYPE_HERO,),
     ),
-    HomePageTemplate(
+    PageTemplate(
         slug="essentials",
         name=_("Essentials"),
         description=_(
             "A short page focused on what is happening now: consultations, news and events."
         ),
         blocks=(OPEN_PROJECTS, RECENT_PUBLICATIONS, UPCOMING_EVENTS, JOIN),
+        keep=(BLOCK_TYPE_HERO,),
     ),
 )
-
-
-def get_template(slug: str) -> HomePageTemplate | None:
-    return next((template for template in TEMPLATES if template.slug == slug), None)

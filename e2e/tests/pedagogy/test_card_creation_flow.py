@@ -29,6 +29,7 @@ def test_pedagogy_card_creation_flow(
 
     page.get_by_role("button", name="Informations utiles").click()
     page.get_by_role("link", name="Ajouter").click()
+    page.get_by_role("link", name="Partir d'une page vide").click()
     page.get_by_role("textbox", name="Titre*").click()
     page.get_by_role("textbox", name="Titre*").fill(TEST_TITLE)
     page.get_by_role("textbox", name="description").fill(TEST_DESCRIPTION)

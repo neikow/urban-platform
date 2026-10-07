@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 17:01+0200\n"
+"POT-Creation-Date: 2026-10-07 17:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -276,7 +276,9 @@ msgstr "Message"
 msgid ""
 "Keep it short: one or two sentences. Visitors who closed it see it again "
 "once you change it."
-msgstr "Restez bref : une ou deux phrases. Les visiteurs qui l'ont fermée la revoient dès que vous la modifiez."
+msgstr ""
+"Restez bref : une ou deux phrases. Les visiteurs qui l'ont fermée la "
+"revoient dès que vous la modifiez."
 
 #: core/models/announcement.py:40
 msgid "Style"
@@ -549,7 +551,7 @@ msgstr "Actif"
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:158 core/wagtail_hooks.py:239
+#: core/models/user.py:158 core/wagtail_hooks.py:241
 msgid "Users"
 msgstr "Utilisateurs"
 
@@ -636,6 +638,7 @@ msgstr "Mot de passe oublié ?"
 
 #: core/templates/auth/login_modal.html:77
 #: core/templates/core/account_delete.html:114
+#: core/templates/core/admin/page_templates.html:43
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -829,6 +832,15 @@ msgstr "Cette action est irréversible et ne peut pas être annulée"
 msgid "Permanently delete my account"
 msgstr "Supprimer définitivement mon compte"
 
+#: core/templates/core/admin/page_templates.html:25
+#, python-format
+msgid "Use “%(name)s”"
+msgstr "Utiliser « %(name)s »"
+
+#: core/templates/core/admin/page_templates.html:41
+msgid "Start from a blank page"
+msgstr "Partir d'une page vide"
+
 #: core/templates/core/blocks/faq_list_block.html:4
 msgid "Foire aux Questions"
 msgstr "Foire aux Questions"
@@ -888,12 +900,12 @@ msgstr "Outils"
 
 #: core/templates/core/components/website_footer.html:55
 #: core/tests/test_templates/test_components/test_website_footer.py:56
-#: core/wagtail_hooks.py:195
+#: core/wagtail_hooks.py:197
 msgid "Legal"
 msgstr "Légal"
 
 #: core/templates/core/components/website_footer.html:67
-#: core/wagtail_hooks.py:233
+#: core/wagtail_hooks.py:235
 msgid "About"
 msgstr "À propos"
 
@@ -1186,6 +1198,33 @@ msgstr "Du nouveau sur « %(title)s », un projet auquel vous avez participé :"
 msgid "Home"
 msgstr "Accueil"
 
+#: core/views/page_templates.py:36
+#, python-format
+msgid "New %(page_type)s"
+msgstr "Nouveau : %(page_type)s"
+
+#: core/views/page_templates.py:38
+msgid "Start from a template and adapt it, or from a blank page."
+msgstr "Partez d'un modèle et adaptez-le, ou d'une page vide."
+
+#: core/views/page_templates.py:70 core/wagtail_hooks.py:277
+msgid "Start from a template"
+msgstr "Partir d'un modèle"
+
+#: core/views/page_templates.py:73
+msgid ""
+"The template replaces the content of the page in a new draft. Nothing "
+"changes on the website until you publish, and the current version stays in "
+"the page history."
+msgstr "Le modèle remplace le contenu de la page dans un nouveau brouillon. Rien ne change sur le site avant la publication, et la version actuelle reste dans l'historique de la page."
+
+#: core/views/page_templates.py:98
+#, python-format
+msgid ""
+"The “%(name)s” template is saved as a draft. Edit the texts, preview, then "
+"publish. The previous version stays in the history."
+msgstr "Le modèle « %(name)s » est enregistré en brouillon. Adaptez les textes, prévisualisez, puis publiez. La version précédente reste dans l'historique."
+
 #: core/views/profile_edit.py:48
 msgid "Results of polls I voted in, when they close"
 msgstr "Les résultats des votes auxquels j'ai participé, à leur clôture"
@@ -1202,55 +1241,55 @@ msgstr "Un rappel la veille des événements qui m'intéressent"
 msgid "You do not have permission to assign this role."
 msgstr "Vous n'avez pas la permission d'attribuer ce rôle."
 
-#: core/wagtail_hooks.py:84 core/wagtail_hooks.py:98 core/wagtail_hooks.py:129
+#: core/wagtail_hooks.py:86 core/wagtail_hooks.py:100 core/wagtail_hooks.py:131
 msgid "Home page"
 msgstr "Page d'accueil"
 
-#: core/wagtail_hooks.py:104 core/wagtail_hooks.py:135
+#: core/wagtail_hooks.py:106 core/wagtail_hooks.py:137
 msgid "List"
 msgstr "Liste"
 
-#: core/wagtail_hooks.py:110 core/wagtail_hooks.py:141
+#: core/wagtail_hooks.py:112 core/wagtail_hooks.py:143
 msgid "Add"
 msgstr "Ajouter"
 
-#: core/wagtail_hooks.py:117
+#: core/wagtail_hooks.py:119
 msgid "News"
 msgstr "Actualités"
 
-#: core/wagtail_hooks.py:148
+#: core/wagtail_hooks.py:150
 msgid "Useful information"
 msgstr "Informations utiles"
 
-#: core/wagtail_hooks.py:170
+#: core/wagtail_hooks.py:172
 msgid "Code of conduct"
 msgstr "Charte de bonne conduite"
 
-#: core/wagtail_hooks.py:176
+#: core/wagtail_hooks.py:178
 msgid "Terms of service"
 msgstr "Conditions d'utilisation"
 
-#: core/wagtail_hooks.py:182
+#: core/wagtail_hooks.py:184
 msgid "Cookies policy"
 msgstr "Politique de cookies"
 
-#: core/wagtail_hooks.py:188
+#: core/wagtail_hooks.py:190
 msgid "Privacy policy"
 msgstr "Politique de confidentialité"
 
-#: core/wagtail_hooks.py:214
+#: core/wagtail_hooks.py:216
 msgid "The platform"
 msgstr "La plateforme"
 
-#: core/wagtail_hooks.py:220
+#: core/wagtail_hooks.py:222
 msgid "The urban planning commission"
 msgstr "La commission d'urbanisme"
 
-#: core/wagtail_hooks.py:226
+#: core/wagtail_hooks.py:228
 msgid "The development team"
 msgstr "L'équipe de développement"
 
-#: core/wagtail_hooks.py:249
+#: core/wagtail_hooks.py:251
 msgid "Documentation"
 msgstr "Documentation"
 

@@ -1,0 +1,45 @@
+{% extends "wagtailadmin/base.html" %}
+
+{% load i18n %}
+
+{% comment %}
+    Template chooser (core/views/page_templates.py): before creating a page, each
+    template links to the editor; on an existing page, each one posts.
+{% endcomment %}
+
+{% block titletag %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title=title subtitle=subtitle icon="doc-full" %}
+
+    <div class="nice-padding">
+        <p class="help-block help-info">{{ intro }}</p>
+
+        {% for item in templates %}
+            <section class="w-panel" aria-labelledby="template-{{ item.template.slug }}">
+                <h2 id="template-{{ item.template.slug }}" class="w-h3">{{ item.template.name }}</h2>
+                <p>{{ item.template.description }}</p>
+                <ol>
+                    {% for part in item.outline %}<li>{{ part }}</li>{% endfor %}
+                </ol>
+                {% blocktrans trimmed with name=item.template.name asvar use_label %}
+                    Use “{{ name }}”
+                {% endblocktrans %}
+                {% if item.url %}
+                    <a href="{{ item.url }}" class="button">{{ use_label }}</a>
+                {% else %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="template" value="{{ item.template.slug }}">
+                        <button type="submit" class="button">{{ use_label }}</button>
+                    </form>
+                {% endif %}
+            </section>
+        {% endfor %}
+
+        {% if blank_url %}
+            <a href="{{ blank_url }}" class="button button-secondary">{% trans "Start from a blank page" %}</a>
+        {% endif %}
+        <a href="{{ cancel_url }}" class="button button-secondary">{% trans "Cancel" %}</a>
+    </div>
+{% endblock %}

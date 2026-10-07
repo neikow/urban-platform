@@ -12,6 +12,8 @@ from publications.models.publication import PublicationPage
 
 
 class EventPage(PublicationPage):
+    # Ready-made content offered when creating one (core/page_templates.py).
+    page_templates = "publications.page_templates.EVENT_TEMPLATES"
     parent_page_types: list[str] = ["publications.PublicationIndexPage"]
     child_page_types: list[str] = []
 

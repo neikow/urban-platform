@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 17:01+0200\n"
+"POT-Creation-Date: 2026-10-07 17:47+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -29,7 +29,7 @@ msgstr "La localisation doit être un point ou un polygone."
 msgid "The location coordinates are invalid."
 msgstr "Les coordonnées de la localisation sont invalides."
 
-#: publications/models/event.py:20 publications/models/event.py:123
+#: publications/models/event.py:22 publications/models/event.py:125
 #: publications/models/event_interest.py:23
 #: publications/templates/publications/components/publication_preview.html:51
 #: publications/templates/publications/event_page.html:17
@@ -37,66 +37,66 @@ msgstr "Les coordonnées de la localisation sont invalides."
 msgid "Event"
 msgstr "Événement"
 
-#: publications/models/event.py:25
+#: publications/models/event.py:27
 msgid "Event Date"
 msgstr "Date de l'événement"
 
-#: publications/models/event.py:26
+#: publications/models/event.py:28
 msgid "Start date and time of the event"
 msgstr "Date et heure de début de l'événement"
 
-#: publications/models/event.py:30
+#: publications/models/event.py:32
 msgid "End Date"
 msgstr "Date de fin"
 
-#: publications/models/event.py:33
+#: publications/models/event.py:35
 msgid "End date and time of the event (optional)"
 msgstr "Date et heure de fin de l'événement (optionnel)"
 
-#: publications/models/event.py:37 publications/models/project.py:79
+#: publications/models/event.py:39 publications/models/project.py:81
 #: publications/templates/publications/components/project_location.html:5
 #: publications/templates/publications/event_page.html:90
 msgid "Location"
 msgstr "Lieu"
 
-#: publications/models/event.py:40
+#: publications/models/event.py:42
 msgid "Venue of the event"
 msgstr "Lieu de l'événement"
 
-#: publications/models/event.py:44
+#: publications/models/event.py:46
 #: publications/templates/publications/event_page.html:181
 msgid "Address"
 msgstr "Adresse"
 
-#: publications/models/event.py:46
+#: publications/models/event.py:48
 msgid "Full address of the event"
 msgstr "Adresse complète de l'événement"
 
-#: publications/models/event.py:50
+#: publications/models/event.py:52
 msgid "Online Event"
 msgstr "Événement en ligne"
 
-#: publications/models/event.py:52
+#: publications/models/event.py:54
 msgid "Check if the event takes place online"
 msgstr "Cochez si l'événement est en ligne"
 
-#: publications/models/event.py:56
+#: publications/models/event.py:58
 msgid "Online Link"
 msgstr "Lien en ligne"
 
-#: publications/models/event.py:58
+#: publications/models/event.py:60
 msgid "Link to the online event (if applicable)"
 msgstr "Lien vers l'événement en ligne (si applicable)"
 
-#: publications/models/event.py:63
+#: publications/models/event.py:65
 msgid "Maximum Participants"
 msgstr "Nombre maximum de participants"
 
-#: publications/models/event.py:66
+#: publications/models/event.py:68
 msgid "Maximum number of participants (leave empty if unlimited)"
 msgstr "Nombre maximum de participants (laisser vide si illimité)"
 
-#: publications/models/event.py:124
+#: publications/models/event.py:126
 #: publications/templates/publications/components/publication_results.html:43
 msgid "Events"
 msgstr "Événements"
@@ -147,7 +147,7 @@ msgstr "Texte affiché au survol (optionnel)"
 msgid "External Link"
 msgstr "Lien externe"
 
-#: publications/models/external_link.py:46 publications/models/project.py:99
+#: publications/models/external_link.py:46 publications/models/project.py:101
 msgid "External Links"
 msgstr "Liens externes"
 
@@ -187,8 +187,8 @@ msgid "Updated At"
 msgstr "Mis à jour le"
 
 #: publications/models/form.py:44 publications/models/idea.py:31
-#: publications/models/poll_closure.py:22 publications/models/project.py:48
-#: publications/models/project.py:184
+#: publications/models/poll_closure.py:22 publications/models/project.py:50
+#: publications/models/project.py:186
 #: publications/templates/publications/admin/ideas_stats.html:36
 #: publications/templates/publications/admin/vote_stats.html:36
 #: publications/templates/publications/components/publication_preview.html:68
@@ -301,15 +301,15 @@ msgstr "Vote"
 msgid "Idea collection"
 msgstr "Collecte d'idées"
 
-#: publications/models/project.py:53
+#: publications/models/project.py:55
 msgid "Category"
 msgstr "Catégorie"
 
-#: publications/models/project.py:60
+#: publications/models/project.py:62
 msgid "Participation mode"
 msgstr "Mode de participation"
 
-#: publications/models/project.py:65
+#: publications/models/project.py:67
 msgid ""
 "Voting lets residents give an opinion; idea collection lets them propose "
 "ideas on a project still in its early stages. The two are mutually exclusive "
@@ -320,37 +320,37 @@ msgstr ""
 "sont mutuellement exclusifs — le changement conserve les réponses déjà "
 "collectées."
 
-#: publications/models/project.py:72
+#: publications/models/project.py:74
 msgid "Voting End Date"
 msgstr "Date de fin du vote"
 
-#: publications/models/project.py:75
+#: publications/models/project.py:77
 msgid "Leave empty for no end date (only applies to voting)"
 msgstr "Laisser vide pour pas de date de fin (s'applique uniquement au vote)"
 
-#: publications/models/project.py:83
+#: publications/models/project.py:85
 msgid "Where the project takes place: a point or an area."
 msgstr "Lieu du projet : un point ou une zone."
 
-#: publications/models/project.py:87
+#: publications/models/project.py:89
 msgid "Show table of contents"
 msgstr "Afficher la table des matières"
 
-#: publications/models/project.py:89
+#: publications/models/project.py:91
 msgid "Display the table of contents in the sidebar"
 msgstr "Afficher la table des matières dans la barre latérale"
 
-#: publications/models/project.py:102
+#: publications/models/project.py:104
 #: publications/templates/publications/components/project_timeline.html:8
 msgid "Project timeline"
 msgstr "Suivi du projet"
 
-#: publications/models/project.py:103
+#: publications/models/project.py:105
 msgid "News about the project, newest first on the page."
 msgstr ""
 "Actualités du projet, de la plus récente à la plus ancienne sur la page."
 
-#: publications/models/project.py:185
+#: publications/models/project.py:187
 #: publications/templates/publications/components/publication_results.html:31
 msgid "Projects"
 msgstr "Projets"
@@ -443,6 +443,62 @@ msgstr "Contenu de la page"
 #: publications/models/publication_index.py:49
 msgid "Additional content for the publications page."
 msgstr "Contenu supplémentaire pour la page des publications."
+
+#: publications/page_templates.py:37
+msgid "Project put to the vote"
+msgstr "Projet soumis au vote"
+
+#: publications/page_templates.py:39
+msgid ""
+"Residents give their opinion on a defined project: what it is, why, what "
+"changes, when, and who decides."
+msgstr "Les habitants donnent leur avis sur un projet défini : ce qu'il est, pourquoi, ce qui change, quand, et qui décide."
+
+#: publications/page_templates.py:74
+msgid "Project open to ideas"
+msgstr "Projet ouvert aux idées"
+
+#: publications/page_templates.py:76
+msgid ""
+"A project still taking shape: residents suggest ideas on what is not decided "
+"yet."
+msgstr "Un projet encore en construction : les habitants proposent des idées sur ce qui n'est pas encore décidé."
+
+#: publications/page_templates.py:102
+msgid "Project to follow"
+msgstr "Projet à suivre"
+
+#: publications/page_templates.py:104
+msgid ""
+"Information on a project without a vote: what it is, its schedule and its "
+"documents."
+msgstr "L'information sur un projet sans vote : ce qu'il est, son calendrier et ses documents."
+
+#: publications/page_templates.py:139
+msgid "Public meeting"
+msgstr "Réunion publique"
+
+#: publications/page_templates.py:140
+msgid ""
+"A presentation followed by questions: agenda, speakers, practical "
+"information."
+msgstr "Une présentation suivie de questions : ordre du jour, intervenants, infos pratiques."
+
+#: publications/page_templates.py:166
+msgid "Participatory workshop"
+msgstr "Atelier participatif"
+
+#: publications/page_templates.py:167
+msgid "A working session in small groups: goal, programme, what to bring."
+msgstr "Une séance de travail en petits groupes : objectif, déroulé, ce qu'il faut apporter."
+
+#: publications/page_templates.py:193
+msgid "Neighbourhood walk"
+msgstr "Balade urbaine"
+
+#: publications/page_templates.py:194
+msgid "A guided walk through the area: route, stops, practical information."
+msgstr "Une visite commentée du quartier : parcours, étapes, infos pratiques."
 
 #: publications/polls.py:73
 #, python-format
