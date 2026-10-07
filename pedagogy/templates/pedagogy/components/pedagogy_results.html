@@ -1,0 +1,25 @@
+{% load i18n cache wagtailroutablepage_tags %}
+{% comment %}
+    The list region: rendered in the page, and alone by the "results" route for
+    lib/instant-results.ts, which swaps it in without a page reload.
+{% endcomment %}
+{% blocktrans trimmed count total=pedagogy_entries.paginator.count asvar summary %}
+    {{ total }} result
+    {% plural %}
+    {{ total }} results
+{% endblocktrans %}
+<div data-instant-results data-instant-url="{% routablepageurl page 'results' %}" data-summary="{{ summary }}">
+    {% cache 300 pedagogy_list page.id request.GET.urlencode using="content" %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for pedagogy_entry in pedagogy_entries %}
+                {% include "pedagogy/components/pedagogy_card_preview.html" with pedagogy_entry=pedagogy_entry %}
+                {% empty %}
+                <div class="min-h-64 flex items-center justify-center col-span-1 md:col-span-2 lg:col-span-3">
+                    <p class="text-base-content/50">{% trans "No educational resources found" %}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% include "components/navigation/pagination.html" with page_data=pedagogy_entries %}
+    {% endcache %}
+</div>

@@ -2,11 +2,13 @@ from dataclasses import dataclass
 from typing import Any
 
 from django.db import models
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.template import Context
+from django.template.response import TemplateResponse
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
 from wagtail.admin.panels import FieldPanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 from wagtail.search import index
@@ -22,7 +24,7 @@ class CategoryFilter:
     is_selected: bool
 
 
-class PublicationIndexPage(Page):
+class PublicationIndexPage(RoutablePageMixin, Page):
     PUBLICATIONS_PER_PAGE = 12
 
     max_count = 1
@@ -80,32 +82,39 @@ class PublicationIndexPage(Page):
         )
         return feature_collection(projects)
 
-    def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Context:
+    def get_results_context(self, request: HttpRequest) -> dict[str, Any]:
+        """What the list region (components/publication_results.html) needs."""
         from publications.models.project import ProjectCategory
 
+        selected_category = request.GET.get("category", "")
+        return {
+            "publications": self.get_publications(request),
+            "categories": [
+                CategoryFilter(label=label, value=value, is_selected=(value == selected_category))
+                for value, label in ProjectCategory.choices
+            ],
+            "selected_category": selected_category,
+            "selected_type": request.GET.get("type", "all"),
+            "show_past_events": request.GET.get("show_past", "").lower() in ("true", "1", "on"),
+        }
+
+    def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Context:
         context = super().get_context(request, *args, **kwargs)
-        context["publications"] = self.get_publications(request)
-
-        categories = [
-            CategoryFilter(
-                label=label,
-                value=value,
-                is_selected=(value == request.GET.get("category", "")),
-            )
-            for value, label in ProjectCategory.choices
-        ]
-
-        context["categories"] = categories
+        context.update(self.get_results_context(request))
         context["projects_map"] = self.get_projects_map()
         context["map_config"] = map_config()
-        context["selected_category"] = request.GET.get("category", "")
-        context["selected_type"] = request.GET.get("type", "all")
-        context["show_past_events"] = request.GET.get("show_past", "").lower() in (
-            "true",
-            "1",
-            "on",
-        )
         return context
+
+    @path("results/", name="results")
+    def results(self, request: HttpRequest) -> HttpResponse:
+        """The list region alone, fetched by lib/instant-results.ts."""
+        response = TemplateResponse(
+            request,
+            "publications/components/publication_results.html",
+            {"page": self, "request": request, **self.get_results_context(request)},
+        )
+        response["X-Robots-Tag"] = "noindex"
+        return response
 
     class Meta:
         verbose_name = verbose_name_plural = _("Publications Index")
