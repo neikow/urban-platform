@@ -4,7 +4,7 @@ La section **Statistiques des votes** vous permet de consulter en temps réel le
 
 ## Accéder aux statistiques
 
-Dans la barre latérale, cliquez sur **Statistiques des votes**.
+Dans la barre latérale, ouvrez **Participation** puis cliquez sur **Votes**. Les votes en cours apparaissent aussi sur le tableau de bord, dans « Consultations à suivre ».
 
 ## La vue d'ensemble
 

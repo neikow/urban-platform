@@ -8,8 +8,7 @@ set of Django permissions on top of any stored in the database:
 - ``wagtailadmin.access_admin`` lets a user enter the Wagtail admin at all (the
   permission Wagtail's ``require_admin_access`` checks, see ``wagtail.admin.auth``).
 - The ``core.*_user`` permissions in :data:`USER_MANAGEMENT_PERMISSIONS` unlock
-  the Wagtail user admin at ``/admin/users/``. *Which* roles such a user may then
-  assign is further constrained by :mod:`core.permissions`.
+  the Wagtail user admin at ``/admin/users/``, for administrators only.
 - ``core.change_announcement`` (:data:`ANNOUNCEMENT_PERMISSIONS`) unlocks
   Settings > Announcement.
 """
@@ -54,9 +53,8 @@ ROLE_PERMISSIONS: dict[str, frozenset[str]] = {
     UserRole.ADMIN: frozenset({WAGTAIL_ADMIN_PERMISSION})
     | USER_MANAGEMENT_PERMISSIONS
     | ANNOUNCEMENT_PERMISSIONS,
-    UserRole.ASSOCIATION_MEMBER: frozenset({WAGTAIL_ADMIN_PERMISSION})
-    | USER_MANAGEMENT_PERMISSIONS
-    | ANNOUNCEMENT_PERMISSIONS,
+    # Content work only: managing accounts and roles is for administrators.
+    UserRole.ASSOCIATION_MEMBER: frozenset({WAGTAIL_ADMIN_PERMISSION}) | ANNOUNCEMENT_PERMISSIONS,
 }
 
 

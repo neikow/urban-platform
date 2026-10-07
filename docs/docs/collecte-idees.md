@@ -4,7 +4,7 @@ Un projet en **mode « Collecte d'idées »** invite les habitants à proposer l
 
 ## Consulter les idées
 
-Dans la barre latérale, cliquez sur **Collecte d'idées**.
+Dans la barre latérale, ouvrez **Participation** puis cliquez sur **Idées**. Les collectes en cours apparaissent aussi sur le tableau de bord, dans « Consultations à suivre ».
 
 ![Liste des projets en collecte d'idées](screenshots/idees-liste.png)
 

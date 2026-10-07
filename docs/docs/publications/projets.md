@@ -4,10 +4,9 @@ Les **projets** présentent les aménagements et les décisions d'urbanisme du q
 
 ## Créer un projet
 
-1. Dans la barre latérale, ouvrez **Actualités** puis cliquez sur **Ajouter**.
-2. Choisissez le type **Projet**.
-3. Choisissez un **modèle** (Projet soumis au vote, Projet ouvert aux idées, Projet à suivre) ou **Partir d'une page vide**. → [Partir d'un modèle](../modeles.md)
-4. Remplissez le formulaire, puis enregistrez ou publiez.
+1. Dans la barre latérale, ouvrez **Actualités** puis cliquez sur **Nouveau projet** (ou utilisez l'action rapide du tableau de bord).
+2. Choisissez un **modèle** (Projet soumis au vote, Projet ouvert aux idées, Projet à suivre) ou **Partir d'une page vide**. → [Partir d'un modèle](../modeles.md)
+3. Remplissez le formulaire, puis enregistrez ou publiez.
 
 ## Les champs du formulaire
 

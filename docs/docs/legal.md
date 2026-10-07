@@ -13,7 +13,7 @@ La section **Légal** regroupe les documents légaux obligatoires du site. Ces p
 
 ## Accéder aux pages légales
 
-Dans la barre latérale, cliquez sur **Légal** pour déployer le sous-menu, puis cliquez sur la page à modifier.
+Dans la barre latérale, ouvrez **Pages du site**, puis cliquez sur la page à modifier.
 
 ## Modifier une page légale
 

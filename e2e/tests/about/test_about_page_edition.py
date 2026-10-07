@@ -25,8 +25,8 @@ def test_about_website_page_edition(
     )
     page.goto(base_url + "/admin/")
 
-    page.get_by_role("button", name="À propos").click()
-    page.get_by_label("À propos").get_by_role("link", name="La plateforme").click()
+    page.get_by_role("button", name="Pages du site").click()
+    page.get_by_label("Pages du site").get_by_role("link", name="La plateforme").click()
 
     editor = page.locator(".public-DraftStyleDefault-block")
     editor.click()
@@ -59,8 +59,8 @@ def test_about_commission_page_edition(
     )
     page.goto(base_url + "/admin/")
 
-    page.get_by_role("button", name="À propos").click()
-    page.get_by_label("À propos").get_by_role("link", name="La commission d'urbanisme").click()
+    page.get_by_role("button", name="Pages du site").click()
+    page.get_by_label("Pages du site").get_by_role("link", name="La commission d'urbanisme").click()
 
     editor = page.locator(".public-DraftStyleDefault-block")
     editor.click()
@@ -93,8 +93,8 @@ def test_about_dev_team_page_edition(
     )
     page.goto(base_url + "/admin/")
 
-    page.get_by_role("button", name="À propos").click()
-    page.get_by_label("À propos").get_by_role("link", name="L'équipe de développement").click()
+    page.get_by_role("button", name="Pages du site").click()
+    page.get_by_label("Pages du site").get_by_role("link", name="L'équipe de développement").click()
 
     editor = page.locator(".public-DraftStyleDefault-block")
     editor.click()

@@ -23,8 +23,8 @@ nav:
     - Événements: publications/evenements.md
   - Informations utiles: fiches-pedagogiques.md
   - Participation:
-    - Statistiques des votes: statistiques-votes.md
-    - Collecte d'idées: collecte-idees.md
+    - Votes: statistiques-votes.md
+    - Idées: collecte-idees.md
   - Médiathèque:
     - Images: images.md
     - Documents: documents.md

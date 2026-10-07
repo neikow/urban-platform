@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 17:47+0200\n"
+"POT-Creation-Date: 2026-10-07 18:21+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -452,7 +452,9 @@ msgstr "Projet soumis au vote"
 msgid ""
 "Residents give their opinion on a defined project: what it is, why, what "
 "changes, when, and who decides."
-msgstr "Les habitants donnent leur avis sur un projet défini : ce qu'il est, pourquoi, ce qui change, quand, et qui décide."
+msgstr ""
+"Les habitants donnent leur avis sur un projet défini : ce qu'il est, "
+"pourquoi, ce qui change, quand, et qui décide."
 
 #: publications/page_templates.py:74
 msgid "Project open to ideas"
@@ -462,7 +464,9 @@ msgstr "Projet ouvert aux idées"
 msgid ""
 "A project still taking shape: residents suggest ideas on what is not decided "
 "yet."
-msgstr "Un projet encore en construction : les habitants proposent des idées sur ce qui n'est pas encore décidé."
+msgstr ""
+"Un projet encore en construction : les habitants proposent des idées sur ce "
+"qui n'est pas encore décidé."
 
 #: publications/page_templates.py:102
 msgid "Project to follow"
@@ -472,7 +476,9 @@ msgstr "Projet à suivre"
 msgid ""
 "Information on a project without a vote: what it is, its schedule and its "
 "documents."
-msgstr "L'information sur un projet sans vote : ce qu'il est, son calendrier et ses documents."
+msgstr ""
+"L'information sur un projet sans vote : ce qu'il est, son calendrier et ses "
+"documents."
 
 #: publications/page_templates.py:139
 msgid "Public meeting"
@@ -482,7 +488,9 @@ msgstr "Réunion publique"
 msgid ""
 "A presentation followed by questions: agenda, speakers, practical "
 "information."
-msgstr "Une présentation suivie de questions : ordre du jour, intervenants, infos pratiques."
+msgstr ""
+"Une présentation suivie de questions : ordre du jour, intervenants, infos "
+"pratiques."
 
 #: publications/page_templates.py:166
 msgid "Participatory workshop"
@@ -490,7 +498,9 @@ msgstr "Atelier participatif"
 
 #: publications/page_templates.py:167
 msgid "A working session in small groups: goal, programme, what to bring."
-msgstr "Une séance de travail en petits groupes : objectif, déroulé, ce qu'il faut apporter."
+msgstr ""
+"Une séance de travail en petits groupes : objectif, déroulé, ce qu'il faut "
+"apporter."
 
 #: publications/page_templates.py:193
 msgid "Neighbourhood walk"
@@ -529,7 +539,7 @@ msgid "This cannot be undone."
 msgstr "Cette action est irréversible."
 
 #: publications/templates/publications/admin/close_poll_confirm.html:17
-#: publications/wagtail_hooks.py:75
+#: publications/wagtail_hooks.py:54
 msgid "Close the poll and send the results"
 msgstr "Clore le vote et envoyer les résultats"
 
@@ -541,7 +551,6 @@ msgstr "Annuler"
 #: publications/templates/publications/admin/ideas_stats.html:7
 #: publications/templates/publications/admin/ideas_stats_detail.html:4
 #: publications/views/idea_stats.py:35 publications/views/idea_stats.py:71
-#: publications/wagtail_hooks.py:49
 msgid "Idea Collection"
 msgstr "Collecte d'idées"
 
@@ -606,7 +615,6 @@ msgstr "Aucune idée pour le moment"
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
 #: publications/views/vote_stats.py:48 publications/views/vote_stats.py:103
-#: publications/wagtail_hooks.py:27
 msgid "Vote Statistics"
 msgstr "Statistiques des votes"
 

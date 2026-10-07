@@ -8,7 +8,7 @@ La section **À propos** contient les pages de présentation de la plateforme et
 
 ## Accéder aux pages "À propos"
 
-Dans la barre latérale, cliquez sur **À propos** pour déployer le sous-menu, puis cliquez sur la page à modifier.
+Dans la barre latérale, ouvrez **Pages du site**, puis cliquez sur la page à modifier : *La plateforme*, *La commission urbanisme* ou *L'équipe de développement*.
 
 ## Modifier une page
 
