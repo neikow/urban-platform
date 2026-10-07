@@ -10,6 +10,8 @@ set of Django permissions on top of any stored in the database:
 - The ``core.*_user`` permissions in :data:`USER_MANAGEMENT_PERMISSIONS` unlock
   the Wagtail user admin at ``/admin/users/``. *Which* roles such a user may then
   assign is further constrained by :mod:`core.permissions`.
+- ``core.change_announcement`` (:data:`ANNOUNCEMENT_PERMISSIONS`) unlocks
+  Settings > Announcement.
 """
 
 from __future__ import annotations
@@ -40,15 +42,21 @@ USER_MANAGEMENT_PERMISSIONS: frozenset[str] = frozenset(
     }
 )
 
+# Settings > Announcement: the band shown at the top of every page.
+ANNOUNCEMENT_PERMISSIONS: frozenset[str] = frozenset({"core.change_announcement"})
+
 # Roles that may access the Wagtail admin. Kept for backwards compatibility; it
 # is now derived from :data:`ROLE_PERMISSIONS`.
 ADMIN_ACCESS_ROLES: frozenset[str] = frozenset({UserRole.ADMIN, UserRole.ASSOCIATION_MEMBER})
 
 # Permissions granted purely from a user's role, on top of database-stored ones.
 ROLE_PERMISSIONS: dict[str, frozenset[str]] = {
-    UserRole.ADMIN: frozenset({WAGTAIL_ADMIN_PERMISSION}) | USER_MANAGEMENT_PERMISSIONS,
+    UserRole.ADMIN: frozenset({WAGTAIL_ADMIN_PERMISSION})
+    | USER_MANAGEMENT_PERMISSIONS
+    | ANNOUNCEMENT_PERMISSIONS,
     UserRole.ASSOCIATION_MEMBER: frozenset({WAGTAIL_ADMIN_PERMISSION})
-    | USER_MANAGEMENT_PERMISSIONS,
+    | USER_MANAGEMENT_PERMISSIONS
+    | ANNOUNCEMENT_PERMISSIONS,
 }
 
 

@@ -2,7 +2,7 @@
 
 {% if index == 1 %}
     <div
-        class="relative min-h-screen no-page-style overflow-hidden bg-cover bg-center flex flex-col justify-end"
+        class="relative min-h-[calc(100svh-4rem)] no-page-style overflow-hidden bg-cover bg-center flex flex-col justify-end"
         {% if self.image %}
             style="{% image self.image fill-1920x1080 as bg_img %}background-image: url({{ bg_img.url }});"
         {% endif %}
