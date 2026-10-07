@@ -148,7 +148,7 @@ class ProjectPageStructuredDataTests(StructuredDataBaseTestCase):
             parent=self.home,
             title="Projet de mobilité douce",
             description="Un projet pour améliorer la mobilité",
-            category=ProjectCategory.MOBILITY,
+            category=ProjectCategory.LIVING_ENVIRONMENT,
         )
 
     def test_type_is_article(self) -> None:

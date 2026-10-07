@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from django.test import TestCase, RequestFactory
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from wagtail.rich_text import RichText
 
 from core.blocks import BLOCK_TYPE_RICH_TEXT, TextJustification
@@ -24,10 +25,10 @@ class ProjectPageModelTest(TestCase):
 
         self.assertEqual(project.title, "Test Project")
         self.assertEqual(project.description, "Test description")
-        self.assertEqual(project.category, ProjectCategory.OTHER)
+        self.assertEqual(project.category, ProjectCategory.LIVING_ENVIRONMENT)
 
     def test_project_all_categories_valid(self) -> None:
-        for category_value, _ in ProjectCategory.choices:
+        for category_value in ProjectCategory.values:
             project = ProjectPage(title=f"Project {category_value}", category=category_value)
             self.project_index.add_child(instance=project)
             self.assertEqual(project.category, category_value)
@@ -40,7 +41,7 @@ class ProjectPageModelTest(TestCase):
     def test_table_of_contents_extracts_headers(self) -> None:
         project = ProjectPage(
             title="Project with TOC",
-            category=ProjectCategory.URBAN_PLANNING,
+            category=ProjectCategory.URBAN_FORMS,
             content=[
                 (
                     BLOCK_TYPE_RICH_TEXT,
@@ -142,7 +143,7 @@ class PublicationIndexPageModelTest(TestCase):
 
         cls.publication_index = PublicationIndexPage.objects.first()
 
-        project1 = ProjectPage(title="Urban Project", category=ProjectCategory.URBAN_PLANNING)
+        project1 = ProjectPage(title="Urban Project", category=ProjectCategory.URBAN_FORMS)
         cls.publication_index.add_child(instance=project1)
         project1.save_revision().publish()
 
@@ -165,7 +166,7 @@ class PublicationIndexPageModelTest(TestCase):
         self.assertEqual(len(self.publication_index.get_publications(request)), 1)
 
     def test_get_publications_filters_by_category(self) -> None:
-        request = self.factory.get("/publications/?type=projects&category=URBAN_PLANNING")
+        request = self.factory.get("/publications/?type=projects&category=URBAN_FORMS")
         publications = self.publication_index.get_publications(request)
 
         self.assertEqual(len(publications), 1)
@@ -189,7 +190,7 @@ class PublicationIndexPageModelTest(TestCase):
 
     def test_get_publications_pagination(self) -> None:
         for i in range(15):
-            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.OTHER)
+            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.LIVING_ENVIRONMENT)
             self.publication_index.add_child(instance=project)
             project.save_revision().publish()
 
@@ -201,7 +202,7 @@ class PublicationIndexPageModelTest(TestCase):
 
     def test_get_publications_invalid_page_falls_back(self) -> None:
         for i in range(15):
-            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.OTHER)
+            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.LIVING_ENVIRONMENT)
             self.publication_index.add_child(instance=project)
             project.save_revision().publish()
 
@@ -220,30 +221,41 @@ class PublicationIndexPageModelTest(TestCase):
         self.publication_index.save_revision().publish()
 
         response = self.client.get(
-            self.publication_index.url + "?type=projects&search=a%26b&category=MOBILITY"
+            self.publication_index.url + "?type=projects&search=a%26b&category=ENVIRONMENT"
         )
 
         content = response.content.decode()
         # Category links keep the search term, URL-encoded, and drop the page.
-        self.assertIn("type=projects&amp;search=a%26b&amp;category=HOUSING", content)
+        self.assertIn("type=projects&amp;search=a%26b&amp;category=URBAN_FORMS", content)
         self.assertNotIn("search=a&b", content)
+
+    def test_category_filter_offers_all_urban_planning(self) -> None:
+        self.publication_index.save_revision().publish()
+
+        response = self.client.get(self.publication_index.url + "?type=projects")
+
+        self.assertContains(response, _("All urban planning"))
 
     def test_pagination_links_keep_filters(self) -> None:
         for i in range(15):
-            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.OTHER)
+            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.LIVING_ENVIRONMENT)
             self.publication_index.add_child(instance=project)
             project.save_revision().publish()
         self.publication_index.save_revision().publish()
 
-        response = self.client.get(self.publication_index.url + "?type=projects&category=OTHER")
+        response = self.client.get(
+            self.publication_index.url + "?type=projects&category=LIVING_ENVIRONMENT"
+        )
 
-        self.assertIn("?type=projects&amp;category=OTHER&amp;page=2", response.content.decode())
+        self.assertIn(
+            "?type=projects&amp;category=LIVING_ENVIRONMENT&amp;page=2", response.content.decode()
+        )
 
     def test_get_context_returns_expected_keys(self) -> None:
-        request = self.factory.get("/publications/?type=events&category=URBAN_PLANNING")
+        request = self.factory.get("/publications/?type=events&category=URBAN_FORMS")
         context = self.publication_index.get_context(request)
 
         self.assertIn("publications", context)
         self.assertIn("categories", context)
         self.assertEqual(context["selected_type"], "events")
-        self.assertEqual(context["selected_category"], "URBAN_PLANNING")
+        self.assertEqual(context["selected_category"], "URBAN_FORMS")

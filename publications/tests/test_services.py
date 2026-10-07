@@ -24,7 +24,7 @@ class PublicationFiltersTest(TestCase):
         request = MagicMock()
         get_data = {
             "type": "projects",
-            "category": "URBAN_PLANNING",
+            "category": "URBAN_FORMS",
             "search": "test query",
             "page": "2",
         }
@@ -33,7 +33,7 @@ class PublicationFiltersTest(TestCase):
         filters = PublicationFilters.from_request(request)
 
         self.assertEqual(filters.publication_type, "projects")
-        self.assertEqual(filters.category, "URBAN_PLANNING")
+        self.assertEqual(filters.category, "URBAN_FORMS")
         self.assertEqual(filters.search_query, "test query")
         self.assertEqual(filters.page_number, "2")
 
@@ -232,9 +232,9 @@ class FilterPublicationsByCategoryTest(TestCase):
         mock_filtered = MagicMock()
         mock_queryset.filter.return_value = mock_filtered
 
-        result = filter_publications_by_category(mock_queryset, "URBAN_PLANNING")
+        result = filter_publications_by_category(mock_queryset, "URBAN_FORMS")
 
-        mock_queryset.filter.assert_called_once_with(projectpage__category="URBAN_PLANNING")
+        mock_queryset.filter.assert_called_once_with(projectpage__category="URBAN_FORMS")
         self.assertEqual(result, mock_filtered)
 
     def test_filter_with_invalid_category_returns_unchanged(self) -> None:
