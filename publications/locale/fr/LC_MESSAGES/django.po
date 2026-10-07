@@ -922,6 +922,10 @@ msgid "You are here"
 msgstr "Vous êtes ici"
 
 #: publications/templates/publications/components/projects_map.html:47
+msgid "You are outside Marseille: the map only covers the city."
+msgstr "Vous êtes en dehors de Marseille : la carte ne couvre que la ville."
+
+#: publications/templates/publications/components/projects_map.html:47
 msgid "Open for participation"
 msgstr "Participation ouverte"
 

@@ -377,6 +377,15 @@ def populate_database() -> None:
         else:
             print(f"  ✓ Project exists: {title}")
 
+    # The projects map test opens this one's popup: a long category, at the
+    # Palais du Pharo (7e), away from where the admin test places its marker.
+    from publications.models import ProjectCategory
+
+    on_map = ProjectPage.objects.get(slug="projet-idees")
+    on_map.category = ProjectCategory.LIVING_ENVIRONMENT
+    on_map.location = {"type": "Point", "coordinates": [5.3615, 43.2925]}
+    on_map.save_revision().publish()
+
     # The poll-closing test closes this one: reopen it for every run.
     from core.models import NotificationDispatch
     from publications.models import PollClosure
