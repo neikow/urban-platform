@@ -16,8 +16,10 @@
 | about/models/about\_index.py                                   |       14 |        0 |        0 |        0 |    100.00% |           |
 | about/models/about\_website.py                                 |       14 |        0 |        0 |        0 |    100.00% |           |
 | core/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
+| core/admin\_dashboard.py                                       |       75 |        0 |        6 |        1 |     98.77% |   68-\>76 |
+| core/admin\_menu.py                                            |       51 |        2 |        8 |        2 |     93.22% |   62, 101 |
 | core/apps.py                                                   |       15 |        0 |        0 |        0 |    100.00% |           |
-| core/auth\_backends.py                                         |       18 |        2 |        4 |        2 |     81.82% |    71, 74 |
+| core/auth\_backends.py                                         |       18 |        2 |        4 |        2 |     81.82% |    69, 72 |
 | core/blocks.py                                                 |      182 |        0 |        4 |        2 |     98.92% |255-\>265, 262-\>265 |
 | core/cache.py                                                  |       16 |        2 |        2 |        1 |     83.33% |33-34, 40-\>exit |
 | core/context\_processors.py                                    |        6 |        0 |        0 |        0 |    100.00% |           |
@@ -72,7 +74,7 @@
 | core/views/profile\_edit.py                                    |      126 |        6 |       26 |        6 |     92.11% |86, 96, 100, 129, 139, 146 |
 | core/views/register.py                                         |       90 |        7 |       22 |        8 |     86.61% |68, 81, 87, 94, 96, 98, 136-\>140, 163 |
 | core/wagtail\_forms.py                                         |       35 |        2 |        6 |        2 |     90.24% |    33, 53 |
-| core/wagtail\_hooks.py                                         |      123 |        8 |       26 |       10 |     87.92% |62-\>78, 126, 161, 163, 165, 167, 207, 209, 211, 275-\>exit |
+| core/wagtail\_hooks.py                                         |       71 |        0 |        8 |        1 |     98.73% | 88-\>exit |
 | core/wagtail\_viewsets.py                                      |       19 |        3 |        0 |        0 |     84.21% |     22-24 |
 | core/widgets.py                                                |       45 |       19 |       16 |        3 |     47.54% |16, 28-35, 49, 68-71, 81-88, 98 |
 | home/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
@@ -145,9 +147,9 @@
 | publications/views/poll\_close.py                              |       26 |        2 |        4 |        2 |     86.67% |    24, 41 |
 | publications/views/vote.py                                     |       66 |        7 |       26 |        6 |     85.87% |34-35, 87, 90, 96, 108, 130, 138-\>153 |
 | publications/views/vote\_stats.py                              |       60 |        0 |        8 |        0 |    100.00% |           |
-| publications/wagtail\_hooks.py                                 |       29 |        0 |        2 |        1 |     96.77% | 68-\>exit |
+| publications/wagtail\_hooks.py                                 |       22 |        0 |        2 |        1 |     95.83% | 47-\>exit |
 | publications/widgets.py                                        |       20 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **4339** |  **555** |  **734** |  **110** | **84.45%** |           |
+| **TOTAL**                                                      | **4406** |  **549** |  **730** |  **104** | **84.87%** |           |
 
 
 ## Setup coverage badge
