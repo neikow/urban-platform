@@ -132,41 +132,42 @@
                                 </li>
                             {% endif %}
                             <li>
-                                <form method="post" action="{% url 'logout' %}" class="m-0">
-                                    {% csrf_token %}
-                                    <button type="submit" class="flex items-center gap-2 w-full text-left py-2">
-                                        <svg
-                                            class="w-5 h-5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            viewBox="0 0 24 24"
-                                            aria-hidden="true"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"
-                                            />
-                                            <polyline
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                points="16 17 21 12 16 7"
-                                            />
-                                            <line
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                x1="21"
-                                                x2="9"
-                                                y1="12"
-                                                y2="12"
-                                            />
-                                        </svg>
-                                        <span>{% trans "Log out" %}</span>
-                                    </button>
-                                </form>
+                                {# The button must be the item's direct child to get the menu item style, like the links. #}
+                                <button type="submit" form="logout-form" class="flex items-center gap-2 py-2">
+                                    <svg
+                                        class="w-5 h-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"
+                                        />
+                                        <polyline
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            points="16 17 21 12 16 7"
+                                        />
+                                        <line
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            x1="21"
+                                            x2="9"
+                                            y1="12"
+                                            y2="12"
+                                        />
+                                    </svg>
+                                    <span>{% trans "Log out" %}</span>
+                                </button>
                             </li>
                         </ul>
+                        <form id="logout-form" method="post" action="{% url 'logout' %}" hidden>
+                            {% csrf_token %}
+                        </form>
                     </div>
                 {% else %}
                     <button
