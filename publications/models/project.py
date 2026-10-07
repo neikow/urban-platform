@@ -21,17 +21,9 @@ DEFAULT_VOTE_QUESTION = _("What is your opinion on this project?")
 
 
 class ProjectCategory(models.TextChoices):
-    URBAN_PLANNING = "URBAN_PLANNING", _("Urban Planning")
     ENVIRONMENT = "ENVIRONMENT", _("Environment")
-    MOBILITY = "MOBILITY", _("Mobility")
-    HOUSING = "HOUSING", _("Housing")
-    CULTURE = "CULTURE", _("Culture")
-    SPORT = "SPORT", _("Sport")
-    EDUCATION = "EDUCATION", _("Education")
-    HEALTH = "HEALTH", _("Health")
-    SOCIAL = "SOCIAL", _("Social")
-    ECONOMY = "ECONOMY", _("Economy")
-    OTHER = "OTHER", _("Other")
+    LIVING_ENVIRONMENT = "LIVING_ENVIRONMENT", _("Living environment / Public spaces / Mobility")
+    URBAN_FORMS = "URBAN_FORMS", _("Urban forms / Housing")
 
 
 class ParticipationMode(models.TextChoices):
@@ -61,7 +53,7 @@ class ProjectPage(PublicationPage):
         _("Category"),
         max_length=30,
         choices=ProjectCategory.choices,
-        default=ProjectCategory.OTHER,
+        default=ProjectCategory.LIVING_ENVIRONMENT,
     )
 
     participation_mode: models.CharField[str, str] = models.CharField(

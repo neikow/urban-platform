@@ -12,13 +12,21 @@
             <div class="flex flex-col-reverse md:flex-row pt-2 md:pt-4 lg:pt-8 gap-4 md:gap-8 lg:gap-16">
                 <div class="w-full flex flex-col justify-center items-center gap-4">
                     <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="badge badge-secondary badge-lg">{% trans "Event" %}</span>
+                        <span
+                            class="badge badge-secondary text-3xs font-bold uppercase tracking-wide"
+                        >{% trans "Event" %}</span>
                         {% if page.is_upcoming %}
-                            <span class="badge badge-success badge-lg">{% trans "Upcoming" %}</span>
+                            <span
+                                class="badge badge-success text-3xs font-bold uppercase tracking-wide"
+                            >{% trans "Upcoming" %}</span>
                         {% elif page.is_ongoing %}
-                            <span class="badge badge-warning badge-lg">{% trans "Ongoing" %}</span>
+                            <span
+                                class="badge badge-warning text-3xs font-bold uppercase tracking-wide"
+                            >{% trans "Ongoing" %}</span>
                         {% elif page.is_past %}
-                            <span class="badge badge-ghost badge-lg">{% trans "Past" %}</span>
+                            <span
+                                class="badge badge-ghost text-3xs font-bold uppercase tracking-wide"
+                            >{% trans "Past" %}</span>
                         {% endif %}
                     </div>
                     <p class="text-sm sm:text-base leading-relaxed text-base-content/80 text-center">
