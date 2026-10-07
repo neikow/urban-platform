@@ -9,11 +9,12 @@ from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
 from wagtail.admin.panels import FieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
-from wagtail.fields import RichTextField
+from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
 
-from publications.geo import feature_collection, map_config
+from publications.blocks import BLOCK_TYPE_PUBLICATION_LIST, PUBLICATION_INDEX_BLOCK_TYPES
+from publications.geo import feature_collection
 from publications.services import PublicationFilters, get_filtered_publications
 
 
@@ -24,6 +25,14 @@ class CategoryFilter:
     is_selected: bool
 
 
+def default_content() -> list[dict[str, Any]]:
+    """The list, then the projects map: the page as it was before its blocks."""
+    return [
+        {"type": BLOCK_TYPE_PUBLICATION_LIST, "value": {"label": "", "title": ""}},
+        {"type": "projects_map", "value": {"label": "", "title": "", "introduction": ""}},
+    ]
+
+
 class PublicationIndexPage(RoutablePageMixin, Page):
     PUBLICATIONS_PER_PAGE = 12
 
@@ -31,6 +40,7 @@ class PublicationIndexPage(RoutablePageMixin, Page):
     parent_page_types = ["home.HomePage"]
     subpage_types = ["publications.ProjectPage", "publications.EventPage"]
     show_in_menus_default = True
+    page_templates = "publications.page_templates.INDEX_TEMPLATES"
 
     @classmethod
     def get_verbose_name(cls) -> StrOrPromise:
@@ -43,20 +53,22 @@ class PublicationIndexPage(RoutablePageMixin, Page):
         default="Découvrez les projets et événements en cours et à venir dans votre quartier.",
     )
 
-    body = RichTextField(
-        blank=True,
-        verbose_name=_("Page body content"),
-        help_text=_("Additional content for the publications page."),
+    content = StreamField(
+        PUBLICATION_INDEX_BLOCK_TYPES,
+        block_counts={BLOCK_TYPE_PUBLICATION_LIST: {"min_num": 1, "max_num": 1}},
+        default=default_content,
+        verbose_name=_("Page content"),
+        help_text=_("The list of publications and the parts around it."),
     )
 
     search_fields = Page.search_fields + [
         index.SearchField("page_introduction"),
-        index.SearchField("body"),
+        index.SearchField("content"),
     ]
 
     content_panels = Page.content_panels + [
         FieldPanel("page_introduction"),
-        FieldPanel("body"),
+        FieldPanel("content"),
     ]
 
     def get_publications(self, request: HttpRequest) -> Any:
@@ -101,8 +113,6 @@ class PublicationIndexPage(RoutablePageMixin, Page):
     def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Context:
         context = super().get_context(request, *args, **kwargs)
         context.update(self.get_results_context(request))
-        context["projects_map"] = self.get_projects_map()
-        context["map_config"] = map_config()
         return context
 
     @path("results/", name="results")

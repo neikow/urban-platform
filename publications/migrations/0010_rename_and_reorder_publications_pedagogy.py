@@ -1,4 +1,5 @@
 from django.db import migrations
+from treebeard.mp_tree import MP_Node
 
 # Wagtail auto-creates a Redirect for every live descendant on slug change/page move
 # (WAGTAILREDIRECTS_AUTO_CREATE, default True). Redirect.old_path is a 255-char
@@ -21,6 +22,27 @@ from django.db import migrations
 # committed the rename/move while leaving the redirects uncreated.
 
 
+def index_pages(model_name):
+    """Index pages as plain wagtail Pages: the current specific models may have
+    columns that do not exist yet when this migration runs."""
+    from wagtail.models import Page
+
+    return Page.objects.filter(content_type__model=model_name)
+
+
+def rename(page, title, slug):
+    """Page.save() loads the specific page: update the row and the url_paths directly."""
+    page.refresh_from_db()
+    old_url_path = page.url_path
+    page.title = page.draft_title = title
+    page.slug = slug
+    page.set_url_path(page.get_parent())
+    type(page).objects.filter(pk=page.pk).update(
+        title=title, draft_title=title, slug=slug, url_path=page.url_path
+    )
+    page._update_descendant_url_paths(old_url_path, page.url_path)
+
+
 def _ensure_redirect(Redirect, site, old_path, page):
     Redirect.objects.get_or_create(
         old_path=old_path,
@@ -34,8 +56,6 @@ def _ensure_redirect(Redirect, site, old_path, page):
 
 
 def rename_and_reorder_pages(apps, schema_editor):
-    from pedagogy.models.pedagogy_index import PedagogyIndexPage
-    from publications.models.publication_index import PublicationIndexPage
     from wagtail.contrib.redirects.models import Redirect
     from wagtail.contrib.redirects.signal_handlers import (
         autocreate_redirects_on_page_move,
@@ -44,12 +64,14 @@ def rename_and_reorder_pages(apps, schema_editor):
     from wagtail.models import Site
     from wagtail.signals import page_slug_changed, post_page_move
 
-    publications_page = PublicationIndexPage.objects.filter(
-        slug__in=["publications", "actualites"]
-    ).first()
-    pedagogy_page = PedagogyIndexPage.objects.filter(
-        slug__in=["fiches-pedagogiques", "informations-utiles"]
-    ).first()
+    publications_page = (
+        index_pages("publicationindexpage").filter(slug__in=["publications", "actualites"]).first()
+    )
+    pedagogy_page = (
+        index_pages("pedagogyindexpage")
+        .filter(slug__in=["fiches-pedagogiques", "informations-utiles"])
+        .first()
+    )
 
     if publications_page is None or pedagogy_page is None:
         return
@@ -62,30 +84,19 @@ def rename_and_reorder_pages(apps, schema_editor):
     # Reorder: Actualités (ex-Publications) should appear before Informations
     # utiles (ex-Fiches pédagogiques) in the frontend nav, which follows
     # tree/path order. Safe to call even if already in this relative order.
-    publications_page.move(pedagogy_page, pos="left")
+    # treebeard's move: Wagtail's loads the specific page. Same parent, so the
+    # url_paths do not change.
+    MP_Node.move(publications_page, pedagogy_page, pos="left")
 
-    publications_page.refresh_from_db()
-    publications_page.title = "Actualités"
-    publications_page.draft_title = "Actualités"
-    publications_page.slug = "actualites"
-    publications_page.save()
-    publications_page.save_revision().publish()
+    rename(publications_page, "Actualités", "actualites")
 
-    pedagogy_page.refresh_from_db()
-    pedagogy_page.title = "Informations utiles"
-    pedagogy_page.draft_title = "Informations utiles"
-    pedagogy_page.slug = "informations-utiles"
-    pedagogy_page.save()
-    pedagogy_page.save_revision().publish()
+    rename(pedagogy_page, "Informations utiles", "informations-utiles")
 
     _ensure_redirect(Redirect, site, "/publications", publications_page)
     _ensure_redirect(Redirect, site, "/fiches-pedagogiques", pedagogy_page)
 
 
 def reverse_rename_and_reorder_pages(apps, schema_editor):
-    from legal.models.legal_index import LegalIndexPage
-    from pedagogy.models.pedagogy_index import PedagogyIndexPage
-    from publications.models.publication_index import PublicationIndexPage
     from wagtail.contrib.redirects.models import Redirect
     from wagtail.contrib.redirects.signal_handlers import (
         autocreate_redirects_on_page_move,
@@ -95,13 +106,15 @@ def reverse_rename_and_reorder_pages(apps, schema_editor):
 
     Redirect.objects.filter(old_path__in=["/publications", "/fiches-pedagogiques"]).delete()
 
-    publications_page = PublicationIndexPage.objects.filter(
-        slug__in=["actualites", "publications"]
-    ).first()
-    pedagogy_page = PedagogyIndexPage.objects.filter(
-        slug__in=["informations-utiles", "fiches-pedagogiques"]
-    ).first()
-    legal_page = LegalIndexPage.objects.first()
+    publications_page = (
+        index_pages("publicationindexpage").filter(slug__in=["actualites", "publications"]).first()
+    )
+    pedagogy_page = (
+        index_pages("pedagogyindexpage")
+        .filter(slug__in=["informations-utiles", "fiches-pedagogiques"])
+        .first()
+    )
+    legal_page = index_pages("legalindexpage").first()
 
     if publications_page is None or pedagogy_page is None:
         return
@@ -110,21 +123,11 @@ def reverse_rename_and_reorder_pages(apps, schema_editor):
     post_page_move.disconnect(autocreate_redirects_on_page_move)
 
     if legal_page is not None:
-        publications_page.move(legal_page, pos="right")
+        MP_Node.move(publications_page, legal_page, pos="right")
 
-    publications_page.refresh_from_db()
-    publications_page.title = "Publications"
-    publications_page.draft_title = "Publications"
-    publications_page.slug = "publications"
-    publications_page.save()
-    publications_page.save_revision().publish()
+    rename(publications_page, "Publications", "publications")
 
-    pedagogy_page.refresh_from_db()
-    pedagogy_page.title = "Fiches pédagogiques"
-    pedagogy_page.draft_title = "Fiches pédagogiques"
-    pedagogy_page.slug = "fiches-pedagogiques"
-    pedagogy_page.save()
-    pedagogy_page.save_revision().publish()
+    rename(pedagogy_page, "Fiches pédagogiques", "fiches-pedagogiques")
 
 
 class Migration(migrations.Migration):

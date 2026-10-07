@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 18:21+0200\n"
+"POT-Creation-Date: 2026-10-07 20:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: core/admin_dashboard.py:53 core/admin_menu.py:135
+#: core/admin_dashboard.py:53 core/admin_menu.py:145
 msgid "New project"
 msgstr "Nouveau projet"
 
-#: core/admin_dashboard.py:54 core/admin_menu.py:136
+#: core/admin_dashboard.py:54 core/admin_menu.py:146
 msgid "New event"
 msgstr "Nouvel événement"
 
@@ -36,97 +36,97 @@ msgstr "Modifier la page d'accueil"
 msgid "Edit the announcement"
 msgstr "Modifier l'annonce"
 
-#: core/admin_menu.py:127
+#: core/admin_menu.py:137
 msgid "Home page"
 msgstr "Page d'accueil"
 
-#: core/admin_menu.py:131
+#: core/admin_menu.py:141
 msgid "News"
 msgstr "Actualités"
 
-#: core/admin_menu.py:133
+#: core/admin_menu.py:143
 msgid "“News” page"
 msgstr "Page « Actualités »"
 
-#: core/admin_menu.py:134
+#: core/admin_menu.py:144
 msgid "All publications"
 msgstr "Toutes les publications"
 
-#: core/admin_menu.py:144
+#: core/admin_menu.py:154
 msgid "Useful information"
 msgstr "Informations utiles"
 
-#: core/admin_menu.py:146
+#: core/admin_menu.py:156
 msgid "“Useful information” page"
 msgstr "Page « Informations utiles »"
 
-#: core/admin_menu.py:147
+#: core/admin_menu.py:157
 msgid "All cards"
 msgstr "Toutes les fiches"
 
-#: core/admin_menu.py:148
+#: core/admin_menu.py:158
 msgid "New card"
 msgstr "Nouvelle fiche"
 
-#: core/admin_menu.py:155
+#: core/admin_menu.py:165
 msgid "Site pages"
 msgstr "Pages du site"
 
-#: core/admin_menu.py:157
+#: core/admin_menu.py:167
 msgid "The platform"
 msgstr "La plateforme"
 
-#: core/admin_menu.py:159
+#: core/admin_menu.py:169
 msgid "The urban planning commission"
 msgstr "La commission d'urbanisme"
 
-#: core/admin_menu.py:163
+#: core/admin_menu.py:173
 msgid "The development team"
 msgstr "L'équipe de développement"
 
-#: core/admin_menu.py:165
+#: core/admin_menu.py:175
 msgid "Code of conduct"
 msgstr "Charte de bonne conduite"
 
-#: core/admin_menu.py:168
+#: core/admin_menu.py:178
 msgid "Terms of service"
 msgstr "Conditions d'utilisation"
 
-#: core/admin_menu.py:174
+#: core/admin_menu.py:184
 msgid "Cookies policy"
 msgstr "Politique de cookies"
 
-#: core/admin_menu.py:177
+#: core/admin_menu.py:187
 msgid "Privacy policy"
 msgstr "Politique de confidentialité"
 
-#: core/admin_menu.py:185
+#: core/admin_menu.py:195
 #: core/templates/core/admin/dashboard/consultations.html:9
 msgid "Participation"
 msgstr "Participation"
 
-#: core/admin_menu.py:188
+#: core/admin_menu.py:198
 msgid "Votes"
 msgstr "Votes"
 
-#: core/admin_menu.py:195
+#: core/admin_menu.py:206
 #: core/templates/core/admin/dashboard/consultations.html:21
 msgid "Ideas"
 msgstr "Idées"
 
-#: core/admin_menu.py:207
+#: core/admin_menu.py:219
 msgid "Media library"
 msgstr "Médiathèque"
 
-#: core/admin_menu.py:210
+#: core/admin_menu.py:222
 msgid "Images"
 msgstr "Images"
 
-#: core/admin_menu.py:213
+#: core/admin_menu.py:229
 msgid "Documents"
 msgstr "Documents"
 
-#: core/admin_menu.py:224
+#: core/admin_menu.py:241
 msgid "Documentation"
 msgstr "Documentation"
 

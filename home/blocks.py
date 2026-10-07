@@ -17,7 +17,9 @@ from typing import Any
 
 from django.db import models
 from django.db.models import Q
+from django.template.loader import render_to_string
 from django.utils import timezone
+from django.utils.safestring import SafeString
 from django.utils.translation import gettext_lazy as _
 from wagtail import blocks
 
@@ -381,6 +383,31 @@ class ProjectsMapBlock(LiveBlock):
             "title": "Les projets du quartier",
             "introduction": "",
         }
+
+
+class IndexListBlock(blocks.StructBlock):
+    """The list of child pages of an index page, with its search field.
+
+    Its template reads the list from the page context (``get_results_context``
+    of the page), so the "results" route and the page render the same list.
+    """
+
+    label = blocks.CharBlock(label=_("Small label"), required=False, max_length=40)
+    title = blocks.CharBlock(label=_("Title"), required=False, max_length=120)
+
+    def render(self, value: Any, context: dict | None = None) -> SafeString:
+        # Rendered with the request, as the page is: the filters use
+        # {% querystring %}, which needs it.
+        new_context = self.get_context(value, parent_context=dict(context or {}))
+        return render_to_string(self.meta.template, new_context, request=new_context.get("request"))
+
+    def get_preview_context(self, value: Any, parent_context: dict | None = None) -> dict:
+        context = super().get_preview_context(value, parent_context=parent_context)
+        context["is_block_preview"] = True
+        return context
+
+    class Meta:
+        group = GROUP_LIVE
 
 
 class JoinBlock(blocks.StructBlock):

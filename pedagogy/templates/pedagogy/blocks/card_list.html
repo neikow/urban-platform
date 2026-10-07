@@ -1,0 +1,25 @@
+{% load i18n %}
+<section class="home-section home-section--plain no-page-style" aria-labelledby="card-list-title">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        {% if is_block_preview %}
+            {% include "home/blocks/_header.html" with label=value.label title=value.title heading_id="card-list-title" %}
+            {% trans "The useful information cards, with a search field." as message %}
+            <div class="mt-10">{% include "home/blocks/_empty_preview.html" %}</div>
+        {% else %}
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-8 gap-4">
+                <div>
+                    <p class="section-label mb-1.5">{% firstof value.label _("Resources") %}</p>
+                    <h2 id="card-list-title" class="font-display font-black uppercase text-display-sm leading-tight">
+                        {% firstof value.title _("Latest additions") %}
+                    </h2>
+                </div>
+                {% trans 'Search resources' as aria_label %}
+                {% trans "Search for a resource..." as placeholder %}
+                {% include "core/components/search/text_search_form.html" with aria_label=aria_label placeholder=placeholder %}
+            </div>
+
+            {% include "pedagogy/components/pedagogy_results.html" %}
+            <p class="sr-only" role="status" data-instant-status></p>
+        {% endif %}
+    </div>
+</section>

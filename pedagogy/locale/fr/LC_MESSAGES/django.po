@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 17:47+0200\n"
+"POT-Creation-Date: 2026-10-07 20:56+0200\n"
 "PO-Revision-Date: 2026-06-23 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -14,6 +14,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: pedagogy/blocks.py:42
+msgid "List of cards"
+msgstr "Liste des fiches"
+
+#: pedagogy/blocks.py:45 pedagogy/templates/pedagogy/blocks/card_list.html:6
+msgid "The useful information cards, with a search field."
+msgstr "Les fiches d'informations utiles, avec un champ de recherche."
 
 #: pedagogy/models/pedagogy_card.py:26
 msgid "Pedagogy Card"
@@ -51,28 +59,28 @@ msgstr "Afficher la table des matières dans la barre latérale"
 msgid "Resource"
 msgstr "Ressource"
 
-#: pedagogy/models/pedagogy_index.py:32
+#: pedagogy/models/pedagogy_index.py:38
 msgid "For search engines"
 msgstr "Pour les moteurs de recherche"
 
-#: pedagogy/models/pedagogy_index.py:40
+#: pedagogy/models/pedagogy_index.py:46
 msgid "Page introduction"
 msgstr "Introduction de la page"
 
-#: pedagogy/models/pedagogy_index.py:41
+#: pedagogy/models/pedagogy_index.py:47
 msgid "Small introduction shown above the pedagogy card list."
 msgstr ""
 "Petite introduction affichée au-dessus de la liste des fiches pédagogiques."
 
-#: pedagogy/models/pedagogy_index.py:46
-msgid "Page body content"
+#: pedagogy/models/pedagogy_index.py:54
+msgid "Page content"
 msgstr "Contenu de la page"
 
-#: pedagogy/models/pedagogy_index.py:47
-msgid "Content for the pedagogy entries page."
-msgstr "Contenu supplémentaire pour la page des fiches pédagogiques."
+#: pedagogy/models/pedagogy_index.py:55
+msgid "The list of cards and the parts around it."
+msgstr "La liste des fiches et les parties qui l'entourent."
 
-#: pedagogy/models/pedagogy_index.py:62 pedagogy/models/pedagogy_index.py:100
+#: pedagogy/models/pedagogy_index.py:70 pedagogy/models/pedagogy_index.py:108
 msgid "Pedagogy Entries Index"
 msgstr "Index des fiches pédagogiques"
 
@@ -94,25 +102,66 @@ msgstr "Veuillez fournir soit une URL, soit un document, mais pas les deux."
 msgid "Please provide either a URL or a Document."
 msgstr "Veuillez fournir soit une URL, soit un document."
 
-#: pedagogy/page_templates.py:13
+#: pedagogy/page_templates.py:16
 msgid "Explain a notion"
 msgstr "Expliquer une notion"
 
-#: pedagogy/page_templates.py:15
+#: pedagogy/page_templates.py:18
 msgid ""
 "A notion of urban planning in plain words, e.g. the PLUi or a building "
 "permit: what it is, why it matters, how it works."
-msgstr "Une notion d'urbanisme en mots simples, par exemple le PLUi ou le permis de construire : ce que c'est, pourquoi c'est important, comment ça marche."
+msgstr ""
+"Une notion d'urbanisme en mots simples, par exemple le PLUi ou le permis de "
+"construire : ce que c'est, pourquoi c'est important, comment ça marche."
 
-#: pedagogy/page_templates.py:48
+#: pedagogy/page_templates.py:51
 msgid "Step-by-step guide"
 msgstr "Guide pas à pas"
 
-#: pedagogy/page_templates.py:50
+#: pedagogy/page_templates.py:53
 msgid ""
 "How to do something, e.g. consult a building permit or contest a project: "
 "when, the steps, deadlines and contacts."
-msgstr "Comment faire une démarche, par exemple consulter un permis de construire ou contester un projet : dans quel cas, les étapes, les délais et les contacts."
+msgstr ""
+"Comment faire une démarche, par exemple consulter un permis de construire ou"
+" contester un projet : dans quel cas, les étapes, les délais et les "
+"contacts."
+
+#: pedagogy/page_templates.py:160
+msgid "Complete"
+msgstr "Complète"
+
+#: pedagogy/page_templates.py:162
+msgid ""
+"Why these cards, the cards, how to use them, open consultations and "
+"questions."
+msgstr ""
+"Pourquoi ces fiches, les fiches, comment s'en servir, les consultations en "
+"cours et les questions."
+
+#: pedagogy/page_templates.py:168
+msgid "Simple"
+msgstr "Simple"
+
+#: pedagogy/page_templates.py:169
+msgid "The cards alone."
+msgstr "Les fiches seules."
+
+#: pedagogy/templates/pedagogy/blocks/card_list.html:11
+msgid "Resources"
+msgstr "Ressources"
+
+#: pedagogy/templates/pedagogy/blocks/card_list.html:13
+msgid "Latest additions"
+msgstr "Derniers ajouts"
+
+#: pedagogy/templates/pedagogy/blocks/card_list.html:16
+msgid "Search resources"
+msgstr "Rechercher des ressources"
+
+#: pedagogy/templates/pedagogy/blocks/card_list.html:17
+msgid "Search for a resource..."
+msgstr "Rechercher une ressource..."
 
 #: pedagogy/templates/pedagogy/components/pedagogy_card_page_resource.html:12
 msgid "Access the resource"
@@ -155,21 +204,8 @@ msgstr "Accès rapide"
 msgid "Table of Contents"
 msgstr "Table des matières"
 
-#: pedagogy/templates/pedagogy/pedagogy_index_page.html:11
-msgid "Resources"
-msgstr "Ressources"
-
-#: pedagogy/templates/pedagogy/pedagogy_index_page.html:13
-msgid "Latest additions"
-msgstr "Derniers ajouts"
-
-#: pedagogy/templates/pedagogy/pedagogy_index_page.html:16
-msgid "Search resources"
-msgstr "Rechercher des ressources"
-
-#: pedagogy/templates/pedagogy/pedagogy_index_page.html:17
-msgid "Search for a resource..."
-msgstr "Rechercher une ressource..."
+#~ msgid "Content for the pedagogy entries page."
+#~ msgstr "Contenu supplémentaire pour la page des fiches pédagogiques."
 
 #~ msgid "View more"
 #~ msgstr "Voir plus"

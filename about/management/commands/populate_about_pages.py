@@ -25,7 +25,7 @@ class Command(BaseCommand):
                 continue
 
             if not page.content:
-                page.content = f"<p>Contenu de la page {page.title}.</p>"
+                page.content = [("text", f"<p>Contenu de la page {page.title}.</p>")]
                 page.save_revision().publish()
                 self.stdout.write(self.style.SUCCESS(f"Updated content for {label}"))
             else:

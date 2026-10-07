@@ -10,20 +10,28 @@ from django.db import migrations
 # regardless of 0010's bookkeeping state or how far it got.
 
 
+def index_pages(model_name):
+    """Index pages as plain wagtail Pages: the current specific models may have
+    columns that do not exist yet when this migration runs."""
+    from wagtail.models import Page
+
+    return Page.objects.filter(content_type__model=model_name)
+
+
 def ensure_redirects(apps, schema_editor):
-    from pedagogy.models.pedagogy_index import PedagogyIndexPage
-    from publications.models.publication_index import PublicationIndexPage
     from wagtail.contrib.redirects.models import Redirect
     from wagtail.models import Site
 
     site = Site.objects.filter(is_default_site=True).first() or Site.objects.first()
 
-    publications_page = PublicationIndexPage.objects.filter(
-        slug__in=["actualites", "publications"]
-    ).first()
-    pedagogy_page = PedagogyIndexPage.objects.filter(
-        slug__in=["informations-utiles", "fiches-pedagogiques"]
-    ).first()
+    publications_page = (
+        index_pages("publicationindexpage").filter(slug__in=["actualites", "publications"]).first()
+    )
+    pedagogy_page = (
+        index_pages("pedagogyindexpage")
+        .filter(slug__in=["informations-utiles", "fiches-pedagogiques"])
+        .first()
+    )
 
     for old_path, page in (
         ("/publications", publications_page),

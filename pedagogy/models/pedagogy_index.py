@@ -7,12 +7,17 @@ from django.http import HttpRequest, HttpResponse
 from django.template import Context
 from django.template.response import TemplateResponse
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
-from wagtail.fields import RichTextField
+from wagtail.fields import StreamField
 from wagtail.models import Page, PanelPlaceholder
 from django.utils.translation import gettext_lazy as _
 from wagtail.search import index
 from wagtail.admin.panels import FieldPanel
+from pedagogy.blocks import BLOCK_TYPE_CARD_LIST, PEDAGOGY_INDEX_BLOCK_TYPES
 from pedagogy.models.pedagogy_card import PedagogyCardPage
+
+
+def default_content() -> list[dict[str, Any]]:
+    return [{"type": BLOCK_TYPE_CARD_LIST, "value": {"label": "", "title": ""}}]
 
 
 class PedagogyIndexPage(RoutablePageMixin, Page):
@@ -20,6 +25,7 @@ class PedagogyIndexPage(RoutablePageMixin, Page):
 
     max_count = 1
     parent_page_types = ["home.HomePage"]
+    page_templates = "pedagogy.page_templates.INDEX_TEMPLATES"
 
     promote_panels = [
         PanelPlaceholder(
@@ -41,20 +47,22 @@ class PedagogyIndexPage(RoutablePageMixin, Page):
         help_text=_("Small introduction shown above the pedagogy card list."),
         default="Voici un ensemble d'outils et de ressources pédagogiques pour vous aider à vous investir dans la vie de votre quartier.",
     )
-    body = RichTextField(
-        blank=True,
-        verbose_name=_("Page body content"),
-        help_text=_("Content for the pedagogy entries page."),
+    content = StreamField(
+        PEDAGOGY_INDEX_BLOCK_TYPES,
+        block_counts={BLOCK_TYPE_CARD_LIST: {"min_num": 1, "max_num": 1}},
+        default=default_content,
+        verbose_name=_("Page content"),
+        help_text=_("The list of cards and the parts around it."),
     )
 
     search_fields = Page.search_fields + [
         index.SearchField("page_introduction"),
-        index.SearchField("body"),
+        index.SearchField("content"),
     ]
 
     content_panels = Page.content_panels + [
         FieldPanel("page_introduction"),
-        FieldPanel("body"),
+        FieldPanel("content"),
     ]
 
     @classmethod

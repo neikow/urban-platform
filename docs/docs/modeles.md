@@ -1,6 +1,6 @@
 # Partir d'un modèle
 
-Pour ne pas partir d'une page blanche, les **projets**, les **événements**, les **fiches « Informations utiles »** et la **page d'accueil** proposent des modèles : une page déjà structurée, avec un texte qui indique quoi écrire dans chaque partie.
+Pour ne pas partir d'une page blanche, les **projets**, les **événements**, les **fiches « Informations utiles »**, la **page d'accueil**, les pages **« Actualités »** et **« Informations utiles »** et les pages **« À propos »** proposent des modèles : une page déjà structurée, avec un texte qui indique quoi écrire dans chaque partie.
 
 ## En créant une page
 
@@ -24,6 +24,9 @@ Les textes du modèle sont des **consignes** (« Décrivez en deux ou trois phra
 | **Événement** | Réunion publique · Atelier participatif · Balade urbaine |
 | **Informations utiles** | Expliquer une notion · Guide pas à pas |
 | **Page d'accueil** | Participation · L'essentiel |
+| **Page « Actualités »** | Complète · Simple |
+| **Page « Informations utiles »** | Complète · Simple |
+| **Pages « À propos »** | Présentation · Texte seul |
 
 Pour un projet, le modèle règle aussi le **mode de participation** (vote, idées ou aucune participation). Vous pouvez le changer ensuite.
 
@@ -35,4 +38,4 @@ Le modèle remplace le **contenu** de la page dans un **nouveau brouillon** :
 
 - rien ne change sur le site tant que vous n'avez pas publié ;
 - la version précédente reste dans l'**historique** de la page (icône horloge), d'où vous pouvez la restaurer ;
-- le titre, le résumé, l'image et les autres réglages ne changent pas. Sur la page d'accueil, le bandeau principal et sa photo sont conservés.
+- le titre, le résumé, l'image et les autres réglages ne changent pas. Sur la page d'accueil, le bandeau principal et sa photo sont conservés. Sur les pages « À propos », les membres ne changent pas.

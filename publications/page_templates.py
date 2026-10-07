@@ -1,4 +1,4 @@
-"""Ready-made projects and events (see ``core.page_templates``).
+"""Ready-made projects, events and "Actualités" pages (see ``core.page_templates``).
 
 Each section says what to write in it: editors replace these instructions
 with their text, and delete the sections they do not need.
@@ -7,6 +7,9 @@ with their text, and delete the sections they do not need.
 from django.utils.translation import gettext_lazy as _
 
 from core.page_templates import PageTemplate, faq, rich_text
+from home.blocks import SectionTone
+from home.page_templates import JOIN, OPEN_PROJECTS, PROJECTS_MAP, UPCOMING_EVENTS, section
+from publications.blocks import BLOCK_TYPE_PUBLICATION_LIST
 from publications.models.project import ParticipationMode
 
 # --- Projects --------------------------------------------------------------------
@@ -211,3 +214,87 @@ WALK = PageTemplate(
 )
 
 EVENT_TEMPLATES = (PUBLIC_MEETING, WORKSHOP, WALK)
+
+
+# --- The "Actualités" page ---------------------------------------------------------
+# Built from the home page parts around the list of publications.
+
+PUBLICATION_LIST = {
+    "type": BLOCK_TYPE_PUBLICATION_LIST,
+    "value": {"label": "Publications", "title": "Dernières publications"},
+}
+
+FOLLOW_THE_NEWS = section(
+    label="Rester informé",
+    title="Ne manquez aucune étape",
+    tone=SectionTone.SAND,
+    content=[
+        {
+            "type": "steps",
+            "value": [
+                {
+                    "title": "Activez les notifications",
+                    "text": "Depuis votre compte, recevez un email à chaque nouveau projet ou événement.",
+                },
+                {
+                    "title": "Abonnez-vous au calendrier",
+                    "text": "Les événements s'ajoutent d'eux-mêmes à votre agenda.",
+                },
+                {
+                    "title": "Suivez le flux RSS",
+                    "text": "Pour lire les publications dans votre lecteur de flux.",
+                },
+            ],
+        }
+    ],
+)
+
+NEWS_FAQ = section(
+    label="Questions fréquentes",
+    title="Vos questions",
+    content=[
+        {
+            "type": "faq",
+            "value": [
+                {
+                    "question": "Quelle différence entre un projet et un événement ?",
+                    "answer": "Un projet est un aménagement du quartier, sur lequel vous pouvez parfois voter ou proposer des idées. Un événement est un rendez-vous : réunion publique, atelier, balade urbaine.",
+                },
+                {
+                    "question": "Comment donner mon avis sur un projet ?",
+                    "answer": "Créez un compte et confirmez votre adresse email, puis ouvrez la page du projet pendant la consultation.",
+                },
+                {
+                    "question": "Un projet du quartier manque à la liste ?",
+                    "answer": "Écrivez-nous à l'adresse de contact indiquée en bas de page.",
+                },
+            ],
+        }
+    ],
+)
+
+INDEX_TEMPLATES = (
+    PageTemplate(
+        slug="complete",
+        name=_("Complete"),
+        description=_(
+            "Open consultations, the publications, upcoming events, the map, how to follow "
+            "the news and questions."
+        ),
+        blocks=(
+            OPEN_PROJECTS,
+            PUBLICATION_LIST,
+            UPCOMING_EVENTS,
+            PROJECTS_MAP,
+            FOLLOW_THE_NEWS,
+            NEWS_FAQ,
+            JOIN,
+        ),
+    ),
+    PageTemplate(
+        slug="simple",
+        name=_("Simple"),
+        description=_("The publications and the map."),
+        blocks=(PUBLICATION_LIST, PROJECTS_MAP),
+    ),
+)

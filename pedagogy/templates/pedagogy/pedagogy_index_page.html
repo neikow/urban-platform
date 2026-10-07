@@ -1,26 +1,14 @@
 {% extends "base.html" %}
-{% load i18n cache %}
-{% load wagtailcore_tags wagtailimages_tags %}
+
+{% load wagtailcore_tags %}
 
 {% block content %}
-    <article class="mx-4">
+    <div class="index-page-header container mx-auto px-4 sm:px-6 lg:px-8">
         {% include "core/components/page_header.html" %}
-        <div class="container mx-auto">
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-8 gap-4">
-                <div>
-                    <p class="section-label mb-1.5">{% trans "Resources" %}</p>
-                    <h2 class="font-display font-black uppercase text-display-sm leading-tight">
-                        {% trans "Latest additions" %}
-                    </h2>
-                </div>
-                {% trans 'Search resources' as aria_label %}
-                {% trans "Search for a resource..." as placeholder %}
-                {% include "core/components/search/text_search_form.html" with aria_label=aria_label placeholder=placeholder %}
-            </div>
-
-            {% include "pedagogy/components/pedagogy_results.html" %}
-            <p class="sr-only" role="status" data-instant-status></p>
-            <article class="mt-8">{{ page.content|richtext }}</article>
-        </div>
-    </article>
+    </div>
+    <div class="page-content">
+        {% for block in page.content %}
+            {% include_block block with index=forloop.counter container=True %}
+        {% endfor %}
+    </div>
 {% endblock content %}

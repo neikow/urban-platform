@@ -3,7 +3,7 @@
 {% block content %}
     <article>
         <header class="bg-base-200/60 border-b border-base-300/70">
-            <div class="container mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16 lg:py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
                 {% include "components/navigation/breadcrumbs.html" with page=page %}
                 <h1
                     class="
@@ -16,10 +16,8 @@
                 </h1>
             </div>
         </header>
-        <div class="container mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-16 min-h-[40vh]">
-            <div class="page-content max-w-3xl">
-                {% block about_content %}{% endblock %}
-            </div>
+        <div class="min-h-[40vh]">
+            {% block about_content %}{% endblock %}
         </div>
     </article>
 {% endblock %}
