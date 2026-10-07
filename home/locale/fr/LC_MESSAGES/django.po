@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 17:48+0200\n"
+"POT-Creation-Date: 2026-10-07 20:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,167 +16,168 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: home/blocks.py:49
+#: home/blocks.py:51
 msgid "Sections"
 msgstr "Sections"
 
-#: home/blocks.py:50
+#: home/blocks.py:52
 msgid "Live content"
 msgstr "Contenu automatique"
 
-#: home/blocks.py:51
+#: home/blocks.py:53
 msgid "Other blocks"
 msgstr "Autres blocs"
 
-#: home/blocks.py:57
+#: home/blocks.py:59
 msgid "Plain"
 msgstr "Uni"
 
-#: home/blocks.py:58
+#: home/blocks.py:60
 msgid "Sand"
 msgstr "Sable"
 
-#: home/blocks.py:59
+#: home/blocks.py:61
 msgid "Navy"
 msgstr "Bleu marine"
 
-#: home/blocks.py:63
+#: home/blocks.py:65
 msgid "Title above the content"
 msgstr "Titre au-dessus du contenu"
 
-#: home/blocks.py:64
+#: home/blocks.py:66
 msgid "Title on the left, content on the right"
 msgstr "Titre à gauche, contenu à droite"
 
-#: home/blocks.py:80 home/blocks.py:87 home/blocks.py:388
+#: home/blocks.py:82 home/blocks.py:89 home/blocks.py:417
 msgid "Text"
 msgstr "Texte"
 
-#: home/blocks.py:86 home/blocks.py:216 home/blocks.py:291 home/blocks.py:387
+#: home/blocks.py:88 home/blocks.py:218 home/blocks.py:293 home/blocks.py:396
+#: home/blocks.py:416
 msgid "Title"
 msgstr "Titre"
 
-#: home/blocks.py:95
+#: home/blocks.py:97
 msgid "Steps"
 msgstr "Étapes"
 
-#: home/blocks.py:98
+#: home/blocks.py:100
 msgid "Numbered steps, e.g. how to take part."
 msgstr "Des étapes numérotées, par exemple pour expliquer comment participer."
 
-#: home/blocks.py:102 home/blocks.py:320
+#: home/blocks.py:104 home/blocks.py:322
 msgid "Open consultations"
 msgstr "Consultations en cours"
 
-#: home/blocks.py:103
+#: home/blocks.py:105
 msgid "Published projects"
 msgstr "Projets publiés"
 
-#: home/blocks.py:104
+#: home/blocks.py:106
 msgid "Votes cast"
 msgstr "Votes exprimés"
 
-#: home/blocks.py:105
+#: home/blocks.py:107
 msgid "Ideas submitted"
 msgstr "Idées proposées"
 
-#: home/blocks.py:106
+#: home/blocks.py:108
 msgid "People who took part"
 msgstr "Personnes ayant participé"
 
-#: home/blocks.py:107
+#: home/blocks.py:109
 msgid "Registered members"
 msgstr "Membres inscrits"
 
-#: home/blocks.py:108
+#: home/blocks.py:110
 msgid "Events"
 msgstr "Événements"
 
-#: home/blocks.py:109
+#: home/blocks.py:111
 msgid "Number typed below"
 msgstr "Nombre saisi ci-dessous"
 
-#: home/blocks.py:137
+#: home/blocks.py:139
 msgid "Figure"
 msgstr "Chiffre"
 
-#: home/blocks.py:140
+#: home/blocks.py:142
 msgid "Counted from the website, so it is always up to date."
 msgstr "Compté à partir du site : il est toujours à jour."
 
-#: home/blocks.py:143
+#: home/blocks.py:145
 msgid "Number"
 msgstr "Nombre"
 
-#: home/blocks.py:146
+#: home/blocks.py:148
 msgid "Only for “Number typed below”, e.g. 7 or 1 200."
 msgstr "Uniquement pour « Nombre saisi ci-dessous », par exemple 7 ou 1 200."
 
-#: home/blocks.py:148
+#: home/blocks.py:150
 msgid "Label"
 msgstr "Libellé"
 
-#: home/blocks.py:167
+#: home/blocks.py:169
 msgid "Key figures"
 msgstr "Chiffres clés"
 
-#: home/blocks.py:170
+#: home/blocks.py:172
 msgid "Two to four large numbers, counted live from the website."
 msgstr "Deux à quatre grands chiffres, comptés en direct à partir du site."
 
-#: home/blocks.py:174
+#: home/blocks.py:176
 msgid "Quote"
 msgstr "Citation"
 
-#: home/blocks.py:175
+#: home/blocks.py:177
 msgid "Author"
 msgstr "Auteur"
 
-#: home/blocks.py:176
+#: home/blocks.py:178
 msgid "Role or neighbourhood"
 msgstr "Rôle ou quartier"
 
-#: home/blocks.py:184
+#: home/blocks.py:186
 msgid "Quotes"
 msgstr "Citations"
 
-#: home/blocks.py:187
+#: home/blocks.py:189
 msgid "What residents say, up to three quotes."
 msgstr "Ce que disent les habitants, jusqu'à trois citations."
 
-#: home/blocks.py:194
+#: home/blocks.py:196
 msgid "Questions and answers"
 msgstr "Questions et réponses"
 
-#: home/blocks.py:211 home/blocks.py:290
+#: home/blocks.py:213 home/blocks.py:292 home/blocks.py:395
 msgid "Small label"
 msgstr "Petit libellé"
 
-#: home/blocks.py:214
+#: home/blocks.py:216
 msgid "Shown above the title, e.g. “Who we are”."
 msgstr "Affiché au-dessus du titre, par exemple « Qui sommes-nous »."
 
-#: home/blocks.py:217 home/blocks.py:357
+#: home/blocks.py:219 home/blocks.py:359
 msgid "Introduction"
 msgstr "Introduction"
 
-#: home/blocks.py:219
+#: home/blocks.py:221
 msgid "Background"
 msgstr "Fond"
 
-#: home/blocks.py:222
+#: home/blocks.py:224
 msgid "Layout"
 msgstr "Mise en page"
 
-#: home/blocks.py:224
+#: home/blocks.py:226
 msgid "Content"
 msgstr "Contenu"
 
-#: home/blocks.py:227
+#: home/blocks.py:229
 msgid "Section"
 msgstr "Section"
 
-#: home/blocks.py:232
+#: home/blocks.py:234
 msgid ""
 "A titled part of the page with a background: text, steps, key figures, "
 "quotes or questions."
@@ -184,11 +185,11 @@ msgstr ""
 "Une partie de la page avec un titre et un fond : texte, étapes, chiffres "
 "clés, citations ou questions."
 
-#: home/blocks.py:306
+#: home/blocks.py:308
 msgid "Maximum number of projects"
 msgstr "Nombre maximum de projets"
 
-#: home/blocks.py:324
+#: home/blocks.py:326
 msgid ""
 "Projects open for votes or ideas, closing soonest first. Hidden when none is "
 "open."
@@ -196,49 +197,49 @@ msgstr ""
 "Les projets ouverts aux votes ou aux idées, ceux qui ferment le plus tôt en "
 "premier. Masqué quand aucun n'est ouvert."
 
-#: home/blocks.py:331
+#: home/blocks.py:333
 msgid "Maximum number of events"
 msgstr "Nombre maximum d'événements"
 
-#: home/blocks.py:349
+#: home/blocks.py:351
 msgid "Upcoming events"
 msgstr "Événements à venir"
 
-#: home/blocks.py:352
+#: home/blocks.py:354
 msgid "The next events, soonest first. Hidden when none is planned."
 msgstr ""
 "Les prochains événements, du plus proche au plus lointain. Masqué quand "
 "aucun n'est prévu."
 
-#: home/blocks.py:375
+#: home/blocks.py:377
 msgid "Projects map"
 msgstr "Carte des projets"
 
-#: home/blocks.py:378
+#: home/blocks.py:380
 msgid "Every located project on a map of the area."
 msgstr "Tous les projets localisés, sur une carte du quartier."
 
-#: home/blocks.py:390
+#: home/blocks.py:419
 msgid "Button for visitors"
 msgstr "Bouton pour les visiteurs"
 
-#: home/blocks.py:392
+#: home/blocks.py:421
 msgid "Leads to the registration form."
 msgstr "Mène au formulaire d'inscription."
 
-#: home/blocks.py:395
+#: home/blocks.py:424
 msgid "Button for signed-in members"
 msgstr "Bouton pour les membres connectés"
 
-#: home/blocks.py:397
+#: home/blocks.py:426
 msgid "Leads to their email notification settings."
 msgstr "Mène à leurs préférences de notifications par email."
 
-#: home/blocks.py:401
+#: home/blocks.py:430
 msgid "Join the platform"
 msgstr "Rejoindre la plateforme"
 
-#: home/blocks.py:406
+#: home/blocks.py:435
 msgid ""
 "An invitation to create an account, or to members, to turn on email updates."
 msgstr ""

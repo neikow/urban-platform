@@ -346,11 +346,13 @@ def populate_database() -> None:
                 show_in_menus=True,
             )
             about_index.add_child(instance=page)
-            page.save_revision().publish()
             print(f"  ✓ Created {about_page_def['title']}")
         else:
-            page.save_revision().publish()
             print(f"  ✓ {about_page_def['title']} exists")
+        if not page.content:
+            # A text block, so the edition tests find a rich text editor.
+            page.content = [("text", f"<p>Contenu de la page {page.title}.</p>")]
+        page.save_revision().publish()
 
     from publications.models import ParticipationMode, ProjectPage
 

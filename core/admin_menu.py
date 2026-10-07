@@ -37,7 +37,17 @@ from wagtail.models import Page
 
 # Wagtail entries this menu replaces or that editors do not need.
 HIDDEN_TOP_LEVEL = {"explorer", "reports", "help", "images", "documents"}
-HIDDEN_SETTINGS = {"sites", "redirects", "collections"}
+# Settings managed in code (groups and workflows come from migrations, the
+# site has a single locale).
+HIDDEN_SETTINGS = {
+    "sites",
+    "redirects",
+    "collections",
+    "workflows",
+    "workflow-tasks",
+    "groups",
+    "locales",
+}
 
 
 class CheckedMenuItem(MenuItem):

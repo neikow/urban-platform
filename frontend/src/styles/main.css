@@ -98,6 +98,17 @@
         padding-top: 0;
     }
 
+    /* Same under the title of an index page ("Actualités", "Informations
+       utiles"): its margin is the gap. */
+    .index-page-header + .page-content > .home-section--plain:first-child > .container {
+        padding-top: 0;
+    }
+
+    /* The members of an "À propos" page follow its last part: one gap. */
+    .page-content:has(+ .about-members) > .home-section--plain:last-child > .container {
+        padding-bottom: 0;
+    }
+
     .last-breadcrumb {
         position: relative;
         display: flex;

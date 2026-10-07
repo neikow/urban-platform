@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 18:21+0200\n"
+"POT-Creation-Date: 2026-10-07 20:56+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -15,6 +15,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: publications/blocks.py:40
+msgid "List of publications"
+msgstr "Liste des publications"
+
+#: publications/blocks.py:44
+msgid ""
+"Projects and events, with search and filters, and links to follow the news."
+msgstr ""
+"Projets et événements, avec recherche et filtres, et les liens pour suivre "
+"l'actualité."
 
 #: publications/event_reminders.py:33
 #, python-format
@@ -312,8 +323,8 @@ msgstr "Mode de participation"
 #: publications/models/project.py:67
 msgid ""
 "Voting lets residents give an opinion; idea collection lets them propose "
-"ideas on a project still in its early stages. The two are mutually exclusive "
-"— switching keeps responses already collected."
+"ideas on a project still in its early stages. The two are mutually exclusive"
+" — switching keeps responses already collected."
 msgstr ""
 "Le vote permet aux habitants de donner leur avis ; la collecte d'idées leur "
 "permet de proposer des idées sur un projet encore à ses débuts. Les deux "
@@ -374,12 +385,12 @@ msgstr "Prévenir les participants par email"
 
 #: publications/models/project_update.py:29
 msgid ""
-"Sent once, when the page is published, to people who voted or shared an idea "
-"and asked for project updates. Untick for past events you are adding to the "
-"timeline."
+"Sent once, when the page is published, to people who voted or shared an idea"
+" and asked for project updates. Untick for past events you are adding to the"
+" timeline."
 msgstr ""
-"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté "
-"ou proposé une idée et demandé à suivre les projets. Décochez pour les "
+"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté"
+" ou proposé une idée et demandé à suivre les projets. Décochez pour les "
 "étapes passées ajoutées à l'historique."
 
 #: publications/models/project_update.py:43
@@ -395,7 +406,7 @@ msgid "Publication"
 msgstr "Publication"
 
 #: publications/models/publication.py:18
-#: publications/templates/publications/publication_index_page.html:16
+#: publications/templates/publications/blocks/publication_list.html:11
 msgid "Publications"
 msgstr "Publications"
 
@@ -423,32 +434,32 @@ msgstr "Contenu"
 msgid "The main content of the page."
 msgstr "Le contenu principal de la page."
 
-#: publications/models/publication_index.py:37
-#: publications/models/publication_index.py:120
+#: publications/models/publication_index.py:47
+#: publications/models/publication_index.py:130
 msgid "Publications Index"
 msgstr "Index des publications"
 
-#: publications/models/publication_index.py:41
+#: publications/models/publication_index.py:51
 msgid "Page introduction"
 msgstr "Introduction de la page"
 
-#: publications/models/publication_index.py:42
+#: publications/models/publication_index.py:52
 msgid "Small introduction shown above the publications list."
 msgstr "Petite introduction affichée au-dessus de la liste des publications."
 
-#: publications/models/publication_index.py:48
-msgid "Page body content"
+#: publications/models/publication_index.py:60
+msgid "Page content"
 msgstr "Contenu de la page"
 
-#: publications/models/publication_index.py:49
-msgid "Additional content for the publications page."
-msgstr "Contenu supplémentaire pour la page des publications."
+#: publications/models/publication_index.py:61
+msgid "The list of publications and the parts around it."
+msgstr "La liste des publications et les parties qui l'entourent."
 
-#: publications/page_templates.py:37
+#: publications/page_templates.py:40
 msgid "Project put to the vote"
 msgstr "Projet soumis au vote"
 
-#: publications/page_templates.py:39
+#: publications/page_templates.py:42
 msgid ""
 "Residents give their opinion on a defined project: what it is, why, what "
 "changes, when, and who decides."
@@ -456,23 +467,23 @@ msgstr ""
 "Les habitants donnent leur avis sur un projet défini : ce qu'il est, "
 "pourquoi, ce qui change, quand, et qui décide."
 
-#: publications/page_templates.py:74
+#: publications/page_templates.py:77
 msgid "Project open to ideas"
 msgstr "Projet ouvert aux idées"
 
-#: publications/page_templates.py:76
+#: publications/page_templates.py:79
 msgid ""
-"A project still taking shape: residents suggest ideas on what is not decided "
-"yet."
+"A project still taking shape: residents suggest ideas on what is not decided"
+" yet."
 msgstr ""
 "Un projet encore en construction : les habitants proposent des idées sur ce "
 "qui n'est pas encore décidé."
 
-#: publications/page_templates.py:102
+#: publications/page_templates.py:105
 msgid "Project to follow"
 msgstr "Projet à suivre"
 
-#: publications/page_templates.py:104
+#: publications/page_templates.py:107
 msgid ""
 "Information on a project without a vote: what it is, its schedule and its "
 "documents."
@@ -480,11 +491,11 @@ msgstr ""
 "L'information sur un projet sans vote : ce qu'il est, son calendrier et ses "
 "documents."
 
-#: publications/page_templates.py:139
+#: publications/page_templates.py:142
 msgid "Public meeting"
 msgstr "Réunion publique"
 
-#: publications/page_templates.py:140
+#: publications/page_templates.py:143
 msgid ""
 "A presentation followed by questions: agenda, speakers, practical "
 "information."
@@ -492,23 +503,43 @@ msgstr ""
 "Une présentation suivie de questions : ordre du jour, intervenants, infos "
 "pratiques."
 
-#: publications/page_templates.py:166
+#: publications/page_templates.py:169
 msgid "Participatory workshop"
 msgstr "Atelier participatif"
 
-#: publications/page_templates.py:167
+#: publications/page_templates.py:170
 msgid "A working session in small groups: goal, programme, what to bring."
 msgstr ""
 "Une séance de travail en petits groupes : objectif, déroulé, ce qu'il faut "
 "apporter."
 
-#: publications/page_templates.py:193
+#: publications/page_templates.py:196
 msgid "Neighbourhood walk"
 msgstr "Balade urbaine"
 
-#: publications/page_templates.py:194
+#: publications/page_templates.py:197
 msgid "A guided walk through the area: route, stops, practical information."
 msgstr "Une visite commentée du quartier : parcours, étapes, infos pratiques."
+
+#: publications/page_templates.py:279
+msgid "Complete"
+msgstr "Complète"
+
+#: publications/page_templates.py:281
+msgid ""
+"Open consultations, the publications, upcoming events, the map, how to "
+"follow the news and questions."
+msgstr ""
+"Les consultations en cours, les publications, les prochains événements, la "
+"carte, comment suivre l'actualité et les questions."
+
+#: publications/page_templates.py:296
+msgid "Simple"
+msgstr "Simple"
+
+#: publications/page_templates.py:297
+msgid "The publications and the map."
+msgstr "Les publications et la carte."
 
 #: publications/polls.py:73
 #, python-format
@@ -567,8 +598,8 @@ msgid ""
 "Only ideas from users with postal code %(code)s are shown.\n"
 "                    Check the box above to include all ideas."
 msgstr ""
-"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées. "
-"Cochez la case ci-dessus pour inclure toutes les idées."
+"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées."
+" Cochez la case ci-dessus pour inclure toutes les idées."
 
 #: publications/templates/publications/admin/ideas_stats.html:37
 msgid "Total ideas"
@@ -690,6 +721,38 @@ msgstr "Commentaires"
 #: publications/templates/publications/admin/vote_stats_detail.html:311
 msgid "No votes yet"
 msgstr "Aucun vote pour l'instant"
+
+#: publications/templates/publications/blocks/publication_list.html:6
+msgid "The projects and events of the website, with search and filters."
+msgstr "Les projets et événements du site, avec recherche et filtres."
+
+#: publications/templates/publications/blocks/publication_list.html:13
+msgid "Latest Publications"
+msgstr "Dernières publications"
+
+#: publications/templates/publications/blocks/publication_list.html:16
+msgid "Search publications"
+msgstr "Rechercher des publications"
+
+#: publications/templates/publications/blocks/publication_list.html:17
+msgid "Search for a publication..."
+msgstr "Rechercher une publication..."
+
+#: publications/templates/publications/blocks/publication_list.html:25
+msgid "Follow the news:"
+msgstr "Suivre l'actualité :"
+
+#: publications/templates/publications/blocks/publication_list.html:26
+msgid "RSS feed"
+msgstr "Flux RSS"
+
+#: publications/templates/publications/blocks/publication_list.html:29
+msgid "Subscribe to the events calendar"
+msgstr "S'abonner à l'agenda des événements"
+
+#: publications/templates/publications/blocks/publication_list.html:31
+msgid "iCal link"
+msgstr "Lien iCal"
 
 #: publications/templates/publications/components/event_interest.html:8
 #: publications/templates/publications/components/event_interest.html:32
@@ -919,8 +982,8 @@ msgstr "Aucune publication trouvée"
 #: publications/templates/publications/components/verify_email_prompt.html:5
 #, python-format
 msgid ""
-"Verify your email address (%(email)s) to take part. Check your inbox for the "
-"link we sent you."
+"Verify your email address (%(email)s) to take part. Check your inbox for the"
+" link we sent you."
 msgstr ""
 "Vérifiez votre adresse email (%(email)s) pour participer. Consultez votre "
 "boîte de réception : nous vous avons envoyé un lien."
@@ -980,10 +1043,11 @@ msgstr ""
 
 #: publications/templates/publications/components/vote_form.html:48
 msgid ""
-"All votes are analyzed and taken into account in the final project decisions."
+"All votes are analyzed and taken into account in the final project "
+"decisions."
 msgstr ""
-"Tous les votes sont analysés et pris en compte dans les décisions finales du "
-"projet."
+"Tous les votes sont analysés et pris en compte dans les décisions finales du"
+" projet."
 
 #: publications/templates/publications/components/vote_form.html:74
 msgid "Log in to vote on this project"
@@ -1012,7 +1076,8 @@ msgstr "Seuls vous et les administrateurs peuvent voir votre commentaire"
 #: publications/templates/publications/components/vote_form.html:237
 msgid "Submit my vote anonymously (my name will not be linked to this vote)"
 msgstr ""
-"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce vote)"
+"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce "
+"vote)"
 
 #: publications/templates/publications/components/vote_form.html:248
 msgid "Submit my vote"
@@ -1087,34 +1152,6 @@ msgstr "Partager votre idée"
 #: publications/templates/publications/project_page.html:145
 msgid "Table of Contents"
 msgstr "Table des matières"
-
-#: publications/templates/publications/publication_index_page.html:18
-msgid "Latest Publications"
-msgstr "Dernières publications"
-
-#: publications/templates/publications/publication_index_page.html:21
-msgid "Search publications"
-msgstr "Rechercher des publications"
-
-#: publications/templates/publications/publication_index_page.html:22
-msgid "Search for a publication..."
-msgstr "Rechercher une publication..."
-
-#: publications/templates/publications/publication_index_page.html:30
-msgid "Follow the news:"
-msgstr "Suivre l'actualité :"
-
-#: publications/templates/publications/publication_index_page.html:31
-msgid "RSS feed"
-msgstr "Flux RSS"
-
-#: publications/templates/publications/publication_index_page.html:34
-msgid "Subscribe to the events calendar"
-msgstr "S'abonner à l'agenda des événements"
-
-#: publications/templates/publications/publication_index_page.html:36
-msgid "iCal link"
-msgstr "Lien iCal"
 
 #: publications/views/event_interest.py:39
 #: publications/views/event_interest.py:45
@@ -1246,6 +1283,9 @@ msgid ""
 msgstr ""
 "Placez un marqueur pour un lieu précis, ou dessinez un polygone pour une "
 "zone. Une nouvelle forme remplace la précédente."
+
+#~ msgid "Additional content for the publications page."
+#~ msgstr "Contenu supplémentaire pour la page des publications."
 
 #~ msgid "Mobility"
 #~ msgstr "Mobilité"

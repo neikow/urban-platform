@@ -92,3 +92,16 @@ class TestAdminMenu:
         citizen = make_user(UserRole.CITIZEN, "citizen@example.com")
 
         assert menu_for(citizen) == {}
+
+    def test_settings_managed_in_code_are_hidden(self):
+        superuser = User.objects.create_superuser(email="root@example.com", password="pass12345")
+        request = RequestFactory().get("/admin/")
+        request.user = superuser
+        settings = next(
+            i for i in admin_menu.menu_items_for_request(request) if i.name == "settings"
+        )
+
+        names = {entry.name for entry in settings.menu.menu_items_for_request(request)}
+
+        assert "users" in names
+        assert not names & {"workflows", "workflow-tasks", "groups", "locales"}

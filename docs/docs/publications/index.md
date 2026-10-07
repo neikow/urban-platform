@@ -9,9 +9,17 @@ La section **Actualités** regroupe le contenu éditorial du site : les **projet
 
 Dans la barre latérale, cliquez sur **Actualités** pour déployer le sous-menu, puis choisissez :
 
-- **Page « Actualités »** : modifier la page « Actualités » elle-même (son introduction et son texte)
+- **Page « Actualités »** : modifier la page « Actualités » elle-même (voir ci-dessous)
 - **Toutes les publications** : voir les projets et événements existants
 - **Nouveau projet** et **Nouvel événement** : créer une publication, à partir d'un [modèle](../modeles.md) ou d'une page vide
+
+## La page « Actualités »
+
+La page « Actualités » se compose comme la [page d'accueil](../page-accueil.md) : sous son titre et son introduction, une suite de **blocs** (sections, consultations en cours, prochains rendez-vous, carte des projets, questions, invitation à s'inscrire…).
+
+Le bloc **Liste des publications** affiche les projets et événements, avec la recherche, les filtres et les liens pour suivre l'actualité. La page en contient toujours un, et un seul : placez-le où vous voulez, et donnez-lui si besoin un petit titre et un titre.
+
+Pour repartir d'une page toute faite, utilisez un [modèle](../modeles.md) : **Complète** ou **Simple** (la liste et la carte).
 
 ## La liste des publications
 

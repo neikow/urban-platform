@@ -10,6 +10,14 @@ Dans la barre latérale, cliquez sur **Informations utiles**, puis choisissez :
 - **Toutes les fiches** : voir les fiches existantes
 - **Nouvelle fiche** : créer une fiche
 
+## La page « Informations utiles »
+
+La page qui liste les fiches se compose comme la [page d'accueil](page-accueil.md) : sous son titre et son introduction, une suite de **blocs** (sections, étapes, consultations en cours, questions, invitation à s'inscrire…).
+
+Le bloc **Liste des fiches** affiche les fiches avec leur champ de recherche. La page en contient toujours un, et un seul : placez-le où vous voulez.
+
+Pour repartir d'une page toute faite, utilisez un [modèle](modeles.md) : **Complète** ou **Simple** (les fiches seules).
+
 ## La liste des fiches
 
 ![Liste des fiches](screenshots/fiches-liste.png)

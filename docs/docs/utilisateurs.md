@@ -49,7 +49,7 @@ Les droits de **création et de publication des pages** viennent des **groupes**
 | **Editors** | Créer et modifier des pages, sans les publier |
 | **Moderators** | Créer, modifier et publier des pages |
 
-Ajoutez à un groupe les membres qui gèrent le contenu.
+Ajoutez à un groupe les membres qui gèrent le contenu, depuis le formulaire de l'utilisateur (onglet **Rôles**). Les groupes eux-mêmes sont définis par la plateforme : ils n'apparaissent pas dans **Paramètres**, pas plus que les workflows et les langues.
 
 ## Modifier un utilisateur
 

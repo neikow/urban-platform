@@ -1,0 +1,14 @@
+{% load wagtailcore_tags %}
+{% comment %}The blocks of an "À propos" page, then its members, if it has some.{% endcomment %}
+<div class="page-content">
+    {% for block in page.content %}
+        {% include_block block with index=forloop.counter container=True %}
+    {% endfor %}
+</div>
+{% if page.members %}
+    <div class="about-members container mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+        {% for block in page.members %}
+            {% include_block block %}
+        {% endfor %}
+    </div>
+{% endif %}

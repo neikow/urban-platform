@@ -1,0 +1,38 @@
+{% load i18n %}
+<section class="home-section home-section--plain no-page-style" aria-labelledby="publication-list-title">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        {% if is_block_preview %}
+            {% include "home/blocks/_header.html" with label=value.label title=value.title heading_id="publication-list-title" %}
+            {% trans "The projects and events of the website, with search and filters." as message %}
+            <div class="mt-10">{% include "home/blocks/_empty_preview.html" %}</div>
+        {% else %}
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-0 gap-4">
+                <div>
+                    <p class="section-label mb-1.5">{% firstof value.label _("Publications") %}</p>
+                    <h2
+                        id="publication-list-title"
+                        class="font-display font-black uppercase text-display-sm leading-tight"
+                    >
+                        {% firstof value.title _("Latest Publications") %}
+                    </h2>
+                </div>
+                {% trans 'Search publications' as aria_label %}
+                {% trans "Search for a publication..." as placeholder %}
+                {% include "core/components/search/text_search_form.html" with aria_label=aria_label placeholder=placeholder %}
+            </div>
+
+            {% include "publications/components/publication_results.html" %}
+            <p class="sr-only" role="status" data-instant-status></p>
+
+            <p class="flex flex-wrap gap-x-4 gap-y-1 text-sm mt-2">
+                <span class="text-base-content/60">{% trans "Follow the news:" %}</span>
+                <a class="link link-primary" href="{% url 'publications_rss' %}">{% trans "RSS feed" %}</a>
+                {# webcal:// makes Apple Calendar and Outlook subscribe; Google Calendar takes the https link. #}
+                <a class="link link-primary" href="webcal://{{ request.get_host }}{% url 'events_ical' %}">
+                    {% trans "Subscribe to the events calendar" %}
+                </a>
+                <a class="link link-primary" href="{% url 'events_ical' %}">{% trans "iCal link" %}</a>
+            </p>
+        {% endif %}
+    </div>
+</section>

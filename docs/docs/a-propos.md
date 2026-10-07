@@ -12,7 +12,7 @@ Dans la barre latérale, ouvrez **Pages du site**, puis cliquez sur la page à m
 
 ## Modifier une page
 
-Chaque page de la section "À propos" a la même structure simple :
+Chaque page de la section "À propos" se compose de **blocs**, comme la [page d'accueil](page-accueil.md) :
 
 ![Formulaire À propos](screenshots/a-propos-formulaire.png)
 <!-- Capture d'écran : formulaire d'édition d'une page À propos avec le titre et le contenu -->
@@ -20,16 +20,12 @@ Chaque page de la section "À propos" a la même structure simple :
 | Champ | Description |
 |---|---|
 | **Titre** | Le titre de la page tel qu'il apparaît sur le site |
-| **Contenu** | Le texte principal de la page, avec l'éditeur de texte enrichi |
+| **Contenu** | Les blocs de la page : texte, sections, chiffres clés, citations, questions, invitation à s'inscrire… |
+| **Membres** | *Commission et équipe de développement* : les personnes présentées, affichées après le contenu |
 
-### Utiliser l'éditeur de texte
+Le bloc **Texte** garde la largeur de lecture et permet les titres de niveaux 2 et 3, le gras, les listes et les liens. Les **sections** encadrent un titre et un contenu sur un fond au choix.
 
-L'éditeur vous permet de mettre en forme votre texte :
-
-- **Titres** : structurez votre contenu avec des titres de niveaux 2 et 3
-- **Texte en gras** : pour mettre en évidence des informations importantes
-- **Listes** : pour présenter des informations de manière claire
-- **Liens** : pour renvoyer vers d'autres pages ou ressources
+Pour repartir d'une page toute faite, utilisez un [modèle](modeles.md) : **Présentation** (une page complète, qui se termine par une partie qui introduit les membres) ou **Texte seul**.
 
 ## Enregistrer et publier
 

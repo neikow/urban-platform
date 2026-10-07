@@ -4,11 +4,13 @@ import pytest
 from django.urls import reverse
 from django.utils.html import escape
 
+from about.models import AboutCommissionPage, AboutDevTeamPage, AboutWebsitePage
 from core.models import User
 from core.page_templates import get_template, pending_template, rich_text, templates_for
 from core.wagtail_hooks import choose_page_template
 from home.models import HomePage
-from pedagogy.models import PedagogyCardPage
+from legal.models import LegalIndexPage
+from pedagogy.models import PedagogyCardPage, PedagogyIndexPage
 from publications.models import (
     EventPage,
     ParticipationMode,
@@ -16,7 +18,17 @@ from publications.models import (
     PublicationIndexPage,
 )
 
-PAGE_TYPES = [HomePage, ProjectPage, EventPage, PedagogyCardPage]
+PAGE_TYPES = [
+    HomePage,
+    AboutWebsitePage,
+    AboutCommissionPage,
+    AboutDevTeamPage,
+    ProjectPage,
+    EventPage,
+    PublicationIndexPage,
+    PedagogyCardPage,
+    PedagogyIndexPage,
+]
 ALL_TEMPLATES = [
     (page_class, template) for page_class in PAGE_TYPES for template in templates_for(page_class)
 ]
@@ -113,7 +125,7 @@ class TestCreatingAPage:
         request = rf.get("/")
         request.user = admin
 
-        assert choose_page_template(request, index.get_parent(), PublicationIndexPage) is None
+        assert choose_page_template(request, index.get_parent(), LegalIndexPage) is None
 
     def test_saving_is_not_intercepted(self, rf, admin, index):
         request = rf.post("/")
@@ -142,7 +154,17 @@ class TestApplyingToAnExistingPage:
         # Only the content changes on an existing page.
         assert draft.participation_mode == ParticipationMode.NONE
 
-    def test_not_offered_for_pages_without_templates(self, client, admin, index):
+    def test_not_offered_for_pages_without_templates(self, client, admin):
+        client.force_login(admin)
+        legal_index = LegalIndexPage.objects.get()
+
+        assert client.get(reverse("page_templates", args=[legal_index.pk])).status_code == 404
+
+    def test_index_page_template_keeps_its_list(self, client, admin, index):
         client.force_login(admin)
 
-        assert client.get(reverse("page_templates", args=[index.pk])).status_code == 404
+        response = client.post(reverse("page_templates", args=[index.pk]), {"template": "complete"})
+
+        assert response.status_code == 302
+        draft = index.get_latest_revision_as_object()
+        assert [block.block_type for block in draft.content].count("publication_list") == 1

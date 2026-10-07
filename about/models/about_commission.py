@@ -1,9 +1,9 @@
 from wagtail.admin.panels import FieldPanel
-from wagtail.fields import RichTextField, StreamField
+from wagtail.fields import StreamField
 from wagtail.models import Page
 from django.utils.translation import gettext_lazy as _
 
-from about.blocks import UserListBlock
+from about.blocks import ABOUT_BLOCK_TYPES, UserListBlock
 
 
 class AboutCommissionPage(Page):
@@ -11,9 +11,10 @@ class AboutCommissionPage(Page):
     max_count_per_parent = 1
     parent_page_types: list[str] = ["about.AboutIndexPage"]
     child_page_types: list[str] = []
+    page_templates = "about.page_templates.COMMISSION_TEMPLATES"
 
-    content = RichTextField(
-        features=["h2", "h3", "bold", "italic", "link", "ol", "ul", "document-link"],
+    content = StreamField(
+        ABOUT_BLOCK_TYPES,
         blank=True,
         verbose_name=_("Content"),
     )
