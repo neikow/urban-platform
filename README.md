@@ -6,18 +6,19 @@
 |--------------------------------------------------------------- | -------: | -------: | -------: | -------: | ---------: | --------: |
 | about/\_\_init\_\_.py                                          |        0 |        0 |        0 |        0 |    100.00% |           |
 | about/apps.py                                                  |        4 |        0 |        0 |        0 |    100.00% |           |
-| about/blocks.py                                                |       40 |        0 |        0 |        0 |    100.00% |           |
+| about/blocks.py                                                |       53 |        0 |        0 |        0 |    100.00% |           |
 | about/management/\_\_init\_\_.py                               |        0 |        0 |        0 |        0 |    100.00% |           |
 | about/management/commands/\_\_init\_\_.py                      |        0 |        0 |        0 |        0 |    100.00% |           |
 | about/management/commands/populate\_about\_pages.py            |       19 |       19 |        6 |        0 |      0.00% |      1-32 |
 | about/models/\_\_init\_\_.py                                   |        5 |        0 |        0 |        0 |    100.00% |           |
-| about/models/about\_commission.py                              |       16 |        0 |        0 |        0 |    100.00% |           |
-| about/models/about\_dev\_team.py                               |       16 |        0 |        0 |        0 |    100.00% |           |
+| about/models/about\_commission.py                              |       17 |        0 |        0 |        0 |    100.00% |           |
+| about/models/about\_dev\_team.py                               |       17 |        0 |        0 |        0 |    100.00% |           |
 | about/models/about\_index.py                                   |       14 |        0 |        0 |        0 |    100.00% |           |
-| about/models/about\_website.py                                 |       14 |        0 |        0 |        0 |    100.00% |           |
+| about/models/about\_website.py                                 |       16 |        0 |        0 |        0 |    100.00% |           |
+| about/page\_templates.py                                       |       15 |        0 |        0 |        0 |    100.00% |           |
 | core/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/admin\_dashboard.py                                       |       75 |        0 |        6 |        1 |     98.77% |   68-\>76 |
-| core/admin\_menu.py                                            |       51 |        2 |        8 |        2 |     93.22% |   62, 101 |
+| core/admin\_menu.py                                            |       51 |        2 |        8 |        2 |     93.22% |   72, 111 |
 | core/apps.py                                                   |       15 |        0 |        0 |        0 |    100.00% |           |
 | core/auth\_backends.py                                         |       18 |        2 |        4 |        2 |     81.82% |    69, 72 |
 | core/blocks.py                                                 |      182 |        0 |        4 |        2 |     98.92% |255-\>265, 262-\>265 |
@@ -79,7 +80,7 @@
 | core/widgets.py                                                |       45 |       19 |       16 |        3 |     47.54% |16, 28-35, 49, 68-71, 81-88, 98 |
 | home/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/apps.py                                                   |        4 |        0 |        0 |        0 |    100.00% |           |
-| home/blocks.py                                                 |      210 |        4 |       20 |        4 |     96.52% |117, 129, 131, 283 |
+| home/blocks.py                                                 |      224 |        7 |       20 |        4 |     95.49% |119, 131, 133, 285, 405-407 |
 | home/management/\_\_init\_\_.py                                |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/management/commands/\_\_init\_\_.py                       |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/management/commands/mock\_home\_page\_content.py          |       15 |       15 |        2 |        0 |      0.00% |      1-56 |
@@ -102,16 +103,18 @@
 | legal/views.py                                                 |       38 |        0 |        6 |        0 |    100.00% |           |
 | pedagogy/\_\_init\_\_.py                                       |        0 |        0 |        0 |        0 |    100.00% |           |
 | pedagogy/apps.py                                               |        4 |        0 |        0 |        0 |    100.00% |           |
+| pedagogy/blocks.py                                             |       12 |        0 |        0 |        0 |    100.00% |           |
 | pedagogy/management/\_\_init\_\_.py                            |        0 |        0 |        0 |        0 |    100.00% |           |
 | pedagogy/management/commands/\_\_init\_\_.py                   |        0 |        0 |        0 |        0 |    100.00% |           |
 | pedagogy/management/commands/create\_mock\_pedagogy\_cards.py  |       37 |       37 |       12 |        0 |      0.00% |      1-61 |
 | pedagogy/models/\_\_init\_\_.py                                |        3 |        0 |        0 |        0 |    100.00% |           |
 | pedagogy/models/pedagogy\_card.py                              |       35 |        2 |        4 |        0 |     94.87% |    26, 70 |
-| pedagogy/models/pedagogy\_index.py                             |       46 |        5 |        2 |        1 |     87.50% |62, 71, 91-97 |
+| pedagogy/models/pedagogy\_index.py                             |       50 |        5 |        2 |        1 |     88.46% |70, 79, 99-105 |
 | pedagogy/models/pedagogy\_resource.py                          |       18 |        0 |        4 |        0 |    100.00% |           |
-| pedagogy/page\_templates.py                                    |        5 |        0 |        0 |        0 |    100.00% |           |
+| pedagogy/page\_templates.py                                    |       13 |        0 |        0 |        0 |    100.00% |           |
 | publications/\_\_init\_\_.py                                   |        0 |        0 |        0 |        0 |    100.00% |           |
 | publications/apps.py                                           |        6 |        0 |        0 |        0 |    100.00% |           |
+| publications/blocks.py                                         |       12 |        0 |        0 |        0 |    100.00% |           |
 | publications/event\_reminders.py                               |       21 |        0 |        2 |        0 |    100.00% |           |
 | publications/geo.py                                            |       34 |        0 |        8 |        0 |    100.00% |           |
 | publications/ical.py                                           |       47 |        1 |       14 |        3 |     93.44% |55, 64-\>66, 71-\>73 |
@@ -131,8 +134,8 @@
 | publications/models/project.py                                 |       90 |        0 |       12 |        0 |    100.00% |           |
 | publications/models/project\_update.py                         |       18 |        1 |        0 |        0 |     94.44% |        47 |
 | publications/models/publication.py                             |       20 |        0 |        0 |        0 |    100.00% |           |
-| publications/models/publication\_index.py                      |       56 |        1 |        0 |        0 |     98.21% |        37 |
-| publications/page\_templates.py                                |       15 |        0 |        0 |        0 |    100.00% |           |
+| publications/models/publication\_index.py                      |       58 |        1 |        0 |        0 |     98.28% |        47 |
+| publications/page\_templates.py                                |       22 |        0 |        0 |        0 |    100.00% |           |
 | publications/polls.py                                          |       28 |        0 |        4 |        0 |    100.00% |           |
 | publications/project\_updates.py                               |       25 |        1 |        6 |        1 |     93.55% |        38 |
 | publications/services.py                                       |       83 |        0 |       18 |        0 |    100.00% |           |
@@ -149,7 +152,7 @@
 | publications/views/vote\_stats.py                              |       60 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       22 |        0 |        2 |        1 |     95.83% | 47-\>exit |
 | publications/widgets.py                                        |       20 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **4406** |  **549** |  **730** |  **104** | **84.87%** |           |
+| **TOTAL**                                                      | **4497** |  **552** |  **730** |  **104** | **85.08%** |           |
 
 
 ## Setup coverage badge
