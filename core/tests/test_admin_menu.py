@@ -27,6 +27,18 @@ def menu_for(user):
     }
 
 
+def settings_urls(user):
+    """URLs of the Paramètres entries: their names depend on the active language."""
+    request = RequestFactory().get("/admin/")
+    request.user = user
+    settings = next(i for i in admin_menu.menu_items_for_request(request) if i.name == "settings")
+    return [entry.url for entry in settings.menu.menu_items_for_request(request)]
+
+
+ANNOUNCEMENT_URL = "/admin/settings/core/announcement/"
+USERS_URL = "/admin/users/"
+
+
 def make_user(role, email, **kwargs):
     return User.objects.create_user(email=email, password="pass12345", role=role, **kwargs)
 
@@ -56,17 +68,14 @@ class TestAdminMenu:
     def test_administrators_manage_users_and_the_announcement(self):
         admin = make_user(UserRole.ADMIN, "admin@example.com")
 
-        settings = menu_for(admin)["settings"]
-
-        assert "users" in settings
-        assert "annonce" in settings
+        assert sorted(settings_urls(admin)) == [ANNOUNCEMENT_URL, USERS_URL]
 
     def test_association_members_do_not_see_user_management(self):
         member = make_user(UserRole.ASSOCIATION_MEMBER, "member@example.com")
 
         menu = menu_for(member)
 
-        assert menu["settings"] == ["annonce"]
+        assert settings_urls(member) == [ANNOUNCEMENT_URL]
         # No page permissions without a group: no content entries.
         assert "news" not in menu and "site-pages" not in menu
 
@@ -77,7 +86,7 @@ class TestAdminMenu:
         menu = menu_for(member)
 
         assert "news" in menu and "useful-information" in menu and "site-pages" in menu
-        assert "users" not in menu["settings"]
+        assert USERS_URL not in settings_urls(member)
 
     def test_citizens_see_nothing(self):
         citizen = make_user(UserRole.CITIZEN, "citizen@example.com")
