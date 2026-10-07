@@ -43,15 +43,17 @@ La barre latérale gauche est le menu principal de l'administration. Elle contie
 | Entrée | Description |
 |---|---|
 | **Rechercher** | Rechercher une page dans tout le site |
-| **Page d'accueil** | Modifier la page d'accueil |
-| **Publications** | Événements et projets |
-| **Fiches pédagogiques** | Fiches téléchargeables |
-| **Statistiques des votes** | Résultats des votes sur les projets |
-| **Légal** | Charte, CGU, politiques de confidentialité |
-| **Images** | Bibliothèque d'images |
-| **À propos** | Pages de présentation |
-| **Documents** | Bibliothèque de documents |
-| **Utilisateurs** | Gérer les comptes et les groupes |
+| **Page d'accueil** | Modifier la page d'accueil → [Page d'accueil](page-accueil.md) |
+| **Actualités** | Projets et événements → [Actualités](publications/index.md) |
+| **Informations utiles** | Les fiches pour comprendre l'urbanisme → [Informations utiles](fiches-pedagogiques.md) |
+| **Statistiques des votes** | Les votes sur les projets → [Statistiques des votes](statistiques-votes.md) |
+| **Collecte d'idées** | Les idées proposées sur les projets → [Collecte d'idées](collecte-idees.md) |
+| **Légal** | Charte, conditions d'utilisation, politiques → [Pages légales](legal.md) |
+| **Images** | Bibliothèque d'images → [Images](images.md) |
+| **À propos** | Pages de présentation → [À propos](a-propos.md) |
+| **Documents** | Bibliothèque de documents → [Documents](documents.md) |
+| **Utilisateurs** | Les comptes et leurs rôles → [Utilisateurs](utilisateurs.md) |
 | **Documentation** | Ce guide |
+| **Paramètres** | Dont l'**Annonce** en haut du site → [Annonce](annonce.md) |
 
 > **Astuce :** Vous pouvez réduire la barre latérale en cliquant sur la flèche en haut à gauche pour avoir plus d'espace d'édition.

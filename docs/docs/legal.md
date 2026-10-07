@@ -6,7 +6,7 @@ La section **Légal** regroupe les documents légaux obligatoires du site. Ces p
 
 | Page | Description |
 |---|---|
-| **Charte de bonne conduite** | Les règles à respecter pour utiliser la plateforme. Les utilisateurs doivent l'accepter lors de certaines actions. |
+| **Charte de bonne conduite** | Les règles à respecter pour utiliser la plateforme. Les habitants doivent l'accepter pour voter ou proposer une idée. |
 | **Conditions d'utilisation** | Les conditions générales d'utilisation du service |
 | **Politique de cookies** | L'information sur les cookies utilisés par le site |
 | **Politique de confidentialité** | L'information sur la collecte et l'utilisation des données personnelles |
@@ -29,7 +29,7 @@ Chaque page légale a la même structure :
 
 ### Attention à la charte de bonne conduite
 
-La charte de bonne conduite a un comportement particulier : **chaque fois que vous la modifiez et la publiez, les utilisateurs seront invités à l'accepter à nouveau** lors de leur prochaine connexion. Évitez donc de publier des modifications mineures (corrections d'orthographe, reformulations légères) trop fréquemment.
+La charte de bonne conduite a un comportement particulier : **chaque fois que vous la modifiez et la publiez, les habitants doivent l'accepter à nouveau** avant de voter ou de proposer une idée. Évitez donc de publier des modifications mineures (corrections d'orthographe, reformulations légères) trop fréquemment.
 
 > **Conseil :** Pour des ajustements mineurs (fautes d'orthographe), enregistrez d'abord en brouillon et regroupez plusieurs petites corrections avant de publier.
 
