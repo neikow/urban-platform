@@ -4,9 +4,9 @@ Les **événements** permettent de présenter des activités organisées (atelie
 
 ## Créer un événement
 
-1. Dans la barre latérale, cliquez sur **Publications**.
-2. Cliquez sur **Ajouter**.
-3. Choisissez le type **Événement**.
+1. Dans la barre latérale, ouvrez **Actualités** puis cliquez sur **Ajouter**.
+2. Choisissez le type **Événement**.
+3. Choisissez un **modèle** (Réunion publique, Atelier participatif, Balade urbaine) ou **Partir d'une page vide**. → [Partir d'un modèle](../modeles.md)
 4. Remplissez les champs du formulaire (voir ci-dessous).
 5. Enregistrez ou publiez.
 
@@ -31,17 +31,9 @@ Pour changer l'image :
 2. Choisissez **"Choisir une autre image"** pour en sélectionner une dans la médiathèque, ou **"Uploader"** pour en ajouter une nouvelle.
 
 #### Corps de l'article (Contenu)
-La zone de contenu principal est un **éditeur de texte enrichi** qui vous permet d'ajouter :
+Le corps de la page est fait de **blocs** : texte (avec titres, listes, liens, **gras**, *italique*), image, document, questions-réponses, bouton…
 
-- Des paragraphes de texte
-- Des titres (H2, H3…)
-- Des listes à puces ou numérotées
-- Des images intégrées dans le texte
-- Du texte en **gras**, en *italique*
-
-Pour ajouter un nouveau bloc, cliquez sur le bouton **"+"** qui apparaît entre les blocs.
-
-Vous pouvez aussi utiliser "/" pour insérer rapidement un bloc de type spécifique.
+Pour ajouter un bloc, cliquez sur le **+** qui apparaît entre les blocs. Dans un bloc de texte, tapez **/** pour insérer rapidement un titre ou une liste.
 
 ![Éditeur de contenu](../screenshots/evenement-editeur.png)
 <!-- Capture d'écran : éditeur de texte enrichi avec les options de formatage -->
@@ -85,9 +77,15 @@ Pour publier, cliquez sur la **flèche** à côté du bouton pour déployer les 
 | **Publier** | Met la page en ligne immédiatement |
 | **Planifier** | Programme la publication à une date future |
 
+## Ce que voient les visiteurs
+
+- L'**adresse complète**, avec un lien vers la carte.
+- Un bouton **Ajouter à mon agenda** (fichier .ics pour Google Agenda, Apple Calendar, Outlook). Tous les événements sont aussi proposés en **calendrier à suivre** depuis la page Actualités.
+- Un bouton **Ça m'intéresse** pour les personnes inscrites. Le nombre de personnes intéressées s'affiche sur la page. Celles qui l'ont demandé reçoivent un **rappel par email la veille**, à 9 h.
+
 ## Modifier un événement existant
 
-1. Allez dans **Publications > Liste**.
+1. Allez dans **Actualités > Liste**.
 2. Cliquez sur le titre de l'événement à modifier.
 3. Effectuez vos modifications.
 4. Cliquez sur **Publier** pour mettre à jour la page en ligne.

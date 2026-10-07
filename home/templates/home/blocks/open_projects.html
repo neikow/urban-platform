@@ -41,8 +41,9 @@
                                         </span>
                                         {% if project.is_voting_open and project.voting_end_date %}
                                             <span class="block text-base-content/60">
-                                                {% blocktrans with date=project.voting_end_date|date:"j F" %}Until
-                                                    {{ date }}{% endblocktrans %}
+                                                {% blocktrans trimmed with date=project.voting_end_date|date:"j F" %}
+                                                    Until {{ date }}
+                                                {% endblocktrans %}
                                             </span>
                                         {% endif %}
                                     </p>

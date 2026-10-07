@@ -39,13 +39,17 @@ La page de détail affiche :
 - Le **nombre total de votes**
 - La liste individuelle des votes (si des votes ont été enregistrés)
 
-> **Remarque :** Le vote se clôture automatiquement à la **date de fin** définie dans le formulaire du projet. Vous ne pouvez pas modifier directement les votes des citoyens.
+> **Remarque :** Le vote se clôture automatiquement à la **date de fin** définie dans le formulaire du projet. Vous ne pouvez pas modifier les votes des habitants.
+
+## Clore un vote plus tôt
+
+Dans le formulaire du projet, ouvrez le menu **···** en haut, puis **Clore le vote et envoyer les résultats**, et confirmez. Le vote s'arrête immédiatement, les résultats s'affichent sur la page du projet et les votants qui l'ont demandé les reçoivent par email. Cette action est définitive.
 
 ## Comprendre le statut "Vote ouvert" / "Vote fermé"
 
 | Statut | Signification |
 |---|---|
 | **Vote ouvert** | Les citoyens peuvent encore voter sur ce projet |
-| **Vote fermé** | La date de fin est passée, les votes ne sont plus acceptés |
+| **Vote fermé** | La date de fin est passée ou le vote a été clos : les votes ne sont plus acceptés et les résultats sont publics |
 
-Pour modifier la date de clôture d'un vote, éditez le projet correspondant dans la section [Publications > Projets](publications/projets.md).
+Pour modifier la date de clôture d'un vote, éditez le projet correspondant dans la section [Actualités](publications/projets.md).

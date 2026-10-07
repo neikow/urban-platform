@@ -1,8 +1,10 @@
 import logging
 
-from django.http import HttpRequest
+from django.http import Http404, HttpRequest, HttpResponse
+from django.urls import URLPattern, path
 from django.urls import reverse
 from wagtail.admin.menu import MenuItem, Menu, SubmenuMenuItem
+from wagtail.admin.widgets import Button
 from wagtail.admin.viewsets.model import ModelViewSet
 from wagtail import hooks
 from wagtail.models import Page
@@ -252,3 +254,47 @@ def register_docs_menu_item() -> MenuItem:
         icon_name="help",
         order=10000,
     )
+
+
+# --- Page templates (core/page_templates.py) ---------------------------------------
+
+
+@hooks.register("register_admin_urls")
+def register_page_templates_url() -> list[URLPattern]:
+    from core.views.page_templates import PageTemplatesView
+
+    return [
+        path("page-templates/<int:page_id>/", PageTemplatesView.as_view(), name="page_templates"),
+    ]
+
+
+@hooks.register("register_page_header_buttons")
+def page_templates_header_button(page, user, view_name, next_url=None):  # type: ignore[no-untyped-def]
+    from core.page_templates import templates_for
+
+    if templates_for(type(page.specific)) and page.permissions_for_user(user).can_edit():
+        yield Button(
+            _("Start from a template"),
+            reverse("page_templates", args=[page.pk]),
+            icon_name="doc-full",
+            priority=30,
+        )
+
+
+@hooks.register("before_create_page")
+def choose_page_template(
+    request: HttpRequest, parent_page: Page, page_class: type[Page]
+) -> HttpResponse | None:
+    """Before the editor of a new page, offer its templates (GET only: saving posts)."""
+    from core.page_templates import get_template, pending_template, templates_for
+    from core.views.page_templates import creation_chooser
+
+    if request.method != "GET" or not templates_for(page_class) or "blank" in request.GET:
+        return None
+    if "template" not in request.GET:
+        return creation_chooser(request, parent_page, page_class)
+    template = get_template(page_class, request.GET["template"])
+    if template is None:
+        raise Http404
+    pending_template.set((page_class, template))
+    return None

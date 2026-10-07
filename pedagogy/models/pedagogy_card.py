@@ -14,6 +14,8 @@ from core.toc import TableOfContentsItem, generate_header_ids, get_table_of_cont
 
 
 class PedagogyCardPage(Page):
+    # Ready-made content offered when creating one (core/page_templates.py).
+    page_templates = "pedagogy.page_templates.TEMPLATES"
     parent_page_types: list[str] = ["pedagogy.PedagogyIndexPage"]
     child_page_types: list[str] = []
 

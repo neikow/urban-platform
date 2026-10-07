@@ -28,6 +28,8 @@ class HomePage(Page):
 
     search_fields: list = []
 
+    page_templates = "home.page_templates.TEMPLATES"
+
     @classmethod
     def can_create_at(cls, parent: Page) -> bool:
         return False

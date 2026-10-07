@@ -1,17 +1,17 @@
-# Publications
+# Actualités : projets et événements
 
-La section **Publications** regroupe l'ensemble du contenu éditorial du site : les **événements** et les **projets**.
+La section **Actualités** regroupe le contenu éditorial du site : les **projets** et les **événements**. Sur le site, ils sont listés dans la page « Actualités », avec des filtres par type et par catégorie, une recherche et la carte des projets.
 
 ![Liste des publications](../screenshots/publications-liste.png)
 <!-- Capture d'écran : liste des publications avec les colonnes Titre, Mis à jour, Type, Statut -->
 
 ## Accéder aux publications
 
-Dans la barre latérale, cliquez sur **Publications** pour déployer le sous-menu, puis choisissez :
+Dans la barre latérale, cliquez sur **Actualités** pour déployer le sous-menu, puis choisissez :
 
-- **Page d'accueil** : modifier la page de liste des publications
+- **Page d'accueil** : modifier la page « Actualités » elle-même (son introduction et son texte)
 - **Liste** : voir toutes les publications existantes
-- **Ajouter** : créer une nouvelle publication
+- **Ajouter** : créer un projet ou un événement, à partir d'un [modèle](../modeles.md) ou d'une page vide
 
 ## La liste des publications
 
@@ -42,13 +42,13 @@ Chaque ligne dispose d'un bouton **"···"** (trois points) qui ouvre un menu a
 
 ### Événements
 
-Les événements sont des activités avec une **date, un lieu et un nombre de participants**. Ils peuvent être en présentiel ou en ligne.
+Les événements sont des rendez-vous avec une **date et un lieu** : réunion publique, atelier, balade… Ils peuvent être en présentiel ou en ligne.
 
 → [Voir le guide des événements](evenements.md)
 
 ### Projets
 
-Les projets sont des contenus de fond qui peuvent inclure un **système de vote** permettant aux citoyens de s'exprimer.
+Les projets présentent les aménagements du quartier. Les habitants peuvent **voter** ou **proposer des idées**, et suivre leur avancement.
 
 → [Voir le guide des projets](projets.md)
 

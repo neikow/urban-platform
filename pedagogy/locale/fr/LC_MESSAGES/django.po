@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 15:04+0200\n"
+"POT-Creation-Date: 2026-10-07 17:47+0200\n"
 "PO-Revision-Date: 2026-06-23 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -15,39 +15,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: pedagogy/models/pedagogy_card.py:24
+#: pedagogy/models/pedagogy_card.py:26
 msgid "Pedagogy Card"
 msgstr "Fiche pédagogique"
 
-#: pedagogy/models/pedagogy_card.py:29
+#: pedagogy/models/pedagogy_card.py:31
 msgid "Card body content"
 msgstr "Contenu de la fiche pédagogique"
 
-#: pedagogy/models/pedagogy_card.py:30
+#: pedagogy/models/pedagogy_card.py:32
 msgid "The main content of the pedagogy card."
 msgstr "Le contenu principal de la fiche pédagogique."
 
-#: pedagogy/models/pedagogy_card.py:39
+#: pedagogy/models/pedagogy_card.py:41
 msgid "Card image"
 msgstr "Image de la fiche pédagogique"
 
-#: pedagogy/models/pedagogy_card.py:44
+#: pedagogy/models/pedagogy_card.py:46
 msgid "Card description"
 msgstr "Description de la fiche pédagogique"
 
-#: pedagogy/models/pedagogy_card.py:45
+#: pedagogy/models/pedagogy_card.py:47
 msgid "A brief description of the pedagogy card."
 msgstr "Brève description de la fiche pédagogique."
 
-#: pedagogy/models/pedagogy_card.py:49
+#: pedagogy/models/pedagogy_card.py:51
 msgid "Show table of contents"
 msgstr "Afficher la table des matières"
 
-#: pedagogy/models/pedagogy_card.py:51
+#: pedagogy/models/pedagogy_card.py:53
 msgid "Display the table of contents in the sidebar"
 msgstr "Afficher la table des matières dans la barre latérale"
 
-#: pedagogy/models/pedagogy_card.py:62
+#: pedagogy/models/pedagogy_card.py:64
 msgid "Resource"
 msgstr "Ressource"
 
@@ -93,6 +93,26 @@ msgstr "Veuillez fournir soit une URL, soit un document, mais pas les deux."
 #: pedagogy/tests/test_pedagogy_resource.py:54
 msgid "Please provide either a URL or a Document."
 msgstr "Veuillez fournir soit une URL, soit un document."
+
+#: pedagogy/page_templates.py:13
+msgid "Explain a notion"
+msgstr "Expliquer une notion"
+
+#: pedagogy/page_templates.py:15
+msgid ""
+"A notion of urban planning in plain words, e.g. the PLUi or a building "
+"permit: what it is, why it matters, how it works."
+msgstr "Une notion d'urbanisme en mots simples, par exemple le PLUi ou le permis de construire : ce que c'est, pourquoi c'est important, comment ça marche."
+
+#: pedagogy/page_templates.py:48
+msgid "Step-by-step guide"
+msgstr "Guide pas à pas"
+
+#: pedagogy/page_templates.py:50
+msgid ""
+"How to do something, e.g. consult a building permit or contest a project: "
+"when, the steps, deadlines and contacts."
+msgstr "Comment faire une démarche, par exemple consulter un permis de construire ou contester un projet : dans quel cas, les étapes, les délais et les contacts."
 
 #: pedagogy/templates/pedagogy/components/pedagogy_card_page_resource.html:12
 msgid "Access the resource"

@@ -6,7 +6,8 @@ from django.utils.html import escape
 
 from core.models import User, UserRole
 from home.models import HomePage
-from home.page_templates import TEMPLATES, get_template
+from core.page_templates import get_template
+from home.page_templates import TEMPLATES
 
 HERO = {
     "type": "hero",
@@ -57,18 +58,18 @@ class TestTemplates:
                 assert escape(block["value"]["title"]) in content
 
     def test_keeps_the_current_hero(self):
-        content = get_template("essentials").content([HERO, {"type": "faq", "value": []}])
+        content = get_template(HomePage, "essentials").content([HERO, {"type": "faq", "value": []}])
 
         assert content[0] == HERO
         assert [block["type"] for block in content[1:]] == [
-            block["type"] for block in get_template("essentials").blocks
+            block["type"] for block in get_template(HomePage, "essentials").blocks
         ]
 
 
 @pytest.mark.django_db
 class TestTemplatesAdmin:
     def url(self, home):
-        return reverse("home_page_templates", args=[home.pk])
+        return reverse("page_templates", args=[home.pk])
 
     def test_lists_the_templates(self, client, home, editor):
         client.force_login(editor)

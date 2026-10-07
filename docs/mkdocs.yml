@@ -16,17 +16,21 @@ nav:
   - Premiers pas:
     - Se connecter: connexion.md
     - Tableau de bord: tableau-de-bord.md
-  - Publications:
+    - Partir d'un modèle: modeles.md
+  - Actualités:
     - Vue d'ensemble: publications/index.md
-    - Événements: publications/evenements.md
     - Projets: publications/projets.md
-  - Fiches pédagogiques: fiches-pedagogiques.md
-  - Statistiques des votes: statistiques-votes.md
+    - Événements: publications/evenements.md
+  - Informations utiles: fiches-pedagogiques.md
+  - Participation:
+    - Statistiques des votes: statistiques-votes.md
+    - Collecte d'idées: collecte-idees.md
   - Médiathèque:
     - Images: images.md
     - Documents: documents.md
   - Contenu du site:
     - Page d'accueil: page-accueil.md
+    - Annonce: annonce.md
     - À propos: a-propos.md
     - Pages légales: legal.md
   - Utilisateurs: utilisateurs.md

@@ -1,49 +1,47 @@
-# Fiches pédagogiques
+# Informations utiles
 
-Les **fiches pédagogiques** sont des contenus documentaires destinés à informer et éduquer les citoyens sur des thématiques urbaines. Elles peuvent inclure des ressources à télécharger.
+Les fiches **Informations utiles** expliquent aux habitants les notions et les démarches d'urbanisme : le PLUi, le permis de construire, comment contester un projet… Une fiche peut renvoyer vers une ressource à consulter.
 
-## Accéder aux fiches pédagogiques
+## Accéder aux fiches
 
-Dans la barre latérale, cliquez sur **Fiches pédagogiques**, puis choisissez :
+Dans la barre latérale, cliquez sur **Informations utiles**, puis choisissez :
 
 - **Liste** : voir toutes les fiches existantes
 - **Ajouter** : créer une nouvelle fiche
 
 ## La liste des fiches
 
-![Liste des fiches pédagogiques](screenshots/fiches-liste.png)
+![Liste des fiches](screenshots/fiches-liste.png)
 <!-- Capture d'écran : liste des fiches pédagogiques avec les colonnes Titre, Mis à jour, Type, Statut -->
 
 La liste affiche le titre de chaque fiche, sa date de mise à jour et son statut (Publiée / Brouillon).
 
-## Créer une fiche pédagogique
+## Créer une fiche
 
-1. Cliquez sur **Fiches pédagogiques > Ajouter**.
-2. Remplissez les champs du formulaire.
-3. Enregistrez ou publiez.
+1. Cliquez sur **Informations utiles > Ajouter**.
+2. Choisissez un **modèle** (Expliquer une notion, Guide pas à pas) ou **Partir d'une page vide**. → [Partir d'un modèle](modeles.md)
+3. Remplissez les champs du formulaire.
+4. Enregistrez ou publiez.
 
 ## Les champs du formulaire
 
 ### Titre
 Le titre de la fiche tel qu'il apparaîtra sur le site.
 
-### Description de la fiche pédagogique
+### Description de la fiche
 Un résumé court qui s'affiche dans les listes et les vignettes. Décrivez en quelques mots le sujet de la fiche.
 
-### Image de la fiche pédagogique
+### Image de la fiche
 Une image de couverture représentant la fiche. Elle peut être une photo, une illustration ou une capture du document.
 
-![Formulaire d'une fiche pédagogique](screenshots/fiche-formulaire.png)
+![Formulaire d'une fiche](screenshots/fiche-formulaire.png)
 <!-- Capture d'écran : haut du formulaire avec le titre, la description et l'image -->
 
 ### Ressources
 
-La section **Ressources** permet d'ajouter des fichiers à télécharger liés à la fiche (PDF, documents Word, etc.).
+La section **Ressource** permet d'ajouter **une** ressource liée à la fiche : une vidéo, un document, un site de référence. Renseignez son **URL externe**.
 
-Pour chaque ressource, renseignez :
-- **URL externe** : le lien vers le fichier à télécharger
-
-Pour ajouter plusieurs ressources, cliquez sur le bouton **"+"** pour ajouter une nouvelle ligne.
+Pour joindre plusieurs documents, ajoutez des blocs **Document** dans le contenu de la fiche.
 
 > **Astuce :** Si vous souhaitez héberger un document directement sur le site, commencez par l'ajouter dans la section [Documents](documents.md), puis copiez son URL.
 
