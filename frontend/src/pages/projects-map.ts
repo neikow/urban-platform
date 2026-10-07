@@ -12,27 +12,33 @@ import {
 
 function popupContent(project: ProjectProperties, messages: DOMStringMap): HTMLElement {
   const root = document.createElement("div");
-  root.className = "space-y-1";
+  root.className = "map-popup";
+
+  const meta = document.createElement("p");
+  meta.className = "map-popup__meta";
+  meta.textContent = project.category;
+  if (project.isOpen) {
+    const status = document.createElement("span");
+    status.className = "map-popup__status";
+    status.textContent = messages.msgOpen ?? "";
+    meta.append(status);
+  }
 
   const title = document.createElement("a");
   title.href = project.url;
-  title.className = "font-semibold link link-primary block";
+  title.className = "map-popup__title";
   title.textContent = project.title;
 
-  const meta = document.createElement("p");
-  meta.className = "text-xs opacity-70 !m-0";
-  meta.textContent = [project.category, project.isOpen ? messages.msgOpen : ""].filter(Boolean).join(" · ");
-
   const description = document.createElement("p");
-  description.className = "text-sm !m-0";
+  description.className = "map-popup__description";
   description.textContent = project.description;
 
   const link = document.createElement("a");
   link.href = project.url;
-  link.className = "text-sm link";
+  link.className = "map-popup__link";
   link.textContent = messages.msgSeeProject ?? "";
 
-  root.append(title, meta);
+  root.append(meta, title);
   if (project.description) root.append(description);
   root.append(link);
   return root;
@@ -53,8 +59,8 @@ onReady(() => {
   for (const feature of projects.features) {
     const className = feature.properties.isOpen ? "map-project map-project--open" : "map-project";
     projectLayer(feature as ProjectFeature, className)
-      .bindPopup(() => popupContent(feature.properties, messages))
-      .bindTooltip(feature.properties.title)
+      .bindPopup(() => popupContent(feature.properties, messages), { className: "map-popup-frame", maxWidth: 300 })
+      .bindTooltip(feature.properties.title, { className: "map-tooltip", direction: "top" })
       .addTo(map);
   }
 
