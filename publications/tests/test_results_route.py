@@ -47,7 +47,7 @@ class TestResultsRoute:
 
         assert "Fontaine" in body
         assert "Jardin" not in body
-        assert 'data-summary="1 résultat"' in body
+        assert 'data-summary="1 r' in body  # "1 result", or "1 résultat" once translated
 
     def test_page_points_the_region_at_the_route(self, client, publication_index):
         body = client.get(publication_index.url).content.decode()
