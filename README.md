@@ -119,7 +119,7 @@
 | publications/models/form.py                                    |       27 |        1 |        0 |        0 |     96.30% |        73 |
 | publications/models/idea.py                                    |       17 |        1 |        0 |        0 |     94.12% |        54 |
 | publications/models/poll\_closure.py                           |       16 |        1 |        0 |        0 |     93.75% |        40 |
-| publications/models/project.py                                 |       97 |        0 |       12 |        0 |    100.00% |           |
+| publications/models/project.py                                 |       89 |        0 |       12 |        0 |    100.00% |           |
 | publications/models/project\_update.py                         |       18 |        1 |        0 |        0 |     94.44% |        47 |
 | publications/models/publication.py                             |       20 |        0 |        0 |        0 |    100.00% |           |
 | publications/models/publication\_index.py                      |       51 |        1 |        0 |        0 |     98.04% |        35 |
@@ -139,7 +139,7 @@
 | publications/views/vote\_stats.py                              |       60 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       29 |        0 |        2 |        1 |     96.77% | 68-\>exit |
 | publications/widgets.py                                        |       20 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **3924** |  **549** |  **684** |  **104** | **83.14%** |           |
+| **TOTAL**                                                      | **3916** |  **549** |  **684** |  **104** | **83.11%** |           |
 
 
 ## Setup coverage badge
