@@ -99,7 +99,7 @@
 | pedagogy/management/commands/create\_mock\_pedagogy\_cards.py  |       37 |       37 |       12 |        0 |      0.00% |      1-61 |
 | pedagogy/models/\_\_init\_\_.py                                |        3 |        0 |        0 |        0 |    100.00% |           |
 | pedagogy/models/pedagogy\_card.py                              |       34 |        2 |        4 |        0 |     94.74% |    24, 68 |
-| pedagogy/models/pedagogy\_index.py                             |       39 |        2 |        2 |        1 |     92.68% |    60, 68 |
+| pedagogy/models/pedagogy\_index.py                             |       46 |        5 |        2 |        1 |     87.50% |62, 71, 91-97 |
 | pedagogy/models/pedagogy\_resource.py                          |       18 |        0 |        4 |        0 |    100.00% |           |
 | publications/\_\_init\_\_.py                                   |        0 |        0 |        0 |        0 |    100.00% |           |
 | publications/apps.py                                           |        6 |        0 |        0 |        0 |    100.00% |           |
@@ -122,7 +122,7 @@
 | publications/models/project.py                                 |       89 |        0 |       12 |        0 |    100.00% |           |
 | publications/models/project\_update.py                         |       18 |        1 |        0 |        0 |     94.44% |        47 |
 | publications/models/publication.py                             |       20 |        0 |        0 |        0 |    100.00% |           |
-| publications/models/publication\_index.py                      |       51 |        1 |        0 |        0 |     98.04% |        35 |
+| publications/models/publication\_index.py                      |       56 |        1 |        0 |        0 |     98.21% |        37 |
 | publications/polls.py                                          |       28 |        0 |        4 |        0 |    100.00% |           |
 | publications/project\_updates.py                               |       25 |        1 |        6 |        1 |     93.55% |        38 |
 | publications/services.py                                       |       83 |        0 |       18 |        0 |    100.00% |           |
@@ -139,7 +139,7 @@
 | publications/views/vote\_stats.py                              |       60 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       29 |        0 |        2 |        1 |     96.77% | 68-\>exit |
 | publications/widgets.py                                        |       20 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **3916** |  **549** |  **684** |  **104** | **83.11%** |           |
+| **TOTAL**                                                      | **3928** |  **552** |  **684** |  **104** | **83.09%** |           |
 
 
 ## Setup coverage badge
