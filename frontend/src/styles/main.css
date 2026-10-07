@@ -255,4 +255,16 @@
     .section-label {
         @apply text-2xs font-bold uppercase tracking-[0.2em] text-base-content/50;
     }
+
+    /* Site-wide announcement (core/components/announcement_band.html): the rich
+       text takes the band colours. */
+    .announcement-band {
+        p {
+            @apply m-0 leading-6;
+        }
+
+        a {
+            @apply link font-semibold text-current;
+        }
+    }
 }

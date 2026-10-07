@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar i18n structured_data social_meta django_settings %}
+{% load static wagtailcore_tags wagtailuserbar i18n structured_data social_meta django_settings announcement_tags %}
 {% get_current_language as LANGUAGE_CODE %}
 
 {% get_setting "ANALYTICS_SCRIPT_TAG" as analytics_script_tag %}
@@ -51,9 +51,10 @@
             class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-100 btn btn-primary btn-sm"
         >{% trans "Skip to content" %}</a>
         {% wagtailuserbar %}
+        {# Above the header, in the flow: it scrolls away while the sticky header stays. #}
+        {% announcement_band %}
         {% block header %}
             {% include "core/components/website_header.html" %}
-            <div class="pt-16"></div>
         {% endblock header %}
         {% include "core/components/messages.html" %}
         <main id="main-content" tabindex="-1" class="focus:outline-none">

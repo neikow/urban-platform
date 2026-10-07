@@ -566,13 +566,19 @@ def start_server(foreground: bool = True) -> subprocess.Popen | None:
             print("\n👋 Server stopped")
         return None
     else:
+        # Log to a file, not to pipes: nothing reads them, and once a pipe buffer
+        # (~64 KB) fills up the server blocks on its next log line and every
+        # following request hangs. Outside test-results/, which pytest-playwright
+        # empties when it starts; CI uploads both when tests fail.
+        log_path = PROJECT_ROOT / "e2e-server.log"
+        log = log_path.open("w")
         process = subprocess.Popen(  # nosec
             cmd,
             cwd=PROJECT_ROOT,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            stdout=log,
+            stderr=subprocess.STDOUT,
         )
-        print(f"  ✓ Server started (PID: {process.pid})")
+        print(f"  ✓ Server started (PID: {process.pid}), logging to {log_path}")
         return process
 
 

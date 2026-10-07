@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 17:00+0200\n"
+"POT-Creation-Date: 2026-10-07 15:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -248,6 +248,45 @@ msgstr "CTA - Bouton d'appel à l'action"
 msgid "Document"
 msgstr "Document"
 
+#: core/models/announcement.py:11
+msgid "Information"
+msgstr "Information"
+
+#: core/models/announcement.py:12
+msgid "Warning"
+msgstr "Avertissement"
+
+#: core/models/announcement.py:13
+msgid "Important"
+msgstr "Important"
+
+#: core/models/announcement.py:26
+msgid "Show the announcement"
+msgstr "Afficher l'annonce"
+
+#: core/models/announcement.py:28
+msgid "Display the band at the top of every page of the website."
+msgstr "Affiche le bandeau en haut de toutes les pages du site."
+
+#: core/models/announcement.py:31
+msgid "Message"
+msgstr "Message"
+
+#: core/models/announcement.py:35
+msgid ""
+"Keep it short: one or two sentences. Visitors who closed it see it again "
+"once you change it."
+msgstr "Restez bref : une ou deux phrases. Les visiteurs qui l'ont fermée la revoient dès que vous la modifiez."
+
+#: core/models/announcement.py:39
+msgid "Style"
+msgstr "Style"
+
+#: core/models/announcement.py:52
+#: core/templates/core/components/announcement_band.html:8
+msgid "Announcement"
+msgstr "Annonce"
+
 #: core/models/city_district.py:11
 msgid "City District"
 msgstr "Arrondissement"
@@ -453,12 +492,12 @@ msgstr "Date du consentement à la newsletter"
 
 #: core/models/user.py:97
 msgid ""
-"When the user last agreed to receive the newsletter (GDPR proof of consent)."
-" Empty if they are not subscribed, or subscribed before this date was "
+"When the user last agreed to receive the newsletter (GDPR proof of consent). "
+"Empty if they are not subscribed, or subscribed before this date was "
 "recorded."
 msgstr ""
-"Date à laquelle l'utilisateur a accepté de recevoir la newsletter (preuve du"
-" consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
+"Date à laquelle l'utilisateur a accepté de recevoir la newsletter (preuve du "
+"consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
 "l'enregistrement de cette date."
 
 #: core/models/user.py:106
@@ -629,8 +668,7 @@ msgstr "Votre mot de passe a été réinitialisé avec succès."
 
 #: core/templates/auth/password_reset_complete.html:33
 msgid "You can now log in with your new password."
-msgstr ""
-"Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
+msgstr "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
 
 #: core/templates/auth/password_reset_complete.html:37
 #: core/templates/auth/password_reset_request.html:50
@@ -677,8 +715,8 @@ msgstr "Mot de passe oublié ?"
 msgid ""
 "Enter your email address and we will send you a link to reset your password."
 msgstr ""
-"Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser"
-" votre mot de passe."
+"Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser "
+"votre mot de passe."
 
 #: core/templates/auth/password_reset_request.html:44
 msgid "Send the link"
@@ -816,6 +854,10 @@ msgstr "Voir tout"
 msgid "No recent publications found."
 msgstr "Aucune publication récente trouvée."
 
+#: core/templates/core/components/announcement_band.html:16
+msgid "Close the announcement"
+msgstr "Fermer l'annonce"
+
 #: core/templates/core/components/image_lightbox.html:3
 msgid "Image preview"
 msgstr "Aperçu de l'image"
@@ -830,8 +872,8 @@ msgstr "Fermer l'aperçu"
 msgid "Learn More"
 msgstr "En savoir plus"
 
-#: core/templates/core/components/search/text_search_form.html:24
-#: core/templates/core/components/search/text_search_form.html:38
+#: core/templates/core/components/search/text_search_form.html:28
+#: core/templates/core/components/search/text_search_form.html:42
 msgid "Search"
 msgstr "Rechercher"
 
@@ -931,8 +973,7 @@ msgstr "Mon profil"
 msgid "Account"
 msgstr "Compte"
 
-#: core/templates/core/profile.html:27
-#: core/templates/core/profile_edit.html:46
+#: core/templates/core/profile.html:27 core/templates/core/profile_edit.html:46
 msgid "Personal information"
 msgstr "Informations personnelles"
 
@@ -1032,12 +1073,11 @@ msgstr ""
 "emails que nous vous avons envoyés. Le fichier est au format JSON, "
 "importable par d'autres services."
 
-#: core/templates/core/profile.html:216
+#: core/templates/core/profile.html:220
 msgid "Download my data"
 msgstr "Télécharger mes données"
 
-#: core/templates/core/profile.html:237
-#: core/templates/core/profile_edit.html:4
+#: core/templates/core/profile.html:241 core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:18
 #: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
@@ -1067,7 +1107,7 @@ msgstr "Changer le mot de passe"
 msgid "Danger zone"
 msgstr "Zone de danger"
 
-#: core/templates/core/profile_edit.html:207
+#: core/templates/core/profile_edit.html:211
 msgid "Download a copy of my data first"
 msgstr "Télécharger d'abord une copie de mes données"
 

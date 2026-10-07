@@ -1,0 +1,23 @@
+{% load i18n wagtailcore_tags %}
+
+{% if announcement %}
+    <div
+        data-dismissible
+        data-dismiss-cookie="{{ dismiss_cookie }}"
+        role="region"
+        aria-label="{% trans 'Announcement' %}"
+        class="announcement-band {% if announcement.style == 'warning' %}bg-warning text-warning-content{% elif announcement.style == 'important' %}bg-error text-error-content{% else %}bg-secondary text-secondary-content{% endif %}"
+    >
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-start gap-3 text-sm">
+            <div class="flex-1 min-w-0">{{ announcement.message|richtext }}</div>
+            <button
+                type="button"
+                class="btn btn-ghost btn-xs btn-square -my-0.5 text-current"
+                aria-label="{% trans 'Close the announcement' %}"
+                data-dismiss
+            >
+                ✕
+            </button>
+        </div>
+    </div>
+{% endif %}
