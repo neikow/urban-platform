@@ -18,7 +18,7 @@
 | core/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/apps.py                                                   |       13 |        0 |        0 |        0 |    100.00% |           |
 | core/auth\_backends.py                                         |       18 |        2 |        4 |        2 |     81.82% |    71, 74 |
-| core/blocks.py                                                 |      179 |        0 |        4 |        2 |     98.91% |255-\>265, 262-\>265 |
+| core/blocks.py                                                 |      182 |        0 |        4 |        2 |     98.92% |255-\>265, 262-\>265 |
 | core/cache.py                                                  |       16 |        2 |        2 |        1 |     83.33% |33-34, 40-\>exit |
 | core/context\_processors.py                                    |        6 |        0 |        0 |        0 |    100.00% |           |
 | core/data\_export.py                                           |       36 |        0 |        2 |        0 |    100.00% |           |
@@ -75,10 +75,14 @@
 | core/widgets.py                                                |       45 |       19 |       16 |        3 |     47.54% |16, 28-35, 49, 68-71, 81-88, 98 |
 | home/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/apps.py                                                   |        4 |        0 |        0 |        0 |    100.00% |           |
+| home/blocks.py                                                 |      210 |        4 |       20 |        4 |     96.52% |117, 129, 131, 283 |
 | home/management/\_\_init\_\_.py                                |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/management/commands/\_\_init\_\_.py                       |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/management/commands/mock\_home\_page\_content.py          |       15 |       15 |        2 |        0 |      0.00% |      1-56 |
 | home/models.py                                                 |       18 |        1 |        0 |        0 |     94.44% |        33 |
+| home/page\_templates.py                                        |       30 |        0 |        0 |        0 |    100.00% |           |
+| home/views.py                                                  |       30 |        0 |        4 |        0 |    100.00% |           |
+| home/wagtail\_hooks.py                                         |       13 |        1 |        2 |        1 |     86.67% |        25 |
 | legal/\_\_init\_\_.py                                          |        0 |        0 |        0 |        0 |    100.00% |           |
 | legal/apps.py                                                  |        4 |        0 |        0 |        0 |    100.00% |           |
 | legal/forms.py                                                 |        4 |        0 |        0 |        0 |    100.00% |           |
@@ -141,7 +145,7 @@
 | publications/views/vote\_stats.py                              |       60 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       29 |        0 |        2 |        1 |     96.77% | 68-\>exit |
 | publications/widgets.py                                        |       20 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **3972** |  **552** |  **690** |  **105** | **83.25%** |           |
+| **TOTAL**                                                      | **4258** |  **557** |  **716** |  **110** | **84.10%** |           |
 
 
 ## Setup coverage badge
