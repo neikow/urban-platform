@@ -1,0 +1,15 @@
+{% load i18n wagtailadmin_tags %}
+
+{% if actions %}
+    {% panel id="quick-actions" heading=_("Quick actions") classname="w-panel--dashboard" %}
+    <ul class="dashboard-actions">
+        {% for action in actions %}
+            <li>
+                <a href="{{ action.url }}" class="button button-secondary bicolor button--icon">
+                    {% icon name=action.icon wrapped=1 %}{{ action.label }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% endpanel %}
+{% endif %}

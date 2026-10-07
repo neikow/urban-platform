@@ -1,0 +1,38 @@
+{% load i18n wagtailadmin_tags %}
+
+{% panel id="consultations" heading=_("Consultations to watch") classname="w-panel--dashboard" %}
+{% if consultations %}
+    <table class="listing listing--dashboard">
+        <thead>
+            <tr>
+                <th class="title">{% trans "Project" %}</th>
+                <th>{% trans "Participation" %}</th>
+                <th>{% trans "Closes" %}</th>
+                <th>{% trans "Responses" %}</th>
+                <th><span class="w-sr-only">{% trans "Results" %}</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in consultations %}
+                <tr>
+                    <td class="title">
+                        <a href="{% url 'wagtailadmin_pages:edit' item.project.pk %}">{{ item.project.title }}</a>
+                    </td>
+                    <td>{% if item.is_vote %}{% trans "Vote" %}{% else %}{% trans "Ideas" %}{% endif %}</td>
+                    <td>
+                        {% if item.is_vote and item.project.voting_end_date %}
+                            {{ item.project.voting_end_date|date:"j F Y" }}
+                        {% else %}
+                            {% trans "No end date" %}
+                        {% endif %}
+                    </td>
+                    <td>{{ item.responses }}</td>
+                    <td><a href="{{ item.results_url }}">{% trans "See the responses" %}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>{% trans "No vote or idea collection is open." %}</p>
+{% endif %}
+{% endpanel %}

@@ -1,0 +1,28 @@
+{% load i18n wagtailadmin_tags %}
+
+{% panel id="upcoming-events" heading=_("Upcoming events") classname="w-panel--dashboard" %}
+{% if events %}
+    <table class="listing listing--dashboard">
+        <thead>
+            <tr>
+                <th class="title">{% trans "Event" %}</th>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Interested" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+                <tr>
+                    <td class="title">
+                        <a href="{% url 'wagtailadmin_pages:edit' event.pk %}">{{ event.title }}</a>
+                    </td>
+                    <td>{{ event.event_date|date:"l j F, H:i" }}</td>
+                    <td>{{ event.interested }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>{% trans "No event is planned." %}</p>
+{% endif %}
+{% endpanel %}

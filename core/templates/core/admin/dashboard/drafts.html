@@ -1,0 +1,31 @@
+{% load i18n wagtailadmin_tags %}
+
+{% if drafts %}
+    {% panel id="drafts" heading=_("Drafts waiting to be published") classname="w-panel--dashboard" %}
+    <table class="listing listing--dashboard">
+        <thead>
+            <tr>
+                <th class="title">{% trans "Page" %}</th>
+                <th>{% trans "Status" %}</th>
+                <th>{% trans "Last edited" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for page in drafts %}
+                <tr>
+                    <td class="title">
+                        <a href="{% url 'wagtailadmin_pages:edit' page.pk %}">{{ page.get_admin_display_title }}</a>
+                    </td>
+                    <td>{% include "wagtailadmin/shared/page_status_tag.html" with page=page %}</td>
+                    <td>
+                        {% human_readable_date page.latest_revision_created_at %}
+                        {% if page.latest_revision.user %}
+                            · {{ page.latest_revision.user.get_full_name|default:page.latest_revision.user.email }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endpanel %}
+{% endif %}

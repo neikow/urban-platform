@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 17:48+0200\n"
+"POT-Creation-Date: 2026-10-07 18:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,120 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: core/admin_dashboard.py:53 core/admin_menu.py:135
+msgid "New project"
+msgstr "Nouveau projet"
+
+#: core/admin_dashboard.py:54 core/admin_menu.py:136
+msgid "New event"
+msgstr "Nouvel événement"
+
+#: core/admin_dashboard.py:56
+msgid "New “Useful information” card"
+msgstr "Nouvelle fiche « Informations utiles »"
+
+#: core/admin_dashboard.py:63
+msgid "Edit the home page"
+msgstr "Modifier la page d'accueil"
+
+#: core/admin_dashboard.py:71
+msgid "Edit the announcement"
+msgstr "Modifier l'annonce"
+
+#: core/admin_menu.py:127
+msgid "Home page"
+msgstr "Page d'accueil"
+
+#: core/admin_menu.py:131
+msgid "News"
+msgstr "Actualités"
+
+#: core/admin_menu.py:133
+msgid "“News” page"
+msgstr "Page « Actualités »"
+
+#: core/admin_menu.py:134
+msgid "All publications"
+msgstr "Toutes les publications"
+
+#: core/admin_menu.py:144
+msgid "Useful information"
+msgstr "Informations utiles"
+
+#: core/admin_menu.py:146
+msgid "“Useful information” page"
+msgstr "Page « Informations utiles »"
+
+#: core/admin_menu.py:147
+msgid "All cards"
+msgstr "Toutes les fiches"
+
+#: core/admin_menu.py:148
+msgid "New card"
+msgstr "Nouvelle fiche"
+
+#: core/admin_menu.py:155
+msgid "Site pages"
+msgstr "Pages du site"
+
+#: core/admin_menu.py:157
+msgid "The platform"
+msgstr "La plateforme"
+
+#: core/admin_menu.py:159
+msgid "The urban planning commission"
+msgstr "La commission d'urbanisme"
+
+#: core/admin_menu.py:163
+msgid "The development team"
+msgstr "L'équipe de développement"
+
+#: core/admin_menu.py:165
+msgid "Code of conduct"
+msgstr "Charte de bonne conduite"
+
+#: core/admin_menu.py:168
+msgid "Terms of service"
+msgstr "Conditions d'utilisation"
+
+#: core/admin_menu.py:174
+msgid "Cookies policy"
+msgstr "Politique de cookies"
+
+#: core/admin_menu.py:177
+msgid "Privacy policy"
+msgstr "Politique de confidentialité"
+
+#: core/admin_menu.py:185
+#: core/templates/core/admin/dashboard/consultations.html:9
+msgid "Participation"
+msgstr "Participation"
+
+#: core/admin_menu.py:188
+msgid "Votes"
+msgstr "Votes"
+
+#: core/admin_menu.py:195
+#: core/templates/core/admin/dashboard/consultations.html:21
+msgid "Ideas"
+msgstr "Idées"
+
+#: core/admin_menu.py:207
+msgid "Media library"
+msgstr "Médiathèque"
+
+#: core/admin_menu.py:210
+msgid "Images"
+msgstr "Images"
+
+#: core/admin_menu.py:213
+msgid "Documents"
+msgstr "Documents"
+
+#: core/admin_menu.py:224
+msgid "Documentation"
+msgstr "Documentation"
 
 #: core/blocks.py:13 core/blocks.py:18 core/blocks.py:29
 msgid "Left"
@@ -348,6 +462,7 @@ msgid "Event Type"
 msgstr "Type d'événement"
 
 #: core/models/email_event.py:38
+#: core/templates/core/admin/dashboard/drafts.html:9
 msgid "Status"
 msgstr "Statut"
 
@@ -551,7 +666,7 @@ msgstr "Actif"
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:158 core/wagtail_hooks.py:241
+#: core/models/user.py:158
 msgid "Users"
 msgstr "Utilisateurs"
 
@@ -832,6 +947,78 @@ msgstr "Cette action est irréversible et ne peut pas être annulée"
 msgid "Permanently delete my account"
 msgstr "Supprimer définitivement mon compte"
 
+#: core/templates/core/admin/dashboard/consultations.html:3
+msgid "Consultations to watch"
+msgstr "Consultations à suivre"
+
+#: core/templates/core/admin/dashboard/consultations.html:8
+msgid "Project"
+msgstr "Projet"
+
+#: core/templates/core/admin/dashboard/consultations.html:10
+msgid "Closes"
+msgstr "Clôture"
+
+#: core/templates/core/admin/dashboard/consultations.html:11
+msgid "Responses"
+msgstr "Réponses"
+
+#: core/templates/core/admin/dashboard/consultations.html:12
+msgid "Results"
+msgstr "Résultats"
+
+#: core/templates/core/admin/dashboard/consultations.html:21
+msgid "Vote"
+msgstr "Vote"
+
+#: core/templates/core/admin/dashboard/consultations.html:26
+msgid "No end date"
+msgstr "Sans date de fin"
+
+#: core/templates/core/admin/dashboard/consultations.html:30
+msgid "See the responses"
+msgstr "Voir les réponses"
+
+#: core/templates/core/admin/dashboard/consultations.html:36
+msgid "No vote or idea collection is open."
+msgstr "Aucun vote ni aucune collecte d'idées n'est ouvert."
+
+#: core/templates/core/admin/dashboard/drafts.html:4
+msgid "Drafts waiting to be published"
+msgstr "Brouillons en attente de publication"
+
+#: core/templates/core/admin/dashboard/drafts.html:8
+msgid "Page"
+msgstr "Page"
+
+#: core/templates/core/admin/dashboard/drafts.html:10
+msgid "Last edited"
+msgstr "Dernière modification"
+
+#: core/templates/core/admin/dashboard/quick_actions.html:4
+msgid "Quick actions"
+msgstr "Actions rapides"
+
+#: core/templates/core/admin/dashboard/upcoming_events.html:3
+msgid "Upcoming events"
+msgstr "Événements à venir"
+
+#: core/templates/core/admin/dashboard/upcoming_events.html:8
+msgid "Event"
+msgstr "Événement"
+
+#: core/templates/core/admin/dashboard/upcoming_events.html:9
+msgid "Date"
+msgstr "Date"
+
+#: core/templates/core/admin/dashboard/upcoming_events.html:10
+msgid "Interested"
+msgstr "Intéressés"
+
+#: core/templates/core/admin/dashboard/upcoming_events.html:26
+msgid "No event is planned."
+msgstr "Aucun événement n'est prévu."
+
 #: core/templates/core/admin/page_templates.html:25
 #, python-format
 msgid "Use “%(name)s”"
@@ -900,12 +1087,10 @@ msgstr "Outils"
 
 #: core/templates/core/components/website_footer.html:55
 #: core/tests/test_templates/test_components/test_website_footer.py:56
-#: core/wagtail_hooks.py:197
 msgid "Legal"
 msgstr "Légal"
 
 #: core/templates/core/components/website_footer.html:67
-#: core/wagtail_hooks.py:235
 msgid "About"
 msgstr "À propos"
 
@@ -1207,7 +1392,7 @@ msgstr "Nouveau : %(page_type)s"
 msgid "Start from a template and adapt it, or from a blank page."
 msgstr "Partez d'un modèle et adaptez-le, ou d'une page vide."
 
-#: core/views/page_templates.py:70 core/wagtail_hooks.py:277
+#: core/views/page_templates.py:70 core/wagtail_hooks.py:90
 msgid "Start from a template"
 msgstr "Partir d'un modèle"
 
@@ -1216,14 +1401,19 @@ msgid ""
 "The template replaces the content of the page in a new draft. Nothing "
 "changes on the website until you publish, and the current version stays in "
 "the page history."
-msgstr "Le modèle remplace le contenu de la page dans un nouveau brouillon. Rien ne change sur le site avant la publication, et la version actuelle reste dans l'historique de la page."
+msgstr ""
+"Le modèle remplace le contenu de la page dans un nouveau brouillon. Rien ne "
+"change sur le site avant la publication, et la version actuelle reste dans "
+"l'historique de la page."
 
 #: core/views/page_templates.py:98
 #, python-format
 msgid ""
 "The “%(name)s” template is saved as a draft. Edit the texts, preview, then "
 "publish. The previous version stays in the history."
-msgstr "Le modèle « %(name)s » est enregistré en brouillon. Adaptez les textes, prévisualisez, puis publiez. La version précédente reste dans l'historique."
+msgstr ""
+"Le modèle « %(name)s » est enregistré en brouillon. Adaptez les textes, "
+"prévisualisez, puis publiez. La version précédente reste dans l'historique."
 
 #: core/views/profile_edit.py:48
 msgid "Results of polls I voted in, when they close"
@@ -1241,57 +1431,11 @@ msgstr "Un rappel la veille des événements qui m'intéressent"
 msgid "You do not have permission to assign this role."
 msgstr "Vous n'avez pas la permission d'attribuer ce rôle."
 
-#: core/wagtail_hooks.py:86 core/wagtail_hooks.py:100 core/wagtail_hooks.py:131
-msgid "Home page"
-msgstr "Page d'accueil"
+#~ msgid "List"
+#~ msgstr "Liste"
 
-#: core/wagtail_hooks.py:106 core/wagtail_hooks.py:137
-msgid "List"
-msgstr "Liste"
-
-#: core/wagtail_hooks.py:112 core/wagtail_hooks.py:143
-msgid "Add"
-msgstr "Ajouter"
-
-#: core/wagtail_hooks.py:119
-msgid "News"
-msgstr "Actualités"
-
-#: core/wagtail_hooks.py:150
-msgid "Useful information"
-msgstr "Informations utiles"
-
-#: core/wagtail_hooks.py:172
-msgid "Code of conduct"
-msgstr "Charte de bonne conduite"
-
-#: core/wagtail_hooks.py:178
-msgid "Terms of service"
-msgstr "Conditions d'utilisation"
-
-#: core/wagtail_hooks.py:184
-msgid "Cookies policy"
-msgstr "Politique de cookies"
-
-#: core/wagtail_hooks.py:190
-msgid "Privacy policy"
-msgstr "Politique de confidentialité"
-
-#: core/wagtail_hooks.py:216
-msgid "The platform"
-msgstr "La plateforme"
-
-#: core/wagtail_hooks.py:222
-msgid "The urban planning commission"
-msgstr "La commission d'urbanisme"
-
-#: core/wagtail_hooks.py:228
-msgid "The development team"
-msgstr "L'équipe de développement"
-
-#: core/wagtail_hooks.py:251
-msgid "Documentation"
-msgstr "Documentation"
+#~ msgid "Add"
+#~ msgstr "Ajouter"
 
 #~ msgid "Page d'accueil"
 #~ msgstr "Page d'accueil"

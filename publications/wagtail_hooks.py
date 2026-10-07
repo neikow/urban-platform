@@ -1,7 +1,6 @@
 from django.urls import URLPattern, path, reverse
 from django.utils.translation import gettext_lazy as _
 from wagtail import hooks
-from wagtail.admin.menu import MenuItem
 from wagtail.admin.widgets import Button
 
 from publications.views.idea_stats import IdeaStatsView, IdeaStatsDetailView
@@ -21,16 +20,6 @@ def register_vote_stats_url() -> list[URLPattern]:
     ]
 
 
-@hooks.register("register_admin_menu_item")
-def register_vote_stats_menu_item() -> MenuItem:
-    return MenuItem(
-        _("Vote Statistics"),
-        reverse("vote_statistics"),
-        icon_name="success",
-        order=202,
-    )
-
-
 @hooks.register("register_admin_urls")
 def register_idea_stats_url() -> list[URLPattern]:
     return [
@@ -41,16 +30,6 @@ def register_idea_stats_url() -> list[URLPattern]:
             name="idea_statistics_detail",
         ),
     ]
-
-
-@hooks.register("register_admin_menu_item")
-def register_idea_stats_menu_item() -> MenuItem:
-    return MenuItem(
-        _("Idea Collection"),
-        reverse("idea_statistics"),
-        icon_name="clipboard-list",
-        order=203,
-    )
 
 
 @hooks.register("register_admin_urls")

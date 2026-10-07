@@ -2,18 +2,15 @@ import logging
 
 from django.http import Http404, HttpRequest, HttpResponse
 from django.urls import URLPattern, path
+from django.templatetags.static import static
 from django.urls import reverse
-from wagtail.admin.menu import MenuItem, Menu, SubmenuMenuItem
+from django.utils.html import format_html
+from wagtail.admin.menu import MenuItem
 from wagtail.admin.widgets import Button
 from wagtail.admin.viewsets.model import ModelViewSet
 from wagtail import hooks
 from wagtail.models import Page
 
-from home.models import HomePage
-from legal.models import CodeOfConductPage, CookiesPolicyPage, PrivacyPolicyPage, TermsOfServicePage
-from pedagogy.models import PedagogyIndexPage
-from publications.models import PublicationIndexPage
-from about.models import AboutWebsitePage, AboutCommissionPage, AboutDevTeamPage
 from .models import NeighborhoodAssociation, EmailEvent
 from django.utils.translation import gettext_lazy as _
 
@@ -54,206 +51,22 @@ def register_icons(icons: list[str]) -> list[str]:
 
 
 @hooks.register("construct_main_menu")
-def hide_menu_items(request: HttpRequest, menu_items: list[MenuItem | SubmenuMenuItem]) -> None:
-    hidden_names = ["explorer", "reports", "help"]
+def build_main_menu(request: HttpRequest, menu_items: list[MenuItem]) -> None:
+    from core.admin_menu import build_main_menu as build
 
-    admin_settings = [item for item in menu_items if item.name == "settings"]
-
-    if admin_settings:
-        admin_setting = admin_settings[0]
-
-        settings_hidden_names = [
-            "sites",
-            "redirects",
-            "collections",
-            "users",
-        ]
-
-        admin_setting.menu.registered_menu_items[:] = [
-            item
-            for item in admin_setting.menu.registered_menu_items
-            if item.name not in settings_hidden_names
-        ]
-
-    menu_items[:] = [item for item in menu_items if item.name not in hidden_names]
+    build(request, menu_items)
 
 
-@hooks.register("register_admin_menu_item")
-def register_home_page_edition_menu() -> MenuItem:
-    home_page = HomePage.objects.first()
+@hooks.register("construct_homepage_panels")
+def add_dashboard_panels(request: HttpRequest, panels: list) -> None:
+    from core.admin_dashboard import dashboard_panels
 
-    return MenuItem(
-        _("Home page"),
-        reverse("wagtailadmin_pages:edit", args=[home_page.id]),
-        icon_name="home",
-        order=0,
-    )
+    panels.extend(dashboard_panels())
 
 
-@hooks.register("register_admin_menu_item")
-def register_publications_menu() -> MenuItem:
-    index_page = PublicationIndexPage.objects.first()
-
-    submenu = Menu(
-        items=[
-            MenuItem(
-                _("Home page"),
-                reverse("wagtailadmin_pages:edit", args=[index_page.id]),
-                icon_name="home",
-                order=100,
-            ),
-            MenuItem(
-                _("List"),
-                reverse("wagtailadmin_explore", args=[index_page.id]),
-                icon_name="folder-open-inverse",
-                order=200,
-            ),
-            MenuItem(
-                _("Add"),
-                reverse("wagtailadmin_pages:add_subpage", args=[index_page.id]),
-                icon_name="plus",
-                order=300,
-            ),
-        ]
-    )
-    return SubmenuMenuItem(_("News"), submenu, icon_name="doc-full-inverse", order=100)
-
-
-@hooks.register("register_admin_menu_item")
-def register_pedagogic_entries_menu() -> MenuItem:
-    index_page = PedagogyIndexPage.objects.live().first()
-    if index_page is None:
-        raise PedagogyIndexPage.DoesNotExist("No live PedagogyIndexPage found.")
-
-    submenu = Menu(
-        items=[
-            MenuItem(
-                _("Home page"),
-                reverse("wagtailadmin_pages:edit", args=[index_page.id]),
-                icon_name="home",
-                order=100,
-            ),
-            MenuItem(
-                _("List"),
-                reverse("wagtailadmin_explore", args=[index_page.id]),
-                icon_name="folder-open-inverse",
-                order=200,
-            ),
-            MenuItem(
-                _("Add"),
-                reverse("wagtailadmin_pages:add_subpage", args=[index_page.id]),
-                icon_name="plus",
-                order=300,
-            ),
-        ]
-    )
-    return SubmenuMenuItem(_("Useful information"), submenu, icon_name="graduation-cap", order=200)
-
-
-@hooks.register("register_admin_menu_item")
-def register_legal_menu() -> MenuItem:
-    code_of_conduct = CodeOfConductPage.objects.live().first()
-    cookies_policy = CookiesPolicyPage.objects.live().first()
-    privacy_policy = PrivacyPolicyPage.objects.live().first()
-    terms_of_service = TermsOfServicePage.objects.live().first()
-
-    if code_of_conduct is None:
-        raise CodeOfConductPage.DoesNotExist("No live CodeOfConductPage found.")
-    if cookies_policy is None:
-        raise CookiesPolicyPage.DoesNotExist("No live CookiesPolicyPage found.")
-    if privacy_policy is None:
-        raise PrivacyPolicyPage.DoesNotExist("No live PrivacyPolicyPage found.")
-    if terms_of_service is None:
-        raise TermsOfServicePage.DoesNotExist("No live TermsOfServicePage found.")
-
-    submenu = Menu(
-        items=[
-            MenuItem(
-                _("Code of conduct"),
-                reverse("wagtailadmin_pages:edit", args=[code_of_conduct.id]),
-                icon_name="doc-full-inverse",
-                order=100,
-            ),
-            MenuItem(
-                _("Terms of service"),
-                reverse("wagtailadmin_pages:edit", args=[terms_of_service.id]),
-                icon_name="doc-full-inverse",
-                order=200,
-            ),
-            MenuItem(
-                _("Cookies policy"),
-                reverse("wagtailadmin_pages:edit", args=[cookies_policy.id]),
-                icon_name="doc-full-inverse",
-                order=300,
-            ),
-            MenuItem(
-                _("Privacy policy"),
-                reverse("wagtailadmin_pages:edit", args=[privacy_policy.id]),
-                icon_name="doc-full-inverse",
-                order=400,
-            ),
-        ]
-    )
-    return SubmenuMenuItem(_("Legal"), submenu, icon_name="gavel", order=300)
-
-
-@hooks.register("register_admin_menu_item")
-def register_about_menu() -> MenuItem:
-    about_website = AboutWebsitePage.objects.live().first()
-    about_commission = AboutCommissionPage.objects.live().first()
-    about_dev_team = AboutDevTeamPage.objects.live().first()
-
-    if about_website is None:
-        raise AboutWebsitePage.DoesNotExist("No live AboutWebsitePage found.")
-    if about_commission is None:
-        raise AboutCommissionPage.DoesNotExist("No live AboutCommissionPage found.")
-    if about_dev_team is None:
-        raise AboutDevTeamPage.DoesNotExist("No live AboutDevTeamPage found.")
-
-    submenu = Menu(
-        items=[
-            MenuItem(
-                _("The platform"),
-                reverse("wagtailadmin_pages:edit", args=[about_website.id]),
-                icon_name="doc-full-inverse",
-                order=100,
-            ),
-            MenuItem(
-                _("The urban planning commission"),
-                reverse("wagtailadmin_pages:edit", args=[about_commission.id]),
-                icon_name="doc-full-inverse",
-                order=200,
-            ),
-            MenuItem(
-                _("The development team"),
-                reverse("wagtailadmin_pages:edit", args=[about_dev_team.id]),
-                icon_name="doc-full-inverse",
-                order=300,
-            ),
-        ]
-    )
-    return SubmenuMenuItem(_("About"), submenu, icon_name="info-circle", order=400)
-
-
-@hooks.register("register_admin_menu_item")
-def register_users_menu() -> MenuItem:
-    return MenuItem(
-        _("Users"),
-        reverse("wagtailusers_users:index"),
-        icon_name="user",
-        order=500,
-    )
-
-
-@hooks.register("register_admin_menu_item")
-def register_docs_menu_item() -> MenuItem:
-    return MenuItem(
-        _("Documentation"),
-        reverse("docs_index"),
-        name="documentation",
-        icon_name="help",
-        order=10000,
-    )
+@hooks.register("insert_global_admin_css")
+def admin_css() -> str:
+    return format_html('<link rel="stylesheet" href="{}">', static("core/css/admin.css"))
 
 
 # --- Page templates (core/page_templates.py) ---------------------------------------
