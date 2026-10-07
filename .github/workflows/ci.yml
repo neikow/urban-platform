@@ -180,4 +180,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: playwright-artifacts
-          path: test-results/
+          path: |
+            test-results/
+            e2e-server.log

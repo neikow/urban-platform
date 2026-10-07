@@ -14,4 +14,5 @@ urban_platform/static/dist/
 # MkDocs
 docs/site/
 test-results/
+e2e-server.log
 publications/static/publications/geo/*.pmtiles
