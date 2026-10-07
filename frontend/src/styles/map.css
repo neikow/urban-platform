@@ -74,31 +74,48 @@
 
 .map-popup {
     display: grid;
-    gap: 0.375rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
 }
 
 .map-popup p {
     margin: 0;
 }
 
-.map-popup__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.375rem 0.5rem;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+/* Secondary to the title: one quiet line, cut with an ellipsis. */
+.map-popup__category {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.75rem;
+    font-weight: 500;
     color: color-mix(in oklch, var(--color-base-content, #241c16) 55%, transparent);
 }
 
+.map-popup__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem 0.75rem;
+    margin-top: 0.25rem;
+}
+
 .map-popup__status {
-    border-radius: var(--radius-field, 0.25rem);
-    padding: 0.125rem 0.375rem;
-    background: var(--color-primary, #e8553c);
-    color: var(--color-primary-content, #fff);
-    letter-spacing: 0.12em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary, #e8553c);
+}
+
+.map-popup__status::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: currentColor;
 }
 
 .map-popup .map-popup__title {
@@ -125,8 +142,6 @@
 }
 
 .map-popup .map-popup__link {
-    margin-top: 0.25rem;
-    justify-self: start;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
