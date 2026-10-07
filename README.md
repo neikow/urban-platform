@@ -41,12 +41,12 @@ TypeScript and the Tailwind stylesheet live in `frontend/src/` and are built by 
 
 ### Maps
 
-The basemap is self-hosted: a [PMTiles](https://docs.protomaps.com/pmtiles/) extract of the
-local area, cut from the daily OpenStreetMap builds of [Protomaps](https://protomaps.com) and
+The basemap is self-hosted: a [PMTiles](https://docs.protomaps.com/pmtiles/) extract of
+Marseille, cut from the daily OpenStreetMap builds of [Protomaps](https://protomaps.com) and
 drawn by `protomaps-leaflet`. No request leaves the site, and the maps cannot be panned
 outside the extract (`LOCAL_AREA_TILES_BOUNDS` in `publications/geo.py`).
 
-The archive (~7 MB) is not committed. `make map-tiles` downloads the latest one into
+The archive (~35 MB) is not committed. `make map-tiles` downloads the latest one into
 `publications/static/publications/geo/`, with the `pmtiles` CLI (`brew install pmtiles`) or
 Docker. The Docker image fetches it at build time. It is read with HTTP range requests:
 nginx supports them, and the project's `runserver` adds them for development.
