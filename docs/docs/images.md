@@ -4,7 +4,7 @@ La bibliothèque d'images centralise toutes les photos et illustrations utilisé
 
 ## Accéder à la bibliothèque
 
-Dans la barre latérale, cliquez sur **Images**.
+Dans la barre latérale, ouvrez **Médiathèque** puis cliquez sur **Images**.
 
 ## Vue de la bibliothèque
 

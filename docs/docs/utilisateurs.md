@@ -1,10 +1,10 @@
 # Gestion des utilisateurs
 
-La section **Utilisateurs** est accessible depuis la barre latérale. Elle permet de gérer les comptes : ceux des habitants comme ceux des membres de l'équipe.
+La gestion des **utilisateurs** permet de gérer les comptes : ceux des habitants comme ceux des membres de l'équipe. Elle est réservée aux **administrateurs**.
 
 ## Accéder à la gestion des utilisateurs
 
-Dans la barre latérale, cliquez sur **Utilisateurs**.
+Dans la barre latérale, ouvrez **Paramètres** puis cliquez sur **Utilisateurs**.
 
 ## La liste des utilisateurs
 
@@ -35,10 +35,10 @@ Le **rôle** d'un compte détermine son accès à l'administration :
 | Rôle | Accès |
 |---|---|
 | **Citoyen** | Un compte du site : voter, proposer des idées, suivre les projets. Pas d'accès à l'administration |
-| **Membre d'association** | Accès à l'administration, gestion des comptes (peut attribuer les rôles Citoyen et Membre d'association), modification de l'[annonce](annonce.md) |
-| **Administrateur** | Les mêmes droits, et peut nommer d'autres administrateurs |
+| **Membre d'association** | Accès à l'administration pour le contenu et la participation, modification de l'[annonce](annonce.md). Ne gère pas les comptes |
+| **Administrateur** | Les mêmes droits, plus la gestion des comptes et des rôles |
 
-Un membre d'association ne peut ni nommer un administrateur ni modifier le rôle d'un administrateur.
+Le menu de chacun ne montre que ce qu'il peut faire : un membre d'association ne voit pas la gestion des utilisateurs, et les entrées de contenu dépendent de ses groupes.
 
 ### Groupes : les droits sur les pages
 

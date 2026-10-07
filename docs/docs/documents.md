@@ -4,7 +4,7 @@ La bibliothèque de documents vous permet de stocker et gérer des fichiers tél
 
 ## Accéder à la bibliothèque
 
-Dans la barre latérale, cliquez sur **Documents**.
+Dans la barre latérale, ouvrez **Médiathèque** puis cliquez sur **Documents**.
 
 ## Vue de la bibliothèque
 

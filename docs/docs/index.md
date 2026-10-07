@@ -13,14 +13,14 @@ Ce guide est destiné aux **éditeurs de contenu** et **administrateurs** de la 
 | Section | Description |
 |---|---|
 | [Se connecter](connexion.md) | Accéder à l'interface d'administration |
-| [Tableau de bord](tableau-de-bord.md) | Vue d'ensemble et menu |
+| [Tableau de bord](tableau-de-bord.md) | Ce qui demande votre attention, et le menu |
 | [Partir d'un modèle](modeles.md) | Créer une page à partir d'une page toute prête |
 | [Actualités](publications/index.md) | Gérer les projets et les événements |
 | [Projets](publications/projets.md) | Vote, collecte d'idées, carte, suivi du projet |
 | [Événements](publications/evenements.md) | Réunions, ateliers, balades |
 | [Informations utiles](fiches-pedagogiques.md) | Les fiches pour comprendre l'urbanisme |
-| [Statistiques des votes](statistiques-votes.md) | Suivre les votes et clore un vote |
-| [Collecte d'idées](collecte-idees.md) | Lire les idées des habitants |
+| [Votes](statistiques-votes.md) | Suivre les votes et clore un vote |
+| [Idées](collecte-idees.md) | Lire les idées des habitants |
 | [Images](images.md) | Gérer la bibliothèque d'images |
 | [Documents](documents.md) | Gérer les fichiers téléchargeables |
 | [Page d'accueil](page-accueil.md) | Composer la page d'accueil |

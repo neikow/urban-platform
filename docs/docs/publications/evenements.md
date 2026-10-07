@@ -4,11 +4,10 @@ Les **événements** permettent de présenter des activités organisées (atelie
 
 ## Créer un événement
 
-1. Dans la barre latérale, ouvrez **Actualités** puis cliquez sur **Ajouter**.
-2. Choisissez le type **Événement**.
-3. Choisissez un **modèle** (Réunion publique, Atelier participatif, Balade urbaine) ou **Partir d'une page vide**. → [Partir d'un modèle](../modeles.md)
-4. Remplissez les champs du formulaire (voir ci-dessous).
-5. Enregistrez ou publiez.
+1. Dans la barre latérale, ouvrez **Actualités** puis cliquez sur **Nouvel événement** (ou utilisez l'action rapide du tableau de bord).
+2. Choisissez un **modèle** (Réunion publique, Atelier participatif, Balade urbaine) ou **Partir d'une page vide**. → [Partir d'un modèle](../modeles.md)
+3. Remplissez les champs du formulaire (voir ci-dessous).
+4. Enregistrez ou publiez.
 
 ## Les champs du formulaire
 
@@ -85,7 +84,7 @@ Pour publier, cliquez sur la **flèche** à côté du bouton pour déployer les 
 
 ## Modifier un événement existant
 
-1. Allez dans **Actualités > Liste**.
+1. Ouvrez **Actualités** puis **Toutes les publications**.
 2. Cliquez sur le titre de l'événement à modifier.
 3. Effectuez vos modifications.
 4. Cliquez sur **Publier** pour mettre à jour la page en ligne.

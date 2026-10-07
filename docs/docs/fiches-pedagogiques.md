@@ -6,8 +6,9 @@ Les fiches **Informations utiles** expliquent aux habitants les notions et les d
 
 Dans la barre latérale, cliquez sur **Informations utiles**, puis choisissez :
 
-- **Liste** : voir toutes les fiches existantes
-- **Ajouter** : créer une nouvelle fiche
+- **Page « Informations utiles »** : modifier la page qui liste les fiches
+- **Toutes les fiches** : voir les fiches existantes
+- **Nouvelle fiche** : créer une fiche
 
 ## La liste des fiches
 
@@ -18,7 +19,7 @@ La liste affiche le titre de chaque fiche, sa date de mise à jour et son statut
 
 ## Créer une fiche
 
-1. Cliquez sur **Informations utiles > Ajouter**.
+1. Ouvrez **Informations utiles** puis cliquez sur **Nouvelle fiche** (ou utilisez l'action rapide du tableau de bord).
 2. Choisissez un **modèle** (Expliquer une notion, Guide pas à pas) ou **Partir d'une page vide**. → [Partir d'un modèle](modeles.md)
 3. Remplissez les champs du formulaire.
 4. Enregistrez ou publiez.

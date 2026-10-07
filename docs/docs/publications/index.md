@@ -9,9 +9,9 @@ La section **Actualités** regroupe le contenu éditorial du site : les **projet
 
 Dans la barre latérale, cliquez sur **Actualités** pour déployer le sous-menu, puis choisissez :
 
-- **Page d'accueil** : modifier la page « Actualités » elle-même (son introduction et son texte)
-- **Liste** : voir toutes les publications existantes
-- **Ajouter** : créer un projet ou un événement, à partir d'un [modèle](../modeles.md) ou d'une page vide
+- **Page « Actualités »** : modifier la page « Actualités » elle-même (son introduction et son texte)
+- **Toutes les publications** : voir les projets et événements existants
+- **Nouveau projet** et **Nouvel événement** : créer une publication, à partir d'un [modèle](../modeles.md) ou d'une page vide
 
 ## La liste des publications
 

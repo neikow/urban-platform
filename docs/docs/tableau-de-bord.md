@@ -1,59 +1,55 @@
 # Tableau de bord
 
-Le tableau de bord est la première page que vous voyez après vous être connecté. Il offre une vue d'ensemble rapide de l'activité du site.
+Le tableau de bord est la page qui s'ouvre après la connexion. Il rassemble ce qui demande votre attention et les raccourcis vers les tâches fréquentes.
 
 ![Tableau de bord](screenshots/tableau-de-bord.png)
-<!-- Capture d'écran : tableau de bord complet avec la barre latérale et les statistiques -->
 
-## Les éléments du tableau de bord
+## Les panneaux
 
-### Statistiques rapides
+### Actions rapides
 
-En haut de la page, trois compteurs affichent en temps réel :
+Des boutons pour les tâches les plus courantes :
 
-| Compteur | Ce qu'il indique |
-|---|---|
-| **Pages** | Le nombre total de pages publiées sur le site |
-| **Images** | Le nombre d'images dans la médiathèque |
-| **Documents** | Le nombre de documents disponibles |
+- **Nouveau projet**, **Nouvel événement**, **Nouvelle fiche « Informations utiles »** : ouvrent le [choix d'un modèle](modeles.md) ;
+- **Modifier la page d'accueil** ;
+- **Modifier l'annonce** : le [bandeau en haut du site](annonce.md).
 
-Cliquez sur l'un de ces compteurs pour accéder directement à la section correspondante.
+Seules les actions que vous avez le droit de faire sont affichées.
 
-### Barre de recherche
+### Consultations à suivre
 
-La barre de recherche centrale vous permet de **retrouver rapidement une page** par son titre. Commencez à taper le nom de la page que vous recherchez et les résultats s'affichent automatiquement.
+Les projets dont le **vote** ou la **collecte d'idées** est ouvert : le type de participation, la date de clôture, le nombre de réponses, et un lien **Voir les réponses** vers les [votes](statistiques-votes.md) ou les [idées](collecte-idees.md).
 
-### Vos modifications les plus récentes
+### Événements à venir
 
-Cette section liste les **dernières pages que vous avez modifiées**, avec leur statut (Publiée, Brouillon) et la date de la dernière modification.
+Les prochains événements, avec leur date et le nombre de personnes qui ont cliqué sur « Ça m'intéresse ».
 
-Cliquez sur le titre d'une page pour la modifier directement.
+### Brouillons en attente de publication
 
-### Votre compte
+Les pages avec des modifications **pas encore publiées**, quel qu'en soit l'auteur, de la plus récente à la plus ancienne. Pratique pour ne rien oublier. Le panneau n'apparaît que s'il y a des brouillons.
 
-En haut à droite, vous pouvez accéder à :
+### Plus bas
 
-- **Compte** : modifier votre profil et votre mot de passe
-- **Guide de l'éditeur pour Wagtail** : documentation officielle de l'outil (en anglais)
+Les panneaux habituels de Wagtail : **vos modifications les plus récentes**, et les pages verrouillées ou en attente de validation, s'il y en a.
+
+En haut de la page, les compteurs (pages, images, documents) et la **barre de recherche** permettent de retrouver une page par son titre.
 
 ## La barre latérale
 
-La barre latérale gauche est le menu principal de l'administration. Elle contient toutes les sections du site :
+Le menu est organisé par tâche :
 
-| Entrée | Description |
+| Entrée | Contenu |
 |---|---|
 | **Rechercher** | Rechercher une page dans tout le site |
-| **Page d'accueil** | Modifier la page d'accueil → [Page d'accueil](page-accueil.md) |
-| **Actualités** | Projets et événements → [Actualités](publications/index.md) |
-| **Informations utiles** | Les fiches pour comprendre l'urbanisme → [Informations utiles](fiches-pedagogiques.md) |
-| **Statistiques des votes** | Les votes sur les projets → [Statistiques des votes](statistiques-votes.md) |
-| **Collecte d'idées** | Les idées proposées sur les projets → [Collecte d'idées](collecte-idees.md) |
-| **Légal** | Charte, conditions d'utilisation, politiques → [Pages légales](legal.md) |
-| **Images** | Bibliothèque d'images → [Images](images.md) |
-| **À propos** | Pages de présentation → [À propos](a-propos.md) |
-| **Documents** | Bibliothèque de documents → [Documents](documents.md) |
-| **Utilisateurs** | Les comptes et leurs rôles → [Utilisateurs](utilisateurs.md) |
+| **Page d'accueil** | Composer la page d'accueil → [Page d'accueil](page-accueil.md) |
+| **Actualités** | Page « Actualités », toutes les publications, **Nouveau projet**, **Nouvel événement** → [Actualités](publications/index.md) |
+| **Informations utiles** | Page « Informations utiles », toutes les fiches, **Nouvelle fiche** → [Informations utiles](fiches-pedagogiques.md) |
+| **Pages du site** | Les pages « À propos » et les pages légales → [À propos](a-propos.md), [Pages légales](legal.md) |
+| **Participation** | **Votes** et **Idées** des habitants → [Votes](statistiques-votes.md), [Idées](collecte-idees.md) |
+| **Médiathèque** | **Images** et **Documents** → [Images](images.md), [Documents](documents.md) |
+| **Paramètres** | **Annonce**, **Utilisateurs** et les réglages techniques → [Annonce](annonce.md), [Utilisateurs](utilisateurs.md) |
 | **Documentation** | Ce guide |
-| **Paramètres** | Dont l'**Annonce** en haut du site → [Annonce](annonce.md) |
+
+**Chacun ne voit que ce qu'il peut faire.** Un membre d'association ne voit pas la gestion des utilisateurs, et les entrées de contenu (Actualités, Pages du site…) n'apparaissent que si ses groupes lui permettent de modifier ces pages. Voir [Utilisateurs](utilisateurs.md).
 
 > **Astuce :** Vous pouvez réduire la barre latérale en cliquant sur la flèche en haut à gauche pour avoir plus d'espace d'édition.
