@@ -17,7 +17,7 @@
 | about/models/about\_website.py                                 |       14 |        0 |        0 |        0 |    100.00% |           |
 | core/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
 | core/apps.py                                                   |       13 |        0 |        0 |        0 |    100.00% |           |
-| core/auth\_backends.py                                         |       17 |        2 |        4 |        2 |     80.95% |    63, 66 |
+| core/auth\_backends.py                                         |       18 |        2 |        4 |        2 |     81.82% |    71, 74 |
 | core/blocks.py                                                 |      179 |        0 |        4 |        2 |     98.91% |255-\>265, 262-\>265 |
 | core/cache.py                                                  |       16 |        2 |        2 |        1 |     83.33% |33-34, 40-\>exit |
 | core/context\_processors.py                                    |        6 |        0 |        0 |        0 |    100.00% |           |
@@ -30,7 +30,8 @@
 | core/management/commands/\_content\_transfer.py                |       51 |        3 |       22 |        3 |     91.78% |105, 126, 134 |
 | core/management/commands/export\_content.py                    |      104 |       12 |       28 |        7 |     85.61% |67-\>65, 73-\>71, 94-95, 152-\>144, 161-162, 166-167, 185-186, 190-191, 212-213 |
 | core/management/commands/import\_content.py                    |      154 |       18 |       46 |        8 |     85.00% |59-60, 66, 105-108, 126, 140-142, 152-153, 188-189, 199, 208, 211 |
-| core/models/\_\_init\_\_.py                                    |        7 |        0 |        0 |        0 |    100.00% |           |
+| core/models/\_\_init\_\_.py                                    |        8 |        0 |        0 |        0 |    100.00% |           |
+| core/models/announcement.py                                    |       26 |        0 |        0 |        0 |    100.00% |           |
 | core/models/city.py                                            |        5 |        1 |        0 |        0 |     80.00% |         8 |
 | core/models/city\_district.py                                  |       10 |        0 |        0 |        0 |    100.00% |           |
 | core/models/city\_neighborhood.py                              |       15 |        2 |        0 |        0 |     86.67% |    18, 22 |
@@ -45,6 +46,7 @@
 | core/permissions.py                                            |       19 |        0 |       10 |        0 |    100.00% |           |
 | core/sitemaps.py                                               |       72 |       21 |        6 |        0 |     65.38% |31-33, 36, 39, 47, 55-65, 73, 81, 89, 97, 105, 113-122 |
 | core/templatetags/\_\_init\_\_.py                              |        0 |        0 |        0 |        0 |    100.00% |           |
+| core/templatetags/announcement\_tags.py                        |       16 |        0 |        6 |        0 |    100.00% |           |
 | core/templatetags/custom\_blocks.py                            |       18 |        7 |        8 |        3 |     53.85% |11, 13, 16-19, 24-39 |
 | core/templatetags/django\_settings.py                          |        6 |        0 |        0 |        0 |    100.00% |           |
 | core/templatetags/forms.py                                     |        6 |        0 |        0 |        0 |    100.00% |           |
@@ -68,7 +70,7 @@
 | core/views/profile\_edit.py                                    |      126 |        6 |       26 |        6 |     92.11% |86, 96, 100, 129, 139, 146 |
 | core/views/register.py                                         |       90 |        7 |       22 |        8 |     86.61% |68, 81, 87, 94, 96, 98, 136-\>140, 163 |
 | core/wagtail\_forms.py                                         |       35 |        2 |        6 |        2 |     90.24% |    33, 53 |
-| core/wagtail\_hooks.py                                         |       99 |        8 |       18 |        8 |     86.32% |124, 159, 161, 163, 165, 205, 207, 209 |
+| core/wagtail\_hooks.py                                         |       99 |        8 |       18 |        9 |     85.47% |60-\>76, 124, 159, 161, 163, 165, 205, 207, 209 |
 | core/wagtail\_viewsets.py                                      |       19 |        3 |        0 |        0 |     84.21% |     22-24 |
 | core/widgets.py                                                |       45 |       19 |       16 |        3 |     47.54% |16, 28-35, 49, 68-71, 81-88, 98 |
 | home/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
@@ -139,7 +141,7 @@
 | publications/views/vote\_stats.py                              |       60 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       29 |        0 |        2 |        1 |     96.77% | 68-\>exit |
 | publications/widgets.py                                        |       20 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **3928** |  **552** |  **684** |  **104** | **83.09%** |           |
+| **TOTAL**                                                      | **3972** |  **552** |  **690** |  **105** | **83.25%** |           |
 
 
 ## Setup coverage badge
