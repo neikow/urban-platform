@@ -1,14 +1,24 @@
 {% load i18n static %}
+{% comment %}
+    Optional overrides (home page block): map_label, map_title, map_introduction,
+    map_section_class, map_title_class.
+{% endcomment %}
+{% trans "Around you" as default_label %}
+{% trans "Projects near me" as default_title %}
+{% trans "Projects located in the 7th arrondissement of Marseille." as default_introduction %}
 
-<section class="mt-12 mb-4" aria-labelledby="projects-map-title">
+<section class="{% firstof map_section_class "mt-12 mb-4" %}" aria-labelledby="projects-map-title">
     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4">
         <div>
-            <p class="section-label mb-1.5">{% trans "Around you" %}</p>
-            <h2 id="projects-map-title" class="font-display font-black uppercase text-display-sm leading-tight">
-                {% trans "Projects near me" %}
+            <p class="section-label mb-1.5">{% firstof map_label default_label %}</p>
+            <h2
+                id="projects-map-title"
+                class="font-display font-black uppercase {% firstof map_title_class "text-display-sm leading-tight" %}"
+            >
+                {% firstof map_title default_title %}
             </h2>
             <p class="text-sm text-base-content/70 mt-1">
-                {% trans "Projects located in the 7th arrondissement of Marseille." %}
+                {% firstof map_introduction default_introduction %}
             </p>
         </div>
         <button type="button" id="projects-map-locate" class="btn btn-outline btn-sm hidden">

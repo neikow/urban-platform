@@ -92,6 +92,12 @@
 }
 
 @layer utilities {
+    /* Two plain home page parts in a row share one gap instead of stacking
+       two. A utility, so it wins over the parts' own padding utilities. */
+    .home-section--plain + .home-section--plain > .container {
+        padding-top: 0;
+    }
+
     .last-breadcrumb {
         position: relative;
         display: flex;
@@ -254,6 +260,69 @@
 
     .section-label {
         @apply text-2xs font-bold uppercase tracking-[0.2em] text-base-content/50;
+    }
+
+    /* Home page parts (home/templates/home/blocks/). The tone sets the
+       background and text colour; children use currentColor-based rules and
+       the helpers below so they read on every tone. */
+    .home-section--plain {
+        @apply bg-base-100 text-base-content;
+    }
+
+    .home-section--sand {
+        background: color-mix(in oklch, var(--color-accent) 30%, var(--color-base-100));
+        @apply text-base-content;
+    }
+
+    .home-section--navy {
+        @apply bg-secondary text-secondary-content;
+
+        .section-label {
+            color: color-mix(in oklch, currentColor 65%, transparent);
+        }
+    }
+
+    .home-accent {
+        @apply text-primary;
+
+        .home-section--navy & {
+            @apply text-accent;
+        }
+    }
+
+    .home-muted,
+    .home-intro {
+        color: color-mix(in oklch, currentColor 72%, transparent);
+    }
+
+    .home-quote {
+        background: color-mix(in oklch, currentColor 5%, transparent);
+    }
+
+    .home-prose {
+        p + p,
+        p + ul,
+        p + ol,
+        ul + p,
+        ol + p {
+            @apply mt-4;
+        }
+
+        h3 {
+            @apply mt-8 mb-3 font-display font-extrabold uppercase text-2xl leading-tight;
+        }
+
+        ul {
+            @apply pl-6 list-disc;
+        }
+
+        ol {
+            @apply pl-6 list-decimal;
+        }
+
+        a {
+            @apply link font-semibold;
+        }
     }
 
     /* Site-wide announcement (core/components/announcement_band.html): the rich

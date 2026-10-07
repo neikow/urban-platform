@@ -1,0 +1,10 @@
+<div class="max-w-3xl border-t border-current/15">
+    {% for item in value %}
+        <details class="collapse collapse-arrow rounded-none border-b border-current/15">
+            <summary class="collapse-title px-0 text-lg font-semibold">{{ item.question }}</summary>
+            <div class="collapse-content px-0">
+                <div class="home-muted leading-relaxed">{{ item.answer|linebreaks }}</div>
+            </div>
+        </details>
+    {% endfor %}
+</div>

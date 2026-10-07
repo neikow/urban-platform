@@ -1,26 +1,33 @@
 {% load wagtailcore_tags i18n l10n %}
 
-<section class="{% if container %}container mx-auto{% endif %} px-4 sm:px-6 py-14 sm:py-20 no-page-style">
-    <div class="flex justify-between items-end mb-10 gap-4">
-        <div>
-            <p class="section-label mb-2">{% translate 'Publications' %}</p>
-            <h2 class="font-display font-black uppercase text-display-sm leading-tight">
-                {% translate 'Recent Publications' %}
-            </h2>
+<section class="home-section home-section--plain no-page-style">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div class="flex justify-between items-end mb-10 gap-4">
+            <div>
+                <p class="section-label mb-2">{% translate 'Publications' %}</p>
+                <h2 class="font-display font-black uppercase text-display-md leading-[1.05]">
+                    {% translate 'Recent Publications' %}
+                </h2>
+            </div>
+            {% if publications_url %}
+                <a
+                    href="{{ publications_url }}"
+                    class="link link-hover inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-label shrink-0"
+                >
+                    {% translate 'View All' %}
+                    {% include "icons/arrow_right.html" %}
+                </a>
+            {% endif %}
         </div>
-        <a href="/publications/" class="btn btn-ghost text-sm opacity-70 flex items-center shrink-0 self-end">
-            {% translate 'View All' %}
-            {% include "icons/arrow_right.html" %}
-        </a>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for publication in publications %}
-            {% include "publications/components/publication_preview.html" with publication=publication %}
-            {% empty %}
-            <p class="col-span-full text-center opacity-50 py-10">
-                {% translate "No recent publications found." %}
-            </p>
-        {% endfor %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for publication in publications %}
+                {% include "publications/components/publication_preview.html" with publication=publication %}
+                {% empty %}
+                <p class="col-span-full text-center opacity-50 py-10">
+                    {% translate "No recent publications found." %}
+                </p>
+            {% endfor %}
+        </div>
     </div>
 </section>

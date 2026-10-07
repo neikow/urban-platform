@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 15:04+0200\n"
+"POT-Creation-Date: 2026-10-07 17:01+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -770,46 +770,46 @@ msgstr "Recevoir les actualités du projet par email"
 msgid "Around you"
 msgstr "Autour de vous"
 
-#: publications/templates/publications/components/projects_map.html:8
+#: publications/templates/publications/components/projects_map.html:7
 msgid "Projects near me"
 msgstr "Projets près de chez moi"
 
-#: publications/templates/publications/components/projects_map.html:11
+#: publications/templates/publications/components/projects_map.html:8
 msgid "Projects located in the 7th arrondissement of Marseille."
 msgstr "Les projets situés dans le 7e arrondissement de Marseille."
 
-#: publications/templates/publications/components/projects_map.html:27
+#: publications/templates/publications/components/projects_map.html:37
 msgid "Show my position"
 msgstr "Afficher ma position"
 
-#: publications/templates/publications/components/projects_map.html:34
+#: publications/templates/publications/components/projects_map.html:44
 msgid "Map of projects"
 msgstr "Carte des projets"
 
-#: publications/templates/publications/components/projects_map.html:35
+#: publications/templates/publications/components/projects_map.html:45
 msgid "Your position could not be found."
 msgstr "Votre position n'a pas pu être déterminée."
 
-#: publications/templates/publications/components/projects_map.html:36
+#: publications/templates/publications/components/projects_map.html:46
 msgid "You are here"
 msgstr "Vous êtes ici"
 
-#: publications/templates/publications/components/projects_map.html:37
+#: publications/templates/publications/components/projects_map.html:47
 msgid "Open for participation"
 msgstr "Participation ouverte"
 
-#: publications/templates/publications/components/projects_map.html:38
+#: publications/templates/publications/components/projects_map.html:48
 msgid "See the project"
 msgstr "Voir le projet"
 
-#: publications/templates/publications/components/projects_map.html:45
+#: publications/templates/publications/components/projects_map.html:55
 #, python-format
 msgid "%(total)s project on the map"
 msgid_plural "%(total)s projects on the map"
 msgstr[0] "%(total)s projet sur la carte"
 msgstr[1] "%(total)s projets sur la carte"
 
-#: publications/templates/publications/components/projects_map.html:63
+#: publications/templates/publications/components/projects_map.html:73
 msgid "No project has been placed on the map yet."
 msgstr "Aucun projet n'est encore placé sur la carte."
 

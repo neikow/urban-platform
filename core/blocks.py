@@ -263,6 +263,11 @@ class RecentPublicationsBlock(blocks.StructBlock):
                 cache.set(cache_key, publications, CONTENT_CACHE_TIMEOUT)
 
         context["publications"] = publications
+
+        from publications.models import PublicationIndexPage
+
+        index = PublicationIndexPage.objects.live().first()
+        context["publications_url"] = index.url if index else ""
         return context
 
     class Meta:

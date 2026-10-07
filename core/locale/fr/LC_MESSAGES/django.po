@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 15:36+0200\n"
+"POT-Creation-Date: 2026-10-07 17:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,93 +196,93 @@ msgstr "Bloc Liste de témoignages"
 msgid "Number of Publications"
 msgstr "Nombre de publications"
 
-#: core/blocks.py:270
+#: core/blocks.py:275
 msgid "Recent Publications Block"
 msgstr "Bloc des publications récentes"
 
-#: core/blocks.py:275
+#: core/blocks.py:280
 msgid "Question"
 msgstr "Question"
 
-#: core/blocks.py:276
+#: core/blocks.py:281
 msgid "Answer"
 msgstr "Réponse"
 
-#: core/blocks.py:288
+#: core/blocks.py:293
 msgid "FAQ Block"
 msgstr "Bloc FAQ"
 
-#: core/blocks.py:295
+#: core/blocks.py:300
 msgid "Height (in pixels)"
 msgstr "Hauteur (en pixels)"
 
-#: core/blocks.py:302
+#: core/blocks.py:307
 msgid "Hide on Mobile"
 msgstr "Masquer sur mobile"
 
-#: core/blocks.py:308
+#: core/blocks.py:313
 msgid "Vertical Spacer"
 msgstr "Espace vertical"
 
-#: core/blocks.py:314
+#: core/blocks.py:319
 msgid "Button Text"
 msgstr "Texte du bouton"
 
-#: core/blocks.py:316
+#: core/blocks.py:321
 msgid "Button Type"
 msgstr "Type de bouton"
 
-#: core/blocks.py:322
+#: core/blocks.py:327
 msgid "Button Alignment"
 msgstr "Alignement du bouton"
 
-#: core/blocks.py:333
+#: core/blocks.py:338
 msgid "Button Link"
 msgstr "Lien du bouton"
 
-#: core/blocks.py:336
+#: core/blocks.py:341
 msgid "Call-to-Action Button"
 msgstr "CTA - Bouton d'appel à l'action"
 
-#: core/blocks.py:342 core/blocks.py:345
+#: core/blocks.py:347 core/blocks.py:350
 msgid "Document"
 msgstr "Document"
 
-#: core/models/announcement.py:11
+#: core/models/announcement.py:12
 msgid "Information"
 msgstr "Information"
 
-#: core/models/announcement.py:12
+#: core/models/announcement.py:13
 msgid "Warning"
 msgstr "Avertissement"
 
-#: core/models/announcement.py:13
+#: core/models/announcement.py:14
 msgid "Important"
 msgstr "Important"
 
-#: core/models/announcement.py:26
+#: core/models/announcement.py:27
 msgid "Show the announcement"
 msgstr "Afficher l'annonce"
 
-#: core/models/announcement.py:28
+#: core/models/announcement.py:29
 msgid "Display the band at the top of every page of the website."
 msgstr "Affiche le bandeau en haut de toutes les pages du site."
 
-#: core/models/announcement.py:31
+#: core/models/announcement.py:32
 msgid "Message"
 msgstr "Message"
 
-#: core/models/announcement.py:35
+#: core/models/announcement.py:36
 msgid ""
 "Keep it short: one or two sentences. Visitors who closed it see it again "
 "once you change it."
 msgstr "Restez bref : une ou deux phrases. Les visiteurs qui l'ont fermée la revoient dès que vous la modifiez."
 
-#: core/models/announcement.py:39
+#: core/models/announcement.py:40
 msgid "Style"
 msgstr "Style"
 
-#: core/models/announcement.py:52
+#: core/models/announcement.py:53
 #: core/templates/core/components/announcement_band.html:8
 msgid "Announcement"
 msgstr "Annonce"
@@ -587,8 +587,8 @@ msgstr "Les liens de vérification sont valables 24 heures."
 #: core/templates/auth/login_modal.html:29
 #: core/templates/auth/login_modal.html:75
 #: core/templates/auth/register.html:184
-#: core/templates/core/components/website_header.html:176
-#: core/templates/core/components/website_header.html:225
+#: core/templates/core/components/website_header.html:177
+#: core/templates/core/components/website_header.html:226
 msgid "Log in"
 msgstr "Se connecter"
 
@@ -838,19 +838,19 @@ msgstr "Foire aux Questions"
 msgid "Preview image: %(title)s"
 msgstr "Aperçu de l'image: %(title)s"
 
-#: core/templates/core/blocks/recent_publications_block.html:6
+#: core/templates/core/blocks/recent_publications_block.html:7
 msgid "Publications"
 msgstr "Publications"
 
-#: core/templates/core/blocks/recent_publications_block.html:8
+#: core/templates/core/blocks/recent_publications_block.html:9
 msgid "Recent Publications"
 msgstr "Publications récentes"
 
-#: core/templates/core/blocks/recent_publications_block.html:12
+#: core/templates/core/blocks/recent_publications_block.html:17
 msgid "View All"
 msgstr "Voir tout"
 
-#: core/templates/core/blocks/recent_publications_block.html:22
+#: core/templates/core/blocks/recent_publications_block.html:28
 msgid "No recent publications found."
 msgstr "Aucune publication récente trouvée."
 
@@ -913,11 +913,11 @@ msgstr "Menu utilisateur"
 msgid "Profile"
 msgstr "Profil"
 
-#: core/templates/core/components/website_header.html:165
+#: core/templates/core/components/website_header.html:164
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: core/templates/core/components/website_header.html:197
+#: core/templates/core/components/website_header.html:198
 msgid "Navigation Menu"
 msgstr "Menu de navigation"
 

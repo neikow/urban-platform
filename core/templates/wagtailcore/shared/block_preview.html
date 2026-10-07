@@ -1,0 +1,16 @@
+{% extends "wagtailcore/shared/block_preview.html" %}
+{% load static %}
+
+{% comment %}
+    Block previews in the admin's block picker, with the website's styles so
+    editors see what a block will look like.
+{% endcomment %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/map.css' %}">
+{% endblock %}
+
+{% block js %}
+    <script type="module" src="{% static 'dist/main.js' %}"></script>
+{% endblock %}

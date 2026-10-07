@@ -1,0 +1,11 @@
+{% comment %}
+    Label, title and introduction of a home page part.
+    Takes `label`, `title`, `introduction` and `heading_id`.
+{% endcomment %}
+{% if label %}<p class="section-label mb-3">{{ label }}</p>{% endif %}
+{% if title %}
+    <h2 id="{{ heading_id }}" class="font-display font-black uppercase text-display-md leading-[1.05] text-balance">
+        {{ title }}
+    </h2>
+{% endif %}
+{% if introduction %}<p class="home-intro mt-5 text-lg leading-relaxed max-w-2xl">{{ introduction }}</p>{% endif %}
