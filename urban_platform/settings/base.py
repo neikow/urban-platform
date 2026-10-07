@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "publications",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.routable_page",
     "wagtail.embeds",
     "wagtail.sites",
     "core.apps.CustomUsersAppConfig",  # replaces "wagtail.users" to add role management

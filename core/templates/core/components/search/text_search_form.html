@@ -1,5 +1,9 @@
 {% load i18n %}
-<form class="flex gap-2">
+<form class="flex gap-2" data-instant-search>
+    {# Keep the other filters: a search refines the current list. #}
+    {% for key, value in request.GET.items %}
+        {% if key != "search" and key != "page" %}<input type="hidden" name="{{ key }}" value="{{ value }}">{% endif %}
+    {% endfor %}
     <label class="input">
         <svg aria-hidden="true" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <g

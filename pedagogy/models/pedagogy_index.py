@@ -3,8 +3,10 @@ from django_stubs_ext import StrOrPromise
 
 from django.core.paginator import Paginator
 from django.db import models
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.template import Context
+from django.template.response import TemplateResponse
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.fields import RichTextField
 from wagtail.models import Page, PanelPlaceholder
 from django.utils.translation import gettext_lazy as _
@@ -13,7 +15,7 @@ from wagtail.admin.panels import FieldPanel
 from pedagogy.models.pedagogy_card import PedagogyCardPage
 
 
-class PedagogyIndexPage(Page):
+class PedagogyIndexPage(RoutablePageMixin, Page):
     PEDAGOGY_ENTRIES_PER_PAGE = 9
 
     max_count = 1
@@ -59,7 +61,8 @@ class PedagogyIndexPage(Page):
     def get_verbose_name(cls) -> StrOrPromise:
         return _("Pedagogy Entries Index")
 
-    def _populate_pedagogy_entries(self, context: Context, request: HttpRequest) -> None:
+    def get_results_context(self, request: HttpRequest) -> dict[str, Any]:
+        """What the list region (components/pedagogy_results.html) needs."""
         pedagogy_entries = (
             PedagogyCardPage.objects.live().descendant_of(self).order_by("-first_published_at")
         )
@@ -75,12 +78,23 @@ class PedagogyIndexPage(Page):
         page_number = request.GET.get("page")
         pedagogy_entries = paginator.get_page(page_number)
 
-        context.update({"pedagogy_entries": pedagogy_entries})
+        return {"pedagogy_entries": pedagogy_entries}
 
     def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> Context:
         context = super().get_context(request, *args, **kwargs)
-        self._populate_pedagogy_entries(context, request)
+        context.update(self.get_results_context(request))
         return context
+
+    @path("results/", name="results")
+    def results(self, request: HttpRequest) -> HttpResponse:
+        """The list region alone, fetched by lib/instant-results.ts."""
+        response = TemplateResponse(
+            request,
+            "pedagogy/components/pedagogy_results.html",
+            {"page": self, "request": request, **self.get_results_context(request)},
+        )
+        response["X-Robots-Tag"] = "noindex"
+        return response
 
     class Meta:
         verbose_name = verbose_name_plural = _("Pedagogy Entries Index")

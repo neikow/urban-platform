@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 11:38+0200\n"
+"POT-Creation-Date: 2026-10-07 15:04+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -32,7 +32,7 @@ msgstr "Les coordonnées de la localisation sont invalides."
 #: publications/models/event.py:20 publications/models/event.py:123
 #: publications/models/event_interest.py:23
 #: publications/templates/publications/components/publication_preview.html:51
-#: publications/templates/publications/event_page.html:15
+#: publications/templates/publications/event_page.html:17
 #: publications/views/feeds.py:79
 msgid "Event"
 msgstr "Événement"
@@ -55,7 +55,7 @@ msgstr "Date et heure de fin de l'événement (optionnel)"
 
 #: publications/models/event.py:37 publications/models/project.py:79
 #: publications/templates/publications/components/project_location.html:5
-#: publications/templates/publications/event_page.html:82
+#: publications/templates/publications/event_page.html:90
 msgid "Location"
 msgstr "Lieu"
 
@@ -64,7 +64,7 @@ msgid "Venue of the event"
 msgstr "Lieu de l'événement"
 
 #: publications/models/event.py:44
-#: publications/templates/publications/event_page.html:173
+#: publications/templates/publications/event_page.html:181
 msgid "Address"
 msgstr "Adresse"
 
@@ -97,7 +97,7 @@ msgid "Maximum number of participants (leave empty if unlimited)"
 msgstr "Nombre maximum de participants (laisser vide si illimité)"
 
 #: publications/models/event.py:124
-#: publications/templates/publications/publication_index_page.html:59
+#: publications/templates/publications/components/publication_results.html:43
 msgid "Events"
 msgstr "Événements"
 
@@ -351,12 +351,12 @@ msgstr ""
 "Actualités du projet, de la plus récente à la plus ancienne sur la page."
 
 #: publications/models/project.py:185
-#: publications/templates/publications/publication_index_page.html:47
+#: publications/templates/publications/components/publication_results.html:31
 msgid "Projects"
 msgstr "Projets"
 
 #: publications/models/project_update.py:22
-#: publications/templates/publications/event_page.html:49
+#: publications/templates/publications/event_page.html:57
 msgid "Date"
 msgstr "Date"
 
@@ -423,24 +423,24 @@ msgstr "Contenu"
 msgid "The main content of the page."
 msgstr "Le contenu principal de la page."
 
-#: publications/models/publication_index.py:35
-#: publications/models/publication_index.py:111
+#: publications/models/publication_index.py:37
+#: publications/models/publication_index.py:120
 msgid "Publications Index"
 msgstr "Index des publications"
 
-#: publications/models/publication_index.py:39
+#: publications/models/publication_index.py:41
 msgid "Page introduction"
 msgstr "Introduction de la page"
 
-#: publications/models/publication_index.py:40
+#: publications/models/publication_index.py:42
 msgid "Small introduction shown above the publications list."
 msgstr "Petite introduction affichée au-dessus de la liste des publications."
 
-#: publications/models/publication_index.py:46
+#: publications/models/publication_index.py:48
 msgid "Page body content"
 msgstr "Contenu de la page"
 
-#: publications/models/publication_index.py:47
+#: publications/models/publication_index.py:49
 msgid "Additional content for the publications page."
 msgstr "Contenu supplémentaire pour la page des publications."
 
@@ -814,19 +814,43 @@ msgid "No project has been placed on the map yet."
 msgstr "Aucun projet n'est encore placé sur la carte."
 
 #: publications/templates/publications/components/publication_preview.html:55
-#: publications/templates/publications/event_page.html:17
+#: publications/templates/publications/event_page.html:21
 msgid "Upcoming"
 msgstr "À venir"
 
 #: publications/templates/publications/components/publication_preview.html:59
-#: publications/templates/publications/event_page.html:19
+#: publications/templates/publications/event_page.html:25
 msgid "Ongoing"
 msgstr "En cours"
 
 #: publications/templates/publications/components/publication_preview.html:63
-#: publications/templates/publications/event_page.html:21
+#: publications/templates/publications/event_page.html:29
 msgid "Past"
 msgstr "Passé"
+
+#: publications/templates/publications/components/publication_results.html:6
+#, python-format
+msgid "%(total)s result"
+msgid_plural "%(total)s results"
+msgstr[0] "%(total)s résultat"
+msgstr[1] "%(total)s résultats"
+
+#: publications/templates/publications/components/publication_results.html:21
+msgid "All"
+msgstr "Tout"
+
+#: publications/templates/publications/components/publication_results.html:68
+msgid "Show past events"
+msgstr "Afficher les événements passés"
+
+#: publications/templates/publications/components/publication_results.html:84
+#: publications/tests/test_models.py:237
+msgid "All urban planning"
+msgstr "Tout l'urbanisme"
+
+#: publications/templates/publications/components/publication_results.html:106
+msgid "No publications found"
+msgstr "Aucune publication trouvée"
 
 #: publications/templates/publications/components/verify_email_prompt.html:5
 #, python-format
@@ -950,53 +974,53 @@ msgstr "Modifier mon vote"
 msgid "Remove my vote"
 msgstr "Retirer mon vote"
 
-#: publications/templates/publications/event_page.html:111
+#: publications/templates/publications/event_page.html:119
 msgid "Online"
 msgstr "En ligne"
 
-#: publications/templates/publications/event_page.html:112
+#: publications/templates/publications/event_page.html:120
 msgid "Yes"
 msgstr "Oui"
 
-#: publications/templates/publications/event_page.html:118
+#: publications/templates/publications/event_page.html:126
 msgid "Join"
 msgstr "Rejoindre"
 
-#: publications/templates/publications/event_page.html:143
+#: publications/templates/publications/event_page.html:151
 msgid "Max Participants"
 msgstr "Participants max"
 
-#: publications/templates/publications/event_page.html:158
-#: publications/templates/publications/project_page.html:58
+#: publications/templates/publications/event_page.html:166
+#: publications/templates/publications/project_page.html:60
 #, python-format
 msgid "Preview image: %(title)s"
 msgstr "Image d'aperçu: %(title)s"
 
-#: publications/templates/publications/event_page.html:182
+#: publications/templates/publications/event_page.html:190
 msgid "View on a map"
 msgstr "Voir sur une carte"
 
-#: publications/templates/publications/project_page.html:28
+#: publications/templates/publications/project_page.html:30
 msgid "Vote open"
 msgstr "Vote ouvert"
 
-#: publications/templates/publications/project_page.html:32
+#: publications/templates/publications/project_page.html:34
 msgid "Ideas open"
 msgstr "Idées ouvertes"
 
-#: publications/templates/publications/project_page.html:78
+#: publications/templates/publications/project_page.html:80
 msgid "Citizen Participation"
 msgstr "Participation citoyenne"
 
-#: publications/templates/publications/project_page.html:112
+#: publications/templates/publications/project_page.html:114
 msgid "Give your opinion"
 msgstr "Donner votre avis"
 
-#: publications/templates/publications/project_page.html:134
+#: publications/templates/publications/project_page.html:136
 msgid "Share your idea"
 msgstr "Partager votre idée"
 
-#: publications/templates/publications/project_page.html:143
+#: publications/templates/publications/project_page.html:145
 msgid "Table of Contents"
 msgstr "Table des matières"
 
@@ -1012,35 +1036,19 @@ msgstr "Rechercher des publications"
 msgid "Search for a publication..."
 msgstr "Rechercher une publication..."
 
-#: publications/templates/publications/publication_index_page.html:35
-msgid "All"
-msgstr "Tout"
-
-#: publications/templates/publications/publication_index_page.html:86
-msgid "Show past events"
-msgstr "Afficher les événements passés"
-
-#: publications/templates/publications/publication_index_page.html:102
-msgid "All urban planning"
-msgstr "Tout l'urbanisme"
-
-#: publications/templates/publications/publication_index_page.html:124
-msgid "No publications found"
-msgstr "Aucune publication trouvée"
-
-#: publications/templates/publications/publication_index_page.html:133
+#: publications/templates/publications/publication_index_page.html:30
 msgid "Follow the news:"
 msgstr "Suivre l'actualité :"
 
-#: publications/templates/publications/publication_index_page.html:134
+#: publications/templates/publications/publication_index_page.html:31
 msgid "RSS feed"
 msgstr "Flux RSS"
 
-#: publications/templates/publications/publication_index_page.html:137
+#: publications/templates/publications/publication_index_page.html:34
 msgid "Subscribe to the events calendar"
 msgstr "S'abonner à l'agenda des événements"
 
-#: publications/templates/publications/publication_index_page.html:139
+#: publications/templates/publications/publication_index_page.html:36
 msgid "iCal link"
 msgstr "Lien iCal"
 
