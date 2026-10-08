@@ -10,14 +10,6 @@ from .user import UserRole
 
 class NeighborhoodAssociation(models.Model):
     name = models.CharField(_("Name"), max_length=150)
-    neighborhood = models.ForeignKey(
-        "CityNeighborhood",
-        verbose_name=_("City Neighborhood"),
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="associations",
-    )
     address = models.CharField(_("Address"), max_length=255, blank=True)
     # Filled from the address when saving (core.geocoding), for the maps.
     address_location = models.JSONField(
@@ -47,6 +39,11 @@ class NeighborhoodAssociation(models.Model):
         verbose_name = _("Neighborhood Association")
         verbose_name_plural = _("Neighborhood Associations")
         ordering = ["name"]
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        # The area as loaded, to tell whether saving changed it (core.associations).
+        self.loaded_area = self.area
 
     def __str__(self) -> str:
         return self.name

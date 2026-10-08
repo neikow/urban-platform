@@ -123,7 +123,13 @@ if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
     # Serve static and media files from development server
+    from django.urls import re_path
+
+    from publications.management.commands.runserver import serve_media_tiles
+
     urlpatterns += staticfiles_urlpatterns()
+    # Updated map tiles (publications.map_tiles) need range requests.
+    urlpatterns += [re_path(r"^media/(?P<path>.+\.pmtiles)$", serve_media_tiles)]
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
     # Enable django-browser-reload

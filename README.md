@@ -51,6 +51,11 @@ The archive (~35 MB) is not committed. `make map-tiles` downloads the latest one
 Docker. The Docker image fetches it at build time. It is read with HTTP range requests:
 nginx supports them, and the project's `runserver` adds them for development.
 
+After that, the `refresh_map_tiles` Celery task checks every night and, once the interval
+set in the admin (Settings › Map, 30 days by default) has passed, extracts the latest build
+into `MEDIA_ROOT/map-tiles/` (shared by the worker and nginx). The maps then use it; the
+static copy stays as the fallback. `manage.py build_map_tiles --refresh` runs one now.
+
 ### Translations
 
 Code and templates use English strings; the French catalog lives in each app's

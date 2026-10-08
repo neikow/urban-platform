@@ -255,6 +255,12 @@ CELERY_BEAT_SCHEDULE = {
         "task": "publications.tasks.close_expired_polls",
         "schedule": 15 * 60,
     },
+    "refresh-map-tiles": {
+        "task": "publications.tasks.refresh_map_tiles",
+        # Daily check; the task only downloads once the interval set in the
+        # admin (Settings › Map) has passed.
+        "schedule": crontab(hour="4", minute="30"),
+    },
     "anonymize-old-email-events": {
         "task": "core.emails.tasks.anonymize_old_email_events",
         "schedule": 86400,

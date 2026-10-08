@@ -1,14 +1,16 @@
 import pytest
 from django.test import RequestFactory
 
-from publications.management.commands.runserver import serve_range
+from django.http import Http404
+
+from publications.management.commands.runserver import serve_media_tiles, serve_range
 
 
 @pytest.fixture
-def archive(tmp_path, settings):
-    settings.STATICFILES_DIRS = [tmp_path]
-    (tmp_path / "tiles.pmtiles").write_bytes(bytes(range(100)))
-    return "tiles.pmtiles"
+def archive(tmp_path):
+    path = tmp_path / "tiles.pmtiles"
+    path.write_bytes(bytes(range(100)))
+    return path
 
 
 def get(headers):
@@ -39,3 +41,33 @@ def test_range_past_the_end_is_not_satisfiable(archive):
 
 def test_no_range_falls_back_to_the_staticfiles_view(archive):
     assert serve_range(get({}), archive) is None
+
+
+class TestMediaTiles:
+    @pytest.fixture(autouse=True)
+    def media(self, tmp_path, settings):
+        settings.MEDIA_ROOT = tmp_path
+        (tmp_path / "map-tiles").mkdir()
+        (tmp_path / "map-tiles" / "local-area.pmtiles").write_bytes(bytes(range(100)))
+
+    def test_serves_ranges(self):
+        request = RequestFactory().get(
+            "/media/map-tiles/local-area.pmtiles", headers={"Range": "bytes=0-9"}
+        )
+
+        response = serve_media_tiles(request, "map-tiles/local-area.pmtiles")
+
+        assert response.status_code == 206
+        assert response.content == bytes(range(10))
+
+    def test_serves_whole_file_without_range(self):
+        request = RequestFactory().get("/media/map-tiles/local-area.pmtiles")
+
+        response = serve_media_tiles(request, "map-tiles/local-area.pmtiles")
+
+        assert response.status_code == 200
+
+    @pytest.mark.parametrize("path", ["map-tiles/missing.pmtiles", "../outside.pmtiles"])
+    def test_unknown_or_outside_files(self, path):
+        with pytest.raises(Http404):
+            serve_media_tiles(RequestFactory().get("/media/x"), path)

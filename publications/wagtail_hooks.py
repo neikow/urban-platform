@@ -56,3 +56,10 @@ def close_poll_header_button(page, user, view_name, next_url=None):  # type: ign
             icon_name="lock",
             priority=40,
         )
+
+
+@hooks.register("register_admin_urls")
+def register_map_tiles_refresh_url() -> list[URLPattern]:
+    from publications.views.map_tiles import refresh_map_tiles
+
+    return [path("map-tiles/refresh/", refresh_map_tiles, name="map_tiles_refresh")]

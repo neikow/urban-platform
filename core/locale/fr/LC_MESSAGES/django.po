@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 11:12+0200\n"
+"POT-Creation-Date: 2026-10-08 11:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -412,7 +412,6 @@ msgid "City Districts"
 msgstr "Arrondissements"
 
 #: core/models/city_neighborhood.py:13
-#: core/models/neighborhood_association.py:15
 msgid "City Neighborhood"
 msgstr "Quartier"
 
@@ -498,48 +497,48 @@ msgstr "Événements d'email"
 msgid "Name"
 msgstr "Nom"
 
-#: core/models/neighborhood_association.py:21 core/models/user.py:73
+#: core/models/neighborhood_association.py:13 core/models/user.py:73
 #: core/templates/core/profile.html:60
 msgid "Address"
 msgstr "Adresse"
 
-#: core/models/neighborhood_association.py:24
+#: core/models/neighborhood_association.py:16
 msgid "Address location"
 msgstr "Position de l'adresse"
 
-#: core/models/neighborhood_association.py:27
+#: core/models/neighborhood_association.py:19
 msgid "Area"
 msgstr "Secteur"
 
-#: core/models/neighborhood_association.py:31
+#: core/models/neighborhood_association.py:23
 msgid ""
 "Residents whose address lies in this area are attached to the association."
 msgstr ""
 "Les habitants dont l'adresse se trouve dans ce secteur sont rattachés à "
 "l'association."
 
-#: core/models/neighborhood_association.py:35
+#: core/models/neighborhood_association.py:27
 msgid "Responsible"
 msgstr "Responsable"
 
-#: core/models/neighborhood_association.py:42
+#: core/models/neighborhood_association.py:34
 msgid "Contact Email"
 msgstr "Email de contact"
 
-#: core/models/neighborhood_association.py:43 core/models/user.py:98
+#: core/models/neighborhood_association.py:35 core/models/user.py:98
 msgid "Phone Number"
 msgstr "Numéro de téléphone"
 
-#: core/models/neighborhood_association.py:44
+#: core/models/neighborhood_association.py:36
 msgid "Website"
 msgstr "Site web"
 
-#: core/models/neighborhood_association.py:47 core/models/user.py:82
+#: core/models/neighborhood_association.py:39 core/models/user.py:82
 #: core/templates/core/profile.html:68
 msgid "Neighborhood Association"
 msgstr "Comité d'intérêt de quartier"
 
-#: core/models/neighborhood_association.py:48
+#: core/models/neighborhood_association.py:40
 msgid "Neighborhood Associations"
 msgstr "Comités d'intérêt de quartier"
 
@@ -641,12 +640,12 @@ msgstr "Date du consentement à la newsletter"
 
 #: core/models/user.py:109
 msgid ""
-"When the user last agreed to receive the newsletter (GDPR proof of consent)."
-" Empty if they are not subscribed, or subscribed before this date was "
+"When the user last agreed to receive the newsletter (GDPR proof of consent). "
+"Empty if they are not subscribed, or subscribed before this date was "
 "recorded."
 msgstr ""
-"Date à laquelle l'utilisateur a accepté de recevoir la newsletter (preuve du"
-" consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
+"Date à laquelle l'utilisateur a accepté de recevoir la newsletter (preuve du "
+"consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
 "l'enregistrement de cette date."
 
 #: core/models/user.py:118
@@ -818,8 +817,7 @@ msgstr "Votre mot de passe a été réinitialisé avec succès."
 
 #: core/templates/auth/password_reset_complete.html:33
 msgid "You can now log in with your new password."
-msgstr ""
-"Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
+msgstr "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
 
 #: core/templates/auth/password_reset_complete.html:37
 #: core/templates/auth/password_reset_request.html:50
@@ -866,8 +864,8 @@ msgstr "Mot de passe oublié ?"
 msgid ""
 "Enter your email address and we will send you a link to reset your password."
 msgstr ""
-"Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser"
-" votre mot de passe."
+"Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser "
+"votre mot de passe."
 
 #: core/templates/auth/password_reset_request.html:44
 msgid "Send the link"
@@ -1203,8 +1201,7 @@ msgstr "Mon profil"
 msgid "Account"
 msgstr "Compte"
 
-#: core/templates/core/profile.html:27
-#: core/templates/core/profile_edit.html:48
+#: core/templates/core/profile.html:27 core/templates/core/profile_edit.html:48
 msgid "Personal information"
 msgstr "Informations personnelles"
 
@@ -1212,7 +1209,7 @@ msgstr "Informations personnelles"
 msgid "Postal code"
 msgstr "Code postal"
 
-#: core/templates/core/profile.html:96 core/wagtail_hooks.py:64
+#: core/templates/core/profile.html:96 core/wagtail_hooks.py:63
 msgid "Contact"
 msgstr "Contact"
 
@@ -1308,8 +1305,7 @@ msgstr ""
 msgid "Download my data"
 msgstr "Télécharger mes données"
 
-#: core/templates/core/profile.html:276
-#: core/templates/core/profile_edit.html:4
+#: core/templates/core/profile.html:276 core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:20
 #: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
@@ -1427,7 +1423,7 @@ msgstr "Nouveau : %(page_type)s"
 msgid "Start from a template and adapt it, or from a blank page."
 msgstr "Partez d'un modèle et adaptez-le, ou d'une page vide."
 
-#: core/views/page_templates.py:70 core/wagtail_hooks.py:133
+#: core/views/page_templates.py:70 core/wagtail_hooks.py:132
 msgid "Start from a template"
 msgstr "Partir d'un modèle"
 
@@ -1466,10 +1462,10 @@ msgstr "Un rappel la veille des événements qui m'intéressent"
 msgid "You do not have permission to assign this role."
 msgstr "Vous n'avez pas la permission d'attribuer ce rôle."
 
-#: core/wagtail_hooks.py:56
+#: core/wagtail_hooks.py:55
 msgid ""
-"Draw the area the association covers: residents living in it are attached to"
-" the association. The other associations' areas are shown in grey, and new "
+"Draw the area the association covers: residents living in it are attached to "
+"the association. The other associations' areas are shown in grey, and new "
 "points snap to their edges."
 msgstr ""
 "Dessinez le secteur couvert par l'association : les habitants qui y vivent "
