@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 12:01+0200\n"
+"POT-Creation-Date: 2026-10-08 12:12+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -387,8 +387,8 @@ msgstr "Mode de participation"
 #: publications/models/project.py:67
 msgid ""
 "Voting lets residents give an opinion; idea collection lets them propose "
-"ideas on a project still in its early stages. The two are mutually exclusive"
-" — switching keeps responses already collected."
+"ideas on a project still in its early stages. The two are mutually exclusive "
+"— switching keeps responses already collected."
 msgstr ""
 "Le vote permet aux habitants de donner leur avis ; la collecte d'idées leur "
 "permet de proposer des idées sur un projet encore à ses débuts. Les deux "
@@ -449,12 +449,12 @@ msgstr "Prévenir les participants par email"
 
 #: publications/models/project_update.py:29
 msgid ""
-"Sent once, when the page is published, to people who voted or shared an idea"
-" and asked for project updates. Untick for past events you are adding to the"
-" timeline."
+"Sent once, when the page is published, to people who voted or shared an idea "
+"and asked for project updates. Untick for past events you are adding to the "
+"timeline."
 msgstr ""
-"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté"
-" ou proposé une idée et demandé à suivre les projets. Décochez pour les "
+"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté "
+"ou proposé une idée et demandé à suivre les projets. Décochez pour les "
 "étapes passées ajoutées à l'historique."
 
 #: publications/models/project_update.py:43
@@ -537,8 +537,8 @@ msgstr "Projet ouvert aux idées"
 
 #: publications/page_templates.py:79
 msgid ""
-"A project still taking shape: residents suggest ideas on what is not decided"
-" yet."
+"A project still taking shape: residents suggest ideas on what is not decided "
+"yet."
 msgstr ""
 "Un projet encore en construction : les habitants proposent des idées sur ce "
 "qui n'est pas encore décidé."
@@ -662,8 +662,8 @@ msgid ""
 "Only ideas from users with postal code %(code)s are shown.\n"
 "                    Check the box above to include all ideas."
 msgstr ""
-"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées."
-" Cochez la case ci-dessus pour inclure toutes les idées."
+"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées. "
+"Cochez la case ci-dessus pour inclure toutes les idées."
 
 #: publications/templates/publications/admin/ideas_stats.html:37
 msgid "Total ideas"
@@ -719,14 +719,13 @@ msgstr ""
 msgid "Update the map now"
 msgstr "Mettre à jour la carte maintenant"
 
-#: publications/templates/publications/admin/map_tiles_status.html:23
+#: publications/templates/publications/admin/map_tiles_status.html:24
 msgid ""
 "Downloads the latest OpenStreetMap data (about 35 MB), whatever the "
 "interval. Unsaved changes above are lost."
 msgstr ""
 "Télécharge les dernières données OpenStreetMap (environ 35 Mo), quel que "
-"soit l'intervalle. Les modifications non enregistrées ci-dessus sont "
-"perdues."
+"soit l'intervalle. Les modifications non enregistrées ci-dessus sont perdues."
 
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
@@ -1068,8 +1067,8 @@ msgstr "Aucune publication trouvée"
 #: publications/templates/publications/components/verify_email_prompt.html:5
 #, python-format
 msgid ""
-"Verify your email address (%(email)s) to take part. Check your inbox for the"
-" link we sent you."
+"Verify your email address (%(email)s) to take part. Check your inbox for the "
+"link we sent you."
 msgstr ""
 "Vérifiez votre adresse email (%(email)s) pour participer. Consultez votre "
 "boîte de réception : nous vous avons envoyé un lien."
@@ -1129,11 +1128,10 @@ msgstr ""
 
 #: publications/templates/publications/components/vote_form.html:48
 msgid ""
-"All votes are analyzed and taken into account in the final project "
-"decisions."
+"All votes are analyzed and taken into account in the final project decisions."
 msgstr ""
-"Tous les votes sont analysés et pris en compte dans les décisions finales du"
-" projet."
+"Tous les votes sont analysés et pris en compte dans les décisions finales du "
+"projet."
 
 #: publications/templates/publications/components/vote_form.html:74
 msgid "Log in to vote on this project"
@@ -1162,8 +1160,7 @@ msgstr "Seuls vous et les administrateurs peuvent voir votre commentaire"
 #: publications/templates/publications/components/vote_form.html:237
 msgid "Submit my vote anonymously (my name will not be linked to this vote)"
 msgstr ""
-"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce "
-"vote)"
+"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce vote)"
 
 #: publications/templates/publications/components/vote_form.html:248
 msgid "Submit my vote"

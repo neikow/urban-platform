@@ -7,3 +7,11 @@ def reassign_residents() -> int:
     from core.associations import reassign_residents as reassign
 
     return reassign()
+
+
+@shared_task
+def prune_task_runs() -> int:
+    """Forget task runs older than the retention period (admin tasks page)."""
+    from core.task_monitor import prune_runs
+
+    return prune_runs()

@@ -27,6 +27,11 @@ class CoreConfig(AppConfig):
         # A page created from a template starts with its content.
         init_new_page.connect(fill_new_page, dispatch_uid="core.page_templates.fill_new_page")
 
+        # Every Celery task run is recorded for the admin tasks page.
+        from core.task_monitor import connect_signals
+
+        connect_signals()
+
         # Residents follow the association areas: redraw one, and they move with it.
         from django.db.models.signals import post_delete, post_save
 

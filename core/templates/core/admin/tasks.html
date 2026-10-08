@@ -1,0 +1,42 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n static wagtailadmin_tags %}
+
+{% block titletag %}{% trans "Tasks" %}{% endblock %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script type="module" src="{% static 'dist/admin-tasks.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title=_("Tasks") icon="cogs" %}
+
+    <div class="w-nice-padding w-px-6">
+        <section class="w-mb-10">
+            <h2 class="w-h3">{% trans "Run now" %}</h2>
+            <ul class="tasks-triggers">
+                {% for trigger in triggers %}
+                    <li>
+                        <form method="post" action="{% url 'admin_tasks_run' trigger.key %}">
+                            {% csrf_token %}
+                            <button type="submit" class="button button-secondary button-small">
+                                {{ trigger.label }}
+                            </button>
+                        </form>
+                        <p class="help">{{ trigger.description }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <div
+            id="tasks-status"
+            data-url="{{ status_url }}"
+            data-interval="{{ poll_interval }}"
+            data-msg-stale="{% trans 'Could not refresh the tasks. Retrying…' %}"
+            aria-live="polite"
+        >
+            {% include "core/admin/tasks_status.html" %}
+        </div>
+    </div>
+{% endblock %}

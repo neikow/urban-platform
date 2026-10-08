@@ -1,0 +1,112 @@
+{% load i18n %}
+<section class="w-mb-10">
+    <h2 class="w-h3">{% trans "Running and queued" %}</h2>
+    <p class="w-text-text-meta w-text-sm w-mb-4">
+        {% if live.reachable %}
+            {% blocktrans trimmed count counter=live.workers|length %}
+                {{ counter }} worker online
+                {% plural %}
+                {{ counter }} workers online
+            {% endblocktrans %}
+        {% else %}
+            <span
+                class="tasks-status tasks-status--failure"
+            >{% trans "No worker answers: background tasks are not running." %}</span>
+        {% endif %}
+        {% if live.queued is not None %}
+            ·
+            {% blocktrans trimmed count counter=live.queued %}
+                {{ counter }} task waiting for a worker
+                {% plural %}
+                {{ counter }} tasks waiting for a worker
+            {% endblocktrans %}
+        {% endif %}
+        · {% trans "Updated at" %}
+        {{ live.checked_at|time:"H:i:s" }}
+    </p>
+    {% if live.tasks %}
+        <table class="listing">
+            <thead>
+                <tr>
+                    <th>{% trans "Task" %}</th>
+                    <th>{% trans "State" %}</th>
+                    <th>{% trans "Since / planned for" %}</th>
+                    <th>{% trans "Arguments" %}</th>
+                    <th>{% trans "Worker" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in live.tasks %}
+                    <tr>
+                        <td><code>{{ task.name }}</code></td>
+                        <td>
+                            {% if task.state == "active" %}
+                                <span class="tasks-status tasks-status--running">{% trans "Running" %}</span>
+                            {% elif task.state == "reserved" %}
+                                <span class="tasks-status">{% trans "Next" %}</span>
+                            {% else %}
+                                <span class="tasks-status">{% trans "Scheduled" %}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ task.started_at|default:task.eta|default:"—" }}</td>
+                        <td><code>{{ task.arguments|default:"—" }}</code></td>
+                        <td>{{ task.worker }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif live.reachable %}
+        <p>{% trans "No task is running." %}</p>
+    {% endif %}
+</section>
+
+<section>
+    <h2 class="w-h3">{% trans "Recent runs" %}</h2>
+    {% if runs %}
+        <table class="listing">
+            <thead>
+                <tr>
+                    <th>{% trans "Task" %}</th>
+                    <th>{% trans "Status" %}</th>
+                    <th>{% trans "Started" %}</th>
+                    <th>{% trans "Duration" %}</th>
+                    <th>{% trans "Result" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for run in runs %}
+                    <tr>
+                        <td>
+                            <code>{{ run.name }}</code>
+                            {% if run.arguments %}<div class="w-text-text-meta w-text-xs">
+                                    <code>{{ run.arguments }}</code>
+                                </div>{% endif %}
+                        </td>
+                        <td>
+                            <span
+                                class="tasks-status tasks-status--{{ run.status|lower }}"
+                            >{{ run.get_status_display }}</span>
+                        </td>
+                        <td>{{ run.started_at }}</td>
+                        <td>
+                            {% if run.duration_seconds is not None %}
+                                {{ run.duration_seconds|floatformat:1 }} s
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if run.error %}
+                                <span class="w-text-critical-200">{{ run.error|truncatechars:300 }}</span>
+                            {% else %}
+                                <code>{{ run.result|default:"—" }}</code>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>{% trans "No task has run yet." %}</p>
+    {% endif %}
+</section>

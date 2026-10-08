@@ -33,6 +33,7 @@ module = [
     "modelcluster.*",
     "django_ratelimit.*",
     "django_celery_beat.*",
+    "amqp.*",
     "modelsearch.*",
     "taggit.*",
     "treebeard.*",
