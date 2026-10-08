@@ -73,8 +73,8 @@
             </form>
             {% if not show_all %}
                 <p class="w-text-text-meta w-text-sm w-mb-4">
-                    {% blocktrans with code=local_postal_code %}Only ideas from users with postal code {{ code }} are
-                        shown. Check the box above to include all ideas.{% endblocktrans %}
+                    {% blocktrans trimmed with code=local_postal_code %}Only ideas from users with postal code
+                        {{ code }} are shown. Check the box above to include all ideas.{% endblocktrans %}
                 </p>
             {% endif %}
         {% endif %}

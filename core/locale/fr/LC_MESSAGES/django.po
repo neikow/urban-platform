@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 18:02+0200\n"
+"POT-Creation-Date: 2026-10-08 18:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,8 +77,8 @@ msgid "The platform"
 msgstr "La plateforme"
 
 #: core/admin_menu.py:173
-msgid "The urban planning commission"
-msgstr "La commission d'urbanisme"
+msgid "The association"
+msgstr "L'association"
 
 #: core/admin_menu.py:177
 msgid "The development team"
@@ -182,9 +182,9 @@ msgstr "Compte désactivé"
 #: core/audit.py:115 core/templates/auth/email_verify_error.html:37
 #: core/templates/auth/login_modal.html:29
 #: core/templates/auth/login_modal.html:75
-#: core/templates/auth/register.html:187
-#: core/templates/core/components/website_header.html:177
-#: core/templates/core/components/website_header.html:226
+#: core/templates/auth/register.html:189
+#: core/templates/core/components/website_header.html:181
+#: core/templates/core/components/website_header.html:230
 msgid "Log in"
 msgstr "Se connecter"
 
@@ -583,6 +583,87 @@ msgstr "Style"
 #: core/templates/core/components/announcement_band.html:8
 msgid "Announcement"
 msgstr "Annonce"
+
+#: core/models/branding.py:8
+msgid "A colour like #e94f37."
+msgstr "Une couleur comme #e94f37."
+
+#: core/models/branding.py:25
+msgid "Website name"
+msgstr "Nom du site"
+
+#: core/models/branding.py:28
+msgid "In the header, the page titles and the emails."
+msgstr "Dans l'en-tête, les titres des pages et les emails."
+
+#: core/models/branding.py:31
+msgid "Tagline"
+msgstr "Slogan"
+
+#: core/models/branding.py:34
+msgid "Under the name, at the bottom of every page."
+msgstr "Sous le nom, en bas de chaque page."
+
+#: core/models/branding.py:37
+msgid "Contact email"
+msgstr "Email de contact"
+
+#: core/models/branding.py:39
+msgid "Shown to visitors who want to write to you."
+msgstr "Affiché aux visiteurs qui veulent vous écrire."
+
+#: core/models/branding.py:43
+msgid "Logo"
+msgstr "Logo"
+
+#: core/models/branding.py:48
+msgid "A square image works best: it is also the browser tab icon."
+msgstr ""
+"Une image carrée convient le mieux : elle sert aussi d'icône dans l'onglet du"
+" navigateur."
+
+#: core/models/branding.py:51
+msgid "Main colour"
+msgstr "Couleur principale"
+
+#: core/models/branding.py:56
+msgid ""
+"Buttons, links and highlights, as #rrggbb. Choose a colour dark enough to "
+"read on a white background. Empty: the default orange."
+msgstr ""
+"Boutons, liens et mises en avant, au format #rrggbb. Choisissez une couleur "
+"assez foncée pour être lisible sur fond blanc. Vide : l'orange par défaut."
+
+#: core/models/branding.py:61
+msgid "Secondary colour"
+msgstr "Couleur secondaire"
+
+#: core/models/branding.py:65
+msgid "Dark sections and some badges, as #rrggbb. Empty: the default navy."
+msgstr ""
+"Sections sombres et certains badges, au format #rrggbb. Vide : le bleu marine"
+" par défaut."
+
+#: core/models/branding.py:69
+msgid "Sign-up photo"
+msgstr "Photo de l'inscription"
+
+#: core/models/branding.py:74
+msgid "Beside the sign-up form, on large screens. A photo of the area."
+msgstr ""
+"À côté du formulaire d'inscription, sur grand écran. Une photo du quartier."
+
+#: core/models/branding.py:80
+msgid "Identity"
+msgstr "Identité"
+
+#: core/models/branding.py:89
+msgid "Look"
+msgstr "Apparence"
+
+#: core/models/branding.py:94
+msgid "Branding"
+msgstr "Identité visuelle"
 
 #: core/models/city_district.py:11
 msgid "City District"
@@ -1179,7 +1260,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: core/templates/auth/login_modal.html:81
-#: core/templates/auth/register.html:178
+#: core/templates/auth/register.html:180
 msgid "OR"
 msgstr "OU"
 
@@ -1188,7 +1269,7 @@ msgid "Don't have an account?"
 msgstr "Vous n'avez pas de compte ?"
 
 #: core/templates/auth/login_modal.html:90 core/templates/auth/register.html:4
-#: core/templates/auth/register.html:91 core/templates/auth/register.html:173
+#: core/templates/auth/register.html:93 core/templates/auth/register.html:175
 msgid "Sign up"
 msgstr "S'inscrire"
 
@@ -1272,43 +1353,43 @@ msgstr ""
 msgid "The link is valid for 1 hour."
 msgstr "Le lien est valable pendant 1 heure."
 
-#: core/templates/auth/register.html:21
+#: core/templates/auth/register.html:23
 msgid "Become a member"
 msgstr "Devenez membre"
 
-#: core/templates/auth/register.html:42 core/templates/auth/register.html:212
+#: core/templates/auth/register.html:44 core/templates/auth/register.html:214
 msgid "Access educational resources"
 msgstr "Accédez aux fiches pédagogiques"
 
-#: core/templates/auth/register.html:62 core/templates/auth/register.html:230
+#: core/templates/auth/register.html:64 core/templates/auth/register.html:232
 msgid "Follow your neighborhood's news"
 msgstr "Suivez les actualités de votre quartier"
 
-#: core/templates/auth/register.html:80 core/templates/auth/register.html:248
+#: core/templates/auth/register.html:82 core/templates/auth/register.html:250
 msgid "Vote on initiatives"
 msgstr "Votez sur les initiatives"
 
-#: core/templates/auth/register.html:89
+#: core/templates/auth/register.html:91
 msgid "Registration"
 msgstr "Inscription"
 
-#: core/templates/auth/register.html:139
+#: core/templates/auth/register.html:141
 msgid "I accept the"
 msgstr "J'accepte les"
 
-#: core/templates/auth/register.html:146
+#: core/templates/auth/register.html:148
 msgid "terms of service"
 msgstr "conditions d'utilisation"
 
-#: core/templates/auth/register.html:148 core/templates/core/profile.html:79
+#: core/templates/auth/register.html:150 core/templates/core/profile.html:79
 msgid "(opens in a new tab)"
 msgstr "(ouvre dans un nouvel onglet)"
 
-#: core/templates/auth/register.html:181
+#: core/templates/auth/register.html:183
 msgid "Already have an account?"
 msgstr "Vous avez déjà un compte ?"
 
-#: core/templates/auth/register.html:193
+#: core/templates/auth/register.html:195
 #, python-format
 msgid "Become a member of %(website_name)s"
 msgstr "Devenez membre de %(website_name)s"
@@ -1581,45 +1662,50 @@ msgstr "En savoir plus"
 msgid "Search"
 msgstr "Rechercher"
 
-#: core/templates/core/components/website_footer.html:36
+#: core/templates/core/components/website_footer.html:40
 msgid "Let's build tomorrow's city together"
 msgstr "Co-construisons la ville de demain"
 
-#: core/templates/core/components/website_footer.html:43
+#: core/templates/core/components/website_footer.html:46
+#, python-format
+msgid "Contact: %(email)s"
+msgstr "Contact : %(email)s"
+
+#: core/templates/core/components/website_footer.html:52
 #: core/tests/test_templates/test_components/test_website_footer.py:55
 msgid "Tools"
 msgstr "Outils"
 
-#: core/templates/core/components/website_footer.html:55
+#: core/templates/core/components/website_footer.html:64
 #: core/tests/test_templates/test_components/test_website_footer.py:56
 msgid "Legal"
 msgstr "Légal"
 
-#: core/templates/core/components/website_footer.html:67
+#: core/templates/core/components/website_footer.html:76
 msgid "About"
 msgstr "À propos"
 
-#: core/templates/core/components/website_footer.html:80
+#: core/templates/core/components/website_footer.html:89
 msgid "All rights reserved."
 msgstr "Tous droits réservés."
 
-#: core/templates/core/components/website_header.html:32
+#: core/templates/core/components/website_header.html:36
 msgid "Header Navigation"
 msgstr "Navigation de l'en-tête"
 
-#: core/templates/core/components/website_header.html:64
+#: core/templates/core/components/website_header.html:68
 msgid "Menu utilisateur"
 msgstr "Menu utilisateur"
 
-#: core/templates/core/components/website_header.html:103
+#: core/templates/core/components/website_header.html:107
 msgid "Profile"
 msgstr "Profil"
 
-#: core/templates/core/components/website_header.html:164
+#: core/templates/core/components/website_header.html:168
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: core/templates/core/components/website_header.html:198
+#: core/templates/core/components/website_header.html:202
 msgid "Navigation Menu"
 msgstr "Menu de navigation"
 
@@ -1962,6 +2048,9 @@ msgstr ""
 "Dessinez le secteur couvert par l'association : les habitants qui y vivent "
 "lui sont rattachés. Les secteurs des autres associations apparaissent en "
 "gris, et les nouveaux points s'accrochent à leurs bords."
+
+#~ msgid "The urban planning commission"
+#~ msgstr "La commission d'urbanisme"
 
 #~ msgid ""
 #~ "Subscribers may vote and share ideas when participation is reserved to them "

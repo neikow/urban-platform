@@ -3,12 +3,12 @@
 La section **À propos** contient les pages de présentation de la plateforme et de ses acteurs. Elle comprend trois pages :
 
 - **La plateforme** : présentation générale du projet urbain
-- **La commission d'urbanisme** : présentation de la commission
+- **L'association** : présentation de l'association qui anime le site
 - **L'équipe de développement** : présentation de l'équipe technique
 
 ## Accéder aux pages "À propos"
 
-Dans la barre latérale, ouvrez **Pages du site**, puis cliquez sur la page à modifier : *La plateforme*, *La commission urbanisme* ou *L'équipe de développement*.
+Dans la barre latérale, ouvrez **Pages du site**, puis cliquez sur la page à modifier : *La plateforme*, *L'association* ou *L'équipe de développement*.
 
 ## Modifier une page
 

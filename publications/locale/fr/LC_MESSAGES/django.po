@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 18:02+0200\n"
+"POT-Creation-Date: 2026-10-08 18:34+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -645,7 +645,7 @@ msgstr "Annuler"
 #: publications/templates/publications/admin/ideas_stats.html:4
 #: publications/templates/publications/admin/ideas_stats.html:7
 #: publications/templates/publications/admin/ideas_stats_detail.html:4
-#: publications/views/idea_stats.py:40 publications/views/idea_stats.py:78
+#: publications/views/idea_stats.py:41 publications/views/idea_stats.py:79
 msgid "Idea Collection"
 msgstr "Collecte d'idées"
 
@@ -659,8 +659,8 @@ msgstr "Montrer les idées en dehors du %(code)s"
 #: publications/templates/publications/admin/ideas_stats_detail.html:76
 #, python-format
 msgid ""
-"Only ideas from users with postal code %(code)s are shown.\n"
-"                    Check the box above to include all ideas."
+"Only ideas from users with postal code %(code)s are shown. Check the box "
+"above to include all ideas."
 msgstr ""
 "Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées. "
 "Cochez la case ci-dessus pour inclure toutes les idées."
@@ -730,7 +730,7 @@ msgstr ""
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
-#: publications/views/vote_stats.py:53 publications/views/vote_stats.py:110
+#: publications/views/vote_stats.py:55 publications/views/vote_stats.py:112
 msgid "Vote Statistics"
 msgstr "Statistiques des votes"
 
@@ -744,8 +744,8 @@ msgstr "Montrer les votes en dehors du %(code)s"
 #: publications/templates/publications/admin/vote_stats_detail.html:96
 #, python-format
 msgid ""
-"Only votes from users with postal code %(code)s are shown.\n"
-"                    Check the box above to include all votes."
+"Only votes from users with postal code %(code)s are shown. Check the box "
+"above to include all votes."
 msgstr ""
 "Seuls les votes d'utilisateurs avec le code postal %(code)s sont affichés. "
 "Cochez la case ci-dessus pour inclure tous les votes."

@@ -30,8 +30,8 @@ class AboutCommissionPageFactory(BaseWagtailPageFactory):
     class Meta:
         model = AboutCommissionPage
 
-    title = "La commission urbanisme"
-    slug = "commission-urbanisme"
+    title = "L'association"
+    slug = "association"
     content = factory.LazyFunction(text_content)
     show_in_menus = True
 

@@ -7,6 +7,7 @@ from django.conf import settings
 from django.http import HttpRequest
 from django.utils import timezone
 
+from core.branding import site_name
 from publications.models import EventPage
 
 CRLF = "\r\n"
@@ -78,7 +79,7 @@ def calendar(events: Iterable[EventPage], request: HttpRequest, name: str) -> st
     lines = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
-        f"PRODID:-//{settings.WEBSITE_NAME}//Events//FR",
+        f"PRODID:-//{site_name()}//Events//FR",
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
         f"X-WR-CALNAME:{escape_text(name)}",

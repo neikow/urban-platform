@@ -170,7 +170,7 @@ def menu_entries() -> tuple[MenuItem, ...]:
             [
                 edit_page(_("The platform"), AboutWebsitePage.objects.first(), order=100),
                 edit_page(
-                    _("The urban planning commission"),
+                    _("The association"),
                     AboutCommissionPage.objects.first(),
                     order=110,
                 ),

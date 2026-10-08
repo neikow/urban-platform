@@ -16,6 +16,10 @@ hooks in ``core.wagtail_hooks``):
 
 Templates only fill the ``content`` StreamField (and, at creation, a few
 other fields): titles, summaries and images stay the editor's.
+
+Their texts may name the website, its area and its contact through
+placeholders, filled when the template is applied (:func:`placeholders`), so
+the same templates serve every website of the platform.
 """
 
 import json
@@ -24,7 +28,7 @@ from contextvars import ContextVar
 from dataclasses import dataclass, field
 from typing import Any
 
-from django.utils.html import strip_tags
+from django.utils.html import format_html, strip_tags
 from django.utils.module_loading import import_string
 from django_stubs_ext import StrOrPromise
 from wagtail.models import Page
@@ -63,6 +67,38 @@ def outline_entry(block: RawBlock, page_class: type[Page]) -> str:
     return str(child.label) if child else block["type"]
 
 
+# --- Placeholders ----------------------------------------------------------------
+
+
+def placeholders() -> dict[str, str]:
+    """What the placeholders of the template texts stand for, on this website."""
+    from core import branding
+    from core.models import Territory
+
+    email = branding.current().contact_email
+    return {
+        "{site_name}": branding.site_name(),
+        "{area_in}": Territory.current().name_in or "dans le quartier",
+        # Left for the editor to fill, like the other [bracketed] instructions.
+        "{contact}": format_html('<a href="mailto:{0}">{0}</a>', email)
+        if email
+        else "[adresse de contact]",
+    }
+
+
+def fill_placeholders(value: Any, values: dict[str, str]) -> Any:
+    """``value`` (raw stream data) with the placeholders replaced, in every string."""
+    if isinstance(value, str):
+        for placeholder, text in values.items():
+            value = value.replace(placeholder, text)
+        return value
+    if isinstance(value, dict):
+        return {key: fill_placeholders(item, values) for key, item in value.items()}
+    if isinstance(value, list | tuple):
+        return [fill_placeholders(item, values) for item in value]
+    return value
+
+
 # --- Templates -------------------------------------------------------------------
 
 
@@ -84,13 +120,14 @@ class PageTemplate:
     def content(self, current: list[RawBlock] | None = None) -> list[RawBlock]:
         """The new stream data, with the ``keep`` blocks of ``current`` (raw data)."""
         kept = [block for block in current or [] if block["type"] in self.keep][:1]
-        return kept + [dict(block) for block in self.blocks]
+        return kept + fill_placeholders(list(self.blocks), placeholders())
 
     def fill(self, page: Page) -> None:
         """Fill a page being created."""
         page.content = json.dumps(self.content())  # type: ignore[attr-defined]
+        values = placeholders()
         for name, value in self.fields.items():
-            setattr(page, name, value)
+            setattr(page, name, fill_placeholders(value, values))
 
 
 def templates_for(page_class: type[Page]) -> tuple[PageTemplate, ...]:

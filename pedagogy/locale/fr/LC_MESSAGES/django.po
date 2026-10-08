@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 20:56+0200\n"
+"POT-Creation-Date: 2026-10-08 18:33+0200\n"
 "PO-Revision-Date: 2026-06-23 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -114,24 +114,23 @@ msgstr ""
 "Une notion d'urbanisme en mots simples, par exemple le PLUi ou le permis de "
 "construire : ce que c'est, pourquoi c'est important, comment ça marche."
 
-#: pedagogy/page_templates.py:51
+#: pedagogy/page_templates.py:50
 msgid "Step-by-step guide"
 msgstr "Guide pas à pas"
 
-#: pedagogy/page_templates.py:53
+#: pedagogy/page_templates.py:52
 msgid ""
 "How to do something, e.g. consult a building permit or contest a project: "
 "when, the steps, deadlines and contacts."
 msgstr ""
-"Comment faire une démarche, par exemple consulter un permis de construire ou"
-" contester un projet : dans quel cas, les étapes, les délais et les "
-"contacts."
+"Comment faire une démarche, par exemple consulter un permis de construire ou "
+"contester un projet : dans quel cas, les étapes, les délais et les contacts."
 
-#: pedagogy/page_templates.py:160
+#: pedagogy/page_templates.py:159
 msgid "Complete"
 msgstr "Complète"
 
-#: pedagogy/page_templates.py:162
+#: pedagogy/page_templates.py:161
 msgid ""
 "Why these cards, the cards, how to use them, open consultations and "
 "questions."
@@ -139,11 +138,11 @@ msgstr ""
 "Pourquoi ces fiches, les fiches, comment s'en servir, les consultations en "
 "cours et les questions."
 
-#: pedagogy/page_templates.py:168
+#: pedagogy/page_templates.py:167
 msgid "Simple"
 msgstr "Simple"
 
-#: pedagogy/page_templates.py:169
+#: pedagogy/page_templates.py:168
 msgid "The cards alone."
 msgstr "Les fiches seules."
 

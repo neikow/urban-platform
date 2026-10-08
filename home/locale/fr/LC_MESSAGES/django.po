@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 20:56+0200\n"
+"POT-Creation-Date: 2026-10-08 18:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,12 +48,12 @@ msgstr "Titre au-dessus du contenu"
 msgid "Title on the left, content on the right"
 msgstr "Titre à gauche, contenu à droite"
 
-#: home/blocks.py:82 home/blocks.py:89 home/blocks.py:417
+#: home/blocks.py:82 home/blocks.py:89 home/blocks.py:415
 msgid "Text"
 msgstr "Texte"
 
 #: home/blocks.py:88 home/blocks.py:218 home/blocks.py:293 home/blocks.py:396
-#: home/blocks.py:416
+#: home/blocks.py:414
 msgid "Title"
 msgstr "Titre"
 
@@ -179,8 +179,8 @@ msgstr "Section"
 
 #: home/blocks.py:234
 msgid ""
-"A titled part of the page with a background: text, steps, key figures, "
-"quotes or questions."
+"A titled part of the page with a background: text, steps, key figures, quotes"
+" or questions."
 msgstr ""
 "Une partie de la page avec un titre et un fond : texte, étapes, chiffres "
 "clés, citations ou questions."
@@ -208,8 +208,8 @@ msgstr "Événements à venir"
 #: home/blocks.py:354
 msgid "The next events, soonest first. Hidden when none is planned."
 msgstr ""
-"Les prochains événements, du plus proche au plus lointain. Masqué quand "
-"aucun n'est prévu."
+"Les prochains événements, du plus proche au plus lointain. Masqué quand aucun"
+" n'est prévu."
 
 #: home/blocks.py:377
 msgid "Projects map"
@@ -219,27 +219,27 @@ msgstr "Carte des projets"
 msgid "Every located project on a map of the area."
 msgstr "Tous les projets localisés, sur une carte du quartier."
 
-#: home/blocks.py:419
+#: home/blocks.py:417
 msgid "Button for visitors"
 msgstr "Bouton pour les visiteurs"
 
-#: home/blocks.py:421
+#: home/blocks.py:419
 msgid "Leads to the registration form."
 msgstr "Mène au formulaire d'inscription."
 
-#: home/blocks.py:424
+#: home/blocks.py:422
 msgid "Button for signed-in members"
 msgstr "Bouton pour les membres connectés"
 
-#: home/blocks.py:426
+#: home/blocks.py:424
 msgid "Leads to their email notification settings."
 msgstr "Mène à leurs préférences de notifications par email."
 
-#: home/blocks.py:430
+#: home/blocks.py:428
 msgid "Join the platform"
 msgstr "Rejoindre la plateforme"
 
-#: home/blocks.py:435
+#: home/blocks.py:433
 msgid ""
 "An invitation to create an account, or to members, to turn on email updates."
 msgstr ""
@@ -269,11 +269,11 @@ msgstr "Participation"
 #: home/page_templates.py:181
 msgid ""
 "The full page: who you are, open consultations, how it works, key figures, "
-"events, the map, news, the CIQ and questions."
+"events, the map, news, the neighborhood associations and questions."
 msgstr ""
 "La page complète : qui vous êtes, les consultations en cours, le "
-"fonctionnement, les chiffres clés, l'agenda, la carte, les actualités, le "
-"CIQ et les questions."
+"fonctionnement, les chiffres clés, l'agenda, la carte, les actualités, les "
+"associations de quartier et les questions."
 
 #: home/page_templates.py:200
 msgid "Essentials"
@@ -367,14 +367,14 @@ msgstr ""
 #~ msgstr "Partir d'un modèle"
 
 #~ msgid ""
-#~ "The template replaces the content of the home page in a new draft. Your "
-#~ "hero and its photo are kept. Nothing changes on the website until you "
-#~ "publish, and the current version stays in the page history."
+#~ "The template replaces the content of the home page in a new draft. Your hero "
+#~ "and its photo are kept. Nothing changes on the website until you publish, and"
+#~ " the current version stays in the page history."
 #~ msgstr ""
-#~ "Le modèle remplace le contenu de la page d'accueil dans un nouveau "
-#~ "brouillon. Votre bandeau principal et sa photo sont conservés. Rien ne "
-#~ "change sur le site avant la publication, et la version actuelle reste "
-#~ "dans l'historique de la page."
+#~ "Le modèle remplace le contenu de la page d'accueil dans un nouveau brouillon."
+#~ " Votre bandeau principal et sa photo sont conservés. Rien ne change sur le "
+#~ "site avant la publication, et la version actuelle reste dans l'historique de "
+#~ "la page."
 
 #, python-format
 #~ msgid "Use “%(name)s”"
@@ -385,9 +385,8 @@ msgstr ""
 
 #, python-format
 #~ msgid ""
-#~ "The “%(name)s” template is saved as a draft. Edit the texts, preview, "
-#~ "then publish. The previous version stays in the history."
+#~ "The “%(name)s” template is saved as a draft. Edit the texts, preview, then "
+#~ "publish. The previous version stays in the history."
 #~ msgstr ""
 #~ "Le modèle « %(name)s » est enregistré en brouillon. Adaptez les textes, "
-#~ "prévisualisez, puis publiez. La version précédente reste dans "
-#~ "l'historique."
+#~ "prévisualisez, puis publiez. La version précédente reste dans l'historique."

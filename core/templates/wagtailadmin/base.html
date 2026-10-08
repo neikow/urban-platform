@@ -1,15 +1,24 @@
 {% extends "wagtailadmin/base.html" %}
-{% load static %}
+{% load static wagtailimages_tags %}
 
 {% block branding_logo %}
     <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; background: white; padding: 0.5rem 0.5rem; border-radius: 0.5rem">
-        <img src="{% static 'images/favicon.svg' %}" alt="{{ website_name }}" width="80">
+        {% if branding.logo %}
+            {% image branding.logo width-160 alt=website_name style="width: 80px; height: auto" %}
+        {% else %}
+            <img src="{% static 'images/favicon.svg' %}" alt="{{ website_name }}" width="80">
+        {% endif %}
     </div>
 {% endblock %}
 
 {% block branding_favicon %}
-    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+    {% if branding.logo %}
+        {% image branding.logo fill-64x64 format-png as favicon %}
+        <link rel="icon" type="image/png" href="{{ favicon.url }}">
+    {% else %}
+        <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+    {% endif %}
 {% endblock %}
 
 {% block extra_css %}

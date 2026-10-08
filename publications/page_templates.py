@@ -32,7 +32,7 @@ PROJECT_SCHEDULE = rich_text(
 PROJECT_WHO = rich_text(
     "<h2>Qui porte le projet ?</h2>"
     "<p>Indiquez le maître d'ouvrage (Ville, Métropole, promoteur…), les autres acteurs "
-    "et la position de la commission urbanisme, si elle en a une.</p>"
+    "et la position de l'association, si elle en a une.</p>"
 )
 
 VOTE_PROJECT = PageTemplate(
@@ -153,7 +153,7 @@ PUBLIC_MEETING = PageTemplate(
         rich_text(
             "<h2>Intervenants</h2>"
             "<p>Qui présentera, et à quel titre (élu, service de la Ville, architecte, "
-            "membre de la commission…).</p>"
+            "membre de l'association…).</p>"
         ),
         PRACTICAL,
         rich_text(

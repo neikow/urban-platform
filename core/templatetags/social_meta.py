@@ -3,9 +3,9 @@
 from typing import Any
 
 from django import template
-from django.conf import settings
 from wagtail.models import Page
 
+from core import branding
 from core.templatetags.structured_data import _image_url
 
 register = template.Library()
@@ -31,7 +31,7 @@ def social_meta(context: Any) -> dict[str, Any]:
         return {}
 
     page: Page | None = context.get("page")
-    site_name = settings.WEBSITE_NAME
+    site_name = branding.site_name(request)
     data: dict[str, Any] = {
         "site_name": site_name,
         # Query strings (filters, pagination) do not make a different page.

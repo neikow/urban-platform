@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n wagtailimages_tags %}
 
 {% block title %}{% trans "Sign up" %}{% endblock %}
 
@@ -9,12 +9,14 @@
     <div class="min-h-[calc(100vh-4rem)] flex items-stretch">
         <!-- Left panel: image + benefits -->
         <div class="relative hidden lg:flex flex-col justify-end w-1/2 xl:w-5/12">
-            <img
-                src="{% static 'images/endoume-marseille.jpg' %}"
-                alt=""
-                class="absolute inset-0 w-full h-full object-cover"
-            >
-            <div class="absolute inset-0 bg-linear-to-t from-black/85 via-black/60 via-55% to-black/10"></div>
+            {% if branding.signup_image %}
+                {% image branding.signup_image fill-1200x1600 class="absolute inset-0 w-full h-full object-cover" alt="" %}
+                <div class="absolute inset-0 bg-linear-to-t from-black/85 via-black/60 via-55% to-black/10"></div>
+            {% else %}
+                {# No photo yet (Settings › Branding): the secondary colour, darkened at the bottom. #}
+                <div class="absolute inset-0 bg-secondary"></div>
+                <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
+            {% endif %}
             <div class="relative z-10 p-10 xl:p-14">
                 <p class="section-label text-white/80 mb-3">{{ website_name }}</p>
                 <h2 class="font-display font-black uppercase text-white leading-tight text-5xl xl:text-6xl mb-8">

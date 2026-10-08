@@ -12,6 +12,7 @@ from core.emails.services import (
 )
 
 
+@pytest.mark.django_db  # The sender name comes from the Branding setting.
 class TestConsoleEmailService:
     def test_send_email_returns_true(self):
         service = ConsoleEmailService()
@@ -80,6 +81,7 @@ class TestConsoleEmailService:
         assert "http://example.com/reset/token/" in captured.out
 
 
+@pytest.mark.django_db
 class TestBrevoEmailService:
     @override_settings(BREVO_API_KEY="test-api-key")
     def test_init_configures_api(self):
