@@ -48,7 +48,8 @@ ANNOUNCEMENT_PERMISSIONS: frozenset[str] = frozenset({"core.change_announcement"
 # Vote and idea statistics hold personal data.
 PARTICIPATION_STATS_PERMISSIONS: frozenset[str] = frozenset({"core.view_participation_stats"})
 
-# Website settings: neighborhood associations, map, features, tasks, email log.
+# Website settings: neighborhood associations, memberships, map, features, tasks,
+# email log, activity log.
 SITE_SETTINGS_PERMISSIONS: frozenset[str] = frozenset(
     {
         "core.add_neighborhoodassociation",
@@ -60,6 +61,10 @@ SITE_SETTINGS_PERMISSIONS: frozenset[str] = frozenset(
         "core.manage_tasks",
         "core.view_taskrun",
         "core.view_audit_log",
+        "core.add_membership",
+        "core.change_membership",
+        "core.delete_membership",
+        "core.view_membership",
         "publications.change_mapsettings",
     }
 )

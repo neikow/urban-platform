@@ -34,6 +34,7 @@ module = [
     "django_ratelimit.*",
     "django_celery_beat.*",
     "amqp.*",
+    "django_filters.*",
     "modelsearch.*",
     "taggit.*",
     "treebeard.*",

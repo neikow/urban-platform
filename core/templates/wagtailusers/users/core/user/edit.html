@@ -6,7 +6,5 @@
     {% if form.role %}
         <li>{% formattedfield form.role %}</li>
     {% endif %}
-    {% if form.is_subscriber %}
-        <li>{% formattedfield form.is_subscriber %}</li>
-    {% endif %}
+    {% include "core/admin/user_membership.html" with member=form.instance %}
 {% endblock %}

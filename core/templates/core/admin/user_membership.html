@@ -1,0 +1,23 @@
+{% load i18n %}
+{# User edit page: membership status, managed in Settings › Memberships. #}
+{% if perms.core.view_membership %}
+    <li>
+        <div class="w-field__wrapper">
+            <span class="w-field__label">{% trans "Membership" %}</span>
+            <p>
+                {% if member.is_member %}
+                    {% trans "Membership running" %}
+                {% else %}
+                    {% trans "No membership running" %}
+                {% endif %}
+                ·
+                <a
+                    href="{% url 'membership:index' %}?q={{ member.email|urlencode }}"
+                >{% trans "See the memberships" %}</a>
+                {% if perms.core.add_membership %}
+                    · <a href="{% url 'membership:add' %}?user={{ member.pk }}">{% trans "Record a membership" %}</a>
+                {% endif %}
+            </p>
+        </div>
+    </li>
+{% endif %}

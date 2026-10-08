@@ -8,3 +8,4 @@ from .notification_dispatch import NotificationDispatch
 from .user import User, UserRole
 from .task_run import TaskRun, TaskRunStatus
 from .feature_flags import FeatureFlags, participation_open_to
+from .membership import Membership

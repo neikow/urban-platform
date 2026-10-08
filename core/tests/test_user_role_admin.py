@@ -190,21 +190,6 @@ class TestRoleUserForms:
         assert user.role == UserRole.EDITOR
         assert group_names(user) == {EDITORS_GROUP}
 
-    def test_subscription_date_follows_the_checkbox(self, admin, citizen):
-        form = RoleUserEditForm(
-            data=edit_post_data(citizen, is_subscriber="on"), instance=citizen, for_user=admin
-        )
-        assert form.is_valid(), form.errors
-        form.save()
-        citizen.refresh_from_db()
-        assert citizen.is_subscriber and citizen.subscribed_at is not None
-
-        form = RoleUserEditForm(data=edit_post_data(citizen), instance=citizen, for_user=admin)
-        assert form.is_valid(), form.errors
-        form.save()
-        citizen.refresh_from_db()
-        assert not citizen.is_subscriber and citizen.subscribed_at is None
-
 
 # --- the last administrator -------------------------------------------------
 
@@ -350,13 +335,13 @@ def test_association_members_become_editors_or_moderators():
 
 
 @pytest.mark.django_db
-def test_edit_page_shows_role_subscription_and_locked_groups(client, admin, editor):
+def test_edit_page_shows_role_membership_and_locked_groups(client, admin, editor):
     client.force_login(admin)
 
     content = client.get(reverse("wagtailusers_users:edit", args=[editor.pk])).content.decode()
 
     assert 'name="role"' in content
-    assert 'name="is_subscriber"' in content
+    assert reverse("membership:add") + f"?user={editor.pk}" in content
     groups = content[content.index('name="groups"') - 300 : content.index('name="groups"') + 300]
     assert "disabled" in groups
 
@@ -367,10 +352,10 @@ def test_admin_saves_through_the_page(client, admin, citizen):
 
     response = client.post(
         reverse("wagtailusers_users:edit", args=[citizen.pk]),
-        data=edit_post_data(citizen, role=UserRole.MODERATOR, is_subscriber="on"),
+        data=edit_post_data(citizen, role=UserRole.MODERATOR),
     )
 
     assert response.status_code == 302
     citizen.refresh_from_db()
-    assert citizen.role == UserRole.MODERATOR and citizen.is_subscriber
+    assert citizen.role == UserRole.MODERATOR
     assert group_names(citizen) == {MODERATORS_GROUP}

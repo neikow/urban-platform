@@ -10,7 +10,7 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Journal d'activité**.
 |---|---|
 | **Pages** | Création, modification, soumission à la modération, validation, refus, publication, dépublication, programmation, déplacement, suppression, verrouillage, commentaires |
 | **Médiathèque, associations, paramètres** | Création, modification, suppression ; pour les paramètres (annonce, carte, fonctionnalités), le détail des valeurs changées |
-| **Comptes** | Création, modification, suppression ; changement de **rôle**, d'**adhésion**, de statut superutilisateur, activation et désactivation |
+| **Comptes** | Création, modification, suppression ; changement de **rôle**, de statut superutilisateur, activation et désactivation ; **adhésions** enregistrées, modifiées, supprimées |
 | **Sécurité** | Connexions de l'équipe et **mots de passe erronés** sur ses comptes (avec l'adresse IP), changements de mot de passe et d'email, **téléchargements de données personnelles**, suppressions de compte |
 | **Tâches** | Tâches lancées à la main depuis [Tâches](taches.md) ou [Carte](carte.md) |
 | **Emails** | Résultats de vote et actualités de projet envoyés, avec le nombre de destinataires ; clôture des votes |

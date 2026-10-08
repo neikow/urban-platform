@@ -83,7 +83,7 @@
             {% elif not user.is_verified %}
                 {% include "publications/components/verify_email_prompt.html" %}
             {% elif not participation_open %}
-                {% include "publications/components/subscription_prompt.html" %}
+                {% include "publications/components/membership_prompt.html" %}
             {% else %}
                 <div id="ideas-form-container">
                     <form id="ideas-form" class="space-y-5">

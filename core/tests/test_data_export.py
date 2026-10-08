@@ -22,6 +22,7 @@ from publications.models import (
 # Relations the export covers explicitly (see core.data_export).
 COVERED_RELATIONS = {
     "core.EmailEvent",
+    "core.Membership",
     "core.NeighborhoodAssociation",
     "legal.CodeOfConductConsent",
     "publications.EventInterest",
