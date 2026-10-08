@@ -13,17 +13,13 @@ from django.views.generic import TemplateView
 from wagtail.admin.views.generic.base import WagtailAdminTemplateMixin
 
 from core import task_monitor
-from core.models import UserRole
 
 # How often the page refreshes the task lists, in milliseconds.
 POLL_INTERVAL_MS = 4000
 
 
 def can_manage_tasks(request: HttpRequest) -> bool:
-    user = request.user
-    return user.is_authenticated and (
-        user.is_superuser or getattr(user, "role", None) == UserRole.ADMIN
-    )
+    return request.user.has_perm("core.manage_tasks")
 
 
 def _check(request: HttpRequest) -> None:

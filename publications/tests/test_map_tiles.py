@@ -203,7 +203,7 @@ class TestManualRefresh:
         from core.models import User, UserRole
 
         member = User.objects.create_user(
-            email="member@example.com", password="x", role=UserRole.ASSOCIATION_MEMBER
+            email="member@example.com", password="x", role=UserRole.MODERATOR
         )
         client.force_login(member)
 

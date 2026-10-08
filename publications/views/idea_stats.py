@@ -7,6 +7,8 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 from wagtail.admin.views.generic.base import WagtailAdminTemplateMixin
 
+from publications.views.mixins import ParticipationStatsPermissionMixin
+
 from publications.models import ParticipationMode, ProjectPage
 from publications.models.idea import IdeaResponse
 
@@ -30,7 +32,7 @@ def _local_responses_qs(show_all: bool) -> QuerySet:
     return qs
 
 
-class IdeaStatsView(WagtailAdminTemplateMixin, TemplateView):
+class IdeaStatsView(ParticipationStatsPermissionMixin, WagtailAdminTemplateMixin, TemplateView):
     template_name = "publications/admin/ideas_stats.html"
     page_title = _("Idea Collection")
 
@@ -66,7 +68,9 @@ class IdeaStatsView(WagtailAdminTemplateMixin, TemplateView):
         return context
 
 
-class IdeaStatsDetailView(WagtailAdminTemplateMixin, TemplateView):
+class IdeaStatsDetailView(
+    ParticipationStatsPermissionMixin, WagtailAdminTemplateMixin, TemplateView
+):
     template_name = "publications/admin/ideas_stats_detail.html"
     page_title = _("Idea Collection")
 

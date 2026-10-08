@@ -30,26 +30,28 @@ La liste affiche pour chaque utilisateur :
 
 ## Rôles
 
-Le **rôle** d'un compte détermine son accès à l'administration :
+Le **rôle** d'un compte détermine ce qu'il peut faire. Chaque rôle a les droits du précédent :
 
-| Rôle | Accès |
+| Rôle | Droits |
 |---|---|
-| **Citoyen** | Un compte du site : voter, proposer des idées, suivre les projets. Pas d'accès à l'administration |
-| **Membre d'association** | Accès à l'administration pour le contenu et la participation, modification de l'[annonce](annonce.md). Ne gère pas les comptes |
-| **Administrateur** | Les mêmes droits, plus la gestion des comptes et des rôles |
+| **Citoyen** | Un compte du site : suivre les projets, s'abonner à la newsletter, voter et proposer des idées (voir l'adhésion ci-dessous). Pas d'accès à l'administration |
+| **Rédacteur** | Créer et modifier les pages et la médiathèque, puis les **soumettre à la modération**. Ne publie pas |
+| **Modérateur** | Publier, dépublier et verrouiller les pages, valider ou refuser les pages soumises, publier les actualités de projet et clore un vote. Modifier l'[annonce](annonce.md), voir les statistiques de participation |
+| **Administrateur** | Gérer les comptes et les rôles, les [associations de quartier](associations.md), la [carte](carte.md), les [fonctionnalités](fonctionnalites.md) et les [tâches](taches.md). Seuls les administrateurs modifient les **pages légales** (dont la charte, dont chaque modification demande à tous de l'accepter à nouveau) |
 
-Le menu de chacun ne montre que ce qu'il peut faire : un membre d'association ne voit pas la gestion des utilisateurs, et les entrées de contenu dépendent de ses groupes.
+Le menu de chacun ne montre que ce qu'il peut faire. Seuls les administrateurs attribuent les rôles.
 
-### Groupes : les droits sur les pages
+**Le dernier administrateur** ne peut être ni rétrogradé, ni désactivé, ni supprimé : nommez-en d'abord un autre.
 
-Les droits de **création et de publication des pages** viennent des **groupes** :
+### Soumettre une page à la modération
 
-| Groupe | Droits |
-|---|---|
-| **Editors** | Créer et modifier des pages, sans les publier |
-| **Moderators** | Créer, modifier et publier des pages |
+Un rédacteur termine sa page puis choisit **Soumettre à la modération** (sous le bouton d'enregistrement). Les **modérateurs et administrateurs actifs** reçoivent un email ; l'un d'eux relit la page, puis la **publie** ou la **refuse** avec un commentaire. Le rédacteur reçoit un email dans les deux cas.
 
-Ajoutez à un groupe les membres qui gèrent le contenu, depuis le formulaire de l'utilisateur (onglet **Rôles**). Les groupes eux-mêmes sont définis par la plateforme : ils n'apparaissent pas dans **Paramètres**, pas plus que les workflows et les langues.
+Les groupes Wagtail (*Editors*, *Moderators*) suivent le rôle : ils ne se modifient plus à la main.
+
+### Adhésion
+
+La case **Adhérent** marque les habitants qui ont adhéré. Tant que la participation n'est pas réservée aux adhérents (voir [Fonctionnalités](fonctionnalites.md)), elle ne change rien : tous les comptes confirmés peuvent voter et proposer des idées. L'adhésion est indépendante du rôle : un membre de l'équipe vote comme habitant, avec la même règle.
 
 ## Modifier un utilisateur
 

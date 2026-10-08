@@ -7,10 +7,11 @@ set of Django permissions on top of any stored in the database:
 
 - ``wagtailadmin.access_admin`` lets a user enter the Wagtail admin at all (the
   permission Wagtail's ``require_admin_access`` checks, see ``wagtail.admin.auth``).
-- The ``core.*_user`` permissions in :data:`USER_MANAGEMENT_PERMISSIONS` unlock
-  the Wagtail user admin at ``/admin/users/``, for administrators only.
-- ``core.change_announcement`` (:data:`ANNOUNCEMENT_PERMISSIONS`) unlocks
-  Settings > Announcement.
+- Editors: the admin only. Their page and media rights come from the Wagtail
+  group of their role (core.roles).
+- Moderators: also the announcement and the vote and idea statistics.
+- Administrators: also the users and the website settings (associations, map,
+  features, tasks).
 """
 
 from __future__ import annotations
@@ -44,17 +45,38 @@ USER_MANAGEMENT_PERMISSIONS: frozenset[str] = frozenset(
 # Settings > Announcement: the band shown at the top of every page.
 ANNOUNCEMENT_PERMISSIONS: frozenset[str] = frozenset({"core.change_announcement"})
 
+# Vote and idea statistics hold personal data.
+PARTICIPATION_STATS_PERMISSIONS: frozenset[str] = frozenset({"core.view_participation_stats"})
+
+# Website settings: neighborhood associations, map, features, tasks, email log.
+SITE_SETTINGS_PERMISSIONS: frozenset[str] = frozenset(
+    {
+        "core.add_neighborhoodassociation",
+        "core.change_neighborhoodassociation",
+        "core.delete_neighborhoodassociation",
+        "core.view_neighborhoodassociation",
+        "core.change_featureflags",
+        "core.view_emailevent",
+        "core.manage_tasks",
+        "publications.change_mapsettings",
+    }
+)
+
 # Roles that may access the Wagtail admin. Kept for backwards compatibility; it
 # is now derived from :data:`ROLE_PERMISSIONS`.
-ADMIN_ACCESS_ROLES: frozenset[str] = frozenset({UserRole.ADMIN, UserRole.ASSOCIATION_MEMBER})
+ADMIN_ACCESS_ROLES: frozenset[str] = frozenset(
+    {UserRole.EDITOR, UserRole.MODERATOR, UserRole.ADMIN}
+)
 
 # Permissions granted purely from a user's role, on top of database-stored ones.
+# Page and media rights come from the Wagtail group of the role (core.roles).
+_EDITOR = frozenset({WAGTAIL_ADMIN_PERMISSION})
+_MODERATOR = _EDITOR | ANNOUNCEMENT_PERMISSIONS | PARTICIPATION_STATS_PERMISSIONS
+_ADMIN = _MODERATOR | USER_MANAGEMENT_PERMISSIONS | SITE_SETTINGS_PERMISSIONS
 ROLE_PERMISSIONS: dict[str, frozenset[str]] = {
-    UserRole.ADMIN: frozenset({WAGTAIL_ADMIN_PERMISSION})
-    | USER_MANAGEMENT_PERMISSIONS
-    | ANNOUNCEMENT_PERMISSIONS,
-    # Content work only: managing accounts and roles is for administrators.
-    UserRole.ASSOCIATION_MEMBER: frozenset({WAGTAIL_ADMIN_PERMISSION}) | ANNOUNCEMENT_PERMISSIONS,
+    UserRole.EDITOR: _EDITOR,
+    UserRole.MODERATOR: _MODERATOR,
+    UserRole.ADMIN: _ADMIN,
 }
 
 

@@ -4,7 +4,7 @@
     <div
         id="vote-component"
         data-project-id="{{ page.id }}"
-        data-can-participate="{% if page.is_voting_open and user.is_authenticated and user.is_verified %}true{% else %}false{% endif %}"
+        data-can-participate="{% if page.is_voting_open and user.is_authenticated and user.is_verified and participation_open %}true{% else %}false{% endif %}"
         data-csrf-token="{{ csrf_token }}"
         data-msg-select-option="{% trans 'Please select an option' %}"
         data-msg-generic-error="{% trans 'An error occurred' %}"
@@ -82,6 +82,8 @@
                 </div>
             {% elif not user.is_verified %}
                 {% include "publications/components/verify_email_prompt.html" %}
+            {% elif not participation_open %}
+                {% include "publications/components/subscription_prompt.html" %}
             {% else %}
                 <div id="vote-form-container">
                     <form id="vote-form" class="space-y-5">

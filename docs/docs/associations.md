@@ -9,7 +9,7 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Associations de quartier*
 | Champ | Description |
 |---|---|
 | **Nom** | Le nom de l'association, tel qu'affiché aux habitants |
-| **Responsable** | Un compte de **membre d'association** ou d'**administrateur** |
+| **Responsable** | Un compte de l'équipe : **rédacteur**, **modérateur** ou **administrateur** |
 | **Adresse** | Le siège ou le local. Tapez quelques lettres et choisissez l'adresse dans la liste |
 | **Secteur** | La zone couverte (voir ci-dessous) |
 | **Email de contact**, **Numéro de téléphone**, **Site web** | Les coordonnées montrées aux habitants rattachés |

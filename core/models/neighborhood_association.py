@@ -29,7 +29,7 @@ class NeighborhoodAssociation(models.Model):
         null=True,
         blank=True,
         related_name="responsible_for_associations",
-        limit_choices_to={"role__in": [UserRole.ASSOCIATION_MEMBER, UserRole.ADMIN]},
+        limit_choices_to={"role__in": [UserRole.EDITOR, UserRole.MODERATOR, UserRole.ADMIN]},
     )
     contact_email = models.EmailField(_("Contact Email"), blank=True)
     contact_phone = models.CharField(_("Phone Number"), max_length=20, blank=True)

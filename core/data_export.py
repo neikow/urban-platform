@@ -54,6 +54,10 @@ def account(user: User) -> dict[str, Any]:
         "phone_number": user.phone_number,
         "neighborhood": str(user.neighborhood) if user.neighborhood else None,
         "role": user.get_role_display(),
+        "subscription": {
+            "subscribed": user.is_subscriber,
+            "since": _iso(user.subscribed_at),
+        },
         "email_verified": user.is_verified,
         "date_joined": _iso(user.created_at),
         "last_updated": _iso(user.updated_at),

@@ -71,7 +71,7 @@ class TestAnnouncementBand:
 
 @pytest.mark.django_db
 class TestAnnouncementAdmin:
-    @pytest.mark.parametrize("role", [UserRole.ADMIN, UserRole.ASSOCIATION_MEMBER])
+    @pytest.mark.parametrize("role", [UserRole.ADMIN, UserRole.MODERATOR])
     def test_admin_roles_can_edit_it(self, client, role):
         user = User.objects.create_user(email="editor@example.com", password="pass12345", role=role)
         client.force_login(user)

@@ -68,7 +68,7 @@ def admin_password() -> str:
 
 @pytest.fixture
 def moderator_email() -> str:
-    """Moderator test user email (admin access via Moderator group, not superuser)."""
+    """Moderator test user email (MODERATOR role, not superuser)."""
     return "e2e.moderator@email.com"
 
 

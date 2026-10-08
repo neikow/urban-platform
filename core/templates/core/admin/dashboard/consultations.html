@@ -27,7 +27,11 @@
                         {% endif %}
                     </td>
                     <td>{{ item.responses }}</td>
-                    <td><a href="{{ item.results_url }}">{% trans "See the responses" %}</a></td>
+                    <td>
+                        {% if can_see_results %}
+                            <a href="{{ item.results_url }}">{% trans "See the responses" %}</a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

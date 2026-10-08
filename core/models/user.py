@@ -12,9 +12,19 @@ from django.utils.translation import gettext_lazy as _
 
 
 class UserRole(models.TextChoices):
+    """Staff role, from none (a resident) to administrator; each includes the previous.
+
+    Unrelated to the subscription (``User.is_subscriber``), which decides who may
+    take part in polls and idea collections when that is restricted.
+    """
+
     CITIZEN = "CITIZEN", _("Citizen")
-    ASSOCIATION_MEMBER = "ASSOCIATION_MEMBER", _("Association Member")
-    ADMIN = "ADMIN", _("Admin")
+    EDITOR = "EDITOR", _("Editor")
+    MODERATOR = "MODERATOR", _("Moderator")
+    ADMIN = "ADMIN", _("Administrator")
+
+
+ROLE_RANK: dict[str, int] = {role.value: rank for rank, role in enumerate(UserRole)}
 
 
 class UserManager(BaseUserManager["User"]):
@@ -96,6 +106,16 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     phone_number = models.CharField(_("Phone Number"), max_length=20, blank=True)
+    # Set by hand by administrators until the subscription process exists.
+    is_subscriber = models.BooleanField(
+        _("Subscriber"),
+        default=False,
+        help_text=_(
+            "Subscribers may vote and share ideas when participation is reserved to them "
+            "(Settings › Features)."
+        ),
+    )
+    subscribed_at = models.DateTimeField(_("Subscribed on"), null=True, blank=True)
     newsletter_subscription = models.BooleanField(
         _("Newsletter Subscription"),
         default=False,
@@ -169,6 +189,25 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = _("User")
         verbose_name_plural = _("Users")
         ordering = ["-created_at"]
+        # Granted from the role (core.auth_backends), never stored.
+        permissions = [
+            ("view_participation_stats", _("Can see vote and idea statistics")),
+            ("manage_tasks", _("Can see and start background tasks")),
+        ]
+
+    def has_role(self, role: str) -> bool:
+        """Whether the user's role is ``role`` or above (superusers have them all)."""
+        return self.is_superuser or ROLE_RANK.get(self.role, -1) >= ROLE_RANK[role]
+
+    def set_subscription(self, subscribed: bool) -> None:
+        """Change the subscription and keep its date in step (not saved)."""
+        from django.utils import timezone
+
+        if subscribed and not self.is_subscriber:
+            self.subscribed_at = timezone.now()
+        elif not subscribed:
+            self.subscribed_at = None
+        self.is_subscriber = subscribed
 
     def __str__(self) -> str:
         return self.email
@@ -211,6 +250,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.association = None
         self.newsletter_subscription = False
         self.newsletter_consent_at = None
+        self.is_subscriber = False
+        self.subscribed_at = None
+        self.role = UserRole.CITIZEN
         self.notify_poll_results = False
         self.notify_project_updates = False
         self.notify_event_reminders = False

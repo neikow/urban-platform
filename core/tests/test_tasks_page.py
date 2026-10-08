@@ -228,7 +228,7 @@ class TestTasksPage:
 
         assert "tasks-status--failure" in content
 
-    @pytest.mark.parametrize("role", [UserRole.ASSOCIATION_MEMBER, UserRole.CITIZEN])
+    @pytest.mark.parametrize("role", [UserRole.MODERATOR, UserRole.EDITOR, UserRole.CITIZEN])
     def test_reserved_to_administrators(self, client, role):
         client.force_login(User.objects.create_user(email="u@example.com", password="x", role=role))
 

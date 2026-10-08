@@ -1,10 +1,12 @@
 from typing import Any
 
+from django.core.exceptions import PermissionDenied
 from django.http import HttpRequest, HttpResponseBase, JsonResponse
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django_ratelimit.core import is_ratelimited
 
+from core.models import participation_open_to
 from legal.utils import needs_code_of_conduct_consent
 from publications.models.project import ProjectPage
 
@@ -22,12 +24,15 @@ class ParticipationMixin:
 
     Every request must be authenticated. Writes (POST/DELETE) additionally
     require a verified email address and, unless `requires_code_of_conduct`
-    is turned off, an up-to-date code of conduct consent. Writes are
-    rate-limited per user.
+    is turned off, an up-to-date code of conduct consent. Unless
+    `requires_subscription` is turned off, they also require a subscription
+    when participation is reserved to subscribers (Settings › Features).
+    Writes are rate-limited per user.
     """
 
     requires_authentication = True
     requires_code_of_conduct = True
+    requires_subscription = True
     write_methods = ("post", "delete")
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponseBase:
@@ -64,6 +69,13 @@ class ParticipationMixin:
                 action_url=consent_url,
             )
 
+        if self.requires_subscription and not participation_open_to(user, request):
+            return json_error(
+                _("Taking part is reserved to subscribers."),
+                status=403,
+                code="subscription_required",
+            )
+
         if is_ratelimited(
             request,
             group="publications.participation",
@@ -82,3 +94,12 @@ class ParticipationMixin:
     def get_live_project(project_id: int) -> ProjectPage | None:
         """Only published projects can be voted on or receive ideas."""
         return ProjectPage.objects.live().filter(pk=project_id).first()
+
+
+class ParticipationStatsPermissionMixin:
+    """Vote and idea statistics hold personal data: moderators and administrators only."""
+
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponseBase:
+        if not request.user.has_perm("core.view_participation_stats"):
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)  # type: ignore[misc]
