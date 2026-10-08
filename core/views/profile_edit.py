@@ -11,6 +11,7 @@ from django.contrib import messages
 from core.emails.tasks import send_verification_email
 
 from core.associations import set_address
+from core.audit import audit
 from .auth_mixins import AddressFieldMixin, PasswordValidationMixin
 from ..widgets import (
     DaisyAddressInput,
@@ -189,6 +190,7 @@ class ProfileEditView(LoginRequiredMixin, FormView):
         user = cast(User, self.request.user)
 
         email_changed = form.cleaned_data["email"] != user.email
+        old_email = user.email
 
         user.email = form.cleaned_data["email"]
         user.first_name = form.cleaned_data["first_name"]
@@ -212,6 +214,8 @@ class ProfileEditView(LoginRequiredMixin, FormView):
             )
 
         user.save()
+        if email_changed:
+            audit(user, "core.auth.email_change", user=user, old=old_email, new=user.email)
 
         messages.success(self.request, "Votre profil a été mis à jour avec succès.")
         return super().form_valid(form)
@@ -240,6 +244,7 @@ class PasswordChangeView(LoginRequiredMixin, FormView):
         user.set_password(form.cleaned_data["new_password"])
         user.save()
         update_session_auth_hash(self.request, user)
+        audit(user, "core.auth.password_change", user=user)
 
         messages.success(
             self.request,

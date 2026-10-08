@@ -43,6 +43,8 @@ Le menu de chacun ne montre que ce qu'il peut faire. Seuls les administrateurs a
 
 **Le dernier administrateur** ne peut être ni rétrogradé, ni désactivé, ni supprimé : nommez-en d'abord un autre.
 
+Chaque changement de rôle, d'adhésion ou d'activation est inscrit au [journal d'activité](journal.md), avec son auteur.
+
 ### Soumettre une page à la modération
 
 Un rédacteur termine sa page puis choisit **Soumettre à la modération** (sous le bouton d'enregistrement). Les **modérateurs et administrateurs actifs** reçoivent un email ; l'un d'eux relit la page, puis la **publie** ou la **refuse** avec un commentaire. Le rédacteur reçoit un email dans les deux cas.

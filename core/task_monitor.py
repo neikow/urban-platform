@@ -113,7 +113,7 @@ def prune_runs() -> int:
 def recent_runs() -> list[Any]:
     from core.models import TaskRun
 
-    return list(TaskRun.objects.all()[:HISTORY_SIZE])
+    return list(TaskRun.objects.select_related("launched_by")[:HISTORY_SIZE])
 
 
 # --- live state (Celery remote inspection) --------------------------------------
@@ -230,23 +230,23 @@ class Trigger:
     label: str | Promise
     description: str | Promise
     task_name: str
-    start: Callable[[], bool]  # False when it was already under way
+    start: Callable[[], str | None]  # the task id, None when it was already under way
 
 
-def _start_map_tiles() -> bool:
+def _start_map_tiles() -> str | None:
     from publications.map_tiles import queue_refresh
 
     return queue_refresh()
 
 
-def _starter(task_path: str) -> Callable[[], bool]:
-    def start() -> bool:
-        from celery import current_app
+def _starter(task_path: str) -> Callable[[], str | None]:
+    def start() -> str | None:
+        from django.utils.module_loading import import_string
 
         if live_state().running(task_path):
-            return False
-        current_app.tasks[task_path].delay()
-        return True
+            return None
+        # Imported by path: the web process has not necessarily loaded every task module.
+        return str(import_string(task_path).delay().id)
 
     return start
 
@@ -278,3 +278,28 @@ TRIGGERS = (
 
 def get_trigger(key: str) -> Trigger | None:
     return next((t for t in TRIGGERS if t.key == key), None)
+
+
+def launch(trigger: Trigger, user: Any) -> bool:
+    """Start a trigger for ``user``: record who did, in the history and the activity log.
+
+    False when the task was already under way.
+    """
+    from core.audit import audit
+    from core.models import TaskRun, TaskRunStatus
+
+    task_id = trigger.start()
+    if task_id is None:
+        return False
+    # Eager runs (tests) have already recorded the run: keep it, add who launched it.
+    run, _created = TaskRun.objects.get_or_create(
+        task_id=task_id,
+        defaults={
+            "name": trigger.task_name,
+            "status": TaskRunStatus.QUEUED,
+            "started_at": timezone.now(),
+        },
+    )
+    TaskRun.objects.filter(pk=run.pk).update(launched_by=user)
+    audit(run, "core.task.launch", user=user, label=str(trigger.label), task=trigger.task_name)
+    return True

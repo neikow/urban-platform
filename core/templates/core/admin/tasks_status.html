@@ -87,7 +87,13 @@
                                 class="tasks-status tasks-status--{{ run.status|lower }}"
                             >{{ run.get_status_display }}</span>
                         </td>
-                        <td>{{ run.started_at }}</td>
+                        <td>
+                            {{ run.started_at }}
+                            {% if run.launched_by %}<div class="w-text-text-meta w-text-xs">
+                                    {% blocktrans with name=run.launched_by.get_full_name %}by
+                                        {{ name }}{% endblocktrans %}
+                                </div>{% endif %}
+                        </td>
                         <td>
                             {% if run.duration_seconds is not None %}
                                 {{ run.duration_seconds|floatformat:1 }} s

@@ -178,6 +178,24 @@ def api_tokens(user: User) -> list[dict[str, Any]]:
     ]
 
 
+def account_activity(user: User) -> list[dict[str, Any]]:
+    """The activity log entries about the account (logins, changes of role, exports…)."""
+    from django.contrib.contenttypes.models import ContentType
+    from wagtail.models import ModelLogEntry
+
+    entries = ModelLogEntry.objects.filter(
+        content_type=ContentType.objects.get_for_model(user), object_id=str(user.pk)
+    ).order_by("timestamp")
+    return [
+        {
+            "date": _iso(entry.timestamp),
+            "action": str(entry.formatter.label) if entry.formatter else entry.action,
+            "details": str(entry.message),
+        }
+        for entry in entries
+    ]
+
+
 def export_user_data(user: User) -> dict[str, Any]:
     data: dict[str, Any] = {
         "generated_at": _iso(timezone.now()),
@@ -187,6 +205,7 @@ def export_user_data(user: User) -> dict[str, Any]:
         "code_of_conduct_consents": consents(user),
         "emails_sent": emails(user),
         "api_tokens": api_tokens(user),
+        "account_activity": account_activity(user),
     }
     if user.can_access_admin():
         data["editorial_activity"] = editorial(user)

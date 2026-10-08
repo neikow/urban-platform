@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class TaskRunStatus(models.TextChoices):
+    QUEUED = "QUEUED", _("Queued")
     STARTED = "STARTED", _("Running")
     SUCCESS = "SUCCESS", _("Succeeded")
     FAILURE = "FAILURE", _("Failed")
@@ -26,6 +27,15 @@ class TaskRun(models.Model):
     finished_at = models.DateTimeField(_("Finished"), null=True, blank=True)
     result = models.CharField(_("Result"), max_length=255, blank=True)
     error = models.TextField(_("Error"), blank=True)
+    # Who started it by hand (Settings › Tasks); empty for scheduled runs.
+    launched_by = models.ForeignKey(
+        "User",
+        verbose_name=_("Started by"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="+",
+    )
 
     class Meta:
         verbose_name = _("Task run")

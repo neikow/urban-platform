@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django_ratelimit.decorators import ratelimit
 
+from core.audit import audit
 from core.data_export import export_user_data
 from core.models import User
 
@@ -25,6 +26,7 @@ class DataExportView(LoginRequiredMixin, View):
             return redirect("me")
 
         user = cast(User, request.user)
+        audit(user, "core.auth.data_export", user=user)
         content = json.dumps(
             export_user_data(user), cls=DjangoJSONEncoder, ensure_ascii=False, indent=2
         )

@@ -63,7 +63,7 @@ def run_task(request: HttpRequest, key: str) -> HttpResponseRedirect:
     trigger = task_monitor.get_trigger(key)
     if trigger is None:
         raise Http404(key)
-    if trigger.start():
+    if task_monitor.launch(trigger, request.user):
         messages.success(request, _("“%(task)s” has started.") % {"task": trigger.label})
     else:
         messages.warning(request, _("“%(task)s” is already in progress.") % {"task": trigger.label})

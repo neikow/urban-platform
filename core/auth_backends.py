@@ -58,6 +58,8 @@ SITE_SETTINGS_PERMISSIONS: frozenset[str] = frozenset(
         "core.change_featureflags",
         "core.view_emailevent",
         "core.manage_tasks",
+        "core.view_taskrun",
+        "core.view_audit_log",
         "publications.change_mapsettings",
     }
 )
