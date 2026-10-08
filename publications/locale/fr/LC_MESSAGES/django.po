@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 18:34+0200\n"
+"POT-Creation-Date: 2026-10-08 18:59+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -32,19 +32,19 @@ msgstr ""
 msgid "Tomorrow: %(title)s"
 msgstr "Demain : %(title)s"
 
-#: publications/geo.py:64
+#: publications/geo.py:65
 msgid "The location must be a point or a polygon."
 msgstr "La localisation doit être un point ou un polygone."
 
-#: publications/geo.py:72
+#: publications/geo.py:73
 msgid "The location coordinates are invalid."
 msgstr "Les coordonnées de la localisation sont invalides."
 
-#: publications/geo.py:88
+#: publications/geo.py:89
 msgid "The area must be a polygon."
 msgstr "Le secteur doit être un polygone."
 
-#: publications/geo.py:95
+#: publications/geo.py:96
 msgid "The area coordinates are invalid."
 msgstr "Les coordonnées du secteur sont invalides."
 
@@ -286,10 +286,10 @@ msgstr "Intervalle de mise à jour (jours)"
 #: publications/models/map_settings.py:40
 msgid ""
 "Streets and places change slowly: once a month is enough. Each update "
-"downloads about 35 MB."
+"downloads 35 to 60 MB, depending on the territory."
 msgstr ""
 "Les rues et les lieux changent lentement : une fois par mois suffit. Chaque "
-"mise à jour télécharge environ 35 Mo."
+"mise à jour télécharge 35 à 60 Mo selon le territoire."
 
 #: publications/models/map_settings.py:46
 #: publications/templates/publications/admin/map_tiles_status.html:4

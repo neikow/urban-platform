@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 class EmailEventType(models.TextChoices):
     VERIFICATION = "VERIFICATION", _("Email Verification")
     PASSWORD_RESET = "PASSWORD_RESET", _("Password Reset")
+    INVITATION = "INVITATION", _("Invitation")
     POLL_RESULTS = "POLL_RESULTS", _("Poll results")
     PROJECT_UPDATE = "PROJECT_UPDATE", _("Project update")
     EVENT_REMINDER = "EVENT_REMINDER", _("Event reminder")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 18:33+0200\n"
+"POT-Creation-Date: 2026-10-08 18:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -531,11 +531,11 @@ msgid "Memberships"
 msgstr "Adhésions"
 
 #: core/memberships.py:107 core/models/membership.py:27
-#: core/templates/core/profile.html:168 core/tests/views/test_me.py:59
+#: core/templates/core/profile.html:160 core/tests/views/test_me.py:59
 msgid "Member"
 msgstr "Membre"
 
-#: core/memberships.py:107 core/templates/core/profile.html:100
+#: core/memberships.py:107 core/templates/core/profile.html:92
 msgid "Email"
 msgstr "Email"
 
@@ -665,22 +665,6 @@ msgstr "Apparence"
 msgid "Branding"
 msgstr "Identité visuelle"
 
-#: core/models/city_district.py:11
-msgid "City District"
-msgstr "Arrondissement"
-
-#: core/models/city_district.py:12
-msgid "City Districts"
-msgstr "Arrondissements"
-
-#: core/models/city_neighborhood.py:13
-msgid "City Neighborhood"
-msgstr "Quartier"
-
-#: core/models/city_neighborhood.py:14
-msgid "City Neighborhoods"
-msgstr "Quartiers"
-
 #: core/models/email_event.py:9
 msgid "Email Verification"
 msgstr "Vérification d'email"
@@ -689,70 +673,74 @@ msgstr "Vérification d'email"
 msgid "Password Reset"
 msgstr "Réinitialisation du mot de passe"
 
-#: core/models/email_event.py:11 core/models/user.py:126
-#: core/templates/core/profile.html:218
+#: core/models/email_event.py:11
+msgid "Invitation"
+msgstr "Invitation"
+
+#: core/models/email_event.py:12 core/models/user.py:118
+#: core/templates/core/profile.html:210
 msgid "Poll results"
 msgstr "Résultats des votes"
 
-#: core/models/email_event.py:12
+#: core/models/email_event.py:13
 msgid "Project update"
 msgstr "Actualité du projet"
 
-#: core/models/email_event.py:13
+#: core/models/email_event.py:14
 msgid "Event reminder"
 msgstr "Rappel d'événement"
 
-#: core/models/email_event.py:17
+#: core/models/email_event.py:18
 msgid "Pending"
 msgstr "En attente"
 
-#: core/models/email_event.py:18
+#: core/models/email_event.py:19
 msgid "Sent"
 msgstr "Envoyé"
 
-#: core/models/email_event.py:19 core/models/task_run.py:9
+#: core/models/email_event.py:20 core/models/task_run.py:9
 msgid "Failed"
 msgstr "Échec"
 
-#: core/models/email_event.py:30 core/models/user.py:179
+#: core/models/email_event.py:31 core/models/user.py:171
 msgid "User"
 msgstr "Utilisateur"
 
-#: core/models/email_event.py:33
+#: core/models/email_event.py:34
 msgid "Event Type"
 msgstr "Type d'événement"
 
-#: core/models/email_event.py:38 core/models/task_run.py:23
+#: core/models/email_event.py:39 core/models/task_run.py:23
 #: core/templates/core/admin/dashboard/drafts.html:9
 #: core/templates/core/admin/tasks_status.html:70
 msgid "Status"
 msgstr "Statut"
 
-#: core/models/email_event.py:44
+#: core/models/email_event.py:45
 msgid "Recipient Email"
 msgstr "Email du destinataire"
 
-#: core/models/email_event.py:45
+#: core/models/email_event.py:46
 msgid "Stored temporarily, cleared on anonymization"
 msgstr "Stocké temporairement, effacé lors de l'anonymisation"
 
-#: core/models/email_event.py:48 core/models/notification_dispatch.py:17
+#: core/models/email_event.py:49 core/models/notification_dispatch.py:17
 msgid "Sent At"
 msgstr "Envoyé à"
 
-#: core/models/email_event.py:53
+#: core/models/email_event.py:54
 msgid "Created At"
 msgstr "Créé à"
 
-#: core/models/email_event.py:57
+#: core/models/email_event.py:58
 msgid "Error Message"
 msgstr "Message d'erreur"
 
-#: core/models/email_event.py:62
+#: core/models/email_event.py:63
 msgid "Email Event"
 msgstr "Événement de courriel"
 
-#: core/models/email_event.py:63
+#: core/models/email_event.py:64
 msgid "Email Events"
 msgstr "Événements d'email"
 
@@ -809,8 +797,8 @@ msgstr "Adhésion"
 msgid "Name"
 msgstr "Nom"
 
-#: core/models/neighborhood_association.py:13 core/models/user.py:83
-#: core/templates/core/profile.html:60
+#: core/models/neighborhood_association.py:13 core/models/user.py:75
+#: core/templates/core/profile.html:52
 msgid "Address"
 msgstr "Adresse"
 
@@ -837,7 +825,7 @@ msgstr "Responsable"
 msgid "Contact Email"
 msgstr "Email de contact"
 
-#: core/models/neighborhood_association.py:35 core/models/user.py:108
+#: core/models/neighborhood_association.py:35 core/models/user.py:100
 msgid "Phone Number"
 msgstr "Numéro de téléphone"
 
@@ -845,8 +833,8 @@ msgstr "Numéro de téléphone"
 msgid "Website"
 msgstr "Site web"
 
-#: core/models/neighborhood_association.py:39 core/models/user.py:92
-#: core/templates/core/profile.html:68
+#: core/models/neighborhood_association.py:39 core/models/user.py:84
+#: core/templates/core/profile.html:60
 msgid "Neighborhood Association"
 msgstr "Comité d'intérêt de quartier"
 
@@ -948,18 +936,22 @@ msgstr ""
 "Marseille »."
 
 #: core/models/territory.py:38
+msgid "INSEE code"
+msgstr "Code INSEE"
+
+#: core/models/territory.py:40
 msgid "City"
 msgstr "Ville"
 
-#: core/models/territory.py:41
+#: core/models/territory.py:43
 msgid "Addresses are searched in this city, e.g. Marseille."
 msgstr "Les adresses sont recherchées dans cette ville, par exemple Marseille."
 
-#: core/models/territory.py:44
+#: core/models/territory.py:46
 msgid "City INSEE code"
 msgstr "Code INSEE de la ville"
 
-#: core/models/territory.py:48
+#: core/models/territory.py:50
 msgid ""
 "Official code of the commune (not the postal code), e.g. 13055 for Marseille."
 " Empty: addresses are searched in the whole of France."
@@ -967,11 +959,11 @@ msgstr ""
 "Code officiel de la commune (pas le code postal), par exemple 13055 pour "
 "Marseille. Vide : les adresses sont recherchées dans toute la France."
 
-#: core/models/territory.py:53
+#: core/models/territory.py:55
 msgid "Local postal codes"
 msgstr "Codes postaux locaux"
 
-#: core/models/territory.py:57
+#: core/models/territory.py:59
 msgid ""
 "Separated by commas. The participation statistics count residents with these "
 "postal codes by default. Empty: everyone is counted."
@@ -980,11 +972,11 @@ msgstr ""
 "défaut les habitants ayant ces codes postaux. Vide : tout le monde est "
 "compté."
 
-#: core/models/territory.py:62
+#: core/models/territory.py:64
 msgid "Boundary"
 msgstr "Contour"
 
-#: core/models/territory.py:67
+#: core/models/territory.py:69
 msgid ""
 "The outline of the area is set when the website is installed. Contact the "
 "support to change it."
@@ -992,7 +984,7 @@ msgstr ""
 "Le contour du territoire est défini à l'installation du site. Contactez le "
 "support pour le modifier."
 
-#: core/models/territory.py:79
+#: core/models/territory.py:81
 msgid "Territory"
 msgstr "Territoire"
 
@@ -1036,47 +1028,43 @@ msgstr "Prénom"
 msgid "Last Name"
 msgstr "Nom de famille"
 
-#: core/models/user.py:80 core/templates/core/profile.html:44
-msgid "Neighborhood"
-msgstr "Quartier"
-
-#: core/models/user.py:82
+#: core/models/user.py:74
 msgid "Postal Code"
 msgstr "Code postal"
 
-#: core/models/user.py:85
+#: core/models/user.py:77
 msgid "Location"
 msgstr "Position"
 
-#: core/models/user.py:93
+#: core/models/user.py:85
 msgid "The association whose area contains the user's address."
 msgstr "L'association dont le secteur contient l'adresse de l'utilisateur."
 
-#: core/models/user.py:97
+#: core/models/user.py:89
 msgid "Email Verified"
 msgstr "Email vérifié"
 
-#: core/models/user.py:99
+#: core/models/user.py:91
 msgid "Is the user's email address verified?"
 msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:102 core/templates/core/profile.html:162
+#: core/models/user.py:94 core/templates/core/profile.html:154
 msgid "Role"
 msgstr "Rôle"
 
-#: core/models/user.py:110
+#: core/models/user.py:102
 msgid "Newsletter Subscription"
 msgstr "Inscription à la newsletter"
 
-#: core/models/user.py:112
+#: core/models/user.py:104
 msgid "Does the user want to receive the newsletter?"
 msgstr "L'utilisateur souhaite-t-il recevoir la newsletter ?"
 
-#: core/models/user.py:115
+#: core/models/user.py:107
 msgid "Newsletter consent date"
 msgstr "Date du consentement à la newsletter"
 
-#: core/models/user.py:119
+#: core/models/user.py:111
 msgid ""
 "When the user last agreed to receive the newsletter (GDPR proof of consent). "
 "Empty if they are not subscribed, or subscribed before this date was "
@@ -1086,68 +1074,68 @@ msgstr ""
 "consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
 "l'enregistrement de cette date."
 
-#: core/models/user.py:128
+#: core/models/user.py:120
 msgid "Email the results when a poll I voted in closes."
 msgstr ""
 "Recevoir les résultats par email à la clôture d'un vote auquel j'ai "
 "participé."
 
-#: core/models/user.py:131 core/templates/core/profile.html:219
+#: core/models/user.py:123 core/templates/core/profile.html:211
 msgid "Project updates"
 msgstr "Actualités des projets"
 
-#: core/models/user.py:133
+#: core/models/user.py:125
 msgid "Email the news of projects I voted on or shared an idea about."
 msgstr ""
 "Recevoir par email les actualités des projets sur lesquels j'ai voté ou "
 "proposé une idée."
 
-#: core/models/user.py:136 core/templates/core/profile.html:220
+#: core/models/user.py:128 core/templates/core/profile.html:212
 msgid "Event reminders"
 msgstr "Rappels d'événements"
 
-#: core/models/user.py:138
+#: core/models/user.py:130
 msgid "Email a reminder the day before events I am interested in."
 msgstr ""
 "Recevoir un rappel par email la veille des événements qui m'intéressent."
 
-#: core/models/user.py:141
+#: core/models/user.py:133
 msgid "Date Joined"
 msgstr "Date d'inscription"
 
-#: core/models/user.py:142
+#: core/models/user.py:134
 msgid "Last Updated"
 msgstr "Dernière mise à jour"
 
-#: core/models/user.py:144
+#: core/models/user.py:136
 msgid "Deleted At"
 msgstr "Supprimé le"
 
-#: core/models/user.py:147
+#: core/models/user.py:139
 msgid "When the user account was soft-deleted. NULL if not deleted."
 msgstr "Quand le compte utilisateur a été supprimé. NULL si non supprimé."
 
-#: core/models/user.py:152
+#: core/models/user.py:144
 msgid "Active"
 msgstr "Actif"
 
-#: core/models/user.py:154
+#: core/models/user.py:146
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:180
+#: core/models/user.py:172
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: core/models/user.py:184
+#: core/models/user.py:176
 msgid "Can see vote and idea statistics"
 msgstr "Peut voir les statistiques des votes et des idées"
 
-#: core/models/user.py:185
+#: core/models/user.py:177
 msgid "Can see and start background tasks"
 msgstr "Peut voir et lancer les tâches de fond"
 
-#: core/models/user.py:186
+#: core/models/user.py:178
 msgid "Can see the activity log"
 msgstr "Peut voir le journal d'activité"
 
@@ -1381,7 +1369,7 @@ msgstr "J'accepte les"
 msgid "terms of service"
 msgstr "conditions d'utilisation"
 
-#: core/templates/auth/register.html:150 core/templates/core/profile.html:79
+#: core/templates/auth/register.html:150 core/templates/core/profile.html:71
 msgid "(opens in a new tab)"
 msgstr "(ouvre dans un nouvel onglet)"
 
@@ -1711,7 +1699,7 @@ msgstr "Menu de navigation"
 
 #: core/templates/core/notification_unsubscribe.html:6
 #: core/templates/core/notification_unsubscribe.html:11
-#: core/templates/core/profile.html:215
+#: core/templates/core/profile.html:207
 #: core/templates/core/profile_edit.html:94
 msgid "Email notifications"
 msgstr "Notifications par email"
@@ -1756,7 +1744,7 @@ msgstr "Gérer toutes mes notifications"
 msgid "My profile"
 msgstr "Mon profil"
 
-#: core/templates/core/profile.html:10 core/templates/core/profile.html:158
+#: core/templates/core/profile.html:10 core/templates/core/profile.html:150
 #: core/templates/core/profile_edit.html:13
 msgid "Account"
 msgstr "Compte"
@@ -1765,88 +1753,88 @@ msgstr "Compte"
 msgid "Personal information"
 msgstr "Informations personnelles"
 
-#: core/templates/core/profile.html:52
+#: core/templates/core/profile.html:44
 msgid "Postal code"
 msgstr "Code postal"
 
-#: core/templates/core/profile.html:96 core/wagtail_hooks.py:63
+#: core/templates/core/profile.html:88 core/wagtail_hooks.py:63
 msgid "Contact"
 msgstr "Contact"
 
-#: core/templates/core/profile.html:107 core/tests/views/test_me.py:74
+#: core/templates/core/profile.html:99 core/tests/views/test_me.py:74
 msgid "Verified"
 msgstr "Vérifié"
 
-#: core/templates/core/profile.html:111 core/tests/views/test_me.py:67
+#: core/templates/core/profile.html:103 core/tests/views/test_me.py:67
 msgid "Not verified"
 msgstr "Non vérifié"
 
-#: core/templates/core/profile.html:118
+#: core/templates/core/profile.html:110
 msgid "Resend the verification link"
 msgstr "Renvoyer le lien de vérification"
 
-#: core/templates/core/profile.html:126
+#: core/templates/core/profile.html:118
 msgid "Phone"
 msgstr "Téléphone"
 
-#: core/templates/core/profile.html:135
+#: core/templates/core/profile.html:127
 msgid "My events"
 msgstr "Mes événements"
 
-#: core/templates/core/profile.html:152
+#: core/templates/core/profile.html:144
 msgid "Events you are interested in will appear here."
 msgstr "Les événements qui vous intéressent apparaîtront ici."
 
-#: core/templates/core/profile.html:178
+#: core/templates/core/profile.html:170
 msgid "Subscription"
 msgstr "Adhésion"
 
-#: core/templates/core/profile.html:184
+#: core/templates/core/profile.html:176
 msgid "Subscriber"
 msgstr "Adhérent"
 
-#: core/templates/core/profile.html:186
+#: core/templates/core/profile.html:178
 msgid "Not a subscriber"
 msgstr "Non adhérent"
 
-#: core/templates/core/profile.html:192
+#: core/templates/core/profile.html:184
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: core/templates/core/profile.html:198 core/tests/views/test_me.py:51
+#: core/templates/core/profile.html:190 core/tests/views/test_me.py:51
 msgid "Subscribed"
 msgstr "Abonné"
 
-#: core/templates/core/profile.html:201
+#: core/templates/core/profile.html:193
 #, python-format
 msgid "since %(date)s"
 msgstr "depuis le %(date)s"
 
-#: core/templates/core/profile.html:209
+#: core/templates/core/profile.html:201
 msgid "Not subscribed"
 msgstr "Non abonné"
 
-#: core/templates/core/profile.html:222
+#: core/templates/core/profile.html:214
 msgid "None"
 msgstr "Aucune"
 
-#: core/templates/core/profile.html:228
+#: core/templates/core/profile.html:220
 msgid "Change"
 msgstr "Modifier"
 
-#: core/templates/core/profile.html:232
+#: core/templates/core/profile.html:224
 msgid "Member since"
 msgstr "Membre depuis"
 
-#: core/templates/core/profile.html:238
+#: core/templates/core/profile.html:230
 msgid "Last update"
 msgstr "Dernière mise à jour"
 
-#: core/templates/core/profile.html:246
+#: core/templates/core/profile.html:238
 msgid "My data"
 msgstr "Mes données"
 
-#: core/templates/core/profile.html:248
+#: core/templates/core/profile.html:240
 msgid ""
 "Download everything we store about you: your account, votes, ideas, events "
 "you follow, consents and the emails we sent you. The file is in JSON, a "
@@ -1857,11 +1845,11 @@ msgstr ""
 "emails que nous vous avons envoyés. Le fichier est au format JSON, importable"
 " par d'autres services."
 
-#: core/templates/core/profile.html:265
+#: core/templates/core/profile.html:257
 msgid "Download my data"
 msgstr "Télécharger mes données"
 
-#: core/templates/core/profile.html:286 core/templates/core/profile_edit.html:4
+#: core/templates/core/profile.html:278 core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:20
 #: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
@@ -2048,6 +2036,21 @@ msgstr ""
 "Dessinez le secteur couvert par l'association : les habitants qui y vivent "
 "lui sont rattachés. Les secteurs des autres associations apparaissent en "
 "gris, et les nouveaux points s'accrochent à leurs bords."
+
+#~ msgid "City District"
+#~ msgstr "Arrondissement"
+
+#~ msgid "City Districts"
+#~ msgstr "Arrondissements"
+
+#~ msgid "City Neighborhood"
+#~ msgstr "Quartier"
+
+#~ msgid "City Neighborhoods"
+#~ msgstr "Quartiers"
+
+#~ msgid "Neighborhood"
+#~ msgstr "Quartier"
 
 #~ msgid "The urban planning commission"
 #~ msgstr "La commission d'urbanisme"

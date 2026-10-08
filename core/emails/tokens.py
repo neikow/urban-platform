@@ -11,6 +11,8 @@ if TYPE_CHECKING:
 
 VERIFICATION_SALT = "email-verification"
 PASSWORD_RESET_SALT = "password-reset"  # nosec B105
+# An administrator's first password (core.tenant): same token, valid longer.
+INVITATION_SALT = "invitation"  # nosec B105
 _PASSWORD_MARKER_SALT = "core.emails.tokens.password-reset-marker"  # nosec B105
 
 
@@ -45,12 +47,28 @@ def generate_password_reset_token(user: "User") -> str:
     return signer.sign(f"{user.uuid}:{_password_marker(user)}")
 
 
+def generate_invitation_token(user: "User") -> str:
+    signer = TimestampSigner(salt=INVITATION_SALT)
+    return signer.sign(f"{user.uuid}:{_password_marker(user)}")
+
+
+def _unsign(token: str) -> str | None:
+    """The value of a password reset or invitation token, each with its own lifetime."""
+    for salt, max_age in (
+        (PASSWORD_RESET_SALT, getattr(settings, "PASSWORD_RESET_TOKEN_EXPIRY", 3600)),
+        (INVITATION_SALT, getattr(settings, "INVITATION_TOKEN_EXPIRY", 7 * 86400)),
+    ):
+        try:
+            return TimestampSigner(salt=salt).unsign(token, max_age=max_age)
+        except (BadSignature, SignatureExpired):
+            continue
+    return None
+
+
 def verify_password_reset_token(token: str) -> UUID | None:
-    signer = TimestampSigner(salt=PASSWORD_RESET_SALT)
-    max_age = getattr(settings, "PASSWORD_RESET_TOKEN_EXPIRY", 3600)
-    try:
-        value = signer.unsign(token, max_age=max_age)
-    except (BadSignature, SignatureExpired):
+    """The user a password reset or invitation token lets choose a password, if still valid."""
+    value = _unsign(token)
+    if value is None:
         return None
 
     user_uuid_str, separator, marker = value.partition(":")

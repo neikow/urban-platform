@@ -178,13 +178,25 @@ class TestExtent:
         # Four times the span on each side (at least 0.05°), rounded outwards.
         assert tiles_bounds(small) == (4.8, 42.92, 5.25, 43.1)
 
-    def test_tiles_margin_is_capped(self):
+    def test_tiles_extent_is_capped(self):
+        # A large commune (0.35° by 0.2°, like Aix-en-Provence): 0.6° on each axis at most.
+        commune = {
+            "type": "Polygon",
+            "coordinates": [[[5.0, 43.0], [5.35, 43.0], [5.35, 43.2], [5.0, 43.0]]],
+        }
+
+        west, south, east, north = tiles_bounds(commune)
+
+        assert east - west == pytest.approx(0.6, abs=0.02)
+        assert north - south == pytest.approx(0.6, abs=0.02)
+
+    def test_larger_outline_keeps_a_small_margin(self):
         large = {
             "type": "Polygon",
             "coordinates": [[[4.0, 43.0], [5.0, 43.0], [5.0, 44.0], [4.0, 43.0]]],
         }
 
-        assert tiles_bounds(large) == (3.7, 42.7, 5.3, 44.3)
+        assert tiles_bounds(large) == (3.95, 42.95, 5.05, 44.05)
 
     def test_without_outline(self):
         assert tiles_bounds(None) == DEFAULT_TILES_BOUNDS

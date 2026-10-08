@@ -1,0 +1,29 @@
+{% extends "emails/password_reset_email.html" %}
+
+{% block title %}Votre accès à {{ site_name }}{% endblock %}
+
+{% block message %}
+    <p>Un compte administrateur vous attend sur {{ site_name }}, le site de participation de votre association.</p>
+
+    <p>Pour y accéder, choisissez votre mot de passe :</p>
+
+    <table role="presentation" class="btn-table" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center">
+                <a href="{{ reset_url }}" class="button">Choisir mon mot de passe</a>
+            </td>
+        </tr>
+    </table>
+
+    <div class="warning">
+        <strong>Important :</strong> ce lien est valable {{ expiry_days }} jours. Passé ce délai, utilisez « Mot de
+        passe oublié » sur la page de connexion avec cette adresse email.
+    </div>
+
+    <p class="meta">
+        Si le bouton ne fonctionne pas, copiez et collez le lien suivant dans votre navigateur :
+    </p>
+    <p class="link-fallback">{{ reset_url }}</p>
+
+    <p class="meta">Si vous ne vous attendiez pas à cet email, vous pouvez l'ignorer.</p>
+{% endblock %}

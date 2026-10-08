@@ -84,7 +84,7 @@ def ensure_admin(email: str, report: Report) -> None:
 
     Existing accounts are left as they are: the bootstrap never changes a role.
     """
-    from core.emails.tasks import send_password_reset_email
+    from core.emails.tasks import send_invitation_email
     from core.models import User, UserRole
 
     if not email or User.objects.with_deleted().filter(email=email).exists():
@@ -97,8 +97,7 @@ def ensure_admin(email: str, report: Report) -> None:
         is_verified=True,
     )
     report.done.append(f"Administrator: {email}.")
-    # The password reset email doubles as the invitation.
-    transaction.on_commit(lambda: send_password_reset_email.delay(user.pk))  # type: ignore[attr-defined]
+    transaction.on_commit(lambda: send_invitation_email.delay(user.pk))  # type: ignore[attr-defined]
 
 
 def ensure_territory(code: str, report: Report) -> None:

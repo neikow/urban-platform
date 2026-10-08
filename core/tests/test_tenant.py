@@ -37,7 +37,7 @@ def services():
     """The outside world: geo.api.gouv.fr, the admin invitation, the map tiles."""
     with (
         patch("core.territories.fetch", return_value=AIX) as fetch,
-        patch("core.emails.tasks.send_password_reset_email.delay") as invite,
+        patch("core.emails.tasks.send_invitation_email.delay") as invite,
         patch("publications.map_tiles.queue_refresh") as tiles,
     ):
         yield {"fetch": fetch, "invite": invite, "tiles": tiles}

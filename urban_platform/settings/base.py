@@ -237,6 +237,8 @@ setup_sentry(
 
 EMAIL_VERIFICATION_TOKEN_EXPIRY = 86400
 PASSWORD_RESET_TOKEN_EXPIRY = 3600
+# An administrator invited when the website is set up (core.tenant).
+INVITATION_TOKEN_EXPIRY = 7 * 86400
 EMAIL_EVENT_ANONYMIZE_DAYS = 30
 
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")

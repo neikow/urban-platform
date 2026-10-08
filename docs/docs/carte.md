@@ -9,7 +9,7 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Carte**.
 | Champ | Description |
 |---|---|
 | **Mettre à jour la carte automatiquement** | Décochez pour garder le fond de carte actuel |
-| **Intervalle de mise à jour (jours)** | 30 par défaut : les rues changent lentement, une fois par mois suffit. Chaque mise à jour télécharge environ 35 Mo |
+| **Intervalle de mise à jour (jours)** | 30 par défaut : les rues changent lentement, une fois par mois suffit. Chaque mise à jour télécharge 35 à 60 Mo selon le territoire |
 
 La partie **État** indique la version des données, la date de la dernière mise à jour, celle de la dernière vérification et, en cas d'échec, l'erreur rencontrée. Une mise à jour qui échoue garde la carte actuelle et sera retentée à l'intervalle suivant.
 
