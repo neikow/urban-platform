@@ -46,7 +46,7 @@ module = "*.migrations.*"
 disallow_untyped_defs = false
 
 [[tool.mypy.overrides]]
-module = ["*.tests.*"]
+module = ["*.tests.*", "tests.*"]
 disallow_untyped_defs = false
 
 [tool.django-stubs]
@@ -75,6 +75,8 @@ dev = [
 DJANGO_SETTINGS_MODULE = "urban_platform.settings.test"
 addopts = "--strict-markers --tb=short -m 'not e2e'"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
+# The deployment agent is its own package, outside the Django project.
+pythonpath = ["agent"]
 markers = [
     "e2e: marks tests as end-to-end tests (deselect with '-m \"not e2e\"')",
 ]

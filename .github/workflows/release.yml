@@ -3,7 +3,8 @@ name: Release tenant image
 # The image every website of the platform runs (deploy/tenant/compose.yml):
 #   - each push to saas: ghcr.io/neikow/urban-platform:saas and :saas-<commit>
 #   - each version tag (v1.2.0): :1.2.0, :1.2 and :latest
-# The nginx image follows with the same tags, as urban-platform-nginx.
+# The nginx image follows with the same tags, as urban-platform-nginx, and the
+# deployment agent (agent/) as urban-platform-agent.
 
 on:
   push:
@@ -71,6 +72,18 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=raw,value=latest,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
 
+      - name: Agent tags
+        id: agent-meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE }}-agent
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-,enable=${{ github.ref_type == 'branch' }}
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v4
         with:
@@ -96,3 +109,14 @@ jobs:
           push: true
           tags: ${{ steps.nginx-meta.outputs.tags }}
           labels: ${{ steps.nginx-meta.outputs.labels }}
+
+      - name: Build and push agent image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: agent/Dockerfile
+          push: true
+          tags: ${{ steps.agent-meta.outputs.tags }}
+          labels: ${{ steps.agent-meta.outputs.labels }}
+          build-args: |
+            AGENT_VERSION=${{ steps.version.outputs.app_version }}

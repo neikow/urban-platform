@@ -83,7 +83,7 @@ check: ## Everything CI runs before tests: lint, format check, types, security, 
 	uv run ruff check .
 	uv run ruff format --check .
 	uv run mypy .
-	uv run bandit -q -c pyproject.toml -r core home about legal pedagogy publications urban_platform scripts
+	uv run bandit -q -c pyproject.toml -r core home about legal pedagogy publications urban_platform scripts agent/urban_agent
 	$(MANAGE) makemigrations --check --dry-run
 
 .PHONY: docs
