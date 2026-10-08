@@ -28,13 +28,14 @@ LOCAL_AREA_ZOOM = 14
 # Self-hosted basemap: a PMTiles extract fetched by the `refresh_map_tiles` task
 # (publications.map_tiles). It covers the outline's bounding box widened on each
 # side by four times its span, so the maps open on the outline and zoom out a few
-# levels further. The margin is capped, or the extract of a large commune would
-# weigh hundreds of MB. The maps cannot be panned outside it: there are no tiles there.
+# levels further. The whole extract stays within TILES_EXTENT_MAX on each axis
+# (unless the outline alone is larger): its weight grows with its surface, about
+# 35 to 60 MB at that size. The maps cannot be panned outside it: there are no tiles there.
 LOCAL_AREA_TILES_PATH = "publications/geo/local-area.pmtiles"
 LOCAL_AREA_TILES_MAX_ZOOM = 15  # vector tiles stay sharp when zoomed past it
 TILES_MARGIN_SPANS = 4
 TILES_MARGIN_MIN = 0.05  # degrees
-TILES_MARGIN_MAX = 0.3
+TILES_EXTENT_MAX = 0.6
 
 
 def _is_position(value: Any) -> bool:
@@ -173,7 +174,8 @@ def tiles_bounds(area: dict[str, Any] | None) -> tuple[float, float, float, floa
     west, south, east, north = bounds(area)
 
     def margin(span: float) -> float:
-        return min(max(span * TILES_MARGIN_SPANS, TILES_MARGIN_MIN), TILES_MARGIN_MAX)
+        room = (TILES_EXTENT_MAX - span) / 2
+        return max(min(span * TILES_MARGIN_SPANS, room), TILES_MARGIN_MIN)
 
     def down(value: float) -> float:
         # Rounded first: 42.92 * 100 is 4291.999…

@@ -61,6 +61,23 @@ class EmailService(ABC):
             html_content=html_content,
         )
 
+    def send_invitation_email(self, user: "User", invitation_url: str) -> bool:
+        html_content = render_to_string(
+            "emails/invitation_email.html",
+            {
+                "user": user,
+                "reset_url": invitation_url,
+                "site_name": site_name(),
+                "expiry_days": settings.INVITATION_TOKEN_EXPIRY // 86400,
+            },
+        )
+        return self.send_email(
+            to_email=user.email,
+            to_name=user.get_full_name(),
+            subject=f"Votre accès à {site_name()}",
+            html_content=html_content,
+        )
+
 
 class ConsoleEmailService(EmailService):
     def send_email(

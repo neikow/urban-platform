@@ -19,6 +19,10 @@ x-django-common: &django-common
         - DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
         - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
         - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+        # This website (core.tenant, run by the migrator)
+        - TENANT_ADMIN_EMAIL=${TENANT_ADMIN_EMAIL:-}
+        - TENANT_TERRITORY=${TENANT_TERRITORY:-}
+        - TENANT_CONTACT_EMAIL=${TENANT_CONTACT_EMAIL:-}
         # Brevo configuration
         - BREVO_API_KEY=${BREVO_API_KEY}
         - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
@@ -180,9 +184,13 @@ services:
     migrator:
         <<: *django-common
         container_name: ${COMPOSE_PROJECT_NAME:-urban-platform}-migrator
-        command: uv run python manage.py migrate --noinput
+        # Then bring the database in line with the TENANT_* variables (idempotent).
+        command: sh -c "uv run python manage.py migrate --noinput && uv run python manage.py bootstrap_tenant"
         depends_on:
             db:
+                condition: service_healthy
+            # The admin invitation and the map tiles are queued for the worker.
+            cache:
                 condition: service_healthy
             volume_init:
                 condition: service_completed_successfully

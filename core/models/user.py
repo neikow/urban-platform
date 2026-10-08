@@ -71,14 +71,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_("First Name"), max_length=150)
     last_name = models.CharField(_("Last Name"), max_length=150)
 
-    neighborhood = models.ForeignKey(
-        "CityNeighborhood",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="users",
-        verbose_name=_("Neighborhood"),
-    )
     postal_code = models.CharField(_("Postal Code"), max_length=10, blank=True)
     address = models.CharField(_("Address"), max_length=255, blank=True)
     # Filled from the address (core.geocoding); places the user in an association's area.

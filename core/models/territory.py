@@ -34,6 +34,8 @@ class Territory(BaseGenericSetting):
             'Completes "Projects located…", e.g. "dans le 7e arrondissement de Marseille".'
         ),
     )
+    # INSEE code of the commune or arrondissement the outline comes from.
+    code = models.CharField(_("INSEE code"), max_length=5, blank=True, editable=False)
     city_name = models.CharField(
         _("City"),
         max_length=100,

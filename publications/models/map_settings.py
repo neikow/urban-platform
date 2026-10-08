@@ -38,7 +38,7 @@ class MapSettings(BaseGenericSetting):
         validators=[MinValueValidator(1), MaxValueValidator(365)],
         help_text=_(
             "Streets and places change slowly: once a month is enough. "
-            "Each update downloads about 35 MB."
+            "Each update downloads 35 to 60 MB, depending on the territory."
         ),
     )
 

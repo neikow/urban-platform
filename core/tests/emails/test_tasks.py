@@ -6,6 +6,7 @@ from django.test import override_settings
 from django.utils import timezone
 
 from core.emails.tasks import (
+    send_invitation_email,
     send_verification_email,
     send_password_reset_email,
     anonymize_old_email_events,
@@ -134,6 +135,36 @@ class TestSendPasswordResetEmail:
         call_args = mock_service.send_password_reset_email.call_args
         reset_url = call_args[0][1]
         assert "/auth/password-reset/" in reset_url
+
+
+@pytest.mark.django_db
+class TestSendInvitationEmail:
+    @patch("core.emails.tasks.get_email_service")
+    def test_sends_an_invitation_link(self, mock_get_service, user, settings):
+        settings.WAGTAILADMIN_BASE_URL = "https://aix.example.org"
+        mock_service = MagicMock()
+        mock_service.send_invitation_email.return_value = True
+        mock_get_service.return_value = mock_service
+
+        assert send_invitation_email(user.pk)
+
+        event = EmailEvent.objects.get(user=user)
+        assert event.event_type == EmailEventType.INVITATION
+        assert event.status == EmailEventStatus.SENT
+        _, url = mock_service.send_invitation_email.call_args.args
+        assert url.startswith("https://aix.example.org/auth/password-reset/")
+        mock_service.send_password_reset_email.assert_not_called()
+
+    def test_email_wording(self, user):
+        from core.emails.services import ConsoleEmailService
+
+        with patch.object(ConsoleEmailService, "send_email", return_value=True) as send:
+            ConsoleEmailService().send_invitation_email(user, "https://x.example/link/")
+
+        html = send.call_args.kwargs["html_content"]
+        assert "https://x.example/link/" in html
+        assert "7 jours" in html
+        assert "réinitialisation" not in html
 
 
 @pytest.mark.django_db

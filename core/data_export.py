@@ -53,7 +53,6 @@ def account(user: User) -> dict[str, Any]:
             a.name for a in user.responsible_for_associations.order_by("name")
         ],
         "phone_number": user.phone_number,
-        "neighborhood": str(user.neighborhood) if user.neighborhood else None,
         "role": user.get_role_display(),
         "memberships": [m.as_dict() for m in user.memberships.order_by("starts_on")],
         "email_verified": user.is_verified,

@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.test import override_settings
 
 from core.emails.tokens import (
+    generate_invitation_token,
     generate_verification_token,
     verify_verification_token,
     generate_password_reset_token,
@@ -121,3 +122,34 @@ class TestTokenSeparation:
         token = generate_password_reset_token(reset_user)
         result = verify_verification_token(token)
         assert result is None
+
+
+@pytest.mark.django_db
+class TestInvitationTokens:
+    def test_lets_choose_a_password(self, reset_user):
+        token = generate_invitation_token(reset_user)
+
+        assert verify_password_reset_token(token) == reset_user.uuid
+
+    @override_settings(PASSWORD_RESET_TOKEN_EXPIRY=0, INVITATION_TOKEN_EXPIRY=3600)
+    def test_lives_longer_than_a_reset(self, reset_user):
+        reset = generate_password_reset_token(reset_user)
+        invitation = generate_invitation_token(reset_user)
+        time.sleep(1)
+
+        assert verify_password_reset_token(reset) is None
+        assert verify_password_reset_token(invitation) == reset_user.uuid
+
+    @override_settings(INVITATION_TOKEN_EXPIRY=0)
+    def test_expires(self, reset_user):
+        token = generate_invitation_token(reset_user)
+        time.sleep(1)
+
+        assert verify_password_reset_token(token) is None
+
+    def test_single_use(self, reset_user):
+        token = generate_invitation_token(reset_user)
+        reset_user.set_password("ChosenPass123")
+        reset_user.save()
+
+        assert verify_password_reset_token(token) is None
