@@ -70,8 +70,9 @@ template formatter cannot change the msgid.
 ## Deploying a website
 
 Every website (one per association) runs the same image with its own database, described
-by environment variables. After `migrate`, `manage.py bootstrap_tenant` brings the database
-in line with them (the `migrator` service of `docker-compose.yml` runs both). It is
+by environment variables: see [`deploy/README.md`](deploy/README.md) for the image, the
+Compose project and its variables. After `migrate`, `manage.py bootstrap_tenant` brings the
+database in line with them (the `migrator` service runs both). It is
 idempotent and runs at every deployment; it only fills what is missing, so nothing the
 association edited is overwritten (see `core/tenant.py`).
 

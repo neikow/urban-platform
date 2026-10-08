@@ -1,0 +1,181 @@
+# One website (tenant) of the platform: run as its own Compose project.
+#
+#   docker compose -p <TENANT_SLUG> -f compose.yml --env-file .env up -d
+#
+# The variables are documented in .env.example and deploy/README.md. Every
+# website on a host runs this same file; the project name keeps their
+# containers, volumes and networks apart. Only nginx joins the shared edge
+# network, where the reverse proxy (Traefik) routes TENANT_HOSTNAME to it.
+
+x-app: &app
+    image: ${IMAGE:-ghcr.io/neikow/urban-platform}:${IMAGE_TAG:?set IMAGE_TAG}
+    restart: unless-stopped
+    networks:
+        - internal
+    environment:
+        DJANGO_SETTINGS_MODULE: urban_platform.settings.production
+        ENVIRONMENT: ${ENVIRONMENT:-production}
+        SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY}
+        BASE_URL: https://${TENANT_HOSTNAME:?set TENANT_HOSTNAME}
+        ALLOWED_HOSTS: ${TENANT_HOSTNAME}
+        CSRF_TRUSTED_ORIGINS: https://${TENANT_HOSTNAME}
+        DB_HOST: db
+        DB_PORT: "5432"
+        DB_NAME: urban
+        DB_USER: urban
+        DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD}
+        REDIS_URL: redis://cache:6379/0
+        WEBSITE_NAME: ${WEBSITE_NAME:-}
+        TENANT_ADMIN_EMAIL: ${TENANT_ADMIN_EMAIL:-}
+        TENANT_TERRITORY: ${TENANT_TERRITORY:-}
+        TENANT_CONTACT_EMAIL: ${TENANT_CONTACT_EMAIL:-}
+        BREVO_API_KEY: ${BREVO_API_KEY:-}
+        DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-}
+        DEFAULT_FROM_NAME: ${DEFAULT_FROM_NAME:-}
+        SENTRY_DSN: ${SENTRY_DSN:-}
+        ANALYTICS_SCRIPT_TAG: ${ANALYTICS_SCRIPT_TAG:-}
+        # Small websites: a few processes are plenty, and many run on one host.
+        GUNICORN_WORKERS: ${GUNICORN_WORKERS:-2}
+        GUNICORN_THREADS: ${GUNICORN_THREADS:-4}
+
+services:
+    # Migrations, then the website's setup from the TENANT_* variables
+    # (core.tenant). Runs at every deployment; the other services wait for it.
+    migrator:
+        <<: *app
+        restart: "no"
+        command: sh -c "python manage.py migrate --noinput && python manage.py bootstrap_tenant"
+        depends_on:
+            db:
+                condition: service_healthy
+            cache:
+                condition: service_healthy
+            volumes:
+                condition: service_completed_successfully
+
+    web:
+        <<: *app
+        command: gunicorn urban_platform.wsgi:application -c gunicorn.conf.py
+        volumes:
+            - static:/app/staticfiles
+            - media:/app/mediafiles
+        depends_on:
+            migrator:
+                condition: service_completed_successfully
+            static:
+                condition: service_completed_successfully
+        healthcheck:
+            # The slim image has no curl. Send the allowed Host and the proxy's
+            # X-Forwarded-Proto so neither ALLOWED_HOSTS nor the HTTPS redirect
+            # turn the probe into a 400/301.
+            test:
+                - CMD
+                - python
+                - -c
+                - "import os, urllib.request as r; r.urlopen(r.Request('http://localhost:8000/healthz/', headers={'Host': os.environ['ALLOWED_HOSTS'], 'X-Forwarded-Proto': 'https'}), timeout=4)"
+            interval: 30s
+            timeout: 5s
+            retries: 3
+            start_period: 30s
+
+    worker:
+        <<: *app
+        # Also runs the scheduler (--beat): one worker per website, so no
+        # schedule runs twice, and a separate beat container would cost ~130 MB.
+        # Schedules live in the database (django_celery_beat).
+        command: >-
+            celery -A urban_platform worker --beat
+            --scheduler django_celery_beat.schedulers:DatabaseScheduler
+            --loglevel=info --concurrency=${CELERY_CONCURRENCY:-1}
+        volumes:
+            # The map tiles are written here (publications.map_tiles).
+            - media:/app/mediafiles
+        depends_on:
+            migrator:
+                condition: service_completed_successfully
+
+    nginx:
+        image: ${IMAGE:-ghcr.io/neikow/urban-platform}-nginx:${IMAGE_TAG}
+        restart: unless-stopped
+        environment:
+            UPSTREAM_NAME: web
+        volumes:
+            - static:/app/staticfiles:ro
+            - media:/app/mediafiles:ro
+        depends_on:
+            web:
+                condition: service_healthy
+        networks:
+            - internal
+            - edge
+        # A list, not a mapping: Compose does not interpolate mapping keys.
+        labels:
+            - traefik.enable=true
+            - traefik.docker.network=${EDGE_NETWORK:-urban-edge}
+            - traefik.http.routers.${TENANT_SLUG:?set TENANT_SLUG}.rule=Host(`${TENANT_HOSTNAME}`)
+            - traefik.http.routers.${TENANT_SLUG}.entrypoints=${EDGE_ENTRYPOINT:-websecure}
+            - traefik.http.routers.${TENANT_SLUG}.tls.certresolver=${EDGE_CERT_RESOLVER:-letsencrypt}
+            - traefik.http.services.${TENANT_SLUG}.loadbalancer.server.port=80
+
+    db:
+        image: postgres:17-alpine
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: urban
+            POSTGRES_USER: urban
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - postgres:/var/lib/postgresql/data
+        networks:
+            - internal
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U urban -d urban"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    cache:
+        image: redis:7.4-alpine
+        restart: unless-stopped
+        command: redis-server --save 60 1 --loglevel warning
+        volumes:
+            - redis:/data
+        networks:
+            - internal
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    # One-shot jobs.
+    volumes:
+        # Named volumes start root-owned: hand them to the app user (uid 1000).
+        image: alpine:3.21
+        restart: "no"
+        command: chown -R 1000:1000 /app/staticfiles /app/mediafiles
+        volumes:
+            - static:/app/staticfiles
+            - media:/app/mediafiles
+
+    static:
+        <<: *app
+        restart: "no"
+        command: python manage.py collectstatic --noinput --clear
+        volumes:
+            - static:/app/staticfiles
+        depends_on:
+            volumes:
+                condition: service_completed_successfully
+
+volumes:
+    postgres:
+    redis:
+    static:
+    media:
+
+networks:
+    internal:
+    edge:
+        name: ${EDGE_NETWORK:-urban-edge}
+        external: true
