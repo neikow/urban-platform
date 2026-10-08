@@ -22,8 +22,8 @@
 | core/apps.py                                                   |       34 |        0 |        2 |        0 |    100.00% |           |
 | core/area\_index.py                                            |       85 |        1 |       32 |        1 |     98.29% |        54 |
 | core/associations.py                                           |       41 |        0 |       10 |        1 |     98.04% | 84-\>exit |
-| core/audit.py                                                  |      146 |       26 |       34 |        3 |     80.56% |47-48, 67-68, 80-81, 88-90, 99, 106-108, 123-124, 131-134, 141, 148-151, 198, 233 |
-| core/auth\_backends.py                                         |       23 |        2 |        4 |        2 |     85.19% |    93, 96 |
+| core/audit.py                                                  |      146 |       26 |       34 |        3 |     80.56% |48-49, 68-69, 81-82, 91-93, 102, 109-111, 126-127, 134-137, 144, 151-154, 200, 235 |
+| core/auth\_backends.py                                         |       23 |        2 |        4 |        2 |     85.19% |   98, 101 |
 | core/blocks.py                                                 |      182 |        0 |        4 |        2 |     98.92% |255-\>265, 262-\>265 |
 | core/cache.py                                                  |       16 |        2 |        2 |        1 |     83.33% |33-34, 40-\>exit |
 | core/context\_processors.py                                    |        6 |        0 |        0 |        0 |    100.00% |           |
@@ -38,17 +38,19 @@
 | core/management/commands/\_content\_transfer.py                |       51 |        3 |       22 |        3 |     91.78% |105, 126, 134 |
 | core/management/commands/export\_content.py                    |      104 |       12 |       28 |        7 |     85.61% |67-\>65, 73-\>71, 94-95, 152-\>144, 161-162, 166-167, 185-186, 190-191, 212-213 |
 | core/management/commands/import\_content.py                    |      154 |       18 |       46 |        8 |     85.00% |59-60, 66, 105-108, 126, 140-142, 152-153, 188-189, 199, 208, 211 |
-| core/models/\_\_init\_\_.py                                    |       10 |        0 |        0 |        0 |    100.00% |           |
+| core/memberships.py                                            |       83 |        1 |        8 |        2 |     96.70% |34-\>42, 80 |
+| core/models/\_\_init\_\_.py                                    |       11 |        0 |        0 |        0 |    100.00% |           |
 | core/models/announcement.py                                    |       26 |        0 |        0 |        0 |    100.00% |           |
 | core/models/city.py                                            |        5 |        1 |        0 |        0 |     80.00% |         8 |
 | core/models/city\_district.py                                  |       10 |        0 |        0 |        0 |    100.00% |           |
 | core/models/city\_neighborhood.py                              |       15 |        2 |        0 |        0 |     86.67% |    18, 22 |
 | core/models/email\_event.py                                    |       30 |        0 |        0 |        0 |    100.00% |           |
 | core/models/feature\_flags.py                                  |       18 |        0 |        4 |        0 |    100.00% |           |
+| core/models/membership.py                                      |       36 |        0 |        2 |        0 |    100.00% |           |
 | core/models/neighborhood\_association.py                       |       29 |        0 |        0 |        0 |    100.00% |           |
 | core/models/notification\_dispatch.py                          |       16 |        1 |        0 |        0 |     93.75% |        27 |
 | core/models/task\_run.py                                       |       30 |        0 |        2 |        0 |    100.00% |           |
-| core/models/user.py                                            |      123 |        3 |       12 |        3 |     95.56% |45, 60, 176, 216-\>218 |
+| core/models/user.py                                            |      116 |        3 |        8 |        2 |     95.97% |45, 60, 166 |
 | core/notifications/\_\_init\_\_.py                             |       16 |        0 |        0 |        0 |    100.00% |           |
 | core/notifications/recipients.py                               |        6 |        0 |        0 |        0 |    100.00% |           |
 | core/notifications/tasks.py                                    |       40 |        6 |        6 |        1 |     84.78% | 71-75, 80 |
@@ -87,8 +89,8 @@
 | core/views/profile\_edit.py                                    |      136 |        6 |       30 |        6 |     92.77% |104, 114, 118, 147, 157, 164 |
 | core/views/register.py                                         |       95 |        7 |       24 |        7 |     88.24% |86, 99, 105, 112, 114, 116, 184 |
 | core/views/tasks.py                                            |       50 |        0 |        6 |        0 |    100.00% |           |
-| core/wagtail\_forms.py                                         |       58 |        2 |       14 |        4 |     91.67% |31-\>exit, 39, 59, 71-\>76 |
-| core/wagtail\_hooks.py                                         |      130 |        1 |       16 |        3 |     97.26% |33-\>35, 227, 231-\>exit |
+| core/wagtail\_forms.py                                         |       52 |        2 |       12 |        4 |     90.62% |31-\>exit, 39, 59, 71-\>76 |
+| core/wagtail\_hooks.py                                         |      134 |        1 |       16 |        3 |     97.33% |33-\>35, 227, 231-\>exit |
 | core/wagtail\_viewsets.py                                      |       19 |        3 |        0 |        0 |     84.21% |     22-24 |
 | core/widgets.py                                                |       64 |       19 |       16 |        3 |     60.00% |20, 32-39, 53, 72-75, 85-92, 102 |
 | home/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
@@ -169,7 +171,7 @@
 | publications/views/vote\_stats.py                              |       61 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       52 |        6 |        4 |        0 |     85.71% |78-80, 86, 94, 103 |
 | publications/widgets.py                                        |       32 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **5664** |  **595** |  **966** |  **127** | **87.06%** |           |
+| **TOTAL**                                                      | **5775** |  **596** |  **970** |  **128** | **87.25%** |           |
 
 
 ## Setup coverage badge
