@@ -9,6 +9,10 @@ Data is deleted only for a website marked absent *and* purge.
 Files, under the state directory:
 
     tenants/<slug>/compose.yml   from the website's image (deploy/tenant/compose.yml)
+    tenants/<slug>/compose.override.yml
+                                 written by the agent with the "external" edge:
+                                 nginx joins the proxy's network as <slug>-nginx,
+                                 or is published on 127.0.0.1:<http_port>
     tenants/<slug>/.env          its variables (mode 0600: it holds secrets)
     tenants/<slug>/state.json    the generation applied, its outcome, its version
 """
@@ -40,6 +44,12 @@ EDGE_COMPOSE = Path(__file__).parent / "edge" / "compose.yml"
 EDGE_PROJECT = "urban-edge"
 EDGE_NETWORK = "urban-edge"
 DEPLOY_TIMEOUT = 20 * 60
+# "traefik": the agent runs Traefik on 80/443 with Let's Encrypt certificates.
+# "external": the host already has a reverse proxy, with its own certificates.
+# With a "network" (a proxy running in Docker), each website's nginx joins it as
+# <slug>-nginx; without, it is published on 127.0.0.1:<http_port>.
+EDGE_MODES = ("traefik", "external")
+NETWORK = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$")
 
 
 class InvalidTenant(Exception):
@@ -54,6 +64,9 @@ class Tenant:
     image_tag: str
     env: dict[str, str]
     purge: bool = False
+    http_port: int | None = None
+    # The host proxy's Docker network (external edge), set from the edge settings.
+    proxy_network: str | None = None
 
     @classmethod
     def parse(cls, data: Any) -> "Tenant":
@@ -71,6 +84,13 @@ class Tenant:
             raise InvalidTenant(f"{slug}: invalid generation")
         image_tag = data.get("image_tag", "")
         env = data.get("env") or {}
+        http_port = data.get("http_port")
+        if http_port is not None and (
+            not isinstance(http_port, int)
+            or isinstance(http_port, bool)
+            or not 1024 <= http_port <= 65535
+        ):
+            raise InvalidTenant(f"{slug}: invalid http_port {http_port!r}")
         if state != "absent":
             if not isinstance(image_tag, str) or not TAG.match(image_tag):
                 raise InvalidTenant(f"{slug}: invalid image_tag {image_tag!r}")
@@ -89,6 +109,7 @@ class Tenant:
             image_tag=image_tag if isinstance(image_tag, str) else "",
             env={str(k): str(v) for k, v in env.items()} if isinstance(env, dict) else {},
             purge=data.get("purge") is True,
+            http_port=http_port,
         )
 
 
@@ -144,9 +165,11 @@ class Reconciler:
             return []
         return sorted(p.name for p in self.tenants_dir.iterdir() if (p / "state.json").exists())
 
-    def _files(self, slug: str) -> tuple[Path, Path]:
+    def _files(self, slug: str) -> tuple[list[Path], Path]:
+        """The Compose files of a website (with the agent's override, if any), its .env."""
         directory = self._dir(slug)
-        return directory / "compose.yml", directory / ".env"
+        files = [directory / "compose.yml", directory / "compose.override.yml"]
+        return [f for f in files if f == files[0] or f.exists()], directory / ".env"
 
     # --- One website --------------------------------------------------------------
 
@@ -156,9 +179,27 @@ class Reconciler:
         self.docker.pull(f"{self.config.image}-nginx:{tenant.image_tag}")
         compose = self.docker.read_file(image, COMPOSE_PATH_IN_IMAGE)
 
-        compose_file, env_file = self._files(tenant.slug)
-        compose_file.parent.mkdir(parents=True, exist_ok=True)
-        compose_file.write_text(compose)
+        directory = self._dir(tenant.slug)
+        directory.mkdir(parents=True, exist_ok=True)
+        (directory / "compose.yml").write_text(compose)
+        override = directory / "compose.override.yml"
+        if tenant.proxy_network:
+            override.write_text(
+                "# Written by the agent: the host's reverse proxy reaches this website\n"
+                f"# as {tenant.slug}-nginx on its network.\n"
+                "services:\n  nginx:\n    networks:\n      proxy:\n"
+                f'        aliases: ["{tenant.slug}-nginx"]\n'
+                f"networks:\n  proxy:\n    name: {tenant.proxy_network}\n    external: true\n"
+            )
+        elif tenant.http_port:
+            override.write_text(
+                "# Written by the agent: the host's reverse proxy forwards to this port.\n"
+                "services:\n  nginx:\n    ports:\n"
+                f'      - "127.0.0.1:{tenant.http_port}:80"\n'
+            )
+        else:
+            override.unlink(missing_ok=True)
+        compose_files, env_file = self._files(tenant.slug)
         env_file.touch(mode=0o600)
         env_file.chmod(0o600)
         env_file.write_text(env_file_content(tenant, self.config.image))
@@ -168,7 +209,7 @@ class Reconciler:
         # (migrations, bootstrap) exited successfully, fails otherwise.
         self.docker.compose(
             tenant.slug,
-            compose_file,
+            compose_files,
             env_file,
             ["up", "--detach", "--wait", "--remove-orphans"],
             timeout=DEPLOY_TIMEOUT,
@@ -176,24 +217,24 @@ class Reconciler:
         status.version = self.health_version(tenant.slug)
 
     def health_version(self, slug: str) -> str:
-        compose_file, env_file = self._files(slug)
+        compose_files, env_file = self._files(slug)
         probe = (
             "import json, os, urllib.request as r; print(json.load(r.urlopen(r.Request("
             "'http://localhost:8000/healthz/', headers={'Host': os.environ['ALLOWED_HOSTS'], "
             "'X-Forwarded-Proto': 'https'}), timeout=5))['version'])"
         )
         out = self.docker.compose(
-            slug, compose_file, env_file, ["exec", "-T", "web", "python", "-c", probe]
+            slug, compose_files, env_file, ["exec", "-T", "web", "python", "-c", probe]
         )
         return out.strip()
 
     def observe(self, status: TenantStatus) -> None:
         """The containers' states, for the report."""
-        compose_file, env_file = self._files(status.slug)
-        if not compose_file.exists():
+        compose_files, env_file = self._files(status.slug)
+        if not compose_files[0].exists():
             return
         try:
-            services = self.docker.compose_services(status.slug, compose_file, env_file)
+            services = self.docker.compose_services(status.slug, compose_files, env_file)
         except (DockerError, ValueError) as error:
             status.services = {}
             logger.warning("%s: could not list containers: %s", status.slug, error)
@@ -223,9 +264,9 @@ class Reconciler:
                         "",
                     )
             elif status.status != "stopped":
-                compose_file, env_file = self._files(tenant.slug)
-                if compose_file.exists():
-                    self.docker.compose(tenant.slug, compose_file, env_file, ["stop"])
+                compose_files, env_file = self._files(tenant.slug)
+                if compose_files[0].exists():
+                    self.docker.compose(tenant.slug, compose_files, env_file, ["stop"])
                 status.generation, status.status, status.error = tenant.generation, "stopped", ""
         except (DockerError, OSError) as error:
             logger.error("%s: %s", tenant.slug, error)
@@ -237,35 +278,48 @@ class Reconciler:
         return status
 
     def _remove(self, tenant: Tenant, status: TenantStatus) -> TenantStatus:
-        compose_file, env_file = self._files(tenant.slug)
-        if compose_file.exists():
+        compose_files, env_file = self._files(tenant.slug)
+        if compose_files[0].exists():
             args = ["down", "--remove-orphans"] + (["--volumes"] if tenant.purge else [])
-            self.docker.compose(tenant.slug, compose_file, env_file, args, timeout=300)
+            self.docker.compose(tenant.slug, compose_files, env_file, args, timeout=300)
         shutil.rmtree(self._dir(tenant.slug), ignore_errors=True)
         return TenantStatus(slug=tenant.slug, generation=tenant.generation, status="absent")
 
     # --- The edge proxy -----------------------------------------------------------
 
     def ensure_edge(self, edge: dict[str, Any]) -> str:
-        """One Traefik per host, routing each website's hostname to its nginx."""
-        email = edge.get("acme_email", "") if isinstance(edge, dict) else ""
+        """The host's edge: our Traefik, or the host's own reverse proxy ("external")."""
+        mode = edge.get("mode", "traefik")
+        if mode not in EDGE_MODES:
+            return f"invalid mode {mode!r}"
+        email = edge.get("acme_email", "")
         if not isinstance(email, str) or "'" in email or "\n" in email:
             return "invalid acme_email"
         env_file = self.config.state_dir / "edge.env"
-        content = f"ACME_EMAIL='{email}'\nEDGE_NETWORK='{EDGE_NETWORK}'\n"
-        digest = hashlib.sha256((content + EDGE_COMPOSE.read_text()).encode()).hexdigest()
+        # Traefik's file needs an email even to be stopped.
+        content = f"ACME_EMAIL='{email or 'unused@example.org'}'\nEDGE_NETWORK='{EDGE_NETWORK}'\n"
+        digest = hashlib.sha256((mode + content + EDGE_COMPOSE.read_text()).encode()).hexdigest()
         if digest == self.edge_hash:
-            return "running"
+            return "running" if mode == "traefik" else "external"
         try:
+            # The websites' Compose file joins this network in both modes.
             self.docker.ensure_network(EDGE_NETWORK)
             env_file.parent.mkdir(parents=True, exist_ok=True)
             env_file.write_text(content)
-            self.docker.compose(EDGE_PROJECT, EDGE_COMPOSE, env_file, ["up", "--detach", "--wait"])
+            if mode == "traefik":
+                if not email:
+                    return "acme_email required"
+                self.docker.compose(
+                    EDGE_PROJECT, [EDGE_COMPOSE], env_file, ["up", "--detach", "--wait"]
+                )
+            else:
+                # Free ports 80/443 for the host's proxy if our Traefik ran before.
+                self.docker.compose(EDGE_PROJECT, [EDGE_COMPOSE], env_file, ["down"])
         except (DockerError, OSError) as error:
             logger.error("edge: %s", error)
             return f"failed: {error}"[:500]
         self.edge_hash = digest
-        return "running"
+        return "running" if mode == "traefik" else "external"
 
     # --- The whole host -----------------------------------------------------------
 
@@ -274,11 +328,34 @@ class Reconciler:
         now = time.time() if now is None else now
         statuses: dict[str, TenantStatus] = {}
         errors: list[str] = []
-        edge = self.ensure_edge(desired.get("edge") or {})
+        edge_settings = desired.get("edge") or {}
+        if not isinstance(edge_settings, dict):
+            edge_settings = {}
+        external = edge_settings.get("mode") == "external"
+        network = edge_settings.get("network") if external else None
+        if network is not None and (not isinstance(network, str) or not NETWORK.match(network)):
+            errors.append(f"invalid proxy network {network!r}")
+            network = None
+        edge = self.ensure_edge(edge_settings)
 
+        ports: dict[int, str] = {}
         for data in desired.get("tenants") or []:
             try:
                 tenant = Tenant.parse(data)
+                if tenant.state != "absent" and external and network:
+                    tenant.proxy_network = network
+                    tenant.http_port = None  # reached by name on the network
+                elif tenant.state != "absent" and external:
+                    if tenant.http_port is None:
+                        raise InvalidTenant(f"{tenant.slug}: http_port required (external edge)")
+                    if tenant.http_port in ports:
+                        raise InvalidTenant(
+                            f"{tenant.slug}: http_port {tenant.http_port} "
+                            f"already used by {ports[tenant.http_port]}"
+                        )
+                    ports[tenant.http_port] = tenant.slug
+                elif not external:
+                    tenant.http_port = None  # Traefik routes by hostname: no port
             except InvalidTenant as error:
                 errors.append(str(error))
                 continue
