@@ -43,7 +43,7 @@ Le menu de chacun ne montre que ce qu'il peut faire. Seuls les administrateurs a
 
 **Le dernier administrateur** ne peut être ni rétrogradé, ni désactivé, ni supprimé : nommez-en d'abord un autre.
 
-Chaque changement de rôle, d'adhésion ou d'activation est inscrit au [journal d'activité](journal.md), avec son auteur.
+Chaque changement de rôle ou d'activation, et chaque adhésion enregistrée, modifiée ou supprimée, est inscrit au [journal d'activité](journal.md), avec son auteur.
 
 ### Soumettre une page à la modération
 
@@ -53,7 +53,13 @@ Les groupes Wagtail (*Editors*, *Moderators*) suivent le rôle : ils ne se modif
 
 ### Adhésion
 
-La case **Adhérent** marque les habitants qui ont adhéré. Tant que la participation n'est pas réservée aux adhérents (voir [Fonctionnalités](fonctionnalites.md)), elle ne change rien : tous les comptes confirmés peuvent voter et proposer des idées. L'adhésion est indépendante du rôle : un membre de l'équipe vote comme habitant, avec la même règle.
+Les adhésions se gèrent dans **Paramètres › Adhésions** (administrateurs). Une adhésion a une **date de début**, une **date de fin** facultative et une **note** (par exemple le mode de paiement) ; un renouvellement est une nouvelle adhésion. Une personne est **adhérente** tant qu'une de ses adhésions est en cours.
+
+- **Enregistrer une adhésion** : bouton **Ajouter**, puis choisissez la personne (recherche par nom ou email). Depuis la fiche d'un utilisateur, le lien **Enregistrer une adhésion** la présélectionne.
+- **Filtrer** les adhésions en cours ou terminées, **chercher** par nom, email ou note, et **exporter** la liste en CSV ou Excel.
+- La fiche de chaque utilisateur indique s'il a une adhésion en cours.
+
+Tant que la participation n'est pas réservée aux adhérents (voir [Fonctionnalités](fonctionnalites.md)), l'adhésion ne change rien : tous les comptes confirmés peuvent voter et proposer des idées. Elle est indépendante du rôle : un membre de l'équipe vote comme habitant, avec la même règle. Quand une personne supprime son compte, ses adhésions en cours se terminent le jour même.
 
 ## Modifier un utilisateur
 

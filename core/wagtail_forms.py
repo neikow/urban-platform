@@ -75,13 +75,6 @@ class RoleRestrictionMixin(forms.ModelForm):
                 )
         return cleaned_data
 
-    def save(self, commit: bool = True) -> Any:
-        if "is_subscriber" in self.changed_data:
-            subscribed = self.instance.is_subscriber
-            self.instance.is_subscriber = not subscribed
-            self.instance.set_subscription(subscribed)
-        return super().save(commit=commit)
-
     def _save_m2m(self) -> None:
         super()._save_m2m()  # type: ignore[misc]
         sync_role_groups(self.instance)
@@ -89,9 +82,9 @@ class RoleRestrictionMixin(forms.ModelForm):
 
 class RoleUserCreationForm(RoleRestrictionMixin, UserCreationForm):
     class Meta(UserCreationForm.Meta):
-        fields = UserCreationForm.Meta.fields | {"role", "is_subscriber"}
+        fields = UserCreationForm.Meta.fields | {"role"}
 
 
 class RoleUserEditForm(RoleRestrictionMixin, UserEditForm):
     class Meta(UserEditForm.Meta):
-        fields = UserEditForm.Meta.fields | {"role", "is_subscriber"}
+        fields = UserEditForm.Meta.fields | {"role"}

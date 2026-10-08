@@ -254,3 +254,13 @@ def register_audit_menu_item() -> MenuItem:
         icon_name="history",
         order=950,
     )
+
+
+# --- Memberships (core/memberships.py) ------------------------------------------
+
+
+@hooks.register("register_admin_viewset")
+def register_membership_viewsets() -> list[Any]:
+    from core.memberships import membership_viewset, user_chooser_viewset
+
+    return [user_chooser_viewset, membership_viewset]

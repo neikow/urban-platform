@@ -25,14 +25,14 @@ class ParticipationMixin:
     Every request must be authenticated. Writes (POST/DELETE) additionally
     require a verified email address and, unless `requires_code_of_conduct`
     is turned off, an up-to-date code of conduct consent. Unless
-    `requires_subscription` is turned off, they also require a subscription
-    when participation is reserved to subscribers (Settings › Features).
+    `requires_membership` is turned off, they also require a membership
+    when participation is reserved to members (Settings › Features).
     Writes are rate-limited per user.
     """
 
     requires_authentication = True
     requires_code_of_conduct = True
-    requires_subscription = True
+    requires_membership = True
     write_methods = ("post", "delete")
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponseBase:
@@ -69,11 +69,11 @@ class ParticipationMixin:
                 action_url=consent_url,
             )
 
-        if self.requires_subscription and not participation_open_to(user, request):
+        if self.requires_membership and not participation_open_to(user, request):
             return json_error(
-                _("Taking part is reserved to subscribers."),
+                _("Taking part is reserved to members."),
                 status=403,
-                code="subscription_required",
+                code="membership_required",
             )
 
         if is_ratelimited(

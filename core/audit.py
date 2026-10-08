@@ -5,7 +5,8 @@ Built on Wagtail's audit log, which already records page and model actions
 moved, deleted…) and shows them in the activity log (core.views.audit).
 This module adds the actions Wagtail does not see:
 
-- account changes: role, subscription, superuser status, activation;
+- account changes: role, superuser status, activation (memberships are
+  logged by Wagtail, like any model edited in the admin);
 - security events: staff logins and failed logins, password and email
   changes, personal data exports, account deletions;
 - background tasks started by hand;
@@ -34,7 +35,7 @@ SECURITY_RETENTION_DAYS = 365
 SECURITY_ACTIONS_PREFIX = "core.auth."
 
 # Account fields whose changes are logged, with their labels.
-TRACKED_USER_FIELDS = ("role", "is_subscriber", "is_superuser", "is_active")
+TRACKED_USER_FIELDS = ("role", "is_superuser", "is_active")
 
 
 def audit(instance: Any, action: str, user: Any = None, **data: Any) -> None:
@@ -82,6 +83,8 @@ class RoleChangeFormatter(LogFormatter):
 
 
 class SubscriptionChangeFormatter(LogFormatter):
+    """Entries from before memberships had their own records (core.models.Membership)."""
+
     label = _("Change subscription")
 
     def format_message(self, log_entry: Any) -> str:
@@ -183,7 +186,6 @@ def snapshot(user: Any) -> dict[str, Any]:
 
 USER_FIELD_ACTIONS = {
     "role": "core.user.role_change",
-    "is_subscriber": "core.user.subscription_change",
     "is_superuser": "core.user.superuser_change",
     "is_active": "core.user.activation_change",
 }

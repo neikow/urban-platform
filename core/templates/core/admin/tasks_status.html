@@ -90,8 +90,9 @@
                         <td>
                             {{ run.started_at }}
                             {% if run.launched_by %}<div class="w-text-text-meta w-text-xs">
-                                    {% blocktrans with name=run.launched_by.get_full_name %}by
-                                        {{ name }}{% endblocktrans %}
+                                    {% blocktrans trimmed with name=run.launched_by.get_full_name %}
+                                        by {{ name }}
+                                    {% endblocktrans %}
                                 </div>{% endif %}
                         </td>
                         <td>

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 13:35+0200\n"
+"POT-Creation-Date: 2026-10-08 13:51+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -966,6 +966,14 @@ msgstr "Modifier mon idée"
 msgid "Remove my idea"
 msgstr "Retirer mon idée"
 
+#: publications/templates/publications/components/membership_prompt.html:5
+msgid ""
+"Taking part is reserved to members. Become a member to vote and share your "
+"ideas."
+msgstr ""
+"La participation est réservée aux adhérents. Adhérez pour voter et proposer "
+"vos idées."
+
 #: publications/templates/publications/components/project_location.html:11
 #, python-format
 msgid "Map showing where “%(title)s” takes place"
@@ -1064,14 +1072,6 @@ msgstr "Tout l'urbanisme"
 #: publications/templates/publications/components/publication_results.html:106
 msgid "No publications found"
 msgstr "Aucune publication trouvée"
-
-#: publications/templates/publications/components/subscription_prompt.html:5
-msgid ""
-"Taking part is reserved to subscribers. Subscribe to vote and share your "
-"ideas."
-msgstr ""
-"La participation est réservée aux adhérents. Adhérez pour voter et proposer "
-"vos idées."
 
 #: publications/templates/publications/components/verify_email_prompt.html:5
 #, python-format
@@ -1337,7 +1337,7 @@ msgid "Please accept the code of conduct before taking part."
 msgstr "Veuillez accepter la charte de bonne conduite avant de participer."
 
 #: publications/views/mixins.py:74
-msgid "Taking part is reserved to subscribers."
+msgid "Taking part is reserved to members."
 msgstr "La participation est réservée aux adhérents."
 
 #: publications/views/mixins.py:87

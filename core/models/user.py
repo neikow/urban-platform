@@ -14,7 +14,7 @@ from django.utils.translation import gettext_lazy as _
 class UserRole(models.TextChoices):
     """Staff role, from none (a resident) to administrator; each includes the previous.
 
-    Unrelated to the subscription (``User.is_subscriber``), which decides who may
+    Unrelated to the membership (``User.is_member``), which decides who may
     take part in polls and idea collections when that is restricted.
     """
 
@@ -106,16 +106,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     phone_number = models.CharField(_("Phone Number"), max_length=20, blank=True)
-    # Set by hand by administrators until the subscription process exists.
-    is_subscriber = models.BooleanField(
-        _("Subscriber"),
-        default=False,
-        help_text=_(
-            "Subscribers may vote and share ideas when participation is reserved to them "
-            "(Settings › Features)."
-        ),
-    )
-    subscribed_at = models.DateTimeField(_("Subscribed on"), null=True, blank=True)
     newsletter_subscription = models.BooleanField(
         _("Newsletter Subscription"),
         default=False,
@@ -207,15 +197,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         """Whether the user's role is ``role`` or above (superusers have them all)."""
         return self.is_superuser or ROLE_RANK.get(self.role, -1) >= ROLE_RANK[role]
 
-    def set_subscription(self, subscribed: bool) -> None:
-        """Change the subscription and keep its date in step (not saved)."""
-        from django.utils import timezone
-
-        if subscribed and not self.is_subscriber:
-            self.subscribed_at = timezone.now()
-        elif not subscribed:
-            self.subscribed_at = None
-        self.is_subscriber = subscribed
+    @property
+    def is_member(self) -> bool:
+        """Whether one of the user's memberships runs today (core.models.Membership)."""
+        return bool(self.pk) and self.memberships.active().exists()
 
     def __str__(self) -> str:
         return self.email
@@ -258,8 +243,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.association = None
         self.newsletter_subscription = False
         self.newsletter_consent_at = None
-        self.is_subscriber = False
-        self.subscribed_at = None
+        # Memberships stay (the association's records), but end today.
+        self.memberships.active().update(ends_on=timezone.localdate())
         self.role = UserRole.CITIZEN
         self.notify_poll_results = False
         self.notify_project_updates = False

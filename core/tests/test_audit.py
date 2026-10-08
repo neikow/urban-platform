@@ -63,13 +63,12 @@ class TestAccountChanges:
 
         client.post(
             reverse("wagtailusers_users:edit", args=[citizen.pk]),
-            edit_post_data(citizen, role=UserRole.MODERATOR, is_subscriber="on"),
+            edit_post_data(citizen, role=UserRole.MODERATOR),
         )
 
         role = entries(citizen, "core.user.role_change").get()
         assert role.user == admin
         assert role.data == {"old": UserRole.CITIZEN, "new": UserRole.MODERATOR}
-        assert entries(citizen, "core.user.subscription_change").get().data["new"] is True
         # Wagtail's own entry for the edit is still there.
         assert entries(citizen, "wagtail.edit").exists()
 
@@ -224,7 +223,7 @@ class TestOtherActions:
 
         client.post(
             reverse("wagtailsettings:edit", args=["core", "featureflags", flags.pk]),
-            {"participation_requires_subscription": "on"},
+            {"participation_requires_membership": "on"},
         )
 
         change = entries(flags, "core.settings.change").get()

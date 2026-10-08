@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 13:35+0200\n"
+"POT-Creation-Date: 2026-10-08 13:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,56 +130,56 @@ msgstr "Documents"
 msgid "Documentation"
 msgstr "Documentation"
 
-#: core/audit.py:72
+#: core/audit.py:73
 msgid "Change role"
 msgstr "Changer de rôle"
 
-#: core/audit.py:76
+#: core/audit.py:77
 #, python-format
 msgid "Role changed from %(old)s to %(new)s"
 msgstr "Rôle changé de %(old)s à %(new)s"
 
-#: core/audit.py:81
+#: core/audit.py:82
 msgid "Role changed"
 msgstr "Rôle changé"
 
-#: core/audit.py:85
+#: core/audit.py:88
 msgid "Change subscription"
 msgstr "Changer l'adhésion"
 
-#: core/audit.py:89
+#: core/audit.py:92
 msgid "Marked as subscriber"
 msgstr "Marqué comme adhérent"
 
-#: core/audit.py:90
+#: core/audit.py:93
 msgid "No longer a subscriber"
 msgstr "N'est plus adhérent"
 
-#: core/audit.py:94
+#: core/audit.py:97
 msgid "Change superuser status"
 msgstr "Changer le statut superutilisateur"
 
-#: core/audit.py:98
+#: core/audit.py:101
 msgid "Made superuser"
 msgstr "Devenu superutilisateur"
 
-#: core/audit.py:99
+#: core/audit.py:102
 msgid "No longer superuser"
 msgstr "N'est plus superutilisateur"
 
-#: core/audit.py:103
+#: core/audit.py:106
 msgid "Activate or deactivate"
 msgstr "Activer ou désactiver"
 
-#: core/audit.py:107
+#: core/audit.py:110
 msgid "Account activated"
 msgstr "Compte activé"
 
-#: core/audit.py:108
+#: core/audit.py:111
 msgid "Account deactivated"
 msgstr "Compte désactivé"
 
-#: core/audit.py:112 core/templates/auth/email_verify_error.html:37
+#: core/audit.py:115 core/templates/auth/email_verify_error.html:37
 #: core/templates/auth/login_modal.html:29
 #: core/templates/auth/login_modal.html:75
 #: core/templates/auth/register.html:187
@@ -188,89 +188,89 @@ msgstr "Compte désactivé"
 msgid "Log in"
 msgstr "Se connecter"
 
-#: core/audit.py:116
+#: core/audit.py:119
 #, python-format
 msgid "Logged in from %(ip)s"
 msgstr "Connexion depuis %(ip)s"
 
-#: core/audit.py:116
+#: core/audit.py:119
 msgid "Logged in"
 msgstr "Connexion"
 
-#: core/audit.py:120
+#: core/audit.py:123
 msgid "Failed login"
 msgstr "Échec de connexion"
 
-#: core/audit.py:125
+#: core/audit.py:127
 #, python-format
 msgid "Wrong password, from %(ip)s"
 msgstr "Mot de passe erroné, depuis %(ip)s"
 
-#: core/audit.py:125
+#: core/audit.py:127
 msgid "Wrong password"
 msgstr "Mot de passe erroné"
 
-#: core/audit.py:130
+#: core/audit.py:131
 msgid "Change email"
 msgstr "Changer d'email"
 
-#: core/audit.py:134
+#: core/audit.py:135
 #, python-format
 msgid "Email changed from %(old)s to %(new)s"
 msgstr "Email changé de %(old)s à %(new)s"
 
-#: core/audit.py:136
+#: core/audit.py:137
 msgid "Email changed"
 msgstr "Email changé"
 
-#: core/audit.py:140
+#: core/audit.py:141
 msgid "Start a task"
 msgstr "Lancer une tâche"
 
-#: core/audit.py:143
+#: core/audit.py:144
 #, python-format
 msgid "Started “%(task)s”"
 msgstr "« %(task)s » lancée"
 
-#: core/audit.py:147
+#: core/audit.py:148
 msgid "Change settings"
 msgstr "Modifier les paramètres"
 
-#: core/audit.py:152
+#: core/audit.py:153
 msgid "Settings saved"
 msgstr "Paramètres enregistrés"
 
-#: core/audit.py:164 core/templates/core/profile_edit.html:138
+#: core/audit.py:165 core/templates/core/profile_edit.html:138
 #: core/templates/core/profile_edit.html:182
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
-#: core/audit.py:164 core/templates/auth/password_reset_complete.html:4
+#: core/audit.py:165 core/templates/auth/password_reset_complete.html:4
 msgid "Password changed"
 msgstr "Mot de passe modifié"
 
-#: core/audit.py:166 core/templates/auth/password_reset_confirm.html:45
+#: core/audit.py:167 core/templates/auth/password_reset_confirm.html:45
 #: core/templates/auth/password_reset_request.html:4
 msgid "Reset password"
 msgstr "Réinitialiser le mot de passe"
 
-#: core/audit.py:166
+#: core/audit.py:167
 msgid "Password reset"
 msgstr "Mot de passe réinitialisé"
 
-#: core/audit.py:169
+#: core/audit.py:170
 msgid "Export personal data"
 msgstr "Exporter ses données personnelles"
 
-#: core/audit.py:169
+#: core/audit.py:170
 msgid "Downloaded their personal data"
 msgstr "A téléchargé ses données personnelles"
 
-#: core/audit.py:172
+#: core/audit.py:173
 msgid "Delete own account"
 msgstr "Supprimer son compte"
 
-#: core/audit.py:172
+#: core/audit.py:173
 msgid "Deleted their account"
 msgstr "A supprimé son compte"
 
@@ -506,6 +506,43 @@ msgstr "CTA - Bouton d'appel à l'action"
 msgid "Document"
 msgstr "Document"
 
+#: core/memberships.py:27
+msgid "Search term"
+msgstr "Recherche"
+
+#: core/memberships.py:28
+msgid "Name or email"
+msgstr "Nom ou email"
+
+#: core/memberships.py:56
+msgid "Choose a user"
+msgstr "Choisir un utilisateur"
+
+#: core/memberships.py:57
+msgid "Choose another user"
+msgstr "Choisir un autre utilisateur"
+
+#: core/memberships.py:71
+msgid "Running today"
+msgstr "En cours aujourd'hui"
+
+#: core/memberships.py:101 core/models/membership.py:51
+msgid "Memberships"
+msgstr "Adhésions"
+
+#: core/memberships.py:107 core/models/membership.py:27
+#: core/templates/core/profile.html:168 core/tests/views/test_me.py:59
+msgid "Member"
+msgstr "Membre"
+
+#: core/memberships.py:107 core/templates/core/profile.html:100
+msgid "Email"
+msgstr "Email"
+
+#: core/memberships.py:126 core/models/membership.py:61
+msgid "The end cannot come before the start."
+msgstr "La fin ne peut pas précéder le début."
+
 #: core/models/announcement.py:12
 msgid "Information"
 msgstr "Information"
@@ -571,7 +608,7 @@ msgstr "Vérification d'email"
 msgid "Password Reset"
 msgstr "Réinitialisation du mot de passe"
 
-#: core/models/email_event.py:11 core/models/user.py:136
+#: core/models/email_event.py:11 core/models/user.py:126
 #: core/templates/core/profile.html:218
 msgid "Poll results"
 msgstr "Résultats des votes"
@@ -596,7 +633,7 @@ msgstr "Envoyé"
 msgid "Failed"
 msgstr "Échec"
 
-#: core/models/email_event.py:30 core/models/user.py:189
+#: core/models/email_event.py:30 core/models/user.py:179
 msgid "User"
 msgstr "Utilisateur"
 
@@ -639,13 +676,13 @@ msgid "Email Events"
 msgstr "Événements d'email"
 
 #: core/models/feature_flags.py:15
-msgid "Reserve participation to subscribers"
+msgid "Reserve participation to members"
 msgstr "Réserver la participation aux adhérents"
 
 #: core/models/feature_flags.py:18
 msgid ""
-"Only subscribers may vote and share ideas. Turn on once subscribing is "
-"possible: other users will be invited to subscribe."
+"Only members may vote and share ideas. Turn on once joining is possible: "
+"other users will be invited to become members."
 msgstr ""
 "Seuls les adhérents peuvent voter et proposer des idées. À activer une fois "
 "l'adhésion possible : les autres seront invités à adhérer."
@@ -653,6 +690,39 @@ msgstr ""
 #: core/models/feature_flags.py:26
 msgid "Features"
 msgstr "Fonctionnalités"
+
+#: core/models/membership.py:29
+msgid "Start"
+msgstr "Début"
+
+#: core/models/membership.py:31
+msgid "End"
+msgstr "Fin"
+
+#: core/models/membership.py:31
+msgid "Leave empty for a membership with no end."
+msgstr "Laissez vide pour une adhésion sans fin."
+
+#: core/models/membership.py:34
+msgid "Note"
+msgstr "Note"
+
+#: core/models/membership.py:34
+msgid "E.g. how the membership was paid."
+msgstr "Par exemple le mode de paiement."
+
+#: core/models/membership.py:38
+msgid "Recorded by"
+msgstr "Enregistrée par"
+
+#: core/models/membership.py:45
+msgid "Recorded on"
+msgstr "Enregistrée le"
+
+#: core/models/membership.py:50
+#: core/templates/core/admin/user_membership.html:6
+msgid "Membership"
+msgstr "Adhésion"
 
 #: core/models/neighborhood_association.py:12
 msgid "Name"
@@ -848,35 +918,19 @@ msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 msgid "Role"
 msgstr "Rôle"
 
-#: core/models/user.py:111 core/templates/core/profile.html:184
-msgid "Subscriber"
-msgstr "Adhérent"
-
-#: core/models/user.py:114
-msgid ""
-"Subscribers may vote and share ideas when participation is reserved to them "
-"(Settings › Features)."
-msgstr ""
-"Les adhérents peuvent voter et proposer des idées quand la participation "
-"leur est réservée (Paramètres › Fonctionnalités)."
-
-#: core/models/user.py:118
-msgid "Subscribed on"
-msgstr "Adhérent depuis"
-
-#: core/models/user.py:120
+#: core/models/user.py:110
 msgid "Newsletter Subscription"
 msgstr "Inscription à la newsletter"
 
-#: core/models/user.py:122
+#: core/models/user.py:112
 msgid "Does the user want to receive the newsletter?"
 msgstr "L'utilisateur souhaite-t-il recevoir la newsletter ?"
 
-#: core/models/user.py:125
+#: core/models/user.py:115
 msgid "Newsletter consent date"
 msgstr "Date du consentement à la newsletter"
 
-#: core/models/user.py:129
+#: core/models/user.py:119
 msgid ""
 "When the user last agreed to receive the newsletter (GDPR proof of consent)."
 " Empty if they are not subscribed, or subscribed before this date was "
@@ -886,68 +940,68 @@ msgstr ""
 " consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
 "l'enregistrement de cette date."
 
-#: core/models/user.py:138
+#: core/models/user.py:128
 msgid "Email the results when a poll I voted in closes."
 msgstr ""
 "Recevoir les résultats par email à la clôture d'un vote auquel j'ai "
 "participé."
 
-#: core/models/user.py:141 core/templates/core/profile.html:219
+#: core/models/user.py:131 core/templates/core/profile.html:219
 msgid "Project updates"
 msgstr "Actualités des projets"
 
-#: core/models/user.py:143
+#: core/models/user.py:133
 msgid "Email the news of projects I voted on or shared an idea about."
 msgstr ""
 "Recevoir par email les actualités des projets sur lesquels j'ai voté ou "
 "proposé une idée."
 
-#: core/models/user.py:146 core/templates/core/profile.html:220
+#: core/models/user.py:136 core/templates/core/profile.html:220
 msgid "Event reminders"
 msgstr "Rappels d'événements"
 
-#: core/models/user.py:148
+#: core/models/user.py:138
 msgid "Email a reminder the day before events I am interested in."
 msgstr ""
 "Recevoir un rappel par email la veille des événements qui m'intéressent."
 
-#: core/models/user.py:151
+#: core/models/user.py:141
 msgid "Date Joined"
 msgstr "Date d'inscription"
 
-#: core/models/user.py:152
+#: core/models/user.py:142
 msgid "Last Updated"
 msgstr "Dernière mise à jour"
 
-#: core/models/user.py:154
+#: core/models/user.py:144
 msgid "Deleted At"
 msgstr "Supprimé le"
 
-#: core/models/user.py:157
+#: core/models/user.py:147
 msgid "When the user account was soft-deleted. NULL if not deleted."
 msgstr "Quand le compte utilisateur a été supprimé. NULL si non supprimé."
 
-#: core/models/user.py:162
+#: core/models/user.py:152
 msgid "Active"
 msgstr "Actif"
 
-#: core/models/user.py:164
+#: core/models/user.py:154
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:190
+#: core/models/user.py:180
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: core/models/user.py:194
+#: core/models/user.py:184
 msgid "Can see vote and idea statistics"
 msgstr "Peut voir les statistiques des votes et des idées"
 
-#: core/models/user.py:195
+#: core/models/user.py:185
 msgid "Can see and start background tasks"
 msgstr "Peut voir et lancer les tâches de fond"
 
-#: core/models/user.py:196
+#: core/models/user.py:186
 msgid "Can see the activity log"
 msgstr "Peut voir le journal d'activité"
 
@@ -1390,14 +1444,30 @@ msgstr "Exécutions récentes"
 msgid "Duration"
 msgstr "Durée"
 
-#: core/templates/core/admin/tasks_status.html:92
+#: core/templates/core/admin/tasks_status.html:93
 #, python-format
 msgid "by %(name)s"
 msgstr "par %(name)s"
 
-#: core/templates/core/admin/tasks_status.html:113
+#: core/templates/core/admin/tasks_status.html:117
 msgid "No task has run yet."
 msgstr "Aucune tâche n'a encore tourné."
+
+#: core/templates/core/admin/user_membership.html:9
+msgid "Membership running"
+msgstr "Adhésion en cours"
+
+#: core/templates/core/admin/user_membership.html:11
+msgid "No membership running"
+msgstr "Aucune adhésion en cours"
+
+#: core/templates/core/admin/user_membership.html:14
+msgid "See the memberships"
+msgstr "Voir les adhésions"
+
+#: core/templates/core/admin/user_membership.html:16
+msgid "Record a membership"
+msgstr "Enregistrer une adhésion"
 
 #: core/templates/core/blocks/faq_list_block.html:4
 msgid "Foire aux Questions"
@@ -1554,10 +1624,6 @@ msgstr "Code postal"
 msgid "Contact"
 msgstr "Contact"
 
-#: core/templates/core/profile.html:100
-msgid "Email"
-msgstr "Email"
-
 #: core/templates/core/profile.html:107 core/tests/views/test_me.py:74
 msgid "Verified"
 msgstr "Vérifié"
@@ -1582,13 +1648,13 @@ msgstr "Mes événements"
 msgid "Events you are interested in will appear here."
 msgstr "Les événements qui vous intéressent apparaîtront ici."
 
-#: core/templates/core/profile.html:168 core/tests/views/test_me.py:59
-msgid "Member"
-msgstr "Membre"
-
 #: core/templates/core/profile.html:178
 msgid "Subscription"
 msgstr "Adhésion"
+
+#: core/templates/core/profile.html:184
+msgid "Subscriber"
+msgstr "Adhérent"
 
 #: core/templates/core/profile.html:186
 msgid "Not a subscriber"
@@ -1834,6 +1900,16 @@ msgstr ""
 "Dessinez le secteur couvert par l'association : les habitants qui y vivent "
 "lui sont rattachés. Les secteurs des autres associations apparaissent en "
 "gris, et les nouveaux points s'accrochent à leurs bords."
+
+#~ msgid ""
+#~ "Subscribers may vote and share ideas when participation is reserved to them "
+#~ "(Settings › Features)."
+#~ msgstr ""
+#~ "Les adhérents peuvent voter et proposer des idées quand la participation "
+#~ "leur est réservée (Paramètres › Fonctionnalités)."
+
+#~ msgid "Subscribed on"
+#~ msgstr "Adhérent depuis"
 
 #~ msgid "Association Member"
 #~ msgstr "Membre d'association"
