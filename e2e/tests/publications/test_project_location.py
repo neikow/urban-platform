@@ -96,14 +96,14 @@ def test_project_popup_keeps_the_category_on_one_line(page: Page, base_url: str)
 
 
 @pytest.mark.e2e
-def test_locating_outside_marseille_says_so(page: Page, base_url: str):
+def test_locating_outside_the_map_says_so(page: Page, base_url: str):
     page.context.grant_permissions(["geolocation"])
     page.context.set_geolocation(PARIS)
     page.goto(f"{base_url}/actualites/")
 
     page.get_by_role("button", name="Afficher ma position").click()
     expect(page.locator("#projects-map ~ [role=status]")).to_have_text(
-        "Vous êtes en dehors de Marseille : la carte ne couvre que la ville."
+        "Vous êtes en dehors de la zone couverte par la carte."
     )
     expect(page.locator("#projects-map .map-me")).to_have_count(0)
 
