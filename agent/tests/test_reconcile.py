@@ -296,3 +296,55 @@ class TestDockerPull:
 
         with pytest.raises(DockerError, match="registry down"):
             Docker().pull(f"{IMAGE}:1.4.0")
+
+
+class TestExternalEdge:
+    """The host's own reverse proxy, with its own certificates."""
+
+    EXTERNAL = {"mode": "external"}
+
+    def test_websites_get_a_local_port(self, agent, docker, tmp_path):
+        report = agent.reconcile(desired(tenant(http_port=8101), edge=self.EXTERNAL), now=1000)
+
+        assert report["edge"] == "external"
+        assert report["tenants"][0]["status"] == "running"
+        override = (tmp_path / "tenants" / "aix" / "compose.override.yml").read_text()
+        assert '"127.0.0.1:8101:80"' in override
+        # Our Traefik is stopped, never started: ports 80/443 are the proxy's.
+        assert docker.composed("urban-edge", "down")
+        assert not docker.composed("urban-edge", "up")
+
+    def test_port_required(self, agent, docker):
+        report = agent.reconcile(desired(tenant(), edge=self.EXTERNAL), now=1000)
+
+        assert report["tenants"] == []
+        assert "http_port required" in report["errors"][0]
+
+    def test_ports_are_unique(self, agent):
+        report = agent.reconcile(
+            desired(
+                tenant(http_port=8101), tenant(slug="arles", http_port=8101), edge=self.EXTERNAL
+            ),
+            now=1000,
+        )
+
+        assert [t["slug"] for t in report["tenants"]] == ["aix"]
+        assert "already used by aix" in report["errors"][0]
+
+    @pytest.mark.parametrize("port", [80, 70000, "8101", True])
+    def test_invalid_port(self, port):
+        with pytest.raises(InvalidTenant):
+            Tenant.parse(tenant(http_port=port))
+
+    def test_back_to_traefik_drops_the_port(self, agent, tmp_path):
+        agent.reconcile(desired(tenant(http_port=8101), edge=self.EXTERNAL), now=1000)
+
+        agent.reconcile(desired(tenant(generation=2, http_port=8101)), now=1030)
+
+        assert not (tmp_path / "tenants" / "aix" / "compose.override.yml").exists()
+
+    def test_traefik_needs_an_email(self, agent, docker):
+        report = agent.reconcile(desired(edge={"mode": "traefik"}), now=1000)
+
+        assert report["edge"] == "acme_email required"
+        assert not docker.composed("urban-edge", "up")

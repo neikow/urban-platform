@@ -54,21 +54,22 @@ class Docker:
     def compose(
         self,
         project: str,
-        compose_file: Path,
+        compose_files: Sequence[Path],
         env_file: Path,
         args: Sequence[str],
         timeout: int = 120,
     ) -> str:
+        files = [arg for path in compose_files for arg in ("-f", str(path))]
         return self.run(
-            ["compose", "-p", project, "-f", str(compose_file), "--env-file", str(env_file), *args],
+            ["compose", "-p", project, *files, "--env-file", str(env_file), *args],
             timeout=timeout,
         )
 
     def compose_services(
-        self, project: str, compose_file: Path, env_file: Path
+        self, project: str, compose_files: Sequence[Path], env_file: Path
     ) -> list[dict[str, Any]]:
         """State of a project's containers, one-shot jobs included."""
-        out = self.compose(project, compose_file, env_file, ["ps", "--all", "--format", "json"])
+        out = self.compose(project, compose_files, env_file, ["ps", "--all", "--format", "json"])
         services = []
         # One JSON object per line (Compose v2.21+), or a single array before.
         for line in out.strip().splitlines():
