@@ -2,7 +2,7 @@
 
 Built from the home page parts. Where only the association knows the facts,
 the text says what to write: editors replace these instructions with their
-text, and delete the parts they do not need. The members of the commission
+text, and delete the parts they do not need. The members of the association
 and of the development team are shown after the content, so their templates
 end on a part that introduces them.
 """
@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 
 from core.page_templates import PageTemplate, RawBlock
 from home.blocks import FigureMetric, SectionLayout, SectionTone
-from home.page_templates import FAQ, JOIN, JOIN_A_CIQ, KEY_FIGURES, section
+from home.page_templates import FAQ, JOIN, JOIN_AN_ASSOCIATION, KEY_FIGURES, section
 
 
 def text(html: str) -> RawBlock:
@@ -90,28 +90,28 @@ WEBSITE = PageTemplate(
     ),
 )
 
-# --- La commission urbanisme -----------------------------------------------------
+# --- L'association --------------------------------------------------------------
 
 COMMISSION = PageTemplate(
     slug="presentation",
     name=_("Presentation"),
     description=_(
-        "Who the commission is, its missions, how it works, what residents say, the CIQ, "
+        "Who you are, your missions, what residents say, the neighborhood associations, "
         "then its members."
     ),
     blocks=(
         paragraph_section(
             "Qui sommes-nous",
-            "La commission urbanisme",
-            "<p>Présentez la commission en quelques phrases : de qui elle dépend, qui la "
-            "compose, depuis quand elle existe.</p>"
+            "Notre association",
+            "<p>Présentez l'association en quelques phrases : qui la compose, depuis "
+            "quand elle existe, quel territoire elle couvre.</p>"
             "<p>Dites ce qui la guide, par exemple être force de proposition plutôt que "
             "d'opposition.</p>",
             layout=SectionLayout.SPLIT,
         ),
         section(
             label="Nos missions",
-            title="Ce que fait la commission",
+            title="Ce que fait l'association",
             tone=SectionTone.SAND,
             content=[
                 {
@@ -149,10 +149,10 @@ COMMISSION = PageTemplate(
                 }
             ],
         ),
-        JOIN_A_CIQ,
+        JOIN_AN_ASSOCIATION,
         section(
             label="L'équipe",
-            title="Les membres de la commission",
+            title="Les membres de l'association",
             introduction="Les membres sont présentés ci-dessous.",
             content=[],
         ),

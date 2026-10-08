@@ -3,7 +3,8 @@
 Applied as described in ``core.page_templates``. The hero of the current
 draft is kept, so its photo is not lost.
 
-The texts are starting points written for Urba7Marseille, meant to be edited.
+The texts are starting points, meant to be edited. Their placeholders
+({site_name}, {area_in}, {contact}) are filled when a template is applied.
 """
 
 from django.utils.translation import gettext_lazy as _
@@ -43,8 +44,8 @@ WHO_WE_ARE = section(
         {
             "type": "text",
             "value": (
-                "<p>Urba7Marseille est la plateforme de la commission urbanisme de la "
-                "fédération des CIQ du 7<sup>e</sup> arrondissement de Marseille.</p>"
+                "<p>{site_name} est la plateforme de participation des habitants "
+                "{area_in}.</p>"
                 "<p>Elle partage avec les habitants et les usagers du quartier les projets "
                 "d'urbanisme à l'étude ou en cours : ce qui change, pourquoi, et comment "
                 "donner son avis. Notre ambition n'est pas de nous opposer, mais d'être "
@@ -100,19 +101,18 @@ KEY_FIGURES = section(
     ],
 )
 
-JOIN_A_CIQ = section(
+JOIN_AN_ASSOCIATION = section(
     label="Agir localement",
-    title="Rejoignez le CIQ de votre quartier",
+    title="Rejoignez l'association de votre quartier",
     layout=SectionLayout.SPLIT,
     content=[
         {
             "type": "text",
             "value": (
-                "<p>Les comités d'intérêt de quartier (CIQ) portent la voix des habitants "
-                "auprès des pouvoirs publics. Pour agir sur votre environnement au-delà "
-                "de cette plateforme, devenez membre du CIQ de votre quartier.</p>"
-                '<p>Contact : <a href="mailto:fedeciqmarseille7@hotmail.fr">'
-                "fedeciqmarseille7@hotmail.fr</a></p>"
+                "<p>Les associations de quartier portent la voix des habitants auprès "
+                "des pouvoirs publics. Pour agir sur votre environnement au-delà de "
+                "cette plateforme, devenez membre de l'association de votre quartier.</p>"
+                "<p>Contact : {contact}</p>"
             ),
         }
     ],
@@ -135,7 +135,7 @@ FAQ = section(
                 },
                 {
                     "question": "Comment aller plus loin dans mon implication ?",
-                    "answer": "Rejoignez le CIQ de votre quartier : il porte les demandes des habitants auprès des pouvoirs publics.",
+                    "answer": "Rejoignez l'association de votre quartier : elle porte les demandes des habitants auprès des pouvoirs publics.",
                 },
                 {
                     "question": "Puis-je suggérer un projet qui n'est pas encore sur le site ?",
@@ -179,7 +179,7 @@ TEMPLATES = (
         name=_("Participation"),
         description=_(
             "The full page: who you are, open consultations, how it works, key figures, "
-            "events, the map, news, the CIQ and questions."
+            "events, the map, news, the neighborhood associations and questions."
         ),
         blocks=(
             WHO_WE_ARE,
@@ -189,7 +189,7 @@ TEMPLATES = (
             UPCOMING_EVENTS,
             PROJECTS_MAP,
             RECENT_PUBLICATIONS,
-            JOIN_A_CIQ,
+            JOIN_AN_ASSOCIATION,
             FAQ,
             JOIN,
         ),

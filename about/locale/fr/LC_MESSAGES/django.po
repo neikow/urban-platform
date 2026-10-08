@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 20:56+0200\n"
+"POT-Creation-Date: 2026-10-08 18:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,16 +75,16 @@ msgid "Content"
 msgstr "Contenu"
 
 #: about/models/about_commission.py:25
-msgid "Commission Members"
-msgstr "Membres de la commission"
+msgid "Association members"
+msgstr "Membres de l'association"
 
 #: about/models/about_commission.py:35
-msgid "About Commission Page"
-msgstr "Page à propos de la commission"
+msgid "About the association page"
+msgstr "Page à propos de l'association"
 
 #: about/models/about_commission.py:36
-msgid "About Commission Pages"
-msgstr "Pages à propos de la commission"
+msgid "About the association pages"
+msgstr "Pages à propos de l'association"
 
 #: about/models/about_dev_team.py:25
 msgid "Dev Team Members"
@@ -132,21 +132,21 @@ msgid ""
 "Why the platform exists, what visitors can do on it, key figures, questions "
 "and an invitation to join."
 msgstr ""
-"Pourquoi la plateforme existe, ce qu'on peut y faire, les chiffres clés, les"
-" questions et une invitation à s'inscrire."
+"Pourquoi la plateforme existe, ce qu'on peut y faire, les chiffres clés, les "
+"questions et une invitation à s'inscrire."
 
 #: about/page_templates.py:99
 msgid ""
-"Who the commission is, its missions, how it works, what residents say, the "
-"CIQ, then its members."
+"Who you are, your missions, what residents say, the neighborhood "
+"associations, then its members."
 msgstr ""
-"Qui est la commission, ses missions, ce qu'en disent les habitants, les CIQ,"
-" puis ses membres."
+"Qui vous êtes, vos missions, ce qu'en disent les habitants, les associations "
+"de quartier, puis vos membres."
 
 #: about/page_templates.py:168
 msgid ""
-"The project, how it is built, how to contribute and the platform in figures,"
-" then the team members."
+"The project, how it is built, how to contribute and the platform in figures, "
+"then the team members."
 msgstr ""
 "Le projet, comment la plateforme est faite, comment contribuer et la "
 "plateforme en chiffres, puis les membres de l'équipe."

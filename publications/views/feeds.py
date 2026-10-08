@@ -1,12 +1,12 @@
 from datetime import datetime, timedelta
 
-from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.http import Http404, HttpRequest, HttpResponse
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from wagtail.query import PageQuerySet
 
+from core.branding import site_name
 from core.models import Territory
 from publications.ical import calendar
 from publications.models import EventPage, PublicationIndexPage, PublicationPage
@@ -29,7 +29,7 @@ def events_ical(request: HttpRequest) -> HttpResponse:
         .filter(event_date__gte=timezone.now() - CALENDAR_HISTORY)
         .order_by("event_date")
     )
-    name = _("%(site)s — events") % {"site": settings.WEBSITE_NAME}
+    name = _("%(site)s — events") % {"site": site_name()}
     return _calendar_response(calendar(events, request, name), "evenements.ics")
 
 
@@ -47,7 +47,7 @@ class PublicationsFeed(Feed):
     """RSS feed of the latest projects and events."""
 
     def title(self) -> str:
-        return _("%(site)s — news") % {"site": settings.WEBSITE_NAME}
+        return _("%(site)s — news") % {"site": site_name()}
 
     def description(self) -> str:
         area = Territory.current().name_in

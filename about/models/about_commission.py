@@ -22,7 +22,7 @@ class AboutCommissionPage(Page):
     members = StreamField(
         [("user_list", UserListBlock())],
         blank=True,
-        verbose_name=_("Commission Members"),
+        verbose_name=_("Association members"),
         use_json_field=True,
     )
 
@@ -32,5 +32,5 @@ class AboutCommissionPage(Page):
     ]
 
     class Meta(Page.Meta):
-        verbose_name = _("About Commission Page")
-        verbose_name_plural = _("About Commission Pages")
+        verbose_name = _("About the association page")
+        verbose_name_plural = _("About the association pages")

@@ -31,6 +31,7 @@ nav:
   - Contenu du site:
     - Page d'accueil: page-accueil.md
     - Annonce: annonce.md
+    - Identité visuelle: identite.md
     - À propos: a-propos.md
     - Pages légales: legal.md
   - Utilisateurs: utilisateurs.md

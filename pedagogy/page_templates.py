@@ -26,8 +26,7 @@ CONCEPT = PageTemplate(
         ),
         rich_text(
             "<h2>Pourquoi c'est important pour le quartier</h2>"
-            "<p>Un exemple concret dans le 7<sup>e</sup> arrondissement aide à comprendre "
-            "l'enjeu.</p>"
+            "<p>Un exemple concret {area_in} aide à comprendre l'enjeu.</p>"
         ),
         rich_text(
             "<h2>Comment ça marche</h2>"
@@ -73,8 +72,8 @@ GUIDE = PageTemplate(
         ),
         rich_text(
             "<h2>Contacts</h2>"
-            "<p>Le service compétent, ses horaires, et le CIQ de votre quartier pour vous "
-            "accompagner.</p>"
+            "<p>Le service compétent, ses horaires, et l'association de votre quartier pour "
+            "vous accompagner.</p>"
         ),
         faq(("[Une question fréquente]", "[Sa réponse, en une ou deux phrases.]")),
     ),

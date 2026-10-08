@@ -17,6 +17,7 @@ django_stubs_ext.monkeypatch()
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = PROJECT_DIR.parent
 
+# Default name, until one is set in the admin (Settings › Branding).
 WEBSITE_NAME = os.environ.get("WEBSITE_NAME", "Urbix")
 
 ANALYTICS_SCRIPT_TAG = os.environ.get("ANALYTICS_SCRIPT_TAG", "")
@@ -239,7 +240,8 @@ BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@example.com")
 # Moderation workflow emails (submitted, approved, rejected pages), in HTML.
 WAGTAILADMIN_NOTIFICATION_USE_HTML = True
-DEFAULT_FROM_NAME = os.environ.get("DEFAULT_FROM_NAME", WEBSITE_NAME)
+# Empty: the website name of the Branding setting (core.branding.sender_name).
+DEFAULT_FROM_NAME = os.environ.get("DEFAULT_FROM_NAME", "")
 
 # Task modules outside "<app>.tasks", which autodiscovery would miss.
 CELERY_IMPORTS = ("core.emails.tasks", "core.notifications.tasks")

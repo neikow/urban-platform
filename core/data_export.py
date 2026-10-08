@@ -10,6 +10,7 @@ from typing import Any
 from django.conf import settings
 from django.utils import timezone
 
+from core.branding import site_name
 from core.models import User
 
 # Relations to User that are deliberately left out of the export, with why.
@@ -196,7 +197,7 @@ def account_activity(user: User) -> list[dict[str, Any]]:
 def export_user_data(user: User) -> dict[str, Any]:
     data: dict[str, Any] = {
         "generated_at": _iso(timezone.now()),
-        "site": settings.WEBSITE_NAME,
+        "site": site_name(),
         "account": account(user),
         "participation": participation(user),
         "code_of_conduct_consents": consents(user),

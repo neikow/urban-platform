@@ -2,11 +2,12 @@ import json
 from typing import Any
 
 from django import template
-from django.conf import settings
 from django.http import HttpRequest
 from django.utils.safestring import SafeString, mark_safe
 from wagtail.images.models import Image, SourceImageIOError
 from wagtail.models import Page
+
+from core.branding import site_name
 
 register = template.Library()
 
@@ -36,7 +37,7 @@ def _page_url(request: HttpRequest, page: Page) -> str:
 
 
 def _site_name(request: HttpRequest) -> str:
-    return settings.WEBSITE_NAME
+    return site_name(request)
 
 
 def _organization(request: HttpRequest) -> dict[str, str]:

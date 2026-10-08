@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
 
+from core.branding import site_name
 from core.emails.services import FailedToSendEmail, get_email_service
 from core.models import EmailEvent, EmailEventStatus, User
 from core.notifications import NotificationKind
@@ -42,7 +43,7 @@ def send_notification_email(
             **context,
             "user": user,
             "subject": subject,
-            "site_name": settings.WEBSITE_NAME,
+            "site_name": site_name(),
             "site_url": absolute_url("/"),
             "preferences_url": absolute_url(reverse("profile_edit") + "#notifications"),
             "unsubscribe_url": unsubscribe_url,

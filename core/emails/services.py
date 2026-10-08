@@ -6,6 +6,8 @@ from django.template.loader import render_to_string
 
 from sib_api_v3_sdk.rest import ApiException  # type: ignore[import-untyped]
 
+from core.branding import site_name, sender_name
+
 if TYPE_CHECKING:
     from core.models import User
 
@@ -32,13 +34,13 @@ class EmailService(ABC):
             {
                 "user": user,
                 "verification_url": verification_url,
-                "site_name": settings.WEBSITE_NAME,
+                "site_name": site_name(),
             },
         )
         return self.send_email(
             to_email=user.email,
             to_name=user.get_full_name(),
-            subject=f"Confirmez votre adresse email - {settings.WEBSITE_NAME}",
+            subject=f"Confirmez votre adresse email - {site_name()}",
             html_content=html_content,
         )
 
@@ -48,14 +50,14 @@ class EmailService(ABC):
             {
                 "user": user,
                 "reset_url": reset_url,
-                "site_name": settings.WEBSITE_NAME,
+                "site_name": site_name(),
                 "expiry_hours": settings.PASSWORD_RESET_TOKEN_EXPIRY // 3600,
             },
         )
         return self.send_email(
             to_email=user.email,
             to_name=user.get_full_name(),
-            subject=f"Réinitialisation de votre mot de passe - {settings.WEBSITE_NAME}",
+            subject=f"Réinitialisation de votre mot de passe - {site_name()}",
             html_content=html_content,
         )
 
@@ -73,7 +75,7 @@ class ConsoleEmailService(EmailService):
         print("EMAIL SENT")
         print("=" * 60)
         print(f"To: {to_name} <{to_email}>")
-        print(f"From: {settings.DEFAULT_FROM_NAME} <{settings.DEFAULT_FROM_EMAIL}>")
+        print(f"From: {sender_name()} <{settings.DEFAULT_FROM_EMAIL}>")
         print(f"Subject: {subject}")
         for name, value in (headers or {}).items():
             print(f"{name}: {value}")
@@ -105,7 +107,7 @@ class BrevoEmailService(EmailService):
 
         send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
             to=[{"email": to_email, "name": to_name}],
-            sender={"email": settings.DEFAULT_FROM_EMAIL, "name": settings.DEFAULT_FROM_NAME},
+            sender={"email": settings.DEFAULT_FROM_EMAIL, "name": sender_name()},
             subject=subject,
             html_content=html_content,
             headers=headers or None,
