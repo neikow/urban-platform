@@ -56,6 +56,12 @@ services:
     web:
         <<: *app
         command: gunicorn urban_platform.wsgi:application -c gunicorn.conf.py
+        networks:
+            internal:
+                # nginx's upstream. Not "web": nginx also sits on shared networks (the
+                # edge, a host proxy's), where other stacks' "web" containers answer too.
+                aliases:
+                    - ${TENANT_SLUG}-web
         volumes:
             - static:/app/staticfiles
             - media:/app/mediafiles
@@ -98,7 +104,7 @@ services:
         image: ${IMAGE:-ghcr.io/neikow/urban-platform}-nginx:${IMAGE_TAG}
         restart: unless-stopped
         environment:
-            UPSTREAM_NAME: web
+            UPSTREAM_NAME: ${TENANT_SLUG}-web
         volumes:
             - static:/app/staticfiles:ro
             - media:/app/mediafiles:ro
