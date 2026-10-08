@@ -14,7 +14,8 @@ The agent drives Docker through its socket, which amounts to root access to the 
 therefore limits what the control plane can ask of it:
 
 - It only runs images under one name (`AGENT_IMAGE`, `ghcr.io/neikow/urban-platform` by
-  default): the control plane chooses a tag, never an image.
+  default, and its own `-agent` image to update itself): the control plane chooses a
+  tag, never an image.
 - The Compose file comes from that image (`/app/deploy/tenant/compose.yml`), not from the
   control plane.
 - Website names, tags and variables are checked before anything reaches Docker; a
@@ -95,6 +96,7 @@ Two calls, both with `Authorization: Bearer <AGENT_TOKEN>`.
 ```json
 {
   "edge": {"mode": "traefik", "acme_email": "ops@example.org"},
+  "agent": {"image_tag": "saas", "version": "saas-1a2b3c4"},
   "tenants": [
     {
       "slug": "aix",
@@ -121,6 +123,24 @@ Two calls, both with `Authorization: Bearer <AGENT_TOKEN>`.
 - `env`: the website's variables (`deploy/tenant/.env.example`), uppercase names. Values
   cannot contain `'` or line breaks. `IMAGE`, `IMAGE_TAG` and `TENANT_SLUG` are set by the
   agent and refused here.
+- `agent` (optional): `{"image_tag": "saas", "version": "saas-1a2b3c4"}`, the version the
+  agent should run (see [Updating itself](#updating-itself)).
+
+## Updating itself
+
+When the desired state names another `agent.version` than its own, the agent, between two
+polls:
+
+1. pulls `<AGENT_IMAGE>-agent:<image_tag>` (its own image, never another one) and reads
+   the `AGENT_VERSION` built into it. Not the version asked for yet (the image still
+   building): it reports so and tries again 10 minutes later;
+2. starts a helper from that image (`urban-agent-update`, removed when done), which
+   reads the agent's container, removes it, and runs the new image with the same name,
+   restart policy, volumes, variables and networks. If the new agent does not start,
+   the helper runs the old image again.
+
+The websites keep running throughout. Agents older than this feature are updated by hand
+once: `docker pull` the agent image, then recreate the container with the same command.
 
 ### `POST /api/agent/v1/report`
 
