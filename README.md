@@ -83,7 +83,7 @@ association edited is overwritten (see `core/tenant.py`).
 | `TENANT_ADMIN_EMAIL` | First administrator, created without a password and invited by email to choose one |
 | `TENANT_TERRITORY` | INSEE code of the area (e.g. `13001`); changing it moves the website to the new area |
 | `TENANT_CONTACT_EMAIL` | Contact address, until the association sets one |
-| `TENANT_TAGLINE`, `TENANT_PRIMARY_COLOR`, `TENANT_SECONDARY_COLOR`, `TENANT_LOGO_URL`, `TENANT_SIGNUP_IMAGE_URL` | Initial branding, each applied once to its empty field (images downloaded from the URLs) |
+| `TENANT_TAGLINE`, `TENANT_PRIMARY_COLOR`, `TENANT_SECONDARY_COLOR`, `TENANT_BACKGROUND_COLOR`, `TENANT_TEXT_COLOR`, `TENANT_FONT_BODY`, `TENANT_FONT_DISPLAY`, `TENANT_LOGO_URL`, `TENANT_SIGNUP_IMAGE_URL` | Initial branding, each applied once to its empty field (images downloaded from the URLs) |
 | `APP_VERSION` | Build argument: the release, reported by `/healthz/` |
 
 On a new database, the bootstrap also publishes starter content in the home page and the

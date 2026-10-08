@@ -71,6 +71,8 @@ still empty.
 |---|---|
 | `TENANT_TAGLINE` | Tagline under the name |
 | `TENANT_PRIMARY_COLOR`, `TENANT_SECONDARY_COLOR` | Theme colours, `#rrggbb` |
+| `TENANT_BACKGROUND_COLOR`, `TENANT_TEXT_COLOR` | Background and text, `#rrggbb`; dropped together if their contrast is under 4.5:1 |
+| `TENANT_FONT_BODY`, `TENANT_FONT_DISPLAY` | Fonts for text and titles: ids of [`frontend/theme/fonts.json`](../frontend/theme/fonts.json) |
 | `TENANT_LOGO_URL`, `TENANT_SIGNUP_IMAGE_URL` | Logo and sign-up photo, downloaded at deployment (http or https, 10 MB at most); retried at the next deployment if unavailable |
 
 Optional: `BREVO_API_KEY`, `DEFAULT_FROM_EMAIL`, `DEFAULT_FROM_NAME` (emails; without a
