@@ -39,22 +39,26 @@ TypeScript and the Tailwind stylesheet live in `frontend/src/` and are built by 
 - Prefer theme tokens (`text-2xs`, `tracking-label`, `text-display-*`, defined in
   `frontend/src/styles/main.css`) over arbitrary values.
 
-### Maps
+### Territory and maps
 
-The basemap is self-hosted: a [PMTiles](https://docs.protomaps.com/pmtiles/) extract of
-Marseille, cut from the daily OpenStreetMap builds of [Protomaps](https://protomaps.com) and
-drawn by `protomaps-leaflet`. No request leaves the site, and the maps cannot be panned
-outside the extract (`LOCAL_AREA_TILES_BOUNDS` in `publications/geo.py`).
+The area a website covers is the `Territory` setting: its outline, names, postal codes
+and the city addresses are searched in. `manage.py configure_territory <INSEE code>`
+sets it from geo.api.gouv.fr (a commune, or an arrondissement of Paris, Lyon or
+Marseille); `make territory` sets the bundled 7th arrondissement of Marseille, which
+`make install` does for development.
 
-The archive (~35 MB) is not committed. `make map-tiles` downloads the latest one into
-`publications/static/publications/geo/`, with the `pmtiles` CLI (`brew install pmtiles`) or
-Docker. The Docker image fetches it at build time. It is read with HTTP range requests:
-nginx supports them, and the project's `runserver` adds them for development.
+The basemap is self-hosted: a [PMTiles](https://docs.protomaps.com/pmtiles/) extract around
+the territory, cut from the daily OpenStreetMap builds of [Protomaps](https://protomaps.com)
+and drawn by `protomaps-leaflet`. No request leaves the site, and the maps cannot be panned
+outside the extract (`tiles_bounds` in `publications/geo.py`).
 
-After that, the `refresh_map_tiles` Celery task checks every night and, once the interval
-set in the admin (Settings › Map, 30 days by default) has passed, extracts the latest build
-into `MEDIA_ROOT/map-tiles/` (shared by the worker and nginx). The maps then use it; the
-static copy stays as the fallback. `manage.py build_map_tiles --refresh` runs one now.
+The image ships no tiles: the `refresh_map_tiles` Celery task extracts them into
+`MEDIA_ROOT/map-tiles/` (shared by the worker and nginx) when there are none, when the
+territory changes, then once the interval set in the admin (Settings › Map, 30 days by
+default) has passed. `manage.py build_map_tiles --refresh` runs it now. In development,
+`make map-tiles` writes an extract into the static files instead, with the `pmtiles` CLI
+(`brew install pmtiles`) or Docker. Tiles are read with HTTP range requests: nginx
+supports them, and the project's `runserver` adds them for development.
 
 ### Translations
 
@@ -62,6 +66,26 @@ Code and templates use English strings; the French catalog lives in each app's
 `locale/fr/`. After adding or changing a string, run `make messages` and fill in the
 new `msgstr` entries. Prefer `{% blocktrans trimmed %}` for multi-line text so the
 template formatter cannot change the msgid.
+
+## Deploying a website
+
+Every website (one per association) runs the same image with its own database, described
+by environment variables. After `migrate`, `manage.py bootstrap_tenant` brings the database
+in line with them (the `migrator` service of `docker-compose.yml` runs both). It is
+idempotent and runs at every deployment; it only fills what is missing, so nothing the
+association edited is overwritten (see `core/tenant.py`).
+
+| Variable | Use |
+|---|---|
+| `BASE_URL` | Public URL, e.g. `https://aix.example.org`: the Wagtail site and the links in emails |
+| `WEBSITE_NAME` | Default name, until the association sets one (Settings › Identité visuelle) |
+| `TENANT_ADMIN_EMAIL` | First administrator, created without a password and invited by email to choose one |
+| `TENANT_TERRITORY` | INSEE code of the area (e.g. `13001`); changing it moves the website to the new area |
+| `TENANT_CONTACT_EMAIL` | Contact address, until the association sets one |
+| `APP_VERSION` | Build argument: the release, reported by `/healthz/` |
+
+On a new database, the bootstrap also publishes starter content in the home page and the
+"À propos" pages.
 
 ## E2E Testing
 

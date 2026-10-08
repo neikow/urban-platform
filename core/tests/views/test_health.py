@@ -5,11 +5,14 @@ from django.db import DatabaseError
 
 
 @pytest.mark.django_db
-def test_healthz_ok(client):
+def test_healthz_ok(client, settings):
+    settings.APP_VERSION = "1.4.0"
+
     response = client.get("/healthz/")
 
     assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
+    # The deployment agent reads the version to confirm an update.
+    assert response.json() == {"status": "ok", "version": "1.4.0"}
 
 
 @pytest.mark.django_db

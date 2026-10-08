@@ -18,6 +18,9 @@ ENV UV_COMPILE_BYTECODE=1 UV_NO_DEV=1
 
 ARG SENTRY_RELEASE
 ENV SENTRY_RELEASE=${SENTRY_RELEASE}
+# Reported by /healthz/, for the deployment agent (defaults to SENTRY_RELEASE).
+ARG APP_VERSION
+ENV APP_VERSION=${APP_VERSION}
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq5 \

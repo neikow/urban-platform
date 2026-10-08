@@ -17,6 +17,9 @@ django_stubs_ext.monkeypatch()
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = PROJECT_DIR.parent
 
+# The release this image was built from (a version tag or a commit), set at build time.
+APP_VERSION = os.environ.get("APP_VERSION") or os.environ.get("SENTRY_RELEASE") or "dev"
+
 # Default name, until one is set in the admin (Settings › Branding).
 WEBSITE_NAME = os.environ.get("WEBSITE_NAME", "Urbix")
 

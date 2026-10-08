@@ -34,6 +34,7 @@ class TerritoryUnavailable(Exception):
 
 @dataclass
 class TerritoryData:
+    code: str
     name: str
     name_in: str
     city_name: str
@@ -43,6 +44,7 @@ class TerritoryData:
 
     def fields(self) -> dict[str, Any]:
         return {
+            "code": self.code,
             "name": self.name,
             "name_in": self.name_in,
             "city_name": self.city_name,
@@ -85,6 +87,7 @@ def from_feature(feature: dict[str, Any], city_name: str | None = None) -> Terri
         city = city_name or (match["city"] if match else name)
         label = f"{match['rank']} arrondissement de {city}" if match else name
         return TerritoryData(
+            code=code,
             name=label,
             name_in=f"dans le {label}" if match else f"à {name}",
             city_name=city,
@@ -93,6 +96,7 @@ def from_feature(feature: dict[str, Any], city_name: str | None = None) -> Terri
             boundary=geometry,
         )
     return TerritoryData(
+        code=code,
         name=name,
         name_in=f"à {name}",
         city_name=name,
