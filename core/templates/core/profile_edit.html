@@ -3,6 +3,8 @@
 
 {% block title %}{% trans "Edit my profile" %}{% endblock %}
 
+{% block extra_css %}{{ form.media.css }}{% endblock %}
+
 {% block content %}
     <article>
         <header class="bg-base-200/60 border-b border-base-300/70">
@@ -73,6 +75,7 @@
                             {% include "components/forms/form_field.html" with field=form.last_name %}
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {% include "components/forms/form_field.html" with field=form.address %}
                             {% include "components/forms/form_field.html" with field=form.postal_code %}
                             {% include "components/forms/form_field.html" with field=form.phone_number %}
                         </div>
@@ -232,3 +235,5 @@
         </div>
     </article>
 {% endblock content %}
+
+{% block extra_js %}{{ form.media.js }}{% endblock %}

@@ -54,6 +54,41 @@
                                 <p class="text-base font-medium">{{ user.postal_code }}</p>
                             </div>
                         {% endif %}
+                        {% if user.address %}
+                            <div>
+                                <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                    {% trans "Address" %}
+                                </p>
+                                <p class="text-base font-medium">{{ user.address }}</p>
+                            </div>
+                        {% endif %}
+                        {% if user.association %}
+                            <div>
+                                <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                    {% trans "Neighborhood Association" %}
+                                </p>
+                                <p class="text-base font-medium">
+                                    {% if user.association.website %}
+                                        <a
+                                            href="{{ user.association.website }}"
+                                            class="link link-hover"
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                        >{{ user.association.name }}<span
+                                                class="sr-only"
+                                            >{% trans "(opens in a new tab)" %}</span></a>
+                                    {% else %}
+                                        {{ user.association.name }}
+                                    {% endif %}
+                                </p>
+                                {% if user.association.contact_email %}
+                                    <a
+                                        href="mailto:{{ user.association.contact_email }}"
+                                        class="text-sm link link-hover text-base-content/70"
+                                    >{{ user.association.contact_email }}</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
                     </div>
                 </section>
 

@@ -3,6 +3,8 @@
 
 {% block title %}{% trans "Sign up" %}{% endblock %}
 
+{% block extra_css %}{{ form.media.css }}{% endblock %}
+
 {% block content %}
     <div class="min-h-[calc(100vh-4rem)] flex items-stretch">
         <!-- Left panel: image + benefits -->
@@ -122,6 +124,7 @@
                         {% include "components/forms/form_field.html" with field=form.last_name %}
                     </div>
 
+                    {% include "components/forms/form_field.html" with field=form.address %}
                     {% include "components/forms/form_field.html" with field=form.postal_code %}
                     {% include "components/forms/password_field.html" with field=form.password %}
                     {% include "components/forms/password_field.html" with field=form.confirm_password %}
@@ -250,3 +253,5 @@
         </div>
     </div>
 {% endblock content %}
+
+{% block extra_js %}{{ form.media.js }}{% endblock %}

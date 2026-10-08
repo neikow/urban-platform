@@ -1,4 +1,14 @@
-<geojson-map-input data-config="{{ map_config }}">
+{% load i18n %}
+<geojson-map-input data-config="{{ map_config }}" {% if reference %}data-reference="{{ reference }}"{% endif %}>
+    <div class="geojson-map-input__search" data-search>
+        <input
+            type="search"
+            class="geojson-map-input__search-input"
+            placeholder="{% trans 'Search an address in Marseille' %}"
+            aria-label="{% trans 'Search an address in Marseille' %}"
+            autocomplete="off"
+        >
+    </div>
     <div data-map class="geojson-map-input__map"></div>
     <p class="help">{{ help }}</p>
     <textarea name="{{ widget.name }}" hidden {% include "django/forms/widgets/attrs.html" %}

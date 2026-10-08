@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
 from wagtail.admin.panels import FieldPanel
 
+from core.widgets import AddressInput
 from publications.models.publication import PublicationPage
 
 
@@ -47,6 +48,10 @@ class EventPage(PublicationPage):
         blank=True,
         help_text=_("Full address of the event"),
     )
+    # Filled from the address when saving (core.geocoding), for the maps.
+    address_location: models.JSONField[Any, Any] = models.JSONField(
+        _("Address location"), null=True, blank=True, editable=False
+    )
 
     is_online: models.BooleanField[bool, bool] = models.BooleanField(
         _("Online Event"),
@@ -73,11 +78,17 @@ class EventPage(PublicationPage):
         FieldPanel("event_date"),
         FieldPanel("end_date"),
         FieldPanel("location"),
-        FieldPanel("address"),
+        FieldPanel("address", widget=AddressInput),
         FieldPanel("is_online"),
         FieldPanel("online_link"),
         FieldPanel("max_participants"),
     ]
+
+    def clean(self) -> None:
+        from core.geocoding import locate
+
+        super().clean()
+        self.address_location = locate(self.address, self.address_location)
 
     def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context(request, *args, **kwargs)

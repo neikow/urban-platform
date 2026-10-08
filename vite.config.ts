@@ -29,6 +29,8 @@ export default defineConfig(({ mode }) => ({
         admin: src("admin/main.ts"),
         "admin-vote-stats": src("admin/vote-stats.ts"),
         "admin-location": src("admin/location-input.ts"),
+        "address-input": src("address-input.ts"),
+        "address-autocomplete": src("lib/address-autocomplete.css"),
         "projects-map": src("pages/projects-map.ts"),
         "project-location": src("pages/project-location.ts"),
         "event-interest": src("pages/event-interest.ts"),

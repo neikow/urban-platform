@@ -4,7 +4,13 @@ import re
 import pytest
 from django.core.exceptions import ValidationError
 
-from publications.geo import LOCAL_AREA_CENTER, map_config, validate_geometry
+from publications.geo import (
+    LOCAL_AREA_CENTER,
+    area_contains,
+    map_config,
+    validate_area,
+    validate_geometry,
+)
 from publications.widgets import GeoJSONMapWidget
 
 POINT = {"type": "Point", "coordinates": [5.3601, 43.2841]}
@@ -43,6 +49,54 @@ class TestValidateGeometry:
             validate_geometry(value)
 
 
+SQUARE = [[5.0, 43.0], [5.1, 43.0], [5.1, 43.1], [5.0, 43.1], [5.0, 43.0]]
+HOLE = [[5.04, 43.04], [5.06, 43.04], [5.06, 43.06], [5.04, 43.06], [5.04, 43.04]]
+DONUT = {"type": "Polygon", "coordinates": [SQUARE, HOLE]}
+ISLANDS = {
+    "type": "MultiPolygon",
+    "coordinates": [[SQUARE], [[[5.2, 43.0], [5.3, 43.0], [5.3, 43.1], [5.2, 43.0]]]],
+}
+
+
+def point(lon, lat):
+    return {"type": "Point", "coordinates": [lon, lat]}
+
+
+class TestValidateArea:
+    @pytest.mark.parametrize("value", [None, "", POLYGON, DONUT, ISLANDS])
+    def test_accepts(self, value):
+        validate_area(value)
+
+    @pytest.mark.parametrize(
+        "value",
+        [
+            POINT,
+            {"type": "Polygon", "coordinates": []},
+            {"type": "MultiPolygon", "coordinates": []},
+            {"type": "Polygon", "coordinates": [[[5, 43], [5.1, 43], [5.2, 43.1]]]},
+        ],
+    )
+    def test_rejects(self, value):
+        with pytest.raises(ValidationError):
+            validate_area(value)
+
+
+class TestAreaContains:
+    def test_polygon_with_hole(self):
+        assert area_contains(DONUT, point(5.02, 43.02))
+        assert not area_contains(DONUT, point(5.05, 43.05))
+        assert not area_contains(DONUT, point(5.2, 43.05))
+
+    def test_multipolygon(self):
+        assert area_contains(ISLANDS, point(5.05, 43.05))
+        assert area_contains(ISLANDS, point(5.28, 43.02))
+        assert not area_contains(ISLANDS, point(5.15, 43.05))
+
+    def test_nothing_to_compare(self):
+        assert not area_contains(None, point(5.05, 43.05))
+        assert not area_contains(DONUT, None)
+
+
 class TestWidget:
     def test_renders_custom_element_with_geometry(self):
         html = GeoJSONMapWidget().render("location", POINT)
@@ -55,6 +109,15 @@ class TestWidget:
         html = GeoJSONMapWidget().render("location", None)
 
         assert re.search(r"<textarea[^>]*></textarea>", html)
+
+    def test_area_only_widget_with_reference_shapes(self):
+        reference = {"type": "FeatureCollection", "features": []}
+        html = GeoJSONMapWidget(markers=False, reference=lambda: reference).render("area", None)
+        config = re.search(r'data-config="([^"]*)"', html)
+
+        assert config and json.loads(config.group(1).replace("&quot;", '"'))["markers"] is False
+        assert "data-reference=" in html
+        assert "data-search" in html
 
     def test_media_loads_the_module_bundle(self):
         media = str(GeoJSONMapWidget().media)

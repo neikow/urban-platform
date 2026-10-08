@@ -21,3 +21,17 @@ def give_code_of_conduct_consent(db: None) -> Callable[[Any], Any]:
         return create_code_of_conduct_consent_record(user)
 
     return _consent
+
+
+@pytest.fixture(autouse=True)
+def offline_geocoding(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Tests never reach the geocoding service: by default it is unavailable.
+
+    Tests about addresses patch ``core.geocoding._fetch`` with canned answers.
+    """
+    from core import geocoding
+
+    def unavailable(*args: Any, **kwargs: Any) -> Any:
+        raise geocoding.GeocodingUnavailable
+
+    monkeypatch.setattr(geocoding, "_fetch", unavailable)
