@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 13:51+0200\n"
+"POT-Creation-Date: 2026-10-08 18:02+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -32,19 +32,19 @@ msgstr ""
 msgid "Tomorrow: %(title)s"
 msgstr "Demain : %(title)s"
 
-#: publications/geo.py:60
+#: publications/geo.py:64
 msgid "The location must be a point or a polygon."
 msgstr "La localisation doit être un point ou un polygone."
 
-#: publications/geo.py:68
+#: publications/geo.py:72
 msgid "The location coordinates are invalid."
 msgstr "Les coordonnées de la localisation sont invalides."
 
-#: publications/geo.py:84
+#: publications/geo.py:88
 msgid "The area must be a polygon."
 msgstr "Le secteur doit être un polygone."
 
-#: publications/geo.py:91
+#: publications/geo.py:95
 msgid "The area coordinates are invalid."
 msgstr "Les coordonnées du secteur sont invalides."
 
@@ -52,7 +52,7 @@ msgstr "Les coordonnées du secteur sont invalides."
 #: publications/models/event_interest.py:23
 #: publications/templates/publications/components/publication_preview.html:51
 #: publications/templates/publications/event_page.html:17
-#: publications/views/feeds.py:79
+#: publications/views/feeds.py:83
 msgid "Event"
 msgstr "Événement"
 
@@ -175,32 +175,32 @@ msgid "External Links"
 msgstr "Liens externes"
 
 #: publications/models/form.py:10
-#: publications/templates/publications/admin/vote_stats_detail.html:126
-#: publications/templates/publications/admin/vote_stats_detail.html:227
-#: publications/templates/publications/admin/vote_stats_detail.html:283
+#: publications/templates/publications/admin/vote_stats_detail.html:128
+#: publications/templates/publications/admin/vote_stats_detail.html:229
+#: publications/templates/publications/admin/vote_stats_detail.html:285
 #: publications/templates/publications/components/vote_form.html:117
 msgid "Unfavorable"
 msgstr "Défavorable"
 
 #: publications/models/form.py:11
-#: publications/templates/publications/admin/vote_stats_detail.html:207
-#: publications/templates/publications/admin/vote_stats_detail.html:276
+#: publications/templates/publications/admin/vote_stats_detail.html:209
+#: publications/templates/publications/admin/vote_stats_detail.html:278
 #: publications/templates/publications/components/vote_form.html:141
 msgid "Rather Unfavorable"
 msgstr "Plutôt défavorable"
 
 #: publications/models/form.py:12
-#: publications/templates/publications/admin/vote_stats_detail.html:187
-#: publications/templates/publications/admin/vote_stats_detail.html:269
+#: publications/templates/publications/admin/vote_stats_detail.html:189
+#: publications/templates/publications/admin/vote_stats_detail.html:271
 #: publications/templates/publications/components/vote_form.html:166
 msgid "Rather Favorable"
 msgstr "Plutôt favorable"
 
 #: publications/models/form.py:13
-#: publications/templates/publications/admin/vote_stats.html:40
-#: publications/templates/publications/admin/vote_stats_detail.html:111
-#: publications/templates/publications/admin/vote_stats_detail.html:167
-#: publications/templates/publications/admin/vote_stats_detail.html:262
+#: publications/templates/publications/admin/vote_stats.html:42
+#: publications/templates/publications/admin/vote_stats_detail.html:113
+#: publications/templates/publications/admin/vote_stats_detail.html:169
+#: publications/templates/publications/admin/vote_stats_detail.html:264
 #: publications/templates/publications/components/vote_form.html:190
 msgid "Favorable"
 msgstr "Favorable"
@@ -212,11 +212,11 @@ msgstr "Mis à jour le"
 #: publications/models/form.py:44 publications/models/idea.py:31
 #: publications/models/poll_closure.py:22 publications/models/project.py:50
 #: publications/models/project.py:189
-#: publications/templates/publications/admin/ideas_stats.html:36
-#: publications/templates/publications/admin/vote_stats.html:36
+#: publications/templates/publications/admin/ideas_stats.html:38
+#: publications/templates/publications/admin/vote_stats.html:38
 #: publications/templates/publications/components/publication_preview.html:68
 #: publications/templates/publications/project_page.html:21
-#: publications/views/feeds.py:79
+#: publications/views/feeds.py:83
 msgid "Project"
 msgstr "Projet"
 
@@ -312,7 +312,7 @@ msgid "Last error"
 msgstr "Dernière erreur"
 
 #: publications/models/map_settings.py:55
-#: publications/templates/publications/admin/vote_stats.html:37
+#: publications/templates/publications/admin/vote_stats.html:39
 msgid "Status"
 msgstr "Statut"
 
@@ -387,12 +387,12 @@ msgstr "Mode de participation"
 #: publications/models/project.py:67
 msgid ""
 "Voting lets residents give an opinion; idea collection lets them propose "
-"ideas on a project still in its early stages. The two are mutually exclusive"
-" — switching keeps responses already collected."
+"ideas on a project still in its early stages. The two are mutually exclusive "
+"— switching keeps responses already collected."
 msgstr ""
 "Le vote permet aux habitants de donner leur avis ; la collecte d'idées leur "
-"permet de proposer des idées sur un projet encore à ses débuts. Les deux "
-"sont mutuellement exclusifs — le changement conserve les réponses déjà "
+"permet de proposer des idées sur un projet encore à ses débuts. Les deux sont"
+" mutuellement exclusifs — le changement conserve les réponses déjà "
 "collectées."
 
 #: publications/models/project.py:74
@@ -449,13 +449,13 @@ msgstr "Prévenir les participants par email"
 
 #: publications/models/project_update.py:29
 msgid ""
-"Sent once, when the page is published, to people who voted or shared an idea"
-" and asked for project updates. Untick for past events you are adding to the"
-" timeline."
+"Sent once, when the page is published, to people who voted or shared an idea "
+"and asked for project updates. Untick for past events you are adding to the "
+"timeline."
 msgstr ""
-"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté"
-" ou proposé une idée et demandé à suivre les projets. Décochez pour les "
-"étapes passées ajoutées à l'historique."
+"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté "
+"ou proposé une idée et demandé à suivre les projets. Décochez pour les étapes"
+" passées ajoutées à l'historique."
 
 #: publications/models/project_update.py:43
 msgid "Project update"
@@ -537,8 +537,8 @@ msgstr "Projet ouvert aux idées"
 
 #: publications/page_templates.py:79
 msgid ""
-"A project still taking shape: residents suggest ideas on what is not decided"
-" yet."
+"A project still taking shape: residents suggest ideas on what is not decided "
+"yet."
 msgstr ""
 "Un projet encore en construction : les habitants proposent des idées sur ce "
 "qui n'est pas encore décidé."
@@ -591,8 +591,8 @@ msgstr "Complète"
 
 #: publications/page_templates.py:281
 msgid ""
-"Open consultations, the publications, upcoming events, the map, how to "
-"follow the news and questions."
+"Open consultations, the publications, upcoming events, the map, how to follow"
+" the news and questions."
 msgstr ""
 "Les consultations en cours, les publications, les prochains événements, la "
 "carte, comment suivre l'actualité et les questions."
@@ -645,35 +645,35 @@ msgstr "Annuler"
 #: publications/templates/publications/admin/ideas_stats.html:4
 #: publications/templates/publications/admin/ideas_stats.html:7
 #: publications/templates/publications/admin/ideas_stats_detail.html:4
-#: publications/views/idea_stats.py:37 publications/views/idea_stats.py:75
+#: publications/views/idea_stats.py:40 publications/views/idea_stats.py:78
 msgid "Idea Collection"
 msgstr "Collecte d'idées"
 
-#: publications/templates/publications/admin/ideas_stats.html:21
-#: publications/templates/publications/admin/ideas_stats_detail.html:70
+#: publications/templates/publications/admin/ideas_stats.html:22
+#: publications/templates/publications/admin/ideas_stats_detail.html:71
 #, python-format
 msgid "Show ideas from outside %(code)s"
 msgstr "Montrer les idées en dehors du %(code)s"
 
-#: publications/templates/publications/admin/ideas_stats.html:27
-#: publications/templates/publications/admin/ideas_stats_detail.html:75
+#: publications/templates/publications/admin/ideas_stats.html:28
+#: publications/templates/publications/admin/ideas_stats_detail.html:76
 #, python-format
 msgid ""
 "Only ideas from users with postal code %(code)s are shown.\n"
 "                    Check the box above to include all ideas."
 msgstr ""
-"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées."
-" Cochez la case ci-dessus pour inclure toutes les idées."
+"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées. "
+"Cochez la case ci-dessus pour inclure toutes les idées."
 
-#: publications/templates/publications/admin/ideas_stats.html:37
+#: publications/templates/publications/admin/ideas_stats.html:39
 msgid "Total ideas"
 msgstr "Total des idées"
 
-#: publications/templates/publications/admin/ideas_stats.html:58
+#: publications/templates/publications/admin/ideas_stats.html:60
 msgid "View ideas"
 msgstr "Voir les idées"
 
-#: publications/templates/publications/admin/ideas_stats.html:66
+#: publications/templates/publications/admin/ideas_stats.html:68
 msgid "No projects collecting ideas."
 msgstr "Aucun projet en collecte d'idées."
 
@@ -691,18 +691,18 @@ msgstr "Voir le projet"
 msgid "ideas"
 msgstr "idées"
 
-#: publications/templates/publications/admin/ideas_stats_detail.html:92
-#: publications/templates/publications/admin/vote_stats_detail.html:289
+#: publications/templates/publications/admin/ideas_stats_detail.html:94
+#: publications/templates/publications/admin/vote_stats_detail.html:291
 #: publications/tests/test_vote_stats.py:319
 msgid "Deleted User"
 msgstr "Utilisateur supprimé"
 
-#: publications/templates/publications/admin/ideas_stats_detail.html:98
-#: publications/templates/publications/admin/vote_stats_detail.html:297
+#: publications/templates/publications/admin/ideas_stats_detail.html:100
+#: publications/templates/publications/admin/vote_stats_detail.html:299
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: publications/templates/publications/admin/ideas_stats_detail.html:108
+#: publications/templates/publications/admin/ideas_stats_detail.html:110
 msgid "No ideas yet"
 msgstr "Aucune idée pour le moment"
 
@@ -721,28 +721,27 @@ msgstr "Mettre à jour la carte maintenant"
 
 #: publications/templates/publications/admin/map_tiles_status.html:24
 msgid ""
-"Downloads the latest OpenStreetMap data (about 35 MB), whatever the "
-"interval. Unsaved changes above are lost."
+"Downloads the latest OpenStreetMap data (about 35 MB), whatever the interval."
+" Unsaved changes above are lost."
 msgstr ""
-"Télécharge les dernières données OpenStreetMap (environ 35 Mo), quel que "
-"soit l'intervalle. Les modifications non enregistrées ci-dessus sont "
-"perdues."
+"Télécharge les dernières données OpenStreetMap (environ 35 Mo), quel que soit"
+" l'intervalle. Les modifications non enregistrées ci-dessus sont perdues."
 
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
-#: publications/views/vote_stats.py:50 publications/views/vote_stats.py:107
+#: publications/views/vote_stats.py:53 publications/views/vote_stats.py:110
 msgid "Vote Statistics"
 msgstr "Statistiques des votes"
 
-#: publications/templates/publications/admin/vote_stats.html:21
-#: publications/templates/publications/admin/vote_stats_detail.html:90
+#: publications/templates/publications/admin/vote_stats.html:22
+#: publications/templates/publications/admin/vote_stats_detail.html:91
 #, python-format
 msgid "Show votes from outside %(code)s"
 msgstr "Montrer les votes en dehors du %(code)s"
 
-#: publications/templates/publications/admin/vote_stats.html:27
-#: publications/templates/publications/admin/vote_stats_detail.html:95
+#: publications/templates/publications/admin/vote_stats.html:28
+#: publications/templates/publications/admin/vote_stats_detail.html:96
 #, python-format
 msgid ""
 "Only votes from users with postal code %(code)s are shown.\n"
@@ -751,28 +750,28 @@ msgstr ""
 "Seuls les votes d'utilisateurs avec le code postal %(code)s sont affichés. "
 "Cochez la case ci-dessus pour inclure tous les votes."
 
-#: publications/templates/publications/admin/vote_stats.html:38
+#: publications/templates/publications/admin/vote_stats.html:40
 msgid "Total votes"
 msgstr "Total des votes"
 
-#: publications/templates/publications/admin/vote_stats.html:39
-#: publications/templates/publications/admin/vote_stats_detail.html:155
+#: publications/templates/publications/admin/vote_stats.html:41
+#: publications/templates/publications/admin/vote_stats_detail.html:157
 msgid "With comment"
 msgstr "Avec commentaire"
 
-#: publications/templates/publications/admin/vote_stats.html:61
+#: publications/templates/publications/admin/vote_stats.html:63
 msgid "Open"
 msgstr "Ouvert"
 
-#: publications/templates/publications/admin/vote_stats.html:68
+#: publications/templates/publications/admin/vote_stats.html:70
 msgid "Closed"
 msgstr "Fermé"
 
-#: publications/templates/publications/admin/vote_stats.html:89
+#: publications/templates/publications/admin/vote_stats.html:91
 msgid "View details"
 msgstr "Voir les détails"
 
-#: publications/templates/publications/admin/vote_stats.html:97
+#: publications/templates/publications/admin/vote_stats.html:99
 msgid "No projects with voting enabled."
 msgstr "Aucun projet avec le vote activé."
 
@@ -788,19 +787,19 @@ msgstr "Vote fermé"
 msgid "votes"
 msgstr "votes"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:148
+#: publications/templates/publications/admin/vote_stats_detail.html:150
 msgid "Type"
 msgstr "Type"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:151
+#: publications/templates/publications/admin/vote_stats_detail.html:153
 msgid "Count"
 msgstr "Nombre"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:247
+#: publications/templates/publications/admin/vote_stats_detail.html:249
 msgid "Comments"
 msgstr "Commentaires"
 
-#: publications/templates/publications/admin/vote_stats_detail.html:311
+#: publications/templates/publications/admin/vote_stats_detail.html:313
 msgid "No votes yet"
 msgstr "Aucun vote pour l'instant"
 
@@ -909,8 +908,8 @@ msgstr "Partagez vos idées pour ce projet"
 
 #: publications/templates/publications/components/ideas_form.html:43
 msgid ""
-"This project is in its early stages — propose your ideas or an alternative "
-"to help shape it."
+"This project is in its early stages — propose your ideas or an alternative to"
+" help shape it."
 msgstr ""
 "Ce projet en est à ses débuts — proposez vos idées ou une alternative pour "
 "aider à le façonner."
@@ -991,46 +990,51 @@ msgstr "Autour de vous"
 msgid "Projects near me"
 msgstr "Projets près de chez moi"
 
-#: publications/templates/publications/components/projects_map.html:8
-msgid "Projects located in the 7th arrondissement of Marseille."
-msgstr "Les projets situés dans le 7e arrondissement de Marseille."
+#: publications/templates/publications/components/projects_map.html:9
+#, python-format
+msgid "Projects located %(area)s."
+msgstr "Les projets situés %(area)s."
 
-#: publications/templates/publications/components/projects_map.html:37
+#: publications/templates/publications/components/projects_map.html:13
+msgid "Projects placed on the map."
+msgstr "Les projets placés sur la carte."
+
+#: publications/templates/publications/components/projects_map.html:43
 msgid "Show my position"
 msgstr "Afficher ma position"
 
-#: publications/templates/publications/components/projects_map.html:44
+#: publications/templates/publications/components/projects_map.html:50
 msgid "Map of projects"
 msgstr "Carte des projets"
 
-#: publications/templates/publications/components/projects_map.html:45
+#: publications/templates/publications/components/projects_map.html:51
 msgid "Your position could not be found."
 msgstr "Votre position n'a pas pu être déterminée."
 
-#: publications/templates/publications/components/projects_map.html:46
+#: publications/templates/publications/components/projects_map.html:52
 msgid "You are here"
 msgstr "Vous êtes ici"
 
-#: publications/templates/publications/components/projects_map.html:47
-msgid "You are outside Marseille: the map only covers the city."
-msgstr "Vous êtes en dehors de Marseille : la carte ne couvre que la ville."
+#: publications/templates/publications/components/projects_map.html:53
+msgid "You are outside the area covered by the map."
+msgstr "Vous êtes en dehors de la zone couverte par la carte."
 
-#: publications/templates/publications/components/projects_map.html:48
+#: publications/templates/publications/components/projects_map.html:54
 msgid "Open for participation"
 msgstr "Participation ouverte"
 
-#: publications/templates/publications/components/projects_map.html:49
+#: publications/templates/publications/components/projects_map.html:55
 msgid "See the project"
 msgstr "Voir le projet"
 
-#: publications/templates/publications/components/projects_map.html:56
+#: publications/templates/publications/components/projects_map.html:62
 #, python-format
 msgid "%(total)s project on the map"
 msgid_plural "%(total)s projects on the map"
 msgstr[0] "%(total)s projet sur la carte"
 msgstr[1] "%(total)s projets sur la carte"
 
-#: publications/templates/publications/components/projects_map.html:74
+#: publications/templates/publications/components/projects_map.html:80
 msgid "No project has been placed on the map yet."
 msgstr "Aucun projet n'est encore placé sur la carte."
 
@@ -1076,8 +1080,8 @@ msgstr "Aucune publication trouvée"
 #: publications/templates/publications/components/verify_email_prompt.html:5
 #, python-format
 msgid ""
-"Verify your email address (%(email)s) to take part. Check your inbox for the"
-" link we sent you."
+"Verify your email address (%(email)s) to take part. Check your inbox for the "
+"link we sent you."
 msgstr ""
 "Vérifiez votre adresse email (%(email)s) pour participer. Consultez votre "
 "boîte de réception : nous vous avons envoyé un lien."
@@ -1132,16 +1136,15 @@ msgid ""
 "Your opinion matters! Votes help decision-makers understand residents "
 "priorities."
 msgstr ""
-"Votre avis compte ! Les votes aident les décideurs à comprendre les "
-"priorités des habitants."
+"Votre avis compte ! Les votes aident les décideurs à comprendre les priorités"
+" des habitants."
 
 #: publications/templates/publications/components/vote_form.html:48
 msgid ""
-"All votes are analyzed and taken into account in the final project "
-"decisions."
+"All votes are analyzed and taken into account in the final project decisions."
 msgstr ""
-"Tous les votes sont analysés et pris en compte dans les décisions finales du"
-" projet."
+"Tous les votes sont analysés et pris en compte dans les décisions finales du "
+"projet."
 
 #: publications/templates/publications/components/vote_form.html:74
 msgid "Log in to vote on this project"
@@ -1170,8 +1173,7 @@ msgstr "Seuls vous et les administrateurs peuvent voir votre commentaire"
 #: publications/templates/publications/components/vote_form.html:239
 msgid "Submit my vote anonymously (my name will not be linked to this vote)"
 msgstr ""
-"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce "
-"vote)"
+"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce vote)"
 
 #: publications/templates/publications/components/vote_form.html:250
 msgid "Submit my vote"
@@ -1247,10 +1249,14 @@ msgstr "Partager votre idée"
 msgid "Table of Contents"
 msgstr "Table des matières"
 
+#: publications/templates/publications/widgets/geojson_map.html:5
+#, python-format
+msgid "Search an address in %(city_name)s"
+msgstr "Rechercher une adresse à %(city_name)s"
+
 #: publications/templates/publications/widgets/geojson_map.html:7
-#: publications/templates/publications/widgets/geojson_map.html:8
-msgid "Search an address in Marseille"
-msgstr "Rechercher une adresse à Marseille"
+msgid "Search an address"
+msgstr "Rechercher une adresse"
 
 #: publications/views/event_interest.py:41
 #: publications/views/event_interest.py:47
@@ -1262,19 +1268,24 @@ msgstr "Événement introuvable"
 msgid "This event is over."
 msgstr "Cet événement est terminé."
 
-#: publications/views/feeds.py:31
+#: publications/views/feeds.py:32
 #, python-format
 msgid "%(site)s — events"
 msgstr "%(site)s — événements"
 
-#: publications/views/feeds.py:49
+#: publications/views/feeds.py:50
 #, python-format
 msgid "%(site)s — news"
 msgstr "%(site)s — actualités"
 
-#: publications/views/feeds.py:52
-msgid "Projects and events in the 7th arrondissement of Marseille."
-msgstr "Projets et événements du 7e arrondissement de Marseille."
+#: publications/views/feeds.py:55
+msgid "Projects and events."
+msgstr "Projets et événements."
+
+#: publications/views/feeds.py:56
+#, python-format
+msgid "Projects and events %(area)s."
+msgstr "Projets et événements %(area)s."
 
 #: publications/views/idea.py:17 publications/views/idea.py:73
 #: publications/views/idea.py:109 publications/views/vote.py:18
@@ -1347,8 +1358,8 @@ msgstr "Trop de requêtes. Réessayez dans une minute."
 #: publications/views/poll_close.py:36
 #, python-format
 msgid ""
-"The poll on “%(title)s” is closed. Results are being sent to voters who "
-"opted in."
+"The poll on “%(title)s” is closed. Results are being sent to voters who opted"
+" in."
 msgstr ""
 "Le vote sur « %(title)s » est clos. Les résultats sont envoyés aux votants "
 "qui l'ont demandé."
@@ -1430,13 +1441,19 @@ msgstr "Mettre à jour la carte"
 msgid "Map data updated to %(build)s"
 msgstr "Données de la carte mises à jour : %(build)s"
 
-#: publications/widgets.py:52
+#: publications/widgets.py:54
 msgid ""
 "Place a marker for a precise spot, or draw a polygon for an area. Drawing a "
 "new shape replaces the previous one."
 msgstr ""
 "Placez un marqueur pour un lieu précis, ou dessinez un polygone pour une "
 "zone. Une nouvelle forme remplace la précédente."
+
+#~ msgid "Projects located in the 7th arrondissement of Marseille."
+#~ msgstr "Les projets situés dans le 7e arrondissement de Marseille."
+
+#~ msgid "Projects and events in the 7th arrondissement of Marseille."
+#~ msgstr "Projets et événements du 7e arrondissement de Marseille."
 
 #~ msgid "Additional content for the publications page."
 #~ msgstr "Contenu supplémentaire pour la page des publications."

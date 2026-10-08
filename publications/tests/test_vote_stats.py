@@ -622,6 +622,7 @@ def project_with_local_and_outside_votes(db):
 
 
 @pytest.mark.django_db
+@pytest.mark.usefixtures("territory")
 class TestVoteStatsLocalFilter:
     """Tests for the local postal code filtering in vote statistics."""
 

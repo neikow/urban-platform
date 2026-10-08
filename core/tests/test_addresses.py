@@ -58,6 +58,7 @@ FEATURE = {
 # --- geocoding ----------------------------------------------------------------
 
 
+@pytest.mark.usefixtures("territory")
 class TestFetch:
     def test_queries_marseille_and_parses_features(self, monkeypatch):
         monkeypatch.setattr(geocoding, "_fetch", real_fetch)
@@ -66,7 +67,7 @@ class TestFetch:
 
         assert results == [PARADIS]
         params = parse_qs(urlparse(urlopen.call_args.args[0].full_url).query)
-        assert params["citycode"] == [geocoding.CITY_CODE]
+        assert params["citycode"] == ["13055"]
         assert params["autocomplete"] == ["1"]
         assert params["q"] == ["12 rue paradis"]
 

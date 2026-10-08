@@ -1,11 +1,16 @@
 {% load i18n %}
 <geojson-map-input data-config="{{ map_config }}" {% if reference %}data-reference="{{ reference }}"{% endif %}>
     <div class="geojson-map-input__search" data-search>
+        {% if city_name %}
+            {% blocktrans trimmed asvar search_label %}Search an address in {{ city_name }}{% endblocktrans %}
+        {% else %}
+            {% trans "Search an address" as search_label %}
+        {% endif %}
         <input
             type="search"
             class="geojson-map-input__search-input"
-            placeholder="{% trans 'Search an address in Marseille' %}"
-            aria-label="{% trans 'Search an address in Marseille' %}"
+            placeholder="{{ search_label }}"
+            aria-label="{{ search_label }}"
             autocomplete="off"
         >
     </div>

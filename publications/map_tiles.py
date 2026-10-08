@@ -1,20 +1,23 @@
 """The self-hosted basemap: a PMTiles extract of the local area, and its updates.
 
 Tiles come from the daily OpenStreetMap builds published by Protomaps. Only
-the tiles inside LOCAL_AREA_TILES_BOUNDS are fetched (HTTP range requests,
-a few MB), so the planet file is never downloaded. Extracting needs the
+the tiles around the territory are fetched (publications.geo.tiles_bounds, HTTP
+range requests, a few MB), so the planet file is never downloaded. Extracting needs the
 `pmtiles` CLI (https://docs.protomaps.com/pmtiles/cli), or Docker to run it
 from the protomaps/go-pmtiles image.
 
-Two copies exist:
-- the one in the static files, fetched when the Docker image is built
-  (`manage.py build_map_tiles`): the fallback, always there;
-- newer ones, fetched by the `refresh_map_tiles` task at the interval set in
-  the admin (MapSettings), into the media files, which nginx serves and the
-  Celery worker can write. Each extract gets its own name, so pages cached with
-  the previous URL keep working: the previous file is kept as well.
+The image is the same for every website, so it ships no tiles: they are
+fetched by the `refresh_map_tiles` task into the media files, which nginx
+serves and the Celery worker can write. That happens on the first daily check,
+when the territory changes, then at the interval set in the admin (MapSettings).
+Each extract gets its own name (build and extent), so pages cached with the
+previous URL keep working: the previous file is kept as well.
+
+In development, `manage.py build_map_tiles` writes an extract into the static
+files instead, used until the task has fetched one.
 """
 
+import hashlib
 import json
 import logging
 import os
@@ -31,11 +34,7 @@ from django.core.cache import cache
 from django.templatetags.static import static
 from django.utils import timezone
 
-from publications.geo import (
-    LOCAL_AREA_TILES_BOUNDS,
-    LOCAL_AREA_TILES_MAX_ZOOM,
-    LOCAL_AREA_TILES_PATH,
-)
+from publications.geo import LOCAL_AREA_TILES_MAX_ZOOM, LOCAL_AREA_TILES_PATH, tiles_bounds
 
 if TYPE_CHECKING:
     from publications.models import MapSettings
@@ -59,8 +58,25 @@ class TilesError(Exception):
 
 
 def static_tiles_path() -> Path:
-    """The tiles shipped with the static files (the fallback)."""
+    """Tiles in the static files, written by `build_map_tiles` (development)."""
     return Path(apps.get_app_config("publications").path) / "static" / LOCAL_AREA_TILES_PATH
+
+
+def current_bounds() -> tuple[float, float, float, float]:
+    """Extent of the extract for the territory as it is now."""
+    from core.models import Territory
+
+    return tiles_bounds(Territory.current().boundary)
+
+
+def _extent_suffix(extent: tuple[float, float, float, float]) -> str:
+    digest = hashlib.sha256(",".join(str(c) for c in extent).encode()).hexdigest()[:8]
+    return f"-{digest}.pmtiles"
+
+
+def extract_name(build: str, extent: tuple[float, float, float, float]) -> str:
+    """File name of an extract, relative to MEDIA_ROOT: new build or new extent, new name."""
+    return f"{MEDIA_DIRECTORY}/local-area-{Path(build).stem}{_extent_suffix(extent)}"
 
 
 def latest_build() -> str:
@@ -93,8 +109,8 @@ def pmtiles_command(output: Path) -> list[str]:
     raise TilesError("Install the pmtiles CLI (brew install pmtiles) or Docker.")
 
 
-def extract(build: str, output: Path) -> None:
-    """Extract the local area from a planet build into ``output``.
+def extract(build: str, output: Path, extent: tuple[float, float, float, float]) -> None:
+    """Extract ``extent`` (west, south, east, north) from a planet build into ``output``.
 
     Writes next to the target, then swaps: a failed run keeps the old file.
     """
@@ -105,7 +121,7 @@ def extract(build: str, output: Path) -> None:
         "extract",
         BUILD_URL.format(key=build),
         str(partial),
-        f"--bbox={','.join(str(c) for c in LOCAL_AREA_TILES_BOUNDS)}",
+        f"--bbox={','.join(str(c) for c in extent)}",
         f"--maxzoom={LOCAL_AREA_TILES_MAX_ZOOM}",
     ]
     try:
@@ -118,17 +134,19 @@ def extract(build: str, output: Path) -> None:
 
 
 def tiles_url() -> str:
-    """URL of the newest tiles: the last update, or the ones shipped with the static files."""
+    """URL of the newest tiles: the last update, else the static ones, else none yet ("")."""
     from publications.models import MapSettings
 
     name = MapSettings.load().tiles_file
     if name and (Path(settings.MEDIA_ROOT) / name).is_file():
         return f"{settings.MEDIA_URL}{name}"
-    return static(LOCAL_AREA_TILES_PATH)
+    if static_tiles_path().is_file():
+        return static(LOCAL_AREA_TILES_PATH)
+    return ""
 
 
 def last_checked(map_settings: "MapSettings") -> datetime | None:
-    """When the tiles were last checked: never by the task means when the image was built."""
+    """When the tiles were last checked: never by the task means when they were built locally."""
     if map_settings.tiles_checked_at:
         return map_settings.tiles_checked_at
     shipped = static_tiles_path()
@@ -138,6 +156,17 @@ def last_checked(map_settings: "MapSettings") -> datetime | None:
 
 
 def is_due(map_settings: "MapSettings", now: datetime) -> bool:
+    """Whether the task should look for newer tiles now.
+
+    Always when the website has none yet, or none for the territory as it is
+    now: the maps would stay blank until the next interval.
+    """
+    current = map_settings.tiles_file
+    if current and (Path(settings.MEDIA_ROOT) / current).is_file():
+        if not current.endswith(_extent_suffix(current_bounds())):
+            return True
+    elif not static_tiles_path().is_file():
+        return True
     if not map_settings.tiles_auto_update:
         return False
     checked = last_checked(map_settings)
@@ -191,14 +220,14 @@ def refresh_tiles(force: bool = False) -> str | None:
     status = MapSettings.objects.filter(pk=map_settings.pk)
     try:
         build = latest_build()
+        extent = current_bounds()
         current = map_settings.tiles_file
-        if not force and build == map_settings.tiles_build and current:
-            if (Path(settings.MEDIA_ROOT) / current).is_file():
-                status.update(tiles_checked_at=now, tiles_error="")
-                return None
+        name = extract_name(build, extent)
+        if not force and name == current and (Path(settings.MEDIA_ROOT) / current).is_file():
+            status.update(tiles_checked_at=now, tiles_error="")
+            return None
 
-        name = f"{MEDIA_DIRECTORY}/local-area-{Path(build).stem}.pmtiles"
-        extract(build, Path(settings.MEDIA_ROOT) / name)
+        extract(build, Path(settings.MEDIA_ROOT) / name, extent)
     except TilesError as error:
         logger.warning("Map tiles refresh failed: %s", error)
         status.update(tiles_checked_at=now, tiles_error=str(error)[:1000])

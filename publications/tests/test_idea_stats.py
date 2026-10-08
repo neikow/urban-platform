@@ -135,6 +135,7 @@ class TestIdeaStatsDetailView:
 
 
 @pytest.mark.django_db
+@pytest.mark.usefixtures("territory")
 class TestIdeaStatsLocalFilter:
     @pytest.fixture
     def project_local_and_outside(self, db):

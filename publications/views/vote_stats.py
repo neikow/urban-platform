@@ -1,12 +1,12 @@
 from typing import Any
 
-from django.conf import settings
 from django.db.models import Count, Q, QuerySet
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 from wagtail.admin.views.generic.base import WagtailAdminTemplateMixin
 
+from core.models import Territory
 from publications.views.mixins import ParticipationStatsPermissionMixin
 
 from publications.models import ParticipationMode, ProjectPage
@@ -17,7 +17,11 @@ from publications.models.form import (
     VoteChoice,
 )
 
-LOCAL_POSTAL_CODE: str = getattr(settings, "LOCAL_POSTAL_CODE", "13007")
+
+def _local_postal_codes() -> list[str]:
+    """The territory's postal codes: residents counted by default."""
+    return Territory.current().postal_code_list
+
 
 # Pie chart order and colours, from favorable to unfavorable.
 PIE_CHART_COLORS = {
@@ -29,19 +33,20 @@ PIE_CHART_COLORS = {
 
 
 def _is_show_all(request: Any) -> bool:
-    return request.GET.get("show_all") == "1"
+    """Everyone is counted when asked, or when the territory has no postal codes."""
+    return request.GET.get("show_all") == "1" or not _local_postal_codes()
 
 
 def _local_votes_filter() -> Q:
-    """Return a Q filter for votes from local users (matching LOCAL_POSTAL_CODE)."""
-    return Q(vote_responses__user__postal_code=LOCAL_POSTAL_CODE)
+    """Return a Q filter for votes from local users (the territory's postal codes)."""
+    return Q(vote_responses__user__postal_code__in=_local_postal_codes())
 
 
 def _local_responses_qs(show_all: bool) -> QuerySet:
     """Return a FormResponse queryset filtered by locality unless show_all is True."""
     qs = FormResponse.objects.all()
     if not show_all:
-        qs = qs.filter(user__postal_code=LOCAL_POSTAL_CODE)
+        qs = qs.filter(user__postal_code__in=_local_postal_codes())
     return qs
 
 
@@ -93,7 +98,7 @@ class VoteStatsView(ParticipationStatsPermissionMixin, WagtailAdminTemplateMixin
             {
                 "projects_stats": projects_stats,
                 "show_all": show_all,
-                "local_postal_code": LOCAL_POSTAL_CODE,
+                "local_postal_code": ", ".join(_local_postal_codes()),
             }
         )
 
@@ -168,7 +173,7 @@ class VoteStatsDetailView(
                 },
                 "vote_choices": VoteChoice,
                 "show_all": show_all,
-                "local_postal_code": LOCAL_POSTAL_CODE,
+                "local_postal_code": ", ".join(_local_postal_codes()),
             }
         )
 

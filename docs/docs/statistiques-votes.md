@@ -23,9 +23,9 @@ Le tableau affiche pour chaque projet :
 
 ### Filtre géographique
 
-Par défaut, seuls les votes des habitants du **code postal 13007** sont affichés.
+Par défaut, seuls les votes des habitants des **codes postaux locaux** sont affichés (voir [Territoire](carte.md#territoire)).
 
-Cochez la case **"Montrer les votes en dehors du 13007"** pour inclure tous les votes, quelle que soit l'origine géographique.
+Cochez la case **« Montrer les votes en dehors de … »** pour inclure tous les votes, quelle que soit l'origine géographique. Sans code postal local, tous les votes sont comptés et la case n'apparaît pas.
 
 ## Voir le détail d'un projet
 

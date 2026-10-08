@@ -9,7 +9,14 @@ from django.utils import timezone
 
 from publications import map_tiles
 from publications.geo import map_config
-from publications.map_tiles import TilesError, is_due, refresh_tiles, tiles_url
+from publications.map_tiles import (
+    TilesError,
+    current_bounds,
+    extract_name,
+    is_due,
+    refresh_tiles,
+    tiles_url,
+)
 from publications.models import MapSettings
 from publications.tasks import refresh_map_tiles
 
@@ -20,12 +27,31 @@ def media(tmp_path, settings):
     return tmp_path
 
 
+@pytest.fixture(autouse=True)
+def static_tiles(tmp_path, monkeypatch):
+    """Where `build_map_tiles` writes, empty: a checkout may have real tiles there."""
+    path = tmp_path / "static" / "local-area.pmtiles"
+    monkeypatch.setattr(map_tiles, "static_tiles_path", lambda: path)
+    return path
+
+
+@pytest.fixture
+def shipped(static_tiles):
+    static_tiles.parent.mkdir(parents=True, exist_ok=True)
+    static_tiles.write_bytes(b"tiles")
+    return static_tiles
+
+
+def name(build: str) -> str:
+    return extract_name(build, current_bounds())
+
+
 @pytest.fixture
 def fake_extract(monkeypatch):
     """Replace the download: write a small file, remember the builds asked for."""
     builds = []
 
-    def extract(build: str, output: Path) -> None:
+    def extract(build: str, output: Path, extent) -> None:
         builds.append(build)
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_bytes(b"tiles")
@@ -46,7 +72,11 @@ def update_settings(**fields):
 
 @pytest.mark.django_db
 class TestTilesUrl:
-    def test_falls_back_to_the_static_tiles(self, media):
+    def test_none_before_the_first_fetch(self, media):
+        assert tiles_url() == ""
+        assert map_config()["tilesUrl"] == ""
+
+    def test_falls_back_to_the_static_tiles(self, media, shipped):
         assert tiles_url().startswith("/static/")
         assert map_config()["tilesUrl"] == tiles_url()
 
@@ -57,7 +87,7 @@ class TestTilesUrl:
 
         assert tiles_url() == "/media/map-tiles/local-area-20261001.pmtiles"
 
-    def test_ignores_a_missing_file(self, media):
+    def test_ignores_a_missing_file(self, media, shipped):
         update_settings(tiles_file="map-tiles/gone.pmtiles")
 
         assert tiles_url().startswith("/static/")
@@ -71,22 +101,38 @@ class TestIsDue:
         assert map_settings.tiles_auto_update
         assert map_settings.tiles_update_interval_days == 30
 
-    def test_after_the_interval(self):
+    def test_after_the_interval(self, shipped):
         now = timezone.now()
         map_settings = update_settings(tiles_checked_at=now - timedelta(days=30))
 
         assert is_due(map_settings, now)
         assert not is_due(map_settings, now - timedelta(days=1))
 
-    def test_never_when_disabled(self):
+    def test_never_when_disabled(self, shipped):
         map_settings = update_settings(tiles_auto_update=False, tiles_checked_at=None)
 
         assert not is_due(map_settings, timezone.now())
 
-    def test_first_check_counts_from_the_shipped_tiles(self, tmp_path, monkeypatch):
-        shipped = tmp_path / "local-area.pmtiles"
-        shipped.write_bytes(b"tiles")
-        monkeypatch.setattr(map_tiles, "static_tiles_path", lambda: shipped)
+    def test_always_without_tiles(self, media):
+        map_settings = update_settings(tiles_auto_update=False, tiles_checked_at=timezone.now())
+
+        assert is_due(map_settings, timezone.now())
+
+    def test_always_when_the_territory_moved(self, media, fake_extract, territory):
+        with latest("20261001.pmtiles"):
+            refresh_tiles(force=True)
+        map_settings = update_settings(tiles_auto_update=False, tiles_checked_at=timezone.now())
+        assert not is_due(map_settings, timezone.now())
+
+        territory.boundary = {
+            "type": "Polygon",
+            "coordinates": [[[2.3, 48.8], [2.4, 48.8], [2.4, 48.9], [2.3, 48.8]]],
+        }
+        territory.save()
+
+        assert is_due(map_settings, timezone.now())
+
+    def test_first_check_counts_from_the_shipped_tiles(self, shipped):
         map_settings = MapSettings.load()
         now = timezone.now()
 
@@ -104,7 +150,7 @@ class TestRefresh:
         with latest("20261015.pmtiles"):
             third = refresh_tiles(force=True)
 
-        assert third == "map-tiles/local-area-20261015.pmtiles"
+        assert third == name("20261015.pmtiles")
         map_settings = MapSettings.load()
         assert map_settings.tiles_build == "20261015.pmtiles"
         assert map_settings.tiles_file == third
@@ -126,7 +172,7 @@ class TestRefresh:
         assert fake_extract == ["20261001.pmtiles"]
         assert MapSettings.load().tiles_checked_at > timezone.now() - timedelta(minutes=1)
 
-    def test_not_due_does_nothing(self, media, fake_extract):
+    def test_not_due_does_nothing(self, media, fake_extract, shipped):
         update_settings(tiles_checked_at=timezone.now())
 
         with latest("20261001.pmtiles") as listed:
@@ -136,7 +182,7 @@ class TestRefresh:
         assert fake_extract == []
 
     def test_failure_is_recorded(self, media, monkeypatch):
-        def fail(build, output):
+        def fail(build, output, extent):
             raise TilesError("pmtiles extract failed: boom")
 
         monkeypatch.setattr(map_tiles, "extract", fail)
@@ -151,9 +197,7 @@ class TestRefresh:
 
     def test_task(self, media, fake_extract):
         with latest("20261001.pmtiles"):
-            assert (
-                refresh_map_tiles.delay(force=True).get() == "map-tiles/local-area-20261001.pmtiles"
-            )
+            assert refresh_map_tiles.delay(force=True).get() == name("20261001.pmtiles")
 
     def test_command_refresh(self, media, fake_extract):
         with latest("20261001.pmtiles"):

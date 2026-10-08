@@ -5,10 +5,13 @@ import pytest
 from django.core.exceptions import ValidationError
 
 from publications.geo import (
-    LOCAL_AREA_CENTER,
+    DEFAULT_TILES_BOUNDS,
+    area_center,
     area_contains,
+    bounds,
     map_config,
     validate_area,
+    tiles_bounds,
     validate_geometry,
 )
 from publications.widgets import GeoJSONMapWidget
@@ -129,15 +132,59 @@ class TestWidget:
 
 @pytest.mark.django_db
 class TestMapConfig:
-    def test_points_to_the_self_hosted_tiles(self):
+    def test_shows_france_before_the_territory_is_set(self):
         config = map_config()
 
-        assert config["tilesUrl"].endswith(".pmtiles")
-        assert config["tilesUrl"].startswith("/static/")
+        assert config["boundaryUrl"] == ""
+        (south, west), (north, east) = config["maxBounds"]
+        assert (west, south, east, north) == DEFAULT_TILES_BOUNDS
 
-    def test_max_bounds_contain_the_initial_view(self):
-        (south, west), (north, east) = map_config()["maxBounds"]
-        lat, lon = LOCAL_AREA_CENTER
+    def test_opens_on_the_territory(self, territory):
+        config = map_config()
+        (south, west), (north, east) = config["maxBounds"]
+        lat, lon = config["center"]
 
+        assert config["boundaryUrl"].endswith(f"?v={territory.boundary_version}")
         assert south < lat < north
         assert west < lon < east
+
+    def test_new_outline_new_url(self, territory):
+        before = map_config()["boundaryUrl"]
+        territory.boundary = SQUARE_AREA
+        territory.save()
+
+        assert map_config()["boundaryUrl"] != before
+
+
+SQUARE_AREA = {"type": "Polygon", "coordinates": [SQUARE]}
+ISLAND = [[[5.5, 43.5], [5.51, 43.5], [5.51, 43.51], [5.5, 43.5]]]
+
+
+class TestExtent:
+    def test_bounds(self):
+        assert bounds(SQUARE_AREA) == (5.0, 43.0, 5.1, 43.1)
+
+    def test_center_ignores_small_islands(self):
+        area = {"type": "MultiPolygon", "coordinates": [ISLAND, [SQUARE]]}
+
+        assert area_center(area) == (43.05, 5.05)
+
+    def test_tiles_cover_the_surroundings(self):
+        small = {
+            "type": "Polygon",
+            "coordinates": [[[5.0, 43.0], [5.05, 43.0], [5.05, 43.02], [5.0, 43.0]]],
+        }
+
+        # Four times the span on each side (at least 0.05°), rounded outwards.
+        assert tiles_bounds(small) == (4.8, 42.92, 5.25, 43.1)
+
+    def test_tiles_margin_is_capped(self):
+        large = {
+            "type": "Polygon",
+            "coordinates": [[[4.0, 43.0], [5.0, 43.0], [5.0, 44.0], [4.0, 43.0]]],
+        }
+
+        assert tiles_bounds(large) == (3.7, 42.7, 5.3, 44.3)
+
+    def test_without_outline(self):
+        assert tiles_bounds(None) == DEFAULT_TILES_BOUNDS

@@ -35,3 +35,13 @@ def offline_geocoding(monkeypatch: pytest.MonkeyPatch) -> None:
         raise geocoding.GeocodingUnavailable
 
     monkeypatch.setattr(geocoding, "_fetch", unavailable)
+
+
+@pytest.fixture
+def territory(db: None) -> Any:
+    """The 7th arrondissement of Marseille, from the bundled outline."""
+    from core import territories
+    from core.models import Territory
+
+    territories.apply(territories.from_file(territories.MARSEILLE_7E))
+    return Territory.current()

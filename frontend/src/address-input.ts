@@ -1,7 +1,7 @@
 import { attachAddressAutocomplete } from "./lib/address-autocomplete";
 
 /**
- * <address-input data-url="…"> wraps a text input and suggests Marseille
+ * <address-input data-url="…"> wraps a text input and suggests
  * addresses as the user types. With data-postcode-field, picking one also
  * fills that field of the same form. As a custom element it works both on the
  * site and in the Wagtail admin, whenever the field is rendered.

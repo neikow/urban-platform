@@ -16,6 +16,7 @@ install: ## Install dependencies, the e2e browser, git hooks and a local .env
 	@test -f .env || (cp .env.example .env && echo "Created .env from .env.example")
 	$(MANAGE) migrate
 	$(MANAGE) compilemessages --ignore=.venv --ignore=node_modules
+	$(MANAGE) configure_territory --file core/fixtures/marseille-7e.geojson --no-tiles
 	$(MANAGE) build_map_tiles
 	npm run build
 
@@ -40,8 +41,12 @@ messages: ## Update the French catalogs, then compile them
 	$(MANAGE) makemessages -l fr --ignore=node_modules --ignore=.venv --ignore=docs --ignore=e2e
 	$(MANAGE) compilemessages --ignore=.venv --ignore=node_modules
 
+.PHONY: territory
+territory: ## Set the territory, e.g. make territory CODE=13207 (default: the bundled 7e of Marseille)
+	$(MANAGE) configure_territory $(if $(CODE),$(CODE),--file core/fixtures/marseille-7e.geojson) --no-tiles
+
 .PHONY: map-tiles
-map-tiles: ## Download the latest basemap tiles of the local area (needs pmtiles or Docker)
+map-tiles: ## Download the latest basemap tiles of the territory (needs pmtiles or Docker)
 	$(MANAGE) build_map_tiles
 
 .PHONY: assets

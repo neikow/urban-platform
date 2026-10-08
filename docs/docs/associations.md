@@ -23,4 +23,4 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Associations de quartier*
 
 Après l'enregistrement d'un secteur nouveau ou modifié, les habitants sont rattachés de nouveau, en arrière-plan (quelques secondes à quelques minutes selon leur nombre) : ceux qui sont entrés dans le secteur rejoignent l'association, ceux qui en sont sortis la quittent. Supprimer une association détache ses habitants (ou les rattache à un secteur voisin qui les couvre).
 
-**Adresses.** Les adresses viennent de la **Base Adresse Nationale**, limitées à Marseille. Si le service ne répond pas, l'adresse est enregistrée telle quelle et sera localisée au prochain enregistrement.
+**Adresses.** Les adresses viennent de la **Base Adresse Nationale**, limitées à la ville du [territoire](carte.md#territoire). Si le service ne répond pas, l'adresse est enregistrée telle quelle et sera localisée au prochain enregistrement.
