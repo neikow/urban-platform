@@ -66,11 +66,22 @@ key, none are sent), `SENTRY_DSN`, `ANALYTICS_SCRIPT_TAG`, `GUNICORN_WORKERS` (2
 
 ## The edge proxy
 
-Websites do not publish ports. Their nginx joins the external `urban-edge` network
-(`EDGE_NETWORK`) and carries [Traefik](https://traefik.io) labels: a router named after
-`TENANT_SLUG` for `Host(TENANT_HOSTNAME)` on the `websecure` entrypoint
+Websites do not publish ports by default. Their nginx joins the external `urban-edge`
+network (`EDGE_NETWORK`) and carries [Traefik](https://traefik.io) labels: a router named
+after `TENANT_SLUG` for `Host(TENANT_HOSTNAME)` on the `websecure` entrypoint
 (`EDGE_ENTRYPOINT`), with certificates from the `letsencrypt` resolver
 (`EDGE_CERT_RESOLVER`). One Traefik per host serves every website on it.
+
+A host that already has a reverse proxy, with its own certificates, publishes each
+website's nginx on a local port instead (the agent's `external` edge, see
+[`agent/README.md`](../agent/README.md#https-two-ways)), with an override file:
+
+```yaml
+services:
+  nginx:
+    ports:
+      - "127.0.0.1:8101:80"
+```
 
 ## Data
 

@@ -2,7 +2,7 @@
 
 Runs the platform's websites on one host, as the control plane asks. It runs on the
 platform's servers and on associations' own machines alike: it only makes outgoing HTTPS
-requests, so the host needs no open port besides 80/443 for the websites, and no SSH access.
+requests, so the host needs no SSH access and no open port besides the websites' own.
 
 Every few seconds it fetches the desired state from the control plane, deploys what
 changed with Docker Compose ([`deploy/`](../deploy/README.md)), and reports back. It is
@@ -24,9 +24,8 @@ therefore limits what the control plane can ask of it:
 
 ## Installing
 
-Docker Engine with the Compose plugin, and ports 80 and 443 free (the agent starts
-[Traefik](https://traefik.io) on them, with Let's Encrypt certificates). Then, with the
-token the control plane gives for this host:
+Docker Engine with the Compose plugin. Then, with the token the control plane gives for
+this host:
 
 ```sh
 docker run -d --name urban-agent --restart unless-stopped \
@@ -47,6 +46,37 @@ docker run -d --name urban-agent --restart unless-stopped \
 | `AGENT_STATE_DIR` | `/var/lib/urban-agent` | Keep it on a volume |
 | `AGENT_INSECURE` | | `1` allows `http://` (development only) |
 
+## HTTPS: two ways
+
+The control plane sets the host's edge `mode`:
+
+- **`traefik`** (default): the agent runs [Traefik](https://traefik.io) on ports 80 and
+  443, which must be free. It routes each website's hostname to it and gets Let's
+  Encrypt certificates on its own (`acme_email`). Point the DNS at the host: done.
+- **`external`**: the host already has a reverse proxy, with certificates you manage.
+  The agent runs no proxy and publishes each website on `127.0.0.1:<http_port>` (never on
+  a public interface). Configure the proxy to terminate TLS for the website's hostname
+  and forward to that port, keeping the `Host` header. With nginx:
+
+  ```nginx
+  server {
+      listen 443 ssl;
+      server_name aix.example.org;
+      ssl_certificate     /etc/ssl/aix.example.org/fullchain.pem;
+      ssl_certificate_key /etc/ssl/aix.example.org/privkey.pem;
+      client_max_body_size 100M;
+
+      location / {
+          proxy_pass http://127.0.0.1:8101;
+          proxy_set_header Host $host;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      }
+  }
+  ```
+
+  The website's own nginx tells the app the request came over HTTPS. Switching a host
+  from `traefik` to `external` stops the agent's Traefik, freeing ports 80 and 443.
+
 ## Protocol (version 1)
 
 Two calls, both with `Authorization: Bearer <AGENT_TOKEN>`.
@@ -55,7 +85,7 @@ Two calls, both with `Authorization: Bearer <AGENT_TOKEN>`.
 
 ```json
 {
-  "edge": {"acme_email": "ops@example.org"},
+  "edge": {"mode": "traefik", "acme_email": "ops@example.org"},
   "tenants": [
     {
       "slug": "aix",
@@ -75,6 +105,8 @@ Two calls, both with `Authorization: Bearer <AGENT_TOKEN>`.
 - `state`: `running`, `stopped` or `absent` (containers removed; volumes too with `"purge":
   true`).
 - `image_tag`: the release (`deploy/README.md`); required unless `absent`.
+- `http_port`: with the `external` edge only, required there: the local port (1024–65535,
+  unique on the host) the host's proxy forwards the website's hostname to.
 - `env`: the website's variables (`deploy/tenant/.env.example`), uppercase names. Values
   cannot contain `'` or line breaks. `IMAGE`, `IMAGE_TAG` and `TENANT_SLUG` are set by the
   agent and refused here.
@@ -101,6 +133,7 @@ Sent after each poll:
 }
 ```
 
+- `edge`: `running` (Traefik), `external`, or what went wrong.
 - `generation`: the last one applied successfully (`null` before the first).
 - `status`: `running`, `stopped`, `absent`, or `failed` with the reason in `error`. A
   failed deployment is retried after `AGENT_RETRY_SECONDS`, or at once for a new generation.
