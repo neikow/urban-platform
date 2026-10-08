@@ -13,6 +13,7 @@ Built by `.github/workflows/release.yml` and published on GitHub's registry:
 |---|---|
 | `ghcr.io/neikow/urban-platform` | `saas`, `saas-<commit>` for each push to `saas`; `1.2.0`, `1.2`, `latest` for each `v1.2.0` tag |
 | `ghcr.io/neikow/urban-platform-nginx` | the same tags |
+| `ghcr.io/neikow/urban-platform-agent` | the same tags: the [deployment agent](../agent/README.md) |
 
 `/healthz/` answers `{"status": "ok", "version": "<APP_VERSION>"}`: `1.2.0` for a tagged
 release, `saas-<commit>` for a build of the branch. A deployment is done when it reports
@@ -21,6 +22,9 @@ the version just deployed.
 Images are built for `linux/amd64`.
 
 ## Running a website
+
+Normally the [agent](../agent/README.md) does all of this, as the control plane asks. By
+hand:
 
 [`tenant/compose.yml`](tenant/compose.yml) is the whole website: the app (`web`), the
 Celery `worker` (which also runs the scheduler), `nginx`, Postgres (`db`), Redis

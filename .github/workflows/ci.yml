@@ -28,7 +28,7 @@ jobs:
         run: uvx ruff@$RUFF check --output-format=github
 
       - name: Run Bandit Security Scan
-        run: uvx --from "bandit[toml]==$BANDIT" bandit -c pyproject.toml -r core home about legal pedagogy publications urban_platform scripts
+        run: uvx --from "bandit[toml]==$BANDIT" bandit -c pyproject.toml -r core home about legal pedagogy publications urban_platform scripts agent/urban_agent
 
   format:
     name: Quality (format)
