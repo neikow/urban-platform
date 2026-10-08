@@ -10,6 +10,7 @@ from . import VERSION
 from .config import ConfigError, from_environment
 from .control_plane import ControlPlane, ControlPlaneError
 from .reconcile import Reconciler
+from .update import HANDOVER_SECONDS, Updater
 
 logger = logging.getLogger("urban_agent")
 
@@ -33,15 +34,22 @@ def main() -> int:
 
     control_plane = ControlPlane(config)
     reconciler = Reconciler(config)
+    updater = Updater(config)
     logger.info("Agent %s, control plane %s", VERSION, config.control_plane_url)
     while not stopping:
+        wait = config.poll_seconds
         try:
-            report = reconciler.reconcile(control_plane.desired_state())
+            desired = control_plane.desired_state()
+            report = reconciler.reconcile(desired)
+            report["errors"] = [*report["errors"], *updater.errors]
             control_plane.report(report)
+            # Between two polls, nothing under way: the helper may replace this container.
+            if updater.start(desired.get("agent")):
+                wait = HANDOVER_SECONDS
         except ControlPlaneError as error:
             # Websites keep running as they are; try again at the next poll.
             logger.warning("Control plane unreachable: %s", error)
-        for _ in range(config.poll_seconds):
+        for _ in range(wait):
             if stopping:
                 break
             time.sleep(1)
