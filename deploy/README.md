@@ -63,6 +63,16 @@ The website itself (applied by `bootstrap_tenant` at every deployment, see
 | `TENANT_TERRITORY` | INSEE code of the commune or arrondissement; changing it moves the website |
 | `TENANT_CONTACT_EMAIL` | Contact address, until the association sets one |
 
+Initial branding, optional. Each value fills its field once, if empty: what the
+association changes or removes afterwards stays so, and a new value only fills a field
+still empty.
+
+| Variable | |
+|---|---|
+| `TENANT_TAGLINE` | Tagline under the name |
+| `TENANT_PRIMARY_COLOR`, `TENANT_SECONDARY_COLOR` | Theme colours, `#rrggbb` |
+| `TENANT_LOGO_URL`, `TENANT_SIGNUP_IMAGE_URL` | Logo and sign-up photo, downloaded at deployment (http or https, 10 MB at most); retried at the next deployment if unavailable |
+
 Optional: `BREVO_API_KEY`, `DEFAULT_FROM_EMAIL`, `DEFAULT_FROM_NAME` (emails; without a
 key, none are sent), `SENTRY_DSN`, `ANALYTICS_SCRIPT_TAG`, `GUNICORN_WORKERS` (2),
 `GUNICORN_THREADS` (4), `CELERY_CONCURRENCY` (1), and the edge settings below.
