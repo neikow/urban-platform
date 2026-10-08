@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from wagtail.query import PageQuerySet
 
+from core.models import Territory
 from publications.ical import calendar
 from publications.models import EventPage, PublicationIndexPage, PublicationPage
 
@@ -49,7 +50,10 @@ class PublicationsFeed(Feed):
         return _("%(site)s — news") % {"site": settings.WEBSITE_NAME}
 
     def description(self) -> str:
-        return _("Projects and events in the 7th arrondissement of Marseille.")
+        area = Territory.current().name_in
+        if not area:
+            return _("Projects and events.")
+        return _("Projects and events %(area)s.") % {"area": area}
 
     def link(self) -> str:
         index = PublicationIndexPage.objects.live().first()

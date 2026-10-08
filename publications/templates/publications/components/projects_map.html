@@ -5,7 +5,13 @@
 {% endcomment %}
 {% trans "Around you" as default_label %}
 {% trans "Projects near me" as default_title %}
-{% trans "Projects located in the 7th arrondissement of Marseille." as default_introduction %}
+{% if territory.name_in %}
+    {% blocktrans trimmed with area=territory.name_in asvar default_introduction %}
+        Projects located {{ area }}.
+    {% endblocktrans %}
+{% else %}
+    {% trans "Projects placed on the map." as default_introduction %}
+{% endif %}
 
 <section class="{% firstof map_section_class "mt-12 mb-4" %}" aria-labelledby="projects-map-title">
     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4">
@@ -44,7 +50,7 @@
         aria-label="{% trans 'Map of projects' %}"
         data-msg-locate-error="{% trans 'Your position could not be found.' %}"
         data-msg-you-are-here="{% trans 'You are here' %}"
-        data-msg-outside-area="{% trans 'You are outside Marseille: the map only covers the city.' %}"
+        data-msg-outside-area="{% trans 'You are outside the area covered by the map.' %}"
         data-msg-open="{% trans 'Open for participation' %}"
         data-msg-see-project="{% trans 'See the project' %}"
     >

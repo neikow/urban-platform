@@ -1,4 +1,4 @@
-"""French address search and geocoding, restricted to Marseille.
+"""French address search and geocoding, restricted to the territory's city.
 
 Backed by the national address database (Base Adresse Nationale) through the
 IGN Géoplateforme geocoding service: free, no key, about 50 requests per
@@ -20,9 +20,6 @@ from django.core.cache import cache
 logger = logging.getLogger(__name__)
 
 SEARCH_URL = "https://data.geopf.fr/geocodage/search"
-# Marseille as a whole: the service expands it to the 16 arrondissements
-# (INSEE 13201 to 13216), which are the codes the addresses carry.
-CITY_CODE = "13055"
 TIMEOUT_SECONDS = 3
 CACHE_SECONDS = 60 * 60 * 24
 MIN_QUERY_LENGTH = 3
@@ -52,14 +49,22 @@ class Address:
         return asdict(self)
 
 
+def city_code() -> str:
+    """INSEE code of the city searched (Territory setting), "" for the whole of France.
+
+    A city with arrondissements is searched as a whole: for Marseille (13055),
+    the service expands it to the 16 arrondissements the addresses carry.
+    """
+    from core.models import Territory
+
+    return Territory.current().city_code
+
+
 def _fetch(query: str, limit: int, autocomplete: bool) -> list[Address]:
-    params = {
-        "q": query,
-        "index": "address",
-        "citycode": CITY_CODE,
-        "limit": limit,
-        "autocomplete": int(autocomplete),
-    }
+    params: dict[str, Any] = {"q": query, "index": "address"}
+    if code := city_code():
+        params["citycode"] = code
+    params |= {"limit": limit, "autocomplete": int(autocomplete)}
     cache_key = "geocoding:" + hashlib.sha256(urlencode(params).encode()).hexdigest()
     cached = cache.get(cache_key)
     if cached is not None:
@@ -100,7 +105,7 @@ def search_addresses(query: str, limit: int = 5) -> list[Address]:
 
 
 def geocode(address: str) -> Address | None:
-    """The Marseille address best matching a full address, or None if there is none.
+    """The address in the city best matching a full address, or None if there is none.
 
     Raises GeocodingUnavailable when the service cannot answer.
     """

@@ -64,6 +64,27 @@ def collect_static() -> None:
     print("✅ Static files collected")
 
 
+def configure_territory() -> None:
+    """The 7th arrondissement of Marseille, from the bundled outline (no network)."""
+    result = subprocess.run(  # nosec
+        [
+            sys.executable,
+            "manage.py",
+            "configure_territory",
+            "--file",
+            "core/fixtures/marseille-7e.geojson",
+            "--no-tiles",
+            "--settings",
+            E2E_SETTINGS_MODULE,
+        ],
+        cwd=PROJECT_ROOT,
+    )
+    if result.returncode != 0:
+        print("❌ Territory configuration failed")
+        sys.exit(1)
+    print("✅ Territory configured")
+
+
 def build_map_tiles() -> None:
     """Download the basemap tiles, once: they are not committed."""
     tiles = PROJECT_ROOT / "publications/static/publications/geo/local-area.pmtiles"
@@ -626,6 +647,7 @@ def setup(skip_static: bool = False, clean_messages: bool = False) -> None:
     else:
         print("✓ Database exists, running migrations to ensure it's up to date...")
         run_migrations()
+    configure_territory()
 
     if not skip_static:
         if clean_messages:

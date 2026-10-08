@@ -27,6 +27,7 @@ from core.views.docs import ProtectedDocsView
 from core.views.data_export import DataExportView
 from core.views.health import healthz
 from core.views.address_search import address_search
+from core.views.territory import territory_boundary
 from core.views.notifications import NotificationUnsubscribeView
 from core.views.password_reset import (
     PasswordResetRequestView,
@@ -95,6 +96,7 @@ urlpatterns = [
         name="notification_unsubscribe",
     ),
     path("api/addresses/", address_search, name="address_search"),
+    path("api/territory/boundary.geojson", territory_boundary, name="territory_boundary"),
     path("api/projects/<int:project_id>/vote/", VoteView.as_view(), name="project_vote"),
     path(
         "api/projects/<int:project_id>/vote/results/",

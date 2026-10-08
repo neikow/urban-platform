@@ -4,6 +4,8 @@ from django.contrib.auth.password_validation import validate_password
 from django import forms
 from django.http import JsonResponse
 
+from core.models import Territory
+
 User = get_user_model()
 
 
@@ -56,7 +58,7 @@ class JsonResponseMixin:
 
 
 class AddressFieldMixin:
-    """Optional home address, located in Marseille to attach the user to an association.
+    """Optional home address, located in the territory's city to attach the user to an association.
 
     After validation, ``address_location`` holds its GeoJSON point, or None when it
     is empty or the geocoding service is down (the address is then kept unlocated).
@@ -77,8 +79,10 @@ class AddressFieldMixin:
         except GeocodingUnavailable:
             return address
         if found is None:
+            city = Territory.current().city_name
+            where = f" à {city}" if city else ""
             raise forms.ValidationError(
-                "Adresse introuvable à Marseille. Choisissez-la dans la liste, "
+                f"Adresse introuvable{where}. Choisissez-la dans la liste, "
                 "ou laissez ce champ vide si vous habitez ailleurs."
             )
         self.address_location = found.point

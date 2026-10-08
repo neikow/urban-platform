@@ -56,7 +56,7 @@ class UserRegistrationForm(
         label="Adresse",
         max_length=255,
         widget=DaisyAddressInput(
-            placeholder="12 rue Paradis, Marseille", postcode_field="postal_code"
+            placeholder="12 rue de la République", postcode_field="postal_code"
         ),
         help_text="Facultatif. Vous rattache à l'association de votre quartier.",
     )

@@ -104,7 +104,7 @@ class DaisyCheckboxInput(forms.CheckboxInput):
 
 
 class AddressInput(forms.TextInput):
-    """Text input suggesting Marseille addresses as one types (core.geocoding).
+    """Text input suggesting addresses of the territory's city as one types (core.geocoding).
 
     Rendered inside an <address-input> custom element (frontend/src/address-input.ts),
     so it works on the site and in the Wagtail admin alike. With ``postcode_field``,

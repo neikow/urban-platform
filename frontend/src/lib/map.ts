@@ -3,10 +3,11 @@ import L from "leaflet";
 import { leafletLayer } from "protomaps-leaflet";
 
 export interface MapConfig {
+  /** The territory outline; "" until the territory is set. */
   boundaryUrl: string;
   center: [number, number];
   zoom: number;
-  /** Self-hosted PMTiles archive covering `maxBounds` only. */
+  /** Self-hosted PMTiles archive covering `maxBounds` only; "" until first fetched. */
   tilesUrl: string;
   tilesMaxZoom: number;
   /** [[south, west], [north, east]]: the maps cannot leave the tiled area. */
@@ -44,13 +45,16 @@ export function createMap(element: HTMLElement, config: MapConfig, options: L.Ma
     scrollWheelZoom: false,
     ...options,
   });
-  leafletLayer({
-    url: config.tilesUrl,
-    maxDataZoom: config.tilesMaxZoom,
-    flavor: "light",
-    lang: "fr",
-    attribution: ATTRIBUTION,
-  }).addTo(map);
+  // A new website has no tiles until the worker fetched them: the shapes still show.
+  if (config.tilesUrl) {
+    leafletLayer({
+      url: config.tilesUrl,
+      maxDataZoom: config.tilesMaxZoom,
+      flavor: "light",
+      lang: "fr",
+      attribution: ATTRIBUTION,
+    }).addTo(map);
+  }
 
   // Containers inside tabs or collapsed panels start with no size.
   new ResizeObserver(() => {
@@ -62,7 +66,7 @@ export function createMap(element: HTMLElement, config: MapConfig, options: L.Ma
 
 export interface Boundary {
   layer: L.GeoJSON;
-  /** Bounds of the largest polygon: the 7e also covers the Frioul islands, mostly sea. */
+  /** Bounds of the largest polygon: an arrondissement may cover islands, mostly sea. */
   mainland: L.LatLngBounds;
 }
 
@@ -79,6 +83,7 @@ function ringArea(ring: GeoJSON.Position[]): number {
 
 /** Draw the local area outline and return it with the bounds to fit the view to. */
 export async function addBoundary(map: L.Map, url: string): Promise<Boundary | null> {
+  if (!url) return null;
   try {
     const response = await fetch(url);
     const data = (await response.json()) as GeoJSON.GeoJsonObject;

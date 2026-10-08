@@ -12,7 +12,7 @@ const MIN_LENGTH = 3;
 let instances = 0;
 
 /**
- * Turn a text input into an ARIA combobox suggesting Marseille addresses from
+ * Turn a text input into an ARIA combobox suggesting addresses from
  * `url` (core.views.address_search). Typing stays free: picking a suggestion
  * only fills in its full label, and calls `onSelect`.
  */

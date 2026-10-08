@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
 
+from core.models import Territory
 from publications.geo import map_config
 
 
@@ -47,6 +48,7 @@ class GeoJSONMapWidget(forms.Textarea):
         config["markers"] = self.markers
         config["searchUrl"] = reverse("address_search")
         context["map_config"] = json.dumps(config)
+        context["city_name"] = Territory.current().city_name
         context["reference"] = json.dumps(self.reference()) if self.reference else ""
         context["help"] = self.help_text or _(
             "Place a marker for a precise spot, or draw a polygon for an area. "
