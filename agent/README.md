@@ -36,6 +36,9 @@ docker run -d --name urban-agent --restart unless-stopped \
   ghcr.io/neikow/urban-platform-agent:latest
 ```
 
+Add `--network <name>` to run the agent on another Docker network, e.g. the one of a reverse
+proxy that already runs in Docker. It only needs to reach the control plane.
+
 | Variable | Default | |
 |---|---|---|
 | `CONTROL_PLANE_URL` | | Required, `https://` |
@@ -53,10 +56,16 @@ The control plane sets the host's edge `mode`:
 - **`traefik`** (default): the agent runs [Traefik](https://traefik.io) on ports 80 and
   443, which must be free. It routes each website's hostname to it and gets Let's
   Encrypt certificates on its own (`acme_email`). Point the DNS at the host: done.
-- **`external`**: the host already has a reverse proxy, with certificates you manage.
-  The agent runs no proxy and publishes each website on `127.0.0.1:<http_port>` (never on
-  a public interface). Configure the proxy to terminate TLS for the website's hostname
-  and forward to that port, keeping the `Host` header. With nginx:
+- **`external`**: the host already has a reverse proxy, with certificates you manage. The
+  agent runs no proxy (and stops its Traefik if it ran one, freeing ports 80 and 443).
+  Configure the proxy to terminate TLS for each website's hostname and forward to it,
+  keeping the `Host` header. Two ways to reach the websites:
+  - **The proxy runs in Docker** (edge `network`, e.g. `nginx`): each website's nginx
+    joins that network as **`<slug>-nginx`**. Forward to `http://aix-nginx`.
+  - **The proxy runs on the host**: each website's nginx is published on
+    `127.0.0.1:<http_port>` (never on a public interface). Forward to that port.
+
+  With nginx, for a proxy in Docker:
 
   ```nginx
   server {
@@ -67,15 +76,14 @@ The control plane sets the host's edge `mode`:
       client_max_body_size 100M;
 
       location / {
-          proxy_pass http://127.0.0.1:8101;
+          proxy_pass http://aix-nginx;   # or http://127.0.0.1:8101 on the host
           proxy_set_header Host $host;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       }
   }
   ```
 
-  The website's own nginx tells the app the request came over HTTPS. Switching a host
-  from `traefik` to `external` stops the agent's Traefik, freeing ports 80 and 443.
+  The website's own nginx tells the app the request came over HTTPS.
 
 ## Protocol (version 1)
 
@@ -105,8 +113,10 @@ Two calls, both with `Authorization: Bearer <AGENT_TOKEN>`.
 - `state`: `running`, `stopped` or `absent` (containers removed; volumes too with `"purge":
   true`).
 - `image_tag`: the release (`deploy/README.md`); required unless `absent`.
-- `http_port`: with the `external` edge only, required there: the local port (1024–65535,
-  unique on the host) the host's proxy forwards the website's hostname to.
+- `edge`: `mode` (`traefik` or `external`), `acme_email` (required with `traefik`),
+  `network` (with `external`: the proxy's Docker network, which must exist).
+- `http_port`: with the `external` edge without `network` only, required there: the local
+  port (1024–65535, unique on the host) the host's proxy forwards the website's hostname to.
 - `env`: the website's variables (`deploy/tenant/.env.example`), uppercase names. Values
   cannot contain `'` or line breaks. `IMAGE`, `IMAGE_TAG` and `TENANT_SLUG` are set by the
   agent and refused here.

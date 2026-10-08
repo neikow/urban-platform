@@ -72,15 +72,21 @@ after `TENANT_SLUG` for `Host(TENANT_HOSTNAME)` on the `websecure` entrypoint
 (`EDGE_ENTRYPOINT`), with certificates from the `letsencrypt` resolver
 (`EDGE_CERT_RESOLVER`). One Traefik per host serves every website on it.
 
-A host that already has a reverse proxy, with its own certificates, publishes each
-website's nginx on a local port instead (the agent's `external` edge, see
-[`agent/README.md`](../agent/README.md#https-two-ways)), with an override file:
+A host that already has a reverse proxy, with its own certificates, uses the agent's
+`external` edge instead (see [`agent/README.md`](../agent/README.md#https-two-ways)): an
+override file attaches each website's nginx to the proxy's Docker network as
+`<slug>-nginx`, or publishes it on a local port when the proxy runs on the host:
 
 ```yaml
 services:
   nginx:
-    ports:
-      - "127.0.0.1:8101:80"
+    networks:
+      proxy:
+        aliases: ["aix-nginx"]
+networks:
+  proxy:
+    name: nginx
+    external: true
 ```
 
 ## Data

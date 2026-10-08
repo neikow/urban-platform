@@ -348,3 +348,35 @@ class TestExternalEdge:
 
         assert report["edge"] == "acme_email required"
         assert not docker.composed("urban-edge", "up")
+
+
+class TestProxyNetwork:
+    """A host proxy running in Docker: websites join its network instead of a port."""
+
+    EDGE = {"mode": "external", "network": "nginx"}
+
+    def test_websites_join_the_proxy_network(self, agent, docker, tmp_path):
+        report = agent.reconcile(desired(tenant(), edge=self.EDGE), now=1000)
+
+        assert report["errors"] == []
+        assert report["tenants"][0]["status"] == "running"
+        override = (tmp_path / "tenants" / "aix" / "compose.override.yml").read_text()
+        assert 'aliases: ["aix-nginx"]' in override
+        assert "name: nginx\n    external: true" in override
+        assert "127.0.0.1" not in override
+        assert not docker.composed("urban-edge", "up")
+
+    def test_port_ignored(self, agent, tmp_path):
+        agent.reconcile(desired(tenant(http_port=8101), edge=self.EDGE), now=1000)
+
+        override = (tmp_path / "tenants" / "aix" / "compose.override.yml").read_text()
+        assert "8101" not in override
+
+    def test_invalid_network(self, agent):
+        report = agent.reconcile(
+            desired(tenant(), edge={"mode": "external", "network": "bad name;"}), now=1000
+        )
+
+        assert "invalid proxy network" in report["errors"][0]
+        # Without a usable network, the websites need a port.
+        assert "http_port required" in report["errors"][1]

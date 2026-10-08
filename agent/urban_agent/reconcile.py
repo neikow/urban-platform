@@ -11,7 +11,8 @@ Files, under the state directory:
     tenants/<slug>/compose.yml   from the website's image (deploy/tenant/compose.yml)
     tenants/<slug>/compose.override.yml
                                  written by the agent with the "external" edge:
-                                 publishes nginx on 127.0.0.1:<http_port>
+                                 nginx joins the proxy's network as <slug>-nginx,
+                                 or is published on 127.0.0.1:<http_port>
     tenants/<slug>/.env          its variables (mode 0600: it holds secrets)
     tenants/<slug>/state.json    the generation applied, its outcome, its version
 """
@@ -44,9 +45,11 @@ EDGE_PROJECT = "urban-edge"
 EDGE_NETWORK = "urban-edge"
 DEPLOY_TIMEOUT = 20 * 60
 # "traefik": the agent runs Traefik on 80/443 with Let's Encrypt certificates.
-# "external": the host already has a reverse proxy, with its own certificates;
-# each website's nginx is published on 127.0.0.1:<http_port> for it.
+# "external": the host already has a reverse proxy, with its own certificates.
+# With a "network" (a proxy running in Docker), each website's nginx joins it as
+# <slug>-nginx; without, it is published on 127.0.0.1:<http_port>.
 EDGE_MODES = ("traefik", "external")
+NETWORK = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$")
 
 
 class InvalidTenant(Exception):
@@ -62,6 +65,8 @@ class Tenant:
     env: dict[str, str]
     purge: bool = False
     http_port: int | None = None
+    # The host proxy's Docker network (external edge), set from the edge settings.
+    proxy_network: str | None = None
 
     @classmethod
     def parse(cls, data: Any) -> "Tenant":
@@ -178,7 +183,15 @@ class Reconciler:
         directory.mkdir(parents=True, exist_ok=True)
         (directory / "compose.yml").write_text(compose)
         override = directory / "compose.override.yml"
-        if tenant.http_port:
+        if tenant.proxy_network:
+            override.write_text(
+                "# Written by the agent: the host's reverse proxy reaches this website\n"
+                f"# as {tenant.slug}-nginx on its network.\n"
+                "services:\n  nginx:\n    networks:\n      proxy:\n"
+                f'        aliases: ["{tenant.slug}-nginx"]\n'
+                f"networks:\n  proxy:\n    name: {tenant.proxy_network}\n    external: true\n"
+            )
+        elif tenant.http_port:
             override.write_text(
                 "# Written by the agent: the host's reverse proxy forwards to this port.\n"
                 "services:\n  nginx:\n    ports:\n"
@@ -319,13 +332,20 @@ class Reconciler:
         if not isinstance(edge_settings, dict):
             edge_settings = {}
         external = edge_settings.get("mode") == "external"
+        network = edge_settings.get("network") if external else None
+        if network is not None and (not isinstance(network, str) or not NETWORK.match(network)):
+            errors.append(f"invalid proxy network {network!r}")
+            network = None
         edge = self.ensure_edge(edge_settings)
 
         ports: dict[int, str] = {}
         for data in desired.get("tenants") or []:
             try:
                 tenant = Tenant.parse(data)
-                if tenant.state != "absent" and external:
+                if tenant.state != "absent" and external and network:
+                    tenant.proxy_network = network
+                    tenant.http_port = None  # reached by name on the network
+                elif tenant.state != "absent" and external:
                     if tenant.http_port is None:
                         raise InvalidTenant(f"{tenant.slug}: http_port required (external edge)")
                     if tenant.http_port in ports:
