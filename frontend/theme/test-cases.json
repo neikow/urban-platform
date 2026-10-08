@@ -1,0 +1,114 @@
+{
+  "_comment": "Expected theme overrides, checked by core/tests/test_branding_theme.py and frontend/theme/derive.test.ts.",
+  "cases": [
+    {
+      "name": "defaults",
+      "choices": {},
+      "variables": {},
+      "fonts": [
+        "jost",
+        "big-shoulders-display"
+      ]
+    },
+    {
+      "name": "dark primary gets light text",
+      "choices": {
+        "primary_color": "#003d82"
+      },
+      "variables": {
+        "--color-primary": "#003d82",
+        "--color-primary-content": "#fdfbf8"
+      },
+      "fonts": [
+        "jost",
+        "big-shoulders-display"
+      ]
+    },
+    {
+      "name": "light secondary gets dark text",
+      "choices": {
+        "secondary_color": "#f4d35e"
+      },
+      "variables": {
+        "--color-secondary": "#f4d35e",
+        "--color-secondary-content": "#1b100a"
+      },
+      "fonts": [
+        "jost",
+        "big-shoulders-display"
+      ]
+    },
+    {
+      "name": "background and text",
+      "choices": {
+        "background_color": "#10151c",
+        "text_color": "#e8e6e3"
+      },
+      "variables": {
+        "--color-base-100": "#10151c",
+        "--color-base-200": "color-mix(in oklch, var(--color-base-100), var(--color-base-content) 4%)",
+        "--color-base-300": "color-mix(in oklch, var(--color-base-100), var(--color-base-content) 9%)",
+        "--color-base-content": "#e8e6e3"
+      },
+      "fonts": [
+        "jost",
+        "big-shoulders-display"
+      ]
+    },
+    {
+      "name": "fonts",
+      "choices": {
+        "font_body": "source-serif-4",
+        "font_display": "oswald"
+      },
+      "variables": {
+        "--font-sans": "\"Source Serif 4 Variable\", ui-serif, Georgia, serif",
+        "--font-display": "\"Oswald Variable\", ui-sans-serif, system-ui, sans-serif"
+      },
+      "fonts": [
+        "source-serif-4",
+        "oswald"
+      ]
+    },
+    {
+      "name": "same font for both",
+      "choices": {
+        "font_body": "inter",
+        "font_display": "inter"
+      },
+      "variables": {
+        "--font-sans": "\"Inter Variable\", ui-sans-serif, system-ui, sans-serif",
+        "--font-display": "\"Inter Variable\", ui-sans-serif, system-ui, sans-serif"
+      },
+      "fonts": [
+        "inter"
+      ]
+    },
+    {
+      "name": "default fonts named",
+      "choices": {
+        "font_body": "jost",
+        "font_display": "big-shoulders-display"
+      },
+      "variables": {},
+      "fonts": [
+        "jost",
+        "big-shoulders-display"
+      ]
+    },
+    {
+      "name": "invalid values ignored",
+      "choices": {
+        "primary_color": "orange",
+        "text_color": "#12345",
+        "font_body": "oswald",
+        "font_display": "comic-sans"
+      },
+      "variables": {},
+      "fonts": [
+        "jost",
+        "big-shoulders-display"
+      ]
+    }
+  ]
+}

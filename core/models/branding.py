@@ -1,16 +1,51 @@
+import re
+
 from django import forms
+from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
+from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 
-HEX_COLOR = RegexValidator(r"^#[0-9a-fA-F]{6}$", _("A colour like #e94f37."))
+HEX_PATTERN = re.compile(r"^#[0-9a-fA-F]{6}$")
+HEX_COLOR = RegexValidator(HEX_PATTERN.pattern, _("A colour like #e94f37."))
 
 
 def color_input(default: str) -> forms.TextInput:
     # Not the browser's colour picker: it cannot be left empty (the default look).
     return forms.TextInput(attrs={"placeholder": default, "pattern": "#[0-9a-fA-F]{6}", "size": 8})
+
+
+# The theme's background and text colours (frontend/theme/theme.css), approximately.
+DEFAULT_BACKGROUND = "#fdfbf8"
+DEFAULT_TEXT = "#1b100a"
+
+
+def _check_font(value: str, role: str) -> None:
+    from core.branding import font
+
+    if value and font(value, role) is None:
+        raise ValidationError(_("Not one of the fonts offered."))
+
+
+def validate_body_font(value: str) -> None:
+    _check_font(value, "body")
+
+
+def validate_display_font(value: str) -> None:
+    _check_font(value, "display")
+
+
+def font_select(role: str) -> forms.Select:
+    from core.branding import font_catalog, font_choices
+
+    catalog = font_catalog()
+    default = catalog["fonts"][catalog["defaults"][role]]["label"]
+    return forms.Select(
+        choices=[("", format_lazy(_("Default ({})"), default)), *font_choices(role)]
+    )
 
 
 @register_setting(icon="image")
@@ -64,6 +99,33 @@ class Branding(BaseGenericSetting):
         validators=[HEX_COLOR],
         help_text=_("Dark sections and some badges, as #rrggbb. Empty: the default navy."),
     )
+    background_color = models.CharField(
+        _("Background colour"),
+        max_length=7,
+        blank=True,
+        validators=[HEX_COLOR],
+        help_text=_("Behind the text, as #rrggbb. Empty: the default off-white."),
+    )
+    text_color = models.CharField(
+        _("Text colour"),
+        max_length=7,
+        blank=True,
+        validators=[HEX_COLOR],
+        help_text=_(
+            "As #rrggbb. It must read well on the background (contrast of 4.5:1 at least). "
+            "Empty: the default near-black."
+        ),
+    )
+    font_body = models.CharField(
+        _("Text font"), max_length=40, blank=True, validators=[validate_body_font]
+    )
+    font_display = models.CharField(
+        _("Title font"),
+        max_length=40,
+        blank=True,
+        validators=[validate_display_font],
+        help_text=_("Large titles and headings."),
+    )
     signup_image = models.ForeignKey(
         "wagtailimages.Image",
         verbose_name=_("Sign-up photo"),
@@ -88,6 +150,10 @@ class Branding(BaseGenericSetting):
                 FieldPanel("logo"),
                 FieldPanel("primary_color", widget=color_input("#e94f37")),
                 FieldPanel("secondary_color", widget=color_input("#003d82")),
+                FieldPanel("background_color", widget=color_input(DEFAULT_BACKGROUND)),
+                FieldPanel("text_color", widget=color_input(DEFAULT_TEXT)),
+                FieldPanel("font_body", widget=font_select("body")),
+                FieldPanel("font_display", widget=font_select("display")),
                 FieldPanel("signup_image"),
             ],
             heading=_("Look"),
@@ -96,3 +162,28 @@ class Branding(BaseGenericSetting):
 
     class Meta:
         verbose_name = _("Branding")
+
+    def clean(self) -> None:
+        super().clean()
+        if HEX_PATTERN.match(self.text_color or "") or HEX_PATTERN.match(
+            self.background_color or ""
+        ):
+            check_text_contrast(self.background_color, self.text_color)
+
+
+def check_text_contrast(background: str, text: str) -> None:
+    """The text colour must read on the background (either may be the default)."""
+    from core.branding import MIN_TEXT_CONTRAST, contrast
+
+    background = background if HEX_PATTERN.match(background or "") else DEFAULT_BACKGROUND
+    text = text if HEX_PATTERN.match(text or "") else DEFAULT_TEXT
+    ratio = contrast(background, text)
+    if ratio < MIN_TEXT_CONTRAST:
+        raise ValidationError(
+            {
+                "text_color": _(
+                    "Too close to the background: contrast of %(ratio).1f:1, %(minimum)s:1 at least."
+                )
+                % {"ratio": ratio, "minimum": MIN_TEXT_CONTRAST}
+            }
+        )

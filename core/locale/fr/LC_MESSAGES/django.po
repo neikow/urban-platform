@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 18:59+0200\n"
+"POT-Creation-Date: 2026-10-08 23:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -584,49 +584,58 @@ msgstr "Style"
 msgid "Announcement"
 msgstr "Annonce"
 
-#: core/models/branding.py:8
+#: core/models/branding.py:10
 msgid "A colour like #e94f37."
 msgstr "Une couleur comme #e94f37."
 
-#: core/models/branding.py:25
+#: core/models/branding.py:27
+msgid "Not one of the fonts offered."
+msgstr "Cette police ne fait pas partie de celles proposées."
+
+#: core/models/branding.py:44
+#, python-brace-format
+msgid "Default ({})"
+msgstr "Par défaut ({})"
+
+#: core/models/branding.py:57
 msgid "Website name"
 msgstr "Nom du site"
 
-#: core/models/branding.py:28
+#: core/models/branding.py:60
 msgid "In the header, the page titles and the emails."
 msgstr "Dans l'en-tête, les titres des pages et les emails."
 
-#: core/models/branding.py:31
+#: core/models/branding.py:63
 msgid "Tagline"
 msgstr "Slogan"
 
-#: core/models/branding.py:34
+#: core/models/branding.py:66
 msgid "Under the name, at the bottom of every page."
 msgstr "Sous le nom, en bas de chaque page."
 
-#: core/models/branding.py:37
+#: core/models/branding.py:69
 msgid "Contact email"
 msgstr "Email de contact"
 
-#: core/models/branding.py:39
+#: core/models/branding.py:71
 msgid "Shown to visitors who want to write to you."
 msgstr "Affiché aux visiteurs qui veulent vous écrire."
 
-#: core/models/branding.py:43
+#: core/models/branding.py:75
 msgid "Logo"
 msgstr "Logo"
 
-#: core/models/branding.py:48
+#: core/models/branding.py:80
 msgid "A square image works best: it is also the browser tab icon."
 msgstr ""
 "Une image carrée convient le mieux : elle sert aussi d'icône dans l'onglet du"
 " navigateur."
 
-#: core/models/branding.py:51
+#: core/models/branding.py:83
 msgid "Main colour"
 msgstr "Couleur principale"
 
-#: core/models/branding.py:56
+#: core/models/branding.py:88
 msgid ""
 "Buttons, links and highlights, as #rrggbb. Choose a colour dark enough to "
 "read on a white background. Empty: the default orange."
@@ -634,36 +643,77 @@ msgstr ""
 "Boutons, liens et mises en avant, au format #rrggbb. Choisissez une couleur "
 "assez foncée pour être lisible sur fond blanc. Vide : l'orange par défaut."
 
-#: core/models/branding.py:61
+#: core/models/branding.py:93
 msgid "Secondary colour"
 msgstr "Couleur secondaire"
 
-#: core/models/branding.py:65
+#: core/models/branding.py:97
 msgid "Dark sections and some badges, as #rrggbb. Empty: the default navy."
 msgstr ""
 "Sections sombres et certains badges, au format #rrggbb. Vide : le bleu marine"
 " par défaut."
 
-#: core/models/branding.py:69
+#: core/models/branding.py:100
+msgid "Background colour"
+msgstr "Couleur de fond"
+
+#: core/models/branding.py:104
+msgid "Behind the text, as #rrggbb. Empty: the default off-white."
+msgstr ""
+"Derrière le texte, au format #rrggbb. Vide : le blanc cassé par défaut."
+
+#: core/models/branding.py:107
+msgid "Text colour"
+msgstr "Couleur du texte"
+
+#: core/models/branding.py:112
+msgid ""
+"As #rrggbb. It must read well on the background (contrast of 4.5:1 at least)."
+" Empty: the default near-black."
+msgstr ""
+"Au format #rrggbb. Il doit bien se lire sur le fond (contraste de 4,5:1 au "
+"moins). Vide : le quasi-noir par défaut."
+
+#: core/models/branding.py:117
+msgid "Text font"
+msgstr "Police du texte"
+
+#: core/models/branding.py:120
+msgid "Title font"
+msgstr "Police des titres"
+
+#: core/models/branding.py:124
+msgid "Large titles and headings."
+msgstr "Grands titres et intertitres."
+
+#: core/models/branding.py:128
 msgid "Sign-up photo"
 msgstr "Photo de l'inscription"
 
-#: core/models/branding.py:74
+#: core/models/branding.py:133
 msgid "Beside the sign-up form, on large screens. A photo of the area."
 msgstr ""
 "À côté du formulaire d'inscription, sur grand écran. Une photo du quartier."
 
-#: core/models/branding.py:80
+#: core/models/branding.py:143
 msgid "Identity"
 msgstr "Identité"
 
-#: core/models/branding.py:89
+#: core/models/branding.py:156
 msgid "Look"
 msgstr "Apparence"
 
-#: core/models/branding.py:94
+#: core/models/branding.py:161
 msgid "Branding"
 msgstr "Identité visuelle"
+
+#: core/models/branding.py:182
+#, python-format
+msgid ""
+"Too close to the background: contrast of %(ratio).1f:1, %(minimum)s:1 at "
+"least."
+msgstr ""
+"Trop proche du fond : contraste de %(ratio).1f:1, %(minimum)s:1 au moins."
 
 #: core/models/email_event.py:9
 msgid "Email Verification"

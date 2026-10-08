@@ -1,0 +1,15 @@
+{
+  "defaults": { "body": "jost", "display": "big-shoulders-display" },
+  "fonts": {
+    "jost": { "label": "Jost", "family": "Jost Variable", "kind": "sans", "roles": ["body", "display"] },
+    "inter": { "label": "Inter", "family": "Inter Variable", "kind": "sans", "roles": ["body", "display"] },
+    "public-sans": { "label": "Public Sans", "family": "Public Sans Variable", "kind": "sans", "roles": ["body", "display"] },
+    "atkinson-hyperlegible-next": { "label": "Atkinson Hyperlegible", "family": "Atkinson Hyperlegible Next Variable", "kind": "sans", "roles": ["body"] },
+    "nunito": { "label": "Nunito", "family": "Nunito Variable", "kind": "sans", "roles": ["body", "display"] },
+    "source-serif-4": { "label": "Source Serif", "family": "Source Serif 4 Variable", "kind": "serif", "roles": ["body", "display"] },
+    "big-shoulders-display": { "label": "Big Shoulders Display", "family": "Big Shoulders Display Variable", "kind": "sans", "roles": ["display"] },
+    "fraunces": { "label": "Fraunces", "family": "Fraunces Variable", "kind": "serif", "roles": ["display"] },
+    "bricolage-grotesque": { "label": "Bricolage Grotesque", "family": "Bricolage Grotesque Variable", "kind": "sans", "roles": ["display"] },
+    "oswald": { "label": "Oswald", "family": "Oswald Variable", "kind": "sans", "roles": ["display"] }
+  }
+}

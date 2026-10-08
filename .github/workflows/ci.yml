@@ -88,6 +88,9 @@ jobs:
       - name: Type-check TypeScript
         run: npm run typecheck
 
+      - name: Test the theme (frontend/theme)
+        run: npm test
+
       - name: Build front-end assets
         run: npm run build
 

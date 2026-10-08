@@ -45,6 +45,10 @@ BRANDING_TEXTS = {
     "tagline": "TENANT_TAGLINE",
     "primary_color": "TENANT_PRIMARY_COLOR",
     "secondary_color": "TENANT_SECONDARY_COLOR",
+    "background_color": "TENANT_BACKGROUND_COLOR",
+    "text_color": "TENANT_TEXT_COLOR",
+    "font_body": "TENANT_FONT_BODY",
+    "font_display": "TENANT_FONT_DISPLAY",
 }
 BRANDING_IMAGES = {
     "logo": "TENANT_LOGO_URL",
@@ -198,8 +202,11 @@ def ensure_branding(values: dict[str, str], report: Report) -> None:
 
     from core import branding
 
+    from core.models.branding import check_text_contrast
+
     current = branding.current()
     applied = dict(current.initial_values)
+    changed = set()
     for name, value in values.items():
         if applied.get(name) == value:
             continue  # applied before: changed or removed since, by the association
@@ -221,11 +228,21 @@ def ensure_branding(values: dict[str, str], report: Report) -> None:
                     applied[name] = value  # the same value would fail again
                     continue
                 setattr(current, name, value)
+                changed.add(name)
                 report.done.append(f"Branding {name}: {value}.")
         else:
             continue
         applied[name] = value
-    if applied != current.initial_values:
+    if changed & {"background_color", "text_color"}:
+        try:
+            check_text_contrast(current.background_color, current.text_color)
+        except ValidationError as error:
+            # Unreadable: the colours just applied are dropped, the defaults stay.
+            for name in changed & {"background_color", "text_color"}:
+                setattr(current, name, "")
+                report.done.remove(f"Branding {name}: {values[name]}.")
+            report.warnings.append(f"Branding colours not set: {error.messages[0]}")
+    if applied != current.initial_values or changed:
         current.initial_values = applied
         current.save()
 

@@ -1,15 +1,22 @@
-"""The website's name, colours and contact, from the Branding setting (core.models).
+"""The website's name, look and contact, from the Branding setting (core.models).
 
 Each website of the platform sets its own; empty fields fall back to the
-defaults (WEBSITE_NAME, the theme in frontend/src/styles/main.css).
+defaults (WEBSITE_NAME, the theme in frontend/theme/theme.css).
+
+The theme overrides (colours, fonts) mirror frontend/theme/derive.ts, which the
+control plane's preview uses: frontend/theme/test-cases.json checks that both agree.
 """
 
-from typing import TYPE_CHECKING
+import json
+import re
+from functools import cache
+from typing import TYPE_CHECKING, Any
 
 from django.conf import settings
 from django.http import HttpRequest
-from django.utils.html import format_html
-from django.utils.safestring import SafeString
+from django.templatetags.static import static
+from django.utils.html import format_html, format_html_join
+from django.utils.safestring import SafeString, mark_safe
 
 if TYPE_CHECKING:
     from core.models import Branding
@@ -17,6 +24,24 @@ if TYPE_CHECKING:
 # The theme's light and dark text colours (base-100 and base-content).
 LIGHT_CONTENT = "#fdfbf8"
 DARK_CONTENT = "#1b100a"
+# Body text on the background: WCAG AA for normal text.
+MIN_TEXT_CONTRAST = 4.5
+# Cards and borders: the background, shaded toward the text colour.
+BASE_200_SHADE = "4%"
+BASE_300_SHADE = "9%"
+HEX_COLOR = re.compile(r"^#[0-9a-fA-F]{6}$")
+FALLBACKS = {
+    "sans": "ui-sans-serif, system-ui, sans-serif",
+    "serif": "ui-serif, Georgia, serif",
+}
+THEME_FIELDS = (
+    "primary_color",
+    "secondary_color",
+    "background_color",
+    "text_color",
+    "font_body",
+    "font_display",
+)
 
 
 def current(request: HttpRequest | None = None) -> "Branding":
@@ -62,21 +87,97 @@ def content_color(background: str) -> str:
     return DARK_CONTENT
 
 
+# --- Fonts (frontend/theme/fonts.json) ------------------------------------------------
+
+
+@cache
+def font_catalog() -> dict[str, Any]:
+    path = settings.BASE_DIR / "frontend" / "theme" / "fonts.json"
+    return dict(json.loads(path.read_text()))
+
+
+def font(font_id: str, role: str) -> dict[str, Any] | None:
+    """The catalog's font ``font_id``, if it may be used for ``role`` (body, display)."""
+    entry = font_catalog()["fonts"].get(font_id) if font_id else None
+    return entry if entry and role in entry["roles"] else None
+
+
+def font_choices(role: str) -> list[tuple[str, str]]:
+    return [(i, f["label"]) for i, f in font_catalog()["fonts"].items() if role in f["roles"]]
+
+
+def font_stack(font_id: str, role: str) -> str:
+    entry = font(font_id, role)
+    return f'"{entry["family"]}", {FALLBACKS[entry["kind"]]}' if entry else ""
+
+
+def fonts_used(choices: dict[str, str]) -> list[str]:
+    """The fonts the website uses (to link their stylesheets), defaults included."""
+    defaults = font_catalog()["defaults"]
+    used = [
+        font_id if font(font_id := choices.get(f"font_{role}", ""), role) else defaults[role]
+        for role in ("body", "display")
+    ]
+    return list(dict.fromkeys(used))
+
+
+# --- The theme overrides ----------------------------------------------------------------
+
+
+def _is_color(value: str | None) -> bool:
+    return bool(value and HEX_COLOR.match(value))
+
+
+def theme_variables(choices: dict[str, str]) -> dict[str, str]:
+    """The CSS variables replacing the theme's; empty when the defaults are kept."""
+    variables = {}
+    for name in ("primary", "secondary"):
+        color = choices.get(f"{name}_color", "")
+        if _is_color(color):
+            variables[f"--color-{name}"] = color
+            variables[f"--color-{name}-content"] = content_color(color)
+    background = choices.get("background_color", "")
+    if _is_color(background):
+        variables["--color-base-100"] = background
+        for level, amount in (("200", BASE_200_SHADE), ("300", BASE_300_SHADE)):
+            variables[f"--color-base-{level}"] = (
+                f"color-mix(in oklch, var(--color-base-100), var(--color-base-content) {amount})"
+            )
+    text = choices.get("text_color", "")
+    if _is_color(text):
+        variables["--color-base-content"] = text
+    defaults = font_catalog()["defaults"]
+    for role, variable in (("body", "--font-sans"), ("display", "--font-display")):
+        font_id = choices.get(f"font_{role}", "")
+        if font(font_id, role) and font_id != defaults[role]:
+            variables[variable] = font_stack(font_id, role)
+    return variables
+
+
+def theme_choices(request: HttpRequest | None = None) -> dict[str, str]:
+    current_branding = current(request)
+    return {name: getattr(current_branding, name) for name in THEME_FIELDS}
+
+
 def theme_css(request: HttpRequest | None = None) -> SafeString | str:
-    """CSS variables overriding the theme colours, "" when the defaults are kept.
+    """The rule overriding the theme, "" when the defaults are kept.
 
     Same selectors as the daisyUI theme, written after its stylesheet: they win.
     """
-    branding = current(request)
-    variables = []
-    for name, color in (
-        ("primary", branding.primary_color),
-        ("secondary", branding.secondary_color),
-    ):
-        if color:
-            variables.append(
-                f"--color-{name}:{color};--color-{name}-content:{content_color(color)};"
-            )
+    variables = theme_variables(theme_choices(request))
     if not variables:
         return ""
-    return format_html('<style>:root,[data-theme="light"]{{{}}}</style>', "".join(variables))
+    # Safe: validated colours and the catalog's font names only.
+    body = "".join(f"{name}:{value};" for name, value in variables.items())
+    return mark_safe(f'<style>:root,[data-theme="light"]{{{body}}}</style>')  # nosec B308 B703
+
+
+def theme_head(request: HttpRequest | None = None) -> SafeString:
+    """In <head>, after the main stylesheet: the fonts' stylesheets, the overrides."""
+    choices = theme_choices(request)
+    links = format_html_join(
+        "\n",
+        '<link rel="stylesheet" href="{}">',
+        ((static(f"dist/font-{font_id}.css"),) for font_id in fonts_used(choices)),
+    )
+    return format_html("{}{}", links, theme_css(request))

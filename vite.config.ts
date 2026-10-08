@@ -3,7 +3,17 @@ import { resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 
+import fontCatalog from "./frontend/theme/fonts.json" with { type: "json" };
+
 const src = (path: string) => resolve(import.meta.dirname, "frontend/src", path);
+// One stylesheet per font, linked only by the websites using it: dist/font-<id>.css
+// (not in a subdirectory, where its relative font URLs would break).
+const fonts = Object.fromEntries(
+  Object.keys(fontCatalog.fonts).map((id) => [
+    `font-${id}`,
+    resolve(import.meta.dirname, "frontend/theme/fonts", `${id}.css`),
+  ]),
+);
 
 // Assets are built into a static directory with stable names, then served by
 // Django's staticfiles like any other file: ManifestStaticFilesStorage adds the
@@ -35,6 +45,7 @@ export default defineConfig(({ mode }) => ({
         "projects-map": src("pages/projects-map.ts"),
         "project-location": src("pages/project-location.ts"),
         "event-interest": src("pages/event-interest.ts"),
+        ...fonts,
       },
       output: {
         entryFileNames: "[name].js",
