@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-23 08:54+0200\n"
+"POT-Creation-Date: 2026-10-08 13:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,17 +21,17 @@ msgstr ""
 msgid "I agree to abide by the Code of Conduct"
 msgstr "J'accepte de respecter la charte de conduite"
 
-#: legal/models/code_of_conduct.py:25 legal/models/cookies_policy.py:25
-#: legal/models/legal_index.py:20 legal/models/privacy_policy.py:25
-#: legal/models/terms_of_service.py:25
+#: legal/models/code_of_conduct.py:27 legal/models/cookies_policy.py:27
+#: legal/models/legal_index.py:22 legal/models/privacy_policy.py:27
+#: legal/models/terms_of_service.py:27
 msgid "For search engines"
 msgstr "Pour les moteurs de recherche"
 
-#: legal/models/code_of_conduct.py:34
+#: legal/models/code_of_conduct.py:36
 msgid "Code of conduct body content"
 msgstr "Contenu de la charte de conduite"
 
-#: legal/models/code_of_conduct.py:36
+#: legal/models/code_of_conduct.py:38
 msgid ""
 "This content should not change often as the user is prompted to accept it "
 "whenever it changes."
@@ -39,11 +39,11 @@ msgstr ""
 "Ce contenu ne devrait pas changer fréquemment, car l'utilisateur est invité "
 "à l'accepter à chaque modification."
 
-#: legal/models/code_of_conduct.py:41
+#: legal/models/code_of_conduct.py:43
 msgid "Code of Conduct Page"
 msgstr "Page de la Charte de conduite"
 
-#: legal/models/code_of_conduct.py:42
+#: legal/models/code_of_conduct.py:44
 msgid "Code of Conduct Pages"
 msgstr "Pages de la Charte de conduite"
 
@@ -71,47 +71,47 @@ msgstr "Consentement à la Charte de conduite"
 msgid "Code of Conduct Consents"
 msgstr "Consentements à la Charte de conduite"
 
-#: legal/models/cookies_policy.py:34
+#: legal/models/cookies_policy.py:36
 msgid "Cookies policy body content"
 msgstr "Contenu de la politique de cookies"
 
-#: legal/models/cookies_policy.py:38
+#: legal/models/cookies_policy.py:40
 msgid "Cookies Policy Page"
 msgstr "Page de la politique de cookies"
 
-#: legal/models/cookies_policy.py:39
+#: legal/models/cookies_policy.py:41
 msgid "Cookies Policy Pages"
 msgstr "Pages de la politique de cookies"
 
-#: legal/models/legal_index.py:27
+#: legal/models/legal_index.py:29
 msgid "Legal Index Page"
 msgstr "Page d'index juridique"
 
-#: legal/models/legal_index.py:28
+#: legal/models/legal_index.py:30
 msgid "Legal Index Pages"
 msgstr "Pages d'index juridiques"
 
-#: legal/models/privacy_policy.py:34
+#: legal/models/privacy_policy.py:36
 msgid "Privacy policy body content"
 msgstr "Contenu de la politique de confidentialité"
 
-#: legal/models/privacy_policy.py:38
+#: legal/models/privacy_policy.py:40
 msgid "Privacy Policy Page"
 msgstr "Page de la politique de confidentialité"
 
-#: legal/models/privacy_policy.py:39
+#: legal/models/privacy_policy.py:41
 msgid "Privacy Policy Pages"
 msgstr "Pages de la politique de confidentialité"
 
-#: legal/models/terms_of_service.py:34
+#: legal/models/terms_of_service.py:36
 msgid "Terms of service body content"
 msgstr "Contenu des conditions d'utilisation"
 
-#: legal/models/terms_of_service.py:38
+#: legal/models/terms_of_service.py:40
 msgid "Terms of Service Page"
 msgstr "Page des conditions d'utilisation"
 
-#: legal/models/terms_of_service.py:39
+#: legal/models/terms_of_service.py:41
 msgid "Terms of Service Pages"
 msgstr "Pages des conditions d'utilisation"
 

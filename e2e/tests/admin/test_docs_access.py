@@ -11,7 +11,7 @@ def test_moderator_can_access_docs(
     moderator_email: str,
     moderator_password: str,
 ):
-    """A moderator (admin access via Moderator group) can reach the protected docs."""
+    """A moderator (MODERATOR role, not superuser) can reach the protected docs."""
     login_user(
         page=page,
         base_url=base_url,

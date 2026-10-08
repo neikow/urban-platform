@@ -182,3 +182,19 @@ def register_tasks_menu_item() -> MenuItem:
         icon_name="cogs",
         order=900,
     )
+
+
+# --- Roles (core/roles.py) ------------------------------------------------------
+
+
+@hooks.register("before_delete_user")
+def keep_one_administrator(request: HttpRequest, user: Any) -> HttpResponse | None:
+    from django.contrib import messages
+    from django.shortcuts import redirect
+
+    from core.roles import is_last_administrator
+
+    if is_last_administrator(user):
+        messages.error(request, _("This is the last administrator: name another one first."))
+        return redirect("wagtailusers_users:edit", user.pk)
+    return None

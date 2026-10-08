@@ -1,10 +1,12 @@
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Page, PanelPlaceholder
+
+from legal.permissions import AdministratorsOnlyPageMixin
 from django.utils.translation import gettext_lazy as _
 
 
-class PrivacyPolicyPage(Page):
+class PrivacyPolicyPage(AdministratorsOnlyPageMixin, Page):
     is_creatable = False
     max_count_per_parent = 1
     parent_page_types: list[str] = ["legal.LegalIndexPage"]

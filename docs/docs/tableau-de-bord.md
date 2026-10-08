@@ -50,6 +50,6 @@ Le menu est organisé par tâche :
 | **Paramètres** | **Annonce**, **Utilisateurs** et les réglages techniques → [Annonce](annonce.md), [Utilisateurs](utilisateurs.md) |
 | **Documentation** | Ce guide |
 
-**Chacun ne voit que ce qu'il peut faire.** Un membre d'association ne voit pas la gestion des utilisateurs, et les entrées de contenu (Actualités, Pages du site…) n'apparaissent que si ses groupes lui permettent de modifier ces pages. Voir [Utilisateurs](utilisateurs.md).
+**Chacun ne voit que ce qu'il peut faire**, selon son rôle : un rédacteur ne voit ni les statistiques de participation ni les paramètres, un modérateur ne voit que l'annonce dans les paramètres. Voir [Utilisateurs](utilisateurs.md).
 
 > **Astuce :** Vous pouvez réduire la barre latérale en cliquant sur la flèche en haut à gauche pour avoir plus d'espace d'édition.

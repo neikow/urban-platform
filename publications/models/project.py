@@ -162,6 +162,9 @@ class ProjectPage(PublicationPage):
 
     def get_context(self, request: HttpRequest, *args: Any, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context(request, *args, **kwargs)
+        from core.models import participation_open_to
+
+        context["participation_open"] = participation_open_to(request.user, request)
         if self.location:
             from publications.geo import map_config, project_feature
 

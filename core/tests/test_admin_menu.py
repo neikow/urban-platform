@@ -1,5 +1,4 @@
 import pytest
-from django.contrib.auth.models import Group
 from django.test import RequestFactory
 from wagtail.admin.menu import admin_menu
 
@@ -38,6 +37,10 @@ def settings_urls(user):
 ANNOUNCEMENT_URL = "/admin/settings/core/announcement/"
 USERS_URL = "/admin/users/"
 TASKS_URL = "/admin/tasks/"
+MAP_URL = "/admin/settings/publications/mapsettings/"
+FEATURES_URL = "/admin/settings/core/featureflags/"
+ASSOCIATIONS_URL = "/admin/neighborhood_association/"
+LEGAL_PAGES_IN_MENU = 4
 
 
 def make_user(role, email, **kwargs):
@@ -66,28 +69,42 @@ class TestAdminMenu:
         assert menu["media"] == ["images", "documents"]
         assert len(menu["site-pages"]) == 7
 
-    def test_administrators_manage_users_and_the_announcement(self):
+    def test_administrators_manage_the_website(self):
         admin = make_user(UserRole.ADMIN, "admin@example.com")
 
-        assert sorted(settings_urls(admin)) == [ANNOUNCEMENT_URL, TASKS_URL, USERS_URL]
+        urls = settings_urls(admin)
 
-    def test_association_members_do_not_see_user_management(self):
-        member = make_user(UserRole.ASSOCIATION_MEMBER, "member@example.com")
+        for url in (
+            ANNOUNCEMENT_URL,
+            TASKS_URL,
+            USERS_URL,
+            MAP_URL,
+            FEATURES_URL,
+            ASSOCIATIONS_URL,
+        ):
+            assert url in urls, url
+        assert "participation" in menu_for(admin)
+        assert len(menu_for(admin)["site-pages"]) == 7
 
-        menu = menu_for(member)
+    def test_moderators_get_the_announcement_and_statistics(self):
+        moderator = make_user(UserRole.MODERATOR, "moderator@example.com")
 
-        assert settings_urls(member) == [ANNOUNCEMENT_URL]
-        # No page permissions without a group: no content entries.
-        assert "news" not in menu and "site-pages" not in menu
+        menu = menu_for(moderator)
 
-    def test_content_entries_follow_page_permissions(self):
-        member = make_user(UserRole.ASSOCIATION_MEMBER, "editor@example.com")
-        member.groups.add(Group.objects.get(name="Moderators"))
+        assert settings_urls(moderator) == [ANNOUNCEMENT_URL]
+        assert menu["participation"] == ["votes", "ideas"]
+        assert "news" in menu and "useful-information" in menu and "media" in menu
 
-        menu = menu_for(member)
+    def test_editors_get_content_only(self):
+        editor = make_user(UserRole.EDITOR, "editor@example.com")
 
-        assert "news" in menu and "useful-information" in menu and "site-pages" in menu
-        assert USERS_URL not in settings_urls(member)
+        menu = menu_for(editor)
+
+        assert "news" in menu and "useful-information" in menu and "media" in menu
+        assert "participation" not in menu
+        assert "settings" not in menu
+        # The legal pages are for administrators.
+        assert len(menu["site-pages"]) == 7 - LEGAL_PAGES_IN_MENU
 
     def test_citizens_see_nothing(self):
         citizen = make_user(UserRole.CITIZEN, "citizen@example.com")

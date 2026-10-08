@@ -239,6 +239,8 @@ EMAIL_EVENT_ANONYMIZE_DAYS = 30
 
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY", "")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@example.com")
+# Moderation workflow emails (submitted, approved, rejected pages), in HTML.
+WAGTAILADMIN_NOTIFICATION_USE_HTML = True
 DEFAULT_FROM_NAME = os.environ.get("DEFAULT_FROM_NAME", WEBSITE_NAME)
 
 # Task modules outside "<app>.tasks", which autodiscovery would miss.

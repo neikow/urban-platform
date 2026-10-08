@@ -264,7 +264,7 @@ class TestAssociationAdmin:
         set_address(resident, PARADIS.label, PARADIS.point)
         resident.save()
         responsible = User.objects.create_user(
-            email="member@example.com", password="pass12345", role=UserRole.ASSOCIATION_MEMBER
+            email="member@example.com", password="pass12345", role=UserRole.EDITOR
         )
 
         with django_capture_on_commit_callbacks(execute=True):

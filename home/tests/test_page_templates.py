@@ -102,7 +102,7 @@ class TestTemplatesAdmin:
 
     def test_needs_permission_to_edit_the_home_page(self, client, home):
         member = User.objects.create_user(
-            email="member@example.com", password="pass12345", role=UserRole.ASSOCIATION_MEMBER
+            email="member@example.com", password="pass12345", role=UserRole.CITIZEN
         )
         client.force_login(member)
 

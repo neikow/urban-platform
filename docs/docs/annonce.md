@@ -24,4 +24,4 @@ Les visiteurs peuvent fermer le bandeau avec la croix. Il reste fermé pour eux 
 
 ## Qui peut la modifier ?
 
-Les administrateurs et les membres d'association.
+Les modérateurs et les administrateurs.

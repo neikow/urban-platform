@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.apps import AppConfig
 from wagtail.users.apps import WagtailUsersAppConfig
 
@@ -26,6 +28,23 @@ class CoreConfig(AppConfig):
 
         # A page created from a template starts with its content.
         init_new_page.connect(fill_new_page, dispatch_uid="core.page_templates.fill_new_page")
+
+        # Page and media rights follow the staff role (core.roles).
+        from django.db.models.signals import post_save as user_saved
+
+        from core.roles import sync_role_groups
+
+        def sync_groups(
+            sender: type, instance: Any, raw: bool = False, update_fields: Any = None, **kwargs: Any
+        ) -> None:
+            # Skip fixtures, and partial saves that leave the role alone (e.g. last_login).
+            if raw or (update_fields and not {"role", "is_active"} & set(update_fields)):
+                return
+            sync_role_groups(instance)
+
+        user_saved.connect(
+            sync_groups, sender="core.User", dispatch_uid="core.roles.sync_groups", weak=False
+        )
 
         # Every Celery task run is recorded for the admin tasks page.
         from core.task_monitor import connect_signals

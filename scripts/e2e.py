@@ -139,7 +139,6 @@ def populate_database() -> None:
     """Populate the E2E database with required test data."""
     setup_django()
 
-    from django.contrib.auth.models import Group, Permission
     from wagtail.models import Site, Page, Locale, Collection
 
     from home.models import HomePage
@@ -429,21 +428,6 @@ def populate_database() -> None:
     ImageFactory.create_batch(10, collection=Collection.objects.first())
     print("  ✓ Created test images")
 
-    # Create moderator group with permissions
-    editors_group, created = Group.objects.get_or_create(name="Moderator")
-    if created:
-        wagtail_admin_permission = Permission.objects.get(codename="access_admin")
-        editors_group.permissions.add(wagtail_admin_permission)
-        editors_group.permissions.add(Permission.objects.get(codename="add_page"))
-        editors_group.permissions.add(Permission.objects.get(codename="change_page"))
-        editors_group.permissions.add(Permission.objects.get(codename="delete_page"))
-        editors_group.permissions.add(Permission.objects.get(codename="publish_page"))
-        editors_group.permissions.add(Permission.objects.get(codename="unlock_page"))
-        editors_group.permissions.add(Permission.objects.get(codename="add_revision"))
-        print("  ✓ Created Moderator group")
-    else:
-        print("  ✓ Moderator group exists")
-
     print("✅ Database population completed!")
 
 
@@ -451,8 +435,7 @@ def create_test_users() -> None:
     """Create default test users for E2E testing."""
     setup_django()
 
-    from django.contrib.auth.models import Group
-    from core.models import User
+    from core.models import User, UserRole
 
     print("👤 Creating test users...")
 
@@ -473,32 +456,28 @@ def create_test_users() -> None:
     # Admin test user
     admin_email = "e2e.admin@email.com"
     if not User.objects.filter(email=admin_email).exists():
-        admin_user = User.objects.create_superuser(
+        User.objects.create_superuser(
             email=admin_email,
             password="password123",  # nosec
             first_name="E2E",
             last_name="Admin",
             postal_code="13007",
         )
-        editors_group = Group.objects.get(name="Moderator")
-        admin_user.groups.add(editors_group)
-        admin_user.save()
         print(f"  ✓ Created admin user: {admin_email}")
     else:
         print(f"  ✓ Admin user exists: {admin_email}")
 
-    # Moderator test user (not superuser, gets admin access via Moderator group)
+    # Moderator test user (not superuser: rights from the MODERATOR role)
     moderator_email = "e2e.moderator@email.com"
     if not User.objects.filter(email=moderator_email).exists():
-        moderator_user = User.objects.create_user(
+        User.objects.create_user(
             email=moderator_email,
             password="password123",  # nosec
             first_name="E2E",
             last_name="Moderator",
             postal_code="13007",
+            role=UserRole.MODERATOR,
         )
-        moderator_user.groups.add(Group.objects.get(name="Moderator"))
-        moderator_user.save()
         print(f"  ✓ Created moderator user: {moderator_email}")
     else:
         print(f"  ✓ Moderator user exists: {moderator_email}")

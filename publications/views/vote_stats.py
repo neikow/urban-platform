@@ -7,6 +7,8 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 from wagtail.admin.views.generic.base import WagtailAdminTemplateMixin
 
+from publications.views.mixins import ParticipationStatsPermissionMixin
+
 from publications.models import ParticipationMode, ProjectPage
 from publications.models.form import (
     FAVORABLE_VALUES,
@@ -43,7 +45,7 @@ def _local_responses_qs(show_all: bool) -> QuerySet:
     return qs
 
 
-class VoteStatsView(WagtailAdminTemplateMixin, TemplateView):
+class VoteStatsView(ParticipationStatsPermissionMixin, WagtailAdminTemplateMixin, TemplateView):
     template_name = "publications/admin/vote_stats.html"
     page_title = _("Vote Statistics")
 
@@ -98,7 +100,9 @@ class VoteStatsView(WagtailAdminTemplateMixin, TemplateView):
         return context
 
 
-class VoteStatsDetailView(WagtailAdminTemplateMixin, TemplateView):
+class VoteStatsDetailView(
+    ParticipationStatsPermissionMixin, WagtailAdminTemplateMixin, TemplateView
+):
     template_name = "publications/admin/vote_stats_detail.html"
     page_title = _("Vote Statistics")
 

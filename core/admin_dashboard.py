@@ -87,6 +87,9 @@ class ConsultationsPanel(DashboardPanel):
         from publications.models import ProjectPage
 
         context = super().get_context_data(parent_context)
+        context["can_see_results"] = context["request"].user.has_perm(
+            "core.view_participation_stats"
+        )
         projects = open_projects()
         counts = ProjectPage.objects.filter(pk__in=[p.pk for p in projects]).annotate(
             votes=Count("vote_responses", distinct=True),
@@ -138,14 +141,17 @@ class DraftsPanel(DashboardPanel):
 
     def get_context_data(self, parent_context: Any = None) -> dict[str, Any]:
         context = super().get_context_data(parent_context)
-        editable = PagePermissionPolicy().instances_user_has_any_permission_for(
-            context["request"].user, ["change"]
-        )
-        context["drafts"] = (
+        user = context["request"].user
+        editable = PagePermissionPolicy().instances_user_has_any_permission_for(user, ["change"])
+        candidates = (
             editable.filter(has_unpublished_changes=True)
             .select_related("latest_revision__user")
-            .order_by("-latest_revision_created_at")[:DRAFTS_SHOWN]
+            .order_by("-latest_revision_created_at")[: DRAFTS_SHOWN * 3]
         )
+        # Group rights cover the whole tree: some page types narrow them (legal pages).
+        context["drafts"] = [
+            page for page in candidates.specific() if page.permissions_for_user(user).can_edit()
+        ][:DRAFTS_SHOWN]
         return context
 
 

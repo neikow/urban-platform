@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 12:12+0200\n"
+"POT-Creation-Date: 2026-10-08 13:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: core/admin_dashboard.py:53 core/admin_menu.py:145
+#: core/admin_dashboard.py:53 core/admin_menu.py:149
 msgid "New project"
 msgstr "Nouveau projet"
 
-#: core/admin_dashboard.py:54 core/admin_menu.py:146
+#: core/admin_dashboard.py:54 core/admin_menu.py:150
 msgid "New event"
 msgstr "Nouvel événement"
 
@@ -36,97 +36,97 @@ msgstr "Modifier la page d'accueil"
 msgid "Edit the announcement"
 msgstr "Modifier l'annonce"
 
-#: core/admin_menu.py:137
+#: core/admin_menu.py:141
 msgid "Home page"
 msgstr "Page d'accueil"
 
-#: core/admin_menu.py:141
+#: core/admin_menu.py:145
 msgid "News"
 msgstr "Actualités"
 
-#: core/admin_menu.py:143
+#: core/admin_menu.py:147
 msgid "“News” page"
 msgstr "Page « Actualités »"
 
-#: core/admin_menu.py:144
+#: core/admin_menu.py:148
 msgid "All publications"
 msgstr "Toutes les publications"
 
-#: core/admin_menu.py:154
+#: core/admin_menu.py:158
 msgid "Useful information"
 msgstr "Informations utiles"
 
-#: core/admin_menu.py:156
+#: core/admin_menu.py:160
 msgid "“Useful information” page"
 msgstr "Page « Informations utiles »"
 
-#: core/admin_menu.py:157
+#: core/admin_menu.py:161
 msgid "All cards"
 msgstr "Toutes les fiches"
 
-#: core/admin_menu.py:158
+#: core/admin_menu.py:162
 msgid "New card"
 msgstr "Nouvelle fiche"
 
-#: core/admin_menu.py:165
+#: core/admin_menu.py:169
 msgid "Site pages"
 msgstr "Pages du site"
 
-#: core/admin_menu.py:167
+#: core/admin_menu.py:171
 msgid "The platform"
 msgstr "La plateforme"
 
-#: core/admin_menu.py:169
+#: core/admin_menu.py:173
 msgid "The urban planning commission"
 msgstr "La commission d'urbanisme"
 
-#: core/admin_menu.py:173
+#: core/admin_menu.py:177
 msgid "The development team"
 msgstr "L'équipe de développement"
 
-#: core/admin_menu.py:175
+#: core/admin_menu.py:179
 msgid "Code of conduct"
 msgstr "Charte de bonne conduite"
 
-#: core/admin_menu.py:178
+#: core/admin_menu.py:182
 msgid "Terms of service"
 msgstr "Conditions d'utilisation"
 
-#: core/admin_menu.py:184
+#: core/admin_menu.py:188
 msgid "Cookies policy"
 msgstr "Politique de cookies"
 
-#: core/admin_menu.py:187
+#: core/admin_menu.py:191
 msgid "Privacy policy"
 msgstr "Politique de confidentialité"
 
-#: core/admin_menu.py:195
+#: core/admin_menu.py:199
 #: core/templates/core/admin/dashboard/consultations.html:9
 msgid "Participation"
 msgstr "Participation"
 
-#: core/admin_menu.py:198
+#: core/admin_menu.py:202
 msgid "Votes"
 msgstr "Votes"
 
-#: core/admin_menu.py:206
+#: core/admin_menu.py:210
 #: core/templates/core/admin/dashboard/consultations.html:21
 msgid "Ideas"
 msgstr "Idées"
 
-#: core/admin_menu.py:219
+#: core/admin_menu.py:223
 msgid "Media library"
 msgstr "Médiathèque"
 
-#: core/admin_menu.py:222
+#: core/admin_menu.py:226
 msgid "Images"
 msgstr "Images"
 
-#: core/admin_menu.py:229
+#: core/admin_menu.py:233
 msgid "Documents"
 msgstr "Documents"
 
-#: core/admin_menu.py:241
+#: core/admin_menu.py:245
 msgid "Documentation"
 msgstr "Documentation"
 
@@ -427,8 +427,8 @@ msgstr "Vérification d'email"
 msgid "Password Reset"
 msgstr "Réinitialisation du mot de passe"
 
-#: core/models/email_event.py:11 core/models/user.py:116
-#: core/templates/core/profile.html:208
+#: core/models/email_event.py:11 core/models/user.py:136
+#: core/templates/core/profile.html:218
 msgid "Poll results"
 msgstr "Résultats des votes"
 
@@ -452,7 +452,7 @@ msgstr "Envoyé"
 msgid "Failed"
 msgstr "Échec"
 
-#: core/models/email_event.py:30 core/models/user.py:169
+#: core/models/email_event.py:30 core/models/user.py:189
 msgid "User"
 msgstr "Utilisateur"
 
@@ -462,7 +462,7 @@ msgstr "Type d'événement"
 
 #: core/models/email_event.py:38 core/models/task_run.py:22
 #: core/templates/core/admin/dashboard/drafts.html:9
-#: core/templates/core/admin/tasks_status.html:67
+#: core/templates/core/admin/tasks_status.html:70
 msgid "Status"
 msgstr "Statut"
 
@@ -494,11 +494,27 @@ msgstr "Événement de courriel"
 msgid "Email Events"
 msgstr "Événements d'email"
 
+#: core/models/feature_flags.py:15
+msgid "Reserve participation to subscribers"
+msgstr "Réserver la participation aux adhérents"
+
+#: core/models/feature_flags.py:18
+msgid ""
+"Only subscribers may vote and share ideas. Turn on once subscribing is "
+"possible: other users will be invited to subscribe."
+msgstr ""
+"Seuls les adhérents peuvent voter et proposer des idées. À activer une fois "
+"l'adhésion possible : les autres seront invités à adhérer."
+
+#: core/models/feature_flags.py:26
+msgid "Features"
+msgstr "Fonctionnalités"
+
 #: core/models/neighborhood_association.py:12
 msgid "Name"
 msgstr "Nom"
 
-#: core/models/neighborhood_association.py:13 core/models/user.py:73
+#: core/models/neighborhood_association.py:13 core/models/user.py:83
 #: core/templates/core/profile.html:60
 msgid "Address"
 msgstr "Adresse"
@@ -526,7 +542,7 @@ msgstr "Responsable"
 msgid "Contact Email"
 msgstr "Email de contact"
 
-#: core/models/neighborhood_association.py:35 core/models/user.py:98
+#: core/models/neighborhood_association.py:35 core/models/user.py:108
 msgid "Phone Number"
 msgstr "Numéro de téléphone"
 
@@ -534,7 +550,7 @@ msgstr "Numéro de téléphone"
 msgid "Website"
 msgstr "Site web"
 
-#: core/models/neighborhood_association.py:39 core/models/user.py:82
+#: core/models/neighborhood_association.py:39 core/models/user.py:92
 #: core/templates/core/profile.html:68
 msgid "Neighborhood Association"
 msgstr "Comité d'intérêt de quartier"
@@ -563,7 +579,7 @@ msgstr "Notification envoyée"
 msgid "Notifications sent"
 msgstr "Notifications envoyées"
 
-#: core/models/task_run.py:6 core/templates/core/admin/tasks_status.html:41
+#: core/models/task_run.py:6 core/templates/core/admin/tasks_status.html:44
 msgid "Running"
 msgstr "En cours"
 
@@ -575,20 +591,20 @@ msgstr "Réussie"
 msgid "Retrying"
 msgstr "Nouvel essai"
 
-#: core/models/task_run.py:19 core/templates/core/admin/tasks_status.html:28
-#: core/templates/core/admin/tasks_status.html:66
+#: core/models/task_run.py:19 core/templates/core/admin/tasks_status.html:31
+#: core/templates/core/admin/tasks_status.html:69
 msgid "Task"
 msgstr "Tâche"
 
-#: core/models/task_run.py:20 core/templates/core/admin/tasks_status.html:31
+#: core/models/task_run.py:20 core/templates/core/admin/tasks_status.html:34
 msgid "Arguments"
 msgstr "Arguments"
 
-#: core/models/task_run.py:24 core/templates/core/admin/tasks_status.html:32
+#: core/models/task_run.py:24 core/templates/core/admin/tasks_status.html:35
 msgid "Worker"
 msgstr "Worker"
 
-#: core/models/task_run.py:25 core/templates/core/admin/tasks_status.html:68
+#: core/models/task_run.py:25 core/templates/core/admin/tasks_status.html:71
 msgid "Started"
 msgstr "Début"
 
@@ -596,7 +612,7 @@ msgstr "Début"
 msgid "Finished"
 msgstr "Fin"
 
-#: core/models/task_run.py:27 core/templates/core/admin/tasks_status.html:70
+#: core/models/task_run.py:27 core/templates/core/admin/tasks_status.html:73
 msgid "Result"
 msgstr "Résultat"
 
@@ -612,83 +628,103 @@ msgstr "Exécution de tâche"
 msgid "Task runs"
 msgstr "Exécutions de tâches"
 
-#: core/models/user.py:15
+#: core/models/user.py:21
 msgid "Citizen"
 msgstr "Citoyen"
 
-#: core/models/user.py:16
-msgid "Association Member"
-msgstr "Membre d'association"
+#: core/models/user.py:22
+msgid "Editor"
+msgstr "Rédacteur"
 
-#: core/models/user.py:17
-msgid "Admin"
+#: core/models/user.py:23
+msgid "Moderator"
+msgstr "Modérateur"
+
+#: core/models/user.py:24
+msgid "Administrator"
 msgstr "Administrateur"
 
-#: core/models/user.py:35
+#: core/models/user.py:45
 msgid "The Email field must be set"
 msgstr "Le champ email doit être renseigné"
 
-#: core/models/user.py:50
+#: core/models/user.py:60
 msgid "Superuser must have is_superuser=True."
 msgstr "Le superutilisateur doit avoir is_superuser=True."
 
-#: core/models/user.py:58
+#: core/models/user.py:68
 msgid "Email Address"
 msgstr "Adresse e-mail"
 
-#: core/models/user.py:59
+#: core/models/user.py:69
 msgid "UUID"
 msgstr "UUID"
 
-#: core/models/user.py:61 core/templates/core/profile.html:31
+#: core/models/user.py:71 core/templates/core/profile.html:31
 msgid "First Name"
 msgstr "Prénom"
 
-#: core/models/user.py:62 core/templates/core/profile.html:37
+#: core/models/user.py:72 core/templates/core/profile.html:37
 msgid "Last Name"
 msgstr "Nom de famille"
 
-#: core/models/user.py:70 core/templates/core/profile.html:44
+#: core/models/user.py:80 core/templates/core/profile.html:44
 msgid "Neighborhood"
 msgstr "Quartier"
 
-#: core/models/user.py:72
+#: core/models/user.py:82
 msgid "Postal Code"
 msgstr "Code postal"
 
-#: core/models/user.py:75
+#: core/models/user.py:85
 msgid "Location"
 msgstr "Position"
 
-#: core/models/user.py:83
+#: core/models/user.py:93
 msgid "The association whose area contains the user's address."
 msgstr "L'association dont le secteur contient l'adresse de l'utilisateur."
 
-#: core/models/user.py:87
+#: core/models/user.py:97
 msgid "Email Verified"
 msgstr "Email vérifié"
 
-#: core/models/user.py:89
+#: core/models/user.py:99
 msgid "Is the user's email address verified?"
 msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:92 core/templates/core/profile.html:162
+#: core/models/user.py:102 core/templates/core/profile.html:162
 msgid "Role"
 msgstr "Rôle"
 
-#: core/models/user.py:100
+#: core/models/user.py:111 core/templates/core/profile.html:184
+msgid "Subscriber"
+msgstr "Adhérent"
+
+#: core/models/user.py:114
+msgid ""
+"Subscribers may vote and share ideas when participation is reserved to them "
+"(Settings › Features)."
+msgstr ""
+"Les adhérents peuvent voter et proposer des idées quand la participation "
+"leur est réservée (Paramètres › Fonctionnalités)."
+
+#: core/models/user.py:118
+msgid "Subscribed on"
+msgstr "Adhérent depuis"
+
+#: core/models/user.py:120
 msgid "Newsletter Subscription"
 msgstr "Inscription à la newsletter"
 
-#: core/models/user.py:102
+#: core/models/user.py:122
 msgid "Does the user want to receive the newsletter?"
 msgstr "L'utilisateur souhaite-t-il recevoir la newsletter ?"
 
-#: core/models/user.py:105
+#: core/models/user.py:125
 msgid "Newsletter consent date"
 msgstr "Date du consentement à la newsletter"
 
-#: core/models/user.py:109
+#: core/models/user.py:129
 msgid ""
 "When the user last agreed to receive the newsletter (GDPR proof of consent)."
 " Empty if they are not subscribed, or subscribed before this date was "
@@ -698,58 +734,66 @@ msgstr ""
 " consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
 "l'enregistrement de cette date."
 
-#: core/models/user.py:118
+#: core/models/user.py:138
 msgid "Email the results when a poll I voted in closes."
 msgstr ""
 "Recevoir les résultats par email à la clôture d'un vote auquel j'ai "
 "participé."
 
-#: core/models/user.py:121 core/templates/core/profile.html:209
+#: core/models/user.py:141 core/templates/core/profile.html:219
 msgid "Project updates"
 msgstr "Actualités des projets"
 
-#: core/models/user.py:123
+#: core/models/user.py:143
 msgid "Email the news of projects I voted on or shared an idea about."
 msgstr ""
 "Recevoir par email les actualités des projets sur lesquels j'ai voté ou "
 "proposé une idée."
 
-#: core/models/user.py:126 core/templates/core/profile.html:210
+#: core/models/user.py:146 core/templates/core/profile.html:220
 msgid "Event reminders"
 msgstr "Rappels d'événements"
 
-#: core/models/user.py:128
+#: core/models/user.py:148
 msgid "Email a reminder the day before events I am interested in."
 msgstr ""
 "Recevoir un rappel par email la veille des événements qui m'intéressent."
 
-#: core/models/user.py:131
+#: core/models/user.py:151
 msgid "Date Joined"
 msgstr "Date d'inscription"
 
-#: core/models/user.py:132
+#: core/models/user.py:152
 msgid "Last Updated"
 msgstr "Dernière mise à jour"
 
-#: core/models/user.py:134
+#: core/models/user.py:154
 msgid "Deleted At"
 msgstr "Supprimé le"
 
-#: core/models/user.py:137
+#: core/models/user.py:157
 msgid "When the user account was soft-deleted. NULL if not deleted."
 msgstr "Quand le compte utilisateur a été supprimé. NULL si non supprimé."
 
-#: core/models/user.py:142
+#: core/models/user.py:162
 msgid "Active"
 msgstr "Actif"
 
-#: core/models/user.py:144
+#: core/models/user.py:164
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:170
+#: core/models/user.py:190
 msgid "Users"
 msgstr "Utilisateurs"
+
+#: core/models/user.py:194
+msgid "Can see vote and idea statistics"
+msgstr "Peut voir les statistiques des votes et des idées"
+
+#: core/models/user.py:195
+msgid "Can see and start background tasks"
+msgstr "Peut voir et lancer les tâches de fond"
 
 #: core/notifications/__init__.py:40
 msgid "poll results"
@@ -763,32 +807,32 @@ msgstr "les actualités des projets"
 msgid "event reminders"
 msgstr "les rappels d'événements"
 
-#: core/task_monitor.py:258
+#: core/task_monitor.py:257
 msgid "Update the map"
 msgstr "Mettre à jour la carte"
 
-#: core/task_monitor.py:259
+#: core/task_monitor.py:258
 msgid "Download the latest OpenStreetMap data for the maps (about 35 MB)."
 msgstr ""
 "Télécharger les dernières données OpenStreetMap pour les cartes (environ 35 "
 "Mo)."
 
-#: core/task_monitor.py:265
+#: core/task_monitor.py:264
 msgid "Match residents to associations"
 msgstr "Rattacher les habitants aux associations"
 
-#: core/task_monitor.py:266
+#: core/task_monitor.py:265
 msgid ""
 "Attach every user with an address to the association whose area contains it."
 msgstr ""
 "Rattacher chaque utilisateur ayant une adresse à l'association dont le "
 "secteur la contient."
 
-#: core/task_monitor.py:272
+#: core/task_monitor.py:271
 msgid "Close expired polls"
 msgstr "Clore les votes échus"
 
-#: core/task_monitor.py:273
+#: core/task_monitor.py:272
 msgid "Close the votes whose end date has passed, and send their results."
 msgstr ""
 "Clore les votes dont la date de fin est passée, et envoyer leurs résultats."
@@ -1087,11 +1131,11 @@ msgstr "Vote"
 msgid "No end date"
 msgstr "Sans date de fin"
 
-#: core/templates/core/admin/dashboard/consultations.html:30
+#: core/templates/core/admin/dashboard/consultations.html:32
 msgid "See the responses"
 msgstr "Voir les réponses"
 
-#: core/templates/core/admin/dashboard/consultations.html:36
+#: core/templates/core/admin/dashboard/consultations.html:40
 msgid "No vote or idea collection is open."
 msgstr "Aucun vote ni aucune collecte d'idées n'est ouvert."
 
@@ -1141,7 +1185,7 @@ msgid "Start from a blank page"
 msgstr "Partir d'une page vide"
 
 #: core/templates/core/admin/tasks.html:4
-#: core/templates/core/admin/tasks.html:12 core/views/tasks.py:40
+#: core/templates/core/admin/tasks.html:12 core/views/tasks.py:36
 #: core/wagtail_hooks.py:178
 msgid "Tasks"
 msgstr "Tâches"
@@ -1150,7 +1194,7 @@ msgstr "Tâches"
 msgid "Run now"
 msgstr "Lancer maintenant"
 
-#: core/templates/core/admin/tasks.html:34
+#: core/templates/core/admin/tasks.html:36
 msgid "Could not refresh the tasks. Retrying…"
 msgstr "Impossible d'actualiser les tâches. Nouvel essai…"
 
@@ -1165,50 +1209,50 @@ msgid_plural "%(counter)s workers online"
 msgstr[0] "%(counter)s worker en ligne"
 msgstr[1] "%(counter)s workers en ligne"
 
-#: core/templates/core/admin/tasks_status.html:12
+#: core/templates/core/admin/tasks_status.html:14
 msgid "No worker answers: background tasks are not running."
 msgstr "Aucun worker ne répond : les tâches de fond ne tournent pas."
 
-#: core/templates/core/admin/tasks_status.html:16
+#: core/templates/core/admin/tasks_status.html:18
 #, python-format
 msgid "%(counter)s task waiting for a worker"
 msgid_plural "%(counter)s tasks waiting for a worker"
 msgstr[0] "%(counter)s tâche en attente d'un worker"
 msgstr[1] "%(counter)s tâches en attente d'un worker"
 
-#: core/templates/core/admin/tasks_status.html:22
+#: core/templates/core/admin/tasks_status.html:24
 msgid "Updated at"
 msgstr "Mis à jour à"
 
-#: core/templates/core/admin/tasks_status.html:29
+#: core/templates/core/admin/tasks_status.html:32
 msgid "State"
 msgstr "État"
 
-#: core/templates/core/admin/tasks_status.html:30
+#: core/templates/core/admin/tasks_status.html:33
 msgid "Since / planned for"
 msgstr "Depuis / prévue pour"
 
-#: core/templates/core/admin/tasks_status.html:43
+#: core/templates/core/admin/tasks_status.html:46
 msgid "Next"
 msgstr "Suivante"
 
-#: core/templates/core/admin/tasks_status.html:45
+#: core/templates/core/admin/tasks_status.html:48
 msgid "Scheduled"
 msgstr "Planifiée"
 
-#: core/templates/core/admin/tasks_status.html:56
+#: core/templates/core/admin/tasks_status.html:59
 msgid "No task is running."
 msgstr "Aucune tâche en cours."
 
-#: core/templates/core/admin/tasks_status.html:61
+#: core/templates/core/admin/tasks_status.html:64
 msgid "Recent runs"
 msgstr "Exécutions récentes"
 
-#: core/templates/core/admin/tasks_status.html:69
+#: core/templates/core/admin/tasks_status.html:72
 msgid "Duration"
 msgstr "Durée"
 
-#: core/templates/core/admin/tasks_status.html:103
+#: core/templates/core/admin/tasks_status.html:110
 msgid "No task has run yet."
 msgstr "Aucune tâche n'a encore tourné."
 
@@ -1304,7 +1348,7 @@ msgstr "Menu de navigation"
 
 #: core/templates/core/notification_unsubscribe.html:6
 #: core/templates/core/notification_unsubscribe.html:11
-#: core/templates/core/profile.html:205
+#: core/templates/core/profile.html:215
 #: core/templates/core/profile_edit.html:94
 msgid "Email notifications"
 msgstr "Notifications par email"
@@ -1399,52 +1443,52 @@ msgstr "Les événements qui vous intéressent apparaîtront ici."
 msgid "Member"
 msgstr "Membre"
 
-#: core/templates/core/profile.html:172
-msgid "Association member"
-msgstr "Membre d'association"
+#: core/templates/core/profile.html:178
+msgid "Subscription"
+msgstr "Adhésion"
 
-#: core/templates/core/profile.html:176
-msgid "Administrator"
-msgstr "Administrateur"
+#: core/templates/core/profile.html:186
+msgid "Not a subscriber"
+msgstr "Non adhérent"
 
-#: core/templates/core/profile.html:182
+#: core/templates/core/profile.html:192
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: core/templates/core/profile.html:188 core/tests/views/test_me.py:51
+#: core/templates/core/profile.html:198 core/tests/views/test_me.py:51
 msgid "Subscribed"
 msgstr "Abonné"
 
-#: core/templates/core/profile.html:191
+#: core/templates/core/profile.html:201
 #, python-format
 msgid "since %(date)s"
 msgstr "depuis le %(date)s"
 
-#: core/templates/core/profile.html:199
+#: core/templates/core/profile.html:209
 msgid "Not subscribed"
 msgstr "Non abonné"
 
-#: core/templates/core/profile.html:212
+#: core/templates/core/profile.html:222
 msgid "None"
 msgstr "Aucune"
 
-#: core/templates/core/profile.html:218
+#: core/templates/core/profile.html:228
 msgid "Change"
 msgstr "Modifier"
 
-#: core/templates/core/profile.html:222
+#: core/templates/core/profile.html:232
 msgid "Member since"
 msgstr "Membre depuis"
 
-#: core/templates/core/profile.html:228
+#: core/templates/core/profile.html:238
 msgid "Last update"
 msgstr "Dernière mise à jour"
 
-#: core/templates/core/profile.html:236
+#: core/templates/core/profile.html:246
 msgid "My data"
 msgstr "Mes données"
 
-#: core/templates/core/profile.html:238
+#: core/templates/core/profile.html:248
 msgid ""
 "Download everything we store about you: your account, votes, ideas, events "
 "you follow, consents and the emails we sent you. The file is in JSON, a "
@@ -1455,11 +1499,11 @@ msgstr ""
 "emails que nous vous avons envoyés. Le fichier est au format JSON, "
 "importable par d'autres services."
 
-#: core/templates/core/profile.html:255
+#: core/templates/core/profile.html:265
 msgid "Download my data"
 msgstr "Télécharger mes données"
 
-#: core/templates/core/profile.html:276
+#: core/templates/core/profile.html:286
 #: core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:20
 #: core/tests/views/test_profile_edit.py:34
@@ -1613,19 +1657,27 @@ msgstr "Les actualités des projets sur lesquels j'ai voté ou proposé une idé
 msgid "A reminder the day before events I am interested in"
 msgstr "Un rappel la veille des événements qui m'intéressent"
 
-#: core/views/tasks.py:71
+#: core/views/tasks.py:67
 #, python-format
 msgid "“%(task)s” has started."
 msgstr "« %(task)s » a démarré."
 
-#: core/views/tasks.py:73
+#: core/views/tasks.py:69
 #, python-format
 msgid "“%(task)s” is already in progress."
 msgstr "« %(task)s » est déjà en cours."
 
-#: core/wagtail_forms.py:54
+#: core/wagtail_forms.py:35
+msgid "Set by the role."
+msgstr "Défini par le rôle."
+
+#: core/wagtail_forms.py:60
 msgid "You do not have permission to assign this role."
 msgstr "Vous n'avez pas la permission d'attribuer ce rôle."
+
+#: core/wagtail_forms.py:73 core/wagtail_hooks.py:198
+msgid "This is the last administrator: name another one first."
+msgstr "C'est le dernier administrateur : nommez-en un autre d'abord."
 
 #: core/wagtail_hooks.py:55
 msgid ""
@@ -1636,6 +1688,15 @@ msgstr ""
 "Dessinez le secteur couvert par l'association : les habitants qui y vivent "
 "lui sont rattachés. Les secteurs des autres associations apparaissent en "
 "gris, et les nouveaux points s'accrochent à leurs bords."
+
+#~ msgid "Association Member"
+#~ msgstr "Membre d'association"
+
+#~ msgid "Admin"
+#~ msgstr "Administrateur"
+
+#~ msgid "Association member"
+#~ msgstr "Membre d'association"
 
 #~ msgid "Contact Phone"
 #~ msgstr "Numéro de contact"

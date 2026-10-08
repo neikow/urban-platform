@@ -116,6 +116,10 @@ def has_admin_access(request: HttpRequest) -> bool:
     return request.user.has_perm("wagtailadmin.access_admin")
 
 
+def can_see_participation_stats(request: HttpRequest) -> bool:
+    return request.user.has_perm("core.view_participation_stats")
+
+
 @cache
 def menu_entries() -> tuple[MenuItem, ...]:
     from about.models import AboutCommissionPage, AboutDevTeamPage, AboutWebsitePage
@@ -197,7 +201,7 @@ def menu_entries() -> tuple[MenuItem, ...]:
                 CheckedMenuItem(
                     _("Votes"),
                     reverse("vote_statistics"),
-                    check=has_admin_access,
+                    check=can_see_participation_stats,
                     name="votes",
                     icon_name="success",
                     order=100,
@@ -205,7 +209,7 @@ def menu_entries() -> tuple[MenuItem, ...]:
                 CheckedMenuItem(
                     _("Ideas"),
                     reverse("idea_statistics"),
-                    check=has_admin_access,
+                    check=can_see_participation_stats,
                     name="ideas",
                     icon_name="clipboard-list",
                     order=200,

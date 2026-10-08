@@ -12,6 +12,7 @@ from wagtail.users.forms import UserCreationForm, UserEditForm
 
 from .models import UserRole
 from .permissions import assignable_roles, can_change_role
+from .roles import is_last_administrator, sync_role_groups
 
 
 class RoleRestrictionMixin(forms.ModelForm):
@@ -27,6 +28,11 @@ class RoleRestrictionMixin(forms.ModelForm):
         self.for_user = kwargs.pop("for_user", None)
         super().__init__(*args, **kwargs)
         self._restrict_role_choices()
+        if "groups" in self.fields:
+            # Page and media rights follow the role (core.roles).
+            self.fields["groups"].disabled = True
+            self.fields["groups"].required = False
+            self.fields["groups"].help_text = _("Set by the role.")
 
     def _restrict_role_choices(self) -> None:
         if "role" not in self.fields:
@@ -35,7 +41,7 @@ class RoleRestrictionMixin(forms.ModelForm):
         allowed = assignable_roles(self.for_user)
 
         # If the editor has no authority over the target's current role (e.g. an
-        # ASSOCIATION_MEMBER editing an ADMIN), lock the field to that value so
+        # editor with no user rights reaching the form), lock the field to that value so
         # the role cannot be changed and the select still renders correctly.
         current = getattr(self.instance, "role", None)
         if current is not None and current not in allowed:
@@ -56,12 +62,36 @@ class RoleRestrictionMixin(forms.ModelForm):
             )
         return role
 
+    def clean(self) -> dict[str, Any]:
+        cleaned_data = super().clean() or {}
+        instance = self.instance
+        if instance.pk and is_last_administrator(type(instance).objects.get(pk=instance.pk)):
+            demoted = cleaned_data.get("role", instance.role) != UserRole.ADMIN
+            demoted = demoted and not cleaned_data.get("is_superuser", instance.is_superuser)
+            if demoted or cleaned_data.get("is_active", True) is False:
+                raise forms.ValidationError(
+                    _("This is the last administrator: name another one first."),
+                    code="last_administrator",
+                )
+        return cleaned_data
+
+    def save(self, commit: bool = True) -> Any:
+        if "is_subscriber" in self.changed_data:
+            subscribed = self.instance.is_subscriber
+            self.instance.is_subscriber = not subscribed
+            self.instance.set_subscription(subscribed)
+        return super().save(commit=commit)
+
+    def _save_m2m(self) -> None:
+        super()._save_m2m()  # type: ignore[misc]
+        sync_role_groups(self.instance)
+
 
 class RoleUserCreationForm(RoleRestrictionMixin, UserCreationForm):
     class Meta(UserCreationForm.Meta):
-        fields = UserCreationForm.Meta.fields | {"role"}
+        fields = UserCreationForm.Meta.fields | {"role", "is_subscriber"}
 
 
 class RoleUserEditForm(RoleRestrictionMixin, UserEditForm):
     class Meta(UserEditForm.Meta):
-        fields = UserEditForm.Meta.fields | {"role"}
+        fields = UserEditForm.Meta.fields | {"role", "is_subscriber"}

@@ -1,8 +1,10 @@
 from wagtail.models import Page, PanelPlaceholder
+
+from legal.permissions import AdministratorsOnlyPageMixin
 from django.utils.translation import gettext_lazy as _
 
 
-class LegalIndexPage(Page):
+class LegalIndexPage(AdministratorsOnlyPageMixin, Page):
     max_count_per_parent = 1
     parent_page_types: list[str] = ["home.HomePage"]
     child_page_types: list[str] = []

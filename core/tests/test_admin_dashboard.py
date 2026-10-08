@@ -48,15 +48,34 @@ class TestDashboard:
         assert f"/admin/pages/add/publications/projectpage/{index.pk}/" in content
         assert "/admin/settings/core/announcement/" in content
 
-    def test_members_without_page_rights_only_get_the_announcement(self, client, index):
-        member = User.objects.create_user(
-            email="member@example.com", password="pass12345", role=UserRole.ASSOCIATION_MEMBER
+    def test_editors_create_pages_but_not_the_announcement(self, client, index):
+        editor = User.objects.create_user(
+            email="editor@example.com", password="pass12345", role=UserRole.EDITOR
         )
 
-        content = dashboard(client, member)
+        content = dashboard(client, editor)
 
-        assert "/admin/settings/core/announcement/" in content
-        assert "/admin/pages/add/" not in content
+        assert f"/admin/pages/add/publications/projectpage/{index.pk}/" in content
+        assert "/admin/settings/core/announcement/" not in content
+
+    def test_responses_link_for_moderators_only(self, client, index):
+        project = ProjectPage(
+            title="Jardin partagé",
+            slug="jardin",
+            participation_mode=ParticipationMode.VOTING,
+            voting_end_date=timezone.now() + timedelta(days=5),
+        )
+        index.add_child(instance=project)
+        project.save_revision().publish()
+        stats = f"/admin/vote-statistics/{project.pk}/"
+
+        editor = User.objects.create_user(email="e@example.com", password="x", role=UserRole.EDITOR)
+        moderator = User.objects.create_user(
+            email="m@example.com", password="x", role=UserRole.MODERATOR
+        )
+
+        assert stats not in dashboard(client, editor)
+        assert stats in dashboard(client, moderator)
 
     def test_consultations_with_their_responses(self, client, superuser, index):
         project = ProjectPage(
@@ -98,11 +117,13 @@ class TestDashboard:
         assert escape("Projet en préparation") in content
 
     def test_drafts_are_limited_to_pages_the_user_can_edit(self, client, index):
-        draft = ProjectPage(title="Projet confidentiel", slug="confidentiel", live=False)
-        index.add_child(instance=draft)
-        draft.save_revision()
-        member = User.objects.create_user(
-            email="member@example.com", password="pass12345", role=UserRole.ASSOCIATION_MEMBER
+        from legal.models import PrivacyPolicyPage
+
+        policy = PrivacyPolicyPage.objects.first()
+        policy.title = "Politique en révision"
+        policy.save_revision()
+        editor = User.objects.create_user(
+            email="editor@example.com", password="pass12345", role=UserRole.EDITOR
         )
 
-        assert "Projet confidentiel" not in dashboard(client, member)
+        assert escape("Politique en révision") not in dashboard(client, editor)

@@ -16,6 +16,8 @@ class EventInterestView(ParticipationMixin, View):
     # Flagging interest is not a contribution: no code of conduct needed, but a
     # verified email is, since reminders are sent to it.
     requires_code_of_conduct = False
+    # Nor a subscription: it only asks for a reminder.
+    requires_subscription = False
 
     def get_event(self, event_id: int) -> EventPage | None:
         return EventPage.objects.live().filter(pk=event_id).first()

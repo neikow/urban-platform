@@ -108,3 +108,5 @@ CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", REDIS_URL)
 
 # Use Brevo email service in production
 EMAIL_SERVICE_BACKEND = "brevo"
+# Emails sent by Django and Wagtail (moderation workflow) go through Brevo too.
+EMAIL_BACKEND = "core.emails.backend.EmailServiceBackend"

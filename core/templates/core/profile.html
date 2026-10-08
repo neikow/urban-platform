@@ -166,14 +166,24 @@
                                     <span
                                         class="badge badge-primary text-3xs font-bold uppercase tracking-wide"
                                     >{% trans "Member" %}</span>
-                                {% elif user.role == 'ASSOCIATION_MEMBER' %}
+                                {% else %}
                                     <span
                                         class="badge badge-secondary text-3xs font-bold uppercase tracking-wide"
-                                    >{% trans "Association member" %}</span>
-                                {% elif user.role == 'ADMIN' %}
+                                    >{{ user.get_role_display }}</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
+                                {% trans "Subscription" %}
+                            </p>
+                            <p>
+                                {% if user.is_subscriber %}
                                     <span
-                                        class="badge badge-accent text-3xs font-bold uppercase tracking-wide"
-                                    >{% trans "Administrator" %}</span>
+                                        class="badge badge-success text-3xs font-bold uppercase tracking-wide"
+                                    >{% trans "Subscriber" %}</span>
+                                {% else %}
+                                    <span class="text-sm text-base-content/60">{% trans "Not a subscriber" %}</span>
                                 {% endif %}
                             </p>
                         </div>

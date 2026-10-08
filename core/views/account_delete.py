@@ -42,6 +42,15 @@ class AccountDeleteForm(forms.Form):
 
         return password
 
+    def clean(self) -> dict[str, Any] | None:
+        from core.roles import is_last_administrator
+
+        if is_last_administrator(self.user):
+            raise forms.ValidationError(
+                "Vous êtes le dernier administrateur : nommez-en un autre avant de supprimer votre compte."
+            )
+        return super().clean()
+
 
 class AccountDeleteView(LoginRequiredMixin, FormView):
     template_name = "core/account_delete.html"
