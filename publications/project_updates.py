@@ -36,7 +36,7 @@ def send_project_update_now(update: ProjectUpdate) -> int:
     project = ProjectPage.objects.get(pk=update.page_id)
     if not project.live:
         return 0
-    return notify(
+    sent = notify(
         NotificationKind.PROJECT_UPDATE,
         opted_in(NotificationKind.PROJECT_UPDATE, participant_ids(project)),
         subject=_("%(project)s: %(title)s") % {"project": project.title, "title": update.title},
@@ -49,3 +49,7 @@ def send_project_update_now(update: ProjectUpdate) -> int:
             "update_date": update.date.isoformat(),
         },
     )
+    from core.audit import audit
+
+    audit(project, "publications.project_update.sent", title=update.title, recipients=sent)
+    return sent

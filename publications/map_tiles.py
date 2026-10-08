@@ -159,14 +159,16 @@ def is_refreshing() -> bool:
     return bool(cache.get(QUEUED_KEY) or cache.get(LOCK_KEY))
 
 
-def queue_refresh() -> bool:
-    """Ask the worker for an update now, whatever the interval. False if one is under way."""
+def queue_refresh() -> str | None:
+    """Ask the worker for an update now, whatever the interval.
+
+    Returns the task id, or None if an update is already under way.
+    """
     from publications.tasks import refresh_map_tiles
 
     if is_refreshing() or not cache.add(QUEUED_KEY, True, LOCK_SECONDS):
-        return False
-    refresh_map_tiles.delay(force=True)  # type: ignore[attr-defined]  # Celery task
-    return True
+        return None
+    return str(refresh_map_tiles.delay(force=True).id)  # type: ignore[attr-defined]  # Celery task
 
 
 def refresh_tiles(force: bool = False) -> str | None:
@@ -212,6 +214,9 @@ def refresh_tiles(force: bool = False) -> str | None:
         tiles_error="",
     )
     _prune(keep={name, current})
+    from core.audit import audit
+
+    audit(map_settings, "publications.map_tiles.update", build=build)
     # Cached page fragments embed the tiles URL.
     clear_content_cache()
     logger.info("Map tiles updated to %s.", build)

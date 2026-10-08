@@ -15,3 +15,11 @@ def prune_task_runs() -> int:
     from core.task_monitor import prune_runs
 
     return prune_runs()
+
+
+@shared_task
+def prune_security_events() -> int:
+    """Forget logins and other security events after a year (activity log)."""
+    from core.audit import prune_security_events as prune
+
+    return prune()

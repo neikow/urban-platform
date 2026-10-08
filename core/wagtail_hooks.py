@@ -198,3 +198,59 @@ def keep_one_administrator(request: HttpRequest, user: Any) -> HttpResponse | No
         messages.error(request, _("This is the last administrator: name another one first."))
         return redirect("wagtailusers_users:edit", user.pk)
     return None
+
+
+# --- Audit trail (core/audit.py) ------------------------------------------------
+
+
+@hooks.register("register_log_actions")
+def register_audit_actions(actions: Any) -> None:
+    from core.audit import register_actions
+
+    register_actions(actions)
+
+
+@hooks.register("before_edit_setting")
+def remember_setting(request: HttpRequest, instance: Any) -> None:
+    import copy
+
+    request.setting_before_edit = copy.copy(instance)  # type: ignore[attr-defined]
+
+
+@hooks.register("after_edit_setting")
+def log_setting_changes(request: HttpRequest, instance: Any) -> None:
+    """Wagtail logs that a setting was saved; this adds what changed."""
+    from core.audit import audit, settings_changes
+
+    before = getattr(request, "setting_before_edit", None)
+    if before is None:
+        return
+    fields = [f.name for f in instance._meta.concrete_fields if f.editable and not f.is_relation]
+    fields = [name for name in fields if name not in ("id",)]
+    changes = settings_changes(before, instance, fields)
+    if changes:
+        audit(instance, "core.settings.change", changes=changes)
+
+
+@hooks.register("register_admin_urls")
+def register_audit_urls() -> list[URLPattern]:
+    from core.views.audit import AuditLogResultsView, AuditLogView
+
+    return [
+        path("activity-log/", AuditLogView.as_view(), name="audit_log"),
+        path("activity-log/results/", AuditLogResultsView.as_view(), name="audit_log_results"),
+    ]
+
+
+@hooks.register("register_settings_menu_item")
+def register_audit_menu_item() -> MenuItem:
+    from core.admin_menu import CheckedMenuItem
+
+    return CheckedMenuItem(
+        _("Activity log"),
+        reverse("audit_log"),
+        check=lambda request: request.user.has_perm("core.view_audit_log"),
+        name="activity-log",
+        icon_name="history",
+        order=950,
+    )

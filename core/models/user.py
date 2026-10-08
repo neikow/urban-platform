@@ -193,7 +193,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         permissions = [
             ("view_participation_stats", _("Can see vote and idea statistics")),
             ("manage_tasks", _("Can see and start background tasks")),
+            ("view_audit_log", _("Can see the activity log")),
         ]
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        # Values as loaded, to log what saving changes (core.audit).
+        from core.audit import snapshot
+
+        self.audit_snapshot = snapshot(self)
 
     def has_role(self, role: str) -> bool:
         """Whether the user's role is ``role`` or above (superusers have them all)."""

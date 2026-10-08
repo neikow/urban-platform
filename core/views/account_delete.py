@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.views.generic.edit import FormView
 
+from core.audit import audit, forget_user
 from core.models import User
 from ..widgets import DaisyPasswordInput, DaisyCheckboxInput
 
@@ -70,6 +71,8 @@ class AccountDeleteView(LoginRequiredMixin, FormView):
 
         # Soft delete le compte pour anonymiser les données
         user.soft_delete()
+        forget_user(user)
+        audit(user, "core.auth.account_delete", user=user)
 
         messages.success(
             self.request,

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 13:16+0200\n"
+"POT-Creation-Date: 2026-10-08 13:35+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -605,7 +605,7 @@ msgstr "Simple"
 msgid "The publications and the map."
 msgstr "Les publications et la carte."
 
-#: publications/polls.py:73
+#: publications/polls.py:77
 #, python-format
 msgid "Poll results: %(title)s"
 msgstr "Résultats du vote : %(title)s"
@@ -634,7 +634,7 @@ msgid "This cannot be undone."
 msgstr "Cette action est irréversible."
 
 #: publications/templates/publications/admin/close_poll_confirm.html:17
-#: publications/wagtail_hooks.py:54
+#: publications/wagtail_hooks.py:56
 msgid "Close the poll and send the results"
 msgstr "Clore le vote et envoyer les résultats"
 
@@ -645,7 +645,7 @@ msgstr "Annuler"
 #: publications/templates/publications/admin/ideas_stats.html:4
 #: publications/templates/publications/admin/ideas_stats.html:7
 #: publications/templates/publications/admin/ideas_stats_detail.html:4
-#: publications/views/idea_stats.py:37 publications/views/idea_stats.py:73
+#: publications/views/idea_stats.py:37 publications/views/idea_stats.py:75
 msgid "Idea Collection"
 msgstr "Collecte d'idées"
 
@@ -731,7 +731,7 @@ msgstr ""
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
-#: publications/views/vote_stats.py:50 publications/views/vote_stats.py:105
+#: publications/views/vote_stats.py:50 publications/views/vote_stats.py:107
 msgid "Vote Statistics"
 msgstr "Statistiques des votes"
 
@@ -1312,7 +1312,7 @@ msgstr "Aucune idée à supprimer"
 msgid "Idea removed successfully"
 msgstr "Idée supprimée avec succès"
 
-#: publications/views/map_tiles.py:19
+#: publications/views/map_tiles.py:20
 msgid ""
 "The map update has started. It takes a few minutes: reload this page to see "
 "it."
@@ -1320,7 +1320,7 @@ msgstr ""
 "La mise à jour de la carte a commencé. Elle prend quelques minutes : "
 "rechargez cette page pour la voir."
 
-#: publications/views/map_tiles.py:22
+#: publications/views/map_tiles.py:23
 msgid "A map update is already in progress."
 msgstr "Une mise à jour de la carte est déjà en cours."
 
@@ -1390,6 +1390,45 @@ msgstr "Aucun vote à supprimer"
 #: publications/views/vote.py:116
 msgid "Vote removed successfully"
 msgstr "Vote supprimé avec succès"
+
+#: publications/wagtail_hooks.py:75
+msgid "Close a poll"
+msgstr "Clore un vote"
+
+#: publications/wagtail_hooks.py:79
+msgid "Poll closed by hand"
+msgstr "Vote clos à la main"
+
+#: publications/wagtail_hooks.py:80
+msgid "Poll closed at its end date"
+msgstr "Vote clos à sa date de fin"
+
+#: publications/wagtail_hooks.py:83
+msgid "Send poll results"
+msgstr "Envoyer les résultats d'un vote"
+
+#: publications/wagtail_hooks.py:86
+#, python-format
+msgid "Results emailed to %(count)s voters"
+msgstr "Résultats envoyés par email à %(count)s votants"
+
+#: publications/wagtail_hooks.py:91
+msgid "Send project news"
+msgstr "Envoyer une actualité de projet"
+
+#: publications/wagtail_hooks.py:94
+#, python-format
+msgid "“%(title)s” emailed to %(count)s followers"
+msgstr "« %(title)s » envoyée par email à %(count)s abonnés"
+
+#: publications/wagtail_hooks.py:100
+msgid "Update the map"
+msgstr "Mettre à jour la carte"
+
+#: publications/wagtail_hooks.py:103
+#, python-format
+msgid "Map data updated to %(build)s"
+msgstr "Données de la carte mises à jour : %(build)s"
 
 #: publications/widgets.py:52
 msgid ""

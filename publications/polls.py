@@ -21,9 +21,13 @@ def close_poll(
     project: ProjectPage, reason: PollClosureReason, closed_by: User | None = None
 ) -> PollClosure:
     """Close the poll (idempotent) and queue the results email once committed."""
-    closure, _created = PollClosure.objects.get_or_create(
+    closure, created = PollClosure.objects.get_or_create(
         project=project, defaults={"reason": reason, "closed_by": closed_by}
     )
+    if created:
+        from core.audit import audit
+
+        audit(project, "publications.poll.close", user=closed_by, reason=str(reason))
     from publications.tasks import send_poll_results
 
     transaction.on_commit(lambda: send_poll_results.delay(project.pk))  # type: ignore[attr-defined]
@@ -67,10 +71,14 @@ def send_poll_results_now(project: ProjectPage) -> int:
             for row in results["ordered"]
         ],
     }
-    return notify(
+    sent = notify(
         NotificationKind.POLL_RESULTS,
         opted_in(NotificationKind.POLL_RESULTS, voter_ids),
         subject=_("Poll results: %(title)s") % {"title": project.title},
         template="emails/notifications/poll_results.html",
         context=context,
     )
+    from core.audit import audit
+
+    audit(project, "publications.poll.results_sent", recipients=sent)
+    return sent

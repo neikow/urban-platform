@@ -46,6 +46,15 @@ class CoreConfig(AppConfig):
             sync_groups, sender="core.User", dispatch_uid="core.roles.sync_groups", weak=False
         )
 
+        # Audit trail of what Wagtail does not log itself (core.audit).
+        from django.contrib.auth.signals import user_logged_in, user_login_failed
+
+        from core.audit import on_logged_in, on_login_failed, on_user_saved
+
+        user_saved.connect(on_user_saved, sender="core.User", dispatch_uid="core.audit.user_saved")
+        user_logged_in.connect(on_logged_in, dispatch_uid="core.audit.logged_in")
+        user_login_failed.connect(on_login_failed, dispatch_uid="core.audit.login_failed")
+
         # Every Celery task run is recorded for the admin tasks page.
         from core.task_monitor import connect_signals
 

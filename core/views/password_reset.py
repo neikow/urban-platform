@@ -120,6 +120,9 @@ class PasswordResetConfirmView(FormView):
             password = form.cleaned_data["password"]
             self.reset_user.set_password(password)
             self.reset_user.save(update_fields=["password"])
+            from core.audit import audit
+
+            audit(self.reset_user, "core.auth.password_reset", user=self.reset_user)
 
         return redirect("password_reset_complete")
 

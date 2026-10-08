@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.urls import URLPattern, path, reverse
 from django.utils.translation import gettext_lazy as _
 from wagtail import hooks
@@ -63,3 +65,44 @@ def register_map_tiles_refresh_url() -> list[URLPattern]:
     from publications.views.map_tiles import refresh_map_tiles
 
     return [path("map-tiles/refresh/", refresh_map_tiles, name="map_tiles_refresh")]
+
+
+@hooks.register("register_log_actions")
+def register_publication_log_actions(actions: Any) -> None:
+    from wagtail.log_actions import LogFormatter
+
+    class PollCloseFormatter(LogFormatter):
+        label = _("Close a poll")
+
+        def format_message(self, log_entry: Any) -> str:
+            if log_entry.data.get("reason") == "MANUAL":
+                return str(_("Poll closed by hand"))
+            return str(_("Poll closed at its end date"))
+
+    class PollResultsFormatter(LogFormatter):
+        label = _("Send poll results")
+
+        def format_message(self, log_entry: Any) -> str:
+            return _("Results emailed to %(count)s voters") % {
+                "count": log_entry.data.get("recipients", 0)
+            }
+
+    class ProjectNewsFormatter(LogFormatter):
+        label = _("Send project news")
+
+        def format_message(self, log_entry: Any) -> str:
+            return _("“%(title)s” emailed to %(count)s followers") % {
+                "title": log_entry.data.get("title", ""),
+                "count": log_entry.data.get("recipients", 0),
+            }
+
+    class MapUpdateFormatter(LogFormatter):
+        label = _("Update the map")
+
+        def format_message(self, log_entry: Any) -> str:
+            return _("Map data updated to %(build)s") % {"build": log_entry.data.get("build", "")}
+
+    actions.register_action("publications.poll.close")(PollCloseFormatter)
+    actions.register_action("publications.poll.results_sent")(PollResultsFormatter)
+    actions.register_action("publications.project_update.sent")(ProjectNewsFormatter)
+    actions.register_action("publications.map_tiles.update")(MapUpdateFormatter)
