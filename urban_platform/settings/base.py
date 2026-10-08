@@ -261,6 +261,10 @@ CELERY_BEAT_SCHEDULE = {
         # admin (Settings › Map) has passed.
         "schedule": crontab(hour="4", minute="30"),
     },
+    "prune-task-runs": {
+        "task": "core.tasks.prune_task_runs",
+        "schedule": crontab(hour="3", minute="15"),
+    },
     "anonymize-old-email-events": {
         "task": "core.emails.tasks.anonymize_old_email_events",
         "schedule": 86400,

@@ -153,3 +153,32 @@ def choose_page_template(
         raise Http404
     pending_template.set((page_class, template))
     return None
+
+
+# --- Background tasks page (core/task_monitor.py) ---------------------------------
+
+
+@hooks.register("register_admin_urls")
+def register_tasks_urls() -> list[URLPattern]:
+    from core.views.tasks import TasksView, run_task, tasks_status
+
+    return [
+        path("tasks/", TasksView.as_view(), name="admin_tasks"),
+        path("tasks/status/", tasks_status, name="admin_tasks_status"),
+        path("tasks/<slug:key>/run/", run_task, name="admin_tasks_run"),
+    ]
+
+
+@hooks.register("register_settings_menu_item")
+def register_tasks_menu_item() -> MenuItem:
+    from core.admin_menu import CheckedMenuItem
+    from core.views.tasks import can_manage_tasks
+
+    return CheckedMenuItem(
+        _("Tasks"),
+        reverse("admin_tasks"),
+        check=can_manage_tasks,
+        name="tasks",
+        icon_name="cogs",
+        order=900,
+    )

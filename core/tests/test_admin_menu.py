@@ -37,6 +37,7 @@ def settings_urls(user):
 
 ANNOUNCEMENT_URL = "/admin/settings/core/announcement/"
 USERS_URL = "/admin/users/"
+TASKS_URL = "/admin/tasks/"
 
 
 def make_user(role, email, **kwargs):
@@ -68,7 +69,7 @@ class TestAdminMenu:
     def test_administrators_manage_users_and_the_announcement(self):
         admin = make_user(UserRole.ADMIN, "admin@example.com")
 
-        assert sorted(settings_urls(admin)) == [ANNOUNCEMENT_URL, USERS_URL]
+        assert sorted(settings_urls(admin)) == [ANNOUNCEMENT_URL, TASKS_URL, USERS_URL]
 
     def test_association_members_do_not_see_user_management(self):
         member = make_user(UserRole.ASSOCIATION_MEMBER, "member@example.com")

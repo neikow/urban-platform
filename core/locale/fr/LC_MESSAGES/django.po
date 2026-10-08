@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 11:47+0200\n"
+"POT-Creation-Date: 2026-10-08 12:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -448,7 +448,7 @@ msgstr "En attente"
 msgid "Sent"
 msgstr "Envoyé"
 
-#: core/models/email_event.py:19
+#: core/models/email_event.py:19 core/models/task_run.py:8
 msgid "Failed"
 msgstr "Échec"
 
@@ -460,8 +460,9 @@ msgstr "Utilisateur"
 msgid "Event Type"
 msgstr "Type d'événement"
 
-#: core/models/email_event.py:38
+#: core/models/email_event.py:38 core/models/task_run.py:22
 #: core/templates/core/admin/dashboard/drafts.html:9
+#: core/templates/core/admin/tasks_status.html:67
 msgid "Status"
 msgstr "Statut"
 
@@ -562,6 +563,55 @@ msgstr "Notification envoyée"
 msgid "Notifications sent"
 msgstr "Notifications envoyées"
 
+#: core/models/task_run.py:6 core/templates/core/admin/tasks_status.html:41
+msgid "Running"
+msgstr "En cours"
+
+#: core/models/task_run.py:7
+msgid "Succeeded"
+msgstr "Réussie"
+
+#: core/models/task_run.py:9
+msgid "Retrying"
+msgstr "Nouvel essai"
+
+#: core/models/task_run.py:19 core/templates/core/admin/tasks_status.html:28
+#: core/templates/core/admin/tasks_status.html:66
+msgid "Task"
+msgstr "Tâche"
+
+#: core/models/task_run.py:20 core/templates/core/admin/tasks_status.html:31
+msgid "Arguments"
+msgstr "Arguments"
+
+#: core/models/task_run.py:24 core/templates/core/admin/tasks_status.html:32
+msgid "Worker"
+msgstr "Worker"
+
+#: core/models/task_run.py:25 core/templates/core/admin/tasks_status.html:68
+msgid "Started"
+msgstr "Début"
+
+#: core/models/task_run.py:26
+msgid "Finished"
+msgstr "Fin"
+
+#: core/models/task_run.py:27 core/templates/core/admin/tasks_status.html:70
+msgid "Result"
+msgstr "Résultat"
+
+#: core/models/task_run.py:28
+msgid "Error"
+msgstr "Erreur"
+
+#: core/models/task_run.py:31
+msgid "Task run"
+msgstr "Exécution de tâche"
+
+#: core/models/task_run.py:32
+msgid "Task runs"
+msgstr "Exécutions de tâches"
+
 #: core/models/user.py:15
 msgid "Citizen"
 msgstr "Citoyen"
@@ -640,12 +690,12 @@ msgstr "Date du consentement à la newsletter"
 
 #: core/models/user.py:109
 msgid ""
-"When the user last agreed to receive the newsletter (GDPR proof of consent). "
-"Empty if they are not subscribed, or subscribed before this date was "
+"When the user last agreed to receive the newsletter (GDPR proof of consent)."
+" Empty if they are not subscribed, or subscribed before this date was "
 "recorded."
 msgstr ""
-"Date à laquelle l'utilisateur a accepté de recevoir la newsletter (preuve du "
-"consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
+"Date à laquelle l'utilisateur a accepté de recevoir la newsletter (preuve du"
+" consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
 "l'enregistrement de cette date."
 
 #: core/models/user.py:118
@@ -712,6 +762,36 @@ msgstr "les actualités des projets"
 #: core/notifications/__init__.py:42
 msgid "event reminders"
 msgstr "les rappels d'événements"
+
+#: core/task_monitor.py:258
+msgid "Update the map"
+msgstr "Mettre à jour la carte"
+
+#: core/task_monitor.py:259
+msgid "Download the latest OpenStreetMap data for the maps (about 35 MB)."
+msgstr ""
+"Télécharger les dernières données OpenStreetMap pour les cartes (environ 35 "
+"Mo)."
+
+#: core/task_monitor.py:265
+msgid "Match residents to associations"
+msgstr "Rattacher les habitants aux associations"
+
+#: core/task_monitor.py:266
+msgid ""
+"Attach every user with an address to the association whose area contains it."
+msgstr ""
+"Rattacher chaque utilisateur ayant une adresse à l'association dont le "
+"secteur la contient."
+
+#: core/task_monitor.py:272
+msgid "Close expired polls"
+msgstr "Clore les votes échus"
+
+#: core/task_monitor.py:273
+msgid "Close the votes whose end date has passed, and send their results."
+msgstr ""
+"Clore les votes dont la date de fin est passée, et envoyer leurs résultats."
 
 #: core/templates/auth/email_verify_error.html:4
 msgid "Verification error"
@@ -817,7 +897,8 @@ msgstr "Votre mot de passe a été réinitialisé avec succès."
 
 #: core/templates/auth/password_reset_complete.html:33
 msgid "You can now log in with your new password."
-msgstr "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
+msgstr ""
+"Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
 
 #: core/templates/auth/password_reset_complete.html:37
 #: core/templates/auth/password_reset_request.html:50
@@ -864,8 +945,8 @@ msgstr "Mot de passe oublié ?"
 msgid ""
 "Enter your email address and we will send you a link to reset your password."
 msgstr ""
-"Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser "
-"votre mot de passe."
+"Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser"
+" votre mot de passe."
 
 #: core/templates/auth/password_reset_request.html:44
 msgid "Send the link"
@@ -1059,6 +1140,78 @@ msgstr "Utiliser « %(name)s »"
 msgid "Start from a blank page"
 msgstr "Partir d'une page vide"
 
+#: core/templates/core/admin/tasks.html:4
+#: core/templates/core/admin/tasks.html:12 core/views/tasks.py:40
+#: core/wagtail_hooks.py:178
+msgid "Tasks"
+msgstr "Tâches"
+
+#: core/templates/core/admin/tasks.html:16
+msgid "Run now"
+msgstr "Lancer maintenant"
+
+#: core/templates/core/admin/tasks.html:34
+msgid "Could not refresh the tasks. Retrying…"
+msgstr "Impossible d'actualiser les tâches. Nouvel essai…"
+
+#: core/templates/core/admin/tasks_status.html:3
+msgid "Running and queued"
+msgstr "En cours et en attente"
+
+#: core/templates/core/admin/tasks_status.html:6
+#, python-format
+msgid "%(counter)s worker online"
+msgid_plural "%(counter)s workers online"
+msgstr[0] "%(counter)s worker en ligne"
+msgstr[1] "%(counter)s workers en ligne"
+
+#: core/templates/core/admin/tasks_status.html:12
+msgid "No worker answers: background tasks are not running."
+msgstr "Aucun worker ne répond : les tâches de fond ne tournent pas."
+
+#: core/templates/core/admin/tasks_status.html:16
+#, python-format
+msgid "%(counter)s task waiting for a worker"
+msgid_plural "%(counter)s tasks waiting for a worker"
+msgstr[0] "%(counter)s tâche en attente d'un worker"
+msgstr[1] "%(counter)s tâches en attente d'un worker"
+
+#: core/templates/core/admin/tasks_status.html:22
+msgid "Updated at"
+msgstr "Mis à jour à"
+
+#: core/templates/core/admin/tasks_status.html:29
+msgid "State"
+msgstr "État"
+
+#: core/templates/core/admin/tasks_status.html:30
+msgid "Since / planned for"
+msgstr "Depuis / prévue pour"
+
+#: core/templates/core/admin/tasks_status.html:43
+msgid "Next"
+msgstr "Suivante"
+
+#: core/templates/core/admin/tasks_status.html:45
+msgid "Scheduled"
+msgstr "Planifiée"
+
+#: core/templates/core/admin/tasks_status.html:56
+msgid "No task is running."
+msgstr "Aucune tâche en cours."
+
+#: core/templates/core/admin/tasks_status.html:61
+msgid "Recent runs"
+msgstr "Exécutions récentes"
+
+#: core/templates/core/admin/tasks_status.html:69
+msgid "Duration"
+msgstr "Durée"
+
+#: core/templates/core/admin/tasks_status.html:103
+msgid "No task has run yet."
+msgstr "Aucune tâche n'a encore tourné."
+
 #: core/templates/core/blocks/faq_list_block.html:4
 msgid "Foire aux Questions"
 msgstr "Foire aux Questions"
@@ -1201,7 +1354,8 @@ msgstr "Mon profil"
 msgid "Account"
 msgstr "Compte"
 
-#: core/templates/core/profile.html:27 core/templates/core/profile_edit.html:48
+#: core/templates/core/profile.html:27
+#: core/templates/core/profile_edit.html:48
 msgid "Personal information"
 msgstr "Informations personnelles"
 
@@ -1305,7 +1459,8 @@ msgstr ""
 msgid "Download my data"
 msgstr "Télécharger mes données"
 
-#: core/templates/core/profile.html:276 core/templates/core/profile_edit.html:4
+#: core/templates/core/profile.html:276
+#: core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:20
 #: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
@@ -1458,14 +1613,24 @@ msgstr "Les actualités des projets sur lesquels j'ai voté ou proposé une idé
 msgid "A reminder the day before events I am interested in"
 msgstr "Un rappel la veille des événements qui m'intéressent"
 
+#: core/views/tasks.py:71
+#, python-format
+msgid "“%(task)s” has started."
+msgstr "« %(task)s » a démarré."
+
+#: core/views/tasks.py:73
+#, python-format
+msgid "“%(task)s” is already in progress."
+msgstr "« %(task)s » est déjà en cours."
+
 #: core/wagtail_forms.py:54
 msgid "You do not have permission to assign this role."
 msgstr "Vous n'avez pas la permission d'attribuer ce rôle."
 
 #: core/wagtail_hooks.py:55
 msgid ""
-"Draw the area the association covers: residents living in it are attached to "
-"the association. The other associations' areas are shown in grey, and new "
+"Draw the area the association covers: residents living in it are attached to"
+" the association. The other associations' areas are shown in grey, and new "
 "points snap to their edges."
 msgstr ""
 "Dessinez le secteur couvert par l'association : les habitants qui y vivent "
