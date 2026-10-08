@@ -46,6 +46,7 @@ proxy that already runs in Docker. It only needs to reach the control plane.
 | `AGENT_IMAGE` | `ghcr.io/neikow/urban-platform` | The only image websites may run (and its `-nginx`) |
 | `AGENT_POLL_SECONDS` | `30` | |
 | `AGENT_RETRY_SECONDS` | `300` | Delay before trying a failed deployment again |
+| `AGENT_STATS_SECONDS` | `900` | How often the websites' figures are collected |
 | `AGENT_STATE_DIR` | `/var/lib/urban-agent` | Keep it on a volume |
 | `AGENT_INSECURE` | | `1` allows `http://` (development only) |
 
@@ -137,7 +138,8 @@ Sent after each poll:
       "status": "running",
       "version": "1.4.0",
       "error": "",
-      "services": {"web": "healthy", "worker": "running", "migrator": "exited"}
+      "services": {"web": "healthy", "worker": "running", "migrator": "exited"},
+      "stats": {"pages": 12, "users": 40}
     }
   ]
 }
@@ -148,6 +150,10 @@ Sent after each poll:
 - `status`: `running`, `stopped`, `absent`, or `failed` with the reason in `error`. A
   failed deployment is retried after `AGENT_RETRY_SECONDS`, or at once for a new generation.
 - `version`: what the website's `/healthz/` reported after the deployment.
+- `stats`: the website's figures, counts only (`manage.py tenant_stats` in its `web`
+  container): published `pages`, `users` accounts. Collected after each deployment, then
+  every `AGENT_STATS_SECONDS` while it runs; `{}` until then, or for a release without
+  the command. Other non-negative integers may appear later.
 - Websites this host runs but the desired state left out are reported too.
 
 ## Development

@@ -19,6 +19,8 @@ class Config:
     poll_seconds: int = 30
     # A failed deployment is tried again after this delay, not at every poll.
     retry_seconds: int = 300
+    # The websites' figures (pages, users) are collected this often.
+    stats_seconds: int = 900
     # Plain HTTP to the control plane, for local development only.
     insecure: bool = False
 
@@ -38,6 +40,7 @@ class Config:
             image=environ.get("AGENT_IMAGE", cls.image),
             poll_seconds=int(environ.get("AGENT_POLL_SECONDS", cls.poll_seconds)),
             retry_seconds=int(environ.get("AGENT_RETRY_SECONDS", cls.retry_seconds)),
+            stats_seconds=int(environ.get("AGENT_STATS_SECONDS", cls.stats_seconds)),
             insecure=insecure,
         )
 

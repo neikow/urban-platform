@@ -19,6 +19,9 @@ Built by `.github/workflows/release.yml` and published on GitHub's registry:
 release, `saas-<commit>` for a build of the branch. A deployment is done when it reports
 the version just deployed.
 
+`python manage.py tenant_stats` prints the website's figures as JSON, counts only
+(`{"pages": 12, "users": 40}`): the agent reports them to the control plane.
+
 Images are built for `linux/amd64`.
 
 ## Running a website
