@@ -8,6 +8,9 @@ in line with them. Each step is idempotent, so it runs at every deployment:
 - TENANT_ADMIN_EMAIL has an administrator account, invited to set a password;
 - the territory is TENANT_TERRITORY (an INSEE code), fetched again if it changed;
 - the contact email is TENANT_CONTACT_EMAIL, until an administrator changes it;
+- the branding starts from TENANT_TAGLINE, the colours and the images (downloaded
+  from TENANT_LOGO_URL, TENANT_SIGNUP_IMAGE_URL): each value is applied once, to an
+  empty field, so that what the association changes or removes stays so;
 - the pages left empty by the migrations get their starter content.
 
 Nothing the association edited is overwritten: the steps only fill what is
@@ -16,7 +19,12 @@ missing, except the territory, which the platform owns.
 
 import logging
 from dataclasses import dataclass, field
+from io import BytesIO
+from pathlib import PurePosixPath
+from typing import Any
+from urllib.error import URLError
 from urllib.parse import urlsplit
+from urllib.request import Request, urlopen
 
 from django.db import transaction
 from wagtail.models import Page, Site
@@ -29,6 +37,19 @@ STARTER_PAGES = (
     ("about.AboutWebsitePage", "presentation"),
     ("about.AboutCommissionPage", "presentation"),
 )
+# The images of the initial branding: their download.
+IMAGE_TIMEOUT_SECONDS = 20
+MAX_IMAGE_BYTES = 10 * 1024 * 1024
+# Branding fields with an initial value, and the variable it comes from.
+BRANDING_TEXTS = {
+    "tagline": "TENANT_TAGLINE",
+    "primary_color": "TENANT_PRIMARY_COLOR",
+    "secondary_color": "TENANT_SECONDARY_COLOR",
+}
+BRANDING_IMAGES = {
+    "logo": "TENANT_LOGO_URL",
+    "signup_image": "TENANT_SIGNUP_IMAGE_URL",
+}
 # The association's page was created for the first website, with its name.
 LEGACY_ASSOCIATION_TITLE = "La commission urbanisme"
 ASSOCIATION_TITLE = "L'association"
@@ -41,14 +62,22 @@ class TenantConfig:
     admin_email: str = ""
     territory: str = ""
     contact_email: str = ""
+    # Initial branding, by Branding field: texts and colours, image URLs.
+    branding: dict[str, str] = field(default_factory=dict)
 
     @classmethod
     def from_environment(cls, environ: dict[str, str]) -> "TenantConfig":
+        variables = {**BRANDING_TEXTS, **BRANDING_IMAGES}
         return cls(
             base_url=environ.get("BASE_URL", "").strip(),
             admin_email=environ.get("TENANT_ADMIN_EMAIL", "").strip().lower(),
             territory=environ.get("TENANT_TERRITORY", "").strip(),
             contact_email=environ.get("TENANT_CONTACT_EMAIL", "").strip(),
+            branding={
+                name: value
+                for name, variable in variables.items()
+                if (value := environ.get(variable, "").strip())
+            },
         )
 
 
@@ -130,6 +159,77 @@ def ensure_contact(email: str, report: Report) -> None:
         report.done.append(f"Contact: {email}.")
 
 
+class ImageUnavailable(Exception):
+    pass
+
+
+def download_image(url: str) -> Any:
+    """A Wagtail image from ``url`` (http or https), checked to be an image."""
+    from django.core.files.images import ImageFile
+    from PIL import Image as PillowImage
+    from wagtail.images import get_image_model
+
+    parts = urlsplit(url)
+    if parts.scheme not in ("http", "https") or not parts.hostname:
+        raise ImageUnavailable(f"not an http(s) URL: {url!r}")
+    try:
+        request = Request(url, headers={"Accept": "image/*"})
+        with urlopen(request, timeout=IMAGE_TIMEOUT_SECONDS) as response:  # nosec B310: http(s) only
+            data = response.read(MAX_IMAGE_BYTES + 1)
+    except (URLError, TimeoutError, ValueError) as error:
+        raise ImageUnavailable(f"{url} could not be downloaded: {error}") from error
+    if len(data) > MAX_IMAGE_BYTES:
+        raise ImageUnavailable(f"{url} is larger than {MAX_IMAGE_BYTES // 1024 // 1024} MB")
+    try:
+        with PillowImage.open(BytesIO(data)) as image:
+            image.verify()
+    except Exception as error:  # Pillow raises many kinds
+        raise ImageUnavailable(f"{url} is not an image: {error}") from error
+    name = PurePosixPath(parts.path).name or "image"
+    image_model = get_image_model()
+    return image_model.objects.create(
+        title=PurePosixPath(name).stem or "image", file=ImageFile(BytesIO(data), name=name)
+    )
+
+
+def ensure_branding(values: dict[str, str], report: Report) -> None:
+    """The initial branding: each value applied once, to an empty field."""
+    from django.core.exceptions import ValidationError
+
+    from core import branding
+
+    current = branding.current()
+    applied = dict(current.initial_values)
+    for name, value in values.items():
+        if applied.get(name) == value:
+            continue  # applied before: changed or removed since, by the association
+        if name in BRANDING_IMAGES:
+            if getattr(current, f"{name}_id") is None:
+                try:
+                    setattr(current, name, download_image(value))
+                except ImageUnavailable as error:
+                    report.warnings.append(f"Branding {name} not set: {error}")
+                    continue
+                report.done.append(f"Branding {name}: {value}.")
+        elif name in BRANDING_TEXTS:
+            if not getattr(current, name):
+                try:
+                    for validator in current._meta.get_field(name).validators:
+                        validator(value)
+                except ValidationError as error:
+                    report.warnings.append(f"Branding {name} not set: {error.messages[0]}")
+                    applied[name] = value  # the same value would fail again
+                    continue
+                setattr(current, name, value)
+                report.done.append(f"Branding {name}: {value}.")
+        else:
+            continue
+        applied[name] = value
+    if applied != current.initial_values:
+        current.initial_values = applied
+        current.save()
+
+
 def _is_empty(page: Page) -> bool:
     return not page.content and not page.has_unpublished_changes  # type: ignore[attr-defined]
 
@@ -166,6 +266,7 @@ def bootstrap(config: TenantConfig) -> Report:
         ensure_admin(config.admin_email, report)
         ensure_territory(config.territory, report)
         ensure_contact(config.contact_email, report)
+        ensure_branding(config.branding, report)
         # Last: the starter texts name the territory and the contact.
         seed_pages(report)
     return report

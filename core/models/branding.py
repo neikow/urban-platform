@@ -74,6 +74,10 @@ class Branding(BaseGenericSetting):
         help_text=_("Beside the sign-up form, on large screens. A photo of the area."),
     )
 
+    # The initial values from the platform (core.tenant) applied so far, by field:
+    # applied once, so that what the association removes stays removed.
+    initial_values = models.JSONField(default=dict, blank=True, editable=False)
+
     panels = [
         MultiFieldPanel(
             [FieldPanel("site_name"), FieldPanel("tagline"), FieldPanel("contact_email")],

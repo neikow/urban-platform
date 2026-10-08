@@ -7,7 +7,7 @@ from django.core.management import call_command
 from wagtail.models import Site
 
 from about.models import AboutCommissionPage, AboutWebsitePage
-from core import branding, territories
+from core import branding, tenant, territories
 from core.models import Territory, User, UserRole
 from core.tenant import Report, TenantConfig, bootstrap
 from home.models import HomePage
@@ -171,3 +171,126 @@ class TestCommand:
 
         assert "admin@example.org" in out.getvalue()
         assert Site.objects.get(is_default_site=True).port == 8000
+
+
+def png_bytes() -> bytes:
+    from PIL import Image as PillowImage
+
+    out = io.BytesIO()
+    PillowImage.new("RGB", (8, 8), "#123456").save(out, "PNG")
+    return out.getvalue()
+
+
+@pytest.fixture
+def downloads():
+    """The control plane serving the images: URL -> bytes."""
+    files: dict[str, bytes] = {}
+
+    def fake_urlopen(request, timeout):
+        url = request.full_url
+        if url not in files:
+            raise tenant.URLError("not found")
+        return io.BytesIO(files[url])
+
+    with patch("core.tenant.urlopen", side_effect=fake_urlopen) as urlopen:
+        urlopen.files = files
+        yield urlopen
+
+
+BRANDED = TenantConfig(
+    branding={
+        "tagline": "Le quartier ensemble",
+        "primary_color": "#2a9d8f",
+        "secondary_color": "#264653",
+        "logo": "https://control.example.org/branding/abc/logo.png",
+        "signup_image": "https://control.example.org/branding/abc/photo.png",
+    }
+)
+
+
+@pytest.mark.django_db
+class TestInitialBranding:
+    def test_from_environment(self):
+        config = TenantConfig.from_environment(
+            {
+                "TENANT_TAGLINE": " Le quartier ",
+                "TENANT_PRIMARY_COLOR": "#2a9d8f",
+                "TENANT_LOGO_URL": "https://cp/logo.png",
+                "TENANT_SECONDARY_COLOR": "",
+            }
+        )
+
+        assert config.branding == {
+            "tagline": "Le quartier",
+            "primary_color": "#2a9d8f",
+            "logo": "https://cp/logo.png",
+        }
+
+    def test_applied_to_a_new_website(self, downloads):
+        downloads.files[BRANDED.branding["logo"]] = png_bytes()
+        downloads.files[BRANDED.branding["signup_image"]] = png_bytes()
+
+        report = bootstrap(BRANDED)
+
+        assert not report.warnings
+        current = branding.current()
+        assert current.tagline == "Le quartier ensemble"
+        assert (current.primary_color, current.secondary_color) == ("#2a9d8f", "#264653")
+        assert current.logo.file.name.endswith(".png") and current.logo.width == 8
+        assert current.signup_image is not None
+        assert bootstrap(BRANDED).done == []  # applied once
+
+    def test_what_the_association_changed_or_removed_stays(self, downloads):
+        downloads.files[BRANDED.branding["logo"]] = png_bytes()
+        downloads.files[BRANDED.branding["signup_image"]] = png_bytes()
+        bootstrap(BRANDED)
+        current = branding.current()
+        current.primary_color = "#000000"
+        current.tagline = ""
+        current.logo = None
+        current.save()
+
+        bootstrap(BRANDED)
+
+        current = branding.current()
+        assert current.primary_color == "#000000"
+        assert current.tagline == "" and current.logo is None
+
+    def test_a_new_value_fills_an_empty_field_only(self, downloads):
+        bootstrap(TenantConfig(branding={"tagline": "Premier", "primary_color": "#111111"}))
+        current = branding.current()
+        current.tagline = ""
+        current.save()
+
+        bootstrap(TenantConfig(branding={"tagline": "Second", "primary_color": "#222222"}))
+
+        current = branding.current()
+        assert current.tagline == "Second"  # empty: the new value
+        assert current.primary_color == "#111111"  # set: kept
+
+    def test_unavailable_image_is_retried(self, downloads):
+        config = TenantConfig(branding={"logo": "https://cp/logo.png"})
+
+        report = bootstrap(config)
+        assert report.warnings and branding.current().logo is None
+
+        downloads.files["https://cp/logo.png"] = png_bytes()
+        report = bootstrap(config)
+        assert not report.warnings and branding.current().logo is not None
+
+    @pytest.mark.parametrize(
+        "values",
+        [
+            {"primary_color": "orange"},
+            {"logo": "file:///etc/passwd"},
+            {"logo": "https://cp/not-an-image.png"},
+        ],
+    )
+    def test_invalid_values_are_reported(self, downloads, values):
+        downloads.files["https://cp/not-an-image.png"] = b"<html>"
+
+        report = bootstrap(TenantConfig(branding=values))
+
+        assert report.warnings
+        current = branding.current()
+        assert current.primary_color == "" and current.logo is None
