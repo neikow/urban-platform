@@ -53,3 +53,33 @@ class JsonResponseMixin:
     @staticmethod
     def json_success_response(redirect_url: str) -> JsonResponse:
         return JsonResponse({"success": True, "redirect": redirect_url})
+
+
+class AddressFieldMixin:
+    """Optional home address, located in Marseille to attach the user to an association.
+
+    After validation, ``address_location`` holds its GeoJSON point, or None when it
+    is empty or the geocoding service is down (the address is then kept unlocated).
+    """
+
+    address_location: dict | None = None
+    cleaned_data: dict
+
+    def clean_address(self) -> str:
+        from core.geocoding import GeocodingUnavailable, geocode
+
+        address = " ".join(self.cleaned_data.get("address", "").split())
+        self.address_location = None
+        if not address:
+            return ""
+        try:
+            found = geocode(address)
+        except GeocodingUnavailable:
+            return address
+        if found is None:
+            raise forms.ValidationError(
+                "Adresse introuvable à Marseille. Choisissez-la dans la liste, "
+                "ou laissez ce champ vide si vous habitez ailleurs."
+            )
+        self.address_location = found.point
+        return found.label

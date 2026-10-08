@@ -10,12 +10,19 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
 from core.emails.tasks import send_verification_email
 
-from .auth_mixins import PasswordValidationMixin
-from ..widgets import DaisyTextInput, DaisyPasswordInput, DaisyEmailInput, DaisyCheckboxInput
+from core.associations import set_address
+from .auth_mixins import AddressFieldMixin, PasswordValidationMixin
+from ..widgets import (
+    DaisyAddressInput,
+    DaisyTextInput,
+    DaisyPasswordInput,
+    DaisyEmailInput,
+    DaisyCheckboxInput,
+)
 from core.models import User
 
 
-class ProfileUpdateForm(forms.Form):
+class ProfileUpdateForm(AddressFieldMixin, forms.Form):
     email = forms.EmailField(
         required=True, label="Email", widget=DaisyEmailInput(placeholder="jean.dupont@email.fr")
     )
@@ -24,6 +31,15 @@ class ProfileUpdateForm(forms.Form):
     )
     last_name = forms.CharField(
         required=True, label="Nom", widget=DaisyTextInput(placeholder="Dupont")
+    )
+    address = forms.CharField(
+        required=False,
+        label="Adresse",
+        max_length=255,
+        widget=DaisyAddressInput(
+            placeholder="12 rue Paradis, Marseille", postcode_field="postal_code"
+        ),
+        help_text="Facultatif. Vous rattache à l'association de votre quartier.",
     )
     postal_code = forms.CharField(
         required=True,
@@ -74,6 +90,7 @@ class ProfileUpdateForm(forms.Form):
                 "email": user.email,
                 "first_name": user.first_name,
                 "last_name": user.last_name,
+                "address": user.address,
                 "postal_code": user.postal_code,
                 "phone_number": user.phone_number,
                 "newsletter_subscription": user.newsletter_subscription,
@@ -177,6 +194,10 @@ class ProfileEditView(LoginRequiredMixin, FormView):
         user.first_name = form.cleaned_data["first_name"]
         user.last_name = form.cleaned_data["last_name"]
         user.postal_code = form.cleaned_data["postal_code"]
+        address = form.cleaned_data.get("address", "")
+        # Unchanged but not located this time (service down): keep the known location.
+        if address != user.address or form.address_location:
+            set_address(user, address, form.address_location)
         user.phone_number = form.cleaned_data.get("phone_number", "")
         user.set_newsletter_subscription(form.cleaned_data.get("newsletter_subscription", False))
         for name in ProfileUpdateForm.NOTIFICATION_FIELDS:

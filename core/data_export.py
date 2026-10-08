@@ -45,6 +45,12 @@ def account(user: User) -> dict[str, Any]:
         "first_name": user.first_name,
         "last_name": user.last_name,
         "postal_code": user.postal_code,
+        "address": user.address,
+        "location": user.location,
+        "neighborhood_association": user.association.name if user.association else None,
+        "responsible_for_associations": [
+            a.name for a in user.responsible_for_associations.order_by("name")
+        ],
         "phone_number": user.phone_number,
         "neighborhood": str(user.neighborhood) if user.neighborhood else None,
         "role": user.get_role_display(),

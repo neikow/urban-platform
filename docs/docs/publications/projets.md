@@ -35,6 +35,7 @@ Placez le projet sur la carte du quartier : il apparaît alors sur sa page et su
 - **Un point** pour un lieu précis : cliquez sur l'icône marqueur, puis sur la carte.
 - **Une zone** pour une rue, un îlot ou un parc : dessinez un polygone ou un rectangle.
 - Les outils de la barre permettent de déplacer, modifier ou supprimer la forme. Une nouvelle forme remplace l'ancienne.
+- **Rechercher une adresse** au-dessus de la carte : tapez quelques lettres, puis choisissez une adresse de Marseille dans la liste. La carte s'y déplace et y place le marqueur (sauf si une zone est déjà dessinée).
 
 ### Mode de participation
 

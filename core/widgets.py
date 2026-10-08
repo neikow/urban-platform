@@ -1,4 +1,8 @@
+from typing import Any
+
 from django import forms
+from django.forms import Script
+from django.urls import reverse
 
 
 class DaisyTextInput(forms.TextInput):
@@ -97,3 +101,36 @@ class DaisyCheckboxInput(forms.CheckboxInput):
         if attrs:
             default_attrs.update(attrs)
         super().__init__(default_attrs)
+
+
+class AddressInput(forms.TextInput):
+    """Text input suggesting Marseille addresses as one types (core.geocoding).
+
+    Rendered inside an <address-input> custom element (frontend/src/address-input.ts),
+    so it works on the site and in the Wagtail admin alike. With ``postcode_field``,
+    picking a suggestion also fills that field of the form.
+    """
+
+    template_name = "core/widgets/address_input.html"
+
+    class Media:
+        css = {"all": ["dist/address-autocomplete.css"]}
+        js = [Script("dist/address-input.js", type="module")]
+
+    def __init__(self, attrs: dict | None = None, postcode_field: str = "") -> None:
+        super().__init__({"autocomplete": "off", **(attrs or {})})
+        self.postcode_field = postcode_field
+
+    def get_context(self, name: str, value: Any, attrs: dict[str, Any] | None) -> dict[str, Any]:
+        context = super().get_context(name, value, attrs)
+        context["search_url"] = reverse("address_search")
+        context["postcode_field"] = self.postcode_field
+        return context
+
+
+class DaisyAddressInput(AddressInput):
+    def __init__(self, placeholder: str = "", postcode_field: str = "") -> None:
+        super().__init__(
+            {"class": "input input-bordered w-full", "placeholder": placeholder},
+            postcode_field=postcode_field,
+        )

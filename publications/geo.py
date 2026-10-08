@@ -63,13 +63,56 @@ def validate_geometry(value: Any) -> None:
     if value["type"] == "Point":
         valid = _is_position(coordinates)
     else:
-        valid = (
-            isinstance(coordinates, list)
-            and len(coordinates) >= 1
-            and all(_is_linear_ring(ring) for ring in coordinates)
-        )
+        valid = _is_polygon(coordinates)
     if not valid:
         raise ValidationError(_("The location coordinates are invalid."))
+
+
+def _is_polygon(coordinates: Any) -> bool:
+    return (
+        isinstance(coordinates, list)
+        and len(coordinates) >= 1
+        and all(_is_linear_ring(ring) for ring in coordinates)
+    )
+
+
+def validate_area(value: Any) -> None:
+    """Accept a GeoJSON Polygon or MultiPolygon geometry, reject anything else."""
+    if value in (None, ""):
+        return
+    if not isinstance(value, dict) or value.get("type") not in ("Polygon", "MultiPolygon"):
+        raise ValidationError(_("The area must be a polygon."))
+    coordinates = value.get("coordinates")
+    if value["type"] == "Polygon":
+        valid = _is_polygon(coordinates)
+    else:
+        valid = isinstance(coordinates, list) and all(_is_polygon(p) for p in coordinates)
+    if not valid or not coordinates:
+        raise ValidationError(_("The area coordinates are invalid."))
+
+
+def _ring_contains(ring: list[list[float]], x: float, y: float) -> bool:
+    """Ray casting: count the ring edges a ray going east from (x, y) crosses."""
+    inside = False
+    for (x1, y1, *_rest), (x2, y2, *_rest2) in zip(ring, ring[1:]):
+        if (y1 > y) != (y2 > y) and x < x1 + (y - y1) * (x2 - x1) / (y2 - y1):
+            inside = not inside
+    return inside
+
+
+def area_contains(area: dict[str, Any] | None, point: dict[str, Any] | None) -> bool:
+    """Whether a GeoJSON Point lies in a Polygon or MultiPolygon (holes excluded).
+
+    Planar test on longitude/latitude: exact enough at the scale of a city.
+    """
+    if not area or not point or point.get("type") != "Point":
+        return False
+    x, y = point["coordinates"][:2]
+    polygons = [area["coordinates"]] if area["type"] == "Polygon" else area["coordinates"]
+    return any(
+        _ring_contains(outer, x, y) and not any(_ring_contains(hole, x, y) for hole in holes)
+        for outer, *holes in polygons
+    )
 
 
 def project_feature(project: "ProjectPage") -> dict[str, Any]:

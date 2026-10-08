@@ -70,6 +70,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Neighborhood"),
     )
     postal_code = models.CharField(_("Postal Code"), max_length=10, blank=True)
+    address = models.CharField(_("Address"), max_length=255, blank=True)
+    # Filled from the address (core.geocoding); places the user in an association's area.
+    location = models.JSONField(_("Location"), null=True, blank=True, editable=False)
+    association = models.ForeignKey(
+        "NeighborhoodAssociation",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="residents",
+        verbose_name=_("Neighborhood Association"),
+        help_text=_("The association whose area contains the user's address."),
+    )
 
     is_verified = models.BooleanField(
         _("Email Verified"),
@@ -194,6 +206,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.last_name = "Supprimé"
         self.email = f"deleted.{self.uuid}@deleted.local"
         self.phone_number = ""
+        self.address = ""
+        self.location = None
+        self.association = None
         self.newsletter_subscription = False
         self.newsletter_consent_at = None
         self.notify_poll_results = False

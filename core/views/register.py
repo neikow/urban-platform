@@ -12,8 +12,15 @@ from django_ratelimit.decorators import ratelimit
 
 from core.emails.tasks import send_verification_email
 from legal.utils import has_valid_code_of_conduct_consent
-from .auth_mixins import PasswordValidationMixin, EmailValidationMixin
-from ..widgets import DaisyTextInput, DaisyPasswordInput, DaisyEmailInput, DaisyCheckboxInput
+from core.associations import set_address
+from .auth_mixins import AddressFieldMixin, PasswordValidationMixin, EmailValidationMixin
+from ..widgets import (
+    DaisyAddressInput,
+    DaisyTextInput,
+    DaisyPasswordInput,
+    DaisyEmailInput,
+    DaisyCheckboxInput,
+)
 
 if typing.TYPE_CHECKING:
     from core.models import User
@@ -21,7 +28,9 @@ else:
     User = get_user_model()
 
 
-class UserRegistrationForm(PasswordValidationMixin, EmailValidationMixin, forms.Form):
+class UserRegistrationForm(
+    AddressFieldMixin, PasswordValidationMixin, EmailValidationMixin, forms.Form
+):
     email = forms.EmailField(
         required=True, label="Email", widget=DaisyEmailInput(placeholder="jean.dupont@email.fr")
     )
@@ -41,6 +50,15 @@ class UserRegistrationForm(PasswordValidationMixin, EmailValidationMixin, forms.
     )
     last_name = forms.CharField(
         required=True, label="Nom", widget=DaisyTextInput(placeholder="Dupont")
+    )
+    address = forms.CharField(
+        required=False,
+        label="Adresse",
+        max_length=255,
+        widget=DaisyAddressInput(
+            placeholder="12 rue Paradis, Marseille", postcode_field="postal_code"
+        ),
+        help_text="Facultatif. Vous rattache à l'association de votre quartier.",
     )
     postal_code = forms.CharField(
         required=True,
@@ -133,6 +151,9 @@ class RegisterFormView(FormView):
             last_name=last_name,
             postal_code=postal_code,
         )
+        if form.cleaned_data.get("address"):
+            set_address(self.user, form.cleaned_data["address"], form.address_location)
+            self.user.save(update_fields=["address", "location", "association"])
         if newsletter_subscription:
             self.user.set_newsletter_subscription(True)
             self.user.save(update_fields=["newsletter_subscription", "newsletter_consent_at"])

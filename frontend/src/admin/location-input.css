@@ -7,3 +7,19 @@ geojson-map-input {
     border-radius: 0.5rem;
     border: 1px solid var(--w-color-border-field-default, #ccc);
 }
+
+.geojson-map-input__search {
+    margin-bottom: 0.5rem;
+}
+
+.geojson-map-input__search-input {
+    width: 100%;
+}
+
+/* Other shapes shown for context (e.g. the other associations' areas). */
+.map-reference {
+    stroke: var(--w-color-text-meta, #6b7280);
+    stroke-width: 1.5;
+    fill: var(--w-color-text-meta, #6b7280);
+    fill-opacity: 0.12;
+}

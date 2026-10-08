@@ -1,4 +1,5 @@
 import logging
+from typing import Any
 
 from django.http import Http404, HttpRequest, HttpResponse
 from django.urls import URLPattern, path
@@ -8,11 +9,30 @@ from django.utils.html import format_html
 from wagtail.admin.menu import MenuItem
 from wagtail.admin.widgets import Button
 from wagtail.admin.viewsets.model import ModelViewSet
+from wagtail.admin.forms import WagtailAdminModelForm
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, ObjectList
 from wagtail import hooks
 from wagtail.models import Page
 
+from publications.widgets import GeoJSONMapWidget
+
 from .models import NeighborhoodAssociation, EmailEvent
+from .widgets import AddressInput
 from django.utils.translation import gettext_lazy as _
+
+
+class NeighborhoodAssociationForm(WagtailAdminModelForm):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        # Draw the other associations' areas underneath, to draw next to them.
+        self.fields["area"].widget.reference = lambda: other_association_areas(self.instance.pk)
+
+
+def other_association_areas(exclude_pk: int | None) -> dict[str, Any]:
+    associations = NeighborhoodAssociation.objects.filter(area__isnull=False)
+    if exclude_pk is not None:
+        associations = associations.exclude(pk=exclude_pk)
+    return {"type": "FeatureCollection", "features": [a.area_feature() for a in associations]}
 
 
 class NeighborhoodAssociationViewSet(ModelViewSet):
@@ -20,9 +40,32 @@ class NeighborhoodAssociationViewSet(ModelViewSet):
     menu_icon = "group"
     add_to_settings_menu = True
     exclude_from_explorer = False
-    list_display = ["neighborhood", "contact_email", "contact_phone", "website"]
-    search_fields = ["neighborhood__name", "contact_email", "website"]
-    form_fields = ["neighborhood", "contact_email", "contact_phone", "website"]
+    list_display = ["name", "responsible", "contact_email", "contact_phone", "website"]
+    search_fields = ["name", "address", "contact_email", "website"]
+    edit_handler = ObjectList(
+        [
+            FieldPanel("name"),
+            FieldPanel("neighborhood"),
+            FieldPanel("responsible"),
+            FieldPanel("address", widget=AddressInput),
+            FieldPanel(
+                "area",
+                widget=GeoJSONMapWidget(
+                    markers=False,
+                    help_text=_(
+                        "Draw the area the association covers: residents living in it are "
+                        "attached to the association. The other associations' areas are "
+                        "shown in grey, and new points snap to their edges."
+                    ),
+                ),
+            ),
+            MultiFieldPanel(
+                [FieldPanel("contact_email"), FieldPanel("contact_phone"), FieldPanel("website")],
+                heading=_("Contact"),
+            ),
+        ],
+        base_form_class=NeighborhoodAssociationForm,
+    )
 
 
 @hooks.register("register_admin_viewset")

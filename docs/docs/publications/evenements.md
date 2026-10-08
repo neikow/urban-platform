@@ -49,7 +49,7 @@ En bas du formulaire, différents champs permettent de renseigner les détails l
 | **Date de l'événement** | La date et l'heure de début |
 | **Date de fin** | La date et l'heure de fin (optionnel) |
 | **Lieu** | Le nom du lieu (ex : Salle des fêtes du quartier) |
-| **Adresse** | L'adresse complète de l'événement |
+| **Adresse** | L'adresse complète de l'événement. Tapez quelques lettres et choisissez-la dans la liste : elle est alors localisée sur la carte |
 | **Événement en ligne** | Cochez cette case si l'événement se déroule à distance |
 | **Lien en ligne** | Si l'événement est en ligne, collez ici le lien de connexion (Zoom, Teams, etc.) |
 | **Nombre maximum de participants** | Laissez vide si le nombre de places est illimité |

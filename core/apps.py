@@ -27,6 +27,18 @@ class CoreConfig(AppConfig):
         # A page created from a template starts with its content.
         init_new_page.connect(fill_new_page, dispatch_uid="core.page_templates.fill_new_page")
 
+        # Residents follow the association areas: redraw one, and they move with it.
+        from django.db.models.signals import post_delete, post_save
+
+        from core.associations import reassign_residents_on_change
+
+        for signal in (post_save, post_delete):
+            signal.connect(
+                reassign_residents_on_change,
+                sender="core.NeighborhoodAssociation",
+                dispatch_uid=f"core.associations.reassign_residents.{signal is post_save}",
+            )
+
 
 class CustomUsersAppConfig(WagtailUsersAppConfig):
     """Replaces ``wagtail.users`` to swap in our role-aware user viewset."""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 20:56+0200\n"
+"POT-Creation-Date: 2026-10-08 11:12+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -32,15 +32,23 @@ msgstr ""
 msgid "Tomorrow: %(title)s"
 msgstr "Demain : %(title)s"
 
-#: publications/geo.py:58
+#: publications/geo.py:60
 msgid "The location must be a point or a polygon."
 msgstr "La localisation doit être un point ou un polygone."
 
-#: publications/geo.py:70
+#: publications/geo.py:68
 msgid "The location coordinates are invalid."
 msgstr "Les coordonnées de la localisation sont invalides."
 
-#: publications/models/event.py:22 publications/models/event.py:125
+#: publications/geo.py:84
+msgid "The area must be a polygon."
+msgstr "Le secteur doit être un polygone."
+
+#: publications/geo.py:91
+msgid "The area coordinates are invalid."
+msgstr "Les coordonnées du secteur sont invalides."
+
+#: publications/models/event.py:23 publications/models/event.py:136
 #: publications/models/event_interest.py:23
 #: publications/templates/publications/components/publication_preview.html:51
 #: publications/templates/publications/event_page.html:17
@@ -48,66 +56,70 @@ msgstr "Les coordonnées de la localisation sont invalides."
 msgid "Event"
 msgstr "Événement"
 
-#: publications/models/event.py:27
+#: publications/models/event.py:28
 msgid "Event Date"
 msgstr "Date de l'événement"
 
-#: publications/models/event.py:28
+#: publications/models/event.py:29
 msgid "Start date and time of the event"
 msgstr "Date et heure de début de l'événement"
 
-#: publications/models/event.py:32
+#: publications/models/event.py:33
 msgid "End Date"
 msgstr "Date de fin"
 
-#: publications/models/event.py:35
+#: publications/models/event.py:36
 msgid "End date and time of the event (optional)"
 msgstr "Date et heure de fin de l'événement (optionnel)"
 
-#: publications/models/event.py:39 publications/models/project.py:81
+#: publications/models/event.py:40 publications/models/project.py:81
 #: publications/templates/publications/components/project_location.html:5
 #: publications/templates/publications/event_page.html:90
 msgid "Location"
 msgstr "Lieu"
 
-#: publications/models/event.py:42
+#: publications/models/event.py:43
 msgid "Venue of the event"
 msgstr "Lieu de l'événement"
 
-#: publications/models/event.py:46
+#: publications/models/event.py:47
 #: publications/templates/publications/event_page.html:181
 msgid "Address"
 msgstr "Adresse"
 
-#: publications/models/event.py:48
+#: publications/models/event.py:49
 msgid "Full address of the event"
 msgstr "Adresse complète de l'événement"
 
-#: publications/models/event.py:52
+#: publications/models/event.py:53
+msgid "Address location"
+msgstr "Position de l'adresse"
+
+#: publications/models/event.py:57
 msgid "Online Event"
 msgstr "Événement en ligne"
 
-#: publications/models/event.py:54
+#: publications/models/event.py:59
 msgid "Check if the event takes place online"
 msgstr "Cochez si l'événement est en ligne"
 
-#: publications/models/event.py:58
+#: publications/models/event.py:63
 msgid "Online Link"
 msgstr "Lien en ligne"
 
-#: publications/models/event.py:60
+#: publications/models/event.py:65
 msgid "Link to the online event (if applicable)"
 msgstr "Lien vers l'événement en ligne (si applicable)"
 
-#: publications/models/event.py:65
+#: publications/models/event.py:70
 msgid "Maximum Participants"
 msgstr "Nombre maximum de participants"
 
-#: publications/models/event.py:68
+#: publications/models/event.py:73
 msgid "Maximum number of participants (leave empty if unlimited)"
 msgstr "Nombre maximum de participants (laisser vide si illimité)"
 
-#: publications/models/event.py:126
+#: publications/models/event.py:137
 #: publications/templates/publications/components/publication_results.html:43
 msgid "Events"
 msgstr "Événements"
@@ -726,31 +738,31 @@ msgstr "Aucun vote pour l'instant"
 msgid "The projects and events of the website, with search and filters."
 msgstr "Les projets et événements du site, avec recherche et filtres."
 
-#: publications/templates/publications/blocks/publication_list.html:13
+#: publications/templates/publications/blocks/publication_list.html:16
 msgid "Latest Publications"
 msgstr "Dernières publications"
 
-#: publications/templates/publications/blocks/publication_list.html:16
+#: publications/templates/publications/blocks/publication_list.html:19
 msgid "Search publications"
 msgstr "Rechercher des publications"
 
-#: publications/templates/publications/blocks/publication_list.html:17
+#: publications/templates/publications/blocks/publication_list.html:20
 msgid "Search for a publication..."
 msgstr "Rechercher une publication..."
 
-#: publications/templates/publications/blocks/publication_list.html:25
+#: publications/templates/publications/blocks/publication_list.html:28
 msgid "Follow the news:"
 msgstr "Suivre l'actualité :"
 
-#: publications/templates/publications/blocks/publication_list.html:26
+#: publications/templates/publications/blocks/publication_list.html:29
 msgid "RSS feed"
 msgstr "Flux RSS"
 
-#: publications/templates/publications/blocks/publication_list.html:29
+#: publications/templates/publications/blocks/publication_list.html:32
 msgid "Subscribe to the events calendar"
 msgstr "S'abonner à l'agenda des événements"
 
-#: publications/templates/publications/blocks/publication_list.html:31
+#: publications/templates/publications/blocks/publication_list.html:34
 msgid "iCal link"
 msgstr "Lien iCal"
 
@@ -925,22 +937,22 @@ msgstr "Vous êtes ici"
 msgid "You are outside Marseille: the map only covers the city."
 msgstr "Vous êtes en dehors de Marseille : la carte ne couvre que la ville."
 
-#: publications/templates/publications/components/projects_map.html:47
+#: publications/templates/publications/components/projects_map.html:48
 msgid "Open for participation"
 msgstr "Participation ouverte"
 
-#: publications/templates/publications/components/projects_map.html:48
+#: publications/templates/publications/components/projects_map.html:49
 msgid "See the project"
 msgstr "Voir le projet"
 
-#: publications/templates/publications/components/projects_map.html:55
+#: publications/templates/publications/components/projects_map.html:56
 #, python-format
 msgid "%(total)s project on the map"
 msgid_plural "%(total)s projects on the map"
 msgstr[0] "%(total)s projet sur la carte"
 msgstr[1] "%(total)s projets sur la carte"
 
-#: publications/templates/publications/components/projects_map.html:73
+#: publications/templates/publications/components/projects_map.html:74
 msgid "No project has been placed on the map yet."
 msgstr "Aucun projet n'est encore placé sur la carte."
 
@@ -1157,6 +1169,11 @@ msgstr "Partager votre idée"
 msgid "Table of Contents"
 msgstr "Table des matières"
 
+#: publications/templates/publications/widgets/geojson_map.html:7
+#: publications/templates/publications/widgets/geojson_map.html:8
+msgid "Search an address in Marseille"
+msgstr "Rechercher une adresse à Marseille"
+
 #: publications/views/event_interest.py:39
 #: publications/views/event_interest.py:45
 #: publications/views/event_interest.py:54
@@ -1280,7 +1297,7 @@ msgstr "Aucun vote à supprimer"
 msgid "Vote removed successfully"
 msgstr "Vote supprimé avec succès"
 
-#: publications/widgets.py:28
+#: publications/widgets.py:52
 msgid ""
 "Place a marker for a precise spot, or draw a polygon for an area. Drawing a "
 "new shape replaces the previous one."
