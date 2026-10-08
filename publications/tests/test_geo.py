@@ -97,6 +97,7 @@ class TestAreaContains:
         assert not area_contains(DONUT, None)
 
 
+@pytest.mark.django_db
 class TestWidget:
     def test_renders_custom_element_with_geometry(self):
         html = GeoJSONMapWidget().render("location", POINT)
@@ -126,6 +127,7 @@ class TestWidget:
         assert "dist/admin-location.js" in media
 
 
+@pytest.mark.django_db
 class TestMapConfig:
     def test_points_to_the_self_hosted_tiles(self):
         config = map_config()

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 11:12+0200\n"
+"POT-Creation-Date: 2026-10-08 12:01+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -267,6 +267,58 @@ msgstr "Réponse d'idée"
 #: publications/models/idea.py:45
 msgid "Idea Responses"
 msgstr "Réponses d'idées"
+
+#: publications/models/map_settings.py:31
+msgid "Update the map automatically"
+msgstr "Mettre à jour la carte automatiquement"
+
+#: publications/models/map_settings.py:33
+msgid ""
+"Download the latest OpenStreetMap data for the maps at the interval below."
+msgstr ""
+"Télécharger les dernières données OpenStreetMap pour les cartes, à "
+"l'intervalle ci-dessous."
+
+#: publications/models/map_settings.py:36
+msgid "Update interval (days)"
+msgstr "Intervalle de mise à jour (jours)"
+
+#: publications/models/map_settings.py:40
+msgid ""
+"Streets and places change slowly: once a month is enough. Each update "
+"downloads about 35 MB."
+msgstr ""
+"Les rues et les lieux changent lentement : une fois par mois suffit. Chaque "
+"mise à jour télécharge environ 35 Mo."
+
+#: publications/models/map_settings.py:46
+#: publications/templates/publications/admin/map_tiles_status.html:4
+msgid "Map data version"
+msgstr "Version des données"
+
+#: publications/models/map_settings.py:48
+#: publications/templates/publications/admin/map_tiles_status.html:6
+msgid "Last update"
+msgstr "Dernière mise à jour"
+
+#: publications/models/map_settings.py:49
+#: publications/templates/publications/admin/map_tiles_status.html:8
+msgid "Last check"
+msgstr "Dernière vérification"
+
+#: publications/models/map_settings.py:50
+#: publications/templates/publications/admin/map_tiles_status.html:11
+msgid "Last error"
+msgstr "Dernière erreur"
+
+#: publications/models/map_settings.py:55
+#: publications/templates/publications/admin/vote_stats.html:37
+msgid "Status"
+msgstr "Statut"
+
+#: publications/models/map_settings.py:59
+msgid "Map"
+msgstr "Carte"
 
 #: publications/models/poll_closure.py:7
 msgid "End date reached"
@@ -654,6 +706,28 @@ msgstr "Anonyme"
 msgid "No ideas yet"
 msgstr "Aucune idée pour le moment"
 
+#: publications/templates/publications/admin/map_tiles_status.html:5
+msgid "Shipped with the site"
+msgstr "Fournie avec le site"
+
+#: publications/templates/publications/admin/map_tiles_status.html:17
+msgid "An update is in progress. Reload this page in a few minutes."
+msgstr ""
+"Une mise à jour est en cours. Rechargez cette page dans quelques minutes."
+
+#: publications/templates/publications/admin/map_tiles_status.html:21
+msgid "Update the map now"
+msgstr "Mettre à jour la carte maintenant"
+
+#: publications/templates/publications/admin/map_tiles_status.html:23
+msgid ""
+"Downloads the latest OpenStreetMap data (about 35 MB), whatever the "
+"interval. Unsaved changes above are lost."
+msgstr ""
+"Télécharge les dernières données OpenStreetMap (environ 35 Mo), quel que "
+"soit l'intervalle. Les modifications non enregistrées ci-dessus sont "
+"perdues."
+
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
 #: publications/templates/publications/admin/vote_stats_detail.html:4
@@ -676,10 +750,6 @@ msgid ""
 msgstr ""
 "Seuls les votes d'utilisateurs avec le code postal %(code)s sont affichés. "
 "Cochez la case ci-dessus pour inclure tous les votes."
-
-#: publications/templates/publications/admin/vote_stats.html:37
-msgid "Status"
-msgstr "Statut"
 
 #: publications/templates/publications/admin/vote_stats.html:38
 msgid "Total votes"
@@ -1233,6 +1303,18 @@ msgstr "Aucune idée à supprimer"
 #: publications/views/idea.py:96
 msgid "Idea removed successfully"
 msgstr "Idée supprimée avec succès"
+
+#: publications/views/map_tiles.py:19
+msgid ""
+"The map update has started. It takes a few minutes: reload this page to see "
+"it."
+msgstr ""
+"La mise à jour de la carte a commencé. Elle prend quelques minutes : "
+"rechargez cette page pour la voir."
+
+#: publications/views/map_tiles.py:22
+msgid "A map update is already in progress."
+msgstr "Une mise à jour de la carte est déjà en cours."
 
 #: publications/views/mixins.py:35 publications/views/mixins.py:39
 msgid "Authentication required"

@@ -32,3 +32,11 @@ def send_event_reminders() -> int:
     from publications.event_reminders import send_event_reminders as send
 
     return send()
+
+
+@shared_task
+def refresh_map_tiles(force: bool = False) -> str | None:
+    """Fetch newer basemap tiles when the interval set in the admin has passed."""
+    from publications.map_tiles import refresh_tiles
+
+    return refresh_tiles(force=force)

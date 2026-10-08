@@ -9,3 +9,23 @@
     margin: 0;
     padding: 0;
 }
+
+/* Map settings: what the tiles refresh task last did. */
+.map-tiles-status {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.5rem 1.5rem;
+    margin: 0;
+}
+
+.map-tiles-status dt {
+    font-weight: 600;
+}
+
+.map-tiles-status dd {
+    margin: 0;
+}
+
+.map-tiles-status__actions {
+    margin-top: 1.5rem;
+}

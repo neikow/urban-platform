@@ -140,12 +140,14 @@ def feature_collection(projects: Iterable["ProjectPage"]) -> dict[str, Any]:
 
 def map_config() -> dict[str, Any]:
     """Settings shared by the public maps and the admin widget."""
+    from publications.map_tiles import tiles_url
+
     west, south, east, north = LOCAL_AREA_TILES_BOUNDS
     return {
         "boundaryUrl": static(LOCAL_AREA_BOUNDARY_PATH),
         "center": LOCAL_AREA_CENTER,
         "zoom": LOCAL_AREA_ZOOM,
-        "tilesUrl": static(LOCAL_AREA_TILES_PATH),
+        "tilesUrl": tiles_url(),
         "tilesMaxZoom": LOCAL_AREA_TILES_MAX_ZOOM,
         "maxBounds": [[south, west], [north, east]],
     }

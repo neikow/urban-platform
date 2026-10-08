@@ -45,7 +45,6 @@ class NeighborhoodAssociationViewSet(ModelViewSet):
     edit_handler = ObjectList(
         [
             FieldPanel("name"),
-            FieldPanel("neighborhood"),
             FieldPanel("responsible"),
             FieldPanel("address", widget=AddressInput),
             FieldPanel(

@@ -12,6 +12,7 @@ from core import geocoding
 from core.associations import association_at, reassign_residents, set_address
 from core.geocoding import Address, GeocodingUnavailable, geocode, locate, search_addresses
 from core.models import NeighborhoodAssociation, User, UserRole
+from core.tasks import reassign_residents as reassign_residents_task
 
 # Captured before the autouse offline_geocoding fixture replaces it.
 real_fetch = geocoding._fetch
@@ -123,6 +124,12 @@ class TestAddressSearchView:
 # --- associations -------------------------------------------------------------
 
 
+def reassignments(callbacks) -> int:
+    """Queued reassignment tasks (Wagtail queues its own tasks on commit too)."""
+    task = reassign_residents_task.delay  # type: ignore[attr-defined]  # Celery task
+    return sum(callback == task for callback in callbacks)
+
+
 @pytest.fixture
 def paradis_association(db):
     return NeighborhoodAssociation.objects.create(name="Paradis", area=AREA_PARADIS)
@@ -156,7 +163,7 @@ class TestAssociationAssignment:
         assert resident.association == paradis_association
 
     def test_residents_follow_a_redrawn_area(
-        self, paradis_association, prado_association, resident
+        self, paradis_association, prado_association, resident, django_capture_on_commit_callbacks
     ):
         set_address(resident, PARADIS.label, PARADIS.point)
         resident.save()
@@ -169,21 +176,48 @@ class TestAssociationAssignment:
             ],
         }
         paradis_association.area = None
-        paradis_association.save()
-        prado_association.save()
+        with django_capture_on_commit_callbacks(execute=True) as callbacks:
+            paradis_association.save()
+            prado_association.save()
+
+        assert reassignments(callbacks) == 2
 
         resident.refresh_from_db()
         assert resident.association == prado_association
 
-    def test_residents_leave_a_deleted_association(self, paradis_association, resident):
+    def test_residents_leave_a_deleted_association(
+        self, paradis_association, resident, django_capture_on_commit_callbacks
+    ):
         set_address(resident, PARADIS.label, PARADIS.point)
         resident.save()
 
-        paradis_association.delete()
+        with django_capture_on_commit_callbacks(execute=True):
+            paradis_association.delete()
 
         resident.refresh_from_db()
         assert resident.association is None
         assert resident.location == PARADIS.point
+
+    def test_only_a_changed_area_queues_a_reassignment(
+        self, paradis_association, django_capture_on_commit_callbacks
+    ):
+        association = NeighborhoodAssociation.objects.get(pk=paradis_association.pk)
+        with django_capture_on_commit_callbacks() as callbacks:
+            association.website = "https://paradis.example"
+            association.save()
+        assert reassignments(callbacks) == 0
+
+        with django_capture_on_commit_callbacks() as callbacks:
+            association.area = AREA_PRADO
+            association.save()
+            association.save()
+        assert reassignments(callbacks) == 1
+
+    def test_creating_an_area_queues_a_reassignment(self, django_capture_on_commit_callbacks):
+        with django_capture_on_commit_callbacks() as callbacks:
+            NeighborhoodAssociation.objects.create(name="Sans secteur")
+            NeighborhoodAssociation.objects.create(name="Paradis", area=AREA_PARADIS)
+        assert reassignments(callbacks) == 1
 
     def test_reassign_counts_changes(self, paradis_association, resident):
         User.objects.filter(pk=resident.pk).update(location=PARADIS.point)
@@ -226,26 +260,26 @@ class TestAssociationAdmin:
         assert "&quot;name&quot;: &quot;Paradis&quot;" not in content
         assert "<address-input" in content
 
-    def test_create_with_area(self, admin_client, resident):
+    def test_create_with_area(self, admin_client, resident, django_capture_on_commit_callbacks):
         set_address(resident, PARADIS.label, PARADIS.point)
         resident.save()
         responsible = User.objects.create_user(
             email="member@example.com", password="pass12345", role=UserRole.ASSOCIATION_MEMBER
         )
 
-        response = admin_client.post(
-            reverse("neighborhood_association:add"),
-            {
-                "name": "Paradis",
-                "neighborhood": "",
-                "responsible": responsible.pk,
-                "address": "",
-                "area": json.dumps(AREA_PARADIS),
-                "contact_email": "contact@paradis.example",
-                "contact_phone": "04 91 00 00 00",
-                "website": "https://paradis.example",
-            },
-        )
+        with django_capture_on_commit_callbacks(execute=True):
+            response = admin_client.post(
+                reverse("neighborhood_association:add"),
+                {
+                    "name": "Paradis",
+                    "responsible": responsible.pk,
+                    "address": "",
+                    "area": json.dumps(AREA_PARADIS),
+                    "contact_email": "contact@paradis.example",
+                    "contact_phone": "04 91 00 00 00",
+                    "website": "https://paradis.example",
+                },
+            )
 
         assert response.status_code == 302
         association = NeighborhoodAssociation.objects.get(name="Paradis")

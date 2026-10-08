@@ -82,7 +82,10 @@ export async function addBoundary(map: L.Map, url: string): Promise<Boundary | n
   try {
     const response = await fetch(url);
     const data = (await response.json()) as GeoJSON.GeoJsonObject;
-    const layer = L.geoJSON(data, { interactive: false, style: { className: "map-boundary" } }).addTo(map);
+    // Context only: drawing tools (Geoman, in the admin) must not edit or delete
+    // it, but new shapes may snap to it.
+    const options = { interactive: false, pmIgnore: true, snapIgnore: false, style: { className: "map-boundary" } };
+    const layer = L.geoJSON(data, options as L.GeoJSONOptions).addTo(map);
 
     let mainland = layer.getBounds();
     const multi = (data as GeoJSON.Feature).geometry;

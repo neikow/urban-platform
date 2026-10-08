@@ -1,0 +1,28 @@
+{% load i18n %}
+{% with settings=self.instance %}
+    <dl class="map-tiles-status">
+        <dt>{% trans "Map data version" %}</dt>
+        <dd>{{ settings.tiles_build|default:_("Shipped with the site") }}</dd>
+        <dt>{% trans "Last update" %}</dt>
+        <dd>{{ settings.tiles_updated_at|default:"—" }}</dd>
+        <dt>{% trans "Last check" %}</dt>
+        <dd>{{ settings.tiles_checked_at|default:"—" }}</dd>
+        {% if settings.tiles_error %}
+            <dt>{% trans "Last error" %}</dt>
+            <dd class="w-text-critical-200">{{ settings.tiles_error }}</dd>
+        {% endif %}
+    </dl>
+    <div class="map-tiles-status__actions">
+        {% if refreshing %}
+            <p>{% trans "An update is in progress. Reload this page in a few minutes." %}</p>
+        {% else %}
+            {# Inside the settings form: formaction posts it (with its CSRF token) to the refresh view. #}
+            <button type="submit" class="button button-secondary" formaction="{{ refresh_url }}" formnovalidate>
+                {% trans "Update the map now" %}
+            </button>
+            <p class="help">
+                {% trans "Downloads the latest OpenStreetMap data (about 35 MB), whatever the interval. Unsaved changes above are lost." %}
+            </p>
+        {% endif %}
+    </div>
+{% endwith %}

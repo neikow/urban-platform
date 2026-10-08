@@ -30,14 +30,18 @@ class CoreConfig(AppConfig):
         # Residents follow the association areas: redraw one, and they move with it.
         from django.db.models.signals import post_delete, post_save
 
-        from core.associations import reassign_residents_on_change
+        from core.associations import on_association_deleted, on_association_saved
 
-        for signal in (post_save, post_delete):
-            signal.connect(
-                reassign_residents_on_change,
-                sender="core.NeighborhoodAssociation",
-                dispatch_uid=f"core.associations.reassign_residents.{signal is post_save}",
-            )
+        post_save.connect(
+            on_association_saved,
+            sender="core.NeighborhoodAssociation",
+            dispatch_uid="core.associations.on_association_saved",
+        )
+        post_delete.connect(
+            on_association_deleted,
+            sender="core.NeighborhoodAssociation",
+            dispatch_uid="core.associations.on_association_deleted",
+        )
 
 
 class CustomUsersAppConfig(WagtailUsersAppConfig):
