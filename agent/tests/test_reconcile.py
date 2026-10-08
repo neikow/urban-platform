@@ -24,6 +24,7 @@ class FakeDocker:
         self.calls: list[tuple[str, ...]] = []
         self.fail: tuple[str, ...] | None = None
         self.version = "1.4.0"
+        self.stats = '{"pages": 12, "users": 40}'
 
     def _call(self, *call: str) -> None:
         self.calls.append(call)
@@ -42,7 +43,9 @@ class FakeDocker:
 
     def compose(self, project, compose_file, env_file, args, timeout=120) -> str:
         self._call("compose", project, *args)
-        return self.version if args[0] == "exec" else ""
+        if args[0] != "exec":
+            return ""
+        return self.stats if "tenant_stats" in args else self.version
 
     def compose_services(self, project, compose_file, env_file):
         self._call("ps", project)
@@ -380,3 +383,42 @@ class TestProxyNetwork:
         assert "invalid proxy network" in report["errors"][0]
         # Without a usable network, the websites need a port.
         assert "http_port required" in report["errors"][1]
+
+
+class TestStats:
+    def stats_calls(self, docker):
+        return [c for c in docker.composed("aix", "exec") if "tenant_stats" in c]
+
+    def test_collected_after_a_deployment_then_every_interval(self, agent, docker):
+        report = agent.reconcile(desired(tenant()), now=1000)
+        assert report["tenants"][0]["stats"] == {"pages": 12, "users": 40}
+        assert "stats_at" not in report["tenants"][0]
+
+        docker.stats = '{"pages": 13, "users": 41}'
+        report = agent.reconcile(desired(tenant()), now=1000 + 60)
+        assert report["tenants"][0]["stats"] == {"pages": 12, "users": 40}  # not yet
+        report = agent.reconcile(desired(tenant()), now=1000 + 900)
+        assert report["tenants"][0]["stats"] == {"pages": 13, "users": 41}
+        assert len(self.stats_calls(docker)) == 2
+
+    def test_an_old_release_without_the_command(self, agent, docker):
+        docker.fail = ("compose", "aix", "exec", "-T", "web", "python", "manage.py")
+
+        report = agent.reconcile(desired(tenant()), now=1000)
+        agent.reconcile(desired(tenant()), now=1060)
+
+        assert report["tenants"][0]["status"] == "running"
+        assert report["tenants"][0]["stats"] == {}
+        assert len(self.stats_calls(docker)) == 1  # not retried at every poll
+
+    def test_only_counts_are_kept(self, agent, docker):
+        docker.stats = 'Some warning\n{"pages": 3, "users": -1, "name": "x", "flag": true}'
+
+        report = agent.reconcile(desired(tenant()), now=1000)
+
+        assert report["tenants"][0]["stats"] == {"pages": 3}
+
+    def test_not_collected_while_stopped(self, agent, docker):
+        agent.reconcile(desired(tenant(state="stopped")), now=1000)
+
+        assert self.stats_calls(docker) == []

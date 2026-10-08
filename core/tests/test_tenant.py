@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 import pytest
 from django.core.management import call_command
-from wagtail.models import Site
+from wagtail.models import Page, Site
 
 from about.models import AboutCommissionPage, AboutWebsitePage
 from core import branding, territories
@@ -171,3 +171,16 @@ class TestCommand:
 
         assert "admin@example.org" in out.getvalue()
         assert Site.objects.get(is_default_site=True).port == 8000
+
+
+@pytest.mark.django_db
+class TestStats:
+    def test_counts_published_pages_and_active_accounts(self):
+        User.objects.create_user(email="a@example.org", password="x")
+        User.objects.create_user(email="b@example.org", password="x", is_active=False)
+        live_pages = Page.objects.live().filter(depth__gt=1).count()
+        out = io.StringIO()
+
+        call_command("tenant_stats", stdout=out)
+
+        assert json.loads(out.getvalue()) == {"pages": live_pages, "users": 1}

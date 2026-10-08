@@ -123,6 +123,9 @@ class TenantStatus:
     error: str = ""
     failed_at: float = 0
     services: dict[str, str] = field(default_factory=dict)
+    # The website's figures (manage.py tenant_stats), and when they were collected.
+    stats: dict[str, int] = field(default_factory=dict)
+    stats_at: float = 0
 
 
 def env_file_content(tenant: Tenant, image: str) -> str:
@@ -228,6 +231,28 @@ class Reconciler:
         )
         return out.strip()
 
+    def collect_stats(self, status: TenantStatus, now: float) -> None:
+        """The website's figures, every ``stats_seconds`` while it runs."""
+        if status.status != "running" or now - status.stats_at < self.config.stats_seconds:
+            return
+        status.stats_at = now  # failed or not: not again before the next interval
+        compose_files, env_file = self._files(status.slug)
+        try:
+            out = self.docker.compose(
+                status.slug,
+                compose_files,
+                env_file,
+                ["exec", "-T", "web", "python", "manage.py", "tenant_stats"],
+            )
+            data = json.loads(out.strip().splitlines()[-1])
+        except (DockerError, OSError, ValueError, IndexError) as error:
+            # Releases before the command have no figures.
+            logger.warning("%s: no figures: %s", status.slug, error)
+        else:
+            if isinstance(data, dict):
+                status.stats = {str(k): v for k, v in data.items() if type(v) is int and v >= 0}
+        self.save_status(status)
+
     def observe(self, status: TenantStatus) -> None:
         """The containers' states, for the report."""
         compose_files, env_file = self._files(status.slug)
@@ -257,6 +282,7 @@ class Reconciler:
                 )
                 if not up_to_date and not waiting:
                     status.attempted = tenant.generation
+                    status.stats_at = 0  # fresh figures after a deployment
                     self.deploy(tenant, status)
                     status.generation, status.status, status.error = (
                         tenant.generation,
@@ -368,12 +394,19 @@ class Reconciler:
                 self.observe(status)
                 statuses[slug] = status
 
+        for status in statuses.values():
+            self.collect_stats(status, now)
+
         return {
             "agent_version": VERSION,
             "edge": edge,
             "errors": errors,
             "tenants": [
-                {k: v for k, v in asdict(s).items() if k not in ("attempted", "failed_at")}
+                {
+                    k: v
+                    for k, v in asdict(s).items()
+                    if k not in ("attempted", "failed_at", "stats_at")
+                }
                 for s in statuses.values()
             ],
         }
