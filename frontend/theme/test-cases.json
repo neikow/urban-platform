@@ -46,8 +46,8 @@
       },
       "variables": {
         "--color-base-100": "#10151c",
-        "--color-base-200": "color-mix(in oklch, var(--color-base-100), var(--color-base-content) 4%)",
-        "--color-base-300": "color-mix(in oklch, var(--color-base-100), var(--color-base-content) 9%)",
+        "--color-base-200": "color-mix(in oklab, var(--color-base-100), var(--color-base-content) 4%)",
+        "--color-base-300": "color-mix(in oklab, var(--color-base-100), var(--color-base-content) 9%)",
         "--color-base-content": "#e8e6e3"
       },
       "fonts": [

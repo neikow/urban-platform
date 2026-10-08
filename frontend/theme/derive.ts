@@ -28,6 +28,7 @@ export const MIN_LIGHT_CONTRAST = 3;
 // Body text on the background: WCAG AA for normal text.
 export const MIN_TEXT_CONTRAST = 4.5;
 // Cards and borders: the background, shaded toward the text colour.
+// In oklab: mixing in oklch loses the hue of near-greys (Chrome), turning them pink.
 export const BASE_200_SHADE = "4%";
 export const BASE_300_SHADE = "9%";
 
@@ -96,7 +97,7 @@ export function themeVariables(choices: ThemeChoices): Record<string, string> {
   if (isColor(choices.background_color)) {
     variables["--color-base-100"] = choices.background_color;
     const shade = (amount: string) =>
-      `color-mix(in oklch, var(--color-base-100), var(--color-base-content) ${amount})`;
+      `color-mix(in oklab, var(--color-base-100), var(--color-base-content) ${amount})`;
     variables["--color-base-200"] = shade(BASE_200_SHADE);
     variables["--color-base-300"] = shade(BASE_300_SHADE);
   }

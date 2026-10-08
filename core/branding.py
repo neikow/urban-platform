@@ -27,6 +27,7 @@ DARK_CONTENT = "#1b100a"
 # Body text on the background: WCAG AA for normal text.
 MIN_TEXT_CONTRAST = 4.5
 # Cards and borders: the background, shaded toward the text colour.
+# In oklab: mixing in oklch loses the hue of near-greys (Chrome), turning them pink.
 BASE_200_SHADE = "4%"
 BASE_300_SHADE = "9%"
 HEX_COLOR = re.compile(r"^#[0-9a-fA-F]{6}$")
@@ -141,7 +142,7 @@ def theme_variables(choices: dict[str, str]) -> dict[str, str]:
         variables["--color-base-100"] = background
         for level, amount in (("200", BASE_200_SHADE), ("300", BASE_300_SHADE)):
             variables[f"--color-base-{level}"] = (
-                f"color-mix(in oklch, var(--color-base-100), var(--color-base-content) {amount})"
+                f"color-mix(in oklab, var(--color-base-100), var(--color-base-content) {amount})"
             )
     text = choices.get("text_color", "")
     if _is_color(text):
