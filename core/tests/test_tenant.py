@@ -172,6 +172,14 @@ class TestCommand:
         assert "admin@example.org" in out.getvalue()
         assert Site.objects.get(is_default_site=True).port == 8000
 
+    def test_warnings_are_marked_for_the_agent(self, services, monkeypatch):
+        monkeypatch.setenv("TENANT_LOGO_URL", "ftp://cp.example.org/logo.png")
+        err = io.StringIO()
+
+        call_command("bootstrap_tenant", stdout=io.StringIO(), stderr=err)
+
+        assert "WARNING: Branding logo not set: not an http(s) URL" in err.getvalue()
+
 
 def png_bytes() -> bytes:
     from PIL import Image as PillowImage

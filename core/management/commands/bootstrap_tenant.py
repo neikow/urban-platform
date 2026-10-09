@@ -21,6 +21,7 @@ class Command(BaseCommand):
         for line in report.done:
             self.stdout.write(self.style.SUCCESS(line))
         for line in report.warnings:
-            self.stderr.write(self.style.WARNING(line))
+            # "WARNING: ": the agent reports these lines to the control plane.
+            self.stderr.write(self.style.WARNING(f"WARNING: {line}"))
         if not report.done and not report.warnings:
             self.stdout.write("Nothing to do.")

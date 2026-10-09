@@ -196,7 +196,9 @@ The control plane answers `{"events_ack": 41}`: the last event of this journal i
   characters, 3 services at most), by service.
 - Websites this host runs but the desired state left out are reported too.
 - `journal`, `events`: what happened on the host, oldest first, 100 per report: the
-  agent starting, deployments (with their duration), failures (with the error and the
+  agent starting, deployments (with their duration; a `warning` when the website's
+  setup, `bootstrap_tenant`, printed `WARNING:` lines, e.g. an image it could not
+  download), failures (with the error and the
   failing services' logs in `detail`), stops, removals, services of a running website
   turning unhealthy and back, edge and update failures, and the control plane being
   unreachable then back. `level` is `info`, `warning` or `error`; `slug` is `""` for the

@@ -463,6 +463,22 @@ class TestEvents:
         assert (status["hint"], status["logs"]) == ("", {})
         assert self.events(report)[-1][2].startswith("Deployed 1.4.0 (generation 2")
 
+    def test_setup_warnings(self, agent, docker):
+        docker.log_text = (
+            "Site: https://aix.example.org.\n"
+            "WARNING: Branding logo not set: https://cp/logo.png could not be downloaded\n"
+        )
+
+        report = agent.reconcile(desired(tenant()), now=1000)
+
+        [deployed] = [e for e in report["events"] if e["slug"] == "aix"]
+        assert deployed["level"] == "warning"
+        assert deployed["message"].endswith(
+            "1 warning(s) from the setup: Branding logo not set: "
+            "https://cp/logo.png could not be downloaded"
+        )
+        assert docker.composed("aix", "logs", "--no-color", "--no-log-prefix", "--tail", "60")
+
     def test_a_running_website_in_trouble_then_back(self, agent, docker):
         agent.reconcile(desired(tenant()), now=1000)
         docker.services = [{"Service": "web", "State": "running", "Health": "unhealthy"}]

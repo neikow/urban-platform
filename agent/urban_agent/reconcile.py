@@ -341,6 +341,13 @@ class Reconciler:
             found[name] = out.strip()[-LOG_CHARS:]
         return found
 
+    def setup_warnings(self, slug: str) -> list[str]:
+        """What the website's setup (bootstrap_tenant, in the migrator) could not do."""
+        compose_files, env_file = self._files(slug)
+        text = self.logs(slug, ["migrator"], compose_files, env_file).get("migrator", "")
+        marker = "WARNING: "
+        return [line.split(marker, 1)[1] for line in text.splitlines() if marker in line][:20]
+
     def failure_logs(self, slug: str) -> dict[str, str]:
         """After a failed deployment: the logs of the services that failed."""
         compose_files, env_file = self._files(slug)
@@ -376,11 +383,18 @@ class Reconciler:
                         "",
                     )
                     status.hint, status.logs, status.problems = "", {}, {}
-                    self.journal.record(
-                        "info",
+                    message = (
                         f"Deployed {tenant.image_tag} (generation {tenant.generation}, "
-                        f"version {status.version or '?'}) in {time.monotonic() - started:.0f} s.",
+                        f"version {status.version or '?'}) in {time.monotonic() - started:.0f} s."
+                    )
+                    warnings = self.setup_warnings(tenant.slug)
+                    if warnings:
+                        message += f" {len(warnings)} warning(s) from the setup: {warnings[0]}"
+                    self.journal.record(
+                        "warning" if warnings else "info",
+                        message,
                         tenant.slug,
+                        detail="\n".join(warnings),
                     )
             elif status.status != "stopped":
                 compose_files, env_file = self._files(tenant.slug)
