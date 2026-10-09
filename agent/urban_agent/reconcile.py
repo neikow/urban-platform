@@ -15,6 +15,7 @@ Files, under the state directory:
                                  or is published on 127.0.0.1:<http_port>
     tenants/<slug>/.env          its variables (mode 0600: it holds secrets)
     tenants/<slug>/state.json    the generation applied, its outcome, its version
+    journal.json                 the events not yet sent to the control plane (journal.py)
 """
 
 import hashlib
@@ -30,6 +31,8 @@ from typing import Any
 from . import VERSION
 from .config import Config
 from .docker import Docker, DockerError
+from .hints import hint
+from .journal import Journal
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +53,10 @@ DEPLOY_TIMEOUT = 20 * 60
 # <slug>-nginx; without, it is published on 127.0.0.1:<http_port>.
 EDGE_MODES = ("traefik", "external")
 NETWORK = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$")
+# The end of a failing service's logs, sent with the failure.
+LOG_LINES = 60
+LOG_CHARS = 4000
+LOG_SERVICES = 3
 
 
 class InvalidTenant(Exception):
@@ -123,9 +130,26 @@ class TenantStatus:
     error: str = ""
     failed_at: float = 0
     services: dict[str, str] = field(default_factory=dict)
+    # Services in trouble (unhealthy, exited with an error…), and why.
+    problems: dict[str, str] = field(default_factory=dict)
+    # With a failure: its known cause, if any, and the end of the failing services' logs.
+    hint: str = ""
+    logs: dict[str, str] = field(default_factory=dict)
     # The website's figures (manage.py tenant_stats), and when they were collected.
     stats: dict[str, int] = field(default_factory=dict)
     stats_at: float = 0
+
+
+def service_problem(service: dict[str, Any]) -> str:
+    """What is wrong with a container of ``docker compose ps``, or ""."""
+    state, code = service.get("State"), service.get("ExitCode")
+    if service.get("Health") == "unhealthy":
+        return "unhealthy"
+    if state in ("restarting", "dead"):
+        return str(state)
+    if state == "exited" and code not in (0, None):
+        return f"exited with code {code}"
+    return ""
 
 
 def env_file_content(tenant: Tenant, image: str) -> str:
@@ -140,11 +164,16 @@ def env_file_content(tenant: Tenant, image: str) -> str:
 
 
 class Reconciler:
-    def __init__(self, config: Config, docker: Docker | None = None) -> None:
+    def __init__(
+        self, config: Config, docker: Docker | None = None, journal: Journal | None = None
+    ) -> None:
         self.config = config
         self.docker = docker or Docker()
+        self.journal = journal or Journal(config.state_dir / "journal.json")
         self.tenants_dir = config.state_dir / "tenants"
         self.edge_hash = ""
+        self.edge = ""
+        self.errors: list[str] = []
 
     # --- Files --------------------------------------------------------------------
 
@@ -267,6 +296,62 @@ class Reconciler:
         status.services = {
             s.get("Service", "?"): s.get("Health") or s.get("State", "?") for s in services
         }
+        problems = {
+            str(s.get("Service", "?")): problem for s in services if (problem := service_problem(s))
+        }
+        if problems == status.problems:
+            return
+        # A failed deployment has its own event; a running website changing is news.
+        if status.status == "running":
+            if problems:
+                self.journal.record(
+                    "warning",
+                    ", ".join(f"{name} {problem}" for name, problem in sorted(problems.items())),
+                    status.slug,
+                    detail=self.service_logs(status.slug, list(problems), compose_files, env_file),
+                )
+            else:
+                self.journal.record("info", "All services are back to normal.", status.slug)
+        status.problems = problems
+        self.save_status(status)
+
+    def service_logs(
+        self, slug: str, services: list[str], compose_files: list[Path], env_file: Path
+    ) -> str:
+        return "\n\n".join(
+            f"--- {name}\n{text}"
+            for name, text in self.logs(slug, services, compose_files, env_file).items()
+        )
+
+    def logs(
+        self, slug: str, services: list[str], compose_files: list[Path], env_file: Path
+    ) -> dict[str, str]:
+        """The end of these services' logs (at most LOG_SERVICES of them)."""
+        found = {}
+        for name in sorted(services)[:LOG_SERVICES]:
+            try:
+                out = self.docker.compose(
+                    slug,
+                    compose_files,
+                    env_file,
+                    ["logs", "--no-color", "--no-log-prefix", "--tail", str(LOG_LINES), name],
+                )
+            except DockerError as error:
+                out = f"(no logs: {error})"
+            found[name] = out.strip()[-LOG_CHARS:]
+        return found
+
+    def failure_logs(self, slug: str) -> dict[str, str]:
+        """After a failed deployment: the logs of the services that failed."""
+        compose_files, env_file = self._files(slug)
+        if not compose_files[0].exists() or not env_file.exists():
+            return {}
+        try:
+            services = self.docker.compose_services(slug, compose_files, env_file)
+        except (DockerError, ValueError):
+            return {}
+        failing = [str(s.get("Service", "?")) for s in services if service_problem(s)]
+        return self.logs(slug, failing, compose_files, env_file)
 
     def apply(self, tenant: Tenant, now: float) -> TenantStatus:
         status = self.load_status(tenant.slug)
@@ -283,31 +368,62 @@ class Reconciler:
                 if not up_to_date and not waiting:
                     status.attempted = tenant.generation
                     status.stats_at = 0  # fresh figures after a deployment
+                    started = time.monotonic()
                     self.deploy(tenant, status)
                     status.generation, status.status, status.error = (
                         tenant.generation,
                         "running",
                         "",
                     )
+                    status.hint, status.logs, status.problems = "", {}, {}
+                    self.journal.record(
+                        "info",
+                        f"Deployed {tenant.image_tag} (generation {tenant.generation}, "
+                        f"version {status.version or '?'}) in {time.monotonic() - started:.0f} s.",
+                        tenant.slug,
+                    )
             elif status.status != "stopped":
                 compose_files, env_file = self._files(tenant.slug)
                 if compose_files[0].exists():
                     self.docker.compose(tenant.slug, compose_files, env_file, ["stop"])
                 status.generation, status.status, status.error = tenant.generation, "stopped", ""
+                status.hint, status.logs = "", {}
+                self.journal.record("info", "Stopped.", tenant.slug)
         except (DockerError, OSError) as error:
-            logger.error("%s: %s", tenant.slug, error)
-            status.status = "failed"
-            status.error = str(error)[:2000]
-            status.failed_at = now
+            self.fail(tenant, status, str(error), now)
         self.save_status(status)
         self.observe(status)
         return status
+
+    def fail(self, tenant: Tenant, status: TenantStatus, error: str, now: float) -> None:
+        previous = (status.status, status.error)
+        status.status = "failed"
+        status.error = error[:2000]
+        status.failed_at = now
+        status.logs = self.failure_logs(tenant.slug) if tenant.state == "running" else {}
+        status.hint = hint(error, *status.logs.values())
+        if previous == ("failed", status.error):
+            logger.error("%s: %s", tenant.slug, error)  # the same failure again: no new event
+            return
+        action = {"running": "Deployment", "stopped": "Stop", "absent": "Removal"}[tenant.state]
+        logs = "\n\n".join(f"--- {name}\n{text}" for name, text in status.logs.items())
+        summary = status.hint or (error.strip().splitlines() or ["?"])[-1]
+        self.journal.record(
+            "error",
+            f"{action} failed: {summary}",
+            tenant.slug,
+            detail=f"{error}\n\n{logs}".strip(),
+        )
 
     def _remove(self, tenant: Tenant, status: TenantStatus) -> TenantStatus:
         compose_files, env_file = self._files(tenant.slug)
         if compose_files[0].exists():
             args = ["down", "--remove-orphans"] + (["--volumes"] if tenant.purge else [])
             self.docker.compose(tenant.slug, compose_files, env_file, args, timeout=300)
+        if self._dir(tenant.slug).exists():  # not when already removed
+            self.journal.record(
+                "info", "Removed with its data." if tenant.purge else "Removed.", tenant.slug
+            )
         shutil.rmtree(self._dir(tenant.slug), ignore_errors=True)
         return TenantStatus(slug=tenant.slug, generation=tenant.generation, status="absent")
 
@@ -363,6 +479,12 @@ class Reconciler:
             errors.append(f"invalid proxy network {network!r}")
             network = None
         edge = self.ensure_edge(edge_settings)
+        if edge != self.edge:
+            if edge not in ("running", "external"):
+                self.journal.record("error", f"Edge: {edge}")
+            elif self.edge:
+                self.journal.record("info", f"Edge: {edge}.")
+            self.edge = edge
 
         ports: dict[int, str] = {}
         for data in desired.get("tenants") or []:
@@ -397,6 +519,11 @@ class Reconciler:
         for status in statuses.values():
             self.collect_stats(status, now)
 
+        for message in errors:
+            if message not in self.errors:
+                self.journal.record("error", f"Desired state: {message}")
+        self.errors = errors
+
         return {
             "agent_version": VERSION,
             "edge": edge,
@@ -405,8 +532,10 @@ class Reconciler:
                 {
                     k: v
                     for k, v in asdict(s).items()
-                    if k not in ("attempted", "failed_at", "stats_at")
+                    if k not in ("attempted", "failed_at", "stats_at", "problems")
                 }
                 for s in statuses.values()
             ],
+            "journal": self.journal.id,
+            "events": self.journal.pending(),
         }

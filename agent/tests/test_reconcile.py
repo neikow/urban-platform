@@ -25,6 +25,8 @@ class FakeDocker:
         self.fail: tuple[str, ...] | None = None
         self.version = "1.4.0"
         self.stats = '{"pages": 12, "users": 40}'
+        self.services = [{"Service": "web", "State": "running", "Health": "healthy"}]
+        self.log_text = "some output\n"
 
     def _call(self, *call: str) -> None:
         self.calls.append(call)
@@ -43,13 +45,15 @@ class FakeDocker:
 
     def compose(self, project, compose_file, env_file, args, timeout=120) -> str:
         self._call("compose", project, *args)
+        if args[0] == "logs":
+            return self.log_text
         if args[0] != "exec":
             return ""
         return self.stats if "tenant_stats" in args else self.version
 
     def compose_services(self, project, compose_file, env_file):
         self._call("ps", project)
-        return [{"Service": "web", "State": "running", "Health": "healthy"}]
+        return self.services
 
     def composed(self, *args: str) -> list[tuple[str, ...]]:
         return [c for c in self.calls if c[: 1 + len(args)] == ("compose", *args)]
@@ -422,3 +426,81 @@ class TestStats:
         agent.reconcile(desired(tenant(state="stopped")), now=1000)
 
         assert self.stats_calls(docker) == []
+
+
+class TestEvents:
+    def events(self, report):
+        return [(e["level"], e["slug"], e["message"]) for e in report["events"]]
+
+    def test_deployment_and_its_failure(self, agent, docker):
+        docker.fail = ("compose", "aix", "up")
+        docker.services = [
+            {"Service": "db", "State": "running", "Health": "healthy"},
+            {"Service": "static", "State": "exited", "ExitCode": 0},
+            {"Service": "migrator", "State": "exited", "ExitCode": 1},
+        ]
+        docker.log_text = 'FATAL:  password authentication failed for user "urban"\n'
+
+        report = agent.reconcile(desired(tenant()), now=1000)
+
+        [status] = report["tenants"]
+        assert status["logs"] == {"migrator": docker.log_text.strip()}
+        assert docker.composed("aix", "logs", "--no-color", "--no-log-prefix", "--tail", "60")
+        assert "same slug" in status["hint"]
+        [(level, slug, message)] = self.events(report)
+        assert (level, slug) == ("error", "aix")
+        assert message.startswith("Deployment failed: The database refused")
+        assert "password authentication failed" in report["events"][0]["detail"]
+
+        # Tried again with the same outcome: no new event.
+        report = agent.reconcile(desired(tenant()), now=1000 + 301)
+        assert len(report["events"]) == 1
+
+        docker.fail = None
+        docker.services = [{"Service": "web", "State": "running", "Health": "healthy"}]
+        report = agent.reconcile(desired(tenant(generation=2)), now=2000)
+        [status] = report["tenants"]
+        assert (status["hint"], status["logs"]) == ("", {})
+        assert self.events(report)[-1][2].startswith("Deployed 1.4.0 (generation 2")
+
+    def test_a_running_website_in_trouble_then_back(self, agent, docker):
+        agent.reconcile(desired(tenant()), now=1000)
+        docker.services = [{"Service": "web", "State": "running", "Health": "unhealthy"}]
+
+        report = agent.reconcile(desired(tenant()), now=1030)
+
+        assert self.events(report)[-1] == ("warning", "aix", "web unhealthy")
+        assert report["events"][-1]["detail"] == "--- web\nsome output"
+        assert len(agent.reconcile(desired(tenant()), now=1060)["events"]) == 2  # no repeat
+
+        docker.services = [{"Service": "web", "State": "running", "Health": "healthy"}]
+        report = agent.reconcile(desired(tenant()), now=1090)
+        assert self.events(report)[-1] == ("info", "aix", "All services are back to normal.")
+
+    def test_stop_and_removal(self, agent):
+        agent.reconcile(desired(tenant()), now=1000)
+        agent.reconcile(desired(tenant(generation=2, state="stopped")), now=1030)
+        report = agent.reconcile(
+            desired({"slug": "aix", "generation": 3, "state": "absent", "purge": True}), now=1060
+        )
+
+        messages = [m for _, _, m in self.events(report)]
+        assert messages[1:] == ["Stopped.", "Removed with its data."]
+        # Already removed: said once.
+        report = agent.reconcile(
+            desired({"slug": "aix", "generation": 3, "state": "absent", "purge": True}), now=1090
+        )
+        assert len(report["events"]) == 3
+
+    def test_invalid_desired_state_once(self, agent):
+        agent.reconcile(desired(tenant(slug="../x")), now=1000)
+        report = agent.reconcile(desired(tenant(slug="../x")), now=1030)
+
+        assert self.events(report) == [("error", "", "Desired state: invalid slug '../x'")]
+
+    def test_acknowledged_events_are_not_sent_again(self, agent):
+        report = agent.reconcile(desired(tenant()), now=1000)
+        assert report["journal"] == agent.journal.id
+        agent.journal.acknowledge({"events_ack": report["events"][-1]["seq"]})
+
+        assert agent.reconcile(desired(tenant()), now=1030)["events"] == []

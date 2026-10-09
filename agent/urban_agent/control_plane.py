@@ -49,5 +49,6 @@ class ControlPlane:
             raise ControlPlaneError("desired-state: not an object")
         return state
 
-    def report(self, report: dict[str, Any]) -> None:
-        self._call("POST", "report", report)
+    def report(self, report: dict[str, Any]) -> Any:
+        """Its answer: ``{"events_ack": n}`` (or nothing, before the journal)."""
+        return self._call("POST", "report", report)

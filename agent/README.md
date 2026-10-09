@@ -159,11 +159,26 @@ Sent after each poll:
       "version": "1.4.0",
       "error": "",
       "services": {"web": "healthy", "worker": "running", "migrator": "exited"},
-      "stats": {"pages": 12, "users": 40}
+      "stats": {"pages": 12, "users": 40},
+      "hint": "",
+      "logs": {}
+    }
+  ],
+  "journal": "9f2c4e1ab37d5c08",
+  "events": [
+    {
+      "seq": 41,
+      "at": "2026-10-09T08:12:03+00:00",
+      "level": "error",
+      "slug": "aix",
+      "message": "Deployment failed: The database refused the website's password: …",
+      "detail": "docker compose -p aix: … service \"migrator\" didn't complete successfully: exit 1\n\n--- migrator\n…"
     }
   ]
 }
 ```
+
+The control plane answers `{"events_ack": 41}`: the last event of this journal it has.
 
 - `edge`: `running` (Traefik), `external`, or what went wrong.
 - `generation`: the last one applied successfully (`null` before the first).
@@ -174,7 +189,22 @@ Sent after each poll:
   container): published `pages`, `users` accounts. Collected after each deployment, then
   every `AGENT_STATS_SECONDS` while it runs; `{}` until then, or for a release without
   the command. Other non-negative integers may appear later.
+- `hint`: with `failed`, the known cause in plain words, if the agent recognises it (a
+  database password refused, a port taken, a release missing from the registry, a full
+  disk…); `""` otherwise.
+- `logs`: with `failed`, the end of the logs of the services that failed (60 lines, 4,000
+  characters, 3 services at most), by service.
 - Websites this host runs but the desired state left out are reported too.
+- `journal`, `events`: what happened on the host, oldest first, 100 per report: the
+  agent starting, deployments (with their duration), failures (with the error and the
+  failing services' logs in `detail`), stops, removals, services of a running website
+  turning unhealthy and back, edge and update failures, and the control plane being
+  unreachable then back. `level` is `info`, `warning` or `error`; `slug` is `""` for the
+  host. A failure tried again with the same error is not repeated.
+- The events are kept on the host (`journal.json` in the state directory, 500 at most)
+  until the control plane acknowledges them with `events_ack`, so those recorded while
+  it was unreachable reach it later. `seq` counts up within a `journal`: a new journal id
+  (state directory lost) starts again at 1.
 
 ## Development
 
