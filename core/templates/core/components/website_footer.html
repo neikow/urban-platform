@@ -41,11 +41,6 @@
                     </p>
                 </div>
             </a>
-            {% if branding.contact_email %}
-                <a class="link link-hover text-sm" href="mailto:{{ branding.contact_email }}">
-                    {% blocktrans trimmed with email=branding.contact_email %}Contact: {{ email }}{% endblocktrans %}
-                </a>
-            {% endif %}
         </aside>
         <nav>
             <h3 class="footer-title">
