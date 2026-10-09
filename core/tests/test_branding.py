@@ -88,7 +88,7 @@ class TestPages:
         assert "images/favicon.svg" in content
         assert "--color-primary" not in content
 
-    def test_name_colours_logo_and_contact(self, client, media):
+    def test_name_colours_and_logo(self, client, media):
         set_branding(
             site_name="Quartiers Vivants",
             tagline="Ensemble, dans nos rues",
@@ -104,7 +104,7 @@ class TestPages:
         assert "images/favicon.svg" not in content
         assert ".png" in content  # the favicon, from the logo
         assert "Ensemble, dans nos rues" in content
-        assert "mailto:bonjour@example.org" in content
+        assert "bonjour@example.org" not in content  # not in the footer any more
 
     def test_signup_without_photo(self, client):
         response = client.get(reverse("register"))
