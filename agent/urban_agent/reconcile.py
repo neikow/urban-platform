@@ -14,7 +14,8 @@ Files, under the state directory:
                                  nginx joins the proxy's network as <slug>-nginx,
                                  or is published on 127.0.0.1:<http_port>
     tenants/<slug>/.env          its variables (mode 0600: it holds secrets)
-    tenants/<slug>/state.json    the generation applied, its outcome, its version
+    tenants/<slug>/state.json    the generation applied, its outcome, its version, and a
+                                 hash of what was deployed (``Tenant.spec``)
     journal.json                 the events not yet sent to the control plane (journal.py)
 """
 
@@ -119,12 +120,20 @@ class Tenant:
             http_port=http_port,
         )
 
+    def spec(self) -> str:
+        """A hash of what a deployment applies. Generations restart at 1 when a website is
+        created again with an earlier one's slug: a website with other secrets is another
+        website, whatever its generation."""
+        values = [self.image_tag, self.env, self.http_port, self.proxy_network]
+        return hashlib.sha256(json.dumps(values, sort_keys=True).encode()).hexdigest()
+
 
 @dataclass
 class TenantStatus:
     slug: str
     generation: int | None = None  # the generation last applied successfully
     attempted: int | None = None  # the generation last tried
+    spec: str = ""  # Tenant.spec of the last successful deployment
     status: str = "unknown"  # running, stopped, failed, absent, unknown
     version: str = ""  # reported by /healthz/ after the last deployment
     error: str = ""
@@ -366,7 +375,11 @@ class Reconciler:
             if tenant.state == "absent":
                 return self._remove(tenant, status)
             if tenant.state == "running":
-                up_to_date = status.generation == tenant.generation and status.status == "running"
+                spec = tenant.spec()
+                applied = status.generation == tenant.generation and status.status == "running"
+                if applied and not status.spec:
+                    status.spec = spec  # deployed by an agent before the hash: taken as is
+                up_to_date = applied and status.spec == spec and self.containers_exist(tenant.slug)
                 waiting = (
                     status.status == "failed"
                     and status.attempted == tenant.generation
@@ -382,6 +395,7 @@ class Reconciler:
                         "running",
                         "",
                     )
+                    status.spec = spec
                     status.hint, status.logs, status.problems = "", {}, {}
                     message = (
                         f"Deployed {tenant.image_tag} (generation {tenant.generation}, "
@@ -408,6 +422,19 @@ class Reconciler:
         self.save_status(status)
         self.observe(status)
         return status
+
+    def containers_exist(self, slug: str) -> bool:
+        """Whether a deployed website still has containers: removed behind the agent's back
+        (by hand, a prune), it is deployed again."""
+        compose_files, env_file = self._files(slug)
+        try:
+            if self.docker.compose_services(slug, compose_files, env_file):
+                return True
+        except (DockerError, ValueError) as error:
+            logger.warning("%s: could not list containers: %s", slug, error)
+            return True  # unknown: left as it is
+        self.journal.record("warning", "Its containers are gone: deploying it again.", slug)
+        return False
 
     def fail(self, tenant: Tenant, status: TenantStatus, error: str, now: float) -> None:
         previous = (status.status, status.error)
@@ -546,7 +573,7 @@ class Reconciler:
                 {
                     k: v
                     for k, v in asdict(s).items()
-                    if k not in ("attempted", "failed_at", "stats_at", "problems")
+                    if k not in ("attempted", "spec", "failed_at", "stats_at", "problems")
                 }
                 for s in statuses.values()
             ],
