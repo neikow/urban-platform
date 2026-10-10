@@ -7,6 +7,8 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
+from .resources import size
+
 logger = logging.getLogger(__name__)
 
 
@@ -64,6 +66,36 @@ class Docker:
             ["compose", "-p", project, *files, "--env-file", str(env_file), *args],
             timeout=timeout,
         )
+
+    def project_memory(self) -> dict[str, int]:
+        """Memory used by each Compose project's containers, in bytes."""
+        listed = self.run(
+            [
+                "ps",
+                "--filter",
+                "label=com.docker.compose.project",
+                "--format",
+                '{{.ID}}\t{{.Label "com.docker.compose.project"}}',
+            ]
+        )
+        projects = dict(line.split("\t", 1) for line in listed.strip().splitlines() if "\t" in line)
+        if not projects:
+            return {}
+        out = self.run(
+            ["stats", "--no-stream", "--format", "{{.ID}}\t{{.MemUsage}}", *projects], timeout=60
+        )
+        memory: dict[str, int] = {}
+        for line in out.strip().splitlines():
+            container, _, usage = line.partition("\t")
+            project = projects.get(container[:12])
+            if project is None:
+                continue
+            try:
+                used = size(usage.split("/")[0])
+            except ValueError:
+                continue
+            memory[project] = memory.get(project, 0) + used
+        return memory
 
     def compose_services(
         self, project: str, compose_files: Sequence[Path], env_file: Path

@@ -27,6 +27,7 @@ class FakeDocker:
         self.stats = '{"pages": 12, "users": 40}'
         self.services = [{"Service": "web", "State": "running", "Health": "healthy"}]
         self.log_text = "some output\n"
+        self.memory = {"aix": 300_000_000}
 
     def _call(self, *call: str) -> None:
         self.calls.append(call)
@@ -50,6 +51,10 @@ class FakeDocker:
         if args[0] != "exec":
             return ""
         return self.stats if "tenant_stats" in args else self.version
+
+    def project_memory(self):
+        self._call("stats")
+        return self.memory
 
     def compose_services(self, project, compose_file, env_file):
         self._call("ps", project)
@@ -555,3 +560,26 @@ class TestEvents:
         agent.journal.acknowledge({"events_ack": report["events"][-1]["seq"]})
 
         assert agent.reconcile(desired(tenant()), now=1030)["events"] == []
+
+
+class TestResources:
+    def test_host_and_memory_reported(self, agent, docker):
+        report = agent.reconcile(desired(tenant()), now=1000)
+
+        assert report["host"]["cpus"] >= 1 and "disk_free" in report["host"]
+        assert report["tenants"][0]["memory"] == 300_000_000
+
+    def test_collected_every_interval(self, agent, docker):
+        agent.reconcile(desired(tenant()), now=1000)
+        agent.reconcile(desired(tenant()), now=1030)
+        assert docker.calls.count(("stats",)) == 1
+
+        agent.reconcile(desired(tenant()), now=1000 + agent.config.stats_seconds)
+        assert docker.calls.count(("stats",)) == 2
+
+    def test_stopped_website_uses_none(self, agent, docker):
+        agent.reconcile(desired(tenant()), now=1000)
+
+        report = agent.reconcile(desired(tenant(generation=2, state="stopped")), now=1030)
+
+        assert report["tenants"][0]["memory"] == 0

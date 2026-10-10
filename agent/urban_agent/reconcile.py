@@ -29,7 +29,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
 
-from . import VERSION
+from . import VERSION, resources
 from .config import Config
 from .docker import Docker, DockerError
 from .hints import hint
@@ -147,6 +147,8 @@ class TenantStatus:
     # The website's figures (manage.py tenant_stats), and when they were collected.
     stats: dict[str, int] = field(default_factory=dict)
     stats_at: float = 0
+    # Memory its containers use, in bytes (collected with the host's resources).
+    memory: int = 0
 
 
 def service_problem(service: dict[str, Any]) -> str:
@@ -183,6 +185,10 @@ class Reconciler:
         self.edge_hash = ""
         self.edge = ""
         self.errors: list[str] = []
+        # The host's resources and the websites' memory, every ``stats_seconds``.
+        self.resources: dict[str, Any] = {}
+        self.memory: dict[str, int] = {}
+        self.resources_at = 0.0
 
     # --- Files --------------------------------------------------------------------
 
@@ -468,6 +474,17 @@ class Reconciler:
         shutil.rmtree(self._dir(tenant.slug), ignore_errors=True)
         return TenantStatus(slug=tenant.slug, generation=tenant.generation, status="absent")
 
+    def collect_resources(self, now: float) -> None:
+        """The host's resources and the websites' memory, every ``stats_seconds``."""
+        if self.resources_at and now - self.resources_at < self.config.stats_seconds:
+            return
+        self.resources_at = now
+        self.resources = resources.host(self.config.state_dir)
+        try:
+            self.memory = self.docker.project_memory()
+        except (DockerError, ValueError) as error:
+            logger.warning("no memory figures: %s", error)
+
     # --- The edge proxy -----------------------------------------------------------
 
     def ensure_edge(self, edge: dict[str, Any]) -> str:
@@ -559,6 +576,9 @@ class Reconciler:
 
         for status in statuses.values():
             self.collect_stats(status, now)
+        self.collect_resources(now)
+        for status in statuses.values():
+            status.memory = self.memory.get(status.slug, 0) if status.status == "running" else 0
 
         for message in errors:
             if message not in self.errors:
@@ -568,6 +588,7 @@ class Reconciler:
         return {
             "agent_version": VERSION,
             "edge": edge,
+            "host": self.resources,
             "errors": errors,
             "tenants": [
                 {

@@ -153,6 +153,10 @@ Sent after each poll:
 {
   "agent_version": "1.4.0",
   "edge": "running",
+  "host": {
+    "memory_total": 8192000000, "memory_available": 3100000000,
+    "disk_total": 160000000000, "disk_free": 42000000000, "cpus": 4, "load": 0.42
+  },
   "errors": ["invalid slug '../x'"],
   "tenants": [
     {
@@ -163,6 +167,7 @@ Sent after each poll:
       "error": "",
       "services": {"web": "healthy", "worker": "running", "migrator": "exited"},
       "stats": {"pages": 12, "users": 40},
+      "memory": 612000000,
       "hint": "",
       "logs": {}
     }
@@ -192,6 +197,11 @@ The control plane answers `{"events_ack": 41}`: the last event of this journal i
   container): published `pages`, `users` accounts. Collected after each deployment, then
   every `AGENT_STATS_SECONDS` while it runs; `{}` until then, or for a release without
   the command. Other non-negative integers may appear later.
+- `host`: the host's resources, in bytes, collected every `AGENT_STATS_SECONDS`: memory
+  (`/proc/meminfo`, the host's), the disk holding Docker's volumes, processors, load
+  average over a minute. What cannot be read is left out; `{}` from agents before it.
+- `memory`: what the website's containers use, in bytes (`docker stats`), collected with
+  `host`; `0` while it does not run.
 - `hint`: with `failed`, the known cause in plain words, if the agent recognises it (a
   database password refused, a port taken, a release missing from the registry, a full
   disk…); `""` otherwise.
