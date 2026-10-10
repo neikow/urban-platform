@@ -52,6 +52,13 @@ class FakeDocker:
             return ""
         return self.stats if "tenant_stats" in args else self.version
 
+    def compose_stream(
+        self, project, compose_file, env_file, args, stdout=None, stdin=None, timeout=3600
+    ):
+        self._call("stream", project, *args)
+        if stdout is not None:
+            stdout.write_bytes(f"{args[2]} data".encode())
+
     def project_memory(self):
         self._call("stats")
         return self.memory

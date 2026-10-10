@@ -136,11 +136,19 @@ Two calls, both with `Authorization: Bearer <AGENT_TOKEN>`.
   - `restart`: restarts `web`, `worker` and `nginx`;
   - `bootstrap`: runs its setup again (`manage.py bootstrap_tenant`);
   - `invite_admin`: sends the first administrator's invitation again
-    (`manage.py invite_admin`; only while that account has no password).
+    (`manage.py invite_admin`; only while that account has no password);
+  - `backup`: a backup now (see [Backups](#backups));
+  - `restore`: `{"backup": "20261010T030000Z", "urls": {"db.dump": "https://…",
+    "media.tar.gz": "https://…"}}`, from the host's copy, or downloaded from the links
+    (signed by the control plane) when the host no longer has it.
 
   Each runs once: the agent remembers its `id` (`commands.json` in the state directory)
   and reports its result while the command is still asked, so the control plane stops
-  asking once it has the result. Invalid commands go to the report's `errors`.
+  asking once it has the result: `backup` and `restore` run in the background, and their
+  result comes once done. Invalid commands go to the report's `errors`.
+- `backup` (optional): turns daily backups on, `{"hour": 3, "keep": 3, "s3": {"endpoint":
+  "https://s3.fr-par.scw.cloud", "region": "fr-par", "bucket": "…", "prefix": "urban/",
+  "access_key": "…", "secret_key": "…"}}` (`s3` optional: on the host only without it).
 
 ## Updating itself
 
@@ -210,6 +218,9 @@ The control plane answers `{"events_ack": 41}`: the last event of this journal i
   container): published `pages`, `users` accounts. Collected after each deployment, then
   every `AGENT_STATS_SECONDS` while it runs; `{}` until then, or for a release without
   the command. Other non-negative integers may appear later.
+- `backups` (per website): `{"running": false, "last": {"id", "at", "ok", "error",
+  "size", "uploaded"}, "local": [{"id", "size", "version", "uploaded"}]}`, the backups on
+  the host newest first; `{}` without any.
 - `commands`: the results of the commands asked, `{"id": 17, "ok": true, "output": "…"}`
   (the end of what the command printed, or why it failed, 20,000 characters at most).
 - `host`: the host's resources, in bytes, collected every `AGENT_STATS_SECONDS`: memory
@@ -235,6 +246,29 @@ The control plane answers `{"events_ack": 41}`: the last event of this journal i
   until the control plane acknowledges them with `events_ack`, so those recorded while
   it was unreachable reach it later. `seq` counts up within a `journal`: a new journal id
   (state directory lost) starts again at 1.
+
+## Backups
+
+With `backup` in the desired state, each running website is backed up every day after
+`hour` (UTC); a failed backup is tried again an hour later. A backup is its database
+(`pg_dump`, custom format) and its uploaded files (`media.tar.gz`, without the map
+tiles, rebuilt on their own), with a manifest of the website's version and the files'
+hashes, under `backups/<slug>/<id>/` in the state directory. The `keep` latest stay on
+the host; with `s3`, each is also sent to the bucket under `<prefix><slug>/<id>/`, the
+manifest last. The agent only uploads: the control plane deletes the bucket's old
+backups, and signs the links a restore downloads from.
+
+Backups and restores run one at a time, in the background: the agent keeps reporting,
+and leaves the website alone (no deployment) until done. A restore:
+
+1. makes a backup of the current data first, so it can be undone;
+2. stops `web`, `worker` and `nginx`;
+3. restores the database into a new one, swapped in once complete (tables of a newer
+   release do not linger; a failed restore leaves the current data as it was);
+4. replaces the uploaded files (keeping the map tiles);
+5. starts the website again, migrating if the backup is from an older release.
+
+Removing a website with `purge` deletes its backups on the host too.
 
 ## Development
 

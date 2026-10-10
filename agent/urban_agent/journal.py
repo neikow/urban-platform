@@ -11,6 +11,7 @@ import json
 import logging
 import os
 import secrets
+import threading
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -32,6 +33,8 @@ class Journal:
         self.seq = 0
         self.acked = 0
         self.events: list[dict[str, Any]] = []
+        # Backups record events from their own thread.
+        self.lock = threading.RLock()
         try:
             data = json.loads(path.read_text())
             self.id = str(data["id"])
@@ -45,31 +48,34 @@ class Journal:
 
     def record(self, level: str, message: str, slug: str = "", detail: str = "") -> None:
         logger.log(LEVELS.get(level, logging.INFO), "%s%s", f"{slug}: " if slug else "", message)
-        self.seq += 1
-        self.events.append(
-            {
-                "seq": self.seq,
-                "at": datetime.now(UTC).isoformat(timespec="seconds"),
-                "level": level,
-                "slug": slug,
-                "message": message[:500],
-                "detail": detail[-DETAIL_LIMIT:],
-            }
-        )
-        del self.events[:-LIMIT]
-        self.save()
+        with self.lock:
+            self.seq += 1
+            self.events.append(
+                {
+                    "seq": self.seq,
+                    "at": datetime.now(UTC).isoformat(timespec="seconds"),
+                    "level": level,
+                    "slug": slug,
+                    "message": message[:500],
+                    "detail": detail[-DETAIL_LIMIT:],
+                }
+            )
+            del self.events[:-LIMIT]
+            self.save()
 
     def pending(self) -> list[dict[str, Any]]:
-        return [e for e in self.events if e["seq"] > self.acked][:BATCH]
+        with self.lock:
+            return [e for e in self.events if e["seq"] > self.acked][:BATCH]
 
     def acknowledge(self, answer: Any) -> None:
         """The control plane's answer to a report: ``{"events_ack": <last seq it has>}``."""
         ack = answer.get("events_ack") if isinstance(answer, dict) else None
         if not isinstance(ack, int) or isinstance(ack, bool) or ack <= self.acked:
             return
-        self.acked = min(ack, self.seq)
-        self.events = [e for e in self.events if e["seq"] > self.acked]
-        self.save()
+        with self.lock:
+            self.acked = min(ack, self.seq)
+            self.events = [e for e in self.events if e["seq"] > self.acked]
+            self.save()
 
     def save(self) -> None:
         data = {"id": self.id, "seq": self.seq, "acked": self.acked, "events": self.events}

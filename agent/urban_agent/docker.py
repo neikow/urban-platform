@@ -97,6 +97,36 @@ class Docker:
             memory[project] = memory.get(project, 0) + used
         return memory
 
+    def compose_stream(
+        self,
+        project: str,
+        compose_files: Sequence[Path],
+        env_file: Path,
+        args: Sequence[str],
+        stdout: Path | None = None,
+        stdin: Path | None = None,
+        timeout: int = 3600,
+    ) -> None:
+        """A Compose command writing its output to ``stdout``, or reading ``stdin``, as
+        bytes: database dumps and archives, too big for memory."""
+        files = [arg for path in compose_files for arg in ("-f", str(path))]
+        command = ["docker", "compose", "-p", project, *files, "--env-file", str(env_file), *args]
+        out = stdout.open("wb") if stdout else subprocess.DEVNULL
+        source = stdin.open("rb") if stdin else subprocess.DEVNULL
+        try:
+            result = subprocess.run(  # nosec B603 B607: fixed docker commands, no shell
+                command, stdout=out, stdin=source, stderr=subprocess.PIPE, timeout=timeout
+            )
+        except subprocess.TimeoutExpired as error:
+            raise DockerError(f"docker compose {args[0]}: timed out after {timeout} s") from error
+        finally:
+            for handle in (out, source):
+                if not isinstance(handle, int):
+                    handle.close()
+        if result.returncode != 0:
+            detail = result.stderr.decode(errors="replace").strip().splitlines()[-5:]
+            raise DockerError(f"docker compose {' '.join(args[:3])}: " + " / ".join(detail))
+
     def compose_services(
         self, project: str, compose_files: Sequence[Path], env_file: Path
     ) -> list[dict[str, Any]]:
