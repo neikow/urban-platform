@@ -29,7 +29,9 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
 
-from . import VERSION
+from . import VERSION, resources
+from .backups import Backups
+from .commands import Commands
 from .config import Config
 from .docker import Docker, DockerError
 from .hints import hint
@@ -147,6 +149,8 @@ class TenantStatus:
     # The website's figures (manage.py tenant_stats), and when they were collected.
     stats: dict[str, int] = field(default_factory=dict)
     stats_at: float = 0
+    # Memory its containers use, in bytes (collected with the host's resources).
+    memory: int = 0
 
 
 def service_problem(service: dict[str, Any]) -> str:
@@ -183,6 +187,12 @@ class Reconciler:
         self.edge_hash = ""
         self.edge = ""
         self.errors: list[str] = []
+        # The host's resources and the websites' memory, every ``stats_seconds``.
+        self.resources: dict[str, Any] = {}
+        self.memory: dict[str, int] = {}
+        self.resources_at = 0.0
+        self.commands = Commands(config.state_dir / "commands.json")
+        self.backups = Backups(config.state_dir / "backups", self, self.journal)
 
     # --- Files --------------------------------------------------------------------
 
@@ -466,7 +476,20 @@ class Reconciler:
                 "info", "Removed with its data." if tenant.purge else "Removed.", tenant.slug
             )
         shutil.rmtree(self._dir(tenant.slug), ignore_errors=True)
+        if tenant.purge:  # its data is deleted: its backups on the host too
+            shutil.rmtree(self.backups.root / tenant.slug, ignore_errors=True)
         return TenantStatus(slug=tenant.slug, generation=tenant.generation, status="absent")
+
+    def collect_resources(self, now: float) -> None:
+        """The host's resources and the websites' memory, every ``stats_seconds``."""
+        if self.resources_at and now - self.resources_at < self.config.stats_seconds:
+            return
+        self.resources_at = now
+        self.resources = resources.host(self.config.state_dir)
+        try:
+            self.memory = self.docker.project_memory()
+        except (DockerError, ValueError) as error:
+            logger.warning("no memory figures: %s", error)
 
     # --- The edge proxy -----------------------------------------------------------
 
@@ -519,6 +542,7 @@ class Reconciler:
         if network is not None and (not isinstance(network, str) or not NETWORK.match(network)):
             errors.append(f"invalid proxy network {network!r}")
             network = None
+        self.backups.configure(desired.get("backup"), errors)
         edge = self.ensure_edge(edge_settings)
         if edge != self.edge:
             if edge not in ("running", "external"):
@@ -548,6 +572,10 @@ class Reconciler:
             except InvalidTenant as error:
                 errors.append(str(error))
                 continue
+            if self.backups.is_busy(tenant.slug):
+                # A backup or a restore runs: left alone until it is done.
+                statuses[tenant.slug] = self.load_status(tenant.slug)
+                continue
             statuses[tenant.slug] = self.apply(tenant, now)
 
         # Websites the desired state does not mention: reported, left alone.
@@ -559,6 +587,14 @@ class Reconciler:
 
         for status in statuses.values():
             self.collect_stats(status, now)
+        self.collect_resources(now)
+        for status in statuses.values():
+            status.memory = self.memory.get(status.slug, 0) if status.status == "running" else 0
+
+        commands = self.commands.run(desired.get("commands"), self, errors, now)
+        self.backups.schedule(
+            [slug for slug, status in statuses.items() if status.status == "running"], now
+        )
 
         for message in errors:
             if message not in self.errors:
@@ -568,15 +604,20 @@ class Reconciler:
         return {
             "agent_version": VERSION,
             "edge": edge,
+            "host": self.resources,
             "errors": errors,
             "tenants": [
                 {
-                    k: v
-                    for k, v in asdict(s).items()
-                    if k not in ("attempted", "spec", "failed_at", "stats_at", "problems")
+                    **{
+                        k: v
+                        for k, v in asdict(s).items()
+                        if k not in ("attempted", "spec", "failed_at", "stats_at", "problems")
+                    },
+                    "backups": self.backups.report(s.slug),
                 }
                 for s in statuses.values()
             ],
+            "commands": commands,
             "journal": self.journal.id,
             "events": self.journal.pending(),
         }

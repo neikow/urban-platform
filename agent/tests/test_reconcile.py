@@ -27,6 +27,7 @@ class FakeDocker:
         self.stats = '{"pages": 12, "users": 40}'
         self.services = [{"Service": "web", "State": "running", "Health": "healthy"}]
         self.log_text = "some output\n"
+        self.memory = {"aix": 300_000_000}
 
     def _call(self, *call: str) -> None:
         self.calls.append(call)
@@ -50,6 +51,17 @@ class FakeDocker:
         if args[0] != "exec":
             return ""
         return self.stats if "tenant_stats" in args else self.version
+
+    def compose_stream(
+        self, project, compose_file, env_file, args, stdout=None, stdin=None, timeout=3600
+    ):
+        self._call("stream", project, *args)
+        if stdout is not None:
+            stdout.write_bytes(f"{args[2]} data".encode())
+
+    def project_memory(self):
+        self._call("stats")
+        return self.memory
 
     def compose_services(self, project, compose_file, env_file):
         self._call("ps", project)
@@ -555,3 +567,101 @@ class TestEvents:
         agent.journal.acknowledge({"events_ack": report["events"][-1]["seq"]})
 
         assert agent.reconcile(desired(tenant()), now=1030)["events"] == []
+
+
+class TestResources:
+    def test_host_and_memory_reported(self, agent, docker):
+        report = agent.reconcile(desired(tenant()), now=1000)
+
+        assert report["host"]["cpus"] >= 1 and "disk_free" in report["host"]
+        assert report["tenants"][0]["memory"] == 300_000_000
+
+    def test_collected_every_interval(self, agent, docker):
+        agent.reconcile(desired(tenant()), now=1000)
+        agent.reconcile(desired(tenant()), now=1030)
+        assert docker.calls.count(("stats",)) == 1
+
+        agent.reconcile(desired(tenant()), now=1000 + agent.config.stats_seconds)
+        assert docker.calls.count(("stats",)) == 2
+
+    def test_stopped_website_uses_none(self, agent, docker):
+        agent.reconcile(desired(tenant()), now=1000)
+
+        report = agent.reconcile(desired(tenant(generation=2, state="stopped")), now=1030)
+
+        assert report["tenants"][0]["memory"] == 0
+
+
+class TestCommands:
+    def ask(self, agent, *commands, now=1030):
+        return agent.reconcile({**desired(tenant()), "commands": list(commands)}, now=now)
+
+    def test_logs(self, agent, docker):
+        agent.reconcile(desired(tenant()), now=1000)
+
+        report = self.ask(agent, {"id": 7, "slug": "aix", "name": "logs", "args": {"lines": 5000}})
+
+        assert report["commands"] == [{"id": 7, "ok": True, "output": "some output\n"}]
+        assert docker.composed("aix", "logs", "--no-color", "--timestamps", "--tail", "1000")
+
+    def test_run_once_reported_until_no_longer_asked(self, agent, docker):
+        agent.reconcile(desired(tenant()), now=1000)
+        restart = {"id": 8, "slug": "aix", "name": "restart"}
+
+        self.ask(agent, restart)
+        report = self.ask(agent, restart, now=1060)
+
+        assert len(docker.composed("aix", "restart")) == 1
+        assert report["commands"] == [{"id": 8, "ok": True, "output": ""}]
+        assert ("info", "aix", "Restarted, as the control plane asked.") in [
+            (e["level"], e["slug"], e["message"]) for e in report["events"]
+        ]
+        assert self.ask(agent, now=1090)["commands"] == []
+
+    def test_remembered_across_restarts(self, agent, docker, tmp_path):
+        agent.reconcile(desired(tenant()), now=1000)
+        self.ask(agent, {"id": 9, "slug": "aix", "name": "bootstrap"})
+        docker.calls.clear()
+
+        again = Reconciler(agent.config, docker)
+        report = again.reconcile(
+            {**desired(tenant()), "commands": [{"id": 9, "slug": "aix", "name": "bootstrap"}]},
+            now=1060,
+        )
+
+        assert not docker.composed("aix", "exec")
+        assert report["commands"][0]["ok"]
+
+    def test_failure(self, agent, docker):
+        agent.reconcile(desired(tenant()), now=1000)
+        docker.fail = ("compose", "aix", "exec")
+
+        report = self.ask(agent, {"id": 10, "slug": "aix", "name": "invite_admin"})
+
+        [result] = report["commands"]
+        assert not result["ok"] and "boom" in result["output"]
+
+    def test_website_not_here(self, agent):
+        report = self.ask(agent, {"id": 11, "slug": "arles", "name": "restart"})
+
+        assert report["commands"][-1] == {
+            "id": 11,
+            "ok": False,
+            "output": "arles is not deployed on this host.",
+        }
+
+    @pytest.mark.parametrize(
+        "command",
+        [
+            {"id": 12, "slug": "aix", "name": "rm -rf /"},
+            {"id": 13, "slug": "aix", "name": "logs", "args": {"service": "web; reboot"}},
+            {"id": "14", "slug": "aix", "name": "restart"},
+            {"id": 15, "slug": "../x", "name": "restart"},
+        ],
+    )
+    def test_refused(self, agent, docker, command):
+        report = self.ask(agent, command)
+
+        assert report["commands"] == []
+        assert report["errors"]
+        assert not docker.composed("aix", "restart")

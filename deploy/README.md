@@ -108,4 +108,5 @@ networks:
 
 Each project keeps four volumes: `postgres`, `media` (uploads and map tiles), `static`
 and `redis`. Back up `postgres` (`pg_dump` in the `db` container) and `media`; the others
-are rebuilt. `docker compose -p <slug> down -v` deletes a website and its data.
+are rebuilt. The [agent](../agent/README.md#backups) does it every day when the
+control plane turns backups on, on the host and in an S3-compatible bucket. `docker compose -p <slug> down -v` deletes a website and its data.
