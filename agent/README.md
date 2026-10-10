@@ -128,6 +128,19 @@ Two calls, both with `Authorization: Bearer <AGENT_TOKEN>`.
   agent and refused here.
 - `agent` (optional): `{"image_tag": "saas", "version": "saas-1a2b3c4"}`, the version the
   agent should run (see [Updating itself](#updating-itself)).
+- `commands` (optional): one-off commands for a website, e.g.
+  `{"id": 17, "slug": "aix", "name": "logs", "args": {"service": "web", "lines": 200}}`.
+  Only these names, with these arguments:
+  - `logs`: the end of its logs (`service`: one of its services, or all; `lines`: at most
+    1,000);
+  - `restart`: restarts `web`, `worker` and `nginx`;
+  - `bootstrap`: runs its setup again (`manage.py bootstrap_tenant`);
+  - `invite_admin`: sends the first administrator's invitation again
+    (`manage.py invite_admin`; only while that account has no password).
+
+  Each runs once: the agent remembers its `id` (`commands.json` in the state directory)
+  and reports its result while the command is still asked, so the control plane stops
+  asking once it has the result. Invalid commands go to the report's `errors`.
 
 ## Updating itself
 
@@ -197,6 +210,8 @@ The control plane answers `{"events_ack": 41}`: the last event of this journal i
   container): published `pages`, `users` accounts. Collected after each deployment, then
   every `AGENT_STATS_SECONDS` while it runs; `{}` until then, or for a release without
   the command. Other non-negative integers may appear later.
+- `commands`: the results of the commands asked, `{"id": 17, "ok": true, "output": "…"}`
+  (the end of what the command printed, or why it failed, 20,000 characters at most).
 - `host`: the host's resources, in bytes, collected every `AGENT_STATS_SECONDS`: memory
   (`/proc/meminfo`, the host's), the disk holding Docker's volumes, processors, load
   average over a minute. What cannot be read is left out; `{}` from agents before it.

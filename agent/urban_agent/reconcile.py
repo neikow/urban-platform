@@ -30,6 +30,7 @@ from pathlib import Path
 from typing import Any
 
 from . import VERSION, resources
+from .commands import Commands
 from .config import Config
 from .docker import Docker, DockerError
 from .hints import hint
@@ -189,6 +190,7 @@ class Reconciler:
         self.resources: dict[str, Any] = {}
         self.memory: dict[str, int] = {}
         self.resources_at = 0.0
+        self.commands = Commands(config.state_dir / "commands.json")
 
     # --- Files --------------------------------------------------------------------
 
@@ -580,6 +582,8 @@ class Reconciler:
         for status in statuses.values():
             status.memory = self.memory.get(status.slug, 0) if status.status == "running" else 0
 
+        commands = self.commands.run(desired.get("commands"), self, errors, now)
+
         for message in errors:
             if message not in self.errors:
                 self.journal.record("error", f"Desired state: {message}")
@@ -598,6 +602,7 @@ class Reconciler:
                 }
                 for s in statuses.values()
             ],
+            "commands": commands,
             "journal": self.journal.id,
             "events": self.journal.pending(),
         }

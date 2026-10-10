@@ -315,3 +315,37 @@ class TestStats:
         call_command("tenant_stats", stdout=out)
 
         assert json.loads(out.getvalue()) == {"pages": live_pages, "users": 1}
+
+
+@pytest.mark.django_db
+class TestInviteAdmin:
+    def test_sent_again(self, monkeypatch):
+        monkeypatch.setenv("TENANT_ADMIN_EMAIL", "admin@example.org")
+        user = User.objects.create_user(email="admin@example.org", password=None)
+        out = io.StringIO()
+
+        with patch("core.emails.tasks.send_invitation_email.delay") as invite:
+            call_command("invite_admin", stdout=out)
+
+        invite.assert_called_once_with(user.pk)
+        assert "admin@example.org" in out.getvalue()
+
+    def test_not_once_a_password_is_chosen(self, monkeypatch):
+        from django.core.management import CommandError
+
+        monkeypatch.setenv("TENANT_ADMIN_EMAIL", "admin@example.org")
+        User.objects.create_user(email="admin@example.org", password="chosen-1234")
+
+        with patch("core.emails.tasks.send_invitation_email.delay") as invite:
+            with pytest.raises(CommandError):
+                call_command("invite_admin")
+
+        invite.assert_not_called()
+
+    def test_no_account(self, monkeypatch):
+        from django.core.management import CommandError
+
+        monkeypatch.setenv("TENANT_ADMIN_EMAIL", "nobody@example.org")
+
+        with pytest.raises(CommandError):
+            call_command("invite_admin")
