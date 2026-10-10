@@ -156,6 +156,41 @@ class TestDeploy:
         assert ("pull", f"{IMAGE}:1.5.0") in docker.calls
         assert docker.composed("aix", "up")
 
+    def test_same_generation_with_other_variables_redeploys(self, agent, docker):
+        """A website created again with an earlier one's slug starts at generation 1 too."""
+        agent.reconcile(desired(tenant()), now=1000)
+        docker.calls.clear()
+
+        agent.reconcile(desired(tenant(env={"SECRET_KEY": "other"})), now=1030)
+
+        assert docker.composed("aix", "up")
+
+    def test_containers_gone_redeploys(self, agent, docker):
+        agent.reconcile(desired(tenant()), now=1000)
+        docker.calls.clear()
+        docker.services = []
+
+        report = agent.reconcile(desired(tenant()), now=1030)
+
+        assert docker.composed("aix", "up")
+        assert any(
+            e["message"] == "Its containers are gone: deploying it again." for e in report["events"]
+        )
+
+    def test_deployed_before_the_hash_is_not_redeployed(self, agent, docker, tmp_path):
+        agent.reconcile(desired(tenant()), now=1000)
+        state_file = tmp_path / "tenants" / "aix" / "state.json"
+        state = json.loads(state_file.read_text())
+        del state["spec"]
+        state_file.write_text(json.dumps(state))
+        docker.calls.clear()
+
+        report = agent.reconcile(desired(tenant()), now=1030)
+
+        assert not docker.composed("aix", "up")
+        assert json.loads(state_file.read_text())["spec"]
+        assert "spec" not in report["tenants"][0]
+
     def test_failure_is_reported_then_retried_later(self, agent, docker):
         docker.fail = ("compose", "aix", "up")
 

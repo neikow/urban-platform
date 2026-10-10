@@ -112,7 +112,10 @@ Two calls, both with `Authorization: Bearer <AGENT_TOKEN>`.
 
 - `slug`: lowercase letters, digits and dashes, at most 40; the Compose project name.
 - `generation`: an integer the control plane increments at every change of the website
-  (release, variables, state). The agent deploys when it differs from the one it applied.
+  (release, variables, state). The agent deploys when it differs from the one it applied,
+  and also, whatever the generation, when the release or variables differ from those it
+  deployed (a website created again with an earlier one's slug starts at 1 again) or when
+  the website's containers are gone (removed by hand).
 - `state`: `running`, `stopped` or `absent` (containers removed; volumes too with `"purge":
   true`).
 - `image_tag`: the release (`deploy/README.md`); required unless `absent`.
