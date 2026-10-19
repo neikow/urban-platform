@@ -3,7 +3,7 @@ from celery import shared_task
 
 @shared_task
 def reassign_residents() -> int:
-    """Attach every located user to the association whose area contains them."""
+    """Attach every located user who did not choose to the association of their address."""
     from core.associations import reassign_residents as reassign
 
     return reassign()

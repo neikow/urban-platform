@@ -134,3 +134,25 @@ class DaisyAddressInput(AddressInput):
             {"class": "input input-bordered w-full", "placeholder": placeholder},
             postcode_field=postcode_field,
         )
+
+
+class AssociationSelect(forms.Select):
+    """Association picker that lists the nearest first once an address is picked.
+
+    Rendered inside an <association-select> custom element
+    (frontend/src/association-select.ts), which listens to the address input of
+    the same form.
+    """
+
+    template_name = "core/widgets/association_select.html"
+
+    class Media:
+        js = [Script("dist/association-select.js", type="module")]
+
+    def __init__(self, attrs: dict | None = None) -> None:
+        super().__init__({"class": "select select-bordered w-full", **(attrs or {})})
+
+    def get_context(self, name: str, value: Any, attrs: dict[str, Any] | None) -> dict[str, Any]:
+        context = super().get_context(name, value, attrs)
+        context["ranking_url"] = reverse("nearest_associations")
+        return context

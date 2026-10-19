@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.password_validation import validate_password
+from typing import Any
+
 from django import forms
 from django.http import JsonResponse
 
@@ -83,3 +85,46 @@ class AddressFieldMixin:
             )
         self.address_location = found.point
         return found.label
+
+
+def format_distance(meters: float) -> str:
+    """350 m, 1,2 km: as the association picker writes it (association-select.ts)."""
+    from django.utils.formats import number_format
+
+    if meters < 1000:
+        return f"{max(10, round(meters / 10) * 10)} m"
+    return f"{number_format(round(meters / 1000, 1), decimal_pos=1)} km"
+
+
+class AssociationChoiceField(forms.ModelChoiceField):
+    """The neighborhood associations, nearest to an address first, with their distance."""
+
+    def __init__(self, **kwargs: Any) -> None:
+        from core.models import NeighborhoodAssociation
+        from core.widgets import AssociationSelect
+
+        self.distances: dict[int, float] = {}
+        super().__init__(
+            queryset=NeighborhoodAssociation.objects.all(),
+            required=False,
+            widget=AssociationSelect(),
+            **kwargs,
+        )
+
+    def rank_from(self, point: dict | None) -> None:
+        """List the associations nearest to the point first."""
+        from django.db.models import Case, IntegerField, Value, When
+
+        from core.associations import ranked_associations
+
+        ranked = ranked_associations(point)
+        self.distances = {a.pk: d for a, d in ranked if d is not None}
+        order = Case(
+            *[When(pk=a.pk, then=Value(i)) for i, (a, _d) in enumerate(ranked)],
+            output_field=IntegerField(),
+        )
+        self.queryset = self.queryset.order_by(order)  # type: ignore[union-attr]
+
+    def label_from_instance(self, obj: Any) -> str:
+        distance = self.distances.get(obj.pk)
+        return obj.name if distance is None else f"{obj.name} · {format_distance(distance)}"

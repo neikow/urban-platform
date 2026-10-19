@@ -90,7 +90,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         related_name="residents",
         verbose_name=_("Neighborhood Association"),
-        help_text=_("The association whose area contains the user's address."),
+        help_text=_("The association the user chose, or else the one nearest to their address."),
+    )
+    association_chosen = models.BooleanField(
+        _("Association chosen by the user"),
+        default=False,
+        help_text=_("Otherwise it follows the address: the nearest association."),
     )
 
     is_verified = models.BooleanField(
@@ -241,6 +246,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.address = ""
         self.location = None
         self.association = None
+        self.association_chosen = False
         self.newsletter_subscription = False
         self.newsletter_consent_at = None
         # Memberships stay (the association's records), but end today.

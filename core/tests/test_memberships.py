@@ -76,7 +76,12 @@ class TestMembershipModel:
         data = client.get(reverse("data_export")).json()
 
         assert data["account"]["memberships"] == [
-            {"starts_on": TODAY().isoformat(), "ends_on": None, "note": "Espèces"}
+            {
+                "starts_on": TODAY().isoformat(),
+                "ends_on": None,
+                "note": "Espèces",
+                "association": None,
+            }
         ]
 
 

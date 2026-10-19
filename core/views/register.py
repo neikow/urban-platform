@@ -13,7 +13,12 @@ from django_ratelimit.decorators import ratelimit
 from core.emails.tasks import send_verification_email
 from legal.utils import has_valid_code_of_conduct_consent
 from core.associations import set_address
-from .auth_mixins import AddressFieldMixin, PasswordValidationMixin, EmailValidationMixin
+from .auth_mixins import (
+    AddressFieldMixin,
+    AssociationChoiceField,
+    EmailValidationMixin,
+    PasswordValidationMixin,
+)
 from ..widgets import (
     DaisyAddressInput,
     DaisyTextInput,
@@ -58,7 +63,12 @@ class UserRegistrationForm(
         widget=DaisyAddressInput(
             placeholder="12 rue Paradis, Marseille", postcode_field="postal_code"
         ),
-        help_text="Facultatif. Vous rattache à l'association de votre quartier.",
+        help_text="Facultatif. Vous rattache au CIQ de votre quartier.",
+    )
+    association = AssociationChoiceField(
+        label="Comité d'intérêt de quartier (CIQ)",
+        empty_label="Le plus proche de mon adresse",
+        help_text="Choisi d'après votre adresse ; vous pouvez en choisir un autre.",
     )
     postal_code = forms.CharField(
         required=True,
@@ -79,6 +89,11 @@ class UserRegistrationForm(
         label="Je souhaite être informé(e) des actualités et des événements par email",
         widget=DaisyCheckboxInput(),
     )
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        if not self.fields["association"].queryset.exists():  # type: ignore[attr-defined]
+            del self.fields["association"]
 
     def clean(self) -> dict[str, Any] | None:
         cleaned_data = super().clean()
@@ -151,9 +166,12 @@ class RegisterFormView(FormView):
             last_name=last_name,
             postal_code=postal_code,
         )
-        if form.cleaned_data.get("address"):
-            set_address(self.user, form.cleaned_data["address"], form.address_location)
-            self.user.save(update_fields=["address", "location", "association"])
+        choice = form.cleaned_data.get("association")
+        if form.cleaned_data.get("address") or choice:
+            set_address(self.user, form.cleaned_data["address"], form.address_location, choice)
+            self.user.save(
+                update_fields=["address", "location", "association", "association_chosen"]
+            )
         if newsletter_subscription:
             self.user.set_newsletter_subscription(True)
             self.user.save(update_fields=["newsletter_subscription", "newsletter_consent_at"])

@@ -1,6 +1,13 @@
 # Associations de quartier
 
-Chaque **association de quartier** (CIQ…) couvre un **secteur** dessiné sur la carte. Les habitants qui indiquent une adresse située dans ce secteur, à l'inscription ou dans leur profil, y sont **rattachés automatiquement**. Ils voient leur association, son site et son email de contact sur leur page « Mon compte ».
+Chaque habitant est rattaché à une **association de quartier** (CIQ…). À l'inscription ou dans son profil, il **choisit son CIQ** dans une liste. Dès qu'il choisit son adresse dans les suggestions, la liste se classe du plus proche au plus loin, avec la distance, et **le CIQ le plus proche est sélectionné** ; l'habitant peut en choisir un autre.
+
+S'il laisse « Le plus proche de mon adresse », il est rattaché :
+
+1. au CIQ dont le **secteur** (s'il est dessiné) contient son adresse ;
+2. sinon, au CIQ dont l'**adresse** (le siège) est la plus proche.
+
+Un CIQ sans adresse localisée n'est jamais proposé comme le plus proche, mais reste dans la liste.
 
 ## Modifier une association
 
@@ -9,8 +16,9 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Associations de quartier*
 | Champ | Description |
 |---|---|
 | **Nom** | Le nom de l'association, tel qu'affiché aux habitants |
+| **Code** | Le numéro dans l'annuaire de la Confédération (par exemple 712). Sert à l'import |
 | **Responsable** | Un compte de l'équipe : **rédacteur**, **modérateur** ou **administrateur** |
-| **Adresse** | Le siège ou le local. Tapez quelques lettres et choisissez l'adresse dans la liste |
+| **Adresse** | Le siège ou le local. Tapez quelques lettres et choisissez l'adresse dans la liste. Sert à trouver le CIQ le plus proche des habitants |
 | **Secteur** | La zone couverte (voir ci-dessous) |
 | **Email de contact**, **Numéro de téléphone**, **Site web** | Les coordonnées montrées aux habitants rattachés |
 
@@ -21,6 +29,16 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Associations de quartier*
 - **Rechercher une adresse** au-dessus de la carte pour s'y rendre directement.
 - Les outils de la barre permettent de modifier, déplacer ou supprimer le secteur. Un nouveau secteur remplace l'ancien.
 
-Après l'enregistrement d'un secteur nouveau ou modifié, les habitants sont rattachés de nouveau, en arrière-plan (quelques secondes à quelques minutes selon leur nombre) : ceux qui sont entrés dans le secteur rejoignent l'association, ceux qui en sont sortis la quittent. Supprimer une association détache ses habitants (ou les rattache à un secteur voisin qui les couvre).
+Après l'enregistrement d'un secteur ou d'une adresse nouveaux ou modifiés, les habitants qui n'ont pas choisi leur CIQ sont rattachés de nouveau, en arrière-plan (quelques secondes à quelques minutes selon leur nombre). Ceux qui ont choisi leur CIQ le gardent. Supprimer une association rattache ses habitants au CIQ le plus proche, y compris ceux qui l'avaient choisie.
+
+## Importer les CIQ depuis l'annuaire
+
+L'équipe technique importe les CIQ d'un arrondissement depuis une copie CSV de l'annuaire de la Confédération (colonnes `code`, `name`, `address`, `contact_email`, `contact_phone`, `website`) :
+
+```
+python manage.py import_associations annuaire.csv --federation 7
+```
+
+Seuls les CIQ de la fédération demandée sont importés (codes 701 à 799 pour le 7e ; 700 est la fédération elle-même). Relancer l'import met à jour les CIQ existants, retrouvés par leur code (ou par leur nom pour ceux créés à la main). `--dry-run` montre ce qui changerait sans rien enregistrer. L'import liste les CIQ sans adresse localisée, à compléter dans l'administration.
 
 **Adresses.** Les adresses viennent de la **Base Adresse Nationale**, limitées à Marseille. Si le service ne répond pas, l'adresse est enregistrée telle quelle et sera localisée au prochain enregistrement.

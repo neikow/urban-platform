@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 13:52+0200\n"
+"POT-Creation-Date: 2026-10-19 09:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,7 +182,7 @@ msgstr "Compte désactivé"
 #: core/audit.py:115 core/templates/auth/email_verify_error.html:37
 #: core/templates/auth/login_modal.html:29
 #: core/templates/auth/login_modal.html:75
-#: core/templates/auth/register.html:187
+#: core/templates/auth/register.html:188
 #: core/templates/core/components/website_header.html:177
 #: core/templates/core/components/website_header.html:226
 msgid "Log in"
@@ -240,8 +240,8 @@ msgstr "Modifier les paramètres"
 msgid "Settings saved"
 msgstr "Paramètres enregistrés"
 
-#: core/audit.py:165 core/templates/core/profile_edit.html:138
-#: core/templates/core/profile_edit.html:182
+#: core/audit.py:165 core/templates/core/profile_edit.html:139
+#: core/templates/core/profile_edit.html:183
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
@@ -350,8 +350,8 @@ msgstr "Position de l'image"
 msgid ""
 "Image Alt Text (For accessibility, SEO, and in case the image fails to load)"
 msgstr ""
-"Texte alternatif de l'image (pour l'accessibilité, le référencement et en "
-"cas de problème de chargement de l'image)"
+"Texte alternatif de l'image (pour l'accessibilité, le référencement et en cas"
+" de problème de chargement de l'image)"
 
 #: core/blocks.py:120
 msgid "DEPRECATED Image & Text Row"
@@ -526,20 +526,26 @@ msgstr "Choisir un autre utilisateur"
 msgid "Running today"
 msgstr "En cours aujourd'hui"
 
-#: core/memberships.py:101 core/models/membership.py:51
+#: core/memberships.py:102 core/models/membership.py:60
 msgid "Memberships"
 msgstr "Adhésions"
 
-#: core/memberships.py:107 core/models/membership.py:27
+#: core/memberships.py:117 core/models/membership.py:27
 #: core/templates/core/profile.html:168 core/tests/views/test_me.py:59
 msgid "Member"
 msgstr "Membre"
 
-#: core/memberships.py:107 core/templates/core/profile.html:100
+#: core/memberships.py:118 core/templates/core/profile.html:100
 msgid "Email"
 msgstr "Email"
 
-#: core/memberships.py:126 core/models/membership.py:61
+#: core/memberships.py:119 core/models/membership.py:31
+#: core/models/neighborhood_association.py:45 core/models/user.py:92
+#: core/templates/core/profile.html:68
+msgid "Neighborhood Association"
+msgstr "Comité d'intérêt de quartier"
+
+#: core/memberships.py:145 core/models/membership.py:70
 msgid "The end cannot come before the start."
 msgstr "La fin ne peut pas précéder le début."
 
@@ -569,11 +575,11 @@ msgstr "Message"
 
 #: core/models/announcement.py:36
 msgid ""
-"Keep it short: one or two sentences. Visitors who closed it see it again "
-"once you change it."
+"Keep it short: one or two sentences. Visitors who closed it see it again once"
+" you change it."
 msgstr ""
-"Restez bref : une ou deux phrases. Les visiteurs qui l'ont fermée la "
-"revoient dès que vous la modifiez."
+"Restez bref : une ou deux phrases. Les visiteurs qui l'ont fermée la revoient"
+" dès que vous la modifiez."
 
 #: core/models/announcement.py:40
 msgid "Style"
@@ -608,7 +614,7 @@ msgstr "Vérification d'email"
 msgid "Password Reset"
 msgstr "Réinitialisation du mot de passe"
 
-#: core/models/email_event.py:11 core/models/user.py:126
+#: core/models/email_event.py:11 core/models/user.py:131
 #: core/templates/core/profile.html:218
 msgid "Poll results"
 msgstr "Résultats des votes"
@@ -633,7 +639,7 @@ msgstr "Envoyé"
 msgid "Failed"
 msgstr "Échec"
 
-#: core/models/email_event.py:30 core/models/user.py:179
+#: core/models/email_event.py:30 core/models/user.py:184
 msgid "User"
 msgstr "Utilisateur"
 
@@ -691,85 +697,94 @@ msgstr ""
 msgid "Features"
 msgstr "Fonctionnalités"
 
-#: core/models/membership.py:29
+#: core/models/membership.py:36
+msgid "The association (CIQ) the member joins with this membership."
+msgstr "L'association (CIQ) que le membre rejoint avec cette adhésion."
+
+#: core/models/membership.py:38
 msgid "Start"
 msgstr "Début"
 
-#: core/models/membership.py:31
+#: core/models/membership.py:40
 msgid "End"
 msgstr "Fin"
 
-#: core/models/membership.py:31
+#: core/models/membership.py:40
 msgid "Leave empty for a membership with no end."
 msgstr "Laissez vide pour une adhésion sans fin."
 
-#: core/models/membership.py:34
+#: core/models/membership.py:43
 msgid "Note"
 msgstr "Note"
 
-#: core/models/membership.py:34
+#: core/models/membership.py:43
 msgid "E.g. how the membership was paid."
 msgstr "Par exemple le mode de paiement."
 
-#: core/models/membership.py:38
+#: core/models/membership.py:47
 msgid "Recorded by"
 msgstr "Enregistrée par"
 
-#: core/models/membership.py:45
+#: core/models/membership.py:54
 msgid "Recorded on"
 msgstr "Enregistrée le"
 
-#: core/models/membership.py:50
+#: core/models/membership.py:59
 #: core/templates/core/admin/user_membership.html:6
 msgid "Membership"
 msgstr "Adhésion"
 
-#: core/models/neighborhood_association.py:12
+#: core/models/neighborhood_association.py:13
+msgid "Code"
+msgstr "Code"
+
+#: core/models/neighborhood_association.py:16
+msgid "Number in the Confédération's directory, e.g. 712. Used by imports."
+msgstr ""
+"Numéro dans l'annuaire de la Confédération, par exemple 712. Sert aux "
+"imports."
+
+#: core/models/neighborhood_association.py:18
 msgid "Name"
 msgstr "Nom"
 
-#: core/models/neighborhood_association.py:13 core/models/user.py:83
+#: core/models/neighborhood_association.py:19 core/models/user.py:83
 #: core/templates/core/profile.html:60
 msgid "Address"
 msgstr "Adresse"
 
-#: core/models/neighborhood_association.py:16
+#: core/models/neighborhood_association.py:22
 msgid "Address location"
 msgstr "Position de l'adresse"
 
-#: core/models/neighborhood_association.py:19
+#: core/models/neighborhood_association.py:25
 msgid "Area"
 msgstr "Secteur"
 
-#: core/models/neighborhood_association.py:23
+#: core/models/neighborhood_association.py:29
 msgid ""
 "Residents whose address lies in this area are attached to the association."
 msgstr ""
 "Les habitants dont l'adresse se trouve dans ce secteur sont rattachés à "
 "l'association."
 
-#: core/models/neighborhood_association.py:27
+#: core/models/neighborhood_association.py:33
 msgid "Responsible"
 msgstr "Responsable"
 
-#: core/models/neighborhood_association.py:34
+#: core/models/neighborhood_association.py:40
 msgid "Contact Email"
 msgstr "Email de contact"
 
-#: core/models/neighborhood_association.py:35 core/models/user.py:108
+#: core/models/neighborhood_association.py:41 core/models/user.py:113
 msgid "Phone Number"
 msgstr "Numéro de téléphone"
 
-#: core/models/neighborhood_association.py:36
+#: core/models/neighborhood_association.py:42
 msgid "Website"
 msgstr "Site web"
 
-#: core/models/neighborhood_association.py:39 core/models/user.py:92
-#: core/templates/core/profile.html:68
-msgid "Neighborhood Association"
-msgstr "Comité d'intérêt de quartier"
-
-#: core/models/neighborhood_association.py:40
+#: core/models/neighborhood_association.py:46
 msgid "Neighborhood Associations"
 msgstr "Comités d'intérêt de quartier"
 
@@ -903,105 +918,116 @@ msgid "Location"
 msgstr "Position"
 
 #: core/models/user.py:93
-msgid "The association whose area contains the user's address."
-msgstr "L'association dont le secteur contient l'adresse de l'utilisateur."
+msgid ""
+"The association the user chose, or else the one nearest to their address."
+msgstr ""
+"L'association choisie par l'utilisateur, ou à défaut la plus proche de son "
+"adresse."
 
-#: core/models/user.py:97
+#: core/models/user.py:96
+msgid "Association chosen by the user"
+msgstr "Association choisie par l'utilisateur"
+
+#: core/models/user.py:98
+msgid "Otherwise it follows the address: the nearest association."
+msgstr "Sinon, elle suit l'adresse : l'association la plus proche."
+
+#: core/models/user.py:102
 msgid "Email Verified"
 msgstr "Email vérifié"
 
-#: core/models/user.py:99
+#: core/models/user.py:104
 msgid "Is the user's email address verified?"
 msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:102 core/templates/core/profile.html:162
+#: core/models/user.py:107 core/templates/core/profile.html:162
 msgid "Role"
 msgstr "Rôle"
 
-#: core/models/user.py:110
+#: core/models/user.py:115
 msgid "Newsletter Subscription"
 msgstr "Inscription à la newsletter"
 
-#: core/models/user.py:112
+#: core/models/user.py:117
 msgid "Does the user want to receive the newsletter?"
 msgstr "L'utilisateur souhaite-t-il recevoir la newsletter ?"
 
-#: core/models/user.py:115
+#: core/models/user.py:120
 msgid "Newsletter consent date"
 msgstr "Date du consentement à la newsletter"
 
-#: core/models/user.py:119
+#: core/models/user.py:124
 msgid ""
-"When the user last agreed to receive the newsletter (GDPR proof of consent)."
-" Empty if they are not subscribed, or subscribed before this date was "
+"When the user last agreed to receive the newsletter (GDPR proof of consent). "
+"Empty if they are not subscribed, or subscribed before this date was "
 "recorded."
 msgstr ""
-"Date à laquelle l'utilisateur a accepté de recevoir la newsletter (preuve du"
-" consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
+"Date à laquelle l'utilisateur a accepté de recevoir la newsletter (preuve du "
+"consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
 "l'enregistrement de cette date."
 
-#: core/models/user.py:128
+#: core/models/user.py:133
 msgid "Email the results when a poll I voted in closes."
 msgstr ""
 "Recevoir les résultats par email à la clôture d'un vote auquel j'ai "
 "participé."
 
-#: core/models/user.py:131 core/templates/core/profile.html:219
+#: core/models/user.py:136 core/templates/core/profile.html:219
 msgid "Project updates"
 msgstr "Actualités des projets"
 
-#: core/models/user.py:133
+#: core/models/user.py:138
 msgid "Email the news of projects I voted on or shared an idea about."
 msgstr ""
 "Recevoir par email les actualités des projets sur lesquels j'ai voté ou "
 "proposé une idée."
 
-#: core/models/user.py:136 core/templates/core/profile.html:220
+#: core/models/user.py:141 core/templates/core/profile.html:220
 msgid "Event reminders"
 msgstr "Rappels d'événements"
 
-#: core/models/user.py:138
+#: core/models/user.py:143
 msgid "Email a reminder the day before events I am interested in."
 msgstr ""
 "Recevoir un rappel par email la veille des événements qui m'intéressent."
 
-#: core/models/user.py:141
+#: core/models/user.py:146
 msgid "Date Joined"
 msgstr "Date d'inscription"
 
-#: core/models/user.py:142
+#: core/models/user.py:147
 msgid "Last Updated"
 msgstr "Dernière mise à jour"
 
-#: core/models/user.py:144
+#: core/models/user.py:149
 msgid "Deleted At"
 msgstr "Supprimé le"
 
-#: core/models/user.py:147
+#: core/models/user.py:152
 msgid "When the user account was soft-deleted. NULL if not deleted."
 msgstr "Quand le compte utilisateur a été supprimé. NULL si non supprimé."
 
-#: core/models/user.py:152
+#: core/models/user.py:157
 msgid "Active"
 msgstr "Actif"
 
-#: core/models/user.py:154
+#: core/models/user.py:159
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:180
+#: core/models/user.py:185
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: core/models/user.py:184
+#: core/models/user.py:189
 msgid "Can see vote and idea statistics"
 msgstr "Peut voir les statistiques des votes et des idées"
 
-#: core/models/user.py:185
+#: core/models/user.py:190
 msgid "Can see and start background tasks"
 msgstr "Peut voir et lancer les tâches de fond"
 
-#: core/models/user.py:186
+#: core/models/user.py:191
 msgid "Can see the activity log"
 msgstr "Peut voir le journal d'activité"
 
@@ -1031,18 +1057,19 @@ msgstr ""
 msgid "Match residents to associations"
 msgstr "Rattacher les habitants aux associations"
 
-#: core/task_monitor.py:265
+#: core/task_monitor.py:266
 msgid ""
-"Attach every user with an address to the association whose area contains it."
+"Attach every user with an address, who did not choose, to the association of "
+"their address."
 msgstr ""
-"Rattacher chaque utilisateur ayant une adresse à l'association dont le "
-"secteur la contient."
+"Rattacher chaque utilisateur ayant une adresse, et qui n'en a pas choisi, à "
+"l'association de son adresse."
 
-#: core/task_monitor.py:271
+#: core/task_monitor.py:274
 msgid "Close expired polls"
 msgstr "Clore les votes échus"
 
-#: core/task_monitor.py:272
+#: core/task_monitor.py:275
 msgid "Close the votes whose end date has passed, and send their results."
 msgstr ""
 "Clore les votes dont la date de fin est passée, et envoyer leurs résultats."
@@ -1114,7 +1141,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #: core/templates/auth/login_modal.html:81
-#: core/templates/auth/register.html:178
+#: core/templates/auth/register.html:179
 msgid "OR"
 msgstr "OU"
 
@@ -1123,7 +1150,7 @@ msgid "Don't have an account?"
 msgstr "Vous n'avez pas de compte ?"
 
 #: core/templates/auth/login_modal.html:90 core/templates/auth/register.html:4
-#: core/templates/auth/register.html:91 core/templates/auth/register.html:173
+#: core/templates/auth/register.html:91 core/templates/auth/register.html:174
 msgid "Sign up"
 msgstr "S'inscrire"
 
@@ -1138,8 +1165,7 @@ msgstr "Votre mot de passe a été réinitialisé avec succès."
 
 #: core/templates/auth/password_reset_complete.html:33
 msgid "You can now log in with your new password."
-msgstr ""
-"Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
+msgstr "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
 
 #: core/templates/auth/password_reset_complete.html:37
 #: core/templates/auth/password_reset_request.html:50
@@ -1181,8 +1207,8 @@ msgstr "Mot de passe oublié ?"
 msgid ""
 "Enter your email address and we will send you a link to reset your password."
 msgstr ""
-"Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser"
-" votre mot de passe."
+"Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser "
+"votre mot de passe."
 
 #: core/templates/auth/password_reset_request.html:44
 msgid "Send the link"
@@ -1212,15 +1238,15 @@ msgstr "Le lien est valable pendant 1 heure."
 msgid "Become a member"
 msgstr "Devenez membre"
 
-#: core/templates/auth/register.html:42 core/templates/auth/register.html:212
+#: core/templates/auth/register.html:42 core/templates/auth/register.html:213
 msgid "Access educational resources"
 msgstr "Accédez aux fiches pédagogiques"
 
-#: core/templates/auth/register.html:62 core/templates/auth/register.html:230
+#: core/templates/auth/register.html:62 core/templates/auth/register.html:231
 msgid "Follow your neighborhood's news"
 msgstr "Suivez les actualités de votre quartier"
 
-#: core/templates/auth/register.html:80 core/templates/auth/register.html:248
+#: core/templates/auth/register.html:80 core/templates/auth/register.html:249
 msgid "Vote on initiatives"
 msgstr "Votez sur les initiatives"
 
@@ -1228,23 +1254,23 @@ msgstr "Votez sur les initiatives"
 msgid "Registration"
 msgstr "Inscription"
 
-#: core/templates/auth/register.html:139
+#: core/templates/auth/register.html:140
 msgid "I accept the"
 msgstr "J'accepte les"
 
-#: core/templates/auth/register.html:146
+#: core/templates/auth/register.html:147
 msgid "terms of service"
 msgstr "conditions d'utilisation"
 
-#: core/templates/auth/register.html:148 core/templates/core/profile.html:79
+#: core/templates/auth/register.html:149 core/templates/core/profile.html:79
 msgid "(opens in a new tab)"
 msgstr "(ouvre dans un nouvel onglet)"
 
-#: core/templates/auth/register.html:181
+#: core/templates/auth/register.html:182
 msgid "Already have an account?"
 msgstr "Vous avez déjà un compte ?"
 
-#: core/templates/auth/register.html:193
+#: core/templates/auth/register.html:194
 #, python-format
 msgid "Become a member of %(website_name)s"
 msgstr "Devenez membre de %(website_name)s"
@@ -1378,7 +1404,7 @@ msgstr "Partir d'une page vide"
 
 #: core/templates/core/admin/tasks.html:4
 #: core/templates/core/admin/tasks.html:12 core/views/tasks.py:36
-#: core/wagtail_hooks.py:178
+#: core/wagtail_hooks.py:180
 msgid "Tasks"
 msgstr "Tâches"
 
@@ -1461,11 +1487,11 @@ msgstr "Adhésion en cours"
 msgid "No membership running"
 msgstr "Aucune adhésion en cours"
 
-#: core/templates/core/admin/user_membership.html:14
+#: core/templates/core/admin/user_membership.html:16
 msgid "See the memberships"
 msgstr "Voir les adhésions"
 
-#: core/templates/core/admin/user_membership.html:16
+#: core/templates/core/admin/user_membership.html:18
 msgid "Record a membership"
 msgstr "Enregistrer une adhésion"
 
@@ -1562,7 +1588,7 @@ msgstr "Menu de navigation"
 #: core/templates/core/notification_unsubscribe.html:6
 #: core/templates/core/notification_unsubscribe.html:11
 #: core/templates/core/profile.html:215
-#: core/templates/core/profile_edit.html:94
+#: core/templates/core/profile_edit.html:95
 msgid "Email notifications"
 msgstr "Notifications par email"
 
@@ -1611,8 +1637,7 @@ msgstr "Mon profil"
 msgid "Account"
 msgstr "Compte"
 
-#: core/templates/core/profile.html:27
-#: core/templates/core/profile_edit.html:48
+#: core/templates/core/profile.html:27 core/templates/core/profile_edit.html:48
 msgid "Personal information"
 msgstr "Informations personnelles"
 
@@ -1620,7 +1645,7 @@ msgstr "Informations personnelles"
 msgid "Postal code"
 msgstr "Code postal"
 
-#: core/templates/core/profile.html:96 core/wagtail_hooks.py:63
+#: core/templates/core/profile.html:96 core/wagtail_hooks.py:65
 msgid "Contact"
 msgstr "Contact"
 
@@ -1705,40 +1730,39 @@ msgid ""
 msgstr ""
 "Téléchargez tout ce que nous conservons à votre sujet : votre compte, vos "
 "votes, vos idées, les événements que vous suivez, vos consentements et les "
-"emails que nous vous avons envoyés. Le fichier est au format JSON, "
-"importable par d'autres services."
+"emails que nous vous avons envoyés. Le fichier est au format JSON, importable"
+" par d'autres services."
 
 #: core/templates/core/profile.html:265
 msgid "Download my data"
 msgstr "Télécharger mes données"
 
-#: core/templates/core/profile.html:286
-#: core/templates/core/profile_edit.html:4
+#: core/templates/core/profile.html:286 core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:20
 #: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
 msgstr "Modifier mon profil"
 
-#: core/templates/core/profile_edit.html:96
+#: core/templates/core/profile_edit.html:97
 msgid "Only what you choose. Each email has a link to stop receiving it."
 msgstr ""
-"Uniquement ce que vous choisissez. Chaque email contient un lien pour ne "
-"plus le recevoir."
+"Uniquement ce que vous choisissez. Chaque email contient un lien pour ne plus"
+" le recevoir."
 
-#: core/templates/core/profile_edit.html:108
+#: core/templates/core/profile_edit.html:109
 msgid "Notifications are only sent once your email address is verified."
 msgstr ""
 "Les notifications ne sont envoyées qu'une fois votre adresse email vérifiée."
 
-#: core/templates/core/profile_edit.html:130
+#: core/templates/core/profile_edit.html:131
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
 
-#: core/templates/core/profile_edit.html:190
+#: core/templates/core/profile_edit.html:191
 msgid "Danger zone"
 msgstr "Zone de danger"
 
-#: core/templates/core/profile_edit.html:214
+#: core/templates/core/profile_edit.html:215
 msgid "Download a copy of my data first"
 msgstr "Télécharger d'abord une copie de mes données"
 
@@ -1817,7 +1841,7 @@ msgstr "Du nouveau sur « %(title)s », un projet auquel vous avez participé :"
 msgid "Home"
 msgstr "Accueil"
 
-#: core/views/audit.py:16 core/wagtail_hooks.py:250
+#: core/views/audit.py:16 core/wagtail_hooks.py:252
 msgid "Activity log"
 msgstr "Journal d'activité"
 
@@ -1834,15 +1858,15 @@ msgstr "Nouveau : %(page_type)s"
 msgid "Start from a template and adapt it, or from a blank page."
 msgstr "Partez d'un modèle et adaptez-le, ou d'une page vide."
 
-#: core/views/page_templates.py:70 core/wagtail_hooks.py:132
+#: core/views/page_templates.py:70 core/wagtail_hooks.py:134
 msgid "Start from a template"
 msgstr "Partir d'un modèle"
 
 #: core/views/page_templates.py:73
 msgid ""
-"The template replaces the content of the page in a new draft. Nothing "
-"changes on the website until you publish, and the current version stays in "
-"the page history."
+"The template replaces the content of the page in a new draft. Nothing changes"
+" on the website until you publish, and the current version stays in the page "
+"history."
 msgstr ""
 "Le modèle remplace le contenu de la page dans un nouveau brouillon. Rien ne "
 "change sur le site avant la publication, et la version actuelle reste dans "
@@ -1857,15 +1881,15 @@ msgstr ""
 "Le modèle « %(name)s » est enregistré en brouillon. Adaptez les textes, "
 "prévisualisez, puis publiez. La version précédente reste dans l'historique."
 
-#: core/views/profile_edit.py:65
+#: core/views/profile_edit.py:70
 msgid "Results of polls I voted in, when they close"
 msgstr "Les résultats des votes auxquels j'ai participé, à leur clôture"
 
-#: core/views/profile_edit.py:70
+#: core/views/profile_edit.py:75
 msgid "News of projects I voted on or shared an idea about"
 msgstr "Les actualités des projets sur lesquels j'ai voté ou proposé une idée"
 
-#: core/views/profile_edit.py:75
+#: core/views/profile_edit.py:80
 msgid "A reminder the day before events I am interested in"
 msgstr "Un rappel la veille des événements qui m'intéressent"
 
@@ -1887,32 +1911,31 @@ msgstr "Défini par le rôle."
 msgid "You do not have permission to assign this role."
 msgstr "Vous n'avez pas la permission d'attribuer ce rôle."
 
-#: core/wagtail_forms.py:73 core/wagtail_hooks.py:198
+#: core/wagtail_forms.py:73 core/wagtail_hooks.py:200
 msgid "This is the last administrator: name another one first."
 msgstr "C'est le dernier administrateur : nommez-en un autre d'abord."
 
-#: core/wagtail_hooks.py:55
+#: core/wagtail_hooks.py:56
 msgid ""
-"Draw the area the association covers: residents living in it are attached to"
-" the association. The other associations' areas are shown in grey, and new "
-"points snap to their edges."
+"Draw the area the association covers: residents living in it are attached to "
+"the association. The other associations' areas are shown in grey, and new "
+"points snap to their edges. Without areas, residents are attached to the "
+"association whose address is nearest."
 msgstr ""
-"Dessinez le secteur couvert par l'association : les habitants qui y vivent "
-"lui sont rattachés. Les secteurs des autres associations apparaissent en "
-"gris, et les nouveaux points s'accrochent à leurs bords."
+"Dessinez le secteur de l'association : les habitants qui y vivent y sont "
+"rattachés. Les secteurs des autres associations apparaissent en gris, et les "
+"nouveaux points s'accrochent à leurs bords. Sans secteurs, les habitants sont"
+" rattachés à l'association dont l'adresse est la plus proche."
 
 #~ msgid ""
 #~ "Subscribers may vote and share ideas when participation is reserved to them "
 #~ "(Settings › Features)."
 #~ msgstr ""
-#~ "Les adhérents peuvent voter et proposer des idées quand la participation "
-#~ "leur est réservée (Paramètres › Fonctionnalités)."
+#~ "Les adhérents peuvent voter et proposer des idées quand la participation leur"
+#~ " est réservée (Paramètres › Fonctionnalités)."
 
 #~ msgid "Subscribed on"
 #~ msgstr "Adhérent depuis"
-
-#~ msgid "Association Member"
-#~ msgstr "Membre d'association"
 
 #~ msgid "Admin"
 #~ msgstr "Administrateur"

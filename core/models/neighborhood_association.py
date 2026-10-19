@@ -9,6 +9,12 @@ from .user import UserRole
 
 
 class NeighborhoodAssociation(models.Model):
+    code = models.CharField(
+        _("Code"),
+        max_length=10,
+        blank=True,
+        help_text=_("Number in the Confédération's directory, e.g. 712. Used by imports."),
+    )
     name = models.CharField(_("Name"), max_length=150)
     address = models.CharField(_("Address"), max_length=255, blank=True)
     # Filled from the address when saving (core.geocoding), for the maps.
@@ -39,11 +45,19 @@ class NeighborhoodAssociation(models.Model):
         verbose_name = _("Neighborhood Association")
         verbose_name_plural = _("Neighborhood Associations")
         ordering = ["name"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["code"],
+                condition=~models.Q(code=""),
+                name="unique_neighborhood_association_code",
+            )
+        ]
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        # The area as loaded, to tell whether saving changed it (core.associations).
+        # As loaded, to tell whether saving moved it (core.associations).
         self.loaded_area = self.area
+        self.loaded_address_location = self.address_location
 
     def __str__(self) -> str:
         return self.name
