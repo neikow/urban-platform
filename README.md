@@ -152,11 +152,11 @@
 | publications/models/project.py                                 |       92 |        0 |       12 |        0 |    100.00% |           |
 | publications/models/project\_update.py                         |       18 |        1 |        0 |        0 |     94.44% |        47 |
 | publications/models/publication.py                             |       20 |        0 |        0 |        0 |    100.00% |           |
-| publications/models/publication\_index.py                      |       58 |        1 |        0 |        0 |     98.28% |        47 |
+| publications/models/publication\_index.py                      |       58 |        1 |        0 |        0 |     98.28% |        51 |
 | publications/page\_templates.py                                |       22 |        0 |        0 |        0 |    100.00% |           |
 | publications/polls.py                                          |       34 |        0 |        6 |        0 |    100.00% |           |
 | publications/project\_updates.py                               |       28 |        1 |        6 |        1 |     94.12% |        38 |
-| publications/services.py                                       |       83 |        0 |       18 |        0 |    100.00% |           |
+| publications/services.py                                       |       75 |        0 |       14 |        0 |    100.00% |           |
 | publications/signals.py                                        |        7 |        0 |        0 |        0 |    100.00% |           |
 | publications/tasks.py                                          |       25 |        4 |        0 |        0 |     84.00% |8-10, 32-34 |
 | publications/views/\_\_init\_\_.py                             |        0 |        0 |        0 |        0 |    100.00% |           |
@@ -171,7 +171,7 @@
 | publications/views/vote\_stats.py                              |       61 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       52 |        6 |        4 |        0 |     85.71% |78-80, 86, 94, 103 |
 | publications/widgets.py                                        |       32 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **5775** |  **596** |  **970** |  **128** | **87.25%** |           |
+| **TOTAL**                                                      | **5767** |  **596** |  **966** |  **128** | **87.23%** |           |
 
 
 ## Setup coverage badge
