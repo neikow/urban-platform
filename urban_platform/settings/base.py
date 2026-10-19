@@ -251,6 +251,18 @@ HELLOASSO_CLIENT_SECRET = os.environ.get("HELLOASSO_CLIENT_SECRET", "")
 HELLOASSO_ORGANIZATION_SLUG = os.environ.get("HELLOASSO_ORGANIZATION_SLUG", "")
 MEMBERSHIP_FEE_CENTS = int(os.environ.get("MEMBERSHIP_FEE_CENTS", "1000"))
 
+# Content transfer (core.content_transfer): the same key on production and
+# staging signs the archives and is required to import them. Importing is off
+# in production unless CONTENT_IMPORT_ENABLED says otherwise.
+CONTENT_TRANSFER_KEY = os.environ.get("CONTENT_TRANSFER_KEY", "")
+CONTENT_IMPORT_ENABLED = (
+    os.environ.get("CONTENT_IMPORT_ENABLED")
+    or ("false" if os.environ.get("ENVIRONMENT") == "production" else "true")
+).lower() in ("1", "true", "yes")
+# Where archives wait to be downloaded or imported: outside the public media
+# URLs (nginx denies /media/transfers/), deleted after CONTENT_TRANSFER_DAYS.
+CONTENT_TRANSFER_DAYS = 7
+
 # Task modules outside "<app>.tasks", which autodiscovery would miss.
 CELERY_IMPORTS = ("core.emails.tasks", "core.notifications.tasks")
 CELERY_TIMEZONE = TIME_ZONE
@@ -274,6 +286,10 @@ CELERY_BEAT_SCHEDULE = {
     "prune-security-events": {
         "task": "core.tasks.prune_security_events",
         "schedule": crontab(hour="3", minute="20"),
+    },
+    "prune-content-transfers": {
+        "task": "core.tasks.prune_content_transfers",
+        "schedule": crontab(hour="3", minute="25"),
     },
     "prune-task-runs": {
         "task": "core.tasks.prune_task_runs",

@@ -1,0 +1,121 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n wagtailadmin_tags %}
+
+{% block titletag %}{% trans "Content transfer" %}{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    {% if running %}<meta http-equiv="refresh" content="5">{% endif %}
+{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title=_("Content transfer") icon="download" %}
+
+    <div class="w-nice-padding w-px-6">
+        <p class="help w-mb-6">
+            {% blocktrans trimmed %}
+                Copies the projects, events, “Informations utiles” cards, the home page and the images and documents
+                they use from one site to another, for example from production to staging: export here, download the
+                archive, then import it on the other site.
+            {% endblocktrans %}
+            {% if signed %}
+                {% trans "Archives are signed with this site's transfer key and only accepted with a valid signature." %}
+            {% else %}
+                <strong
+                >{% trans "No transfer key is set (CONTENT_TRANSFER_KEY): archives are neither signed nor checked." %}</strong>
+            {% endif %}
+        </p>
+
+        <section class="w-mb-10">
+            <h2 class="w-h3">{% trans "Export" %}</h2>
+            <form method="post" action="{% url 'admin_content_transfer_export' %}">
+                {% csrf_token %}
+                <button type="submit" class="button">{% trans "Prepare an archive" %}</button>
+            </form>
+            <p class="help">
+                {% blocktrans trimmed count days=keep_days %}
+                    Archives are deleted after {{ days }} day.
+                    {% plural %}
+                    Archives are deleted after {{ days }} days.
+                {% endblocktrans %}
+            </p>
+        </section>
+
+        <section class="w-mb-10">
+            <h2 class="w-h3">{% trans "Import" %}</h2>
+            {% if import_enabled %}
+                <form
+                    method="post"
+                    enctype="multipart/form-data"
+                    action="{% url 'admin_content_transfer' %}"
+                    novalidate
+                >
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% formattedfield field %}
+                    {% endfor %}
+                    <button type="submit" class="button">{% trans "Start the import" %}</button>
+                </form>
+            {% else %}
+                <p>
+                    {% trans "Importing is disabled on this site (CONTENT_IMPORT_ENABLED), which is the case in production." %}
+                </p>
+            {% endif %}
+        </section>
+
+        <section>
+            <h2 class="w-h3">{% trans "Recent transfers" %}</h2>
+            {% if jobs %}
+                <table class="listing">
+                    <thead>
+                        <tr>
+                            <th>{% trans "Kind" %}</th>
+                            <th>{% trans "Started on" %}</th>
+                            <th>{% trans "Started by" %}</th>
+                            <th>{% trans "Status" %}</th>
+                            <th>{% trans "Result" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in jobs %}
+                            <tr>
+                                <td>
+                                    {{ job.get_kind_display }}
+                                    {% if job.original_name %}<div class="help">{{ job.original_name }}</div>{% endif %}
+                                </td>
+                                <td>{{ job.created_at|date:"j F Y, H:i" }}</td>
+                                <td>{{ job.created_by.get_full_name|default:"—" }}</td>
+                                <td>{% status job.get_status_display classname="w-status--primary" %}</td>
+                                <td>
+                                    {% if job.error %}
+                                        <span class="w-text-critical-200">{{ job.error }}</span>
+                                    {% elif job.status == "done" and job.kind == "export" %}
+                                        {% blocktrans trimmed with pages=job.summary.pages images=job.summary.images documents=job.summary.documents %}
+                                            {{ pages }} pages, {{ images }} images, {{ documents }} documents
+                                        {% endblocktrans %}
+                                        {% if job.archive %}
+                                            · <a
+                                                href="{% url 'admin_content_transfer_download' job.pk %}"
+                                            >{% trans "Download" %}</a>
+                                        {% endif %}
+                                    {% elif job.status == "done" %}
+                                        {% blocktrans trimmed with created=job.summary.pages_created updated=job.summary.pages_updated %}
+                                            Pages: {{ created }} created, {{ updated }} updated
+                                        {% endblocktrans %}
+                                        ·
+                                        {% blocktrans trimmed with created=job.summary.media_created updated=job.summary.media_updated kept=job.summary.media_kept %}
+                                            media: {{ created }} created, {{ updated }} updated, {{ kept }} kept
+                                        {% endblocktrans %}
+                                    {% endif %}
+                                    {% for message in job.messages %}<div class="help">{{ message }}</div>{% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>{% trans "No transfer yet." %}</p>
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}

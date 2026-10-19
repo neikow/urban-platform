@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 10:50+0200\n"
+"POT-Creation-Date: 2026-10-19 11:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,56 +130,56 @@ msgstr "Documents"
 msgid "Documentation"
 msgstr "Documentation"
 
-#: core/audit.py:74
+#: core/audit.py:75
 msgid "Change role"
 msgstr "Changer de rôle"
 
-#: core/audit.py:78
+#: core/audit.py:79
 #, python-format
 msgid "Role changed from %(old)s to %(new)s"
 msgstr "Rôle changé de %(old)s à %(new)s"
 
-#: core/audit.py:83
+#: core/audit.py:84
 msgid "Role changed"
 msgstr "Rôle changé"
 
-#: core/audit.py:89
+#: core/audit.py:90
 msgid "Change subscription"
 msgstr "Changer l'adhésion"
 
-#: core/audit.py:93
+#: core/audit.py:94
 msgid "Marked as subscriber"
 msgstr "Marqué comme adhérent"
 
-#: core/audit.py:94
+#: core/audit.py:95
 msgid "No longer a subscriber"
 msgstr "N'est plus adhérent"
 
-#: core/audit.py:98
+#: core/audit.py:99
 msgid "Change superuser status"
 msgstr "Changer le statut superutilisateur"
 
-#: core/audit.py:102
+#: core/audit.py:103
 msgid "Made superuser"
 msgstr "Devenu superutilisateur"
 
-#: core/audit.py:103
+#: core/audit.py:104
 msgid "No longer superuser"
 msgstr "N'est plus superutilisateur"
 
-#: core/audit.py:107
+#: core/audit.py:108
 msgid "Activate or deactivate"
 msgstr "Activer ou désactiver"
 
-#: core/audit.py:111
+#: core/audit.py:112
 msgid "Account activated"
 msgstr "Compte activé"
 
-#: core/audit.py:112
+#: core/audit.py:113
 msgid "Account deactivated"
 msgstr "Compte désactivé"
 
-#: core/audit.py:116 core/templates/auth/email_verify_error.html:37
+#: core/audit.py:117 core/templates/auth/email_verify_error.html:37
 #: core/templates/auth/login_modal.html:29
 #: core/templates/auth/login_modal.html:75
 #: core/templates/auth/register.html:188
@@ -188,112 +188,137 @@ msgstr "Compte désactivé"
 msgid "Log in"
 msgstr "Se connecter"
 
-#: core/audit.py:120
+#: core/audit.py:121
 #, python-format
 msgid "Logged in from %(ip)s"
 msgstr "Connexion depuis %(ip)s"
 
-#: core/audit.py:120
+#: core/audit.py:121
 msgid "Logged in"
 msgstr "Connexion"
 
-#: core/audit.py:124
+#: core/audit.py:125
 msgid "Failed login"
 msgstr "Échec de connexion"
 
-#: core/audit.py:128
+#: core/audit.py:129
 #, python-format
 msgid "Wrong password, from %(ip)s"
 msgstr "Mot de passe erroné, depuis %(ip)s"
 
-#: core/audit.py:128
+#: core/audit.py:129
 msgid "Wrong password"
 msgstr "Mot de passe erroné"
 
-#: core/audit.py:132
+#: core/audit.py:133
 msgid "Change email"
 msgstr "Changer d'email"
 
-#: core/audit.py:136
+#: core/audit.py:137
 #, python-format
 msgid "Email changed from %(old)s to %(new)s"
 msgstr "Email changé de %(old)s à %(new)s"
 
-#: core/audit.py:138
+#: core/audit.py:139
 msgid "Email changed"
 msgstr "Email changé"
 
-#: core/audit.py:142
+#: core/audit.py:143
 msgid "Start a task"
 msgstr "Lancer une tâche"
 
-#: core/audit.py:145
+#: core/audit.py:146
 #, python-format
 msgid "Started “%(task)s”"
 msgstr "« %(task)s » lancée"
 
-#: core/audit.py:149
+#: core/audit.py:150
 msgid "Change settings"
 msgstr "Modifier les paramètres"
 
-#: core/audit.py:154
+#: core/audit.py:155
 msgid "Settings saved"
 msgstr "Paramètres enregistrés"
 
-#: core/audit.py:159
+#: core/audit.py:160
 msgid "Pay a membership"
 msgstr "Payer une adhésion"
 
-#: core/audit.py:164
+#: core/audit.py:165
 #, python-format
 msgid "Membership paid on HelloAsso (order %(order)s)"
 msgstr "Adhésion payée sur HelloAsso (commande %(order)s)"
 
-#: core/audit.py:165
+#: core/audit.py:166
 msgid "Membership paid on HelloAsso"
 msgstr "Adhésion payée sur HelloAsso"
 
-#: core/audit.py:176 core/templates/core/profile_edit.html:139
+#: core/audit.py:170
+msgid "Import content"
+msgstr "Importer du contenu"
+
+#: core/audit.py:180
+#, python-format
+msgid "Imported %(file)s (%(mode)s)"
+msgstr "A importé %(file)s (%(mode)s)"
+
+#: core/audit.py:194 core/templates/core/profile_edit.html:139
 #: core/templates/core/profile_edit.html:183
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
-#: core/audit.py:176 core/templates/auth/password_reset_complete.html:4
+#: core/audit.py:194 core/templates/auth/password_reset_complete.html:4
 msgid "Password changed"
 msgstr "Mot de passe modifié"
 
-#: core/audit.py:178 core/templates/auth/password_reset_confirm.html:45
+#: core/audit.py:196 core/templates/auth/password_reset_confirm.html:45
 #: core/templates/auth/password_reset_request.html:4
 msgid "Reset password"
 msgstr "Réinitialiser le mot de passe"
 
-#: core/audit.py:178
+#: core/audit.py:196
 msgid "Password reset"
 msgstr "Mot de passe réinitialisé"
 
-#: core/audit.py:181
+#: core/audit.py:199
 msgid "Export personal data"
 msgstr "Exporter ses données personnelles"
 
-#: core/audit.py:181
+#: core/audit.py:199
 msgid "Downloaded their personal data"
 msgstr "A téléchargé ses données personnelles"
 
-#: core/audit.py:184
+#: core/audit.py:202
 msgid "Delete own account"
 msgstr "Supprimer son compte"
 
-#: core/audit.py:184
+#: core/audit.py:202
 msgid "Deleted their account"
 msgstr "A supprimé son compte"
 
-#: core/audit.py:188
+#: core/audit.py:206
 msgid "Start a membership payment"
 msgstr "Commencer le paiement d'une adhésion"
 
-#: core/audit.py:189
+#: core/audit.py:207
 msgid "Left for HelloAsso to pay a membership"
 msgstr "Parti sur HelloAsso pour payer une adhésion"
+
+#: core/audit.py:211
+msgid "Export content"
+msgstr "Exporter le contenu"
+
+#: core/audit.py:211
+msgid "Started a content export"
+msgstr "A lancé un export de contenu"
+
+#: core/audit.py:215
+msgid "Download a content archive"
+msgstr "Télécharger une archive de contenu"
+
+#: core/audit.py:215
+msgid "Downloaded a content archive"
+msgstr "A téléchargé une archive de contenu"
 
 #: core/blocks.py:13 core/blocks.py:18 core/blocks.py:29
 msgid "Left"
@@ -527,6 +552,14 @@ msgstr "CTA - Bouton d'appel à l'action"
 msgid "Document"
 msgstr "Document"
 
+#: core/content_transfer/importer.py:38
+msgid "Replace the existing pages and media"
+msgstr "Remplacer les pages et médias existants"
+
+#: core/content_transfer/importer.py:39
+msgid "Create new pages, change nothing that exists"
+msgstr "Créer de nouvelles pages, sans rien modifier de l'existant"
+
 #: core/memberships.py:30
 msgid "Search term"
 msgstr "Recherche"
@@ -642,6 +675,96 @@ msgstr "Quartier"
 msgid "City Neighborhoods"
 msgstr "Quartiers"
 
+#: core/models/content_transfer.py:40
+#: core/templates/core/admin/content_transfer.html:29
+msgid "Export"
+msgstr "Export"
+
+#: core/models/content_transfer.py:41
+#: core/templates/core/admin/content_transfer.html:44
+msgid "Import"
+msgstr "Import"
+
+#: core/models/content_transfer.py:45
+msgid "Waiting"
+msgstr "En attente"
+
+#: core/models/content_transfer.py:46 core/models/task_run.py:7
+#: core/templates/core/admin/tasks_status.html:44
+msgid "Running"
+msgstr "En cours"
+
+#: core/models/content_transfer.py:47
+msgid "Done"
+msgstr "Terminé"
+
+#: core/models/content_transfer.py:48 core/models/email_event.py:20
+#: core/models/task_run.py:9
+msgid "Failed"
+msgstr "Échec"
+
+#: core/models/content_transfer.py:54 core/models/notification_dispatch.py:13
+#: core/templates/core/admin/content_transfer.html:69
+msgid "Kind"
+msgstr "Type"
+
+#: core/models/content_transfer.py:55
+msgid "Mode"
+msgstr "Mode"
+
+#: core/models/content_transfer.py:57 core/models/email_event.py:39
+#: core/models/membership_payment.py:38 core/models/task_run.py:23
+#: core/templates/core/admin/content_transfer.html:72
+#: core/templates/core/admin/dashboard/drafts.html:9
+#: core/templates/core/admin/tasks_status.html:70
+msgid "Status"
+msgstr "Statut"
+
+#: core/models/content_transfer.py:63 core/views/content_transfer.py:40
+msgid "Archive"
+msgstr "Archive"
+
+#: core/models/content_transfer.py:65
+msgid "File name"
+msgstr "Nom du fichier"
+
+#: core/models/content_transfer.py:66
+msgid "Summary"
+msgstr "Résumé"
+
+#: core/models/content_transfer.py:67
+msgid "Messages"
+msgstr "Messages"
+
+#: core/models/content_transfer.py:68 core/models/task_run.py:29
+msgid "Error"
+msgstr "Erreur"
+
+#: core/models/content_transfer.py:71 core/models/task_run.py:33
+#: core/templates/core/admin/content_transfer.html:71
+msgid "Started by"
+msgstr "Lancée par"
+
+#: core/models/content_transfer.py:76 core/models/membership_payment.py:55
+#: core/templates/core/admin/content_transfer.html:70
+msgid "Started on"
+msgstr "Commencé le"
+
+#: core/models/content_transfer.py:77
+msgid "Finished on"
+msgstr "Terminé le"
+
+#: core/models/content_transfer.py:80
+#: core/templates/core/admin/content_transfer.html:4
+#: core/templates/core/admin/content_transfer.html:12
+#: core/views/content_transfer.py:67 core/wagtail_hooks.py:213
+msgid "Content transfer"
+msgstr "Transfert de contenu"
+
+#: core/models/content_transfer.py:81
+msgid "Content transfers"
+msgstr "Transferts de contenu"
+
 #: core/models/email_event.py:9
 msgid "Email Verification"
 msgstr "Vérification d'email"
@@ -678,10 +801,6 @@ msgstr "En attente"
 msgid "Sent"
 msgstr "Envoyé"
 
-#: core/models/email_event.py:20 core/models/task_run.py:9
-msgid "Failed"
-msgstr "Échec"
-
 #: core/models/email_event.py:31 core/models/user.py:188
 msgid "User"
 msgstr "Utilisateur"
@@ -689,12 +808,6 @@ msgstr "Utilisateur"
 #: core/models/email_event.py:34
 msgid "Event Type"
 msgstr "Type d'événement"
-
-#: core/models/email_event.py:39 core/models/membership_payment.py:38
-#: core/models/task_run.py:23 core/templates/core/admin/dashboard/drafts.html:9
-#: core/templates/core/admin/tasks_status.html:70
-msgid "Status"
-msgstr "Statut"
 
 #: core/models/email_event.py:45
 msgid "Recipient Email"
@@ -792,10 +905,6 @@ msgstr "Paiement HelloAsso"
 msgid "HelloAsso order"
 msgstr "Commande HelloAsso"
 
-#: core/models/membership_payment.py:55
-msgid "Started on"
-msgstr "Commencé le"
-
 #: core/models/membership_payment.py:56
 msgid "Paid on"
 msgstr "Payé le"
@@ -878,10 +987,6 @@ msgstr "Site web"
 msgid "Neighborhood Associations"
 msgstr "Comités d'intérêt de quartier"
 
-#: core/models/notification_dispatch.py:13
-msgid "Kind"
-msgstr "Type"
-
 #: core/models/notification_dispatch.py:15
 msgid "Key"
 msgstr "Clé"
@@ -901,10 +1006,6 @@ msgstr "Notifications envoyées"
 #: core/models/task_run.py:6
 msgid "Queued"
 msgstr "En attente"
-
-#: core/models/task_run.py:7 core/templates/core/admin/tasks_status.html:44
-msgid "Running"
-msgstr "En cours"
 
 #: core/models/task_run.py:8
 msgid "Succeeded"
@@ -935,17 +1036,11 @@ msgstr "Début"
 msgid "Finished"
 msgstr "Fin"
 
-#: core/models/task_run.py:28 core/templates/core/admin/tasks_status.html:73
+#: core/models/task_run.py:28
+#: core/templates/core/admin/content_transfer.html:73
+#: core/templates/core/admin/tasks_status.html:73
 msgid "Result"
 msgstr "Résultat"
-
-#: core/models/task_run.py:29
-msgid "Error"
-msgstr "Erreur"
-
-#: core/models/task_run.py:33
-msgid "Started by"
-msgstr "Lancée par"
 
 #: core/models/task_run.py:41
 msgid "Task run"
@@ -1435,6 +1530,84 @@ msgstr "Cette action est irréversible et ne peut pas être annulée"
 #: core/templates/core/account_delete.html:153
 msgid "Permanently delete my account"
 msgstr "Supprimer définitivement mon compte"
+
+#: core/templates/core/admin/content_transfer.html:16
+msgid ""
+"Copies the projects, events, “Informations utiles” cards, the home page and "
+"the images and documents they use from one site to another, for example from "
+"production to staging: export here, download the archive, then import it on "
+"the other site."
+msgstr ""
+"Copie les projets, les événements, les fiches « Informations utiles », la "
+"page d'accueil, et les images et documents qu'ils utilisent, d'un site à un "
+"autre, par exemple de la production vers la préproduction : exportez ici, "
+"téléchargez l'archive, puis importez-la sur l'autre site."
+
+#: core/templates/core/admin/content_transfer.html:22
+msgid ""
+"Archives are signed with this site's transfer key and only accepted with a "
+"valid signature."
+msgstr ""
+"Les archives sont signées avec la clé de transfert de ce site, et ne sont "
+"acceptées qu'avec une signature valide."
+
+#: core/templates/core/admin/content_transfer.html:24
+msgid ""
+"No transfer key is set (CONTENT_TRANSFER_KEY): archives are neither signed "
+"nor checked."
+msgstr ""
+"Aucune clé de transfert n'est définie (CONTENT_TRANSFER_KEY) : les archives "
+"ne sont ni signées ni vérifiées."
+
+#: core/templates/core/admin/content_transfer.html:32
+msgid "Prepare an archive"
+msgstr "Préparer une archive"
+
+#: core/templates/core/admin/content_transfer.html:35
+#, python-format
+msgid "Archives are deleted after %(days)s day."
+msgid_plural "Archives are deleted after %(days)s days."
+msgstr[0] "Les archives sont supprimées après %(days)s jour."
+msgstr[1] "Les archives sont supprimées après %(days)s jours."
+
+#: core/templates/core/admin/content_transfer.html:56
+msgid "Start the import"
+msgstr "Lancer l'import"
+
+#: core/templates/core/admin/content_transfer.html:59
+msgid ""
+"Importing is disabled on this site (CONTENT_IMPORT_ENABLED), which is the "
+"case in production."
+msgstr ""
+"L'import est désactivé sur ce site (CONTENT_IMPORT_ENABLED), comme en "
+"production."
+
+#: core/templates/core/admin/content_transfer.html:64
+msgid "Recent transfers"
+msgstr "Transferts récents"
+
+#: core/templates/core/admin/content_transfer.html:90
+#, python-format
+msgid "%(pages)s pages, %(images)s images, %(documents)s documents"
+msgstr "%(pages)s pages, %(images)s images, %(documents)s documents"
+
+#: core/templates/core/admin/content_transfer.html:94
+msgid "Download"
+msgstr "Télécharger"
+
+#: core/templates/core/admin/content_transfer.html:97
+#, python-format
+msgid "Pages: %(created)s created, %(updated)s updated"
+msgstr "Pages : %(created)s créées, %(updated)s mises à jour"
+
+#: core/templates/core/admin/content_transfer.html:101
+#, python-format
+msgid "media: %(created)s created, %(updated)s updated, %(kept)s kept"
+msgstr "médias : %(created)s créés, %(updated)s mis à jour, %(kept)s conservés"
+
+#: core/templates/core/admin/content_transfer.html:112
+msgid "No transfer yet."
+msgstr "Aucun transfert pour l'instant."
 
 #: core/templates/core/admin/dashboard/consultations.html:3
 msgid "Consultations to watch"
@@ -2159,13 +2332,33 @@ msgstr "Du nouveau sur « %(title)s », un projet auquel vous avez participé :"
 msgid "Home"
 msgstr "Accueil"
 
-#: core/views/audit.py:16 core/wagtail_hooks.py:252
+#: core/views/audit.py:16 core/wagtail_hooks.py:285
 msgid "Activity log"
 msgstr "Journal d'activité"
 
 #: core/views/audit.py:19
 msgid "Details"
 msgstr "Détails"
+
+#: core/views/content_transfer.py:41
+msgid "The .zip file exported from the other site."
+msgstr "Le fichier .zip exporté depuis l'autre site."
+
+#: core/views/content_transfer.py:45
+msgid "Pages and media that already exist here"
+msgstr "Pages et médias qui existent déjà ici"
+
+#: core/views/content_transfer.py:54
+msgid "The archive is too large."
+msgstr "L'archive est trop volumineuse."
+
+#: core/views/content_transfer.py:107
+msgid "The import has started."
+msgstr "L'import a commencé."
+
+#: core/views/content_transfer.py:127
+msgid "The export has started."
+msgstr "L'export a commencé."
 
 #: core/views/page_templates.py:36
 #, python-format
@@ -2229,7 +2422,7 @@ msgstr "Défini par le rôle."
 msgid "You do not have permission to assign this role."
 msgstr "Vous n'avez pas la permission d'attribuer ce rôle."
 
-#: core/wagtail_forms.py:73 core/wagtail_hooks.py:200
+#: core/wagtail_forms.py:73 core/wagtail_hooks.py:233
 msgid "This is the last administrator: name another one first."
 msgstr "C'est le dernier administrateur : nommez-en un autre d'abord."
 

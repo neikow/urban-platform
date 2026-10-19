@@ -13,6 +13,7 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Journal d'activité**.
 | **Comptes** | Création, modification, suppression ; changement de **rôle**, de statut superutilisateur, activation et désactivation ; **adhésions** enregistrées, modifiées, supprimées, ou payées en ligne sur HelloAsso |
 | **Sécurité** | Connexions de l'équipe et **mots de passe erronés** sur ses comptes (avec l'adresse IP), changements de mot de passe et d'email, **téléchargements de données personnelles**, suppressions de compte |
 | **Tâches** | Tâches lancées à la main depuis [Tâches](taches.md) ou [Carte](carte.md) |
+| **Transfert de contenu** | Exports, téléchargements d'archives et imports (avec le fichier et le mode), depuis [Transfert de contenu](transfert-contenu.md) |
 | **Emails** | Résultats de vote et actualités de projet envoyés, avec le nombre de destinataires ; clôture des votes |
 | **Carte** | Mises à jour des données de la carte |
 
