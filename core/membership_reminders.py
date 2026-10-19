@@ -1,10 +1,10 @@
-"""Renewal reminders: memberships end on December 31, with a month of grace.
+"""Renewal reminders: memberships last a year, with a month of grace after it.
 
 Sent once each per membership, by a daily task, to members who did not renew:
 
-- "expiring": from 16 days before the end (December 15);
-- "grace": the first week after the end (January 1 to 7);
-- "last_call": the last week of the grace month (from January 25).
+- "expiring": from 16 days before the end;
+- "grace": the first week after the end;
+- "last_call": the last week of the grace month.
 
 A day missed (the task did not run) is caught up the next day, within the window.
 """

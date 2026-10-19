@@ -55,9 +55,9 @@ Les groupes Wagtail (*Editors*, *Moderators*) suivent le rôle : ils ne se modif
 
 Les habitants **adhèrent en ligne** sur la page **/adhesion/** : ils indiquent leur adresse, choisissent leur [CIQ](associations.md) (le plus proche est proposé), puis paient **10 €** sur **HelloAsso**, au profit de la Fédération. L'adhésion est enregistrée automatiquement dès que HelloAsso confirme le paiement, et un email de confirmation part.
 
-- **Année civile** : une adhésion court jusqu'au **31 décembre**. Payée à partir du **1er décembre**, elle couvre aussi l'année suivante ; un adhérent qui renouvelle en décembre repart au 1er janvier.
+- **Un an** : une adhésion dure **un an** à partir du paiement (payée le 10 mars 2026, elle court jusqu'au 9 mars 2027). Le renouvellement est possible dans le **mois** qui précède la fin ; la nouvelle adhésion commence alors le lendemain de la fin de l'actuelle, sans perdre de jours.
 - **Mois de grâce** : une adhésion terminée garde ses droits (voter, donner son avis) pendant **un mois**, le temps de la renouveler. Après, l'habitant n'est plus adhérent.
-- **Rappels** : les adhérents qui n'ont pas renouvelé reçoivent un email à partir du **15 décembre**, un autre la **première semaine de janvier**, et un dernier à partir du **25 janvier**, avant la fin du mois de grâce. Chaque rappel n'est envoyé qu'une fois.
+- **Rappels** : les adhérents qui n'ont pas renouvelé reçoivent un email **16 jours avant la fin** de leur adhésion, un autre la **première semaine après**, et un dernier la **dernière semaine du mois de grâce**. Chaque rappel n'est envoyé qu'une fois.
 - **Paiements** : **Paramètres › Paiements des adhésions** liste chaque paiement (en attente, payé, abandonné), avec sa commande HelloAsso. La liste est en lecture seule et s'exporte en CSV ou Excel.
 
 Les adhésions se gèrent dans **Paramètres › Adhésions** (administrateurs). Une adhésion a une **date de début**, une **date de fin** facultative, un **CIQ** et une **note** (par exemple le mode de paiement) ; un renouvellement est une nouvelle adhésion. Une personne est **adhérente** tant qu'une de ses adhésions est en cours, ou terminée depuis moins d'un mois. Les adhésions payées par chèque ou en espèces s'enregistrent à la main.
