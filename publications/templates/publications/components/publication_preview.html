@@ -46,9 +46,11 @@
         {% endif %}
         <div class="absolute top-3 left-3 right-3 flex flex-wrap items-center gap-1.5">
             {% if publication.is_event %}
-                <span
-                    class="badge badge-secondary text-3xs font-bold uppercase tracking-wide"
-                >{% trans "Event" %}</span>
+                {% if show_type %}
+                    <span
+                        class="badge badge-secondary text-3xs font-bold uppercase tracking-wide"
+                    >{% trans "Event" %}</span>
+                {% endif %}
                 {% if publication.is_upcoming %}
                     <span
                         class="badge badge-success text-3xs font-bold uppercase tracking-wide"
@@ -63,9 +65,11 @@
                     >{% trans "Past" %}</span>
                 {% endif %}
             {% else %}
-                <span
-                    class="badge badge-primary text-3xs font-bold uppercase tracking-wide"
-                >{% trans "Project" %}</span>
+                {% if show_type %}
+                    <span
+                        class="badge badge-primary text-3xs font-bold uppercase tracking-wide"
+                    >{% trans "Project" %}</span>
+                {% endif %}
                 {% if publication.category %}
                     <span
                         class="badge badge-secondary text-3xs font-bold uppercase tracking-wide"

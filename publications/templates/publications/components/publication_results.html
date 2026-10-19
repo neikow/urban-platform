@@ -12,17 +12,7 @@
     <!-- Tab-style type filter -->
     <div class="flex items-center gap-0 border-b border-base-300 mt-6 mb-0">
         <a
-            href="{% querystring type=None category=None page=None %}"
-            class="
-                relative px-4 pb-3 pt-2 text-2xs font-bold uppercase tracking-label transition-colors duration-150
-                {% if selected_type == 'all' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
-            "
-        >
-            {% trans "All" %}
-            {% if selected_type == 'all' %}<span class="absolute bottom-0 inset-x-4 h-0.5 bg-primary"></span>{% endif %}
-        </a>
-        <a
-            href="{% querystring type='projects' category=None page=None show_past=None %}"
+            href="{% querystring type=None category=None page=None show_past=None %}"
             class="
                 relative px-4 pb-3 pt-2 text-2xs font-bold uppercase tracking-label transition-colors duration-150
                 {% if selected_type == 'projects' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
@@ -46,11 +36,9 @@
                 ></span>{% endif %}
         </a>
 
-        {% if selected_type == 'events' or selected_type == 'all' %}
+        {% if selected_type == 'events' %}
             <form method="get" class="ml-auto flex items-center pb-3 pt-2">
-                {% if selected_type == 'events' %}
-                    <input type="hidden" name="type" value="events">
-                {% endif %}
+                <input type="hidden" name="type" value="events">
                 {% if request.GET.search %}
                     <input type="hidden" name="search" value="{{ request.GET.search }}">
                 {% endif %}

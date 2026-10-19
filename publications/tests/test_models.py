@@ -156,8 +156,12 @@ class PublicationIndexPageModelTest(TestCase):
         event.save_revision().publish()
 
     def test_get_publications_filters_by_type(self) -> None:
+        # Projects or events, never both: projects unless asked otherwise.
         request = self.factory.get("/publications/")
-        self.assertEqual(len(self.publication_index.get_publications(request)), 3)
+        self.assertEqual(len(self.publication_index.get_publications(request)), 2)
+
+        request = self.factory.get("/publications/?type=all")
+        self.assertEqual(len(self.publication_index.get_publications(request)), 2)
 
         request = self.factory.get("/publications/?type=projects")
         self.assertEqual(len(self.publication_index.get_publications(request)), 2)
@@ -228,6 +232,14 @@ class PublicationIndexPageModelTest(TestCase):
         # Category links keep the search term, URL-encoded, and drop the page.
         self.assertIn("type=projects&amp;search=a%26b&amp;category=URBAN_FORMS", content)
         self.assertNotIn("search=a&b", content)
+
+    def test_project_cards_have_no_type_badge(self) -> None:
+        self.publication_index.save_revision().publish()
+
+        response = self.client.get(self.publication_index.url)
+
+        self.assertEqual(response.context["selected_type"], "projects")
+        self.assertNotContains(response, "badge-primary")
 
     def test_category_filter_offers_all_urban_planning(self) -> None:
         self.publication_index.save_revision().publish()
