@@ -15,7 +15,11 @@ from wagtail.search import index
 
 from publications.blocks import BLOCK_TYPE_PUBLICATION_LIST, PUBLICATION_INDEX_BLOCK_TYPES
 from publications.geo import feature_collection
-from publications.services import PublicationFilters, get_filtered_publications
+from publications.services import (
+    PublicationFilters,
+    get_filtered_publications,
+    publication_type_from,
+)
 
 
 @dataclass
@@ -106,7 +110,7 @@ class PublicationIndexPage(RoutablePageMixin, Page):
                 for value, label in ProjectCategory.choices
             ],
             "selected_category": selected_category,
-            "selected_type": request.GET.get("type", "all"),
+            "selected_type": publication_type_from(request),
             "show_past_events": request.GET.get("show_past", "").lower() in ("true", "1", "on"),
         }
 

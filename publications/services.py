@@ -15,9 +15,12 @@ if TYPE_CHECKING:
     from publications.models.project import ProjectPage
 
 
+PUBLICATION_TYPES = ("projects", "events")
+
+
 @dataclass
 class PublicationFilters:
-    publication_type: str = "all"
+    publication_type: str = "projects"
     category: Optional[str] = None
     search_query: str = ""
     page_number: Optional[str] = None
@@ -26,7 +29,7 @@ class PublicationFilters:
     @classmethod
     def from_request(cls, request: HttpRequest) -> "PublicationFilters":
         return cls(
-            publication_type=request.GET.get("type", "all"),
+            publication_type=publication_type_from(request),
             category=request.GET.get("category"),
             search_query=request.GET.get("search", ""),
             # Kept as raw input: Paginator.get_page() falls back to a valid page.
@@ -35,56 +38,36 @@ class PublicationFilters:
         )
 
 
+def publication_type_from(request: HttpRequest) -> str:
+    """The list shows projects or events, never both: projects unless asked otherwise."""
+    publication_type = request.GET.get("type", "")
+    return publication_type if publication_type in PUBLICATION_TYPES else "projects"
+
+
 def filter_publications_by_type(
     publications: PageQuerySet, publication_type: str, show_past_events: bool = False
 ) -> PageQuerySet:
     from django.contrib.contenttypes.models import ContentType
-    from django.db.models import Case, When
-    from django.db.models.functions import Coalesce
     from django.utils import timezone
 
     from publications.models.event import EventPage
     from publications.models.project import ProjectPage
 
-    if publication_type == "projects":
-        project_ct = ContentType.objects.get_for_model(ProjectPage)
-        return publications.filter(content_type=project_ct).order_by("-first_published_at")
-
-    elif publication_type == "events":
+    if publication_type == "events":
         event_ct = ContentType.objects.get_for_model(EventPage)
-        now = timezone.now()
-
         event_queryset = publications.filter(content_type=event_ct)
 
         if not show_past_events:
-            today = now.date()
+            now = timezone.now()
             event_queryset = event_queryset.filter(
                 Q(eventpage__end_date__gte=now)
-                | Q(eventpage__end_date__isnull=True, eventpage__event_date__date__gte=today)
+                | Q(eventpage__end_date__isnull=True, eventpage__event_date__date__gte=now.date())
             )
 
         return event_queryset.order_by("-eventpage__event_date")
 
-    event_ct = ContentType.objects.get_for_model(EventPage)
-
-    if not show_past_events:
-        now = timezone.now()
-        today = now.date()
-
-        past_events_filter = Q(content_type=event_ct) & (
-            Q(eventpage__end_date__lt=now)
-            | Q(eventpage__end_date__isnull=True, eventpage__event_date__date__lt=today)
-        )
-        publications = publications.exclude(past_events_filter)
-
-    publications = publications.annotate(
-        sort_date=Case(
-            When(content_type=event_ct, then="eventpage__event_date"),
-            default="first_published_at",
-        )
-    )
-
-    return publications.order_by("-sort_date")
+    project_ct = ContentType.objects.get_for_model(ProjectPage)
+    return publications.filter(content_type=project_ct).order_by("-first_published_at")
 
 
 def filter_publications_by_category(
