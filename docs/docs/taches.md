@@ -11,6 +11,8 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Tâches**. La page se met
 | **Mettre à jour la carte** | Télécharge les dernières données OpenStreetMap (environ 35 Mo) |
 | **Rattacher les habitants aux associations** | Recalcule l'association de chaque habitant ayant une adresse, sauf ceux qui ont choisi leur CIQ |
 | **Clore les votes échus** | Clôt les votes dont la date de fin est passée et envoie leurs résultats |
+| **Vérifier les paiements des adhésions** | Interroge HelloAsso sur les [paiements](paiement-adhesions.md) en attente et enregistre les adhésions payées (aussi automatique, toutes les 15 minutes) |
+| **Envoyer les rappels de renouvellement** | Écrit aux adhérents qui n'ont pas renouvelé (aussi automatique, chaque jour à 9 h 30) |
 
 Une tâche déjà en cours n'est pas relancée.
 

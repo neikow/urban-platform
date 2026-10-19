@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 10:14+0200\n"
+"POT-Creation-Date: 2026-10-19 10:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -527,57 +527,61 @@ msgstr "CTA - Bouton d'appel à l'action"
 msgid "Document"
 msgstr "Document"
 
-#: core/memberships.py:29
+#: core/memberships.py:30
 msgid "Search term"
 msgstr "Recherche"
 
-#: core/memberships.py:30
+#: core/memberships.py:31
 msgid "Name or email"
 msgstr "Nom ou email"
 
-#: core/memberships.py:58
+#: core/memberships.py:59
 msgid "Choose a user"
 msgstr "Choisir un utilisateur"
 
-#: core/memberships.py:59
+#: core/memberships.py:60
 msgid "Choose another user"
 msgstr "Choisir un autre utilisateur"
 
-#: core/memberships.py:73
+#: core/memberships.py:81
 msgid "Running today"
 msgstr "En cours aujourd'hui"
 
-#: core/memberships.py:104 core/models/membership.py:102
+#: core/memberships.py:83
+msgid "Year"
+msgstr "Année"
+
+#: core/memberships.py:127 core/models/membership.py:102
 msgid "Memberships"
 msgstr "Adhésions"
 
-#: core/memberships.py:119 core/memberships.py:200 core/models/membership.py:69
+#: core/memberships.py:143 core/memberships.py:224 core/models/membership.py:69
 #: core/models/membership_payment.py:21 core/templates/core/profile.html:86
 #: core/templates/core/profile.html:179 core/tests/views/test_me.py:59
 msgid "Member"
 msgstr "Membre"
 
-#: core/memberships.py:120 core/memberships.py:201
+#: core/memberships.py:144 core/memberships.py:225
 #: core/templates/core/profile.html:111
 msgid "Email"
 msgstr "Email"
 
-#: core/memberships.py:121 core/memberships.py:202 core/models/membership.py:73
+#: core/memberships.py:145 core/memberships.py:226 core/models/membership.py:73
 #: core/models/membership_payment.py:28
 #: core/models/neighborhood_association.py:45 core/models/user.py:96
 #: core/templates/core/profile.html:68
 msgid "Neighborhood Association"
 msgstr "Comité d'intérêt de quartier"
 
-#: core/memberships.py:147 core/models/membership.py:112
+#: core/memberships.py:171 core/models/membership.py:112
 msgid "The end cannot come before the start."
 msgstr "La fin ne peut pas précéder le début."
 
-#: core/memberships.py:182 core/models/membership_payment.py:60
+#: core/memberships.py:206 core/models/membership_payment.py:60
 msgid "Membership payments"
 msgstr "Paiements des adhésions"
 
-#: core/memberships.py:203
+#: core/memberships.py:227
 msgid "Amount (€)"
 msgstr "Montant (€)"
 
@@ -799,6 +803,26 @@ msgstr "Payé le"
 #: core/models/membership_payment.py:59
 msgid "Membership payment"
 msgstr "Paiement d'adhésion"
+
+#: core/models/membership_reminder.py:6
+msgid "Membership ending soon"
+msgstr "Adhésion bientôt terminée"
+
+#: core/models/membership_reminder.py:7
+msgid "Membership ended, grace month"
+msgstr "Adhésion terminée, mois de grâce"
+
+#: core/models/membership_reminder.py:8
+msgid "Grace month ending soon"
+msgstr "Fin du mois de grâce"
+
+#: core/models/membership_reminder.py:19
+msgid "Membership reminder"
+msgstr "Rappel d'adhésion"
+
+#: core/models/membership_reminder.py:20
+msgid "Membership reminders"
+msgstr "Rappels d'adhésion"
 
 #: core/models/neighborhood_association.py:13
 msgid "Code"
@@ -1140,6 +1164,30 @@ msgid "Close the votes whose end date has passed, and send their results."
 msgstr ""
 "Clore les votes dont la date de fin est passée, et envoyer leurs résultats."
 
+#: core/task_monitor.py:281
+msgid "Check membership payments"
+msgstr "Vérifier les paiements des adhésions"
+
+#: core/task_monitor.py:282
+msgid ""
+"Ask HelloAsso about the payments still pending, and record the memberships "
+"paid."
+msgstr ""
+"Interroger HelloAsso sur les paiements en attente, et enregistrer les "
+"adhésions payées."
+
+#: core/task_monitor.py:288
+msgid "Send renewal reminders"
+msgstr "Envoyer les rappels de renouvellement"
+
+#: core/task_monitor.py:289
+msgid ""
+"Email the members whose membership ends soon, or ended, and who did not "
+"renew."
+msgstr ""
+"Écrire aux adhérents dont l'adhésion se termine bientôt, ou est terminée, et "
+"qui ne l'ont pas renouvelée."
+
 #: core/templates/auth/email_verify_error.html:4
 msgid "Verification error"
 msgstr "Erreur de vérification"
@@ -1436,6 +1484,44 @@ msgstr "Page"
 msgid "Last edited"
 msgstr "Dernière modification"
 
+#: core/templates/core/admin/dashboard/memberships.html:3
+msgid "Members by CIQ"
+msgstr "Adhérents par CIQ"
+
+#: core/templates/core/admin/dashboard/memberships.html:5
+#, python-format
+#| msgid_plural "%(total)s votes in total"
+msgid "%(total)s member today"
+msgid_plural "%(total)s members today"
+msgstr[0] "%(total)s adhérent aujourd'hui"
+msgstr[1] "%(total)s adhérents aujourd'hui"
+
+#: core/templates/core/admin/dashboard/memberships.html:12
+#, python-format
+msgid "%(total)s in their grace month, not renewed yet"
+msgid_plural "%(total)s in their grace month, not renewed yet"
+msgstr[0] "%(total)s en mois de grâce, pas encore renouvelé"
+msgstr[1] "%(total)s en mois de grâce, pas encore renouvelés"
+
+#: core/templates/core/admin/dashboard/memberships.html:23
+msgid "CIQ"
+msgstr "CIQ"
+
+#: core/templates/core/admin/dashboard/memberships.html:24
+msgid "Members"
+msgstr "Adhérents"
+
+#: core/templates/core/admin/dashboard/memberships.html:25
+msgid "To renew"
+msgstr "À renouveler"
+
+#: core/templates/core/admin/dashboard/memberships.html:45
+#, python-format
+msgid "%(total)s member without a CIQ (recorded by hand)."
+msgid_plural "%(total)s members without a CIQ (recorded by hand)."
+msgstr[0] "%(total)s adhérent sans CIQ (enregistré à la main)."
+msgstr[1] "%(total)s adhérents sans CIQ (enregistrés à la main)."
+
 #: core/templates/core/admin/dashboard/quick_actions.html:4
 msgid "Quick actions"
 msgstr "Actions rapides"
@@ -1703,35 +1789,38 @@ msgstr ""
 msgid "Create my account"
 msgstr "Créer mon compte"
 
-#: core/templates/core/membership.html:76
+#: core/templates/core/membership.html:74
 msgid "I already have an account"
 msgstr "J'ai déjà un compte"
 
-#: core/templates/core/membership.html:83
+#: core/templates/core/membership.html:82
+#: core/templates/emails/membership/expiring.html:13
+#: core/templates/emails/membership/grace.html:13
+#: core/templates/emails/membership/last_call.html:13
 msgid "Renew my membership"
 msgstr "Renouveler mon adhésion"
 
-#: core/templates/core/membership.html:85
+#: core/templates/core/membership.html:84
 msgid "Join"
 msgstr "Rejoindre"
 
-#: core/templates/core/membership.html:90
+#: core/templates/core/membership.html:89
 msgid "Online payment is not open yet."
 msgstr "Le paiement en ligne n'est pas encore ouvert."
 
-#: core/templates/core/membership.html:104
+#: core/templates/core/membership.html:103
 #, python-format
 msgid "%(fee)s € · from %(starts)s to %(ends)s"
 msgstr "%(fee)s € · du %(starts)s au %(ends)s"
 
-#: core/templates/core/membership.html:109
+#: core/templates/core/membership.html:108
 msgid ""
 "Memberships run by calendar year. You pay on HelloAsso, then come back here."
 msgstr ""
 "L'adhésion court par année civile. Vous payez sur HelloAsso, puis revenez "
 "ici."
 
-#: core/templates/core/membership.html:119
+#: core/templates/core/membership.html:118
 #, python-format
 msgid "Pay %(fee)s € on HelloAsso"
 msgstr "Payer %(fee)s € sur HelloAsso"
@@ -1951,6 +2040,46 @@ msgstr "Vous êtes inscrit au CIQ %(name)s."
 #: core/templates/emails/membership/confirmation.html:20
 msgid "Go to the website"
 msgstr "Aller sur le site"
+
+#: core/templates/emails/membership/expiring.html:6
+msgid "Your membership ends soon"
+msgstr "Votre adhésion se termine bientôt"
+
+#: core/templates/emails/membership/expiring.html:8
+#, python-format
+msgid ""
+"Your membership ends on %(ends_on)s. Renew it now to keep voting on the "
+"projects and sharing your ideas next year."
+msgstr ""
+"Votre adhésion se termine le %(ends_on)s. Renouvelez-la dès maintenant pour "
+"continuer à voter sur les projets et à donner votre avis l'année prochaine."
+
+#: core/templates/emails/membership/grace.html:6
+msgid "Renew your membership"
+msgstr "Renouvelez votre adhésion"
+
+#: core/templates/emails/membership/grace.html:8
+#, python-format
+msgid ""
+"Your membership ended on %(ends_on)s. You keep voting and sharing your ideas "
+"until %(grace_until)s: renew it before then."
+msgstr ""
+"Votre adhésion a pris fin le %(ends_on)s. Vous pouvez encore voter et donner "
+"votre avis jusqu'au %(grace_until)s : renouvelez-la d'ici là."
+
+#: core/templates/emails/membership/last_call.html:6
+msgid "Last reminder"
+msgstr "Dernier rappel"
+
+#: core/templates/emails/membership/last_call.html:8
+#, python-format
+msgid ""
+"Your membership ended on %(ends_on)s. After %(grace_until)s, you will no "
+"longer be able to vote or share your ideas until you renew it."
+msgstr ""
+"Votre adhésion a pris fin le %(ends_on)s. Après le %(grace_until)s, vous ne "
+"pourrez plus voter ni donner votre avis tant que vous ne l'aurez pas "
+"renouvelée."
 
 #: core/templates/emails/notifications/base.html:112
 #, python-format

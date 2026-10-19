@@ -1,0 +1,14 @@
+{% extends "emails/membership/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans "Last reminder" %}</h1>
+    <p>
+        {% blocktrans trimmed %}
+            Your membership ended on {{ ends_on }}. After {{ grace_until }}, you will no longer be able to vote or share
+            your ideas until you renew it.
+        {% endblocktrans %}
+    </p>
+    <a class="button" href="{{ membership_url }}">{% trans "Renew my membership" %}</a>
+{% endblock %}

@@ -107,6 +107,9 @@ def anonymize_old_email_events() -> int:
 # about something the member paid for.
 MEMBERSHIP_EMAIL_SUBJECTS = {
     "confirmation": "Votre adhésion est enregistrée",
+    "expiring": "Votre adhésion se termine bientôt",
+    "grace": "Renouvelez votre adhésion",
+    "last_call": "Dernier rappel : renouvelez votre adhésion",
 }
 
 

@@ -1,0 +1,52 @@
+{% load i18n wagtailadmin_tags %}
+
+{% panel id="memberships" heading=_("Members by CIQ") classname="w-panel--dashboard" %}
+<p>
+    {% blocktrans trimmed count total=total_members %}
+        {{ total }} member today
+        {% plural %}
+        {{ total }} members today
+    {% endblocktrans %}
+    {% if total_in_grace %}
+        ·
+        {% blocktrans trimmed count total=total_in_grace %}
+            {{ total }} in their grace month, not renewed yet
+            {% plural %}
+            {{ total }} in their grace month, not renewed yet
+        {% endblocktrans %}
+    {% endif %}
+</p>
+{% if rows %}
+    <table class="listing listing--dashboard">
+        <thead>
+            <tr>
+                <th class="title">{% trans "CIQ" %}</th>
+                <th>{% trans "Members" %}</th>
+                <th>{% trans "To renew" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td class="title">
+                        <a
+                            href="{{ memberships_url }}?association={{ row.association.pk }}&amp;running=true"
+                        >{{ row.association.name }}</a>
+                    </td>
+                    <td>{{ row.members }}</td>
+                    <td>{{ row.in_grace }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% if without_association %}
+    <p>
+        {% blocktrans trimmed count total=without_association %}
+            {{ total }} member without a CIQ (recorded by hand).
+            {% plural %}
+            {{ total }} members without a CIQ (recorded by hand).
+        {% endblocktrans %}
+    </p>
+{% endif %}
+{% endpanel %}

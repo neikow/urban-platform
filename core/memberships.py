@@ -12,11 +12,12 @@ from wagtail.admin.forms.choosers import BaseFilterForm
 from wagtail.admin.views.generic import chooser as chooser_views
 from wagtail.admin.viewsets.chooser import ChooserViewSet
 from wagtail.admin.viewsets.model import ModelViewSet
-from wagtail.admin.views.generic.models import CreateView
+from wagtail.admin.views.generic.models import CreateView, IndexView
 from wagtail.permission_policies import ModelPermissionPolicy
 from wagtail.permissions import register_permission_policy
 
 from core.models import Membership, MembershipPayment, User
+from core.models.membership import MembershipQuerySet
 
 
 # --- user chooser -------------------------------------------------------------------
@@ -68,20 +69,42 @@ user_chooser_viewset = UserChooserViewSet("user_chooser")
 # --- memberships ----------------------------------------------------------------------
 
 
+def visible_memberships(user: Any, memberships: MembershipQuerySet) -> MembershipQuerySet:
+    """All of them for administrators; those of their CIQ for a CIQ's responsible."""
+    if user.has_perm("core.change_membership"):
+        return memberships
+    return memberships.filter(association__responsible=user)
+
+
 class MembershipFilterSet(WagtailFilterSet):
     running = django_filters.BooleanFilter(
         label=_("Running today"), method="filter_running", widget=forms.NullBooleanSelect
     )
+    year = django_filters.NumberFilter(label=_("Year"), method="filter_year")
 
     class Meta:
         model = Membership
-        fields = ["running", "association"]
+        fields = ["running", "year", "association"]
+
+    def filter_year(self, queryset: Any, name: str, value: Any) -> Any:
+        """Memberships covering at least a day of the year."""
+        if not value:
+            return queryset
+        year = int(value)
+        return queryset.filter(starts_on__year__lte=year).filter(
+            Q(ends_on__isnull=True) | Q(ends_on__year__gte=year)
+        )
 
     def filter_running(self, queryset: Any, name: str, value: bool | None) -> Any:
         if value is None:
             return queryset
         active = Membership.objects.active().values("pk")
         return queryset.filter(pk__in=active) if value else queryset.exclude(pk__in=active)
+
+
+class MembershipIndexView(IndexView):
+    def get_base_queryset(self) -> MembershipQuerySet:
+        return visible_memberships(self.request.user, super().get_base_queryset())
 
 
 class MembershipCreateView(CreateView):
@@ -105,6 +128,7 @@ class MembershipViewSet(ModelViewSet):
     add_to_settings_menu = True
     menu_order = 450
     add_view_class = MembershipCreateView
+    index_view_class = MembershipIndexView
     list_display = ["user", "association", "starts_on", "ends_on", "note"]
     list_export = [
         "user.get_full_name",

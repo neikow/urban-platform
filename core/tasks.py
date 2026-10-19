@@ -31,3 +31,11 @@ def check_membership_payments() -> int:
     from core.membership_payments import check_pending_payments
 
     return check_pending_payments()
+
+
+@shared_task
+def send_membership_reminders() -> int:
+    """Remind members who did not renew, before and after their membership ends."""
+    from core.membership_reminders import send_membership_reminders as send
+
+    return send()

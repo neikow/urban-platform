@@ -17,7 +17,7 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Associations de quartier*
 |---|---|
 | **Nom** | Le nom de l'association, tel qu'affiché aux habitants |
 | **Code** | Le numéro dans l'annuaire de la Confédération (par exemple 712). Sert à l'import |
-| **Responsable** | Un compte de l'équipe : **rédacteur**, **modérateur** ou **administrateur** |
+| **Responsable** | Un compte de l'équipe : **rédacteur**, **modérateur** ou **administrateur**. Il voit les adhérents du CIQ (liste des adhésions et tableau de bord), sans pouvoir les modifier |
 | **Adresse** | Le siège ou le local. Tapez quelques lettres et choisissez l'adresse dans la liste. Sert à trouver le CIQ le plus proche des habitants |
 | **Secteur** | La zone couverte (voir ci-dessous) |
 | **Email de contact**, **Numéro de téléphone**, **Site web** | Les coordonnées montrées aux habitants rattachés |

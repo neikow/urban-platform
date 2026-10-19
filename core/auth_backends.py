@@ -16,7 +16,7 @@ set of Django permissions on top of any stored in the database:
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import Any, TYPE_CHECKING
 
 from django.contrib.auth.backends import ModelBackend
 
@@ -72,6 +72,10 @@ SITE_SETTINGS_PERMISSIONS: frozenset[str] = frozenset(
 
 # Roles that may access the Wagtail admin. Kept for backwards compatibility; it
 # is now derived from :data:`ROLE_PERMISSIONS`.
+# The responsible of a CIQ sees its members (the list is narrowed to them in
+# core.memberships), without changing them.
+ASSOCIATION_RESPONSIBLE_PERMISSIONS: frozenset[str] = frozenset({"core.view_membership"})
+
 ADMIN_ACCESS_ROLES: frozenset[str] = frozenset(
     {UserRole.EDITOR, UserRole.MODERATOR, UserRole.ADMIN}
 )
@@ -100,4 +104,14 @@ class RolePermissionsBackend(ModelBackend):
         role: str | None = getattr(user_obj, "role", None)
         if role is None:
             return perms
-        return perms | ROLE_PERMISSIONS.get(role, frozenset())
+        perms = perms | ROLE_PERMISSIONS.get(role, frozenset())
+        if is_association_responsible(user_obj):
+            perms = perms | ASSOCIATION_RESPONSIBLE_PERMISSIONS
+        return perms
+
+
+def is_association_responsible(user: Any) -> bool:
+    """Whether the user is responsible for a neighborhood association (cached on the user)."""
+    if not hasattr(user, "_association_responsible"):
+        user._association_responsible = user.responsible_for_associations.exists()
+    return user._association_responsible

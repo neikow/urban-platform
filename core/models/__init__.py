@@ -10,3 +10,4 @@ from .task_run import TaskRun, TaskRunStatus
 from .feature_flags import FeatureFlags, participation_open_to
 from .membership import Membership
 from .membership_payment import MembershipPayment, MembershipPaymentStatus
+from .membership_reminder import MembershipReminder, MembershipReminderKind
