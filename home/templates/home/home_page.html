@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="page-content">
+    <div class="page-content page-content--home">
         {% for block in page.content %}
             {% include_block block with index=forloop.counter container=True %}
         {% endfor %}

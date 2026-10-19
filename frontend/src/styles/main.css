@@ -257,6 +257,14 @@
         }
     }
 
+    /* The home page reads at a larger size than the long pages. */
+    .page-content--home {
+        p:not(.no-page-style, .no-page-style *),
+        li:not(.no-page-style, .no-page-style *) {
+            @apply text-base sm:text-lg leading-7 sm:leading-8;
+        }
+    }
+
     form a::after {
         content: none !important;
     }
