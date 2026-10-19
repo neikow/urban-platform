@@ -101,3 +101,53 @@ def anonymize_old_email_events() -> int:
     )
 
     return count
+
+
+# Emails about the membership, by kind: their subject. Always sent: they are
+# about something the member paid for.
+MEMBERSHIP_EMAIL_SUBJECTS = {
+    "confirmation": "Votre adhésion est enregistrée",
+}
+
+
+@shared_task(bind=True, max_retries=3)
+def send_membership_email(self: Task, user_id: int, kind: str, context: dict) -> bool:
+    """Send one email about the user's membership (emails/membership/<kind>.html)."""
+    from django.template.loader import render_to_string
+    from django.urls import reverse
+
+    user = User.objects.filter(pk=user_id, is_active=True).first()
+    if user is None:
+        return False
+    base_url = getattr(settings, "WAGTAILADMIN_BASE_URL", "http://localhost:8000").rstrip("/")
+    subject = f"{MEMBERSHIP_EMAIL_SUBJECTS[kind]} - {settings.WEBSITE_NAME}"
+    html = render_to_string(
+        f"emails/membership/{kind}.html",
+        {
+            **context,
+            "user": user,
+            "subject": subject,
+            "site_name": settings.WEBSITE_NAME,
+            "site_url": f"{base_url}/",
+            "membership_url": f"{base_url}{reverse('membership')}",
+        },
+    )
+    event = EmailEvent.objects.create(
+        user=user,
+        event_type=EmailEventType.MEMBERSHIP,
+        status=EmailEventStatus.PENDING,
+        recipient_email=user.email,
+    )
+    try:
+        sent = get_email_service().send_email(
+            to_email=user.email, to_name=user.get_full_name(), subject=subject, html_content=html
+        )
+    except FailedToSendEmail as error:
+        event.status = EmailEventStatus.FAILED
+        event.error_message = str(error)
+        event.save()
+        raise self.retry(exc=error, countdown=60)
+    event.status = EmailEventStatus.SENT if sent else EmailEventStatus.FAILED
+    event.sent_at = timezone.now() if sent else None
+    event.save()
+    return sent

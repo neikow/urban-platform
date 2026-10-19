@@ -23,3 +23,11 @@ def prune_security_events() -> int:
     from core.audit import prune_security_events as prune
 
     return prune()
+
+
+@shared_task
+def check_membership_payments() -> int:
+    """Record the memberships paid on HelloAsso whose notification was lost."""
+    from core.membership_payments import check_pending_payments
+
+    return check_pending_payments()

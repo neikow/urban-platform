@@ -34,7 +34,7 @@ class TestMembershipModel:
     def test_running_memberships(self, resident):
         today = TODAY()
         ended = Membership.objects.create(
-            user=resident, starts_on=today - timedelta(days=60), ends_on=today - timedelta(days=1)
+            user=resident, starts_on=today - timedelta(days=90), ends_on=today - timedelta(days=40)
         )
         future = Membership.objects.create(user=resident, starts_on=today + timedelta(days=1))
         assert not resident.is_member

@@ -13,8 +13,10 @@ from wagtail.admin.views.generic import chooser as chooser_views
 from wagtail.admin.viewsets.chooser import ChooserViewSet
 from wagtail.admin.viewsets.model import ModelViewSet
 from wagtail.admin.views.generic.models import CreateView
+from wagtail.permission_policies import ModelPermissionPolicy
+from wagtail.permissions import register_permission_policy
 
-from core.models import Membership, User
+from core.models import Membership, MembershipPayment, User
 
 
 # --- user chooser -------------------------------------------------------------------
@@ -149,3 +151,63 @@ class MembershipViewSet(ModelViewSet):
 
 
 membership_viewset = MembershipViewSet("membership")
+
+
+# --- payments (core.membership_payments) -----------------------------------------
+
+
+class MembershipPaymentFilterSet(WagtailFilterSet):
+    class Meta:
+        model = MembershipPayment
+        fields = ["status", "association"]
+
+
+class ReadOnlyPermissionPolicy(ModelPermissionPolicy):
+    """View permission only: no adding, editing or deleting from the admin."""
+
+    def user_has_permission(self, user: Any, action: str) -> bool:
+        return action not in ("add", "change", "delete") and super().user_has_permission(
+            user, action
+        )
+
+    def user_has_any_permission(self, user: Any, actions: Any) -> bool:
+        return any(self.user_has_permission(user, action) for action in actions)
+
+
+class MembershipPaymentViewSet(ModelViewSet):
+    """The memberships paid on HelloAsso: read only, they come from HelloAsso."""
+
+    model = MembershipPayment
+    icon = "doc-full"
+    menu_label = _("Membership payments")
+    add_to_settings_menu = True
+    menu_order = 455
+    inspect_view_enabled = True
+    list_display = ["user", "association", "amount", "status", "ends_on", "order_id", "created_at"]
+    list_export = [
+        "user.get_full_name",
+        "user.email",
+        "association",
+        "amount",
+        "status",
+        "starts_on",
+        "ends_on",
+        "order_id",
+        "created_at",
+        "paid_at",
+    ]
+    export_headings = {
+        "user.get_full_name": _("Member"),
+        "user.email": _("Email"),
+        "association": _("Neighborhood Association"),
+        "amount": _("Amount (€)"),
+    }
+    export_filename = "paiements-adhesions"
+    filterset_class = MembershipPaymentFilterSet
+    search_fields = ["user__email", "user__first_name", "user__last_name"]
+    ordering = ["-created_at"]
+    form_fields = ["status"]
+
+
+register_permission_policy(MembershipPayment, ReadOnlyPermissionPolicy(MembershipPayment))
+membership_payment_viewset = MembershipPaymentViewSet("membership_payment")

@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 from typing import Any
 
 from django.core.exceptions import ValidationError
@@ -8,11 +8,53 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
+# A membership keeps its rights this long after it ends, time to renew it.
+GRACE_PERIOD = timedelta(days=31)
+# Joining from this month on covers the rest of the year and the next one.
+NEXT_YEAR_FROM_MONTH = 12
+
+
 class MembershipQuerySet(models.QuerySet["Membership"]):
-    def active(self, on: date | None = None) -> "MembershipQuerySet":
-        """Memberships running on a day (today by default)."""
+    def active(self, on: date | None = None, grace: bool = False) -> "MembershipQuerySet":
+        """Memberships running on a day (today by default), or ended in the grace period."""
         on = on or timezone.localdate()
-        return self.filter(starts_on__lte=on).filter(Q(ends_on__isnull=True) | Q(ends_on__gte=on))
+        until = on - GRACE_PERIOD if grace else on
+        return self.filter(starts_on__lte=on).filter(
+            Q(ends_on__isnull=True) | Q(ends_on__gte=until)
+        )
+
+
+def membership_period(
+    memberships: MembershipQuerySet, today: date | None = None
+) -> tuple[date, date]:
+    """The days a membership paid today covers: memberships run by calendar year.
+
+    It starts today, or the day after the current membership ends, and runs to
+    the end of that year; from December, to the end of the next year.
+    """
+    today = today or timezone.localdate()
+    current_end = (
+        memberships.filter(starts_on__lte=today, ends_on__gte=today)
+        .order_by("-ends_on")
+        .values_list("ends_on", flat=True)
+        .first()
+    )
+    starts = current_end + timedelta(days=1) if current_end else today
+    year = starts.year + (1 if starts.month >= NEXT_YEAR_FROM_MONTH else 0)
+    return starts, date(year, 12, 31)
+
+
+def may_join(memberships: MembershipQuerySet, today: date | None = None) -> bool:
+    """Whether paying makes sense today: not a member, or renewing from December."""
+    today = today or timezone.localdate()
+    running = memberships.active(today)
+    if running.filter(ends_on__isnull=True).exists():
+        return False
+    if not running.exists():
+        return True
+    starts, ends = membership_period(memberships, today)
+    covered = memberships.filter(ends_on__gte=ends).exists()
+    return today.month >= NEXT_YEAR_FROM_MONTH and not covered
 
 
 class Membership(models.Model):

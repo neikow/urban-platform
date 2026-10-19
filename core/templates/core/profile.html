@@ -67,29 +67,40 @@
                                 <p class="text-xs font-semibold text-base-content/50 uppercase tracking-wide mb-1">
                                     {% trans "Neighborhood Association" %}
                                 </p>
-                                <p class="text-base font-medium">
-                                    {% if user.association.website %}
-                                        <a
-                                            href="{{ user.association.website }}"
-                                            class="link link-hover"
-                                            rel="noopener noreferrer"
-                                            target="_blank"
-                                        >{{ user.association.name }}<span
-                                                class="sr-only"
-                                            >{% trans "(opens in a new tab)" %}</span></a>
-                                    {% else %}
-                                        {{ user.association.name }}
-                                    {% endif %}
-                                </p>
-                                {% if user.association.contact_email %}
-                                    <a
-                                        href="mailto:{{ user.association.contact_email }}"
-                                        class="text-sm link link-hover text-base-content/70"
-                                    >{{ user.association.contact_email }}</a>
-                                {% endif %}
+                                <p class="text-base font-medium">{{ user.association.name }}</p>
                             </div>
                         {% endif %}
                     </div>
+                </section>
+
+                <section class="pb-8 border-b border-base-300">
+                    <p class="section-label mb-5">{% trans "Membership" %}</p>
+                    {% with membership=user.current_membership %}
+                        {% if membership %}
+                            <p class="text-base font-medium">
+                                {% if membership.ends_on %}
+                                    {% blocktrans trimmed with ends=membership.ends_on|date:"j F Y" %}
+                                        Member until {{ ends }}
+                                    {% endblocktrans %}
+                                {% else %}
+                                    {% trans "Member" %}
+                                {% endif %}
+                                {% if membership.association %}· {{ membership.association.name }}{% endif %}
+                            </p>
+                            <a
+                                href="{% url 'membership' %}"
+                                class="link link-primary text-sm"
+                            >{% trans "My membership" %}</a>
+                        {% else %}
+                            <p class="text-base-content/70 mb-3">
+                                {% trans "Become a member to vote on the projects and share your ideas." %}
+                            </p>
+                            <a
+                                href="{% url 'membership' %}"
+                                class="btn btn-primary btn-sm"
+                            >{% trans "Become a member" %}</a>
+                        {% endif %}
+                    {% endwith %}
                 </section>
 
                 <section class="pb-8 border-b border-base-300">
