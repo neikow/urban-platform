@@ -155,5 +155,61 @@ class DraftsPanel(DashboardPanel):
         return context
 
 
-def dashboard_panels() -> list[Component]:
-    return [QuickActionsPanel(), ConsultationsPanel(), UpcomingEventsPanel(), DraftsPanel()]
+class MembershipsPanel(DashboardPanel):
+    """Members by CIQ: all of them for administrators, their own CIQ for a CIQ's responsible."""
+
+    name = "memberships"
+    order = 50
+    template_name = "core/admin/dashboard/memberships.html"
+
+    def get_context_data(self, parent_context: Any = None) -> dict[str, Any]:
+        from core.memberships import visible_memberships
+        from core.models import Membership, NeighborhoodAssociation
+
+        context = super().get_context_data(parent_context)
+        user = context["request"].user
+        today = timezone.localdate()
+        memberships = visible_memberships(user, Membership.objects.all())  # type: ignore[arg-type]
+        running = memberships.active(today).values("user")
+        in_grace = memberships.active(today, grace=True).exclude(user__in=running).values("user")
+
+        associations = NeighborhoodAssociation.objects.order_by("name")
+        if not user.has_perm("core.change_membership"):
+            associations = associations.filter(responsible=user)
+        members: dict[int | None, int] = dict(
+            Membership.objects.filter(pk__in=memberships.active(today).values("pk"))
+            .values_list("association")
+            .annotate(count=Count("user", distinct=True))
+        )
+        grace: dict[int | None, int] = dict(
+            Membership.objects.filter(
+                pk__in=memberships.active(today, grace=True).values("pk"), user__in=in_grace
+            )
+            .values_list("association")
+            .annotate(count=Count("user", distinct=True))
+        )
+        context["rows"] = [
+            {
+                "association": association,
+                "members": members.get(association.pk, 0),
+                "in_grace": grace.get(association.pk, 0),
+            }
+            for association in associations
+        ]
+        context["total_members"] = memberships.active(today).values("user").distinct().count()
+        context["total_in_grace"] = in_grace.distinct().count()
+        context["without_association"] = members.get(None, 0)
+        context["memberships_url"] = reverse("membership:index")
+        return context
+
+
+def dashboard_panels(request: Any = None) -> list[Component]:
+    panels: list[Component] = [
+        QuickActionsPanel(),
+        ConsultationsPanel(),
+        UpcomingEventsPanel(),
+        DraftsPanel(),
+    ]
+    if request is not None and request.user.has_perm("core.view_membership"):
+        panels.append(MembershipsPanel())
+    return panels

@@ -18,6 +18,7 @@ export function formatDistance(meters: number): string {
  * with an address field. When an address is picked from the suggestions
  * (address-input.ts), the associations are listed nearest first with their
  * distance, and the nearest is selected, unless the user already chose one.
+ * Ticking the form's [data-no-association] box (join none) disables the picker.
  */
 class AssociationSelect extends HTMLElement {
   private attached = false;
@@ -32,6 +33,14 @@ class AssociationSelect extends HTMLElement {
     select.addEventListener("change", () => {
       this.touched = true;
     });
+    const declined = select.form?.querySelector<HTMLInputElement>("[data-no-association]");
+    if (declined) {
+      const sync = (): void => {
+        select.disabled = declined.checked;
+      };
+      declined.addEventListener("change", sync);
+      sync();
+    }
     select.form?.addEventListener("address:selected", (event) => {
       const { lon, lat } = (event as CustomEvent<AddressSuggestion>).detail;
       void this.rank(select, url, lon, lat);
@@ -60,7 +69,7 @@ class AssociationSelect extends HTMLElement {
     }
 
     const nearest = results.find((association) => association.distance !== null);
-    if (!this.touched && nearest) select.value = String(nearest.id);
+    if (!this.touched && !select.disabled && nearest) select.value = String(nearest.id);
   }
 }
 

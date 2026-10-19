@@ -101,12 +101,18 @@ def ranked_associations(
     return sorted(ranked, key=lambda item: (item[1] is None, item[1] or 0))
 
 
-def attach_association(user: "User", choice: "NeighborhoodAssociation | None" = None) -> None:
+def attach_association(
+    user: "User", choice: "NeighborhoodAssociation | None" = None, declined: bool = False
+) -> None:
     """Attach the user to their choice, or to the association of their address (not saved).
 
     Choosing the association their address leads to anyway is not a choice: they
-    keep following their address.
+    keep following their address. Declining leaves them without an association,
+    as a choice the background reassignment keeps.
     """
+    if declined:
+        user.association, user.association_chosen = None, True
+        return
     nearest = nearest_association(user.location)
     if choice is not None and choice != nearest:
         user.association, user.association_chosen = choice, True
@@ -119,11 +125,12 @@ def set_address(
     address: str,
     location: dict[str, Any] | None,
     choice: "NeighborhoodAssociation | None" = None,
+    declined: bool = False,
 ) -> None:
     """Change the user's address and location, and attach their association (not saved)."""
     user.address = address
     user.location = location
-    attach_association(user, choice)
+    attach_association(user, choice, declined)
 
 
 def reassign_residents() -> int:
@@ -189,11 +196,21 @@ def on_association_saved(
     instance.loaded_address_location = instance.address_location
 
 
+def before_association_deleted(
+    sender: Any, instance: "NeighborhoodAssociation", **kwargs: Any
+) -> None:
+    """pre_delete receiver: note who chose it (those who declined any have none too)."""
+    chosen_by = instance.residents.filter(association_chosen=True).values_list("pk", flat=True)
+    setattr(instance, "chosen_by", list(chosen_by))
+
+
 def on_association_deleted(sender: Any, instance: "NeighborhoodAssociation", **kwargs: Any) -> None:
     """post_delete receiver: its residents may lie in a neighbouring area, or near another seat."""
     from core.models import User
 
     # Those who had chosen it follow their address again.
-    orphans = User.objects.filter(association_chosen=True, association__isnull=True)
-    if orphans.update(association_chosen=False) or instance.area or instance.address_location:
+    chosen_by = getattr(instance, "chosen_by", [])
+    if chosen_by:
+        User.objects.filter(pk__in=chosen_by).update(association_chosen=False)
+    if chosen_by or instance.area or instance.address_location:
         queue_reassignment()

@@ -1,0 +1,14 @@
+{% comment %}
+    The CIQ picker and, under it, the box to join none (core.views.auth_mixins).
+{% endcomment %}
+<div>
+    {% include "components/forms/form_field.html" with field=form.association %}
+    {% if form.no_association %}
+        <div class="flex items-center gap-2 mt-2">
+            {{ form.no_association }}
+            <label for="{{ form.no_association.id_for_label }}" class="text-sm cursor-pointer text-base-content/70">
+                {{ form.no_association.label }}
+            </label>
+        </div>
+    {% endif %}
+</div>

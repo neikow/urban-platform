@@ -105,7 +105,7 @@ def build_main_menu(request: HttpRequest, menu_items: list[MenuItem]) -> None:
 def add_dashboard_panels(request: HttpRequest, panels: list) -> None:
     from core.admin_dashboard import dashboard_panels
 
-    panels.extend(dashboard_panels())
+    panels.extend(dashboard_panels(request))
 
 
 @hooks.register("insert_global_admin_css")

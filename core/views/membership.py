@@ -24,7 +24,7 @@ from core.models import Membership, MembershipPayment, User
 from core.models.membership import GRACE_PERIOD, may_join, membership_period
 
 from ..widgets import DaisyAddressInput
-from .auth_mixins import AddressFieldMixin, AssociationChoiceField
+from .auth_mixins import AddressFieldMixin, AssociationChoiceField, no_association_field
 
 
 class MembershipForm(AddressFieldMixin, forms.Form):
@@ -40,6 +40,7 @@ class MembershipForm(AddressFieldMixin, forms.Form):
         empty_label="Le plus proche de mon adresse",
         help_text="Le CIQ auquel vous adhérez ; vous pouvez en choisir un autre.",
     )
+    no_association = no_association_field()
 
     def __init__(self, user: User, *args: Any, **kwargs: Any) -> None:
         self.user = user
@@ -49,6 +50,7 @@ class MembershipForm(AddressFieldMixin, forms.Form):
             self.initial = {
                 "address": user.address,
                 "association": user.association if user.association_chosen else None,
+                "no_association": user.association_chosen and user.association is None,
             }
 
 
@@ -100,14 +102,18 @@ class MembershipView(View):
             return self.render(request, form)
 
         choice = form.cleaned_data.get("association")
+        declined = form.cleaned_data.get("no_association", False)
         if form.cleaned_data["address"] != user.address or form.address_location:
-            set_address(user, form.cleaned_data["address"], form.address_location, choice)
+            set_address(user, form.cleaned_data["address"], form.address_location, choice, declined)
         else:
-            attach_association(user, choice)
+            attach_association(user, choice, declined)
         user.save(update_fields=["address", "location", "association", "association_chosen"])
 
-        if user.association is None:
-            form.add_error("association", "Choisissez votre CIQ dans la liste.")
+        if user.association is None and not declined:
+            form.add_error(
+                "association",
+                "Choisissez votre CIQ dans la liste, ou cochez « Je ne souhaite pas adhérer à un CIQ ».",
+            )
             return self.render(request, form)
         if not may_join(user.memberships.all()):
             messages.info(request, "Votre adhésion est déjà à jour.")

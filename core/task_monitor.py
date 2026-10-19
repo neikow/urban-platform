@@ -276,6 +276,20 @@ TRIGGERS = (
         "publications.tasks.close_expired_polls",
         _starter("publications.tasks.close_expired_polls"),
     ),
+    Trigger(
+        "membership_payments",
+        _("Check membership payments"),
+        _("Ask HelloAsso about the payments still pending, and record the memberships paid."),
+        "core.tasks.check_membership_payments",
+        _starter("core.tasks.check_membership_payments"),
+    ),
+    Trigger(
+        "membership_reminders",
+        _("Send renewal reminders"),
+        _("Email the members whose membership ends soon, or ended, and who did not renew."),
+        "core.tasks.send_membership_reminders",
+        _starter("core.tasks.send_membership_reminders"),
+    ),
 )
 
 

@@ -393,3 +393,78 @@ class TestImportAssociations:
     def test_missing_columns(self, tmp_path):
         with pytest.raises(CommandError):
             run_import(write_csv(tmp_path, "nom,adresse\nA,B\n"), "--federation", "7")
+
+
+# --- declining ------------------------------------------------------------------
+
+
+@pytest.mark.django_db
+class TestDecliningAnAssociation:
+    PROFILE = {
+        "email": "resident@example.com",
+        "first_name": "Res",
+        "last_name": "Ident",
+        "postal_code": "13007",
+    }
+
+    def test_declining_leaves_the_user_without_one(self, resident, catalans, auffes):
+        set_address(resident, "Vallon des Auffes", HOME_NEAR_AUFFES, catalans, declined=True)
+
+        assert resident.association is None
+        assert resident.association_chosen
+
+    def test_reassignment_respects_it(self, resident, catalans, auffes):
+        set_address(resident, "Vallon des Auffes", HOME_NEAR_AUFFES, declined=True)
+        resident.save()
+
+        reassign_residents()
+
+        resident.refresh_from_db()
+        assert resident.association is None
+
+    def test_deleting_an_association_respects_it(
+        self, resident, catalans, auffes, django_capture_on_commit_callbacks
+    ):
+        set_address(resident, "Vallon des Auffes", HOME_NEAR_AUFFES, declined=True)
+        resident.save()
+
+        with django_capture_on_commit_callbacks(execute=True):
+            catalans.delete()
+
+        resident.refresh_from_db()
+        assert (resident.association, resident.association_chosen) == (None, True)
+
+    def test_profile_box(self, client, resident, catalans, auffes):
+        set_address(resident, "Vallon des Auffes", HOME_NEAR_AUFFES)
+        resident.save()
+        client.force_login(resident)
+
+        client.post(
+            reverse("profile_edit"),
+            {
+                **self.PROFILE,
+                "address": "Vallon des Auffes",
+                "association": catalans.pk,
+                "no_association": "on",
+            },
+        )
+        resident.refresh_from_db()
+        assert (resident.association, resident.association_chosen) == (None, True)
+        assert client.get(reverse("profile_edit")).context["form"].initial["no_association"]
+
+        # Unticking it follows the address again.
+        client.post(reverse("profile_edit"), {**self.PROFILE, "address": "Vallon des Auffes"})
+        resident.refresh_from_db()
+        assert (resident.association, resident.association_chosen) == (auffes, False)
+
+    def test_register_box(self, client, catalans):
+        with patch("core.views.register.send_verification_email"):
+            response = client.post(
+                reverse("register"),
+                {**TestAssociationFields.REGISTRATION, "no_association": "on"},
+            )
+
+        assert response.status_code == 302
+        user = User.objects.get(email="new@example.com")
+        assert (user.association, user.association_chosen) == (None, True)
+        assert "data-no-association" in client.get(reverse("register")).content.decode()

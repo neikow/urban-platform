@@ -279,6 +279,10 @@ CELERY_BEAT_SCHEDULE = {
         "task": "core.tasks.prune_task_runs",
         "schedule": crontab(hour="3", minute="15"),
     },
+    "send-membership-reminders": {
+        "task": "core.tasks.send_membership_reminders",
+        "schedule": crontab(hour="9", minute="30"),
+    },
     "check-membership-payments": {
         "task": "core.tasks.check_membership_payments",
         "schedule": 15 * 60,

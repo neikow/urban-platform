@@ -562,3 +562,24 @@ class TestPaymentsAdmin:
         client.force_login(moderator)
 
         assert client.get(reverse("membership_payment:index")).status_code in (302, 403)
+
+
+@pytest.mark.django_db
+class TestJoiningWithoutACiq:
+    def test_paying_without_a_ciq(self, client, resident, ciq, no_email):
+        client.force_login(resident)
+
+        with checkout() as create:
+            response = client.post(
+                reverse("membership"),
+                {"address": "Vallon des Auffes", "association": ciq.pk, "no_association": "on"},
+            )
+
+        assert response.status_code == 302
+        payment = MembershipPayment.objects.get()
+        assert payment.association is None
+        assert "CIQ" not in create.call_args.kwargs["item_name"]
+
+        with paid():
+            sync_payment(payment)
+        assert Membership.objects.get(user=resident).association is None

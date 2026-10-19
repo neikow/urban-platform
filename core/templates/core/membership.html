@@ -97,7 +97,7 @@
                                 </div>
                             {% endif %}
                             {% include "components/forms/form_field.html" with field=form.address %}
-                            {% include "components/forms/form_field.html" with field=form.association %}
+                            {% include "components/forms/association_fields.html" %}
                             <div class="rounded-lg bg-base-200/60 px-5 py-4">
                                 <p class="font-medium">
                                     {% blocktrans trimmed with fee=fee|floatformat:"-2" starts=period_starts|date:"j F Y" ends=period_ends|date:"j F Y" %}

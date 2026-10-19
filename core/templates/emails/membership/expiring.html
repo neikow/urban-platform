@@ -1,0 +1,14 @@
+{% extends "emails/membership/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans "Your membership ends soon" %}</h1>
+    <p>
+        {% blocktrans trimmed %}
+            Your membership ends on {{ ends_on }}. Renew it now to keep voting on the projects and sharing your ideas
+            next year.
+        {% endblocktrans %}
+    </p>
+    <a class="button" href="{{ membership_url }}">{% trans "Renew my membership" %}</a>
+{% endblock %}

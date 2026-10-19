@@ -57,13 +57,15 @@ Les habitants **adhèrent en ligne** sur la page **/adhesion/** : ils indiquent 
 
 - **Année civile** : une adhésion court jusqu'au **31 décembre**. Payée à partir du **1er décembre**, elle couvre aussi l'année suivante ; un adhérent qui renouvelle en décembre repart au 1er janvier.
 - **Mois de grâce** : une adhésion terminée garde ses droits (voter, donner son avis) pendant **un mois**, le temps de la renouveler. Après, l'habitant n'est plus adhérent.
+- **Rappels** : les adhérents qui n'ont pas renouvelé reçoivent un email à partir du **15 décembre**, un autre la **première semaine de janvier**, et un dernier à partir du **25 janvier**, avant la fin du mois de grâce. Chaque rappel n'est envoyé qu'une fois.
 - **Paiements** : **Paramètres › Paiements des adhésions** liste chaque paiement (en attente, payé, abandonné), avec sa commande HelloAsso. La liste est en lecture seule et s'exporte en CSV ou Excel.
 
 Les adhésions se gèrent dans **Paramètres › Adhésions** (administrateurs). Une adhésion a une **date de début**, une **date de fin** facultative, un **CIQ** et une **note** (par exemple le mode de paiement) ; un renouvellement est une nouvelle adhésion. Une personne est **adhérente** tant qu'une de ses adhésions est en cours, ou terminée depuis moins d'un mois. Les adhésions payées par chèque ou en espèces s'enregistrent à la main.
 
 - **Enregistrer une adhésion** : bouton **Ajouter**, puis choisissez la personne (recherche par nom ou email). Depuis la fiche d'un utilisateur, le lien **Enregistrer une adhésion** la présélectionne.
-- **Filtrer** les adhésions en cours ou terminées, ou par CIQ, **chercher** par nom, email, CIQ ou note, et **exporter** la liste en CSV ou Excel.
+- **Filtrer** les adhésions en cours ou terminées, par **année** ou par CIQ (par exemple pour exporter les adhérents d'un CIQ pour l'année), **chercher** par nom, email, CIQ ou note, et **exporter** la liste en CSV ou Excel.
 - La fiche de chaque utilisateur indique s'il a une adhésion en cours.
+- Le **responsable d'un CIQ** (voir [Associations de quartier](associations.md)) voit la liste des adhésions de son CIQ, et peut l'exporter, sans pouvoir la modifier.
 
 Tant que la participation n'est pas réservée aux adhérents (voir [Fonctionnalités](fonctionnalites.md)), l'adhésion ne change rien : tous les comptes confirmés peuvent voter et proposer des idées. Elle est indépendante du rôle : un membre de l'équipe vote comme habitant, avec la même règle. Quand une personne supprime son compte, ses adhésions en cours se terminent le jour même.
 

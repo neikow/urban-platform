@@ -28,6 +28,10 @@ Les prochains événements, avec leur date et le nombre de personnes qui ont cli
 
 Les pages avec des modifications **pas encore publiées**, quel qu'en soit l'auteur, de la plus récente à la plus ancienne. Pratique pour ne rien oublier. Le panneau n'apparaît que s'il y a des brouillons.
 
+### Adhérents par CIQ
+
+Le nombre d'adhérents du jour, puis pour chaque [CIQ](associations.md) ses adhérents et ceux **à renouveler** (adhésion terminée, encore dans leur mois de grâce). Le nom d'un CIQ ouvre la liste de ses adhésions en cours. Les administrateurs voient tous les CIQ, le **responsable** d'un CIQ seulement le sien.
+
 ### Plus bas
 
 Les panneaux habituels de Wagtail : **vos modifications les plus récentes**, et les pages verrouillées ou en attente de validation, s'il y en a.
