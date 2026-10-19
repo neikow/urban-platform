@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 09:48+0200\n"
+"POT-Creation-Date: 2026-10-19 10:14+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -391,8 +391,8 @@ msgid ""
 "— switching keeps responses already collected."
 msgstr ""
 "Le vote permet aux habitants de donner leur avis ; la collecte d'idées leur "
-"permet de proposer des idées sur un projet encore à ses débuts. Les deux "
-"sont mutuellement exclusifs — le changement conserve les réponses déjà "
+"permet de proposer des idées sur un projet encore à ses débuts. Les deux sont"
+" mutuellement exclusifs — le changement conserve les réponses déjà "
 "collectées."
 
 #: publications/models/project.py:74
@@ -454,8 +454,8 @@ msgid ""
 "timeline."
 msgstr ""
 "Envoyé une seule fois, à la publication de la page, aux personnes ayant voté "
-"ou proposé une idée et demandé à suivre les projets. Décochez pour les "
-"étapes passées ajoutées à l'historique."
+"ou proposé une idée et demandé à suivre les projets. Décochez pour les étapes"
+" passées ajoutées à l'historique."
 
 #: publications/models/project_update.py:43
 msgid "Project update"
@@ -591,8 +591,8 @@ msgstr "Complète"
 
 #: publications/page_templates.py:281
 msgid ""
-"Open consultations, the publications, upcoming events, the map, how to "
-"follow the news and questions."
+"Open consultations, the publications, upcoming events, the map, how to follow"
+" the news and questions."
 msgstr ""
 "Les consultations en cours, les publications, les prochains événements, la "
 "carte, comment suivre l'actualité et les questions."
@@ -721,11 +721,11 @@ msgstr "Mettre à jour la carte maintenant"
 
 #: publications/templates/publications/admin/map_tiles_status.html:24
 msgid ""
-"Downloads the latest OpenStreetMap data (about 35 MB), whatever the "
-"interval. Unsaved changes above are lost."
+"Downloads the latest OpenStreetMap data (about 35 MB), whatever the interval."
+" Unsaved changes above are lost."
 msgstr ""
-"Télécharge les dernières données OpenStreetMap (environ 35 Mo), quel que "
-"soit l'intervalle. Les modifications non enregistrées ci-dessus sont perdues."
+"Télécharge les dernières données OpenStreetMap (environ 35 Mo), quel que soit"
+" l'intervalle. Les modifications non enregistrées ci-dessus sont perdues."
 
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
@@ -908,8 +908,8 @@ msgstr "Partagez vos idées pour ce projet"
 
 #: publications/templates/publications/components/ideas_form.html:43
 msgid ""
-"This project is in its early stages — propose your ideas or an alternative "
-"to help shape it."
+"This project is in its early stages — propose your ideas or an alternative to"
+" help shape it."
 msgstr ""
 "Ce projet en est à ses débuts — proposez vos idées ou une alternative pour "
 "aider à le façonner."
@@ -972,6 +972,10 @@ msgid ""
 msgstr ""
 "La participation est réservée aux adhérents. Adhérez pour voter et proposer "
 "vos idées."
+
+#: publications/templates/publications/components/membership_prompt.html:9
+msgid "Become a member"
+msgstr "Devenez membre"
 
 #: publications/templates/publications/components/project_location.html:11
 #, python-format
@@ -1127,8 +1131,8 @@ msgid ""
 "Your opinion matters! Votes help decision-makers understand residents "
 "priorities."
 msgstr ""
-"Votre avis compte ! Les votes aident les décideurs à comprendre les "
-"priorités des habitants."
+"Votre avis compte ! Les votes aident les décideurs à comprendre les priorités"
+" des habitants."
 
 #: publications/templates/publications/components/vote_form.html:48
 msgid ""
@@ -1340,8 +1344,8 @@ msgstr "Trop de requêtes. Réessayez dans une minute."
 #: publications/views/poll_close.py:36
 #, python-format
 msgid ""
-"The poll on “%(title)s” is closed. Results are being sent to voters who "
-"opted in."
+"The poll on “%(title)s” is closed. Results are being sent to voters who opted"
+" in."
 msgstr ""
 "Le vote sur « %(title)s » est clos. Les résultats sont envoyés aux votants "
 "qui l'ont demandé."

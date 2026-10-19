@@ -48,6 +48,7 @@ def account(user: User) -> dict[str, Any]:
         "address": user.address,
         "location": user.location,
         "neighborhood_association": user.association.name if user.association else None,
+        "neighborhood_association_chosen": user.association_chosen,
         "responsible_for_associations": [
             a.name for a in user.responsible_for_associations.order_by("name")
         ],
@@ -55,6 +56,18 @@ def account(user: User) -> dict[str, Any]:
         "neighborhood": str(user.neighborhood) if user.neighborhood else None,
         "role": user.get_role_display(),
         "memberships": [m.as_dict() for m in user.memberships.order_by("starts_on")],
+        "membership_payments": [
+            {
+                "amount_cents": p.amount_cents,
+                "starts_on": _iso(p.starts_on),
+                "ends_on": _iso(p.ends_on),
+                "status": p.status,
+                "helloasso_order": p.order_id,
+                "started_at": _iso(p.created_at),
+                "paid_at": _iso(p.paid_at),
+            }
+            for p in user.membership_payments.order_by("created_at")
+        ],
         "email_verified": user.is_verified,
         "date_joined": _iso(user.created_at),
         "last_updated": _iso(user.updated_at),

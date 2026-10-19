@@ -113,16 +113,18 @@
                     {% block content %}{% endblock %}
                 </div>
                 <div class="footer">
-                    <p>
-                        {% blocktrans trimmed with label=notification_label %}
-                            You receive this email because you asked to be notified about {{ label }}.
-                        {% endblocktrans %}
-                    </p>
-                    <p>
-                        <a href="{{ unsubscribe_url }}">{% trans "Unsubscribe from these emails" %}</a>
-                        ·
-                        <a href="{{ preferences_url }}">{% trans "Manage my notifications" %}</a>
-                    </p>
+                    {% block footer %}
+                        <p>
+                            {% blocktrans trimmed with label=notification_label %}
+                                You receive this email because you asked to be notified about {{ label }}.
+                            {% endblocktrans %}
+                        </p>
+                        <p>
+                            <a href="{{ unsubscribe_url }}">{% trans "Unsubscribe from these emails" %}</a>
+                            ·
+                            <a href="{{ preferences_url }}">{% trans "Manage my notifications" %}</a>
+                        </p>
+                    {% endblock footer %}
                 </div>
             </div>
         </div>

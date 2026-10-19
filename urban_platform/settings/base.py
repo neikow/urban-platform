@@ -243,6 +243,14 @@ DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@example.com")
 WAGTAILADMIN_NOTIFICATION_USE_HTML = True
 DEFAULT_FROM_NAME = os.environ.get("DEFAULT_FROM_NAME", WEBSITE_NAME)
 
+# Memberships are paid on HelloAsso (core.helloasso). The sandbox API is
+# https://api.helloasso-sandbox.com.
+HELLOASSO_API_URL = os.environ.get("HELLOASSO_API_URL", "https://api.helloasso.com")
+HELLOASSO_CLIENT_ID = os.environ.get("HELLOASSO_CLIENT_ID", "")
+HELLOASSO_CLIENT_SECRET = os.environ.get("HELLOASSO_CLIENT_SECRET", "")
+HELLOASSO_ORGANIZATION_SLUG = os.environ.get("HELLOASSO_ORGANIZATION_SLUG", "")
+MEMBERSHIP_FEE_CENTS = int(os.environ.get("MEMBERSHIP_FEE_CENTS", "1000"))
+
 # Task modules outside "<app>.tasks", which autodiscovery would miss.
 CELERY_IMPORTS = ("core.emails.tasks", "core.notifications.tasks")
 CELERY_TIMEZONE = TIME_ZONE
@@ -270,6 +278,10 @@ CELERY_BEAT_SCHEDULE = {
     "prune-task-runs": {
         "task": "core.tasks.prune_task_runs",
         "schedule": crontab(hour="3", minute="15"),
+    },
+    "check-membership-payments": {
+        "task": "core.tasks.check_membership_payments",
+        "schedule": 15 * 60,
     },
     "anonymize-old-email-events": {
         "task": "core.emails.tasks.anonymize_old_email_events",

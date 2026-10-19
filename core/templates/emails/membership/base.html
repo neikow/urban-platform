@@ -1,0 +1,10 @@
+{% extends "emails/notifications/base.html" %}
+
+{% load i18n %}
+
+{% block footer %}
+    <p>{% trans "You receive this email about your membership." %}</p>
+    <p>
+        <a href="{{ membership_url }}">{% trans "My membership" %}</a>
+    </p>
+{% endblock footer %}

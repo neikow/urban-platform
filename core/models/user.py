@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any
+from typing import TYPE_CHECKING, Any
 import uuid
 
 from django.contrib.auth.models import (
@@ -8,7 +8,11 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
+from django.db.models import F
 from django.utils.translation import gettext_lazy as _
+
+if TYPE_CHECKING:
+    from .membership import Membership
 
 
 class UserRole(models.TextChoices):
@@ -204,8 +208,24 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def is_member(self) -> bool:
-        """Whether one of the user's memberships runs today (core.models.Membership)."""
-        return bool(self.pk) and self.memberships.active().exists()
+        """Whether one of the user's memberships runs today, or ended less than a month ago.
+
+        The month after a membership ends (core.models.membership.GRACE_PERIOD)
+        leaves time to renew it without losing the right to take part.
+        """
+        return bool(self.pk) and self.memberships.active(grace=True).exists()
+
+    @property
+    def current_membership(self) -> "Membership | None":
+        """The running membership that lasts the longest, else the last one in its grace period."""
+        if not self.pk:
+            return None
+        return (
+            self.memberships.active(grace=True)
+            .select_related("association")
+            .order_by(F("ends_on").desc(nulls_first=True))
+            .first()
+        )
 
     def __str__(self) -> str:
         return self.email

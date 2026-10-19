@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 09:48+0200\n"
+"POT-Creation-Date: 2026-10-19 10:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,56 +130,56 @@ msgstr "Documents"
 msgid "Documentation"
 msgstr "Documentation"
 
-#: core/audit.py:73
+#: core/audit.py:74
 msgid "Change role"
 msgstr "Changer de rôle"
 
-#: core/audit.py:77
+#: core/audit.py:78
 #, python-format
 msgid "Role changed from %(old)s to %(new)s"
 msgstr "Rôle changé de %(old)s à %(new)s"
 
-#: core/audit.py:82
+#: core/audit.py:83
 msgid "Role changed"
 msgstr "Rôle changé"
 
-#: core/audit.py:88
+#: core/audit.py:89
 msgid "Change subscription"
 msgstr "Changer l'adhésion"
 
-#: core/audit.py:92
+#: core/audit.py:93
 msgid "Marked as subscriber"
 msgstr "Marqué comme adhérent"
 
-#: core/audit.py:93
+#: core/audit.py:94
 msgid "No longer a subscriber"
 msgstr "N'est plus adhérent"
 
-#: core/audit.py:97
+#: core/audit.py:98
 msgid "Change superuser status"
 msgstr "Changer le statut superutilisateur"
 
-#: core/audit.py:101
+#: core/audit.py:102
 msgid "Made superuser"
 msgstr "Devenu superutilisateur"
 
-#: core/audit.py:102
+#: core/audit.py:103
 msgid "No longer superuser"
 msgstr "N'est plus superutilisateur"
 
-#: core/audit.py:106
+#: core/audit.py:107
 msgid "Activate or deactivate"
 msgstr "Activer ou désactiver"
 
-#: core/audit.py:110
+#: core/audit.py:111
 msgid "Account activated"
 msgstr "Compte activé"
 
-#: core/audit.py:111
+#: core/audit.py:112
 msgid "Account deactivated"
 msgstr "Compte désactivé"
 
-#: core/audit.py:115 core/templates/auth/email_verify_error.html:37
+#: core/audit.py:116 core/templates/auth/email_verify_error.html:37
 #: core/templates/auth/login_modal.html:29
 #: core/templates/auth/login_modal.html:75
 #: core/templates/auth/register.html:188
@@ -188,91 +188,112 @@ msgstr "Compte désactivé"
 msgid "Log in"
 msgstr "Se connecter"
 
-#: core/audit.py:119
+#: core/audit.py:120
 #, python-format
 msgid "Logged in from %(ip)s"
 msgstr "Connexion depuis %(ip)s"
 
-#: core/audit.py:119
+#: core/audit.py:120
 msgid "Logged in"
 msgstr "Connexion"
 
-#: core/audit.py:123
+#: core/audit.py:124
 msgid "Failed login"
 msgstr "Échec de connexion"
 
-#: core/audit.py:127
+#: core/audit.py:128
 #, python-format
 msgid "Wrong password, from %(ip)s"
 msgstr "Mot de passe erroné, depuis %(ip)s"
 
-#: core/audit.py:127
+#: core/audit.py:128
 msgid "Wrong password"
 msgstr "Mot de passe erroné"
 
-#: core/audit.py:131
+#: core/audit.py:132
 msgid "Change email"
 msgstr "Changer d'email"
 
-#: core/audit.py:135
+#: core/audit.py:136
 #, python-format
 msgid "Email changed from %(old)s to %(new)s"
 msgstr "Email changé de %(old)s à %(new)s"
 
-#: core/audit.py:137
+#: core/audit.py:138
 msgid "Email changed"
 msgstr "Email changé"
 
-#: core/audit.py:141
+#: core/audit.py:142
 msgid "Start a task"
 msgstr "Lancer une tâche"
 
-#: core/audit.py:144
+#: core/audit.py:145
 #, python-format
 msgid "Started “%(task)s”"
 msgstr "« %(task)s » lancée"
 
-#: core/audit.py:148
+#: core/audit.py:149
 msgid "Change settings"
 msgstr "Modifier les paramètres"
 
-#: core/audit.py:153
+#: core/audit.py:154
 msgid "Settings saved"
 msgstr "Paramètres enregistrés"
 
-#: core/audit.py:165 core/templates/core/profile_edit.html:139
+#: core/audit.py:159
+msgid "Pay a membership"
+msgstr "Payer une adhésion"
+
+#: core/audit.py:164
+#, python-format
+msgid "Membership paid on HelloAsso (order %(order)s)"
+msgstr "Adhésion payée sur HelloAsso (commande %(order)s)"
+
+#: core/audit.py:165
+msgid "Membership paid on HelloAsso"
+msgstr "Adhésion payée sur HelloAsso"
+
+#: core/audit.py:176 core/templates/core/profile_edit.html:139
 #: core/templates/core/profile_edit.html:183
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
-#: core/audit.py:165 core/templates/auth/password_reset_complete.html:4
+#: core/audit.py:176 core/templates/auth/password_reset_complete.html:4
 msgid "Password changed"
 msgstr "Mot de passe modifié"
 
-#: core/audit.py:167 core/templates/auth/password_reset_confirm.html:45
+#: core/audit.py:178 core/templates/auth/password_reset_confirm.html:45
 #: core/templates/auth/password_reset_request.html:4
 msgid "Reset password"
 msgstr "Réinitialiser le mot de passe"
 
-#: core/audit.py:167
+#: core/audit.py:178
 msgid "Password reset"
 msgstr "Mot de passe réinitialisé"
 
-#: core/audit.py:170
+#: core/audit.py:181
 msgid "Export personal data"
 msgstr "Exporter ses données personnelles"
 
-#: core/audit.py:170
+#: core/audit.py:181
 msgid "Downloaded their personal data"
 msgstr "A téléchargé ses données personnelles"
 
-#: core/audit.py:173
+#: core/audit.py:184
 msgid "Delete own account"
 msgstr "Supprimer son compte"
 
-#: core/audit.py:173
+#: core/audit.py:184
 msgid "Deleted their account"
 msgstr "A supprimé son compte"
+
+#: core/audit.py:188
+msgid "Start a membership payment"
+msgstr "Commencer le paiement d'une adhésion"
+
+#: core/audit.py:189
+msgid "Left for HelloAsso to pay a membership"
+msgstr "Parti sur HelloAsso pour payer une adhésion"
 
 #: core/blocks.py:13 core/blocks.py:18 core/blocks.py:29
 msgid "Left"
@@ -506,48 +527,59 @@ msgstr "CTA - Bouton d'appel à l'action"
 msgid "Document"
 msgstr "Document"
 
-#: core/memberships.py:27
+#: core/memberships.py:29
 msgid "Search term"
 msgstr "Recherche"
 
-#: core/memberships.py:28
+#: core/memberships.py:30
 msgid "Name or email"
 msgstr "Nom ou email"
 
-#: core/memberships.py:56
+#: core/memberships.py:58
 msgid "Choose a user"
 msgstr "Choisir un utilisateur"
 
-#: core/memberships.py:57
+#: core/memberships.py:59
 msgid "Choose another user"
 msgstr "Choisir un autre utilisateur"
 
-#: core/memberships.py:71
+#: core/memberships.py:73
 msgid "Running today"
 msgstr "En cours aujourd'hui"
 
-#: core/memberships.py:102 core/models/membership.py:60
+#: core/memberships.py:104 core/models/membership.py:102
 msgid "Memberships"
 msgstr "Adhésions"
 
-#: core/memberships.py:117 core/models/membership.py:27
-#: core/templates/core/profile.html:168 core/tests/views/test_me.py:59
+#: core/memberships.py:119 core/memberships.py:200 core/models/membership.py:69
+#: core/models/membership_payment.py:21 core/templates/core/profile.html:86
+#: core/templates/core/profile.html:179 core/tests/views/test_me.py:59
 msgid "Member"
 msgstr "Membre"
 
-#: core/memberships.py:118 core/templates/core/profile.html:100
+#: core/memberships.py:120 core/memberships.py:201
+#: core/templates/core/profile.html:111
 msgid "Email"
 msgstr "Email"
 
-#: core/memberships.py:119 core/models/membership.py:31
-#: core/models/neighborhood_association.py:45 core/models/user.py:92
+#: core/memberships.py:121 core/memberships.py:202 core/models/membership.py:73
+#: core/models/membership_payment.py:28
+#: core/models/neighborhood_association.py:45 core/models/user.py:96
 #: core/templates/core/profile.html:68
 msgid "Neighborhood Association"
 msgstr "Comité d'intérêt de quartier"
 
-#: core/memberships.py:145 core/models/membership.py:70
+#: core/memberships.py:147 core/models/membership.py:112
 msgid "The end cannot come before the start."
 msgstr "La fin ne peut pas précéder le début."
+
+#: core/memberships.py:182 core/models/membership_payment.py:60
+msgid "Membership payments"
+msgstr "Paiements des adhésions"
+
+#: core/memberships.py:203
+msgid "Amount (€)"
+msgstr "Montant (€)"
 
 #: core/models/announcement.py:12
 msgid "Information"
@@ -614,8 +646,8 @@ msgstr "Vérification d'email"
 msgid "Password Reset"
 msgstr "Réinitialisation du mot de passe"
 
-#: core/models/email_event.py:11 core/models/user.py:131
-#: core/templates/core/profile.html:218
+#: core/models/email_event.py:11 core/models/user.py:135
+#: core/templates/core/profile.html:229
 msgid "Poll results"
 msgstr "Résultats des votes"
 
@@ -627,57 +659,64 @@ msgstr "Actualité du projet"
 msgid "Event reminder"
 msgstr "Rappel d'événement"
 
-#: core/models/email_event.py:17
+#: core/models/email_event.py:14 core/models/membership.py:101
+#: core/models/membership_payment.py:49
+#: core/templates/core/admin/user_membership.html:6
+#: core/templates/core/membership.html:4 core/templates/core/profile.html:77
+msgid "Membership"
+msgstr "Adhésion"
+
+#: core/models/email_event.py:18 core/models/membership_payment.py:6
 msgid "Pending"
 msgstr "En attente"
 
-#: core/models/email_event.py:18
+#: core/models/email_event.py:19
 msgid "Sent"
 msgstr "Envoyé"
 
-#: core/models/email_event.py:19 core/models/task_run.py:9
+#: core/models/email_event.py:20 core/models/task_run.py:9
 msgid "Failed"
 msgstr "Échec"
 
-#: core/models/email_event.py:30 core/models/user.py:184
+#: core/models/email_event.py:31 core/models/user.py:188
 msgid "User"
 msgstr "Utilisateur"
 
-#: core/models/email_event.py:33
+#: core/models/email_event.py:34
 msgid "Event Type"
 msgstr "Type d'événement"
 
-#: core/models/email_event.py:38 core/models/task_run.py:23
-#: core/templates/core/admin/dashboard/drafts.html:9
+#: core/models/email_event.py:39 core/models/membership_payment.py:38
+#: core/models/task_run.py:23 core/templates/core/admin/dashboard/drafts.html:9
 #: core/templates/core/admin/tasks_status.html:70
 msgid "Status"
 msgstr "Statut"
 
-#: core/models/email_event.py:44
+#: core/models/email_event.py:45
 msgid "Recipient Email"
 msgstr "Email du destinataire"
 
-#: core/models/email_event.py:45
+#: core/models/email_event.py:46
 msgid "Stored temporarily, cleared on anonymization"
 msgstr "Stocké temporairement, effacé lors de l'anonymisation"
 
-#: core/models/email_event.py:48 core/models/notification_dispatch.py:17
+#: core/models/email_event.py:49 core/models/notification_dispatch.py:17
 msgid "Sent At"
 msgstr "Envoyé à"
 
-#: core/models/email_event.py:53
+#: core/models/email_event.py:54
 msgid "Created At"
 msgstr "Créé à"
 
-#: core/models/email_event.py:57
+#: core/models/email_event.py:58
 msgid "Error Message"
 msgstr "Message d'erreur"
 
-#: core/models/email_event.py:62
+#: core/models/email_event.py:63
 msgid "Email Event"
 msgstr "Événement de courriel"
 
-#: core/models/email_event.py:63
+#: core/models/email_event.py:64
 msgid "Email Events"
 msgstr "Événements d'email"
 
@@ -697,42 +736,69 @@ msgstr ""
 msgid "Features"
 msgstr "Fonctionnalités"
 
-#: core/models/membership.py:36
+#: core/models/membership.py:78
 msgid "The association (CIQ) the member joins with this membership."
 msgstr "L'association (CIQ) que le membre rejoint avec cette adhésion."
 
-#: core/models/membership.py:38
+#: core/models/membership.py:80 core/models/membership_payment.py:35
 msgid "Start"
 msgstr "Début"
 
-#: core/models/membership.py:40
+#: core/models/membership.py:82 core/models/membership_payment.py:36
 msgid "End"
 msgstr "Fin"
 
-#: core/models/membership.py:40
+#: core/models/membership.py:82
 msgid "Leave empty for a membership with no end."
 msgstr "Laissez vide pour une adhésion sans fin."
 
-#: core/models/membership.py:43
+#: core/models/membership.py:85
 msgid "Note"
 msgstr "Note"
 
-#: core/models/membership.py:43
+#: core/models/membership.py:85
 msgid "E.g. how the membership was paid."
 msgstr "Par exemple le mode de paiement."
 
-#: core/models/membership.py:47
+#: core/models/membership.py:89
 msgid "Recorded by"
 msgstr "Enregistrée par"
 
-#: core/models/membership.py:54
+#: core/models/membership.py:96
 msgid "Recorded on"
 msgstr "Enregistrée le"
 
-#: core/models/membership.py:59
-#: core/templates/core/admin/user_membership.html:6
-msgid "Membership"
-msgstr "Adhésion"
+#: core/models/membership_payment.py:7
+msgid "Paid"
+msgstr "Payé"
+
+#: core/models/membership_payment.py:8
+msgid "Abandoned"
+msgstr "Abandonné"
+
+#: core/models/membership_payment.py:34
+msgid "Amount (cents)"
+msgstr "Montant (centimes)"
+
+#: core/models/membership_payment.py:44
+msgid "HelloAsso checkout"
+msgstr "Paiement HelloAsso"
+
+#: core/models/membership_payment.py:46
+msgid "HelloAsso order"
+msgstr "Commande HelloAsso"
+
+#: core/models/membership_payment.py:55
+msgid "Started on"
+msgstr "Commencé le"
+
+#: core/models/membership_payment.py:56
+msgid "Paid on"
+msgstr "Payé le"
+
+#: core/models/membership_payment.py:59
+msgid "Membership payment"
+msgstr "Paiement d'adhésion"
 
 #: core/models/neighborhood_association.py:13
 msgid "Code"
@@ -748,7 +814,7 @@ msgstr ""
 msgid "Name"
 msgstr "Nom"
 
-#: core/models/neighborhood_association.py:19 core/models/user.py:83
+#: core/models/neighborhood_association.py:19 core/models/user.py:87
 #: core/templates/core/profile.html:60
 msgid "Address"
 msgstr "Adresse"
@@ -776,7 +842,7 @@ msgstr "Responsable"
 msgid "Contact Email"
 msgstr "Email de contact"
 
-#: core/models/neighborhood_association.py:41 core/models/user.py:113
+#: core/models/neighborhood_association.py:41 core/models/user.py:117
 msgid "Phone Number"
 msgstr "Numéro de téléphone"
 
@@ -865,98 +931,98 @@ msgstr "Exécution de tâche"
 msgid "Task runs"
 msgstr "Exécutions de tâches"
 
-#: core/models/user.py:21
+#: core/models/user.py:25
 msgid "Citizen"
 msgstr "Citoyen"
 
-#: core/models/user.py:22
+#: core/models/user.py:26
 msgid "Editor"
 msgstr "Rédacteur"
 
-#: core/models/user.py:23
+#: core/models/user.py:27
 msgid "Moderator"
 msgstr "Modérateur"
 
-#: core/models/user.py:24
+#: core/models/user.py:28
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: core/models/user.py:45
+#: core/models/user.py:49
 msgid "The Email field must be set"
 msgstr "Le champ email doit être renseigné"
 
-#: core/models/user.py:60
+#: core/models/user.py:64
 msgid "Superuser must have is_superuser=True."
 msgstr "Le superutilisateur doit avoir is_superuser=True."
 
-#: core/models/user.py:68
+#: core/models/user.py:72
 msgid "Email Address"
 msgstr "Adresse e-mail"
 
-#: core/models/user.py:69
+#: core/models/user.py:73
 msgid "UUID"
 msgstr "UUID"
 
-#: core/models/user.py:71 core/templates/core/profile.html:31
+#: core/models/user.py:75 core/templates/core/profile.html:31
 msgid "First Name"
 msgstr "Prénom"
 
-#: core/models/user.py:72 core/templates/core/profile.html:37
+#: core/models/user.py:76 core/templates/core/profile.html:37
 msgid "Last Name"
 msgstr "Nom de famille"
 
-#: core/models/user.py:80 core/templates/core/profile.html:44
+#: core/models/user.py:84 core/templates/core/profile.html:44
 msgid "Neighborhood"
 msgstr "Quartier"
 
-#: core/models/user.py:82
+#: core/models/user.py:86
 msgid "Postal Code"
 msgstr "Code postal"
 
-#: core/models/user.py:85
+#: core/models/user.py:89
 msgid "Location"
 msgstr "Position"
 
-#: core/models/user.py:93
+#: core/models/user.py:97
 msgid ""
 "The association the user chose, or else the one nearest to their address."
 msgstr ""
 "L'association choisie par l'utilisateur, ou à défaut la plus proche de son "
 "adresse."
 
-#: core/models/user.py:96
+#: core/models/user.py:100
 msgid "Association chosen by the user"
 msgstr "Association choisie par l'utilisateur"
 
-#: core/models/user.py:98
+#: core/models/user.py:102
 msgid "Otherwise it follows the address: the nearest association."
 msgstr "Sinon, elle suit l'adresse : l'association la plus proche."
 
-#: core/models/user.py:102
+#: core/models/user.py:106
 msgid "Email Verified"
 msgstr "Email vérifié"
 
-#: core/models/user.py:104
+#: core/models/user.py:108
 msgid "Is the user's email address verified?"
 msgstr "L'adresse e-mail de l'utilisateur est-elle vérifiée ?"
 
-#: core/models/user.py:107 core/templates/core/profile.html:162
+#: core/models/user.py:111 core/templates/core/profile.html:173
 msgid "Role"
 msgstr "Rôle"
 
-#: core/models/user.py:115
+#: core/models/user.py:119
 msgid "Newsletter Subscription"
 msgstr "Inscription à la newsletter"
 
-#: core/models/user.py:117
+#: core/models/user.py:121
 msgid "Does the user want to receive the newsletter?"
 msgstr "L'utilisateur souhaite-t-il recevoir la newsletter ?"
 
-#: core/models/user.py:120
+#: core/models/user.py:124
 msgid "Newsletter consent date"
 msgstr "Date du consentement à la newsletter"
 
-#: core/models/user.py:124
+#: core/models/user.py:128
 msgid ""
 "When the user last agreed to receive the newsletter (GDPR proof of consent). "
 "Empty if they are not subscribed, or subscribed before this date was "
@@ -966,68 +1032,68 @@ msgstr ""
 "consentement RGPD). Vide s'il n'est pas abonné, ou s'il s'est abonné avant "
 "l'enregistrement de cette date."
 
-#: core/models/user.py:133
+#: core/models/user.py:137
 msgid "Email the results when a poll I voted in closes."
 msgstr ""
 "Recevoir les résultats par email à la clôture d'un vote auquel j'ai "
 "participé."
 
-#: core/models/user.py:136 core/templates/core/profile.html:219
+#: core/models/user.py:140 core/templates/core/profile.html:230
 msgid "Project updates"
 msgstr "Actualités des projets"
 
-#: core/models/user.py:138
+#: core/models/user.py:142
 msgid "Email the news of projects I voted on or shared an idea about."
 msgstr ""
 "Recevoir par email les actualités des projets sur lesquels j'ai voté ou "
 "proposé une idée."
 
-#: core/models/user.py:141 core/templates/core/profile.html:220
+#: core/models/user.py:145 core/templates/core/profile.html:231
 msgid "Event reminders"
 msgstr "Rappels d'événements"
 
-#: core/models/user.py:143
+#: core/models/user.py:147
 msgid "Email a reminder the day before events I am interested in."
 msgstr ""
 "Recevoir un rappel par email la veille des événements qui m'intéressent."
 
-#: core/models/user.py:146
+#: core/models/user.py:150
 msgid "Date Joined"
 msgstr "Date d'inscription"
 
-#: core/models/user.py:147
+#: core/models/user.py:151
 msgid "Last Updated"
 msgstr "Dernière mise à jour"
 
-#: core/models/user.py:149
+#: core/models/user.py:153
 msgid "Deleted At"
 msgstr "Supprimé le"
 
-#: core/models/user.py:152
+#: core/models/user.py:156
 msgid "When the user account was soft-deleted. NULL if not deleted."
 msgstr "Quand le compte utilisateur a été supprimé. NULL si non supprimé."
 
-#: core/models/user.py:157
+#: core/models/user.py:161
 msgid "Active"
 msgstr "Actif"
 
-#: core/models/user.py:159
+#: core/models/user.py:163
 msgid "Designates whether this user should be treated as active."
 msgstr "Indique si cet utilisateur doit être considéré comme actif."
 
-#: core/models/user.py:185
+#: core/models/user.py:189
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: core/models/user.py:189
+#: core/models/user.py:193
 msgid "Can see vote and idea statistics"
 msgstr "Peut voir les statistiques des votes et des idées"
 
-#: core/models/user.py:190
+#: core/models/user.py:194
 msgid "Can see and start background tasks"
 msgstr "Peut voir et lancer les tâches de fond"
 
-#: core/models/user.py:191
+#: core/models/user.py:195
 msgid "Can see the activity log"
 msgstr "Peut voir le journal d'activité"
 
@@ -1234,7 +1300,8 @@ msgstr ""
 msgid "The link is valid for 1 hour."
 msgstr "Le lien est valable pendant 1 heure."
 
-#: core/templates/auth/register.html:21
+#: core/templates/auth/register.html:21 core/templates/core/membership.html:14
+#: core/templates/core/profile.html:101
 msgid "Become a member"
 msgstr "Devenez membre"
 
@@ -1262,7 +1329,7 @@ msgstr "J'accepte les"
 msgid "terms of service"
 msgstr "conditions d'utilisation"
 
-#: core/templates/auth/register.html:149 core/templates/core/profile.html:79
+#: core/templates/auth/register.html:149
 msgid "(opens in a new tab)"
 msgstr "(ouvre dans un nouvel onglet)"
 
@@ -1585,9 +1652,93 @@ msgstr "Se déconnecter"
 msgid "Navigation Menu"
 msgstr "Menu de navigation"
 
+#: core/templates/core/membership.html:17
+#, python-format
+msgid ""
+"%(fee)s € a year to vote on the projects, share your ideas and be registered "
+"with the CIQ (comité d'intérêt de quartier) of your choice."
+msgstr ""
+"%(fee)s € par an pour voter sur les projets, donner votre avis et être "
+"inscrit au CIQ (comité d'intérêt de quartier) de votre choix."
+
+#: core/templates/core/membership.html:29 core/templates/core/profile.html:93
+#: core/templates/emails/membership/base.html:8
+msgid "My membership"
+msgstr "Mon adhésion"
+
+#: core/templates/core/membership.html:33
+#, python-format
+msgid ""
+"Your membership ended on %(ended)s. Renew it before %(until)s to keep voting "
+"and sharing your ideas."
+msgstr ""
+"Votre adhésion a pris fin le %(ended)s. Renouvelez-la avant le %(until)s pour"
+" continuer à voter et à donner votre avis."
+
+#: core/templates/core/membership.html:42
+#, python-format
+msgid "You are a member until %(ends)s."
+msgstr "Vous êtes adhérent jusqu'au %(ends)s."
+
+#: core/templates/core/membership.html:46
+msgid "You are a member."
+msgstr "Vous êtes adhérent."
+
+#: core/templates/core/membership.html:52
+#, python-format
+msgid "CIQ: %(name)s"
+msgstr "CIQ : %(name)s"
+
+#: core/templates/core/membership.html:63
+#, python-format
+msgid ""
+"To join, create your account, give your address to find your CIQ, then pay "
+"online with HelloAsso. The membership runs until the end of %(ends)s."
+msgstr ""
+"Pour adhérer, créez votre compte, indiquez votre adresse pour trouver votre "
+"CIQ, puis payez en ligne avec HelloAsso. L'adhésion court jusqu'à la fin de "
+"l'année %(ends)s."
+
+#: core/templates/core/membership.html:72
+msgid "Create my account"
+msgstr "Créer mon compte"
+
+#: core/templates/core/membership.html:76
+msgid "I already have an account"
+msgstr "J'ai déjà un compte"
+
+#: core/templates/core/membership.html:83
+msgid "Renew my membership"
+msgstr "Renouveler mon adhésion"
+
+#: core/templates/core/membership.html:85
+msgid "Join"
+msgstr "Rejoindre"
+
+#: core/templates/core/membership.html:90
+msgid "Online payment is not open yet."
+msgstr "Le paiement en ligne n'est pas encore ouvert."
+
+#: core/templates/core/membership.html:104
+#, python-format
+msgid "%(fee)s € · from %(starts)s to %(ends)s"
+msgstr "%(fee)s € · du %(starts)s au %(ends)s"
+
+#: core/templates/core/membership.html:109
+msgid ""
+"Memberships run by calendar year. You pay on HelloAsso, then come back here."
+msgstr ""
+"L'adhésion court par année civile. Vous payez sur HelloAsso, puis revenez "
+"ici."
+
+#: core/templates/core/membership.html:119
+#, python-format
+msgid "Pay %(fee)s € on HelloAsso"
+msgstr "Payer %(fee)s € sur HelloAsso"
+
 #: core/templates/core/notification_unsubscribe.html:6
 #: core/templates/core/notification_unsubscribe.html:11
-#: core/templates/core/profile.html:215
+#: core/templates/core/profile.html:226
 #: core/templates/core/profile_edit.html:95
 msgid "Email notifications"
 msgstr "Notifications par email"
@@ -1632,7 +1783,7 @@ msgstr "Gérer toutes mes notifications"
 msgid "My profile"
 msgstr "Mon profil"
 
-#: core/templates/core/profile.html:10 core/templates/core/profile.html:158
+#: core/templates/core/profile.html:10 core/templates/core/profile.html:169
 #: core/templates/core/profile_edit.html:13
 msgid "Account"
 msgstr "Compte"
@@ -1645,84 +1796,93 @@ msgstr "Informations personnelles"
 msgid "Postal code"
 msgstr "Code postal"
 
-#: core/templates/core/profile.html:96 core/wagtail_hooks.py:65
+#: core/templates/core/profile.html:82
+#, python-format
+msgid "Member until %(ends)s"
+msgstr "Adhérent jusqu'au %(ends)s"
+
+#: core/templates/core/profile.html:96
+msgid "Become a member to vote on the projects and share your ideas."
+msgstr "Adhérez pour voter sur les projets et donner votre avis."
+
+#: core/templates/core/profile.html:107 core/wagtail_hooks.py:65
 msgid "Contact"
 msgstr "Contact"
 
-#: core/templates/core/profile.html:107 core/tests/views/test_me.py:74
+#: core/templates/core/profile.html:118 core/tests/views/test_me.py:74
 msgid "Verified"
 msgstr "Vérifié"
 
-#: core/templates/core/profile.html:111 core/tests/views/test_me.py:67
+#: core/templates/core/profile.html:122 core/tests/views/test_me.py:67
 msgid "Not verified"
 msgstr "Non vérifié"
 
-#: core/templates/core/profile.html:118
+#: core/templates/core/profile.html:129
 msgid "Resend the verification link"
 msgstr "Renvoyer le lien de vérification"
 
-#: core/templates/core/profile.html:126
+#: core/templates/core/profile.html:137
 msgid "Phone"
 msgstr "Téléphone"
 
-#: core/templates/core/profile.html:135
+#: core/templates/core/profile.html:146
 msgid "My events"
 msgstr "Mes événements"
 
-#: core/templates/core/profile.html:152
+#: core/templates/core/profile.html:163
 msgid "Events you are interested in will appear here."
 msgstr "Les événements qui vous intéressent apparaîtront ici."
 
-#: core/templates/core/profile.html:178
+#: core/templates/core/profile.html:189
 msgid "Subscription"
 msgstr "Adhésion"
 
-#: core/templates/core/profile.html:184
+#: core/templates/core/profile.html:195
 msgid "Subscriber"
 msgstr "Adhérent"
 
-#: core/templates/core/profile.html:186
+#: core/templates/core/profile.html:197
 msgid "Not a subscriber"
 msgstr "Non adhérent"
 
-#: core/templates/core/profile.html:192
+#: core/templates/core/profile.html:203
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: core/templates/core/profile.html:198 core/tests/views/test_me.py:51
+#: core/templates/core/profile.html:209 core/tests/views/test_me.py:51
 msgid "Subscribed"
 msgstr "Abonné"
 
-#: core/templates/core/profile.html:201
+#: core/templates/core/profile.html:212
 #, python-format
 msgid "since %(date)s"
 msgstr "depuis le %(date)s"
 
-#: core/templates/core/profile.html:209
+#: core/templates/core/profile.html:220
 msgid "Not subscribed"
 msgstr "Non abonné"
 
-#: core/templates/core/profile.html:222
+#: core/templates/core/profile.html:233
 msgid "None"
 msgstr "Aucune"
 
-#: core/templates/core/profile.html:228
+#: core/templates/core/profile.html:239
 msgid "Change"
 msgstr "Modifier"
 
-#: core/templates/core/profile.html:232
+#: core/templates/core/profile.html:243
 msgid "Member since"
 msgstr "Membre depuis"
 
-#: core/templates/core/profile.html:238
+#: core/templates/core/profile.html:249
 msgid "Last update"
 msgstr "Dernière mise à jour"
 
-#: core/templates/core/profile.html:246
+#: core/templates/core/profile.html:257
 msgid "My data"
 msgstr "Mes données"
 
-#: core/templates/core/profile.html:248
+#: core/templates/core/profile.html:259
 msgid ""
 "Download everything we store about you: your account, votes, ideas, events "
 "you follow, consents and the emails we sent you. The file is in JSON, a "
@@ -1733,11 +1893,11 @@ msgstr ""
 "emails que nous vous avons envoyés. Le fichier est au format JSON, importable"
 " par d'autres services."
 
-#: core/templates/core/profile.html:265
+#: core/templates/core/profile.html:276
 msgid "Download my data"
 msgstr "Télécharger mes données"
 
-#: core/templates/core/profile.html:286 core/templates/core/profile_edit.html:4
+#: core/templates/core/profile.html:297 core/templates/core/profile_edit.html:4
 #: core/templates/core/profile_edit.html:20
 #: core/tests/views/test_profile_edit.py:34
 msgid "Edit my profile"
@@ -1766,12 +1926,38 @@ msgstr "Zone de danger"
 msgid "Download a copy of my data first"
 msgstr "Télécharger d'abord une copie de mes données"
 
+#: core/templates/emails/membership/base.html:6
+msgid "You receive this email about your membership."
+msgstr "Vous recevez cet email au sujet de votre adhésion."
+
+#: core/templates/emails/membership/confirmation.html:6
+msgid "Thank you for joining!"
+msgstr "Merci pour votre adhésion !"
+
+#: core/templates/emails/membership/confirmation.html:8
+#, python-format
+msgid ""
+"Your payment went through: you are a member until %(ends_on)s. You can now "
+"vote on the projects and share your ideas."
+msgstr ""
+"Votre paiement est validé : vous êtes adhérent jusqu'au %(ends_on)s. Vous "
+"pouvez désormais voter sur les projets et donner votre avis."
+
+#: core/templates/emails/membership/confirmation.html:15
+#, python-format
+msgid "You are registered with the CIQ %(name)s."
+msgstr "Vous êtes inscrit au CIQ %(name)s."
+
+#: core/templates/emails/membership/confirmation.html:20
+msgid "Go to the website"
+msgstr "Aller sur le site"
+
 #: core/templates/emails/notifications/base.html:112
 #, python-format
 msgid "Hello %(name)s,"
 msgstr "Bonjour %(name)s,"
 
-#: core/templates/emails/notifications/base.html:117
+#: core/templates/emails/notifications/base.html:118
 #, python-format
 msgid ""
 "You receive this email because you asked to be notified about %(label)s."
@@ -1779,11 +1965,11 @@ msgstr ""
 "Vous recevez cet email car vous avez demandé à être informé·e concernant "
 "%(label)s."
 
-#: core/templates/emails/notifications/base.html:122
+#: core/templates/emails/notifications/base.html:123
 msgid "Unsubscribe from these emails"
 msgstr "Se désinscrire de ces emails"
 
-#: core/templates/emails/notifications/base.html:124
+#: core/templates/emails/notifications/base.html:125
 msgid "Manage my notifications"
 msgstr "Gérer mes notifications"
 

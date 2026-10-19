@@ -263,6 +263,10 @@ def register_audit_menu_item() -> MenuItem:
 
 @hooks.register("register_admin_viewset")
 def register_membership_viewsets() -> list[Any]:
-    from core.memberships import membership_viewset, user_chooser_viewset
+    from core.memberships import (
+        membership_payment_viewset,
+        membership_viewset,
+        user_chooser_viewset,
+    )
 
-    return [user_chooser_viewset, membership_viewset]
+    return [user_chooser_viewset, membership_viewset, membership_payment_viewset]

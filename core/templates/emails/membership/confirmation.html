@@ -1,0 +1,21 @@
+{% extends "emails/membership/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans "Thank you for joining!" %}</h1>
+    <p>
+        {% blocktrans trimmed %}
+            Your payment went through: you are a member until {{ ends_on }}. You can now vote on the projects and share
+            your ideas.
+        {% endblocktrans %}
+    </p>
+    {% if association %}
+        <p>
+            {% blocktrans trimmed with name=association %}
+                You are registered with the CIQ {{ name }}.
+            {% endblocktrans %}
+        </p>
+    {% endif %}
+    <a class="button" href="{{ site_url }}">{% trans "Go to the website" %}</a>
+{% endblock %}

@@ -6,7 +6,8 @@ moved, deleted…) and shows them in the activity log (core.views.audit).
 This module adds the actions Wagtail does not see:
 
 - account changes: role, superuser status, activation (memberships are
-  logged by Wagtail, like any model edited in the admin);
+  logged by Wagtail, like any model edited in the admin), memberships paid
+  online;
 - security events: staff logins and failed logins, password and email
   changes, personal data exports, account deletions;
 - background tasks started by hand;
@@ -154,6 +155,16 @@ class SettingsChangeFormatter(LogFormatter):
         return ", ".join(f"{field}: {old} → {new}" for field, (old, new) in changes.items())
 
 
+class MembershipPaidFormatter(LogFormatter):
+    label = _("Pay a membership")
+
+    def format_message(self, log_entry: Any) -> str:
+        order = log_entry.data.get("order")
+        if order:
+            return _("Membership paid on HelloAsso (order %(order)s)") % {"order": order}
+        return str(_("Membership paid on HelloAsso"))
+
+
 def register_actions(actions: Any) -> None:
     actions.register_action("core.user.role_change")(RoleChangeFormatter)
     actions.register_action("core.user.subscription_change")(SubscriptionChangeFormatter)
@@ -172,6 +183,12 @@ def register_actions(actions: Any) -> None:
     actions.register_action(
         "core.auth.account_delete", _("Delete own account"), _("Deleted their account")
     )
+    actions.register_action(
+        "core.membership.payment_start",
+        _("Start a membership payment"),
+        _("Left for HelloAsso to pay a membership"),
+    )
+    actions.register_action("core.membership.paid")(MembershipPaidFormatter)
     actions.register_action("core.task.launch")(TaskLaunchFormatter)
     actions.register_action("core.settings.change")(SettingsChangeFormatter)
 

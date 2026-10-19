@@ -11,6 +11,7 @@ class EmailEventType(models.TextChoices):
     POLL_RESULTS = "POLL_RESULTS", _("Poll results")
     PROJECT_UPDATE = "PROJECT_UPDATE", _("Project update")
     EVENT_REMINDER = "EVENT_REMINDER", _("Event reminder")
+    MEMBERSHIP = "MEMBERSHIP", _("Membership")
 
 
 class EmailEventStatus(models.TextChoices):

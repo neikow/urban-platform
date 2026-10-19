@@ -65,6 +65,7 @@ SITE_SETTINGS_PERMISSIONS: frozenset[str] = frozenset(
         "core.change_membership",
         "core.delete_membership",
         "core.view_membership",
+        "core.view_membershippayment",
         "publications.change_mapsettings",
     }
 )

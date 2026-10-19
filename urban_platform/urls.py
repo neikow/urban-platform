@@ -12,6 +12,7 @@ from core.sitemaps import SITEMAPS
 
 from legal import views as legal_views
 from core.views.register import RegisterFormView
+from core.views.membership import MembershipView, helloasso_notification, membership_return
 from core.views.login import LoginView
 from core.views.logout import LogoutView
 from core.views.me import MeView
@@ -58,6 +59,9 @@ urlpatterns = [
     path("auth/login/", LoginView.as_view(), name="login"),
     path("auth/logout/", LogoutView.as_view(), name="logout"),
     path("auth/register/", RegisterFormView.as_view(), name="register"),
+    path("adhesion/", MembershipView.as_view(), name="membership"),
+    path("adhesion/retour/", membership_return, name="membership_return"),
+    path("adhesion/notification/", helloasso_notification, name="helloasso_notification"),
     path(
         "auth/verify-email/success/", EmailVerifySuccessView.as_view(), name="email_verify_success"
     ),

@@ -23,6 +23,7 @@ from publications.models import (
 COVERED_RELATIONS = {
     "core.EmailEvent",
     "core.Membership",
+    "core.MembershipPayment",
     "core.NeighborhoodAssociation",
     "legal.CodeOfConductConsent",
     "publications.EventInterest",
