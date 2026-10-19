@@ -42,3 +42,9 @@ def test_picking_an_address_selects_the_nearest_association(page: Page, base_url
     address.press_sequentially("150 rue du vallon")
     page.get_by_role("option", name=AUFFES_LABEL).click()
     expect(association.locator("option:checked")).to_contain_text("Pharo Catalans")
+
+    # Ticking "no CIQ" disables the picker.
+    page.locator("[data-no-association]").check()
+    expect(association).to_be_disabled()
+    page.locator("[data-no-association]").uncheck()
+    expect(association).to_be_enabled()

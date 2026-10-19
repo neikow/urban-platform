@@ -125,7 +125,7 @@
                     </div>
 
                     {% include "components/forms/form_field.html" with field=form.address %}
-                    {% if form.association %}{% include "components/forms/form_field.html" with field=form.association %}{% endif %}
+                    {% if form.association %}{% include "components/forms/association_fields.html" %}{% endif %}
                     {% include "components/forms/form_field.html" with field=form.postal_code %}
                     {% include "components/forms/password_field.html" with field=form.password %}
                     {% include "components/forms/password_field.html" with field=form.confirm_password %}

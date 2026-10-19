@@ -18,6 +18,7 @@ from .auth_mixins import (
     AssociationChoiceField,
     EmailValidationMixin,
     PasswordValidationMixin,
+    no_association_field,
 )
 from ..widgets import (
     DaisyAddressInput,
@@ -70,6 +71,7 @@ class UserRegistrationForm(
         empty_label="Le plus proche de mon adresse",
         help_text="Choisi d'après votre adresse ; vous pouvez en choisir un autre.",
     )
+    no_association = no_association_field()
     postal_code = forms.CharField(
         required=True,
         label="Code postal",
@@ -94,6 +96,7 @@ class UserRegistrationForm(
         super().__init__(*args, **kwargs)
         if not self.fields["association"].queryset.exists():  # type: ignore[attr-defined]
             del self.fields["association"]
+            del self.fields["no_association"]
 
     def clean(self) -> dict[str, Any] | None:
         cleaned_data = super().clean()
@@ -167,8 +170,11 @@ class RegisterFormView(FormView):
             postal_code=postal_code,
         )
         choice = form.cleaned_data.get("association")
-        if form.cleaned_data.get("address") or choice:
-            set_address(self.user, form.cleaned_data["address"], form.address_location, choice)
+        declined = form.cleaned_data.get("no_association", False)
+        if form.cleaned_data.get("address") or choice or declined:
+            set_address(
+                self.user, form.cleaned_data["address"], form.address_location, choice, declined
+            )
             self.user.save(
                 update_fields=["address", "location", "association", "association_chosen"]
             )

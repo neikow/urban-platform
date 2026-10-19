@@ -61,14 +61,23 @@ class CoreConfig(AppConfig):
         connect_signals()
 
         # Residents follow the association areas: redraw one, and they move with it.
-        from django.db.models.signals import post_delete, post_save
+        from django.db.models.signals import post_delete, post_save, pre_delete
 
-        from core.associations import on_association_deleted, on_association_saved
+        from core.associations import (
+            before_association_deleted,
+            on_association_deleted,
+            on_association_saved,
+        )
 
         post_save.connect(
             on_association_saved,
             sender="core.NeighborhoodAssociation",
             dispatch_uid="core.associations.on_association_saved",
+        )
+        pre_delete.connect(
+            before_association_deleted,
+            sender="core.NeighborhoodAssociation",
+            dispatch_uid="core.associations.before_association_deleted",
         )
         post_delete.connect(
             on_association_deleted,

@@ -9,6 +9,8 @@ S'il laisse « Le plus proche de mon adresse », il est rattaché :
 
 Un CIQ sans adresse localisée n'est jamais proposé comme le plus proche, mais reste dans la liste.
 
+L'habitant peut aussi cocher **« Je ne souhaite pas adhérer à un CIQ »** : il n'est alors rattaché à aucun CIQ, même plus tard (le rattachement en arrière-plan respecte ce choix). Une adhésion payée dans ce cas n'a pas de CIQ.
+
 ## Modifier une association
 
 Dans la barre latérale, ouvrez **Paramètres** puis **Associations de quartier**.

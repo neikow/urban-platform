@@ -128,3 +128,16 @@ class AssociationChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj: Any) -> str:
         distance = self.distances.get(obj.pk)
         return obj.name if distance is None else f"{obj.name} · {format_distance(distance)}"
+
+
+def no_association_field() -> forms.BooleanField:
+    """The box to tick next to the association picker to join none."""
+    from core.widgets import DaisyCheckboxInput
+
+    return forms.BooleanField(
+        required=False,
+        label="Je ne souhaite pas adhérer à un CIQ",
+        widget=DaisyCheckboxInput(
+            attrs={"class": "checkbox checkbox-sm", "data-no-association": ""}
+        ),
+    )

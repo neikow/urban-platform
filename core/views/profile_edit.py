@@ -12,7 +12,12 @@ from core.emails.tasks import send_verification_email
 
 from core.associations import attach_association, set_address
 from core.audit import audit
-from .auth_mixins import AddressFieldMixin, AssociationChoiceField, PasswordValidationMixin
+from .auth_mixins import (
+    AddressFieldMixin,
+    AssociationChoiceField,
+    PasswordValidationMixin,
+    no_association_field,
+)
 from ..widgets import (
     DaisyAddressInput,
     DaisyTextInput,
@@ -47,6 +52,7 @@ class ProfileUpdateForm(AddressFieldMixin, forms.Form):
         empty_label="Le plus proche de mon adresse",
         help_text="Choisi d'après votre adresse ; vous pouvez en choisir un autre.",
     )
+    no_association = no_association_field()
     postal_code = forms.CharField(
         required=True,
         label="Code postal",
@@ -94,6 +100,7 @@ class ProfileUpdateForm(AddressFieldMixin, forms.Form):
             cast(AssociationChoiceField, self.fields["association"]).rank_from(user.location)
         else:
             del self.fields["association"]
+            del self.fields["no_association"]
 
         if not kwargs.get("data"):
             self.initial = {
@@ -102,6 +109,7 @@ class ProfileUpdateForm(AddressFieldMixin, forms.Form):
                 "last_name": user.last_name,
                 "address": user.address,
                 "association": user.association if user.association_chosen else None,
+                "no_association": user.association_chosen and user.association is None,
                 "postal_code": user.postal_code,
                 "phone_number": user.phone_number,
                 "newsletter_subscription": user.newsletter_subscription,
@@ -208,11 +216,12 @@ class ProfileEditView(LoginRequiredMixin, FormView):
         user.postal_code = form.cleaned_data["postal_code"]
         address = form.cleaned_data.get("address", "")
         choice = form.cleaned_data.get("association")
+        declined = form.cleaned_data.get("no_association", False)
         # Unchanged but not located this time (service down): keep the known location.
         if address != user.address or form.address_location:
-            set_address(user, address, form.address_location, choice)
+            set_address(user, address, form.address_location, choice, declined)
         else:
-            attach_association(user, choice)
+            attach_association(user, choice, declined)
         user.phone_number = form.cleaned_data.get("phone_number", "")
         user.set_newsletter_subscription(form.cleaned_data.get("newsletter_subscription", False))
         for name in ProfileUpdateForm.NOTIFICATION_FIELDS:
