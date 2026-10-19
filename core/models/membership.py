@@ -26,6 +26,15 @@ class Membership(models.Model):
     user = models.ForeignKey(
         "User", verbose_name=_("Member"), on_delete=models.CASCADE, related_name="memberships"
     )
+    association = models.ForeignKey(
+        "NeighborhoodAssociation",
+        verbose_name=_("Neighborhood Association"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="memberships",
+        help_text=_("The association (CIQ) the member joins with this membership."),
+    )
     starts_on = models.DateField(_("Start"), default=timezone.localdate)
     ends_on = models.DateField(
         _("End"), null=True, blank=True, help_text=_("Leave empty for a membership with no end.")
@@ -70,4 +79,5 @@ class Membership(models.Model):
             "starts_on": self.starts_on.isoformat(),
             "ends_on": self.ends_on.isoformat() if self.ends_on else None,
             "note": self.note,
+            "association": self.association.name if self.association else None,
         }

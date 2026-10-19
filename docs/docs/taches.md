@@ -9,7 +9,7 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Tâches**. La page se met
 | Bouton | Effet |
 |---|---|
 | **Mettre à jour la carte** | Télécharge les dernières données OpenStreetMap (environ 35 Mo) |
-| **Rattacher les habitants aux associations** | Recalcule l'association de chaque habitant ayant une adresse |
+| **Rattacher les habitants aux associations** | Recalcule l'association de chaque habitant ayant une adresse, sauf ceux qui ont choisi leur CIQ |
 | **Clore les votes échus** | Clôt les votes dont la date de fin est passée et envoie leurs résultats |
 
 Une tâche déjà en cours n'est pas relancée.

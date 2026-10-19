@@ -417,6 +417,22 @@ def populate_database() -> None:
     event.save_revision().publish()
     print("  ✓ Upcoming event ready")
 
+    # Two CIQ with located seats, for the association picker.
+    from core.models import NeighborhoodAssociation
+
+    for code, name, lon, lat in [
+        ("701", "Pharo Catalans", 5.3606, 43.2905),
+        ("702", "Vallon des Auffes", 5.3492, 43.2853),
+    ]:
+        NeighborhoodAssociation.objects.update_or_create(
+            code=code,
+            defaults={
+                "name": name,
+                "address_location": {"type": "Point", "coordinates": [lon, lat]},
+            },
+        )
+    print("  ✓ Neighborhood associations ready")
+
     # Create root collection if needed
     if not Collection.objects.filter(depth=1).exists():
         Collection.add_root(name="Root")

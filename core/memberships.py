@@ -73,7 +73,7 @@ class MembershipFilterSet(WagtailFilterSet):
 
     class Meta:
         model = Membership
-        fields = ["running"]
+        fields = ["running", "association"]
 
     def filter_running(self, queryset: Any, name: str, value: bool | None) -> Any:
         if value is None:
@@ -87,7 +87,8 @@ class MembershipCreateView(CreateView):
         # "Record a membership" on a user's page comes with ?user=<pk>.
         initial = super().get_initial()
         if user_id := self.request.GET.get("user"):
-            initial["user"] = User.objects.filter(pk=user_id).first()
+            initial["user"] = user = User.objects.filter(pk=user_id).first()
+            initial["association"] = user.association if user else None
         return initial
 
     def save_instance(self) -> Membership:
@@ -102,12 +103,30 @@ class MembershipViewSet(ModelViewSet):
     add_to_settings_menu = True
     menu_order = 450
     add_view_class = MembershipCreateView
-    list_display = ["user", "starts_on", "ends_on", "note"]
-    list_export = ["user.get_full_name", "user.email", "starts_on", "ends_on", "note", "created_at"]
-    export_headings = {"user.get_full_name": _("Member"), "user.email": _("Email")}
+    list_display = ["user", "association", "starts_on", "ends_on", "note"]
+    list_export = [
+        "user.get_full_name",
+        "user.email",
+        "association",
+        "starts_on",
+        "ends_on",
+        "note",
+        "created_at",
+    ]
+    export_headings = {
+        "user.get_full_name": _("Member"),
+        "user.email": _("Email"),
+        "association": _("Neighborhood Association"),
+    }
     export_filename = "adhesions"
     filterset_class = MembershipFilterSet
-    search_fields = ["user__email", "user__first_name", "user__last_name", "note"]
+    search_fields = [
+        "user__email",
+        "user__first_name",
+        "user__last_name",
+        "association__name",
+        "note",
+    ]
     ordering = ["-starts_on"]
 
     def get_form_class(self, for_update: bool = False) -> Any:
@@ -116,7 +135,7 @@ class MembershipViewSet(ModelViewSet):
         class MembershipForm(WagtailAdminModelForm):
             class Meta:
                 model = Membership
-                fields = ["user", "starts_on", "ends_on", "note"]
+                fields = ["user", "association", "starts_on", "ends_on", "note"]
                 widgets = {"user": user_chooser_viewset.widget_class}
 
             def clean(self) -> dict[str, Any]:

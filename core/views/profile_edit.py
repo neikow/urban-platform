@@ -10,9 +10,9 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
 from core.emails.tasks import send_verification_email
 
-from core.associations import set_address
+from core.associations import attach_association, set_address
 from core.audit import audit
-from .auth_mixins import AddressFieldMixin, PasswordValidationMixin
+from .auth_mixins import AddressFieldMixin, AssociationChoiceField, PasswordValidationMixin
 from ..widgets import (
     DaisyAddressInput,
     DaisyTextInput,
@@ -40,7 +40,12 @@ class ProfileUpdateForm(AddressFieldMixin, forms.Form):
         widget=DaisyAddressInput(
             placeholder="12 rue Paradis, Marseille", postcode_field="postal_code"
         ),
-        help_text="Facultatif. Vous rattache à l'association de votre quartier.",
+        help_text="Facultatif. Vous rattache au CIQ de votre quartier.",
+    )
+    association = AssociationChoiceField(
+        label="Comité d'intérêt de quartier (CIQ)",
+        empty_label="Le plus proche de mon adresse",
+        help_text="Choisi d'après votre adresse ; vous pouvez en choisir un autre.",
     )
     postal_code = forms.CharField(
         required=True,
@@ -85,6 +90,10 @@ class ProfileUpdateForm(AddressFieldMixin, forms.Form):
     def __init__(self, user: User, *args: Any, **kwargs: Any) -> None:
         self.user = user
         super().__init__(*args, **kwargs)
+        if self.fields["association"].queryset.exists():  # type: ignore[attr-defined]
+            cast(AssociationChoiceField, self.fields["association"]).rank_from(user.location)
+        else:
+            del self.fields["association"]
 
         if not kwargs.get("data"):
             self.initial = {
@@ -92,6 +101,7 @@ class ProfileUpdateForm(AddressFieldMixin, forms.Form):
                 "first_name": user.first_name,
                 "last_name": user.last_name,
                 "address": user.address,
+                "association": user.association if user.association_chosen else None,
                 "postal_code": user.postal_code,
                 "phone_number": user.phone_number,
                 "newsletter_subscription": user.newsletter_subscription,
@@ -197,9 +207,12 @@ class ProfileEditView(LoginRequiredMixin, FormView):
         user.last_name = form.cleaned_data["last_name"]
         user.postal_code = form.cleaned_data["postal_code"]
         address = form.cleaned_data.get("address", "")
+        choice = form.cleaned_data.get("association")
         # Unchanged but not located this time (service down): keep the known location.
         if address != user.address or form.address_location:
-            set_address(user, address, form.address_location)
+            set_address(user, address, form.address_location, choice)
+        else:
+            attach_association(user, choice)
         user.phone_number = form.cleaned_data.get("phone_number", "")
         user.set_newsletter_subscription(form.cleaned_data.get("newsletter_subscription", False))
         for name in ProfileUpdateForm.NOTIFICATION_FIELDS:

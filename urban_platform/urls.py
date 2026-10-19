@@ -26,7 +26,7 @@ from core.views.email_verify import (
 from core.views.docs import ProtectedDocsView
 from core.views.data_export import DataExportView
 from core.views.health import healthz
-from core.views.address_search import address_search
+from core.views.address_search import address_search, nearest_associations
 from core.views.notifications import NotificationUnsubscribeView
 from core.views.password_reset import (
     PasswordResetRequestView,
@@ -95,6 +95,7 @@ urlpatterns = [
         name="notification_unsubscribe",
     ),
     path("api/addresses/", address_search, name="address_search"),
+    path("api/associations/", nearest_associations, name="nearest_associations"),
     path("api/projects/<int:project_id>/vote/", VoteView.as_view(), name="project_vote"),
     path(
         "api/projects/<int:project_id>/vote/results/",

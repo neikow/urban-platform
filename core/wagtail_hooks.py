@@ -40,11 +40,12 @@ class NeighborhoodAssociationViewSet(ModelViewSet):
     menu_icon = "group"
     add_to_settings_menu = True
     exclude_from_explorer = False
-    list_display = ["name", "responsible", "contact_email", "contact_phone", "website"]
-    search_fields = ["name", "address", "contact_email", "website"]
+    list_display = ["name", "code", "responsible", "contact_email", "contact_phone", "website"]
+    search_fields = ["name", "code", "address", "contact_email", "website"]
     edit_handler = ObjectList(
         [
             FieldPanel("name"),
+            FieldPanel("code"),
             FieldPanel("responsible"),
             FieldPanel("address", widget=AddressInput),
             FieldPanel(
@@ -54,7 +55,8 @@ class NeighborhoodAssociationViewSet(ModelViewSet):
                     help_text=_(
                         "Draw the area the association covers: residents living in it are "
                         "attached to the association. The other associations' areas are "
-                        "shown in grey, and new points snap to their edges."
+                        "shown in grey, and new points snap to their edges. Without areas, "
+                        "residents are attached to the association whose address is nearest."
                     ),
                 ),
             ),

@@ -262,7 +262,10 @@ TRIGGERS = (
     Trigger(
         "residents",
         _("Match residents to associations"),
-        _("Attach every user with an address to the association whose area contains it."),
+        _(
+            "Attach every user with an address, who did not choose, to the association "
+            "of their address."
+        ),
         "core.tasks.reassign_residents",
         _starter("core.tasks.reassign_residents"),
     ),

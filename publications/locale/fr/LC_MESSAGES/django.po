@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: urban-platform 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-08 13:51+0200\n"
+"POT-Creation-Date: 2026-10-19 09:48+0200\n"
 "PO-Revision-Date: 2026-01-22 10:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
@@ -50,7 +50,7 @@ msgstr "Les coordonnées du secteur sont invalides."
 
 #: publications/models/event.py:23 publications/models/event.py:136
 #: publications/models/event_interest.py:23
-#: publications/templates/publications/components/publication_preview.html:51
+#: publications/templates/publications/components/publication_preview.html:52
 #: publications/templates/publications/event_page.html:17
 #: publications/views/feeds.py:79
 msgid "Event"
@@ -120,7 +120,7 @@ msgid "Maximum number of participants (leave empty if unlimited)"
 msgstr "Nombre maximum de participants (laisser vide si illimité)"
 
 #: publications/models/event.py:137
-#: publications/templates/publications/components/publication_results.html:43
+#: publications/templates/publications/components/publication_results.html:33
 msgid "Events"
 msgstr "Événements"
 
@@ -214,7 +214,7 @@ msgstr "Mis à jour le"
 #: publications/models/project.py:189
 #: publications/templates/publications/admin/ideas_stats.html:36
 #: publications/templates/publications/admin/vote_stats.html:36
-#: publications/templates/publications/components/publication_preview.html:68
+#: publications/templates/publications/components/publication_preview.html:71
 #: publications/templates/publications/project_page.html:21
 #: publications/views/feeds.py:79
 msgid "Project"
@@ -387,8 +387,8 @@ msgstr "Mode de participation"
 #: publications/models/project.py:67
 msgid ""
 "Voting lets residents give an opinion; idea collection lets them propose "
-"ideas on a project still in its early stages. The two are mutually exclusive"
-" — switching keeps responses already collected."
+"ideas on a project still in its early stages. The two are mutually exclusive "
+"— switching keeps responses already collected."
 msgstr ""
 "Le vote permet aux habitants de donner leur avis ; la collecte d'idées leur "
 "permet de proposer des idées sur un projet encore à ses débuts. Les deux "
@@ -426,7 +426,7 @@ msgstr ""
 "Actualités du projet, de la plus récente à la plus ancienne sur la page."
 
 #: publications/models/project.py:190
-#: publications/templates/publications/components/publication_results.html:31
+#: publications/templates/publications/components/publication_results.html:21
 msgid "Projects"
 msgstr "Projets"
 
@@ -449,12 +449,12 @@ msgstr "Prévenir les participants par email"
 
 #: publications/models/project_update.py:29
 msgid ""
-"Sent once, when the page is published, to people who voted or shared an idea"
-" and asked for project updates. Untick for past events you are adding to the"
-" timeline."
+"Sent once, when the page is published, to people who voted or shared an idea "
+"and asked for project updates. Untick for past events you are adding to the "
+"timeline."
 msgstr ""
-"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté"
-" ou proposé une idée et demandé à suivre les projets. Décochez pour les "
+"Envoyé une seule fois, à la publication de la page, aux personnes ayant voté "
+"ou proposé une idée et demandé à suivre les projets. Décochez pour les "
 "étapes passées ajoutées à l'historique."
 
 #: publications/models/project_update.py:43
@@ -498,24 +498,24 @@ msgstr "Contenu"
 msgid "The main content of the page."
 msgstr "Le contenu principal de la page."
 
-#: publications/models/publication_index.py:47
-#: publications/models/publication_index.py:130
+#: publications/models/publication_index.py:51
+#: publications/models/publication_index.py:134
 msgid "Publications Index"
 msgstr "Index des publications"
 
-#: publications/models/publication_index.py:51
+#: publications/models/publication_index.py:55
 msgid "Page introduction"
 msgstr "Introduction de la page"
 
-#: publications/models/publication_index.py:52
+#: publications/models/publication_index.py:56
 msgid "Small introduction shown above the publications list."
 msgstr "Petite introduction affichée au-dessus de la liste des publications."
 
-#: publications/models/publication_index.py:60
+#: publications/models/publication_index.py:64
 msgid "Page content"
 msgstr "Contenu de la page"
 
-#: publications/models/publication_index.py:61
+#: publications/models/publication_index.py:65
 msgid "The list of publications and the parts around it."
 msgstr "La liste des publications et les parties qui l'entourent."
 
@@ -537,8 +537,8 @@ msgstr "Projet ouvert aux idées"
 
 #: publications/page_templates.py:79
 msgid ""
-"A project still taking shape: residents suggest ideas on what is not decided"
-" yet."
+"A project still taking shape: residents suggest ideas on what is not decided "
+"yet."
 msgstr ""
 "Un projet encore en construction : les habitants proposent des idées sur ce "
 "qui n'est pas encore décidé."
@@ -662,8 +662,8 @@ msgid ""
 "Only ideas from users with postal code %(code)s are shown.\n"
 "                    Check the box above to include all ideas."
 msgstr ""
-"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées."
-" Cochez la case ci-dessus pour inclure toutes les idées."
+"Seules les idées d'utilisateurs avec le code postal %(code)s sont affichées. "
+"Cochez la case ci-dessus pour inclure toutes les idées."
 
 #: publications/templates/publications/admin/ideas_stats.html:37
 msgid "Total ideas"
@@ -725,8 +725,7 @@ msgid ""
 "interval. Unsaved changes above are lost."
 msgstr ""
 "Télécharge les dernières données OpenStreetMap (environ 35 Mo), quel que "
-"soit l'intervalle. Les modifications non enregistrées ci-dessus sont "
-"perdues."
+"soit l'intervalle. Les modifications non enregistrées ci-dessus sont perdues."
 
 #: publications/templates/publications/admin/vote_stats.html:4
 #: publications/templates/publications/admin/vote_stats.html:7
@@ -1034,17 +1033,17 @@ msgstr[1] "%(total)s projets sur la carte"
 msgid "No project has been placed on the map yet."
 msgstr "Aucun projet n'est encore placé sur la carte."
 
-#: publications/templates/publications/components/publication_preview.html:55
+#: publications/templates/publications/components/publication_preview.html:57
 #: publications/templates/publications/event_page.html:21
 msgid "Upcoming"
 msgstr "À venir"
 
-#: publications/templates/publications/components/publication_preview.html:59
+#: publications/templates/publications/components/publication_preview.html:61
 #: publications/templates/publications/event_page.html:25
 msgid "Ongoing"
 msgstr "En cours"
 
-#: publications/templates/publications/components/publication_preview.html:63
+#: publications/templates/publications/components/publication_preview.html:65
 #: publications/templates/publications/event_page.html:29
 msgid "Past"
 msgstr "Passé"
@@ -1056,28 +1055,24 @@ msgid_plural "%(total)s results"
 msgstr[0] "%(total)s résultat"
 msgstr[1] "%(total)s résultats"
 
-#: publications/templates/publications/components/publication_results.html:21
-msgid "All"
-msgstr "Tout"
-
-#: publications/templates/publications/components/publication_results.html:68
+#: publications/templates/publications/components/publication_results.html:56
 msgid "Show past events"
 msgstr "Afficher les événements passés"
 
-#: publications/templates/publications/components/publication_results.html:84
-#: publications/tests/test_models.py:237
+#: publications/templates/publications/components/publication_results.html:72
+#: publications/tests/test_models.py:249
 msgid "All urban planning"
 msgstr "Tout l'urbanisme"
 
-#: publications/templates/publications/components/publication_results.html:106
+#: publications/templates/publications/components/publication_results.html:94
 msgid "No publications found"
 msgstr "Aucune publication trouvée"
 
 #: publications/templates/publications/components/verify_email_prompt.html:5
 #, python-format
 msgid ""
-"Verify your email address (%(email)s) to take part. Check your inbox for the"
-" link we sent you."
+"Verify your email address (%(email)s) to take part. Check your inbox for the "
+"link we sent you."
 msgstr ""
 "Vérifiez votre adresse email (%(email)s) pour participer. Consultez votre "
 "boîte de réception : nous vous avons envoyé un lien."
@@ -1137,11 +1132,10 @@ msgstr ""
 
 #: publications/templates/publications/components/vote_form.html:48
 msgid ""
-"All votes are analyzed and taken into account in the final project "
-"decisions."
+"All votes are analyzed and taken into account in the final project decisions."
 msgstr ""
-"Tous les votes sont analysés et pris en compte dans les décisions finales du"
-" projet."
+"Tous les votes sont analysés et pris en compte dans les décisions finales du "
+"projet."
 
 #: publications/templates/publications/components/vote_form.html:74
 msgid "Log in to vote on this project"
@@ -1170,8 +1164,7 @@ msgstr "Seuls vous et les administrateurs peuvent voir votre commentaire"
 #: publications/templates/publications/components/vote_form.html:239
 msgid "Submit my vote anonymously (my name will not be linked to this vote)"
 msgstr ""
-"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce "
-"vote)"
+"Soumettre mon vote de manière anonyme (mon nom ne sera pas associé à ce vote)"
 
 #: publications/templates/publications/components/vote_form.html:250
 msgid "Submit my vote"
@@ -1437,6 +1430,9 @@ msgid ""
 msgstr ""
 "Placez un marqueur pour un lieu précis, ou dessinez un polygone pour une "
 "zone. Une nouvelle forme remplace la précédente."
+
+#~ msgid "All"
+#~ msgstr "Tout"
 
 #~ msgid "Additional content for the publications page."
 #~ msgstr "Contenu supplémentaire pour la page des publications."

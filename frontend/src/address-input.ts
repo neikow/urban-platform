@@ -5,6 +5,9 @@ import { attachAddressAutocomplete } from "./lib/address-autocomplete";
  * addresses as the user types. With data-postcode-field, picking one also
  * fills that field of the same form. As a custom element it works both on the
  * site and in the Wagtail admin, whenever the field is rendered.
+ *
+ * Picking a suggestion dispatches a bubbling "address:selected" event carrying
+ * it, for the association picker (association-select.ts).
  */
 class AddressInput extends HTMLElement {
   private attached = false;
@@ -19,6 +22,7 @@ class AddressInput extends HTMLElement {
     attachAddressAutocomplete(input, url, (address) => {
       const postcode = postcodeField ? input.form?.elements.namedItem(postcodeField) : null;
       if (postcode instanceof HTMLInputElement && address.postcode) postcode.value = address.postcode;
+      this.dispatchEvent(new CustomEvent("address:selected", { bubbles: true, detail: address }));
     });
   }
 }
