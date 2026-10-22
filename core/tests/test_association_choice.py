@@ -471,4 +471,5 @@ class TestDecliningAnAssociation:
         assert response.status_code == 302
         user = User.objects.get(email="new@example.com")
         assert (user.association, user.association_chosen) == (None, True)
+        client.logout()
         assert "data-no-association" in client.get(reverse("register")).content.decode()

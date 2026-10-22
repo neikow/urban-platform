@@ -213,3 +213,23 @@ class TestUserRegistrationView:
             assert response.url == reverse(
                 "code_of_conduct_consent", query={"next": "/some-protected-page/"}
             )
+
+
+@pytest.mark.django_db
+class TestRegisterWhenSignedIn:
+    def test_get_redirects_to_the_account(self, client):
+        client.force_login(User.objects.create_user(email="in@example.com", password="Pass1234"))
+
+        response = client.get(reverse("register"))
+
+        assert response.status_code == 302
+        assert response.url == reverse("me")
+
+    def test_post_creates_no_account(self, client):
+        client.force_login(User.objects.create_user(email="in@example.com", password="Pass1234"))
+
+        response = client.post(reverse("register"), VALID_REQUEST)
+
+        assert response.status_code == 302
+        assert response.url == reverse("me")
+        assert not User.objects.filter(email=VALID_REQUEST["email"]).exists()
