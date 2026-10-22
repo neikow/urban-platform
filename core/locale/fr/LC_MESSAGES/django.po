@@ -584,11 +584,11 @@ msgstr "En cours aujourd'hui"
 msgid "Year"
 msgstr "Année"
 
-#: core/memberships.py:127 core/models/membership.py:102
+#: core/memberships.py:127 core/models/membership.py:110
 msgid "Memberships"
 msgstr "Adhésions"
 
-#: core/memberships.py:143 core/memberships.py:224 core/models/membership.py:69
+#: core/memberships.py:143 core/memberships.py:224 core/models/membership.py:77
 #: core/models/membership_payment.py:21 core/templates/core/profile.html:92
 #: core/templates/core/profile.html:185 core/tests/views/test_me.py:59
 msgid "Member"
@@ -599,14 +599,14 @@ msgstr "Membre"
 msgid "Email"
 msgstr "Email"
 
-#: core/memberships.py:145 core/memberships.py:226 core/models/membership.py:73
+#: core/memberships.py:145 core/memberships.py:226 core/models/membership.py:81
 #: core/models/membership_payment.py:28
 #: core/models/neighborhood_association.py:45 core/models/user.py:96
 #: core/templates/core/profile.html:68
 msgid "Neighborhood Association"
 msgstr "Comité d'intérêt de quartier"
 
-#: core/memberships.py:171 core/models/membership.py:112
+#: core/memberships.py:171 core/models/membership.py:120
 msgid "The end cannot come before the start."
 msgstr "La fin ne peut pas précéder le début."
 
@@ -786,7 +786,7 @@ msgstr "Actualité du projet"
 msgid "Event reminder"
 msgstr "Rappel d'événement"
 
-#: core/models/email_event.py:14 core/models/membership.py:101
+#: core/models/email_event.py:14 core/models/membership.py:109
 #: core/models/membership_payment.py:49
 #: core/templates/core/admin/user_membership.html:6
 #: core/templates/core/membership.html:4 core/templates/core/profile.html:83
@@ -853,35 +853,35 @@ msgstr ""
 msgid "Features"
 msgstr "Fonctionnalités"
 
-#: core/models/membership.py:78
+#: core/models/membership.py:86
 msgid "The association (CIQ) the member joins with this membership."
 msgstr "L'association (CIQ) que le membre rejoint avec cette adhésion."
 
-#: core/models/membership.py:80 core/models/membership_payment.py:35
+#: core/models/membership.py:88 core/models/membership_payment.py:35
 msgid "Start"
 msgstr "Début"
 
-#: core/models/membership.py:82 core/models/membership_payment.py:36
+#: core/models/membership.py:90 core/models/membership_payment.py:36
 msgid "End"
 msgstr "Fin"
 
-#: core/models/membership.py:82
+#: core/models/membership.py:90
 msgid "Leave empty for a membership with no end."
 msgstr "Laissez vide pour une adhésion sans fin."
 
-#: core/models/membership.py:85
+#: core/models/membership.py:93
 msgid "Note"
 msgstr "Note"
 
-#: core/models/membership.py:85
+#: core/models/membership.py:93
 msgid "E.g. how the membership was paid."
 msgstr "Par exemple le mode de paiement."
 
-#: core/models/membership.py:89
+#: core/models/membership.py:97
 msgid "Recorded by"
 msgstr "Enregistrée par"
 
-#: core/models/membership.py:96
+#: core/models/membership.py:104
 msgid "Recorded on"
 msgstr "Enregistrée le"
 
@@ -1986,11 +1986,8 @@ msgid "%(fee)s € · from %(starts)s to %(ends)s"
 msgstr "%(fee)s € · du %(starts)s au %(ends)s"
 
 #: core/templates/core/membership.html:108
-msgid ""
-"Memberships run by calendar year. You pay on HelloAsso, then come back here."
-msgstr ""
-"L'adhésion court par année civile. Vous payez sur HelloAsso, puis revenez "
-"ici."
+msgid "A membership lasts one year. You pay on HelloAsso, then come back here."
+msgstr "L'adhésion dure un an. Vous payez sur HelloAsso, puis revenez ici."
 
 #: core/templates/core/membership.html:118
 #, python-format

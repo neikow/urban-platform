@@ -1,4 +1,4 @@
-"""Joining online: calendar-year periods, the grace month, HelloAsso payments."""
+"""Joining online: year-long memberships, the grace month, HelloAsso payments."""
 
 import io
 import json
@@ -23,7 +23,7 @@ from core.models import (
     User,
     UserRole,
 )
-from core.models.membership import may_join, membership_period
+from core.models.membership import may_join, membership_period, one_year_from
 
 HELLOASSO = {
     "HELLOASSO_API_URL": "https://api.helloasso.test",
@@ -80,32 +80,36 @@ def member(user: User, starts: date, ends: date | None) -> Membership:
 
 @pytest.mark.django_db
 class TestMembershipPeriod:
-    def test_joining_during_the_year(self, resident):
+    def test_one_year_from_the_payment(self, resident):
         assert membership_period(resident.memberships.all(), date(2026, 3, 10)) == (
             date(2026, 3, 10),
-            date(2026, 12, 31),
+            date(2027, 3, 9),
         )
 
-    def test_joining_in_december_covers_the_next_year(self, resident):
+    def test_whatever_the_month(self, resident):
         assert membership_period(resident.memberships.all(), date(2026, 12, 5)) == (
             date(2026, 12, 5),
-            date(2027, 12, 31),
+            date(2027, 12, 4),
         )
 
-    def test_renewing_in_december_starts_on_january_first(self, resident):
-        member(resident, date(2026, 3, 10), date(2026, 12, 31))
+    def test_february_29(self, resident):
+        assert one_year_from(date(2028, 2, 29)) == date(2029, 2, 28)
+        assert one_year_from(date(2027, 3, 1)) == date(2028, 2, 29)
 
-        assert membership_period(resident.memberships.all(), date(2026, 12, 15)) == (
-            date(2027, 1, 1),
-            date(2027, 12, 31),
+    def test_renewing_starts_the_day_after_the_end(self, resident):
+        member(resident, date(2026, 3, 10), date(2027, 3, 9))
+
+        assert membership_period(resident.memberships.all(), date(2027, 2, 20)) == (
+            date(2027, 3, 10),
+            date(2028, 3, 9),
         )
 
     def test_renewing_in_the_grace_month(self, resident):
-        member(resident, date(2026, 3, 10), date(2026, 12, 31))
+        member(resident, date(2026, 3, 10), date(2027, 3, 9))
 
-        assert membership_period(resident.memberships.all(), date(2027, 1, 20)) == (
-            date(2027, 1, 20),
-            date(2027, 12, 31),
+        assert membership_period(resident.memberships.all(), date(2027, 3, 25)) == (
+            date(2027, 3, 25),
+            date(2028, 3, 24),
         )
 
 
@@ -114,18 +118,19 @@ class TestMayJoin:
     def test_not_a_member(self, resident):
         assert may_join(resident.memberships.all(), date(2026, 6, 1))
 
-    def test_member_for_this_year(self, resident):
-        member(resident, date(2026, 3, 10), date(2026, 12, 31))
+    def test_renewals_open_a_month_before_the_end(self, resident):
+        member(resident, date(2026, 3, 10), date(2027, 3, 9))
 
         assert not may_join(resident.memberships.all(), date(2026, 6, 1))
-        assert may_join(resident.memberships.all(), date(2026, 12, 1))
-        assert may_join(resident.memberships.all(), date(2027, 1, 10))
+        assert not may_join(resident.memberships.all(), date(2027, 2, 5))
+        assert may_join(resident.memberships.all(), date(2027, 2, 6))
+        assert may_join(resident.memberships.all(), date(2027, 3, 20))
 
     def test_already_renewed(self, resident):
-        member(resident, date(2026, 3, 10), date(2026, 12, 31))
-        member(resident, date(2027, 1, 1), date(2027, 12, 31))
+        member(resident, date(2026, 3, 10), date(2027, 3, 9))
+        member(resident, date(2027, 3, 10), date(2028, 3, 9))
 
-        assert not may_join(resident.memberships.all(), date(2026, 12, 20))
+        assert not may_join(resident.memberships.all(), date(2027, 2, 20))
 
     def test_open_ended_membership(self, resident):
         member(resident, date(2020, 1, 1), None)
@@ -290,7 +295,7 @@ class TestPayments:
         payment = MembershipPayment.objects.get()
         assert payment.status == MembershipPaymentStatus.PENDING
         assert (payment.checkout_id, payment.association) == (42, ciq)
-        assert (payment.starts_on, payment.ends_on) == (date(2026, 3, 10), date(2026, 12, 31))
+        assert (payment.starts_on, payment.ends_on) == (date(2026, 3, 10), date(2027, 3, 9))
         kwargs = create.call_args.kwargs
         assert kwargs["amount_cents"] == 1000
         assert kwargs["metadata"]["payment"] == payment.pk
@@ -427,9 +432,7 @@ class TestMembershipPage:
 
     def test_members_do_not_pay_twice(self, client, resident, ciq):
         today = timezone.localdate()
-        if today.month == 12:
-            pytest.skip("December opens the renewals")
-        member(resident, today - timedelta(days=10), date(today.year, 12, 31))
+        member(resident, today - timedelta(days=10), today + timedelta(days=300))
         client.force_login(resident)
 
         with checkout() as create:

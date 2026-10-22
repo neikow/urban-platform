@@ -16,7 +16,7 @@ from core.models import (
     UserRole,
 )
 
-END = date(2026, 12, 31)
+END = date(2027, 3, 9)
 
 
 def make_user(email: str, role: str = UserRole.CITIZEN, **kwargs) -> User:
@@ -37,7 +37,7 @@ def resident(db):
 
 @pytest.fixture
 def membership(resident):
-    return Membership.objects.create(user=resident, starts_on=date(2026, 3, 1), ends_on=END)
+    return Membership.objects.create(user=resident, starts_on=date(2026, 3, 10), ends_on=END)
 
 
 def kinds(today: date) -> list[str]:
@@ -49,16 +49,16 @@ class TestDueReminders:
     @pytest.mark.parametrize(
         "today, expected",
         [
-            (date(2026, 12, 14), []),
-            (date(2026, 12, 15), ["expiring"]),
-            (date(2026, 12, 30), ["expiring"]),
-            (date(2026, 12, 31), []),
-            (date(2027, 1, 1), ["grace"]),
-            (date(2027, 1, 7), ["grace"]),
-            (date(2027, 1, 8), []),
-            (date(2027, 1, 25), ["last_call"]),
-            (date(2027, 1, 31), ["last_call"]),
-            (date(2027, 2, 1), []),
+            (date(2027, 2, 20), []),
+            (date(2027, 2, 21), ["expiring"]),
+            (date(2027, 3, 8), ["expiring"]),
+            (date(2027, 3, 9), []),
+            (date(2027, 3, 10), ["grace"]),
+            (date(2027, 3, 16), ["grace"]),
+            (date(2027, 3, 17), []),
+            (date(2027, 4, 3), ["last_call"]),
+            (date(2027, 4, 9), ["last_call"]),
+            (date(2027, 4, 10), []),
         ],
     )
     def test_windows(self, membership, today, expected):
@@ -66,22 +66,22 @@ class TestDueReminders:
 
     def test_renewed_members_are_not_reminded(self, resident, membership):
         Membership.objects.create(
-            user=resident, starts_on=date(2027, 1, 1), ends_on=date(2027, 12, 31)
+            user=resident, starts_on=date(2027, 3, 10), ends_on=date(2028, 3, 9)
         )
 
-        assert kinds(date(2026, 12, 15)) == []
-        assert kinds(date(2027, 1, 2)) == []
+        assert kinds(date(2027, 2, 21)) == []
+        assert kinds(date(2027, 3, 11)) == []
 
     def test_open_ended_renewal(self, resident, membership):
         Membership.objects.create(user=resident, starts_on=date(2026, 6, 1), ends_on=None)
 
-        assert kinds(date(2026, 12, 15)) == []
+        assert kinds(date(2027, 2, 21)) == []
 
     def test_inactive_accounts_are_not_reminded(self, resident, membership):
         resident.is_active = False
         resident.save()
 
-        assert kinds(date(2026, 12, 15)) == []
+        assert kinds(date(2027, 2, 21)) == []
 
 
 @pytest.mark.django_db
@@ -91,9 +91,9 @@ class TestSendReminders:
             patch("core.emails.tasks.send_membership_email.delay") as delay,
             django_capture_on_commit_callbacks(execute=True),
         ):
-            assert send_membership_reminders(date(2026, 12, 15)) == 1
-            assert send_membership_reminders(date(2026, 12, 16)) == 0
-            assert send_membership_reminders(date(2027, 1, 1)) == 1
+            assert send_membership_reminders(date(2027, 2, 21)) == 1
+            assert send_membership_reminders(date(2027, 2, 22)) == 0
+            assert send_membership_reminders(date(2027, 3, 10)) == 1
 
         assert MembershipReminder.objects.filter(membership=membership).count() == 2
         assert [call.args[1] for call in delay.call_args_list] == ["expiring", "grace"]
