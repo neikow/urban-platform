@@ -35,12 +35,19 @@ Après l'enregistrement d'un secteur ou d'une adresse nouveaux ou modifiés, les
 
 ## Importer les CIQ depuis l'annuaire
 
-L'équipe technique importe les CIQ d'un arrondissement depuis une copie CSV de l'annuaire de la Confédération (colonnes `code`, `name`, `address`, `contact_email`, `contact_phone`, `website`) :
+Les CIQ d'un arrondissement s'importent depuis une copie CSV de l'annuaire de la Confédération (colonnes `code`, `name`, `address`, `contact_email`, `contact_phone`, `website` ; seules `code` et `name` sont obligatoires), encodée en UTF-8.
+
+1. **Paramètres › Comités d'intérêt de quartier**, bouton **Import** en haut de la liste (administrateurs).
+2. Choisissez le fichier et la **fédération** : 7 importe les codes 701 à 799 (700 est la fédération elle-même). Cliquez sur **Aperçu**.
+3. L'aperçu liste les CIQ qui seraient créés ou mis à jour, les lignes refusées (email invalide…) et les CIQ dont l'adresse n'a pas été localisée. Rien n'est encore enregistré.
+4. Cliquez sur **Importer ces CIQ** pour confirmer.
+
+Relancer l'import met à jour les CIQ existants, retrouvés par leur code (ou par leur nom pour ceux créés à la main). Les CIQ sans adresse localisée ne sont jamais proposés comme le plus proche : complétez leur adresse dans l'administration. Le fichier n'est pas conservé sur le site (il contient des coordonnées personnelles).
+
+L'équipe technique peut faire de même en ligne de commande (`--dry-run` pour l'aperçu) :
 
 ```
 python manage.py import_associations annuaire.csv --federation 7
 ```
-
-Seuls les CIQ de la fédération demandée sont importés (codes 701 à 799 pour le 7e ; 700 est la fédération elle-même). Relancer l'import met à jour les CIQ existants, retrouvés par leur code (ou par leur nom pour ceux créés à la main). `--dry-run` montre ce qui changerait sans rien enregistrer. L'import liste les CIQ sans adresse localisée, à compléter dans l'administration.
 
 **Adresses.** Les adresses viennent de la **Base Adresse Nationale**, limitées à Marseille. Si le service ne répond pas, l'adresse est enregistrée telle quelle et sera localisée au prochain enregistrement.
