@@ -18,7 +18,8 @@ class DocumentFactory(factory.django.DjangoModelFactory):
         model = "wagtaildocs.Document"
 
     title = factory.Faker("sentence", nb_words=3)
-    file = factory.django.FileField()
+    # An extension the site accepts (WAGTAILDOCS_EXTENSIONS), as a real upload would have.
+    file = factory.django.FileField(filename="example.pdf")
 
 
 class BaseWagtailPageFactory(factory.django.DjangoModelFactory):

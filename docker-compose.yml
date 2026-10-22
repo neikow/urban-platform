@@ -28,6 +28,9 @@ x-django-common: &django-common
         - HELLOASSO_CLIENT_ID=${HELLOASSO_CLIENT_ID:-}
         - HELLOASSO_CLIENT_SECRET=${HELLOASSO_CLIENT_SECRET:-}
         - HELLOASSO_ORGANIZATION_SLUG=${HELLOASSO_ORGANIZATION_SLUG:-}
+        # Content transfer between environments
+        - CONTENT_TRANSFER_KEY=${CONTENT_TRANSFER_KEY:-}
+        - CONTENT_IMPORT_ENABLED=${CONTENT_IMPORT_ENABLED:-}
         # Sentry configuration
         - SENTRY_DSN=${SENTRY_DSN}
         - SENTRY_RELEASE=${SENTRY_RELEASE}

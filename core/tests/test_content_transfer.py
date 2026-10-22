@@ -7,7 +7,7 @@ from wagtail.documents.models import Document
 from wagtail.images.models import Image
 from wagtail.rich_text import RichText
 
-from core.management.commands._content_transfer import collect_media_ids
+from core.content_transfer.archive import collect_media_ids
 from core.tests.utils.factories import DocumentFactory, ImageFactory
 from home.models import HomePage
 from pedagogy.models.pedagogy_card import PedagogyCardPage

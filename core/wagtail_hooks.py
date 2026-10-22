@@ -186,6 +186,39 @@ def register_tasks_menu_item() -> MenuItem:
     )
 
 
+# --- Content transfer (core/content_transfer/) ---------------------------------
+
+
+@hooks.register("register_admin_urls")
+def register_content_transfer_urls() -> list[URLPattern]:
+    from core.views.content_transfer import ContentTransferView, download_export, start_export
+
+    return [
+        path("content-transfer/", ContentTransferView.as_view(), name="admin_content_transfer"),
+        path("content-transfer/export/", start_export, name="admin_content_transfer_export"),
+        path(
+            "content-transfer/<int:pk>/download/",
+            download_export,
+            name="admin_content_transfer_download",
+        ),
+    ]
+
+
+@hooks.register("register_settings_menu_item")
+def register_content_transfer_menu_item() -> MenuItem:
+    from core.admin_menu import CheckedMenuItem
+    from core.views.content_transfer import can_transfer_content
+
+    return CheckedMenuItem(
+        _("Content transfer"),
+        reverse("admin_content_transfer"),
+        check=can_transfer_content,
+        name="content-transfer",
+        icon_name="download",
+        order=910,
+    )
+
+
 # --- Roles (core/roles.py) ------------------------------------------------------
 
 

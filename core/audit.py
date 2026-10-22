@@ -11,6 +11,7 @@ This module adds the actions Wagtail does not see:
 - security events: staff logins and failed logins, password and email
   changes, personal data exports, account deletions;
 - background tasks started by hand;
+- content exports, downloads and imports (core.content_transfer);
 - emails sent to users: poll results, project news (publications);
 - map updates (publications).
 
@@ -165,6 +166,23 @@ class MembershipPaidFormatter(LogFormatter):
         return str(_("Membership paid on HelloAsso"))
 
 
+class ContentImportFormatter(LogFormatter):
+    label = _("Import content")
+
+    def format_message(self, log_entry: Any) -> str:
+        from core.content_transfer.importer import ImportMode
+
+        mode = log_entry.data.get("mode")
+        try:
+            mode_label = str(ImportMode(mode).label)
+        except ValueError:
+            mode_label = mode or ""
+        return _("Imported %(file)s (%(mode)s)") % {
+            "file": log_entry.data.get("file", ""),
+            "mode": mode_label,
+        }
+
+
 def register_actions(actions: Any) -> None:
     actions.register_action("core.user.role_change")(RoleChangeFormatter)
     actions.register_action("core.user.subscription_change")(SubscriptionChangeFormatter)
@@ -189,6 +207,13 @@ def register_actions(actions: Any) -> None:
         _("Left for HelloAsso to pay a membership"),
     )
     actions.register_action("core.membership.paid")(MembershipPaidFormatter)
+    actions.register_action(
+        "core.content.export", _("Export content"), _("Started a content export")
+    )
+    actions.register_action("core.content.import")(ContentImportFormatter)
+    actions.register_action(
+        "core.content.download", _("Download a content archive"), _("Downloaded a content archive")
+    )
     actions.register_action("core.task.launch")(TaskLaunchFormatter)
     actions.register_action("core.settings.change")(SettingsChangeFormatter)
 

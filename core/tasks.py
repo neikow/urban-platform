@@ -39,3 +39,23 @@ def send_membership_reminders() -> int:
     from core.membership_reminders import send_membership_reminders as send
 
     return send()
+
+
+@shared_task
+def run_content_transfer(job_id: int) -> None:
+    """Run an export or an import of content (Settings › Content transfer)."""
+    from core.content_transfer.jobs import run_export, run_import
+    from core.models import ContentTransfer, ContentTransferKind
+
+    job = ContentTransfer.objects.filter(pk=job_id).first()
+    if job is None:
+        return
+    (run_export if job.kind == ContentTransferKind.EXPORT else run_import)(job)
+
+
+@shared_task
+def prune_content_transfers() -> int:
+    """Delete the content archives older than a week."""
+    from core.content_transfer.jobs import prune_archives
+
+    return prune_archives()
