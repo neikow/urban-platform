@@ -56,7 +56,15 @@ class NeighborhoodAssociationViewSet(ModelViewSet):
     menu_icon = "group"
     add_to_settings_menu = True
     exclude_from_explorer = False
-    list_display = ["name", "code", "responsible", "contact_email", "contact_phone", "website"]
+    list_display = [
+        "name",
+        "code",
+        "address",
+        "responsible",
+        "contact_email",
+        "contact_phone",
+        "website",
+    ]
     search_fields = ["name", "code", "address", "contact_email", "website"]
     edit_handler = ObjectList(
         [

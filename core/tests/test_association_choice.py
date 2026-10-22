@@ -443,6 +443,16 @@ class TestImportAdmin:
     def upload(self, content: str = CSV) -> SimpleUploadedFile:
         return SimpleUploadedFile("annuaire.csv", content.encode(), content_type="text/csv")
 
+    def test_list_shows_the_address(self, client, admin_user):
+        NeighborhoodAssociation.objects.create(
+            name="Vallon des Auffes", address="152 rue du Vallon des Auffes, Marseille"
+        )
+        client.force_login(admin_user)
+
+        index = client.get(reverse("neighborhood_association:index"))
+
+        assert "152 rue du Vallon des Auffes, Marseille" in index.content.decode()
+
     def test_administrators_only(self, client, admin_user):
         editor = User.objects.create_user(
             email="editor@example.com", password="Password123", role=UserRole.EDITOR
