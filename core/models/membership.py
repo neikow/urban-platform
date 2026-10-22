@@ -10,8 +10,8 @@ from django.utils.translation import gettext_lazy as _
 
 # A membership keeps its rights this long after it ends, time to renew it.
 GRACE_PERIOD = timedelta(days=31)
-# Joining from this month on covers the rest of the year and the next one.
-NEXT_YEAR_FROM_MONTH = 12
+# A member may renew this long before their membership ends.
+RENEWAL_OPENS = timedelta(days=31)
 
 
 class MembershipQuerySet(models.QuerySet["Membership"]):
@@ -24,37 +24,45 @@ class MembershipQuerySet(models.QuerySet["Membership"]):
         )
 
 
+def one_year_from(starts: date) -> date:
+    """The last day of a year-long membership starting on ``starts``."""
+    try:
+        anniversary = starts.replace(year=starts.year + 1)
+    except ValueError:  # February 29
+        anniversary = starts.replace(year=starts.year + 1, day=28) + timedelta(days=1)
+    return anniversary - timedelta(days=1)
+
+
 def membership_period(
     memberships: MembershipQuerySet, today: date | None = None
 ) -> tuple[date, date]:
-    """The days a membership paid today covers: memberships run by calendar year.
+    """The days a membership paid today covers: one year, whenever it is paid.
 
-    It starts today, or the day after the current membership ends, and runs to
-    the end of that year; from December, to the end of the next year.
+    It starts today or, when renewing, the day after the last membership ends.
     """
     today = today or timezone.localdate()
-    current_end = (
-        memberships.filter(starts_on__lte=today, ends_on__gte=today)
+    last_end = (
+        memberships.filter(ends_on__gte=today)
         .order_by("-ends_on")
         .values_list("ends_on", flat=True)
         .first()
     )
-    starts = current_end + timedelta(days=1) if current_end else today
-    year = starts.year + (1 if starts.month >= NEXT_YEAR_FROM_MONTH else 0)
-    return starts, date(year, 12, 31)
+    starts = last_end + timedelta(days=1) if last_end else today
+    return starts, one_year_from(starts)
 
 
 def may_join(memberships: MembershipQuerySet, today: date | None = None) -> bool:
-    """Whether paying makes sense today: not a member, or renewing from December."""
+    """Whether paying makes sense today: not a member, or less than a month before the end."""
     today = today or timezone.localdate()
-    running = memberships.active(today)
-    if running.filter(ends_on__isnull=True).exists():
+    if memberships.active(today).filter(ends_on__isnull=True).exists():
         return False
-    if not running.exists():
-        return True
-    starts, ends = membership_period(memberships, today)
-    covered = memberships.filter(ends_on__gte=ends).exists()
-    return today.month >= NEXT_YEAR_FROM_MONTH and not covered
+    last_end = (
+        memberships.filter(ends_on__gte=today)
+        .order_by("-ends_on")
+        .values_list("ends_on", flat=True)
+        .first()
+    )
+    return last_end is None or today >= last_end - RENEWAL_OPENS
 
 
 class Membership(models.Model):
