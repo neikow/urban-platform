@@ -13,6 +13,7 @@ VALID_REQUEST = {
     "confirm_password": "SecurePass123",
     "first_name": "Test",
     "last_name": "User",
+    "address": "12 rue Paradis",
     "postal_code": "13001",
     "accept_terms": True,
     "newsletter_subscription": True,
@@ -178,6 +179,7 @@ class TestUserRegistrationView:
         mock_form = MagicMock()
         mock_form.is_valid.return_value = True
         mock_form.cleaned_data = VALID_REQUEST
+        mock_form.address_location = None
         mock_form_class.return_value = mock_form
 
         with patch("core.emails.tasks.send_verification_email.delay") as mock_send_email:
@@ -197,6 +199,7 @@ class TestUserRegistrationView:
         mock_form = MagicMock()
         mock_form.is_valid.return_value = True
         mock_form.cleaned_data = VALID_REQUEST
+        mock_form.address_location = None
         mock_form_class.return_value = mock_form
 
         with patch("core.emails.tasks.send_verification_email.delay"):

@@ -461,7 +461,11 @@ class TestDecliningAnAssociation:
         with patch("core.views.register.send_verification_email"):
             response = client.post(
                 reverse("register"),
-                {**TestAssociationFields.REGISTRATION, "no_association": "on"},
+                {
+                    **TestAssociationFields.REGISTRATION,
+                    "address": "12 rue paradis",
+                    "no_association": "on",
+                },
             )
 
         assert response.status_code == 302
