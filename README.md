@@ -100,7 +100,7 @@
 | core/views/page\_templates.py                                  |       39 |        1 |        6 |        1 |     95.56% |        61 |
 | core/views/password\_reset.py                                  |       81 |        4 |       12 |        3 |     92.47% |77, 90, 113-114, 119-\>127 |
 | core/views/profile\_edit.py                                    |      145 |        6 |       32 |        6 |     93.22% |122, 132, 136, 165, 175, 182 |
-| core/views/register.py                                         |      103 |        7 |       24 |        7 |     88.98% |104, 117, 123, 130, 132, 134, 205 |
+| core/views/register.py                                         |      108 |        7 |       26 |        7 |     89.55% |105, 118, 124, 131, 133, 135, 212 |
 | core/views/tasks.py                                            |       50 |        0 |        6 |        0 |    100.00% |           |
 | core/wagtail\_forms.py                                         |       52 |        2 |       12 |        4 |     90.62% |31-\>exit, 39, 59, 71-\>76 |
 | core/wagtail\_hooks.py                                         |      143 |        1 |       16 |        3 |     97.48% |33-\>35, 262, 266-\>exit |
@@ -184,7 +184,7 @@
 | publications/views/vote\_stats.py                              |       61 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       52 |        6 |        4 |        0 |     85.71% |78-80, 86, 94, 103 |
 | publications/widgets.py                                        |       32 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **6846** |  **657** | **1182** |  **154** | **88.18%** |           |
+| **TOTAL**                                                      | **6851** |  **657** | **1184** |  **154** | **88.19%** |           |
 
 
 ## Setup coverage badge
