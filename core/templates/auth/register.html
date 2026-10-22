@@ -6,9 +6,9 @@
 {% block extra_css %}{{ form.media.css }}{% endblock %}
 
 {% block content %}
-    <div class="min-h-[calc(100vh-4rem)] flex items-stretch">
-        <!-- Left panel: image + benefits -->
-        <div class="relative hidden lg:flex flex-col justify-end w-1/2 xl:w-5/12">
+    <div class="min-h-[calc(100vh-4rem)] flex items-start">
+        <!-- Left panel: image + benefits, kept in view below the header while the form scrolls -->
+        <div class="sticky top-16 h-[calc(100vh-4rem)] hidden lg:flex flex-col justify-end w-1/2 xl:w-5/12">
             <img
                 src="{% static 'images/endoume-marseille.jpg' %}"
                 alt=""
@@ -84,7 +84,7 @@
         </div>
 
         <!-- Right panel: form -->
-        <div class="flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-14 xl:px-20 py-12 bg-base-100">
+        <div class="flex-1 self-stretch flex flex-col justify-center px-6 sm:px-10 lg:px-14 xl:px-20 py-12 bg-base-100">
             <div class="w-full max-w-md mx-auto">
                 <p class="section-label mb-2">{% trans "Registration" %}</p>
                 <h1 class="font-display font-black uppercase text-4xl leading-tight mb-6">
