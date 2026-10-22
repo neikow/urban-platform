@@ -2508,3 +2508,185 @@ msgstr ""
 
 #~ msgid "DEPRECATED Centered Text"
 #~ msgstr "OBSOLÈTE Texte centré"
+
+#: core/templates/core/widgets/association_select.html
+msgid "Your address"
+msgstr "Votre adresse"
+
+#: core/templates/core/widgets/association_select.html
+msgid "Choose on the map"
+msgstr "Choisir sur la carte"
+
+#: core/templates/core/widgets/association_select.html
+msgid "Choose your CIQ"
+msgstr "Choisissez votre CIQ"
+
+#: core/templates/core/widgets/association_select.html
+msgid "The map could not be loaded. Choose your CIQ from the list."
+msgstr "La carte n'a pas pu être chargée. Choisissez votre CIQ dans la liste."
+
+#: core/templates/core/widgets/association_select.html
+msgid "CIQ list"
+msgstr "Liste des CIQ"
+
+#: core/templates/core/widgets/association_select.html
+msgid "Confirm"
+msgstr "Valider"
+
+#: core/templates/core/widgets/association_select.html
+msgid "Map"
+msgstr "Carte"
+
+#: core/association_import.py
+#, python-format
+msgid "Missing columns: %(columns)s"
+msgstr "Colonnes manquantes : %(columns)s"
+
+#: core/association_import.py
+#, python-format
+msgid "Not a valid CSV file: %(error)s"
+msgstr "Ce n'est pas un fichier CSV valide : %(error)s"
+
+#: core/association_import.py
+#, python-format
+msgid "No CIQ of federation %(federation)s in the file."
+msgstr "Aucun CIQ de la fédération %(federation)s dans le fichier."
+
+#: core/templates/core/admin/association_import.html
+msgid "no address"
+msgstr "pas d'adresse"
+
+#: core/views/association_import.py
+msgid "CSV file"
+msgstr "Fichier CSV"
+
+#: core/views/association_import.py
+msgid ""
+"A copy of the Confédération's directory, in UTF-8, with the columns code, "
+"name, address, contact_email, contact_phone and website (only code and name "
+"are required)."
+msgstr ""
+"Une copie de l'annuaire de la Confédération, en UTF-8, avec les colonnes "
+"code, name, address, contact_email, contact_phone et website (seuls code et "
+"name sont obligatoires)."
+
+#: core/views/association_import.py
+msgid "Federation"
+msgstr "Fédération"
+
+#: core/views/association_import.py
+msgid ""
+"Only its CIQ are imported: 7 imports the codes 701 to 799 (the 7th "
+"arrondissement)."
+msgstr ""
+"Seuls ses CIQ sont importés : 7 importe les codes 701 à 799 (le 7e "
+"arrondissement)."
+
+#: core/views/association_import.py
+msgid "The file is too large."
+msgstr "Le fichier est trop volumineux."
+
+#: core/views/association_import.py
+msgid "The file is not encoded in UTF-8."
+msgstr "Le fichier n'est pas encodé en UTF-8."
+
+#: core/views/association_import.py
+msgid "Nothing to import: send the file again."
+msgstr "Rien à importer : envoyez de nouveau le fichier."
+
+#: core/views/association_import.py
+#, python-format
+msgid "%(created)d created, %(updated)d updated."
+msgstr "%(created)d créés, %(updated)d mis à jour."
+
+#: core/templates/core/admin/association_import.html
+#: core/views/association_import.py
+msgid "Import neighborhood associations"
+msgstr "Importer des CIQ"
+
+#: core/templates/core/admin/association_import.html
+msgid ""
+"Creates or updates the CIQ of one federation from a CSV copy of the "
+"Confédération's directory. Existing CIQ are found by their code, or by their "
+"name for those created by hand. Residents who did not choose their CIQ are "
+"then attached again."
+msgstr ""
+"Crée ou met à jour les CIQ d'une fédération à partir d'une copie CSV de "
+"l'annuaire de la Confédération. Les CIQ existants sont retrouvés par leur "
+"code, ou par leur nom pour ceux créés à la main. Les habitants qui n'ont pas "
+"choisi leur CIQ sont ensuite rattachés de nouveau."
+
+#: core/templates/core/admin/association_import.html
+msgid "Back to the associations"
+msgstr "Retour aux CIQ"
+
+#: core/templates/core/admin/association_import.html
+#, python-format
+msgid "Preview of federation %(federation)s: nothing is saved yet"
+msgstr "Aperçu de la fédération %(federation)s : rien n'est encore enregistré"
+
+#: core/templates/core/admin/association_import.html
+#, python-format
+msgid "Federation %(federation)s imported"
+msgstr "Fédération %(federation)s importée"
+
+#: core/templates/core/admin/association_import.html
+#, python-format
+msgid "%(counter)s created"
+msgid_plural "%(counter)s created"
+msgstr[0] "%(counter)s créé"
+msgstr[1] "%(counter)s créés"
+
+#: core/templates/core/admin/association_import.html
+#, python-format
+msgid "%(counter)s updated"
+msgid_plural "%(counter)s updated"
+msgstr[0] "%(counter)s mis à jour"
+msgstr[1] "%(counter)s mis à jour"
+
+#: core/templates/core/admin/association_import.html
+#, python-format
+msgid "%(counter)s row of other federations skipped"
+msgid_plural "%(counter)s rows of other federations skipped"
+msgstr[0] "%(counter)s ligne d'autres fédérations ignorée"
+msgstr[1] "%(counter)s lignes d'autres fédérations ignorées"
+
+#: core/templates/core/admin/association_import.html
+msgid "New"
+msgstr "Nouveaux"
+
+#: core/templates/core/admin/association_import.html
+msgid "Updated"
+msgstr "Mis à jour"
+
+#: core/templates/core/admin/association_import.html
+msgid "Not imported"
+msgstr "Non importés"
+
+#: core/templates/core/admin/association_import.html
+msgid "Address not located"
+msgstr "Adresse non localisée"
+
+#: core/templates/core/admin/association_import.html
+msgid ""
+"These CIQ are never suggested as the nearest, but can still be chosen. "
+"Complete their address after the import."
+msgstr ""
+"Ces CIQ ne sont jamais proposés comme le plus proche, mais peuvent tout de "
+"même être choisis. Complétez leur adresse après l'import."
+
+#: core/templates/core/admin/association_import.html
+msgid "See the associations"
+msgstr "Voir les CIQ"
+
+#: core/templates/core/admin/association_import.html
+msgid "Another file"
+msgstr "Un autre fichier"
+
+#: core/templates/core/admin/association_import.html
+msgid "Preview"
+msgstr "Aperçu"
+
+#: core/templates/core/admin/association_import.html
+msgid "Import these CIQ"
+msgstr "Importer ces CIQ"

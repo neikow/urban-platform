@@ -1,0 +1,124 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n wagtailadmin_tags %}
+
+{% comment %}
+    Import of neighborhood associations (core/views/association_import.py): the
+    file gives a preview, confirmed with the "Import" button.
+{% endcomment %}
+
+{% block titletag %}{% trans "Import neighborhood associations" %}{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title=_("Import neighborhood associations") icon="group" %}
+
+    <div class="w-nice-padding w-px-6">
+        <p class="help w-mb-6">
+            {% blocktrans trimmed %}
+                Creates or updates the CIQ of one federation from a CSV copy of the Confédération's directory. Existing
+                CIQ are found by their code, or by their name for those created by hand. Residents who did not choose
+                their CIQ are then attached again.
+            {% endblocktrans %}
+            <a href="{{ index_url }}">{% trans "Back to the associations" %}</a>
+        </p>
+
+        {% if report %}
+            <section class="w-mb-10">
+                <h2 class="w-h3">
+                    {% if preview %}
+                        {% blocktrans trimmed %}Preview of federation {{ federation }}: nothing is saved
+                            yet{% endblocktrans %}
+                    {% else %}
+                        {% blocktrans trimmed %}Federation {{ federation }} imported{% endblocktrans %}
+                    {% endif %}
+                </h2>
+                <p>
+                    {% blocktrans trimmed count counter=report.created|length %}
+                        {{ counter }} created
+                        {% plural %}
+                        {{ counter }} created
+                    {% endblocktrans %}
+                    ·
+                    {% blocktrans trimmed count counter=report.updated|length %}
+                        {{ counter }} updated
+                        {% plural %}
+                        {{ counter }} updated
+                    {% endblocktrans %}
+                    ·
+                    {% blocktrans trimmed count counter=report.skipped %}
+                        {{ counter }} row of other federations skipped
+                        {% plural %}
+                        {{ counter }} rows of other federations skipped
+                    {% endblocktrans %}
+                </p>
+
+                {% if report.created %}
+                    <h3 class="w-h4">{% trans "New" %}</h3>
+                    <ul>
+                        {% for association in report.created %}<li>
+                                {{ association.code }} {{ association.name }}
+                            </li>{% endfor %}
+                    </ul>
+                {% endif %}
+                {% if report.updated %}
+                    <h3 class="w-h4">{% trans "Updated" %}</h3>
+                    <ul>
+                        {% for association in report.updated %}<li>
+                                {{ association.code }} {{ association.name }}
+                            </li>{% endfor %}
+                    </ul>
+                {% endif %}
+                {% if report.invalid %}
+                    <h3 class="w-h4 w-text-critical-200">{% trans "Not imported" %}</h3>
+                    <ul>
+                        {% for line in report.invalid %}<li>{{ line }}</li>{% endfor %}
+                    </ul>
+                {% endif %}
+                {% if report.unlocated %}
+                    <h3 class="w-h4">{% trans "Address not located" %}</h3>
+                    <p class="help">
+                        {% trans "These CIQ are never suggested as the nearest, but can still be chosen. Complete their address after the import." %}
+                    </p>
+                    <ul>
+                        {% for association in report.unlocated %}
+                            <li>
+                                {{ association.code }} {{ association.name }}:
+                                {{ association.address|default:_("no address") }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if preview and report.created or preview and report.updated %}
+                    <form method="post" action="{% url 'association_import' %}">
+                        {% csrf_token %}
+                        <button type="submit" name="confirm" value="1" class="button">
+                            {% trans "Import these CIQ" %}
+                        </button>
+                    </form>
+                {% elif not preview %}
+                    <a href="{{ index_url }}" class="button">{% trans "See the associations" %}</a>
+                {% endif %}
+            </section>
+        {% endif %}
+
+        {% if form %}
+            <section>
+                {% if report %}<h2 class="w-h3">{% trans "Another file" %}</h2>{% endif %}
+                <form
+                    method="post"
+                    enctype="multipart/form-data"
+                    action="{% url 'association_import' %}"
+                    novalidate
+                >
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% formattedfield field %}
+                    {% endfor %}
+                    <button type="submit" class="button{% if report and preview %} button-secondary{% endif %}">
+                        {% trans "Preview" %}
+                    </button>
+                </form>
+            </section>
+        {% endif %}
+    </div>
+{% endblock %}

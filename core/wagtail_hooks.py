@@ -5,9 +5,11 @@ from django.http import Http404, HttpRequest, HttpResponse
 from django.urls import URLPattern, path
 from django.templatetags.static import static
 from django.urls import reverse
+from django.utils.functional import cached_property
 from django.utils.html import format_html
 from wagtail.admin.menu import MenuItem
-from wagtail.admin.widgets import Button
+from wagtail.admin.widgets import Button, HeaderButton
+from wagtail.admin.views.generic.models import IndexView
 from wagtail.admin.viewsets.model import ModelViewSet
 from wagtail.admin.forms import WagtailAdminModelForm
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, ObjectList
@@ -35,8 +37,22 @@ def other_association_areas(exclude_pk: int | None) -> dict[str, Any]:
     return {"type": "FeatureCollection", "features": [a.area_feature() for a in associations]}
 
 
+class NeighborhoodAssociationIndexView(IndexView):
+    @cached_property
+    def header_buttons(self) -> list[HeaderButton]:
+        from core.views.association_import import can_import_associations
+
+        buttons = super().header_buttons
+        if can_import_associations(self.request):
+            buttons.append(
+                HeaderButton(_("Import"), url=reverse("association_import"), icon_name="upload")
+            )
+        return buttons
+
+
 class NeighborhoodAssociationViewSet(ModelViewSet):
     model = NeighborhoodAssociation
+    index_view_class = NeighborhoodAssociationIndexView
     menu_icon = "group"
     add_to_settings_menu = True
     exclude_from_explorer = False
@@ -72,6 +88,19 @@ class NeighborhoodAssociationViewSet(ModelViewSet):
 @hooks.register("register_admin_viewset")
 def register_neighborhood_association_viewset() -> NeighborhoodAssociationViewSet:
     return NeighborhoodAssociationViewSet("neighborhood_association")
+
+
+@hooks.register("register_admin_urls")
+def register_association_import_url() -> list[URLPattern]:
+    from core.views.association_import import AssociationImportView
+
+    return [
+        path(
+            "neighborhood-associations/import/",
+            AssociationImportView.as_view(),
+            name="association_import",
+        )
+    ]
 
 
 class EmailEventViewSet(ModelViewSet):

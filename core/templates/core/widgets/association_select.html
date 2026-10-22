@@ -1,3 +1,86 @@
-<association-select data-url="{{ ranking_url }}">
+{% load i18n %}
+{% comment %}
+    The <select> holds the value and works without JavaScript; association-select.ts
+    hides it behind the button, which opens the map dialog. The dialog sits in the
+    form: its buttons are type="button" so none submits it.
+{% endcomment %}
+<association-select
+    data-url="{{ ranking_url }}"
+    data-map-url="{{ map_url }}"
+    data-config="{{ map_config }}"
+    data-msg-home="{% translate 'Your address' %}"
+    {% if point %}
+        data-point="{{ point }}"
+    {% endif %}
+>
     {% include "django/forms/widgets/select.html" %}
+    <button
+        type="button"
+        id="{{ widget.attrs.id }}-picker"
+        class="input input-bordered w-full justify-between gap-3 text-left cursor-pointer hidden"
+        aria-haspopup="dialog"
+        data-picker-open
+    >
+        <span class="truncate" data-picker-label></span>
+        <span class="flex shrink-0 items-center gap-1.5 text-sm font-medium text-primary">
+            <svg
+                aria-hidden="true"
+                class="size-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" />
+                <path d="M15 5.764v15" />
+                <path d="M9 3.236v15" />
+            </svg>
+            {% translate "Map" %}
+        </span>
+        <span class="sr-only">{% translate "Choose on the map" %}</span>
+    </button>
+    <dialog
+        class="modal modal-bottom sm:modal-middle"
+        data-picker-dialog
+        aria-labelledby="{{ widget.attrs.id }}-picker-title"
+    >
+        <div class="modal-box flex flex-col p-0 overflow-hidden w-full sm:max-w-5xl h-[92dvh] sm:h-[min(80dvh,44rem)] max-h-none">
+            <header class="flex items-center justify-between gap-4 px-4 py-3 border-b border-base-300">
+                <h2 id="{{ widget.attrs.id }}-picker-title" class="font-display text-xl font-semibold uppercase">
+                    {% translate "Choose your CIQ" %}
+                </h2>
+                <button type="button" class="btn btn-ghost btn-sm btn-square" data-picker-close>
+                    <span aria-hidden="true" class="text-xl leading-none">&times;</span>
+                    <span class="sr-only">{% translate "Close" %}</span>
+                </button>
+            </header>
+            <div class="flex flex-col sm:flex-row flex-1 min-h-0">
+                <div class="relative basis-1/2 sm:basis-auto sm:flex-1 shrink-0 min-h-0">
+                    <div class="absolute inset-0" data-picker-map></div>
+                    <p
+                        class="absolute inset-x-0 bottom-0 m-2 p-2 text-sm bg-base-100/90 hidden"
+                        role="status"
+                        data-picker-error
+                    >
+                        {% translate "The map could not be loaded. Choose your CIQ from the list." %}
+                    </p>
+                </div>
+                <ul
+                    class="flex-1 sm:flex-none sm:w-80 overflow-y-auto overscroll-contain border-t sm:border-t-0 sm:border-l border-base-300 divide-y divide-base-200"
+                    aria-label="{% translate 'CIQ list' %}"
+                    data-picker-list
+                >
+                </ul>
+            </div>
+            <footer class="flex items-center justify-end gap-2 px-4 py-3 border-t border-base-300">
+                <button type="button" class="btn btn-ghost" data-picker-close>{% translate "Cancel" %}</button>
+                <button type="button" class="btn btn-primary" data-picker-confirm>{% translate "Confirm" %}</button>
+            </footer>
+        </div>
+        <div class="modal-backdrop">
+            <button type="button" data-picker-close tabindex="-1">{% translate "Close" %}</button>
+        </div>
+    </dialog>
 </association-select>

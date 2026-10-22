@@ -6,7 +6,9 @@ from unittest.mock import patch
 
 import pytest
 from django.core.management import CommandError, call_command
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
+from wagtail.models import ModelLogEntry
 
 from core import geocoding
 from core.associations import (
@@ -19,8 +21,8 @@ from core.associations import (
     reassign_residents,
     set_address,
 )
-from core.management.commands.import_associations import federation_of
-from core.models import NeighborhoodAssociation, User
+from core.association_import import federation_of
+from core.models import NeighborhoodAssociation, User, UserRole
 from core.views.auth_mixins import AssociationChoiceField, format_distance
 from core.tests.test_addresses import AREA_PARADIS, PARADIS, PRADO, answers, reassignments
 
@@ -198,6 +200,24 @@ class TestNearestAssociationsView:
 
 
 @pytest.mark.django_db
+class TestAssociationMapView:
+    def test_lists_areas_and_seats(self, client, catalans, unlocated):
+        NeighborhoodAssociation.objects.filter(pk=catalans.pk).update(area=AREA_PARADIS)
+
+        response = client.get(reverse("association_map"))
+
+        assert response.status_code == 200
+        results = {r["id"]: r for r in response.json()["results"]}
+        assert results[catalans.pk] == {
+            "id": catalans.pk,
+            "name": "Pharo Catalans",
+            "area": AREA_PARADIS,
+            "seat": CATALANS,
+        }
+        assert (results[unlocated.pk]["area"], results[unlocated.pk]["seat"]) == (None, None)
+
+
+@pytest.mark.django_db
 class TestAssociationFields:
     REGISTRATION = {
         "email": "new@example.com",
@@ -240,6 +260,23 @@ class TestAssociationFields:
         assert "<association-select" in content
         assert reverse("nearest_associations") in content
         assert "dist/association-select.js" in content
+        assert reverse("association_map") in content
+        assert "dist/map.css" in content
+        assert "data-picker-dialog" in content
+
+    def test_widget_marks_the_ranking_point(self, catalans):
+        field = AssociationChoiceField()
+        field.rank_from(HOME_NEAR_AUFFES)
+
+        html = field.widget.render("association", None, {"id": "id_association"})
+
+        assert 'data-point="[5.35, 43.285]"' in html
+        assert 'id="id_association-picker"' in html
+
+    def test_widget_without_point(self, catalans):
+        html = AssociationChoiceField().widget.render("association", None, {"id": "id_association"})
+
+        assert "data-point" not in html
 
     def test_register_with_a_choice(self, client, monkeypatch, catalans, auffes):
         monkeypatch.setattr(geocoding, "_fetch", answers(PARADIS))
@@ -393,6 +430,94 @@ class TestImportAssociations:
     def test_missing_columns(self, tmp_path):
         with pytest.raises(CommandError):
             run_import(write_csv(tmp_path, "nom,adresse\nA,B\n"), "--federation", "7")
+
+
+@pytest.mark.django_db
+class TestImportAdmin:
+    @pytest.fixture
+    def admin_user(self, db):
+        return User.objects.create_user(
+            email="admin@example.com", password="Password123", role=UserRole.ADMIN
+        )
+
+    def upload(self, content: str = CSV) -> SimpleUploadedFile:
+        return SimpleUploadedFile("annuaire.csv", content.encode(), content_type="text/csv")
+
+    def test_administrators_only(self, client, admin_user):
+        editor = User.objects.create_user(
+            email="editor@example.com", password="Password123", role=UserRole.EDITOR
+        )
+        client.force_login(editor)
+        assert client.get(reverse("association_import")).status_code in (302, 403)
+        assert reverse("association_import") not in (
+            client.get(reverse("neighborhood_association:index")).content.decode()
+        )
+
+        client.force_login(admin_user)
+        assert client.get(reverse("association_import")).status_code == 200
+        index = client.get(reverse("neighborhood_association:index"))
+        assert reverse("association_import") in index.content.decode()
+
+    def test_preview_then_confirm(
+        self, client, admin_user, monkeypatch, django_capture_on_commit_callbacks
+    ):
+        monkeypatch.setattr(geocoding, "_fetch", answers(PARADIS))
+        client.force_login(admin_user)
+
+        preview = client.post(
+            reverse("association_import"), {"file": self.upload(), "federation": 7}
+        )
+
+        assert preview.status_code == 200
+        assert preview.context["preview"] is True
+        assert [a.code for a in preview.context["report"].created] == ["701", "702", "704"]
+        assert not NeighborhoodAssociation.objects.exists()
+
+        with django_capture_on_commit_callbacks() as callbacks:
+            done = client.post(reverse("association_import"), {"confirm": "1"})
+
+        assert done.status_code == 200
+        assert done.context["preview"] is False
+        codes = set(NeighborhoodAssociation.objects.values_list("code", flat=True))
+        assert codes == {"701", "702", "704"}
+        assert reassignments(callbacks) == 1
+        assert ModelLogEntry.objects.filter(action="wagtail.create", user=admin_user).count() == 3
+        # The rows are used once.
+        client.post(reverse("association_import"), {"confirm": "1"})
+        assert NeighborhoodAssociation.objects.count() == 3
+        assert "association_import" not in client.session
+
+    def test_confirm_without_preview(self, client, admin_user):
+        client.force_login(admin_user)
+
+        response = client.post(reverse("association_import"), {"confirm": "1"})
+
+        assert response.status_code == 302
+        assert not NeighborhoodAssociation.objects.exists()
+
+    @pytest.mark.parametrize(
+        "content",
+        [CSV, "nom,adresse\nA,B\n"],
+        ids=["no CIQ of the federation", "missing columns"],
+    )
+    def test_refused_files(self, client, admin_user, content):
+        client.force_login(admin_user)
+
+        response = client.post(
+            reverse("association_import"), {"file": self.upload(content), "federation": 9}
+        )
+
+        assert response.status_code == 200
+        assert response.context["form"].errors["file"]
+        assert "association_import" not in client.session
+
+    def test_not_utf8(self, client, admin_user):
+        client.force_login(admin_user)
+        upload = SimpleUploadedFile("annuaire.csv", "code,name\n701,Bénédetti\n".encode("latin-1"))
+
+        response = client.post(reverse("association_import"), {"file": upload, "federation": 7})
+
+        assert response.context["form"].errors["file"]
 
 
 # --- declining ------------------------------------------------------------------

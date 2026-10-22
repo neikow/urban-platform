@@ -1,3 +1,4 @@
+import json
 from typing import Any
 
 from django import forms
@@ -141,18 +142,26 @@ class AssociationSelect(forms.Select):
 
     Rendered inside an <association-select> custom element
     (frontend/src/association-select.ts), which listens to the address input of
-    the same form.
+    the same form and replaces the dropdown with a button opening a map of the
+    associations. ``point`` is the address the choices are ranked from, if any.
     """
 
     template_name = "core/widgets/association_select.html"
 
     class Media:
+        css = {"all": ["dist/map.css"]}
         js = [Script("dist/association-select.js", type="module")]
 
     def __init__(self, attrs: dict | None = None) -> None:
         super().__init__({"class": "select select-bordered w-full", **(attrs or {})})
+        self.point: dict | None = None
 
     def get_context(self, name: str, value: Any, attrs: dict[str, Any] | None) -> dict[str, Any]:
+        from publications.geo import map_config
+
         context = super().get_context(name, value, attrs)
         context["ranking_url"] = reverse("nearest_associations")
+        context["map_url"] = reverse("association_map")
+        context["map_config"] = json.dumps(map_config())
+        context["point"] = json.dumps(self.point["coordinates"]) if self.point else ""
         return context

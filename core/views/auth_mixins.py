@@ -122,6 +122,7 @@ class AssociationChoiceField(forms.ModelChoiceField):
 
         from core.associations import ranked_associations
 
+        self.widget.point = point  # type: ignore[attr-defined]
         ranked = ranked_associations(point)
         self.distances = {a.pk: d for a, d in ranked if d is not None}
         order = Case(

@@ -28,6 +28,47 @@
     fill-opacity: 0.5;
 }
 
+/* Association picker (association-select.ts): every CIQ outlined, the
+   chosen one filled. */
+.map-ciq {
+    stroke: var(--color-secondary, #1e3a8a);
+    stroke-width: 1.5;
+    fill: var(--color-secondary, #1e3a8a);
+    fill-opacity: 0.08;
+    cursor: pointer;
+    transition: fill-opacity 120ms;
+}
+
+.map-ciq:hover {
+    fill-opacity: 0.18;
+}
+
+.map-ciq-seat {
+    stroke: var(--color-base-100, #fff);
+    stroke-width: 2;
+    fill: var(--color-secondary, #1e3a8a);
+    fill-opacity: 1;
+    cursor: pointer;
+}
+
+.map-ciq.map-ciq--selected {
+    stroke: var(--color-primary, #e8553c);
+    stroke-width: 3;
+    fill: var(--color-primary, #e8553c);
+    fill-opacity: 0.3;
+}
+
+.map-ciq-seat.map-ciq--selected {
+    fill: var(--color-primary, #e8553c);
+}
+
+.map-home {
+    stroke: var(--color-base-100, #fff);
+    stroke-width: 2;
+    fill: var(--color-info, #0ea5e9);
+    fill-opacity: 1;
+}
+
 .map-me {
     stroke: var(--color-info, #0ea5e9);
     fill: var(--color-info, #0ea5e9);
