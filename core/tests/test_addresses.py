@@ -320,13 +320,12 @@ class TestRegistrationAddress:
         assert user.location == PARADIS.point
         assert user.association == paradis_association
 
-    def test_address_is_optional(self, client):
+    def test_address_is_required(self, client):
         response = client.post(reverse("register"), REGISTRATION)
 
-        assert response.status_code == 302
-        user = User.objects.get(email="new@example.com")
-        assert user.address == ""
-        assert user.association is None
+        assert response.status_code == 200
+        assert "address" in response.context["form"].errors
+        assert not User.objects.filter(email="new@example.com").exists()
 
     def test_unknown_address_is_refused(self, client, monkeypatch):
         monkeypatch.setattr(geocoding, "_fetch", answers())

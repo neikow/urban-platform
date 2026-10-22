@@ -58,13 +58,13 @@ class UserRegistrationForm(
         required=True, label="Nom", widget=DaisyTextInput(placeholder="Dupont")
     )
     address = forms.CharField(
-        required=False,
+        required=True,
         label="Adresse",
         max_length=255,
         widget=DaisyAddressInput(
             placeholder="12 rue Paradis, Marseille", postcode_field="postal_code"
         ),
-        help_text="Facultatif. Vous rattache au CIQ de votre quartier.",
+        help_text="Vous rattache au CIQ de votre quartier.",
     )
     association = AssociationChoiceField(
         label="Comité d'intérêt de quartier (CIQ)",
@@ -171,13 +171,10 @@ class RegisterFormView(FormView):
         )
         choice = form.cleaned_data.get("association")
         declined = form.cleaned_data.get("no_association", False)
-        if form.cleaned_data.get("address") or choice or declined:
-            set_address(
-                self.user, form.cleaned_data["address"], form.address_location, choice, declined
-            )
-            self.user.save(
-                update_fields=["address", "location", "association", "association_chosen"]
-            )
+        set_address(
+            self.user, form.cleaned_data["address"], form.address_location, choice, declined
+        )
+        self.user.save(update_fields=["address", "location", "association", "association_chosen"])
         if newsletter_subscription:
             self.user.set_newsletter_subscription(True)
             self.user.save(update_fields=["newsletter_subscription", "newsletter_consent_at"])
