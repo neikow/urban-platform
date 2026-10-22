@@ -2,7 +2,7 @@ import typing
 from typing import Any
 
 from django.contrib.auth import get_user_model, login
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseBase
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
@@ -143,7 +143,7 @@ class RegisterFormView(FormView):
 
     user: User
 
-    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponseBase:
         # Already signed in: the account page instead of a second account.
         if request.user.is_authenticated:
             return redirect("me")
