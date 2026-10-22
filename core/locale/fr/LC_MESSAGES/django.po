@@ -2508,3 +2508,31 @@ msgstr ""
 
 #~ msgid "DEPRECATED Centered Text"
 #~ msgstr "OBSOLÈTE Texte centré"
+
+#: core/templates/core/widgets/association_select.html
+msgid "Your address"
+msgstr "Votre adresse"
+
+#: core/templates/core/widgets/association_select.html
+msgid "Choose on the map"
+msgstr "Choisir sur la carte"
+
+#: core/templates/core/widgets/association_select.html
+msgid "Choose your CIQ"
+msgstr "Choisissez votre CIQ"
+
+#: core/templates/core/widgets/association_select.html
+msgid "The map could not be loaded. Choose your CIQ from the list."
+msgstr "La carte n'a pas pu être chargée. Choisissez votre CIQ dans la liste."
+
+#: core/templates/core/widgets/association_select.html
+msgid "CIQ list"
+msgstr "Liste des CIQ"
+
+#: core/templates/core/widgets/association_select.html
+msgid "Confirm"
+msgstr "Valider"
+
+#: core/templates/core/widgets/association_select.html
+msgid "Map"
+msgstr "Carte"

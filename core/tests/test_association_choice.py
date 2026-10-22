@@ -198,6 +198,24 @@ class TestNearestAssociationsView:
 
 
 @pytest.mark.django_db
+class TestAssociationMapView:
+    def test_lists_areas_and_seats(self, client, catalans, unlocated):
+        NeighborhoodAssociation.objects.filter(pk=catalans.pk).update(area=AREA_PARADIS)
+
+        response = client.get(reverse("association_map"))
+
+        assert response.status_code == 200
+        results = {r["id"]: r for r in response.json()["results"]}
+        assert results[catalans.pk] == {
+            "id": catalans.pk,
+            "name": "Pharo Catalans",
+            "area": AREA_PARADIS,
+            "seat": CATALANS,
+        }
+        assert (results[unlocated.pk]["area"], results[unlocated.pk]["seat"]) == (None, None)
+
+
+@pytest.mark.django_db
 class TestAssociationFields:
     REGISTRATION = {
         "email": "new@example.com",
@@ -240,6 +258,23 @@ class TestAssociationFields:
         assert "<association-select" in content
         assert reverse("nearest_associations") in content
         assert "dist/association-select.js" in content
+        assert reverse("association_map") in content
+        assert "dist/map.css" in content
+        assert "data-picker-dialog" in content
+
+    def test_widget_marks_the_ranking_point(self, catalans):
+        field = AssociationChoiceField()
+        field.rank_from(HOME_NEAR_AUFFES)
+
+        html = field.widget.render("association", None, {"id": "id_association"})
+
+        assert 'data-point="[5.35, 43.285]"' in html
+        assert 'id="id_association-picker"' in html
+
+    def test_widget_without_point(self, catalans):
+        html = AssociationChoiceField().widget.render("association", None, {"id": "id_association"})
+
+        assert "data-point" not in html
 
     def test_register_with_a_choice(self, client, monkeypatch, catalans, auffes):
         monkeypatch.setattr(geocoding, "_fetch", answers(PARADIS))

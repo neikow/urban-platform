@@ -51,3 +51,27 @@ def nearest_associations(request: HttpRequest) -> JsonResponse:
             ]
         }
     )
+
+
+@require_GET
+@ratelimit(key="ip", rate="120/m", block=False)
+def association_map(request: HttpRequest) -> JsonResponse:
+    """The associations with their area and seat, for the map of the association pickers (public)."""
+    from core.models import NeighborhoodAssociation
+
+    if getattr(request, "limited", False):
+        return JsonResponse({"results": [], "error": "rate_limited"}, status=429)
+    associations = NeighborhoodAssociation.objects.only("name", "area", "address_location")
+    return JsonResponse(
+        {
+            "results": [
+                {
+                    "id": association.pk,
+                    "name": association.name,
+                    "area": association.area,
+                    "seat": association.address_location,
+                }
+                for association in associations
+            ]
+        }
+    )
