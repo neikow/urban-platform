@@ -50,7 +50,7 @@
 | core/models/city\_neighborhood.py                              |       15 |        2 |        0 |        0 |     86.67% |    18, 22 |
 | core/models/email\_event.py                                    |       31 |        0 |        0 |        0 |    100.00% |           |
 | core/models/feature\_flags.py                                  |       18 |        0 |        4 |        0 |    100.00% |           |
-| core/models/membership.py                                      |       56 |        0 |        6 |        0 |    100.00% |           |
+| core/models/membership.py                                      |       57 |        0 |        4 |        0 |    100.00% |           |
 | core/models/membership\_payment.py                             |       27 |        0 |        0 |        0 |    100.00% |           |
 | core/models/membership\_reminder.py                            |       16 |        1 |        0 |        0 |     93.75% |        28 |
 | core/models/neighborhood\_association.py                       |       32 |        0 |        0 |        0 |    100.00% |           |
@@ -178,7 +178,7 @@
 | publications/views/vote\_stats.py                              |       61 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       52 |        6 |        4 |        0 |     85.71% |78-80, 86, 94, 103 |
 | publications/widgets.py                                        |       32 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **6484** |  **634** | **1114** |  **144** | **87.94%** |           |
+| **TOTAL**                                                      | **6485** |  **634** | **1112** |  **144** | **87.94%** |           |
 
 
 ## Setup coverage badge
