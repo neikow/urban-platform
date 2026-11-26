@@ -14,10 +14,10 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Journal d'activité**.
 | **Sécurité** | Connexions de l'équipe et **mots de passe erronés** sur ses comptes (avec l'adresse IP), changements de mot de passe et d'email, **téléchargements de données personnelles**, suppressions de compte |
 | **Tâches** | Tâches lancées à la main depuis [Tâches](taches.md) ou [Carte](carte.md) |
 | **Transfert de contenu** | Exports, téléchargements d'archives et imports (avec le fichier et le mode), depuis [Transfert de contenu](transfert-contenu.md) |
-| **Emails** | Résultats de vote et actualités de projet envoyés, avec le nombre de destinataires ; clôture des votes |
+| **Emails** | Résultats des avis et actualités de projet envoyés, avec le nombre de destinataires ; clôture des avis |
 | **Carte** | Mises à jour des données de la carte |
 
-Les actions faites par le système (tâches planifiées, clôture automatique d'un vote) apparaissent sans utilisateur.
+Les actions faites par le système (tâches planifiées, clôture automatique des avis) apparaissent sans utilisateur.
 
 ## Filtrer et exporter
 

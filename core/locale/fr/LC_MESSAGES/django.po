@@ -107,7 +107,7 @@ msgstr "Participation"
 
 #: core/admin_menu.py:202
 msgid "Votes"
-msgstr "Votes"
+msgstr "Avis"
 
 #: core/admin_menu.py:210
 #: core/templates/core/admin/dashboard/consultations.html:21
@@ -396,8 +396,8 @@ msgstr "Position de l'image"
 msgid ""
 "Image Alt Text (For accessibility, SEO, and in case the image fails to load)"
 msgstr ""
-"Texte alternatif de l'image (pour l'accessibilité, le référencement et en cas"
-" de problème de chargement de l'image)"
+"Texte alternatif de l'image (pour l'accessibilité, le référencement et en "
+"cas de problème de chargement de l'image)"
 
 #: core/blocks.py:120
 msgid "DEPRECATED Image & Text Row"
@@ -644,11 +644,11 @@ msgstr "Message"
 
 #: core/models/announcement.py:36
 msgid ""
-"Keep it short: one or two sentences. Visitors who closed it see it again once"
-" you change it."
+"Keep it short: one or two sentences. Visitors who closed it see it again "
+"once you change it."
 msgstr ""
-"Restez bref : une ou deux phrases. Les visiteurs qui l'ont fermée la revoient"
-" dès que vous la modifiez."
+"Restez bref : une ou deux phrases. Les visiteurs qui l'ont fermée la "
+"revoient dès que vous la modifiez."
 
 #: core/models/announcement.py:40
 msgid "Style"
@@ -776,7 +776,7 @@ msgstr "Réinitialisation du mot de passe"
 #: core/models/email_event.py:11 core/models/user.py:135
 #: core/templates/core/profile.html:235
 msgid "Poll results"
-msgstr "Résultats des votes"
+msgstr "Résultats des avis"
 
 #: core/models/email_event.py:12
 msgid "Project update"
@@ -846,8 +846,8 @@ msgid ""
 "Only members may vote and share ideas. Turn on once joining is possible: "
 "other users will be invited to become members."
 msgstr ""
-"Seuls les adhérents peuvent voter et proposer des idées. À activer une fois "
-"l'adhésion possible : les autres seront invités à adhérer."
+"Seuls les adhérents peuvent donner leur avis et proposer des idées. À "
+"activer une fois l'adhésion possible : les autres seront invités à adhérer."
 
 #: core/models/feature_flags.py:26
 msgid "Features"
@@ -1154,8 +1154,8 @@ msgstr ""
 #: core/models/user.py:137
 msgid "Email the results when a poll I voted in closes."
 msgstr ""
-"Recevoir les résultats par email à la clôture d'un vote auquel j'ai "
-"participé."
+"Recevoir les résultats par email à la clôture d'un projet sur lequel j'ai "
+"donné mon avis."
 
 #: core/models/user.py:140 core/templates/core/profile.html:236
 msgid "Project updates"
@@ -1164,8 +1164,8 @@ msgstr "Actualités des projets"
 #: core/models/user.py:142
 msgid "Email the news of projects I voted on or shared an idea about."
 msgstr ""
-"Recevoir par email les actualités des projets sur lesquels j'ai voté ou "
-"proposé une idée."
+"Recevoir par email les actualités des projets sur lesquels j'ai donné mon "
+"avis ou proposé une idée."
 
 #: core/models/user.py:145 core/templates/core/profile.html:237
 msgid "Event reminders"
@@ -1206,7 +1206,7 @@ msgstr "Utilisateurs"
 
 #: core/models/user.py:193
 msgid "Can see vote and idea statistics"
-msgstr "Peut voir les statistiques des votes et des idées"
+msgstr "Peut voir les statistiques des avis et des idées"
 
 #: core/models/user.py:194
 msgid "Can see and start background tasks"
@@ -1218,7 +1218,7 @@ msgstr "Peut voir le journal d'activité"
 
 #: core/notifications/__init__.py:40
 msgid "poll results"
-msgstr "les résultats des votes"
+msgstr "les résultats des avis"
 
 #: core/notifications/__init__.py:41
 msgid "project updates"
@@ -1252,12 +1252,12 @@ msgstr ""
 
 #: core/task_monitor.py:274
 msgid "Close expired polls"
-msgstr "Clore les votes échus"
+msgstr "Clore les avis échus"
 
 #: core/task_monitor.py:275
 msgid "Close the votes whose end date has passed, and send their results."
 msgstr ""
-"Clore les votes dont la date de fin est passée, et envoyer leurs résultats."
+"Clore les avis dont la date de fin est passée, et envoyer leurs résultats."
 
 #: core/task_monitor.py:281
 msgid "Check membership payments"
@@ -1458,7 +1458,7 @@ msgstr "Suivez les actualités de votre quartier"
 
 #: core/templates/auth/register.html:80 core/templates/auth/register.html:249
 msgid "Vote on initiatives"
-msgstr "Votez sur les initiatives"
+msgstr "Donnez votre avis sur les initiatives"
 
 #: core/templates/auth/register.html:89
 msgid "Registration"
@@ -1517,7 +1517,7 @@ msgstr "Toutes vos informations personnelles seront définitivement supprimées"
 
 #: core/templates/core/account_delete.html:59
 msgid "Your participations and votes will be anonymized"
-msgstr "Vos participations et votes seront anonymisés"
+msgstr "Vos participations et avis seront anonymisés"
 
 #: core/templates/core/account_delete.html:60
 msgid "You will no longer be able to access your account"
@@ -1631,7 +1631,7 @@ msgstr "Résultats"
 
 #: core/templates/core/admin/dashboard/consultations.html:21
 msgid "Vote"
-msgstr "Vote"
+msgstr "Avis"
 
 #: core/templates/core/admin/dashboard/consultations.html:26
 msgid "No end date"
@@ -1643,7 +1643,7 @@ msgstr "Voir les réponses"
 
 #: core/templates/core/admin/dashboard/consultations.html:40
 msgid "No vote or idea collection is open."
-msgstr "Aucun vote ni aucune collecte d'idées n'est ouvert."
+msgstr "Aucun recueil d'avis ni aucune collecte d'idées n'est ouvert."
 
 #: core/templates/core/admin/dashboard/drafts.html:4
 msgid "Drafts waiting to be published"
@@ -1916,8 +1916,8 @@ msgid ""
 "%(fee)s € a year to vote on the projects, share your ideas and be registered "
 "with the CIQ (comité d'intérêt de quartier) of your choice."
 msgstr ""
-"%(fee)s € par an pour voter sur les projets, donner votre avis et être "
-"inscrit au CIQ (comité d'intérêt de quartier) de votre choix."
+"%(fee)s € par an pour donner votre avis sur les projets, proposer vos idées "
+"et être inscrit au CIQ (comité d'intérêt de quartier) de votre choix."
 
 #: core/templates/core/membership.html:29 core/templates/core/profile.html:99
 #: core/templates/emails/membership/base.html:8
@@ -1930,8 +1930,8 @@ msgid ""
 "Your membership ended on %(ended)s. Renew it before %(until)s to keep voting "
 "and sharing your ideas."
 msgstr ""
-"Votre adhésion a pris fin le %(ended)s. Renouvelez-la avant le %(until)s pour"
-" continuer à voter et à donner votre avis."
+"Votre adhésion a pris fin le %(ended)s. Renouvelez-la avant le %(until)s "
+"pour continuer à donner votre avis et à proposer vos idées."
 
 #: core/templates/core/membership.html:42
 #, python-format
@@ -2065,7 +2065,7 @@ msgstr "Adhérent jusqu'au %(ends)s"
 
 #: core/templates/core/profile.html:102
 msgid "Become a member to vote on the projects and share your ideas."
-msgstr "Adhérez pour voter sur les projets et donner votre avis."
+msgstr "Adhérez pour donner votre avis sur les projets et proposer vos idées."
 
 #: core/templates/core/profile.html:113 core/wagtail_hooks.py:65
 msgid "Contact"
@@ -2151,9 +2151,9 @@ msgid ""
 "format other services can import."
 msgstr ""
 "Téléchargez tout ce que nous conservons à votre sujet : votre compte, vos "
-"votes, vos idées, les événements que vous suivez, vos consentements et les "
-"emails que nous vous avons envoyés. Le fichier est au format JSON, importable"
-" par d'autres services."
+"avis, vos idées, les événements que vous suivez, vos consentements et les "
+"emails que nous vous avons envoyés. Le fichier est au format JSON, "
+"importable par d'autres services."
 
 #: core/templates/core/profile.html:282
 msgid "Download my data"
@@ -2168,8 +2168,8 @@ msgstr "Modifier mon profil"
 #: core/templates/core/profile_edit.html:97
 msgid "Only what you choose. Each email has a link to stop receiving it."
 msgstr ""
-"Uniquement ce que vous choisissez. Chaque email contient un lien pour ne plus"
-" le recevoir."
+"Uniquement ce que vous choisissez. Chaque email contient un lien pour ne "
+"plus le recevoir."
 
 #: core/templates/core/profile_edit.html:109
 msgid "Notifications are only sent once your email address is verified."
@@ -2203,7 +2203,7 @@ msgid ""
 "vote on the projects and share your ideas."
 msgstr ""
 "Votre paiement est validé : vous êtes adhérent jusqu'au %(ends_on)s. Vous "
-"pouvez désormais voter sur les projets et donner votre avis."
+"pouvez désormais donner votre avis sur les projets et proposer vos idées."
 
 #: core/templates/emails/membership/confirmation.html:15
 #, python-format
@@ -2225,7 +2225,8 @@ msgid ""
 "projects and sharing your ideas next year."
 msgstr ""
 "Votre adhésion se termine le %(ends_on)s. Renouvelez-la dès maintenant pour "
-"continuer à voter sur les projets et à donner votre avis l'année prochaine."
+"continuer à donner votre avis sur les projets et à proposer vos idées "
+"l'année prochaine."
 
 #: core/templates/emails/membership/grace.html:6
 msgid "Renew your membership"
@@ -2237,8 +2238,8 @@ msgid ""
 "Your membership ended on %(ends_on)s. You keep voting and sharing your ideas "
 "until %(grace_until)s: renew it before then."
 msgstr ""
-"Votre adhésion a pris fin le %(ends_on)s. Vous pouvez encore voter et donner "
-"votre avis jusqu'au %(grace_until)s : renouvelez-la d'ici là."
+"Votre adhésion a pris fin le %(ends_on)s. Vous pouvez encore donner votre "
+"avis et proposer vos idées jusqu'au %(grace_until)s : renouvelez-la d'ici là."
 
 #: core/templates/emails/membership/last_call.html:6
 msgid "Last reminder"
@@ -2251,8 +2252,8 @@ msgid ""
 "longer be able to vote or share your ideas until you renew it."
 msgstr ""
 "Votre adhésion a pris fin le %(ends_on)s. Après le %(grace_until)s, vous ne "
-"pourrez plus voter ni donner votre avis tant que vous ne l'aurez pas "
-"renouvelée."
+"pourrez plus donner votre avis ni proposer vos idées tant que vous ne "
+"l'aurez pas renouvelée."
 
 #: core/templates/emails/notifications/base.html:112
 #, python-format
@@ -2302,18 +2303,18 @@ msgstr "Ajouter à mon agenda"
 #: core/templates/emails/notifications/poll_results.html:6
 #, python-format
 msgid "The poll on “%(title)s” is closed"
-msgstr "Le vote sur « %(title)s » est clos"
+msgstr "Les avis sur « %(title)s » sont clos"
 
 #: core/templates/emails/notifications/poll_results.html:7
 msgid "Thank you for voting. Here are the final results:"
-msgstr "Merci d'avoir voté. Voici les résultats définitifs :"
+msgstr "Merci d'avoir donné votre avis. Voici les résultats définitifs :"
 
 #: core/templates/emails/notifications/poll_results.html:18
 #, python-format
 msgid "%(total)s vote in total"
 msgid_plural "%(total)s votes in total"
-msgstr[0] "%(total)s vote au total"
-msgstr[1] "%(total)s votes au total"
+msgstr[0] "%(total)s avis au total"
+msgstr[1] "%(total)s avis au total"
 
 #: core/templates/emails/notifications/poll_results.html:24
 #: core/templates/emails/notifications/project_update.html:13
@@ -2372,9 +2373,9 @@ msgstr "Partir d'un modèle"
 
 #: core/views/page_templates.py:73
 msgid ""
-"The template replaces the content of the page in a new draft. Nothing changes"
-" on the website until you publish, and the current version stays in the page "
-"history."
+"The template replaces the content of the page in a new draft. Nothing "
+"changes on the website until you publish, and the current version stays in "
+"the page history."
 msgstr ""
 "Le modèle remplace le contenu de la page dans un nouveau brouillon. Rien ne "
 "change sur le site avant la publication, et la version actuelle reste dans "
@@ -2391,11 +2392,14 @@ msgstr ""
 
 #: core/views/profile_edit.py:76
 msgid "Results of polls I voted in, when they close"
-msgstr "Les résultats des votes auxquels j'ai participé, à leur clôture"
+msgstr ""
+"Les résultats des projets sur lesquels j'ai donné mon avis, à leur clôture"
 
 #: core/views/profile_edit.py:81
 msgid "News of projects I voted on or shared an idea about"
-msgstr "Les actualités des projets sur lesquels j'ai voté ou proposé une idée"
+msgstr ""
+"Les actualités des projets sur lesquels j'ai donné mon avis ou proposé une "
+"idée"
 
 #: core/views/profile_edit.py:86
 msgid "A reminder the day before events I am interested in"
@@ -2432,82 +2436,8 @@ msgid ""
 msgstr ""
 "Dessinez le secteur de l'association : les habitants qui y vivent y sont "
 "rattachés. Les secteurs des autres associations apparaissent en gris, et les "
-"nouveaux points s'accrochent à leurs bords. Sans secteurs, les habitants sont"
-" rattachés à l'association dont l'adresse est la plus proche."
-
-#~ msgid ""
-#~ "Subscribers may vote and share ideas when participation is reserved to them "
-#~ "(Settings › Features)."
-#~ msgstr ""
-#~ "Les adhérents peuvent voter et proposer des idées quand la participation leur"
-#~ " est réservée (Paramètres › Fonctionnalités)."
-
-#~ msgid "Subscribed on"
-#~ msgstr "Adhérent depuis"
-
-#~ msgid "Admin"
-#~ msgstr "Administrateur"
-
-#~ msgid "Association member"
-#~ msgstr "Membre d'association"
-
-#~ msgid "Contact Phone"
-#~ msgstr "Numéro de contact"
-
-#~ msgid "List"
-#~ msgstr "Liste"
-
-#~ msgid "Add"
-#~ msgstr "Ajouter"
-
-#~ msgid "Page d'accueil"
-#~ msgstr "Page d'accueil"
-
-#~ msgid "Ajouter"
-#~ msgstr "Ajouter"
-
-#~ msgid "Conditions d'utilisation"
-#~ msgstr "Conditions d'utilisation"
-
-#~ msgid "Politique de cookies"
-#~ msgstr "Politique de cookies"
-
-#~ msgid "Politique de confidentialité"
-#~ msgstr "Politique de confidentialité"
-
-#~ msgid "Légal"
-#~ msgstr "Juridique"
-
-#~ msgid "La commission d'urbanisme"
-#~ msgstr "La commission d'urbanisme"
-
-#~ msgid "L'équipe de développement"
-#~ msgstr "L'équipe de développement"
-
-#~ msgid "À propos"
-#~ msgstr "À propos"
-
-#~ msgid "Utilisateurs"
-#~ msgstr "Utilisateurs"
-
-#~ msgid "Fiches Pédagogiques"
-#~ msgstr "Fiches Pédagogiques"
-
-#~ msgid "Superuser must have is_staff=True."
-#~ msgstr "Le superutilisateur doit avoir is_staff=True."
-
-#~ msgid "Staff Status"
-#~ msgstr "Statut du personnel"
-
-#~ msgid "Designates whether the user can log into the admin site."
-#~ msgstr ""
-#~ "Indique si l'utilisateur peut se connecter à l'interface d'administration."
-
-#~ msgid "DEPRECATED Text"
-#~ msgstr "OBSOLÈTE Texte"
-
-#~ msgid "DEPRECATED Centered Text"
-#~ msgstr "OBSOLÈTE Texte centré"
+"nouveaux points s'accrochent à leurs bords. Sans secteurs, les habitants "
+"sont rattachés à l'association dont l'adresse est la plus proche."
 
 #: core/templates/core/widgets/association_select.html
 msgid "Your address"
@@ -2690,3 +2620,77 @@ msgstr "Aperçu"
 #: core/templates/core/admin/association_import.html
 msgid "Import these CIQ"
 msgstr "Importer ces CIQ"
+
+#~ msgid ""
+#~ "Subscribers may vote and share ideas when participation is reserved to "
+#~ "them (Settings › Features)."
+#~ msgstr ""
+#~ "Les adhérents peuvent voter et proposer des idées quand la participation "
+#~ "leur est réservée (Paramètres › Fonctionnalités)."
+
+#~ msgid "Subscribed on"
+#~ msgstr "Adhérent depuis"
+
+#~ msgid "Admin"
+#~ msgstr "Administrateur"
+
+#~ msgid "Association member"
+#~ msgstr "Membre d'association"
+
+#~ msgid "Contact Phone"
+#~ msgstr "Numéro de contact"
+
+#~ msgid "List"
+#~ msgstr "Liste"
+
+#~ msgid "Add"
+#~ msgstr "Ajouter"
+
+#~ msgid "Page d'accueil"
+#~ msgstr "Page d'accueil"
+
+#~ msgid "Ajouter"
+#~ msgstr "Ajouter"
+
+#~ msgid "Conditions d'utilisation"
+#~ msgstr "Conditions d'utilisation"
+
+#~ msgid "Politique de cookies"
+#~ msgstr "Politique de cookies"
+
+#~ msgid "Politique de confidentialité"
+#~ msgstr "Politique de confidentialité"
+
+#~ msgid "Légal"
+#~ msgstr "Juridique"
+
+#~ msgid "La commission d'urbanisme"
+#~ msgstr "La commission d'urbanisme"
+
+#~ msgid "L'équipe de développement"
+#~ msgstr "L'équipe de développement"
+
+#~ msgid "À propos"
+#~ msgstr "À propos"
+
+#~ msgid "Utilisateurs"
+#~ msgstr "Utilisateurs"
+
+#~ msgid "Fiches Pédagogiques"
+#~ msgstr "Fiches Pédagogiques"
+
+#~ msgid "Superuser must have is_staff=True."
+#~ msgstr "Le superutilisateur doit avoir is_staff=True."
+
+#~ msgid "Staff Status"
+#~ msgstr "Statut du personnel"
+
+#~ msgid "Designates whether the user can log into the admin site."
+#~ msgstr ""
+#~ "Indique si l'utilisateur peut se connecter à l'interface d'administration."
+
+#~ msgid "DEPRECATED Text"
+#~ msgstr "OBSOLÈTE Texte"
+
+#~ msgid "DEPRECATED Centered Text"
+#~ msgstr "OBSOLÈTE Texte centré"
