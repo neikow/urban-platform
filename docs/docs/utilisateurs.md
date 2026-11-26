@@ -34,9 +34,9 @@ Le **rôle** d'un compte détermine ce qu'il peut faire. Chaque rôle a les droi
 
 | Rôle | Droits |
 |---|---|
-| **Citoyen** | Un compte du site : suivre les projets, s'abonner à la newsletter, voter et proposer des idées (voir l'adhésion ci-dessous). Pas d'accès à l'administration |
+| **Citoyen** | Un compte du site : suivre les projets, s'abonner à la newsletter, donner son avis et proposer des idées (voir l'adhésion ci-dessous). Pas d'accès à l'administration |
 | **Rédacteur** | Créer et modifier les pages et la médiathèque, puis les **soumettre à la modération**. Ne publie pas |
-| **Modérateur** | Publier, dépublier et verrouiller les pages, valider ou refuser les pages soumises, publier les actualités de projet et clore un vote. Modifier l'[annonce](annonce.md), voir les statistiques de participation |
+| **Modérateur** | Publier, dépublier et verrouiller les pages, valider ou refuser les pages soumises, publier les actualités de projet et clore un recueil d'avis. Modifier l'[annonce](annonce.md), voir les statistiques de participation |
 | **Administrateur** | Gérer les comptes et les rôles, les [associations de quartier](associations.md), la [carte](carte.md), les [fonctionnalités](fonctionnalites.md) et les [tâches](taches.md). Seuls les administrateurs modifient les **pages légales** (dont la charte, dont chaque modification demande à tous de l'accepter à nouveau) |
 
 Le menu de chacun ne montre que ce qu'il peut faire. Seuls les administrateurs attribuent les rôles.
@@ -56,7 +56,7 @@ Les groupes Wagtail (*Editors*, *Moderators*) suivent le rôle : ils ne se modif
 Les habitants **adhèrent en ligne** sur la page **/adhesion/** : ils indiquent leur adresse, choisissent leur [CIQ](associations.md) (le plus proche est proposé), puis paient **10 €** sur **HelloAsso**, au profit de la Fédération. L'adhésion est enregistrée automatiquement dès que HelloAsso confirme le paiement, et un email de confirmation part.
 
 - **Un an** : une adhésion dure **un an** à partir du paiement (payée le 10 mars 2026, elle court jusqu'au 9 mars 2027). Le renouvellement est possible dans le **mois** qui précède la fin ; la nouvelle adhésion commence alors le lendemain de la fin de l'actuelle, sans perdre de jours.
-- **Mois de grâce** : une adhésion terminée garde ses droits (voter, donner son avis) pendant **un mois**, le temps de la renouveler. Après, l'habitant n'est plus adhérent.
+- **Mois de grâce** : une adhésion terminée garde ses droits (donner son avis, proposer des idées) pendant **un mois**, le temps de la renouveler. Après, l'habitant n'est plus adhérent.
 - **Rappels** : les adhérents qui n'ont pas renouvelé reçoivent un email **16 jours avant la fin** de leur adhésion, un autre la **première semaine après**, et un dernier la **dernière semaine du mois de grâce**. Chaque rappel n'est envoyé qu'une fois.
 - **Paiements** : **Paramètres › Paiements des adhésions** liste chaque paiement (en attente, payé, abandonné), avec sa commande HelloAsso. La liste est en lecture seule et s'exporte en CSV ou Excel.
 
@@ -67,7 +67,7 @@ Les adhésions se gèrent dans **Paramètres › Adhésions** (administrateurs).
 - La fiche de chaque utilisateur indique s'il a une adhésion en cours.
 - Le **responsable d'un CIQ** (voir [Associations de quartier](associations.md)) voit la liste des adhésions de son CIQ, et peut l'exporter, sans pouvoir la modifier.
 
-Tant que la participation n'est pas réservée aux adhérents (voir [Fonctionnalités](fonctionnalites.md)), l'adhésion ne change rien : tous les comptes confirmés peuvent voter et proposer des idées. Elle est indépendante du rôle : un membre de l'équipe vote comme habitant, avec la même règle. Quand une personne supprime son compte, ses adhésions en cours se terminent le jour même.
+Tant que la participation n'est pas réservée aux adhérents (voir [Fonctionnalités](fonctionnalites.md)), l'adhésion ne change rien : tous les comptes confirmés peuvent donner leur avis et proposer des idées. Elle est indépendante du rôle : un membre de l'équipe donne son avis comme habitant, avec la même règle. Quand une personne supprime son compte, ses adhésions en cours se terminent le jour même.
 
 ## Modifier un utilisateur
 
@@ -86,8 +86,8 @@ Pour désactiver un compte sans le supprimer, modifiez l'utilisateur et **décoc
 
 Depuis leur profil sur le site, les habitants peuvent, sans votre intervention :
 
-- **recevoir à nouveau le lien de confirmation** de leur adresse email (nécessaire pour voter ou proposer une idée) ;
-- choisir leurs **notifications par email**, toutes désactivées par défaut : *Résultats des votes*, *Actualités des projets*, *Rappels d'événements*. Chaque email contient un lien de désinscription ;
+- **recevoir à nouveau le lien de confirmation** de leur adresse email (nécessaire pour donner son avis ou proposer une idée) ;
+- choisir leurs **notifications par email**, toutes désactivées par défaut : *Résultats des avis*, *Actualités des projets*, *Rappels d'événements*. Chaque email contient un lien de désinscription ;
 - s'abonner ou se désabonner de la **newsletter** ;
 - **Télécharger mes données** : un fichier avec tout ce que le site conserve sur eux (droit d'accès RGPD) ;
 - **Supprimer mon compte**.

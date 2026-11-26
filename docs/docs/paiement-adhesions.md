@@ -28,4 +28,4 @@ Tant que ces variables manquent, la page d'adhésion indique que le paiement en 
 3. Dans les deux cas, le site **redemande le paiement à HelloAsso** : ni le retour ni la notification ne suffisent seuls. Une fois le paiement confirmé, l'adhésion est enregistrée (une seule fois) et un email de confirmation part.
 4. Toutes les 15 minutes, une tâche vérifie les paiements en attente, au cas où une notification se serait perdue. Sans paiement au bout de 45 minutes, le paiement passe en **abandonné** ; il est encore enregistré si HelloAsso le confirme plus tard.
 
-Avant d'ouvrir, activez **Réserver la participation aux adhérents** dans les [fonctionnalités](fonctionnalites.md) : tous les comptes, y compris les existants, devront alors adhérer pour voter.
+Avant d'ouvrir, activez **Réserver la participation aux adhérents** dans les [fonctionnalités](fonctionnalites.md) : tous les comptes, y compris les existants, devront alors adhérer pour donner leur avis.

@@ -14,11 +14,11 @@ function popupContent(project: ProjectProperties, messages: DOMStringMap): HTMLE
   const root = document.createElement("div");
   root.className = "map-popup";
 
-  // One truncated line: the full category is in the tooltip.
-  const category = document.createElement("p");
-  category.className = "map-popup__category";
-  category.textContent = project.category;
-  category.title = project.category;
+  // One truncated line: the full rubric list is in the tooltip.
+  const rubrics = document.createElement("p");
+  rubrics.className = "map-popup__rubrics";
+  rubrics.textContent = project.rubrics;
+  rubrics.title = project.rubrics;
 
   const title = document.createElement("a");
   title.href = project.url;
@@ -43,7 +43,7 @@ function popupContent(project: ProjectProperties, messages: DOMStringMap): HTMLE
     footer.append(status);
   }
 
-  if (project.category) root.append(category);
+  if (project.rubrics) root.append(rubrics);
   root.append(title);
   if (project.description) root.append(description);
   root.append(footer);
@@ -65,7 +65,7 @@ onReady(() => {
   for (const feature of projects.features) {
     const className = feature.properties.isOpen ? "map-project map-project--open" : "map-project";
     projectLayer(feature as ProjectFeature, className)
-      // A fixed minimum: Leaflet sizes the popup to its content, which the truncated category shrinks.
+      // A fixed minimum: Leaflet sizes the popup to its content, which the truncated rubric line shrinks.
       .bindPopup(() => popupContent(feature.properties, messages), {
         className: "map-popup-frame",
         minWidth: 260,

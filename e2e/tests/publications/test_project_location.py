@@ -65,7 +65,7 @@ PARIS: Geolocation = {"latitude": 48.8566, "longitude": 2.3522}
 
 
 @pytest.mark.e2e
-def test_project_popup_keeps_the_category_on_one_line(page: Page, base_url: str):
+def test_project_popup_keeps_the_rubrics_on_one_line(page: Page, base_url: str):
     page.context.grant_permissions(["geolocation"])
     page.context.set_geolocation(PHARO)
     page.goto(f"{base_url}/actualites/")
@@ -84,11 +84,13 @@ def test_project_popup_keeps_the_category_on_one_line(page: Page, base_url: str)
     expect(popup.locator(".map-popup__title")).to_have_text("Projet ouvert aux idées")
     popup_box = popup.bounding_box()
     assert popup_box is not None
-    assert popup_box["width"] >= 260  # truncating the category must not shrink the card
-    category = popup.locator(".map-popup__category")
-    expect(category).to_have_attribute("title", "Cadre de vie / Espaces Publics / Mobilité")
-    line_height = category.evaluate("el => parseFloat(getComputedStyle(el).lineHeight)")
-    box = category.bounding_box()
+    assert popup_box["width"] >= 260  # truncating the rubrics must not shrink the card
+    rubrics = popup.locator(".map-popup__rubrics")
+    expect(rubrics).to_have_attribute(
+        "title", "Habitat · Parcs & Jardins · Espace Public · Patrimoine"
+    )
+    line_height = rubrics.evaluate("el => parseFloat(getComputedStyle(el).lineHeight)")
+    box = rubrics.bounding_box()
     assert box is not None
     assert box["height"] <= line_height + 1
     expect(popup.locator(".map-popup__status")).to_be_visible()

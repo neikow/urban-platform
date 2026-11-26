@@ -7,7 +7,11 @@ from wagtail.rich_text import RichText
 
 from core.blocks import BLOCK_TYPE_RICH_TEXT, TextJustification
 from home.models import HomePage
-from publications.models import ProjectPage, PublicationIndexPage, ProjectCategory, EventPage
+from publications.models import ProjectPage, PublicationIndexPage, EventPage, Rubric, RubricCode
+
+
+def rubrics(*codes: str) -> list[Rubric]:
+    return list(Rubric.objects.filter(code__in=codes))
 
 
 class ProjectPageModelTest(TestCase):
@@ -19,19 +23,30 @@ class ProjectPageModelTest(TestCase):
         cls.project_index = PublicationIndexPage(title="Projects", slug="projects")
         home_page.add_child(instance=cls.project_index)
 
-    def test_project_creation_with_default_category(self) -> None:
+    def test_project_creation(self) -> None:
         project = ProjectPage(title="Test Project", description="Test description")
         self.project_index.add_child(instance=project)
 
         self.assertEqual(project.title, "Test Project")
         self.assertEqual(project.description, "Test description")
-        self.assertEqual(project.category, ProjectCategory.LIVING_ENVIRONMENT)
+        self.assertEqual(project.rubric_labels, [])
 
-    def test_project_all_categories_valid(self) -> None:
-        for category_value in ProjectCategory.values:
-            project = ProjectPage(title=f"Project {category_value}", category=category_value)
-            self.project_index.add_child(instance=project)
-            self.assertEqual(project.category, category_value)
+    def test_project_belongs_to_several_rubrics_in_display_order(self) -> None:
+        project = ProjectPage(
+            title="Several rubrics", rubrics=rubrics(RubricCode.HERITAGE, RubricCode.HOUSING)
+        )
+        self.project_index.add_child(instance=project)
+        project.save_revision().publish()
+
+        project = ProjectPage.objects.get(pk=project.pk)
+        self.assertEqual(
+            [r.code for r in project.rubrics.all()], [RubricCode.HOUSING, RubricCode.HERITAGE]
+        )
+        self.assertEqual(len(project.rubric_labels), 2)
+
+    def test_rubrics_are_required_in_the_editor(self) -> None:
+        form_class = ProjectPage.get_edit_handler().get_form_class()
+        self.assertTrue(form_class.base_fields["rubrics"].required)
 
     def test_table_of_contents_empty_when_no_content(self) -> None:
         project = ProjectPage(title="Empty Project")
@@ -41,7 +56,6 @@ class ProjectPageModelTest(TestCase):
     def test_table_of_contents_extracts_headers(self) -> None:
         project = ProjectPage(
             title="Project with TOC",
-            category=ProjectCategory.URBAN_FORMS,
             content=[
                 (
                     BLOCK_TYPE_RICH_TEXT,
@@ -143,11 +157,15 @@ class PublicationIndexPageModelTest(TestCase):
 
         cls.publication_index = PublicationIndexPage.objects.first()
 
-        project1 = ProjectPage(title="Urban Project", category=ProjectCategory.URBAN_FORMS)
+        project1 = ProjectPage(
+            title="Urban Project", rubrics=rubrics(RubricCode.HOUSING, RubricCode.HERITAGE)
+        )
         cls.publication_index.add_child(instance=project1)
         project1.save_revision().publish()
 
-        project2 = ProjectPage(title="Environment Project", category=ProjectCategory.ENVIRONMENT)
+        project2 = ProjectPage(
+            title="Environment Project", rubrics=rubrics(RubricCode.PARKS_GARDENS)
+        )
         cls.publication_index.add_child(instance=project2)
         project2.save_revision().publish()
 
@@ -169,15 +187,19 @@ class PublicationIndexPageModelTest(TestCase):
         request = self.factory.get("/publications/?type=events")
         self.assertEqual(len(self.publication_index.get_publications(request)), 1)
 
-    def test_get_publications_filters_by_category(self) -> None:
-        request = self.factory.get("/publications/?type=projects&category=URBAN_FORMS")
-        publications = self.publication_index.get_publications(request)
+    def test_get_publications_filters_by_rubric(self) -> None:
+        for code in (RubricCode.HOUSING, RubricCode.HERITAGE):
+            request = self.factory.get(f"/publications/?type=projects&rubric={code}")
+            publications = self.publication_index.get_publications(request)
 
-        self.assertEqual(len(publications), 1)
-        self.assertEqual(publications[0].title, "Urban Project")
+            self.assertEqual(len(publications), 1)
+            self.assertEqual(publications[0].title, "Urban Project")
 
-    def test_get_publications_ignores_invalid_category(self) -> None:
-        request = self.factory.get("/publications/?type=projects&category=INVALID")
+        request = self.factory.get("/publications/?type=projects&rubric=PUBLIC_SPACE")
+        self.assertEqual(len(self.publication_index.get_publications(request)), 0)
+
+    def test_get_publications_ignores_invalid_rubric(self) -> None:
+        request = self.factory.get("/publications/?type=projects&rubric=INVALID")
         publications = self.publication_index.get_publications(request)
         self.assertEqual(len(publications), 2)
 
@@ -194,7 +216,7 @@ class PublicationIndexPageModelTest(TestCase):
 
     def test_get_publications_pagination(self) -> None:
         for i in range(15):
-            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.LIVING_ENVIRONMENT)
+            project = ProjectPage(title=f"Project {i}", rubrics=rubrics(RubricCode.PUBLIC_SPACE))
             self.publication_index.add_child(instance=project)
             project.save_revision().publish()
 
@@ -206,7 +228,7 @@ class PublicationIndexPageModelTest(TestCase):
 
     def test_get_publications_invalid_page_falls_back(self) -> None:
         for i in range(15):
-            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.LIVING_ENVIRONMENT)
+            project = ProjectPage(title=f"Project {i}", rubrics=rubrics(RubricCode.PUBLIC_SPACE))
             self.publication_index.add_child(instance=project)
             project.save_revision().publish()
 
@@ -225,12 +247,12 @@ class PublicationIndexPageModelTest(TestCase):
         self.publication_index.save_revision().publish()
 
         response = self.client.get(
-            self.publication_index.url + "?type=projects&search=a%26b&category=ENVIRONMENT"
+            self.publication_index.url + "?type=projects&search=a%26b&rubric=PARKS_GARDENS"
         )
 
         content = response.content.decode()
-        # Category links keep the search term, URL-encoded, and drop the page.
-        self.assertIn("type=projects&amp;search=a%26b&amp;category=URBAN_FORMS", content)
+        # Rubric links keep the search term, URL-encoded, and drop the page.
+        self.assertIn("type=projects&amp;search=a%26b&amp;rubric=HOUSING", content)
         self.assertNotIn("search=a&b", content)
 
     def test_project_cards_have_no_type_badge(self) -> None:
@@ -241,7 +263,7 @@ class PublicationIndexPageModelTest(TestCase):
         self.assertEqual(response.context["selected_type"], "projects")
         self.assertNotContains(response, "badge-primary")
 
-    def test_category_filter_offers_all_urban_planning(self) -> None:
+    def test_rubric_filter_offers_all_urban_planning(self) -> None:
         self.publication_index.save_revision().publish()
 
         response = self.client.get(self.publication_index.url + "?type=projects")
@@ -250,24 +272,24 @@ class PublicationIndexPageModelTest(TestCase):
 
     def test_pagination_links_keep_filters(self) -> None:
         for i in range(15):
-            project = ProjectPage(title=f"Project {i}", category=ProjectCategory.LIVING_ENVIRONMENT)
+            project = ProjectPage(title=f"Project {i}", rubrics=rubrics(RubricCode.PUBLIC_SPACE))
             self.publication_index.add_child(instance=project)
             project.save_revision().publish()
         self.publication_index.save_revision().publish()
 
         response = self.client.get(
-            self.publication_index.url + "?type=projects&category=LIVING_ENVIRONMENT"
+            self.publication_index.url + "?type=projects&rubric=PUBLIC_SPACE"
         )
 
         self.assertIn(
-            "?type=projects&amp;category=LIVING_ENVIRONMENT&amp;page=2", response.content.decode()
+            "?type=projects&amp;rubric=PUBLIC_SPACE&amp;page=2", response.content.decode()
         )
 
     def test_get_context_returns_expected_keys(self) -> None:
-        request = self.factory.get("/publications/?type=events&category=URBAN_FORMS")
+        request = self.factory.get("/publications/?type=events&rubric=HOUSING")
         context = self.publication_index.get_context(request)
 
         self.assertIn("publications", context)
-        self.assertIn("categories", context)
+        self.assertEqual([r.value for r in context["rubrics"]], RubricCode.values)
         self.assertEqual(context["selected_type"], "events")
-        self.assertEqual(context["selected_category"], "URBAN_FORMS")
+        self.assertEqual(context["selected_rubric"], "HOUSING")

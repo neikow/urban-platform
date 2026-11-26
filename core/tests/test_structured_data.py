@@ -12,7 +12,7 @@ from pedagogy.factories.pedagogy_card_factory import PedagogyCardPageFactory
 from pedagogy.models import PedagogyIndexPage, PedagogyCardPage
 from publications.factories import EventPageFactory, ProjectPageFactory
 from publications.models import PublicationIndexPage, EventPage, ProjectPage
-from publications.models.project import ProjectCategory
+from publications.models import Rubric, RubricCode
 
 
 class StructuredDataBaseTestCase(TestCase):
@@ -148,7 +148,7 @@ class ProjectPageStructuredDataTests(StructuredDataBaseTestCase):
             parent=self.home,
             title="Projet de mobilité douce",
             description="Un projet pour améliorer la mobilité",
-            category=ProjectCategory.LIVING_ENVIRONMENT,
+            rubrics=[Rubric.objects.get(code=RubricCode.PUBLIC_SPACE)],
         )
 
     def test_type_is_article(self) -> None:
@@ -163,11 +163,16 @@ class ProjectPageStructuredDataTests(StructuredDataBaseTestCase):
         schema = get_structured_data(self.request, self.project)
         self.assertEqual(schema["description"], "Un projet pour améliorer la mobilité")
 
-    def test_article_section_from_category(self) -> None:
+    def test_article_section_from_rubric(self) -> None:
         schema = get_structured_data(self.request, self.project)
-        self.assertIn("articleSection", schema)
-        self.assertIsInstance(schema["articleSection"], str)
-        self.assertNotEqual(schema["articleSection"], "")
+        public_space = Rubric.objects.get(code=RubricCode.PUBLIC_SPACE)
+        self.assertEqual(schema["articleSection"], str(public_space))
+
+    def test_article_section_lists_every_rubric(self) -> None:
+        self.project.rubrics.set(Rubric.objects.all())
+        self.project.save()
+        schema = get_structured_data(self.request, self.project)
+        self.assertEqual(schema["articleSection"], [str(r) for r in Rubric.objects.all()])
 
     def test_image_included_when_hero_image_present(self) -> None:
         schema = get_structured_data(self.request, self.project)

@@ -40,7 +40,7 @@ Contenus d'une section :
 |---|---|
 | **Texte** | Paragraphes, intertitres, listes, liens |
 | **Étapes** | De deux à six étapes numérotées, par exemple « comment participer » |
-| **Chiffres clés** | De deux à quatre grands chiffres. Choisissez un chiffre **compté automatiquement** (projets publiés, votes exprimés, idées proposées, personnes ayant participé, membres inscrits, événements, consultations en cours) ou saisissez un nombre |
+| **Chiffres clés** | De deux à quatre grands chiffres. Choisissez un chiffre **compté automatiquement** (projets publiés, avis exprimés, idées proposées, personnes ayant participé, membres inscrits, événements, consultations en cours) ou saisissez un nombre |
 | **Citations** | Jusqu'à trois témoignages d'habitants, avec leur nom et leur quartier |
 | **Questions et réponses** | Une liste de questions qui se déplient |
 
@@ -50,7 +50,7 @@ Ces blocs se remplissent tout seuls à partir du site : la page reste à jour sa
 
 | Bloc | Ce qu'il affiche |
 |---|---|
-| **Consultations en cours** | Les projets ouverts au vote ou aux idées, ceux qui ferment le plus tôt en premier. **Masqué quand aucune consultation n'est ouverte** |
+| **Consultations en cours** | Les projets ouverts aux avis ou aux idées, ceux qui ferment le plus tôt en premier. **Masqué quand aucune consultation n'est ouverte** |
 | **Événements à venir** | Les prochains événements. **Masqué quand aucun n'est prévu** |
 | **Carte des projets** | Les projets localisés, sur la carte du quartier |
 | **Bloc des publications récentes** | Les dernières publications |
