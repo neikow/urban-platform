@@ -1,6 +1,6 @@
 # Actualités : projets et événements
 
-La section **Actualités** regroupe le contenu éditorial du site : les **projets** et les **événements**. Sur le site, ils sont listés dans la page « Actualités », avec des filtres par type et par catégorie, une recherche et la carte des projets.
+La section **Actualités** regroupe le contenu éditorial du site : les **projets** et les **événements**. Sur le site, ils sont listés dans la page « Actualités », avec des filtres par type et par rubrique, une recherche et la carte des projets.
 
 ![Liste des publications](../screenshots/publications-liste.png)
 <!-- Capture d'écran : liste des publications avec les colonnes Titre, Mis à jour, Type, Statut -->
