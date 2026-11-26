@@ -123,7 +123,7 @@ def project_feature(project: "ProjectPage") -> dict[str, Any]:
         "properties": {
             "title": project.title,
             "url": project.url,
-            "category": project.get_category_display(),
+            "rubrics": " · ".join(project.rubric_labels),
             "description": project.description[:200],
             "participation": project.participation_mode,
             "isOpen": project.is_voting_open or project.is_ideas_open,

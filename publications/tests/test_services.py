@@ -4,7 +4,7 @@ from django.test import TestCase
 
 from publications.services import (
     PublicationFilters,
-    filter_publications_by_category,
+    filter_publications_by_rubric,
     filter_publications_by_type,
     paginate_publications,
     search_publications,
@@ -16,7 +16,7 @@ class PublicationFiltersTest(TestCase):
         filters = PublicationFilters()
 
         self.assertEqual(filters.publication_type, "projects")
-        self.assertIsNone(filters.category)
+        self.assertIsNone(filters.rubric)
         self.assertEqual(filters.search_query, "")
         self.assertIsNone(filters.page_number)
 
@@ -24,7 +24,7 @@ class PublicationFiltersTest(TestCase):
         request = MagicMock()
         get_data = {
             "type": "projects",
-            "category": "URBAN_FORMS",
+            "rubric": "HOUSING",
             "search": "test query",
             "page": "2",
         }
@@ -33,7 +33,7 @@ class PublicationFiltersTest(TestCase):
         filters = PublicationFilters.from_request(request)
 
         self.assertEqual(filters.publication_type, "projects")
-        self.assertEqual(filters.category, "URBAN_FORMS")
+        self.assertEqual(filters.rubric, "HOUSING")
         self.assertEqual(filters.search_query, "test query")
         self.assertEqual(filters.page_number, "2")
 
@@ -44,7 +44,7 @@ class PublicationFiltersTest(TestCase):
         filters = PublicationFilters.from_request(request)
 
         self.assertEqual(filters.publication_type, "projects")
-        self.assertIsNone(filters.category)
+        self.assertIsNone(filters.rubric)
         self.assertEqual(filters.search_query, "")
         self.assertIsNone(filters.page_number)
         self.assertFalse(filters.show_past_events)
@@ -161,36 +161,36 @@ class FilterPublicationsByTypeTest(TestCase):
 
 
 class FilterPublicationsByCategoryTest(TestCase):
-    def test_filter_with_valid_category(self) -> None:
+    def test_filter_with_valid_rubric(self) -> None:
         mock_queryset = MagicMock()
         mock_filtered = MagicMock()
         mock_queryset.filter.return_value = mock_filtered
 
-        result = filter_publications_by_category(mock_queryset, "URBAN_FORMS")
+        result = filter_publications_by_rubric(mock_queryset, "HOUSING")
 
-        mock_queryset.filter.assert_called_once_with(projectpage__category="URBAN_FORMS")
+        mock_queryset.filter.assert_called_once_with(projectpage__rubrics__code="HOUSING")
         self.assertEqual(result, mock_filtered)
 
-    def test_filter_with_invalid_category_returns_unchanged(self) -> None:
+    def test_filter_with_invalid_rubric_returns_unchanged(self) -> None:
         mock_queryset = MagicMock()
 
-        result = filter_publications_by_category(mock_queryset, "INVALID_CATEGORY")
+        result = filter_publications_by_rubric(mock_queryset, "INVALID_RUBRIC")
 
         mock_queryset.filter.assert_not_called()
         self.assertEqual(result, mock_queryset)
 
-    def test_filter_with_none_category_returns_unchanged(self) -> None:
+    def test_filter_with_none_rubric_returns_unchanged(self) -> None:
         mock_queryset = MagicMock()
 
-        result = filter_publications_by_category(mock_queryset, None)
+        result = filter_publications_by_rubric(mock_queryset, None)
 
         mock_queryset.filter.assert_not_called()
         self.assertEqual(result, mock_queryset)
 
-    def test_filter_with_empty_category_returns_unchanged(self) -> None:
+    def test_filter_with_empty_rubric_returns_unchanged(self) -> None:
         mock_queryset = MagicMock()
 
-        result = filter_publications_by_category(mock_queryset, "")
+        result = filter_publications_by_rubric(mock_queryset, "")
 
         mock_queryset.filter.assert_not_called()
         self.assertEqual(result, mock_queryset)

@@ -129,11 +129,9 @@ def _schema_for_project(request: HttpRequest, page: Page) -> dict[str, Any]:
     if image_url:
         data["image"] = image_url
 
-    category = getattr(page, "get_category_display", None)
-    if callable(category):
-        cat_label = category()
-        if cat_label:
-            data["articleSection"] = cat_label
+    rubrics = getattr(page, "rubric_labels", None)
+    if rubrics:
+        data["articleSection"] = rubrics[0] if len(rubrics) == 1 else rubrics
 
     if page.first_published_at:
         data["datePublished"] = page.first_published_at.isoformat()

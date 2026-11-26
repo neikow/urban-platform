@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 from django.http import HttpRequest
 from wagtail.query import PageQuerySet
 
-from publications.models.project import ProjectCategory
+from publications.models.rubric import RubricCode
 
 if TYPE_CHECKING:
     from publications.models.project import ProjectPage
@@ -21,7 +21,7 @@ PUBLICATION_TYPES = ("projects", "events")
 @dataclass
 class PublicationFilters:
     publication_type: str = "projects"
-    category: Optional[str] = None
+    rubric: Optional[str] = None
     search_query: str = ""
     page_number: Optional[str] = None
     show_past_events: bool = False
@@ -30,7 +30,7 @@ class PublicationFilters:
     def from_request(cls, request: HttpRequest) -> "PublicationFilters":
         return cls(
             publication_type=publication_type_from(request),
-            category=request.GET.get("category"),
+            rubric=request.GET.get("rubric"),
             search_query=request.GET.get("search", ""),
             # Kept as raw input: Paginator.get_page() falls back to a valid page.
             page_number=request.GET.get("page"),
@@ -70,11 +70,11 @@ def filter_publications_by_type(
     return publications.filter(content_type=project_ct).order_by("-first_published_at")
 
 
-def filter_publications_by_category(
-    publications: PageQuerySet, category: Optional[str]
+def filter_publications_by_rubric(
+    publications: PageQuerySet, rubric: Optional[str]
 ) -> PageQuerySet:
-    if category and category in [c.value for c in ProjectCategory]:
-        return publications.filter(projectpage__category=category)
+    if rubric and rubric in RubricCode.values:
+        return publications.filter(projectpage__rubrics__code=rubric)
     return publications
 
 
@@ -105,7 +105,7 @@ def get_filtered_publications(
     )
 
     if filters.publication_type == "projects":
-        publications = filter_publications_by_category(publications, filters.category)
+        publications = filter_publications_by_rubric(publications, filters.rubric)
 
     publications = search_publications(publications, filters.search_query)
 

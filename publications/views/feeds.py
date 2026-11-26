@@ -77,5 +77,5 @@ class PublicationsFeed(Feed):
 
     def item_categories(self, item: PublicationPage) -> list[str]:
         kind = _("Event") if item.is_event else _("Project")
-        category = item.get_category_display() if item.is_project else ""  # type: ignore[attr-defined]
-        return [c for c in (str(kind), category) if c]
+        rubrics = item.rubric_labels if item.is_project else []  # type: ignore[attr-defined]
+        return [str(kind), *rubrics]

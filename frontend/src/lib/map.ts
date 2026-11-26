@@ -16,7 +16,7 @@ export interface MapConfig {
 export interface ProjectProperties {
   title: string;
   url: string;
-  category: string;
+  rubrics: string;
   description: string;
   participation: "NONE" | "VOTING" | "IDEAS";
   isOpen: boolean;

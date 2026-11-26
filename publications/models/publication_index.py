@@ -23,7 +23,7 @@ from publications.services import (
 
 
 @dataclass
-class CategoryFilter:
+class RubricFilter:
     label: StrOrPromise
     value: str
     is_selected: bool
@@ -100,16 +100,16 @@ class PublicationIndexPage(RoutablePageMixin, Page):
 
     def get_results_context(self, request: HttpRequest) -> dict[str, Any]:
         """What the list region (components/publication_results.html) needs."""
-        from publications.models.project import ProjectCategory
+        from publications.models.rubric import RubricCode
 
-        selected_category = request.GET.get("category", "")
+        selected_rubric = request.GET.get("rubric", "")
         return {
             "publications": self.get_publications(request),
-            "categories": [
-                CategoryFilter(label=label, value=value, is_selected=(value == selected_category))
-                for value, label in ProjectCategory.choices
+            "rubrics": [
+                RubricFilter(label=label, value=value, is_selected=(value == selected_rubric))
+                for value, label in RubricCode.choices
             ],
-            "selected_category": selected_category,
+            "selected_rubric": selected_rubric,
             "selected_type": publication_type_from(request),
             "show_past_events": request.GET.get("show_past", "").lower() in ("true", "1", "on"),
         }
