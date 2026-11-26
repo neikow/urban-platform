@@ -1,6 +1,6 @@
 # Collecte d'idées
 
-Un projet en **mode « Collecte d'idées »** invite les habitants à proposer leurs idées plutôt qu'à voter. C'est utile quand le projet n'est pas encore figé (voir [Projets](publications/projets.md#mode-de-participation)).
+Un projet en **mode « Collecte d'idées »** invite les habitants à proposer leurs idées plutôt qu'à donner leur avis. C'est utile quand le projet n'est pas encore figé (voir [Projets](publications/projets.md#mode-de-participation)).
 
 ## Consulter les idées
 
@@ -12,7 +12,7 @@ Le tableau liste les projets en collecte d'idées, avec le **nombre d'idées** r
 
 ### Filtre géographique
 
-Comme pour les votes, seules les idées des habitants du **code postal 13007** sont affichées par défaut. Cochez **« Montrer les idées en dehors du 13007 »** pour toutes les voir.
+Comme pour les avis, seules les idées des habitants du **code postal 13007** sont affichées par défaut. Cochez **« Montrer les idées en dehors du 13007 »** pour toutes les voir.
 
 ## Qui peut proposer une idée ?
 

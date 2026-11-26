@@ -1,6 +1,7 @@
 from .publication import PublicationPage
 from .publication_index import PublicationIndexPage
-from .project import ParticipationMode, ProjectPage, ProjectCategory
+from .project import ParticipationMode, ProjectPage
+from .rubric import Rubric, RubricCode
 from .event import EventPage
 from .event_interest import EventInterest
 from .form import (

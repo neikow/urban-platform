@@ -1,6 +1,6 @@
 # Tâches
 
-Certaines opérations tournent **en arrière-plan** : envoi des emails, clôture des votes, rappels d'événements, mise à jour de la [carte](carte.md), rattachement des habitants aux [associations](associations.md)… La page **Tâches** montre ce qui tourne et ce qui a tourné. Elle est réservée aux **administrateurs**.
+Certaines opérations tournent **en arrière-plan** : envoi des emails, clôture des avis, rappels d'événements, mise à jour de la [carte](carte.md), rattachement des habitants aux [associations](associations.md)… La page **Tâches** montre ce qui tourne et ce qui a tourné. Elle est réservée aux **administrateurs**.
 
 Dans la barre latérale, ouvrez **Paramètres** puis **Tâches**. La page se met à jour toute seule toutes les quelques secondes (en pause quand l'onglet est en arrière-plan).
 
@@ -10,7 +10,7 @@ Dans la barre latérale, ouvrez **Paramètres** puis **Tâches**. La page se met
 |---|---|
 | **Mettre à jour la carte** | Télécharge les dernières données OpenStreetMap (environ 35 Mo) |
 | **Rattacher les habitants aux associations** | Recalcule l'association de chaque habitant ayant une adresse, sauf ceux qui ont choisi leur CIQ |
-| **Clore les votes échus** | Clôt les votes dont la date de fin est passée et envoie leurs résultats |
+| **Clore les avis échus** | Clôt les avis dont la date de fin est passée et envoie leurs résultats |
 | **Vérifier les paiements des adhésions** | Interroge HelloAsso sur les [paiements](paiement-adhesions.md) en attente et enregistre les adhésions payées (aussi automatique, toutes les 15 minutes) |
 | **Envoyer les rappels de renouvellement** | Écrit aux adhérents qui n'ont pas renouvelé (aussi automatique, chaque jour à 9 h 30) |
 
@@ -20,7 +20,7 @@ Une tâche déjà en cours n'est pas relancée.
 
 Le nombre de **workers** (les processus qui exécutent les tâches) en ligne, le nombre de tâches en attente, et la liste des tâches en cours, réservées ou planifiées.
 
-**Aucun worker ne répond** signifie que les tâches de fond ne tournent plus : plus d'emails, plus de clôture automatique des votes. Prévenez la personne qui gère le serveur.
+**Aucun worker ne répond** signifie que les tâches de fond ne tournent plus : plus d'emails, plus de clôture automatique des avis. Prévenez la personne qui gère le serveur.
 
 ## Exécutions récentes
 

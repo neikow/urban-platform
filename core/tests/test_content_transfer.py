@@ -17,6 +17,7 @@ from publications.factories import ProjectPageFactory
 from publications.models.external_link import ProjectExternalLink
 from publications.models.project import ProjectPage
 from publications.models.publication_index import PublicationIndexPage
+from publications.models.rubric import Rubric, RubricCode
 
 
 class ContentTransferTestCase(TestCase):
@@ -30,6 +31,7 @@ class ContentTransferTestCase(TestCase):
             parent=self.publication_index,
             title="Mobilité douce",
             slug="mobilite-douce",
+            rubrics=list(Rubric.objects.filter(code__in=[RubricCode.HOUSING, RubricCode.HERITAGE])),
         )
         ProjectExternalLink.objects.create(
             page=self.project, title="En savoir plus", url="https://example.com", tooltip="Info"
@@ -66,6 +68,9 @@ class ContentTransferTestCase(TestCase):
         project = ProjectPage.objects.get(slug="mobilite-douce")
         self.assertEqual(project.title, "Mobilité douce")
         self.assertEqual(project.get_parent().id, self.publication_index.id)
+        self.assertEqual(
+            [r.code for r in project.rubrics.all()], [RubricCode.HOUSING, RubricCode.HERITAGE]
+        )
 
         # Hero image restored under its original pk; references stay valid.
         self.assertEqual(project.hero_image_id, hero_pk)

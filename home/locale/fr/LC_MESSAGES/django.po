@@ -75,7 +75,7 @@ msgstr "Projets publiés"
 
 #: home/blocks.py:106
 msgid "Votes cast"
-msgstr "Votes exprimés"
+msgstr "Avis exprimés"
 
 #: home/blocks.py:107
 msgid "Ideas submitted"
@@ -194,7 +194,7 @@ msgid ""
 "Projects open for votes or ideas, closing soonest first. Hidden when none is "
 "open."
 msgstr ""
-"Les projets ouverts aux votes ou aux idées, ceux qui ferment le plus tôt en "
+"Les projets ouverts aux avis ou aux idées, ceux qui ferment le plus tôt en "
 "premier. Masqué quand aucun n'est ouvert."
 
 #: home/blocks.py:333
@@ -314,7 +314,7 @@ msgstr "Tous les projets"
 
 #: home/templates/home/blocks/open_projects.html:40
 msgid "Vote open"
-msgstr "Vote ouvert"
+msgstr "Avis ouverts"
 
 #: home/templates/home/blocks/open_projects.html:40
 msgid "Ideas welcome"

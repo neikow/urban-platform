@@ -18,7 +18,7 @@ Seules les actions que vous avez le droit de faire sont affichées.
 
 ### Consultations à suivre
 
-Les projets dont le **vote** ou la **collecte d'idées** est ouvert : le type de participation, la date de clôture, le nombre de réponses, et un lien **Voir les réponses** vers les [votes](statistiques-votes.md) ou les [idées](collecte-idees.md).
+Les projets dont le **recueil d'avis** ou la **collecte d'idées** est ouvert : le type de participation, la date de clôture, le nombre de réponses, et un lien **Voir les réponses** vers les [avis](statistiques-votes.md) ou les [idées](collecte-idees.md).
 
 ### Événements à venir
 
@@ -49,7 +49,7 @@ Le menu est organisé par tâche :
 | **Actualités** | Page « Actualités », toutes les publications, **Nouveau projet**, **Nouvel événement** → [Actualités](publications/index.md) |
 | **Informations utiles** | Page « Informations utiles », toutes les fiches, **Nouvelle fiche** → [Informations utiles](fiches-pedagogiques.md) |
 | **Pages du site** | Les pages « À propos » et les pages légales → [À propos](a-propos.md), [Pages légales](legal.md) |
-| **Participation** | **Votes** et **Idées** des habitants → [Votes](statistiques-votes.md), [Idées](collecte-idees.md) |
+| **Participation** | **Avis** et **Idées** des habitants → [Avis](statistiques-votes.md), [Idées](collecte-idees.md) |
 | **Médiathèque** | **Images** et **Documents** → [Images](images.md), [Documents](documents.md) |
 | **Paramètres** | **Annonce**, **Utilisateurs** et les réglages techniques → [Annonce](annonce.md), [Utilisateurs](utilisateurs.md) |
 | **Documentation** | Ce guide |

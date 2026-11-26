@@ -124,7 +124,7 @@
 }
 
 /* Secondary to the title: one quiet line, cut with an ellipsis. */
-.map-popup__category {
+.map-popup__rubrics {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

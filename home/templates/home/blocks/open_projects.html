@@ -24,7 +24,7 @@
                                     {% endif %}
                                 {% endif %}
                                 <div>
-                                    <p class="section-label">{{ project.get_category_display }}</p>
+                                    <p class="section-label">{{ project.rubric_labels|join:" · " }}</p>
                                     <h3 class="mt-1 font-display font-extrabold uppercase text-3xl leading-tight transition-colors group-hover:text-primary">
                                         {{ project.title }}
                                     </h3>

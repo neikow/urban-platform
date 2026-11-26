@@ -12,7 +12,7 @@
     <!-- Tab-style type filter -->
     <div class="flex items-center gap-0 border-b border-base-300 mt-6 mb-0">
         <a
-            href="{% querystring type=None category=None page=None show_past=None %}"
+            href="{% querystring type=None rubric=None page=None show_past=None %}"
             class="
                 relative px-4 pb-3 pt-2 text-2xs font-bold uppercase tracking-label transition-colors duration-150
                 {% if selected_type == 'projects' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
@@ -24,7 +24,7 @@
                 ></span>{% endif %}
         </a>
         <a
-            href="{% querystring type='events' category=None page=None %}"
+            href="{% querystring type='events' rubric=None page=None %}"
             class="
                 relative px-4 pb-3 pt-2 text-2xs font-bold uppercase tracking-label transition-colors duration-150
                 {% if selected_type == 'events' %}text-primary{% else %}text-base-content/50 hover:text-base-content{% endif %}
@@ -63,23 +63,23 @@
     {% if selected_type == 'projects' %}
         <div class="flex flex-wrap gap-2 pt-4 mb-2">
             <a
-                href="{% querystring category=None page=None %}"
+                href="{% querystring rubric=None page=None %}"
                 class="
                     text-2xs font-bold uppercase tracking-wide px-3 py-1.5 rounded transition-colors duration-150
-                    {% if not selected_category %}bg-secondary text-secondary-content{% else %}bg-base-200 text-base-content/60 hover:text-base-content{% endif %}
+                    {% if not selected_rubric %}bg-secondary text-secondary-content{% else %}bg-base-200 text-base-content/60 hover:text-base-content{% endif %}
                 "
             >
                 {% trans "All urban planning" %}
             </a>
-            {% for category in categories %}
+            {% for rubric in rubrics %}
                 <a
-                    href="{% querystring category=category.value page=None %}"
+                    href="{% querystring rubric=rubric.value page=None %}"
                     class="
                         text-2xs font-bold uppercase tracking-wide px-3 py-1.5 rounded transition-colors duration-150
-                        {% if category.is_selected %}bg-secondary text-secondary-content{% else %}bg-base-200 text-base-content/60 hover:text-base-content{% endif %}
+                        {% if rubric.is_selected %}bg-secondary text-secondary-content{% else %}bg-base-200 text-base-content/60 hover:text-base-content{% endif %}
                     "
                 >
-                    {{ category.label }}
+                    {{ rubric.label }}
                 </a>
             {% endfor %}
         </div>

@@ -70,7 +70,7 @@ WEBSITE = PageTemplate(
                         },
                         {
                             "title": "Donner votre avis",
-                            "text": "Votez ou proposez vos idées pendant les consultations.",
+                            "text": "Donnez votre avis ou proposez vos idées pendant les consultations.",
                         },
                         {
                             "title": "Venir aux rendez-vous",
@@ -193,7 +193,7 @@ DEV_TEAM = PageTemplate(
                     "value": [
                         {"metric": FigureMetric.PROJECTS, "value": "", "label": "Projets suivis"},
                         {"metric": FigureMetric.MEMBERS, "value": "", "label": "Membres inscrits"},
-                        {"metric": FigureMetric.VOTES, "value": "", "label": "Votes exprimés"},
+                        {"metric": FigureMetric.VOTES, "value": "", "label": "Avis exprimés"},
                     ],
                 }
             ],

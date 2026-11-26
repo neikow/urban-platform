@@ -59,15 +59,15 @@ VOTE_PROJECT = PageTemplate(
         PROJECT_WHO,
         rich_text(
             "<h2>Comment votre avis est utilisé</h2>"
-            "<p>Expliquez ce que deviendront les résultats du vote : à qui ils seront transmis, "
+            "<p>Expliquez ce que deviendront les avis recueillis : à qui ils seront transmis, "
             "et quand vous en donnerez des nouvelles dans le suivi du projet.</p>"
         ),
         faq(
             (
-                "Qui peut voter ?",
+                "Qui peut donner son avis ?",
                 "Toute personne inscrite sur la plateforme, une fois son adresse email confirmée.",
             ),
-            ("Puis-je changer mon vote ?", "Oui, tant que le vote est ouvert."),
+            ("Puis-je changer mon avis ?", "Oui, tant que le recueil d'avis est ouvert."),
         ),
     ),
 )
@@ -258,7 +258,7 @@ NEWS_FAQ = section(
             "value": [
                 {
                     "question": "Quelle différence entre un projet et un événement ?",
-                    "answer": "Un projet est un aménagement du quartier, sur lequel vous pouvez parfois voter ou proposer des idées. Un événement est un rendez-vous : réunion publique, atelier, balade urbaine.",
+                    "answer": "Un projet est un aménagement du quartier, sur lequel vous pouvez parfois donner votre avis ou proposer des idées. Un événement est un rendez-vous : réunion publique, atelier, balade urbaine.",
                 },
                 {
                     "question": "Comment donner mon avis sur un projet ?",
