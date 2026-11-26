@@ -110,7 +110,7 @@
 | core/widgets.py                                                |       81 |       18 |       16 |        2 |     69.07% |21, 33-40, 54, 73-76, 86-93 |
 | home/\_\_init\_\_.py                                           |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/apps.py                                                   |        4 |        0 |        0 |        0 |    100.00% |           |
-| home/blocks.py                                                 |      224 |        7 |       20 |        4 |     95.49% |119, 131, 133, 285, 405-407 |
+| home/blocks.py                                                 |      224 |        7 |       20 |        4 |     95.49% |119, 131, 133, 288, 408-410 |
 | home/management/\_\_init\_\_.py                                |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/management/commands/\_\_init\_\_.py                       |        0 |        0 |        0 |        0 |    100.00% |           |
 | home/management/commands/mock\_home\_page\_content.py          |       15 |       15 |        2 |        0 |      0.00% |      1-56 |
