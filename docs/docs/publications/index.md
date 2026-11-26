@@ -56,7 +56,7 @@ Les événements sont des rendez-vous avec une **date et un lieu** : réunion pu
 
 ### Projets
 
-Les projets présentent les aménagements du quartier. Les habitants peuvent **voter** ou **proposer des idées**, et suivre leur avancement.
+Les projets présentent les aménagements du quartier. Les habitants peuvent **donner leur avis** ou **proposer des idées**, et suivre leur avancement.
 
 → [Voir le guide des projets](projets.md)
 

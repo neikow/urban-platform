@@ -16,10 +16,10 @@ Ce guide est destiné aux **éditeurs de contenu** et **administrateurs** de la 
 | [Tableau de bord](tableau-de-bord.md) | Ce qui demande votre attention, et le menu |
 | [Partir d'un modèle](modeles.md) | Créer une page à partir d'une page toute prête |
 | [Actualités](publications/index.md) | Gérer les projets et les événements |
-| [Projets](publications/projets.md) | Vote, collecte d'idées, carte, suivi du projet |
+| [Projets](publications/projets.md) | Avis, collecte d'idées, carte, suivi du projet |
 | [Événements](publications/evenements.md) | Réunions, ateliers, balades |
 | [Informations utiles](fiches-pedagogiques.md) | Les fiches pour comprendre l'urbanisme |
-| [Votes](statistiques-votes.md) | Suivre les votes et clore un vote |
+| [Avis](statistiques-votes.md) | Suivre les avis et clore un recueil d'avis |
 | [Idées](collecte-idees.md) | Lire les idées des habitants |
 | [Images](images.md) | Gérer la bibliothèque d'images |
 | [Documents](documents.md) | Gérer les fichiers téléchargeables |
