@@ -28,9 +28,9 @@
 | core/blocks.py                                                 |      182 |        0 |        4 |        2 |     98.92% |255-\>265, 262-\>265 |
 | core/cache.py                                                  |       16 |        2 |        2 |        1 |     83.33% |33-34, 40-\>exit |
 | core/content\_transfer/\_\_init\_\_.py                         |        0 |        0 |        0 |        0 |    100.00% |           |
-| core/content\_transfer/archive.py                              |      167 |       17 |       80 |       13 |     87.85% |122, 143, 151, 158, 228, 235, 238, 242-243, 245, 260-261, 271, 274, 280, 282, 297 |
-| core/content\_transfer/exporter.py                             |       81 |        6 |       18 |        3 |     90.91% |125-\>117, 136-137, 156-157, 177-178 |
-| core/content\_transfer/importer.py                             |      163 |       10 |       50 |        6 |     90.61% |117-119, 131-\>exit, 168-169, 211, 219, 240-241, 249 |
+| core/content\_transfer/archive.py                              |      168 |       17 |       80 |       13 |     87.90% |127, 148, 156, 163, 233, 240, 243, 247-248, 250, 265-266, 276, 279, 285, 287, 302 |
+| core/content\_transfer/exporter.py                             |       82 |        6 |       18 |        3 |     91.00% |126-\>118, 137-138, 157-158, 178-179 |
+| core/content\_transfer/importer.py                             |      168 |       11 |       54 |        7 |     90.09% |119-121, 133-\>exit, 170-171, 182, 217, 225, 246-247, 255 |
 | core/content\_transfer/jobs.py                                 |       56 |        4 |        8 |        1 |     92.19% |34-37, 75-\>77 |
 | core/context\_processors.py                                    |        6 |        0 |        0 |        0 |    100.00% |           |
 | core/data\_export.py                                           |       41 |        0 |        2 |        0 |    100.00% |           |
@@ -80,7 +80,7 @@
 | core/templatetags/forms.py                                     |        6 |        0 |        0 |        0 |    100.00% |           |
 | core/templatetags/navigation\_tags.py                          |       53 |        3 |       18 |        4 |     90.14% |22-\>25, 36, 48, 53 |
 | core/templatetags/social\_meta.py                              |       28 |        0 |        8 |        1 |     97.22% |   50-\>52 |
-| core/templatetags/structured\_data.py                          |      113 |        4 |       42 |       10 |     90.97% |30-31, 90-\>93, 100, 133-\>138, 135-\>138, 154-\>157, 162-\>165, 166-\>169, 173-\>189, 181-\>187, 200 |
+| core/templatetags/structured\_data.py                          |      111 |        4 |       40 |        8 |     92.05% |30-31, 90-\>93, 100, 152-\>155, 160-\>163, 164-\>167, 171-\>187, 179-\>185, 198 |
 | core/toc.py                                                    |       41 |        1 |       22 |        1 |     96.83% |        52 |
 | core/utils.py                                                  |        6 |        0 |        2 |        0 |    100.00% |           |
 | core/views/\_\_init\_\_.py                                     |        0 |        0 |        0 |        0 |    100.00% |           |
@@ -156,7 +156,7 @@
 | publications/management/commands/create\_mock\_votes.py        |       91 |       91 |       30 |        0 |      0.00% |     1-323 |
 | publications/management/commands/runserver.py                  |       50 |       12 |       14 |        0 |     68.75% |50-57, 71-74 |
 | publications/map\_tiles.py                                     |      114 |       26 |       26 |        3 |     76.43% |63, 69-75, 80-93, 101-117, 137, 187-188, 196-\>200 |
-| publications/models/\_\_init\_\_.py                            |       11 |        0 |        0 |        0 |    100.00% |           |
+| publications/models/\_\_init\_\_.py                            |       12 |        0 |        0 |        0 |    100.00% |           |
 | publications/models/event.py                                   |       55 |        0 |        4 |        1 |     98.31% | 117-\>120 |
 | publications/models/event\_interest.py                         |       13 |        1 |        0 |        0 |     92.31% |        35 |
 | publications/models/external\_link.py                          |       17 |        0 |        0 |        0 |    100.00% |           |
@@ -164,10 +164,11 @@
 | publications/models/idea.py                                    |       17 |        1 |        0 |        0 |     94.12% |        54 |
 | publications/models/map\_settings.py                           |       28 |        0 |        0 |        0 |    100.00% |           |
 | publications/models/poll\_closure.py                           |       16 |        1 |        0 |        0 |     93.75% |        40 |
-| publications/models/project.py                                 |       92 |        0 |       12 |        0 |    100.00% |           |
+| publications/models/project.py                                 |       91 |        0 |       12 |        0 |    100.00% |           |
 | publications/models/project\_update.py                         |       18 |        1 |        0 |        0 |     94.44% |        47 |
 | publications/models/publication.py                             |       20 |        0 |        0 |        0 |    100.00% |           |
 | publications/models/publication\_index.py                      |       58 |        1 |        0 |        0 |     98.28% |        51 |
+| publications/models/rubric.py                                  |       17 |        0 |        0 |        0 |    100.00% |           |
 | publications/page\_templates.py                                |       22 |        0 |        0 |        0 |    100.00% |           |
 | publications/polls.py                                          |       34 |        0 |        6 |        0 |    100.00% |           |
 | publications/project\_updates.py                               |       28 |        1 |        6 |        1 |     94.12% |        38 |
@@ -186,7 +187,7 @@
 | publications/views/vote\_stats.py                              |       61 |        0 |        8 |        0 |    100.00% |           |
 | publications/wagtail\_hooks.py                                 |       52 |        6 |        4 |        0 |     85.71% |78-80, 86, 94, 103 |
 | publications/widgets.py                                        |       32 |        0 |        2 |        0 |    100.00% |           |
-| **TOTAL**                                                      | **6975** |  **664** | **1198** |  **158** | **88.25%** |           |
+| **TOTAL**                                                      | **6997** |  **665** | **1200** |  **157** | **88.29%** |           |
 
 
 ## Setup coverage badge

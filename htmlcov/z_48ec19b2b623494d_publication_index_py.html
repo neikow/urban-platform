@@ -5,7 +5,7 @@
     <title>Coverage for publications/models/publication_index.py: 98.28%</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_c827f16f.png">
     <link rel="stylesheet" href="style_cb_4667309f.css" type="text/css">
-    <script src="coverage_html_cb_15cffcd0.js" defer></script>
+    <script src="coverage_html_cb_54cfdca1.js" defer></script>
 </head>
 <body class="pyfile">
 <header>
@@ -64,10 +64,10 @@
         <p class="text">
             <a id="prevFileLink" class="nav" href="z_48ec19b2b623494d_publication_py.html">&#xab; prev</a> &nbsp; &nbsp;
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
-            <a id="nextFileLink" class="nav" href="z_259c02725a53046d_page_templates_py.html">&#xbb; next</a>
+            <a id="nextFileLink" class="nav" href="z_48ec19b2b623494d_rubric_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.16.2">coverage.py v7.16.2</a>,
-            created at 2026-10-22 14:03 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.17.5">coverage.py v7.17.5</a>,
+            created at 2026-11-26 21:37 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -107,7 +107,7 @@
     <p class="pln"><span class="n"><a id="t23" href="#t23">23</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t24" href="#t24">24</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t25" href="#t25">25</a></span><span class="t"><span class="op">@</span><span class="nam">dataclass</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t26" href="#t26">26</a></span><span class="t"><span class="key">class</span> <span class="nam">CategoryFilter</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t26" href="#t26">26</a></span><span class="t"><span class="key">class</span> <span class="nam">RubricFilter</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t27" href="#t27">27</a></span><span class="t">    <span class="nam">label</span><span class="op">:</span> <span class="nam">StrOrPromise</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t28" href="#t28">28</a></span><span class="t">    <span class="nam">value</span><span class="op">:</span> <span class="nam">str</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t29" href="#t29">29</a></span><span class="t">    <span class="nam">is_selected</span><span class="op">:</span> <span class="nam">bool</span>&nbsp;</span><span class="r"></span></p>
@@ -184,16 +184,16 @@
     <p class="pln"><span class="n"><a id="t100" href="#t100">100</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t101" href="#t101">101</a></span><span class="t">    <span class="key">def</span> <span class="nam">get_results_context</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">request</span><span class="op">:</span> <span class="nam">HttpRequest</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="nam">dict</span><span class="op">[</span><span class="nam">str</span><span class="op">,</span> <span class="nam">Any</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t102" href="#t102">102</a></span><span class="t">        <span class="str">&quot;&quot;&quot;What the list region (components/publication_results.html) needs.&quot;&quot;&quot;</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t103" href="#t103">103</a></span><span class="t">        <span class="key">from</span> <span class="nam">publications</span><span class="op">.</span><span class="nam">models</span><span class="op">.</span><span class="nam">project</span> <span class="key">import</span> <span class="nam">ProjectCategory</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t103" href="#t103">103</a></span><span class="t">        <span class="key">from</span> <span class="nam">publications</span><span class="op">.</span><span class="nam">models</span><span class="op">.</span><span class="nam">rubric</span> <span class="key">import</span> <span class="nam">RubricCode</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t104" href="#t104">104</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t105" href="#t105">105</a></span><span class="t">        <span class="nam">selected_category</span> <span class="op">=</span> <span class="nam">request</span><span class="op">.</span><span class="nam">GET</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">&quot;category&quot;</span><span class="op">,</span> <span class="str">&quot;&quot;</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t105" href="#t105">105</a></span><span class="t">        <span class="nam">selected_rubric</span> <span class="op">=</span> <span class="nam">request</span><span class="op">.</span><span class="nam">GET</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">&quot;rubric&quot;</span><span class="op">,</span> <span class="str">&quot;&quot;</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t106" href="#t106">106</a></span><span class="t">        <span class="key">return</span> <span class="op">{</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t107" href="#t107">107</a></span><span class="t">            <span class="str">&quot;publications&quot;</span><span class="op">:</span> <span class="nam">self</span><span class="op">.</span><span class="nam">get_publications</span><span class="op">(</span><span class="nam">request</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t108" href="#t108">108</a></span><span class="t">            <span class="str">&quot;categories&quot;</span><span class="op">:</span> <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t109" href="#t109">109</a></span><span class="t">                <span class="nam">CategoryFilter</span><span class="op">(</span><span class="nam">label</span><span class="op">=</span><span class="nam">label</span><span class="op">,</span> <span class="nam">value</span><span class="op">=</span><span class="nam">value</span><span class="op">,</span> <span class="nam">is_selected</span><span class="op">=</span><span class="op">(</span><span class="nam">value</span> <span class="op">==</span> <span class="nam">selected_category</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t110" href="#t110">110</a></span><span class="t">                <span class="key">for</span> <span class="nam">value</span><span class="op">,</span> <span class="nam">label</span> <span class="key">in</span> <span class="nam">ProjectCategory</span><span class="op">.</span><span class="nam">choices</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t108" href="#t108">108</a></span><span class="t">            <span class="str">&quot;rubrics&quot;</span><span class="op">:</span> <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t109" href="#t109">109</a></span><span class="t">                <span class="nam">RubricFilter</span><span class="op">(</span><span class="nam">label</span><span class="op">=</span><span class="nam">label</span><span class="op">,</span> <span class="nam">value</span><span class="op">=</span><span class="nam">value</span><span class="op">,</span> <span class="nam">is_selected</span><span class="op">=</span><span class="op">(</span><span class="nam">value</span> <span class="op">==</span> <span class="nam">selected_rubric</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t110" href="#t110">110</a></span><span class="t">                <span class="key">for</span> <span class="nam">value</span><span class="op">,</span> <span class="nam">label</span> <span class="key">in</span> <span class="nam">RubricCode</span><span class="op">.</span><span class="nam">choices</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t111" href="#t111">111</a></span><span class="t">            <span class="op">]</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t112" href="#t112">112</a></span><span class="t">            <span class="str">&quot;selected_category&quot;</span><span class="op">:</span> <span class="nam">selected_category</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t112" href="#t112">112</a></span><span class="t">            <span class="str">&quot;selected_rubric&quot;</span><span class="op">:</span> <span class="nam">selected_rubric</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t113" href="#t113">113</a></span><span class="t">            <span class="str">&quot;selected_type&quot;</span><span class="op">:</span> <span class="nam">publication_type_from</span><span class="op">(</span><span class="nam">request</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t114" href="#t114">114</a></span><span class="t">            <span class="str">&quot;show_past_events&quot;</span><span class="op">:</span> <span class="nam">request</span><span class="op">.</span><span class="nam">GET</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">&quot;show_past&quot;</span><span class="op">,</span> <span class="str">&quot;&quot;</span><span class="op">)</span><span class="op">.</span><span class="nam">lower</span><span class="op">(</span><span class="op">)</span> <span class="key">in</span> <span class="op">(</span><span class="str">&quot;true&quot;</span><span class="op">,</span> <span class="str">&quot;1&quot;</span><span class="op">,</span> <span class="str">&quot;on&quot;</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t115" href="#t115">115</a></span><span class="t">        <span class="op">}</span>&nbsp;</span><span class="r"></span></p>
@@ -222,10 +222,10 @@
         <p>
             <a class="nav" href="z_48ec19b2b623494d_publication_py.html">&#xab; prev</a> &nbsp; &nbsp;
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
-            <a class="nav" href="z_259c02725a53046d_page_templates_py.html">&#xbb; next</a>
+            <a class="nav" href="z_48ec19b2b623494d_rubric_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.16.2">coverage.py v7.16.2</a>,
-            created at 2026-10-22 14:03 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.17.5">coverage.py v7.17.5</a>,
+            created at 2026-11-26 21:37 +0000
         </p>
     </div>
 </footer>

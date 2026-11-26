@@ -5,7 +5,7 @@
     <title>Coverage for publications/views/feeds.py: 100.00%</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_c827f16f.png">
     <link rel="stylesheet" href="style_cb_4667309f.css" type="text/css">
-    <script src="coverage_html_cb_15cffcd0.js" defer></script>
+    <script src="coverage_html_cb_54cfdca1.js" defer></script>
 </head>
 <body class="pyfile">
 <header>
@@ -66,8 +66,8 @@
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a id="nextFileLink" class="nav" href="z_0c0b7c30ea084132_idea_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.16.2">coverage.py v7.16.2</a>,
-            created at 2026-10-22 14:03 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.17.5">coverage.py v7.17.5</a>,
+            created at 2026-11-26 21:37 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -161,8 +161,8 @@
     <p class="pln"><span class="n"><a id="t77" href="#t77">77</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t78" href="#t78">78</a></span><span class="t">    <span class="key">def</span> <span class="nam">item_categories</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">item</span><span class="op">:</span> <span class="nam">PublicationPage</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="nam">list</span><span class="op">[</span><span class="nam">str</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t79" href="#t79">79</a></span><span class="t">        <span class="nam">kind</span> <span class="op">=</span> <span class="nam">_</span><span class="op">(</span><span class="str">&quot;Event&quot;</span><span class="op">)</span> <span class="key">if</span> <span class="nam">item</span><span class="op">.</span><span class="nam">is_event</span> <span class="key">else</span> <span class="nam">_</span><span class="op">(</span><span class="str">&quot;Project&quot;</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t80" href="#t80">80</a></span><span class="t">        <span class="nam">category</span> <span class="op">=</span> <span class="nam">item</span><span class="op">.</span><span class="nam">get_category_display</span><span class="op">(</span><span class="op">)</span> <span class="key">if</span> <span class="nam">item</span><span class="op">.</span><span class="nam">is_project</span> <span class="key">else</span> <span class="str">&quot;&quot;</span>  <span class="com"># type: ignore[attr-defined]</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t81" href="#t81">81</a></span><span class="t">        <span class="key">return</span> <span class="op">[</span><span class="nam">c</span> <span class="key">for</span> <span class="nam">c</span> <span class="key">in</span> <span class="op">(</span><span class="nam">str</span><span class="op">(</span><span class="nam">kind</span><span class="op">)</span><span class="op">,</span> <span class="nam">category</span><span class="op">)</span> <span class="key">if</span> <span class="nam">c</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t80" href="#t80">80</a></span><span class="t">        <span class="nam">rubrics</span> <span class="op">=</span> <span class="nam">item</span><span class="op">.</span><span class="nam">rubric_labels</span> <span class="key">if</span> <span class="nam">item</span><span class="op">.</span><span class="nam">is_project</span> <span class="key">else</span> <span class="op">[</span><span class="op">]</span>  <span class="com"># type: ignore[attr-defined]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t81" href="#t81">81</a></span><span class="t">        <span class="key">return</span> <span class="op">[</span><span class="nam">str</span><span class="op">(</span><span class="nam">kind</span><span class="op">)</span><span class="op">,</span> <span class="op">*</span><span class="nam">rubrics</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -171,8 +171,8 @@
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a class="nav" href="z_0c0b7c30ea084132_idea_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.16.2">coverage.py v7.16.2</a>,
-            created at 2026-10-22 14:03 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.17.5">coverage.py v7.17.5</a>,
+            created at 2026-11-26 21:37 +0000
         </p>
     </div>
 </footer>
