@@ -40,13 +40,13 @@ class TestResultsRoute:
         assert response["X-Robots-Tag"] == "noindex"
 
     def test_applies_the_filters_of_the_query_string(self, client, publication_index):
-        _published_project(publication_index, "Jardin")
+        _published_project(publication_index, "Kiosque")
         _published_project(publication_index, "Fontaine")
 
         body = client.get(publication_index.url + "results/?search=Fontaine").content.decode()
 
         assert "Fontaine" in body
-        assert "Jardin" not in body
+        assert "Kiosque" not in body
         assert 'data-summary="1 r' in body  # "1 result", or "1 résultat" once translated
 
     def test_page_points_the_region_at_the_route(self, client, publication_index):

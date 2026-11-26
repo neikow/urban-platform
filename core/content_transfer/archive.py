@@ -41,7 +41,6 @@ HOME_LABEL = "home.homepage"
 PAGE_FIELD_SPECS: dict[str, list[str]] = {
     PROJECT_LABEL: [
         "description",
-        "category",
         "participation_mode",
         "voting_end_date",
         "show_toc",
@@ -63,6 +62,12 @@ PAGE_FIELD_SPECS: dict[str, list[str]] = {
 }
 
 COMMON_PAGE_FIELDS = ["seo_title", "search_description", "show_in_menus"]
+
+# Fields older archives may still hold, skipped on import. A project's single
+# category became rubrics (exported apart, as codes, under ``"rubrics"``).
+RETIRED_FIELDS: dict[str, tuple[str, ...]] = {
+    PROJECT_LABEL: ("category",),
+}
 
 # StreamField struct keys that hold an image / document chooser id.
 _IMAGE_KEYS = {"image", "author_image"}

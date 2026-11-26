@@ -18,7 +18,7 @@ Les **projets** présentent les aménagements et les décisions d'urbanisme du q
 | **Description** | Un résumé court, affiché dans les listes et sur la page d'accueil. Deux phrases suffisent |
 | **Image principale** | La photo ou l'illustration du projet |
 | **Contenu** | Le corps de la page : texte, intertitres, images, documents, questions-réponses… Les intertitres alimentent la table des matières |
-| **Catégorie** | *Environnement*, *Cadre de vie / Espaces publics / Mobilité* ou *Formes urbaines / Logement*. Elle permet aux visiteurs de filtrer les projets |
+| **Rubriques** | Une ou plusieurs parmi *Habitat*, *Parcs & Jardins*, *Espace Public* et *Patrimoine* (au moins une). Elles permettent aux visiteurs de filtrer les projets |
 | **Lieu** | L'emplacement du projet sur la carte (voir ci-dessous) |
 | **Liens externes** | Des boutons vers des ressources extérieures (étude, site de la Métropole…), avec un texte et une adresse |
 | **Suivi du projet** | Les étapes et nouvelles du projet (voir ci-dessous) |

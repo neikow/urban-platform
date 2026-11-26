@@ -22,9 +22,11 @@ from pedagogy.models.pedagogy_resource import PedagogyResource
 from publications.models.external_link import ProjectExternalLink
 from publications.models.project import ProjectPage
 from publications.models.publication_index import PublicationIndexPage
+from publications.models.rubric import Rubric
 
 from .archive import (
     HOME_LABEL,
+    RETIRED_FIELDS,
     ArchiveError,
     deserialize_field,
     open_archive,
@@ -176,7 +178,11 @@ class _Importer:
             hero = entry["hero_image_pk"]
             page.hero_image_id = self.images.get(hero, hero) if hero else None
         for name, value in entry["fields"].items():
+            if name in RETIRED_FIELDS.get(entry["model"], ()):
+                continue
             setattr(page, name, deserialize_field(model, name, value))
+        if "rubrics" in entry:
+            page.rubrics = list(Rubric.objects.filter(code__in=entry["rubrics"]))
         stream_block = model._meta.get_field("content").stream_block  # type: ignore[union-attr]
         page.content = stream_block.to_python(
             remap_media_ids(entry["content"], self.images, self.documents)
