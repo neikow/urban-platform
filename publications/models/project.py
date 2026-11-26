@@ -4,12 +4,13 @@ from typing import Any
 
 from django.http import HttpRequest
 
+from django import forms
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext import StrOrPromise
+from modelcluster.fields import ParentalManyToManyField
 from wagtail.admin.panels import FieldPanel, InlinePanel
-from wagtail.search import index
 
 from core.toc import TableOfContentsItem, generate_header_ids, get_table_of_contents
 from publications.geo import validate_geometry
@@ -18,12 +19,6 @@ from publications.widgets import GeoJSONMapWidget
 
 
 DEFAULT_VOTE_QUESTION = _("What is your opinion on this project?")
-
-
-class ProjectCategory(models.TextChoices):
-    ENVIRONMENT = "ENVIRONMENT", _("Environment")
-    LIVING_ENVIRONMENT = "LIVING_ENVIRONMENT", _("Living environment / Public spaces / Mobility")
-    URBAN_FORMS = "URBAN_FORMS", _("Urban forms / Housing")
 
 
 class ParticipationMode(models.TextChoices):
@@ -51,11 +46,11 @@ class ProjectPage(PublicationPage):
 
     is_project = True
 
-    category: models.CharField[str, str] = models.CharField(
-        _("Category"),
-        max_length=30,
-        choices=ProjectCategory.choices,
-        default=ProjectCategory.LIVING_ENVIRONMENT,
+    rubrics = ParentalManyToManyField(
+        "publications.Rubric",
+        related_name="projects",
+        verbose_name=_("Rubrics"),
+        help_text=_("One or more rubrics the project belongs to."),
     )
 
     participation_mode: models.CharField[str, str] = models.CharField(
@@ -91,12 +86,8 @@ class ProjectPage(PublicationPage):
         help_text=_("Display the table of contents in the sidebar"),
     )
 
-    search_fields = PublicationPage.search_fields + [
-        index.SearchField("category"),
-    ]
-
     content_panels = PublicationPage.content_panels + [
-        FieldPanel("category"),
+        FieldPanel("rubrics", widget=forms.CheckboxSelectMultiple),
         FieldPanel("location", widget=GeoJSONMapWidget),
         InlinePanel("external_links", label=_("External Links")),
         InlinePanel(
@@ -108,6 +99,11 @@ class ProjectPage(PublicationPage):
         FieldPanel("voting_end_date"),
         FieldPanel("show_toc"),
     ]
+
+    @property
+    def rubric_labels(self) -> list[str]:
+        """Names of the project's rubrics, in display order."""
+        return [str(rubric) for rubric in self.rubrics.all()]
 
     @property
     def enable_voting(self) -> bool:

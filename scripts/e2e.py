@@ -353,8 +353,10 @@ def populate_database() -> None:
             page.content = [("text", f"<p>Contenu de la page {page.title}.</p>")]
         page.save_revision().publish()
 
-    from publications.models import ParticipationMode, ProjectPage
+    from publications.models import ParticipationMode, ProjectPage, Rubric, RubricCode
 
+    # Editors must pick a rubric: without one, saving a project in the admin fails.
+    public_space = Rubric.objects.get(code=RubricCode.PUBLIC_SPACE)
     publication_index = PublicationIndexPage.objects.first()
     participation_projects = [
         ("Projet soumis au vote", "projet-vote", ParticipationMode.VOTING),
@@ -371,17 +373,18 @@ def populate_database() -> None:
                 locale=locale,
             )
             publication_index.add_child(instance=project)
-            project.save_revision().publish()
             print(f"  ✓ Created project: {title}")
         else:
+            project = ProjectPage.objects.get(slug=slug)
             print(f"  ✓ Project exists: {title}")
+        if not project.rubrics.exists():
+            project.rubrics.set([public_space])
+        project.save_revision().publish()
 
-    # The projects map test opens this one's popup: a long category, at the
-    # Palais du Pharo (7e), away from where the admin test places its marker.
-    from publications.models import ProjectCategory
-
+    # The projects map test opens this one's popup: every rubric (a long line),
+    # at the Palais du Pharo (7e), away from where the admin test places its marker.
     on_map = ProjectPage.objects.get(slug="projet-idees")
-    on_map.category = ProjectCategory.LIVING_ENVIRONMENT
+    on_map.rubrics.set(Rubric.objects.all())
     on_map.location = {"type": "Point", "coordinates": [5.3615, 43.2925]}
     on_map.save_revision().publish()
 

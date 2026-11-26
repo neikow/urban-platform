@@ -71,7 +71,7 @@ HOW_IT_WORKS = section(
                     "text": "Plans, calendrier et enjeux : chaque projet du quartier a sa page.",
                 },
                 {
-                    "title": "Votez ou proposez",
+                    "title": "Donnez votre avis ou proposez",
                     "text": "Donnez votre avis pendant la consultation, ou déposez vos idées.",
                 },
                 {
@@ -93,7 +93,7 @@ KEY_FIGURES = section(
             "value": [
                 {"metric": FigureMetric.PROJECTS, "value": "", "label": "Projets suivis"},
                 {"metric": FigureMetric.PARTICIPANTS, "value": "", "label": "Habitants mobilisés"},
-                {"metric": FigureMetric.VOTES, "value": "", "label": "Votes exprimés"},
+                {"metric": FigureMetric.VOTES, "value": "", "label": "Avis exprimés"},
                 {"metric": FigureMetric.IDEAS, "value": "", "label": "Idées proposées"},
             ],
         }
@@ -130,7 +130,7 @@ FAQ = section(
                     "answer": "Rendez-vous dans « Actualités » : les projets et événements y sont listés, du plus récent au plus ancien.",
                 },
                 {
-                    "question": "Comment voter et donner mon avis ?",
+                    "question": "Comment donner mon avis ?",
                     "answer": "Créez un compte et confirmez votre adresse email, puis ouvrez la page du projet pendant la consultation.",
                 },
                 {
@@ -166,7 +166,7 @@ JOIN = {
     "type": "join",
     "value": {
         "title": "Votre avis compte",
-        "text": "Inscrivez-vous pour voter sur les projets du quartier, proposer vos idées et être prévenu des résultats.",
+        "text": "Inscrivez-vous pour donner votre avis sur les projets du quartier, proposer vos idées et être prévenu des résultats.",
         "button": "Créer mon compte",
         "member_button": "Choisir mes notifications",
     },

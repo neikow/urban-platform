@@ -245,7 +245,10 @@ class SectionBlock(blocks.StructBlock):
                     [
                         {"title": "Créez un compte", "text": "Une adresse email suffit."},
                         {"title": "Suivez les projets", "text": "Chaque projet a sa page."},
-                        {"title": "Votez ou proposez", "text": "Pendant la consultation."},
+                        {
+                            "title": "Donnez votre avis ou proposez",
+                            "text": "Pendant la consultation.",
+                        },
                         {
                             "title": "Recevez les résultats",
                             "text": "Par email, si vous le souhaitez.",
@@ -434,7 +437,7 @@ class JoinBlock(blocks.StructBlock):
         )
         preview_value = {
             "title": "Votre avis compte",
-            "text": "Inscrivez-vous pour voter sur les projets, proposer vos idées et être prévenu des résultats.",
+            "text": "Inscrivez-vous pour donner votre avis sur les projets, proposer vos idées et être prévenu des résultats.",
             "button": "Créer mon compte",
             "member_button": "Choisir mes notifications",
         }

@@ -20,7 +20,7 @@ Les textes du modèle sont des **consignes** (« Décrivez en deux ou trois phra
 
 | Type de page | Modèles |
 |---|---|
-| **Projet** | Projet soumis au vote · Projet ouvert aux idées · Projet à suivre |
+| **Projet** | Projet soumis à avis · Projet ouvert aux idées · Projet à suivre |
 | **Événement** | Réunion publique · Atelier participatif · Balade urbaine |
 | **Informations utiles** | Expliquer une notion · Guide pas à pas |
 | **Page d'accueil** | Participation · L'essentiel |
@@ -28,7 +28,7 @@ Les textes du modèle sont des **consignes** (« Décrivez en deux ou trois phra
 | **Page « Informations utiles »** | Complète · Simple |
 | **Pages « À propos »** | Présentation · Texte seul |
 
-Pour un projet, le modèle règle aussi le **mode de participation** (vote, idées ou aucune participation). Vous pouvez le changer ensuite.
+Pour un projet, le modèle règle aussi le **mode de participation** (avis, idées ou aucune participation). Vous pouvez le changer ensuite.
 
 ## Sur une page existante
 

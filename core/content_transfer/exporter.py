@@ -103,6 +103,7 @@ def _serialize_page(page: Any) -> tuple[dict[str, Any], set[int], set[int]]:
     }
 
     if isinstance(page, ProjectPage):
+        entry["rubrics"] = [rubric.code for rubric in page.rubrics.all()]
         entry["children_relations"]["external_links"] = [
             {
                 "title": link.title,
