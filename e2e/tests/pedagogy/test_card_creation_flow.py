@@ -58,7 +58,7 @@ def test_pedagogy_card_creation_flow(
     page.get_by_role("link", name="Visualiser la version publiée").first.click()
 
     expect(page.locator("h1", has_text=TEST_TITLE)).to_be_visible()
-    expect(page.get_by_text(TEST_DESCRIPTION)).to_be_visible()
+    expect(page.locator("#main-content").get_by_text(TEST_DESCRIPTION)).to_be_visible()
     expect(page.locator(f"a[href='{TEST_URL}']").first).to_be_visible()
     page.screenshot(path=f"test-results/card_creation_{unique_id}.png", full_page=True)
     expect(page.locator("p", has_text=TEST_CONTENT)).to_be_visible(timeout=60000)
