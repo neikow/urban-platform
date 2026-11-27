@@ -39,4 +39,4 @@ def test_pedagogy_card_index_page_edition(
 
     page.goto(base_url + "/informations-utiles/")
 
-    expect(page.get_by_text(TEST_CONTENT)).to_be_visible()
+    expect(page.locator("#main-content").get_by_text(TEST_CONTENT)).to_be_visible()

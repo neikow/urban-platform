@@ -38,7 +38,7 @@ def test_about_website_page_edition(
 
     page.goto(base_url + "/a-propos/la-plateforme/")
 
-    expect(page.get_by_text(TEST_CONTENT)).to_be_visible()
+    expect(page.locator("#main-content").get_by_text(TEST_CONTENT)).to_be_visible()
 
 
 @pytest.mark.e2e
@@ -72,7 +72,7 @@ def test_about_commission_page_edition(
 
     page.goto(base_url + "/a-propos/commission-urbanisme/")
 
-    expect(page.get_by_text(TEST_CONTENT)).to_be_visible()
+    expect(page.locator("#main-content").get_by_text(TEST_CONTENT)).to_be_visible()
 
 
 @pytest.mark.e2e
@@ -106,4 +106,4 @@ def test_about_dev_team_page_edition(
 
     page.goto(base_url + "/a-propos/equipe-de-developpement/")
 
-    expect(page.get_by_text(TEST_CONTENT)).to_be_visible()
+    expect(page.locator("#main-content").get_by_text(TEST_CONTENT)).to_be_visible()
